@@ -1,0 +1,219 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.infosys.framework;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import org.apache.log4j.Logger;
+
+import application.Main;
+
+public abstract class AbstractDeviceHandshake implements IDeviceHandshake {
+
+	private static final Logger LOG = Logger.getLogger(AbstractDeviceHandshake.class);
+
+	private IDeviceHandshake nextClass;
+	private PortManagerAndListener identifyingOnPort;
+	private long handshakeTimeOut = 2000; // 10 seconds
+	private volatile HandshakeStatus handshakeStatus;
+	private TimeoutWorker timeoutWorker;
+
+	protected enum HandshakeStatus
+	{
+		IN_PROGRESS, SUCCESSFUL, NOT_SUCCESSFUL
+	}
+
+	public AbstractDeviceHandshake()
+	{
+		timeoutWorker = new TimeoutWorker();
+	}
+
+	/**
+	 * Gets an inputStream to read data from the stream
+	 *
+	 * @return Gets an inputStream to read data from the stream
+	 */
+	protected InputStream getInputStream()
+	{
+		if (identifyingOnPort == null)
+		{
+			return null;
+		}
+		return identifyingOnPort.getInputStream();
+	}
+
+	/**
+	 * Gets an output stream to send commands on the selected port.
+	 *
+	 * @return OutputStream to send commands on the port.
+	 */
+	protected OutputStream getOutputStream()
+	{
+		if (identifyingOnPort == null)
+		{
+			return null;
+		}
+		return identifyingOnPort.getOutputStream();
+	}
+
+	@Override
+	public final CoreDevice identifyDevice(PortManagerAndListener portManager)
+	{
+		identifyingOnPort = portManager;
+		LOG.info("Handshake: Identifying device on port:" + identifyingOnPort.getPortName());
+		// Reset the initial status
+		setHandshakeStatus(null);
+
+		LOG.info("Initializing Handshake");
+
+		setHandshakeStatus(HandshakeStatus.IN_PROGRESS);
+		initHandshakeLogic();
+		// Begin port listening
+		identifyingOnPort.setDeviceListeningToThisPort(this);
+
+		// Begin waiting for handshake to complete or timeout.
+		Future timeOutResult = timeoutWorker.execute();
+		try
+		{
+			LOG.info("Timeout result:" + timeOutResult.get(handshakeTimeOut, TimeUnit.MILLISECONDS));
+		}
+		catch (InterruptedException e)
+		{
+			// TODO Handle exception
+			LOG.error("## Exception occured:", e);
+			e.printStackTrace();
+			timeOutResult.cancel(true);
+		}
+		catch (ExecutionException e)
+		{
+			// TODO Handle exception
+			e.printStackTrace();
+			LOG.error("## Exception occured:", e);
+			timeOutResult.cancel(true);
+		}
+		catch (TimeoutException e)
+		{
+			// TODO Handle exception
+			e.printStackTrace();
+			LOG.error("## Exception occured:", e);
+			timeOutResult.cancel(true);
+		}
+
+		LOG.info("Handshake Status:" + handshakeStatus);
+		switch (handshakeStatus)
+		{
+			case SUCCESSFUL:
+				setHandshakeStatus(null); // Reset handshake status
+				CoreDevice device = getExecutorInstance();
+				identifyingOnPort.setDeviceListeningToThisPort(device);
+				identifyingOnPort = null;
+				return device;
+
+			case IN_PROGRESS:
+				// TODO: Additionally send a notification of time-out to device and
+				// front-end application.
+				//Main.getInstance().getUtility().errorDialogue(getNameOfDevice(),"Check Device Connection/ Cables");
+				LOG.info("Handshake timed out for device:" + getNameOfDevice());
+			case NOT_SUCCESSFUL:
+			default:
+				// Remove listener
+				identifyingOnPort.stopListening();
+				setHandshakeStatus(null); // Reset handshake status
+				if (nextClass != null)
+				{
+					// Let the next identifier in chain to try and identify the
+					// device.
+					CoreDevice identifiedDevice = nextClass.identifyDevice(identifyingOnPort);
+					identifyingOnPort = null; // Clean-up
+					return identifiedDevice;
+				}
+				else
+				{
+					// Remove the last listener
+					identifyingOnPort.stopListening();
+					LOG.info("No new devices were active");
+					identifyingOnPort = null;
+					return null; // Device could not be identified
+				}
+		}
+	}
+
+	@Override
+	public void registerNextDeviceHandshakeClass(IDeviceHandshake nextClass)
+	{
+		this.nextClass = nextClass;
+	}
+
+	public void setComPortParameters(int baudRate, int dataBits, int stopBits, int parity)
+	{
+		identifyingOnPort.setComPortParameters(baudRate, dataBits, stopBits, parity);
+	}
+
+	protected void setNewHandshakeTimeout(long newTimeOut)
+	{
+		this.handshakeTimeOut = newTimeOut;
+	}
+
+	protected void setHandshakeStatus(HandshakeStatus handshakeStatus)
+	{
+		this.handshakeStatus = handshakeStatus;
+	}
+
+	/**
+	 * Any handshake initialization logic should go here. The framework would
+	 * immediately delegate the Serial Port events to the device following this
+	 * and allow a time of {@link AbstractDeviceHandshake#handshakeTimeOut} for
+	 * it to complete the handshake. Use
+	 * {@link AbstractDeviceHandshake#setNewHandshakeTimeout(long)} to change
+	 * the default time-out of 10000 milli-seconds.
+	 */
+	public abstract void initHandshakeLogic();
+
+	/**
+	 * This should return a new executor instance every time as requested.
+	 *
+	 * @return AutoWorkExecutor
+	 */
+	public abstract CoreDevice getExecutorInstance();
+
+	class TimeoutWorker extends Work
+	{
+		private final Logger TIMEOUT_LOG = Logger.getLogger(TimeoutWorker.class);
+		public TimeoutWorker()
+		{
+			super("Timeout Worker");
+		}
+
+		@Override
+		public Object workLogic()
+		{
+			while (handshakeStatus == HandshakeStatus.IN_PROGRESS)
+			{
+				// TIMEOUT_LOG.info("Handshake status:" + handshakeStatus);
+				try
+				{
+					Thread.sleep(100);
+				}
+				catch (InterruptedException e)
+				{
+					// TODO LOG this
+					LOG.error("## Exception occured:", e);
+					e.printStackTrace();
+					break;
+				}
+			}
+			return handshakeStatus;
+		}
+
+	}
+
+}

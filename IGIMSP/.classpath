@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="C:/Program Files (x86)/Java/jre-1.8/lib/jfxswt.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/com.lowagie.text-2.1.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/itext.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/jSerialComm-2.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/java-json.jar/java-json.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/rxtx-2.1-7-bins-r2/rxtx-2.1-7-bins-r2/RXTXcomm.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib/javafx.base.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib/javafx.controls.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib/javafx.fxml.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib/javafx.graphics.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib/javafx.media.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib/javafx.swing.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib/javafx.web.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib/javafx-swt.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Program Files (x86)/Java/jre-1.8/lib/ext/jfxrt.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

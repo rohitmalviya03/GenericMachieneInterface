@@ -1,0 +1,106 @@
+ALTER TABLE `intraop_dev`.`recoveryroomreadings` 
+CHANGE COLUMN `InVitalsBP` `InVitalsBP` VARCHAR(10) NULL DEFAULT NULL;
+
+
+INSERT INTO `intraop_dev`.`investigationstests` (`InvestigationsTestsID`, `TestName`, `HasParameterValues`, `IsAvailableInPAC`, `IsAvailableInIntraOp`) VALUES ('13', 'ACT', 1, 0, 1);
+
+
+INSERT INTO `intraop_dev`.`investigationtestsparameters` (`InvestigationTestsParametersID`, `TestParameterOrder`, `InvestigationTestsID`, `InvestigationsTestParametersParentID`) VALUES ('84', '1', '12', '8');
+
+
+INSERT INTO `intraop_dev`.`investigationparameterfields` (`InvestigationParameterFieldsID`, `InvestigationTestsParametersID`, `Name`) VALUES ('84', '84', 'ACT')
+
+
+//Fav medication list updated
+
+UPDATE `intraop_dev`.`fdaintraopmedications` SET `IsFavourite`=0 WHERE `MedicationsID`='19';
+UPDATE `intraop_dev`.`fdaintraopmedications` SET `IsFavourite`=0 WHERE `MedicationsID`='14';
+UPDATE `intraop_dev`.`fdaintraopmedications` SET `IsFavourite`=0 WHERE `MedicationsID`='8';
+UPDATE `intraop_dev`.`fdaintraopmedications` SET `IsFavourite`=0 WHERE `MedicationsID`='4';
+UPDATE `intraop_dev`.`fdaintraopmedications` SET `IsFavourite`=0 WHERE `MedicationsID`='3';
+
+
+
+
+//Events removed
+
+
+//deleted all event  logs 
+
+
+DELETE FROM `blank_intraop_dev`.`intraop_surgeryevents` WHERE `SurgeryEventID`='16';
+DELETE FROM `blank_intraop_dev`.`intraop_surgeryevents` WHERE `SurgeryEventID`='17';
+DELETE FROM `blank_intraop_dev`.`intraop_surgeryevents` WHERE `SurgeryEventID`='18';
+DELETE FROM `blank_intraop_dev`.`intraop_surgeryevents` WHERE `SurgeryEventID`='19';
+DELETE FROM `blank_intraop_dev`.`intraop_surgeryevents` WHERE `SurgeryEventID`='30';
+DELETE FROM `blank_intraop_dev`.`intraop_surgeryevents` WHERE `SurgeryEventID`='31';
+DELETE FROM `blank_intraop_dev`.`intraop_surgeryevents` WHERE `SurgeryEventID`='32';
+DELETE FROM `blank_intraop_dev`.`intraop_surgeryevents` WHERE `SurgeryEventID`='33';
+
+
+
+DELETE FROM `intraop_dev`.`intraop_eventsmaster` WHERE `EventID`=15;
+DELETE FROM `intraop_dev`.`intraop_eventsmaster` WHERE `EventID`=16;
+DELETE FROM `intraop_dev`.`intraop_eventsmaster` WHERE `EventID`=17;
+DELETE FROM `intraop_dev`.`intraop_eventsmaster` WHERE `EventID`=18;
+
+
+
+//Duplicate values removed
+delete from entityvalues where entityValueID in (194,195,196,199,200,201,178,
+179,180,181,182,183,184,197,
+198)
+
+delete from entityvalues where entityValueID in (202,203,204,205);
+
+
+
+UPDATE `intraop_dev`.`intraop_surgeryevents` SET `EventOrder`='8' WHERE `SurgeryEventID`='12';
+UPDATE `intraop_dev`.`intraop_surgeryevents` SET `EventOrder`='7' WHERE `SurgeryEventID`='13';
+
+
+
+
+UPDATE `intraop_dev`.`intraop_surgeryevents` SET `EventOrder`='9' WHERE `SurgeryEventID`='12';
+UPDATE `intraop_dev`.`intraop_surgeryevents` SET `EventOrder`='8' WHERE `SurgeryEventID`='14';
+UPDATE `intraop_dev`.`intraop_surgeryevents` SET `EventOrder`='8' WHERE `SurgeryEventID`='12';
+UPDATE `intraop_dev`.`intraop_surgeryevents` SET `EventOrder`='7' WHERE `SurgeryEventID`='13';
+
+
+UPDATE `intraop_dev`.`intraop_surgeryevents` SET `EventOrder`='7' WHERE `SurgeryEventID`='27';
+UPDATE `intraop_dev`.`intraop_surgeryevents` SET `EventOrder`='9' WHERE `SurgeryEventID`='26';
+UPDATE `intraop_dev`.`intraop_surgeryevents` SET `EventOrder`='8' WHERE `SurgeryEventID`='28';
+
+
+
+CREATE TABLE `intraop_dev`.`intraop_reports` (
+  `ReportID` INT NOT NULL,
+  `CaseID` BIGINT(11) NOT NULL,
+  `PatientID` INT(11) NOT NULL,
+  `FileType` VARCHAR(45) NOT NULL,
+  `CreatedBy` VARCHAR(45) NULL DEFAULT NULL,
+  `UpdatedBy` VARCHAR(45) NULL DEFAULT NULL,
+  `CreatedTime` DATETIME NULL DEFAULT NULL,
+  `UpdatedTime` DATETIME NULL DEFAULT NULL,
+  `PatientReportData` MEDIUMBLOB NULL DEFAULT NULL,
+  `DeviceExcelData` MEDIUMBLOB NULL DEFAULT NULL,
+  PRIMARY KEY (`ReportID`),
+  UNIQUE INDEX `ReportID_UNIQUE` (`ReportID` ASC));
+
+  
+  ALTER TABLE `intraop_dev`.`intraop_reports` 
+ADD COLUMN `FileName` VARCHAR(100) NULL DEFAULT NULL AFTER `DeviceExcelData`;
+
+
+ALTER TABLE `intraop_dev`.`intraop_reports` 
+CHANGE COLUMN `ReportID` `ReportID` INT(11) NOT NULL AUTO_INCREMENT ;
+
+
+ALTER TABLE `intraop_dev`.`patientmonitordata` 
+ADD COLUMN `BIS` VARCHAR(45) NULL AFTER `CaseID`;
+
+
+
+
+
+

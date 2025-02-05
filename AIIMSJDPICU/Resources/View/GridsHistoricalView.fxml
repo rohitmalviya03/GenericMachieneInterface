@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="baseVbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GridHistoricalViewController">
+   <children>
+      <StackPane fx:id="header" prefHeight="40.0" styleClass="pageHeader" stylesheets="@../styles/newStyles.css">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label styleClass="pageHeader" text="Historical View" />
+               </children></HBox>
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="36.0" styleClass="btnTopBar">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </StackPane>
+      <VBox fx:id="centerVBox" />
+   </children>
+</VBox>

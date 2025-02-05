@@ -1,0 +1,1564 @@
+package Server;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fazecast.jSerialComm.SerialPort;
+import com.formdev.flatlaf.FlatLightLaf;
+
+import Server.ABC;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.*;
+import javax.swing.text.*;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import org.apache.poi.ss.usermodel.*;
+import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.zip.CRC32;
+
+
+//Machine Interface GUI   ......###########........... TCP/IP , Serial Communication 
+public class GenericServer {
+
+	
+	
+	//
+	
+    private static JTextPane textPane;
+    protected static String portNumber;
+    protected static int baudRate;
+    
+    protected static String selectedMachine;
+    protected static String selectedProtocol;
+    static ServerSocket server = null;
+    static Socket client = null;
+    static int port;
+    static ExecutorService pool = null;
+    static int clientcount = 0;
+    static  JRadioButton tcpIpRadioButton = new JRadioButton("TCP/IP");
+    static  JRadioButton comPortRadioButton = new JRadioButton("Serial Port");
+    
+    static  JRadioButton serverRadioButton = new JRadioButton("Server");
+    static  JRadioButton clientRadioButton = new JRadioButton("Client");
+	protected static String portName;
+	static  JComboBox<String> comPortComboBox = new JComboBox<>();
+	private static boolean waveform=false;
+	
+	   private static final String FILE_NAME = "c:/TcpFiles/property/monitor_data.txt"; // File to save the data
+	   private static final String JSON_FILE_NAME = "c:/TcpFiles/property/monitor_param_data.txt";
+	   private static final String PARAM_FILE_NAME="c:/TcpFiles/property/monitor_param_data.xlsx";
+	   private static final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	 
+    public static void main(String[] args) {
+    
+
+                                      
+        FlatLightLaf.install();
+
+        // Create the frame
+        JFrame frame = new JFrame("Generic Interface by CDAC Noida");
+        ImageIcon frameIcon = new ImageIcon("resource/GMEI_Final.jpg"); // Ensure you have this file in your resources folder
+        frame.setIconImage(frameIcon.getImage());
+        Image image = Toolkit.getDefaultToolkit().getImage("resource/GMEI_1.jpg");
+        
+        
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1400, 800);
+        frame.setLocationRelativeTo(null); // Center the frame
+
+        frame.setBackground(Color.blue);
+     
+//        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png");    
+//        f.setIconImage(icon);    
+//        f.setLayout(null);     
+//        f.setSize(400,400);     
+//        f.setVisible(true);     y
+//        
+        
+        // Create the main panel with BorderLayout
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Create the top panel with GridBagLayout
+       // JPanel topPanel = new JPanel(new GridBagLayout());
+      //  topPanel.setBackground(new Color(245, 245, 245)); // Light grey background for the top panel
+        
+        
+        // Create the top panel with GridBagLayout and background image
+        Image backgroundImage = Toolkit.getDefaultToolkit().getImage("resource/GMEI_Final.jpg");
+
+        JPanel topPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+       // GridBagConstraints gbc = new GridBagConstraints();
+       // gbc.insets = new Insets(5, 5, 5, 5);
+
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        
+        
+        
+        
+
+        // Create and decorate the "Select Machine" panel
+        JPanel machinePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        
+        machinePanel.setBackground(new Color(245, 245, 245));
+        machinePanel.setBorder(BorderFactory.createTitledBorder("Machine  & Protocol Selection"));
+       // String[] machffines = {"Monitor","Mindray ICU","Dragger OT","Advia2120","Erba680", "Horriba", "Sysmex","Other","ICU"};
+        
+        String[] machines = {"AVEBPL","Erba680","Mindray Monitor","ICU","Monitor"};
+        
+        JComboBox<String> comboBox = new JComboBox<>(machines);
+        machinePanel.add(new JLabel("Select Machine:"));
+        machinePanel.add(comboBox);
+        
+  
+        String[] protocol = {"HL7", "ASTM", "Other"};
+        JComboBox<String> comboBox2 = new JComboBox<>(protocol);
+        
+        machinePanel.add(new JLabel("Protocol:"));
+        machinePanel.add(comboBox2);
+      
+       // machinePanel.add(baudRateNumberLabel);
+        
+      //  machinePanel.add(baudRateTextField);
+        
+        
+        JPanel appPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        appPanel.setBackground(new Color(245, 245, 245));
+        appPanel.setBorder(BorderFactory.createTitledBorder("Application Type"));
+        
+        appPanel.add(clientRadioButton);
+        appPanel.add(serverRadioButton);
+        
+        
+        
+        
+        JPanel portPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        portPanel.setBackground(new Color(245, 245, 245));
+        portPanel.setBorder(BorderFactory.createTitledBorder("Port Configuration"));
+        JTextField portTextField = new JTextField(10);
+       
+      //  portPanel.add(new JLabel("Port Number:"));
+        JLabel portNumberLabel = new JLabel("Port Number:");
+        
+      //  JTextField portTextField = new JTextField(10);
+        portNumberLabel.setVisible(false); // Initially hidden
+        portTextField.setVisible(false); // Initially hidden
+   
+        
+        portTextField.setVisible(false); 
+
+       
+        ButtonGroup portButtonGroup = new ButtonGroup();
+        
+        
+        portButtonGroup.add(tcpIpRadioButton);
+        portButtonGroup.add(comPortRadioButton);
+        
+        
+        
+       // portPanel.add(tcpIpRadioButton);
+        appPanel.add(comPortRadioButton);
+        
+        
+       
+        
+        
+        JLabel comPortLabel = new JLabel("COM Port :  ");
+        JLabel ipNumberLabel = new JLabel("Server IP :");
+        JTextField ipTextField = new JTextField(15);
+        JLabel baudRateNumberLabel = new JLabel("Baud Rate : ");
+        JTextField baudRateTextField = new JTextField(10);
+      
+        comPortLabel.setVisible(false); // Initially hidden
+        comPortComboBox.setVisible(false); // Initially hidden
+      //  portPanel.add(comPortLabel);
+        portPanel.add(comPortComboBox);
+        portPanel.add(baudRateNumberLabel);
+        
+        baudRateNumberLabel.setVisible(false);
+        baudRateTextField.setVisible(false);
+        portPanel.add(baudRateTextField);
+        portPanel.add(ipNumberLabel);
+        portPanel.add(ipTextField);
+        portPanel.add(portNumberLabel);
+        portPanel.add(portTextField);
+    
+        
+        
+        
+        // Create the buttons
+        JButton button1 = new JButton("Connect to Machine");
+        JButton button2 = new JButton("Download Log");
+        
+        
+        JButton clearButton = new JButton();
+        clearButton = new JButton(UIManager.getIcon("OptionPane.errorIcon")); // Cross icon
+        clearButton.setToolTipText("Clear Log");
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	logClear();
+            
+            }
+        });
+        // Style the buttons 
+        button1.setBackground(new Color(70, 130, 180));
+        
+      //  button1.setPreferredSize(new Dimension(150, 50));
+        button1.setForeground(Color.WHITE);
+        button2.setBackground(new Color(70, 130, 180));
+        button2.setForeground(Color.WHITE);
+        JButton exitButton = new JButton("Exit");
+        exitButton.setBackground(new Color(220, 20, 60));
+        exitButton.setForeground(Color.WHITE);
+        // Create the text pane with a scroll pane
+        textPane = new JTextPane();
+        textPane.setEditable(false); 
+        JScrollPane scrollPane = new JScrollPane(textPane);
+
+       
+
+        serverRadioButton.addActionListener(new ActionListener() {   //event on button click to show/hide Port Number  Field
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	clientRadioButton.setSelected(false);
+            	comPortRadioButton.setSelected(false);
+            	//clientRadioButton.setVisible(false);
+            	//comPortRadioButton.setVisible(false);
+            	
+
+            	baudRateNumberLabel.setVisible(false);
+                baudRateTextField.setVisible(false);
+                portNumberLabel.setVisible(true);
+                portTextField.setVisible(true);
+                comPortLabel.setVisible(false);
+             
+                ipNumberLabel.setVisible(false);
+                ipTextField.setVisible(false);
+                comPortLabel.setVisible(false);
+                comPortComboBox.setVisible(false);
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+ 
+        
+       clientRadioButton.addActionListener(new ActionListener() {   //event on button click to show/hide Port Number  Field
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	//serverRadioButton.setVisible(false);
+            	//comPortRadioButton.setVisible(false);
+            	serverRadioButton.setSelected(false);
+            	comPortRadioButton.setSelected(false);
+            	
+            	 baudRateNumberLabel.setVisible(false);
+                 baudRateTextField.setVisible(false);
+                portNumberLabel.setVisible(true);
+                portTextField.setVisible(true);
+                ipNumberLabel.setVisible(true);
+                ipTextField.setVisible(true);
+                comPortLabel.setVisible(false);
+                comPortComboBox.setVisible(false);
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+ 
+        
+        comPortRadioButton.addActionListener(new ActionListener() {  //event on button click to List Port Name Combo box..
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	populatePortComboBox();
+            	
+            	
+            	System.out.println("ASDFASFSDF");
+            	serverRadioButton.setSelected(false);
+            	clientRadioButton.setSelected(false);
+            	
+            	
+            	  baudRateNumberLabel.setVisible(true);
+                  baudRateTextField.setVisible(true);
+            	
+            	
+                portNumberLabel.setVisible(false);
+                portTextField.setVisible(false);
+                ipTextField.setVisible(false);
+                comPortLabel.setVisible(true);
+                comPortComboBox.setVisible(true);
+                ipNumberLabel.setVisible(false);
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+        
+        //download log file
+//        
+//        button2.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                String logContent = textPane.getText();
+//                try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt"))) {
+//                    writer.write(logContent);
+//                    JOptionPane.showMessageDialog(frame, "Log has been downloaded to log.txt");
+//                } catch (IOException ex) {
+//                    ex.printStackTrace();
+//                    JOptionPane.showMessageDialog(frame, "Error occurred while downloading the log.");
+//                }
+//            }
+//        });
+//        
+        
+        //
+        
+        
+        
+        
+        
+        
+        
+        
+        // Action listener for buttons
+        ActionListener buttonListener = new ActionListener() {   //execution on button click event Start Comunication..
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+            	
+            
+            	
+            	if (e.getSource() == exitButton) {   // to close the application
+            	int res=	JOptionPane.showConfirmDialog(frame, "Are you sure to close this application.");
+
+            	if(res==JOptionPane.YES_OPTION){  
+            		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+            		System.exit(0);
+            	}  
+                    
+                    
+            	}
+            	
+            	else if(e.getSource() == button2) {  ///to download log file on button click..
+            		
+            		
+           		 String logContent = textPane.getText();
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:/TcpFiles/property/Machinelog.txt"))) {
+                        writer.write(logContent);
+                        JOptionPane.showMessageDialog(frame, "Log has been downloaded to Machinelog.txt");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(frame, "Error occurred while downloading the log.");
+                    }
+           		
+           	}
+           	
+            	else {   //  to start the Communication when click on start communication 
+            		 
+            		
+            		
+            		
+            		
+              	  try {
+              		  	selectedMachine = (String) comboBox.getSelectedItem();
+              		 
+		                selectedProtocol = (String) comboBox2.getSelectedItem();
+		                portNumber = portTextField.getText();
+		            	 if(comPortRadioButton.isSelected()) {   //condition to check that COM POrt is selected
+	                    		 baudRate = Integer.parseInt(baudRateTextField.getText());
+	   		                portName=  (String) comPortComboBox.getSelectedItem();
+	                    		
+		            	}
+  					if (validateInputs(selectedMachine, portNumber,portName)) {
+  				
+  		            
+  		                new Thread(() -> {
+  		                    try {
+  		                        
+  		                    	//condition to check that user has selected TCP Ip or COM PORT
+  		                    	
+  		                    	if(serverRadioButton.isSelected())
+  		                    		
+  		                    	{	
+  		                    	
+  		                    	    GenericServer serverobj = new GenericServer(Integer.parseInt(portNumber));
+  		    		                JOptionPane.showMessageDialog(frame, "Selected Machine: " + selectedMachine + "\nPort Number: " + portNumber);
+
+  		    		                String logMessage = "Selected Machine: " + selectedMachine + ", Port Number: " + portNumber + "Protocol: "+selectedProtocol;
+  		    		                logMessage(logMessage, Color.BLUE);
+
+  		    		              saveToFile("Selected Machine: " + selectedMachine + ", Port Number: " + portNumber + "Protocol: "+selectedProtocol,FILE_NAME);
+  		                    	
+  		                      if(selectedMachine.equals("Erba680") && selectedProtocol.equals("HL7")) {
+  		                    	
+  		                    	  serverobj.startServer();  //HL 7 Server
+  		                      
+  		                      
+  		                      }
+  		                      
+  		                      else if(selectedMachine.equals("Mindray Monitor") && selectedProtocol.equals("HL7")) {
+  		                    	
+		                    	  serverobj.startServer();  //HL 7 Server
+		                      
+		                      
+		                      }
+  		                      
+  		                   
+  		                      
+  		                      
+  		                      else if(  selectedMachine.equals("Sysmex") )  {
+  		                    	 ASTMServer objServer = new  ASTMServer(Integer.parseInt(portNumber));
+  		                    		                    	 		                    	
+  		                    	objServer.startServer(Integer.parseInt(portNumber),selectedMachine);  //ASTM Server
+  		                    	  
+  		                      
+  		                      
+  		                      }
+  		                      
+  		                    else if(selectedMachine.equals("Other") )  {
+  		                    	
+ 		                    	 ASTMServer objServer = new  ASTMServer(Integer.parseInt(portNumber));
+ 		                    	objServer.startServer(Integer.parseInt(portNumber),selectedMachine);  
+ 		                    	  
+ 		                      }
+  		                      
+  		                    	}
+  		                    	
+  		                    	
+  		                    	else if(comPortRadioButton.isSelected()) {   //condition to check that COM POrt is selected
+  		                    		 baudRate = Integer.parseInt(baudRateTextField.getText());
+  		   		                portName=  (String) comPortComboBox.getSelectedItem();
+  		                    		JOptionPane.showMessageDialog(frame, "Selected Machine: " + selectedMachine + "\nPort Name:: " + portName);
+
+  		    		                String logMessage = "Selected Machine: " + selectedMachine + ", Port Name: " + portName + "Protocol: "+selectedProtocol;
+  		    		                logMessage(logMessage, Color.BLUE);
+  		    		                
+  		    		           
+  		    		              if(selectedMachine.equals("Advia2120")) {
+  		    		                DB9Server objServer = new DB9Server();
+  		    		            	objServer.startDb9Server(portName, selectedMachine,baudRate);  //DB9 Server 
+  	  		                      }
+  		    		              
+  		    		            if(selectedMachine.equals("ICU")) {
+  		    		                DB9Server objServer = new DB9Server();
+  		    		            	objServer.startDb9Server(portName, selectedMachine,baudRate);  //DB9 Server 
+  	  		                      }
+  		    		            
+  		    		          if(selectedMachine.equals("Mindray ICU")) {
+		    		                DB9Server objServer = new DB9Server();
+		    		            	objServer.startDb9Server(portName, selectedMachine,baudRate);  //DB9 Server 
+	  		                      }
+  		    		          
+  		    		        
+  		    		          if(selectedMachine.equals("Dragger OT")) {
+		    		                DB9Server objServer = new DB9Server();
+		    		            	objServer.startDb9Server(portName, selectedMachine,baudRate);  //DB9 Server 
+	  		                      }
+  		    		                
+  		    		                
+  		                    		
+  		                    	}
+  		                    	
+  		                    	else if(clientRadioButton.isSelected()) {
+  		                    		
+  		                    		String server_ip=ipTextField.getText();
+  		                    		String server_port=portTextField.getText();
+  		                    		if(server_ip.isEmpty()) {
+  		                    		 JOptionPane.showMessageDialog(null, "Please Enter Server Ip.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+  		                           
+  		                           }
+  		                    		
+  		                    		else {
+  		                    		if(selectedMachine.equals("Monitor")) {
+  		                    			
+  		                    			System.out.println("Inside server select");
+  		                    			
+  		                    			logMessage("Application  Type : CLIENT", Color.BLACK);
+  		                    			logMessage("Server IP :"+server_ip, Color.MAGENTA);
+  		                    			logMessage("Server Port :"+server_port, Color.MAGENTA);
+  	  		                    		ClientGUI.cllientConnect(server_ip, server_port);
+  		                    		}
+  		                    		
+  		                    		 else if(selectedMachine.equals("AVEBPL")) {
+  		                    			logMessage("Application  Type : CLIENT", Color.BLACK);
+  		                    			logMessage("Server IP :"+server_ip, Color.MAGENTA);
+  		                    			logMessage("Server Port :"+server_port, Color.MAGENTA);
+  		                    			logMessage("machine Selected :"+selectedMachine, Color.MAGENTA);
+  		                    			AVEBPL.cllientConnect(server_ip, server_port);  //HL 7 Server
+  				                      
+  				                      
+  				                      }
+  		                           }
+  		                    		
+  		                    	}
+  		                    
+  		                    
+  		                    
+  		                    } catch (IOException e1) {
+  		                        e1.printStackTrace();
+  		                    }
+  		                }).start();
+  						  
+  					  }
+  					
+  				} catch (Exception e1) {
+  					// TODO Auto-generated catch block
+  					e1.printStackTrace();
+  				}
+              	
+            		
+            		
+            
+            }
+            	
+            }
+        };
+
+        button1.addActionListener(buttonListener);   //Start Communication event
+        button2.addActionListener(buttonListener);   //Download log event
+        exitButton.addActionListener(buttonListener);  //Exit Button event
+
+        // Create the button panel and add buttons to it
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 5, 5));  //create button panel and them add into the top panel which is exists in the Main Frame
+        buttonPanel.setBorder(BorderFactory.createTitledBorder("Actions"));  //Border and header line
+        
+        buttonPanel.setBackground(new Color(245, 245, 245)); // Light grey background
+        buttonPanel.setOpaque(true); // Ensure background color is displayed
+        buttonPanel.add(button1);
+        buttonPanel.add(button2);
+        buttonPanel.add(exitButton);
+        buttonPanel.add(clearButton);
+    
+        
+        
+        //changed the  button font 
+        
+        button1.setFont(new Font("Monospaced",Font.BOLD,12)); 
+        button2.setFont(new Font("Monospaced",Font.BOLD,12));
+        exitButton.setFont(new Font("Monospaced",Font.BOLD,12));
+        
+        
+    
+
+        JPanel hisConfig = new JPanel(new GridLayout(6, 2, 5, 5));
+        hisConfig.setBorder(BorderFactory.createTitledBorder("HIS Configuration"));
+      //  JCheckBox c1 = new JCheckBox("HIS Configuration"); 
+    ////    hisConfig.add(c1);
+        // Create labels and text fields
+        JLabel lblUrl = new JLabel("HIS URL:");
+        JTextField txtUrl = new JTextField();
+        JLabel lblEquipId = new JLabel("Equipment ID:");
+        JTextField txtEquipId = new JTextField();
+        JLabel lblHospitalCode = new JLabel("Hospital Code:");
+        JTextField txtHospitalCode = new JTextField();
+        
+        // Add labels and text fields to the panel
+        hisConfig.add(lblUrl);hisConfig.add(txtUrl);
+        hisConfig.add(lblEquipId); hisConfig.add(txtEquipId);
+        hisConfig.add(lblHospitalCode); hisConfig.add(txtHospitalCode);
+        
+       
+       
+      
+       
+        
+        // Initially hide the additional fields panel
+        hisConfig.setVisible(true);
+        
+        // Add components to the top panel with proper alignment
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+     
+        topPanel.add(machinePanel, gbc);
+
+        gbc.gridy = 1;
+        
+        
+        gbc.gridy=2;
+        topPanel.add(appPanel,gbc);
+       
+        gbc.gridy = 3;
+      //  topPanel.add(hisConfig,gbc);
+
+        topPanel.add(portPanel, gbc);
+
+
+     
+      
+        gbc.gridy=5;
+        
+        topPanel.add(buttonPanel, gbc);
+        // Add components to the main panel
+        panel.add(topPanel, BorderLayout.NORTH);
+        
+        
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        // Add panel to the frame
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+
+    private static void populatePortComboBox() {
+        SerialPort[] ports = SerialPort.getCommPorts();
+        for (SerialPort port : ports) {
+        	comPortComboBox.addItem(port.getSystemPortName());
+        }
+    }
+	     
+    static void logMessage(String message, Color color) {
+        StyledDocument doc = textPane.getStyledDocument();
+        Style style = textPane.addStyle("Style", null);
+        StyleConstants.setForeground(style, color);
+      //  StyleConstants.setBackground(style, color);
+
+        try {
+            doc.insertString(doc.getLength(), message + "\n", style);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void logClear() {
+    	StyledDocument doc = textPane.getStyledDocument();
+    	try {
+			doc.remove(0, doc.getLength());
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    GenericServer(int port) {
+        this.port = port;
+        pool = Executors.newFixedThreadPool(5);  //max size was 5 change until connections not fully closed
+    }
+
+    public void startServer() throws IOException {
+        server = new ServerSocket(Integer.parseInt(portNumber));
+        logMessage("SERVER BOOTED ON PORT: " + this.port, Color.GREEN);
+        logMessage("ANY CLIENT CAN STOP THE SERVER BY SENDING -1", Color.GREEN);
+        saveToFile("SERVER BOOTED ON PORT: " + this.port,FILE_NAME);
+        saveToFile("ANY CLIENT CAN STOP THE SERVER BY SENDING -1",FILE_NAME);
+          
+        while (true) {
+            client = server.accept();
+            clientcount++;
+            logMessage("CONNECTION " + clientcount + " ESTABLISHED WITH CLIENT " + client, Color.BLACK);
+
+            saveToFile("CONNECTION " + clientcount + " ESTABLISHED WITH CLIENT " + client,FILE_NAME);
+            ServerThread runnable = new ServerThread(client, clientcount, this);
+            pool.execute(runnable);
+        }
+    }
+
+    private static class ServerThread implements Runnable {
+
+        GenericServer server = null;
+        Socket client = null;
+        BufferedReader cin;
+        PrintStream cout;
+        Scanner sc = new Scanner(System.in);
+        int id;
+        char s;
+        String si;
+        private String modifiedTimeStr;
+        private String msgcontrolID;
+        private String timeZoneMachine;
+        private String MSHsegment;
+        private String pidmsg;
+        private String[] sampleNOblock;
+        private String sampleNOblock2;
+        private String sampleNO;
+        private String rackNo;
+        private String SEC2val;
+        private String RackSeq;
+        private List testValue;
+
+        ServerThread(Socket client, int count, GenericServer serverR) throws IOException {
+            this.client = client;
+            this.server = serverR;
+            this.id = count;
+            logMessage("CONNECTION " + id + " ESTABLISHED WITH CLIENT " + client, Color.BLACK);
+
+            cin = new BufferedReader(new InputStreamReader(client.getInputStream())); // Obj To receive Msg from Client
+            cout = new PrintStream(client.getOutputStream()); // Obj For Sending Msg to Client
+        	StringBuffer orderPacket = new StringBuffer();
+		 	orderPacket.append("MSH|^~\\&|LIS|LAB|myla|BMX|20240820163600||OML^O33^OML_O33|MSG-20240820-163600-0377|P|2.5.1|||NE|AL||UNICODE UTF-8").append("\n");
+		 	orderPacket.append("PID|||400450243||PAA^DONI^^^^^nill|PADMAJA|19620820|F|||nill^^nill^^nill^nill|||||S|").append("\n");
+		 	orderPacket.append("PV1||E|ACUTE-A M C U-III^AMC  6N-27(ICU)^^AIIMSMG^^^^^AMC  6N-27(ICU)^||||^RAJESH BOLLAM||||||||||||1657550").append("\n");;
+		 	orderPacket.append("SPM|1|68182||RESP^RESP^99BMx|||^^|^^|||P^Patient^||||||20240820163525|").append("\n");
+		 	orderPacket.append("SAC||||24008672").append("\n");
+		 	orderPacket.append("ORC|NW||||||||20240820163525").append("\n");
+		 	orderPacket.append("TQ1|||||||||R^^").append("\n");
+		 	orderPacket.append("OBR|1|714647||SU^SU^99BMx||||||^^||||||^RAJESH BOLLAM").append("\n");
+		 //	GenericServer.logMessage("Data Sent :"+orderPacket, Color.MAGENTA);
+		 	//GenericServer.logMessage("Data Sent :"+orderPacket, Color.MAGENTA);
+          //  cout.print(orderPacket.toString());
+        
+        }
+
+        public void run() {
+            System.gc();
+            int x = 1, flag = 0, forAck = 0, status = 0;
+            int checkBit = 0;
+            int sendAck = 0;
+            boolean out = false;
+            int replyFlag = 0;
+            boolean isProcessing = false;
+
+            try {
+                char eot = ''; // End-OF-Transmission Bit character
+                char enq = '';
+                char ack = '';
+                String enn = "";
+
+                while (true) {
+                    int red = -1;
+                    byte[] buffer = new byte[800 * 1024]; // a read buffer of 5KiB
+                    byte[] redData;
+                    StringBuilder clientData = new StringBuilder();
+                    String redDataText = "";
+
+                    while ((red = client.getInputStream().read(buffer)) > -1) {
+                        redData = new byte[red];
+                        System.arraycopy(buffer, 0, redData, 0, red);
+                        redDataText = new String(redData, "UTF-8");
+                        
+                        redDataText= redDataText.replaceAll("\\s", "");
+                        logMessage("MSG received: " + redDataText, Color.BLUE);
+                        saveToFile("MSG received: " + redDataText,FILE_NAME);
+                        if(selectedMachine.equals("Erba680") && selectedProtocol.equals("HL7")) {
+                        	ERBA580(redDataText,cout);
+                        
+                        }
+                        
+                        //Mindray Monitor
+                        else if(selectedMachine.equals("Mindray Monitor") && selectedProtocol.equals("HL7")) {
+                        	Mindray_Monitor55(redDataText,cout);
+                        
+                        }
+                        
+                        
+                        
+                        else if(selectedMachine.equals("Horriba")) {
+                        	
+
+                        }
+                        
+                        
+                        else if(selectedMachine.equals("Sysmex")) {
+			                        	
+                        	
+                        	
+                        }
+			                        
+                        
+                        
+                        
+                    }
+                }
+
+            } catch (Exception e) {
+                logMessage("Error: " + e.getMessage(), Color.RED);
+            }
+        }
+    }
+    
+    
+    //MIndray patient Monitor
+    
+    
+public static void Mindray_Monitor55(String redDataText, PrintStream cout) {
+    	
+    	int count=0;
+     	
+     	
+     	
+     	
+     	char fsChar = 0x1C;  //FS
+	 	 
+	 	char crChar=0x0D;   //CR
+    	
+		
+		String[] strData=redDataText.split(Character.toString(fsChar));
+		saveToFile(redDataText,FILE_NAME);
+        Map<String, List> mp = new HashMap();  		
+		List <String> testCode = new ArrayList<>();
+		List <String> testValue = new ArrayList<>();
+		List<String> sampleNo=new ArrayList<>();
+		String sampleName = "";
+		  String msgtype="";
+		for(String strPKT:strData) {
+			System.out.println("MESSAGE PART RECIEVED:- " + strPKT);
+			GenericServer.logMessage("MESSAGE PART RECIEVED:- " + strPKT, Color.black);
+  	  		
+			String[] segments1 = strPKT.split(Character.toString(crChar));
+	        
+	       // String sampleName = null;
+	     // Print each segment
+	     
+	      
+	        
+	        for (String segment : segments1) {
+	        	
+	        	
+	        	if (segment.contains("MSH")) {
+		      		String[] parts = segment.split("\\|");
+
+		      		
+		      		String value=parts[8];
+		      		String[] MSH = value.split("\\^");
+		      	
+		      		msgtype=MSH[0];
+		      		System.out.println("Incoming msg Type :"+msgtype);
+		      		
+		      	    if(msgtype.equals("ORU") ) {  ///sending ACK when result recieved
+		      	    	 Date currentDate = new Date();
+
+		      	        // Define the desired date format
+		      	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssZ");
+
+		      	        // Format the date
+		      	        String formattedDate = dateFormat.format(currentDate);
+
+		      	        // Print the formatted date
+		      	        System.out.println("Formatted Date: " + formattedDate);
+		      	    	String controlid=parts[9];
+		      	    	String resACK1="MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE"
+			        	 		+ "MSA|AA|1"
+			        	 		+ "";
+		      	    	
+		      	    	//MSH|^~\&|H560|Erba Mannheim|||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE
+		      	    	//MSA|AA|1
+		      	    	StringBuilder msg = new StringBuilder();
+		      	    	
+		      	    	msg.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE").append("\r");
+		      	    	msg.append("MSA|AA|1").append("\r");
+		      	    //	msg.append("MSA|AA|CONTROLID||").append("\r");
+		      	    	msg.append((char)0x1C).append("\r");
+		      	    	
+		      	    	
+		      	    	//check sum
+		      	    	
+		      	    	StringBuilder ACKRESCS = new StringBuilder();
+		      	    	
+		      	  	ACKRESCS.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE");
+		      	  	ACKRESCS.append("MSA|AA|1");
+		      	  					      	    //	msg.append("MSA|AA|CONTROLID||").append("\r");
+		      	  	ACKRESCS.append((char)0x1C);
+
+		      	   	 byte[] messageBytes = resACK1.toString().getBytes();
+
+		      	       // Calculate CRC-16 ANSI (HL7)
+		      	       int crcValue = calculateHL7CRC(messageBytes);
+		      	     
+		      	       GenericServer.logMessage("Check Sum"+crcValue, Color.black);
+		      	  								
+		      	  									//check sum
+		      	       	ACKRESCS.append(crcValue);
+		      	    	
+		      	    	//check sum
+		      	    	String resACK=msg.toString();
+		      	    	resACK=resACK.replaceAll("CONTROLID",controlid);
+		      	    	resACK=resACK.replaceAll("YYYYMMDDHHMMSS",formattedDate);
+		      	    	logMessage("ACK SENT :" + resACK, Color.red);
+		      	    	cout.print(resACK);
+		      	    	System.out.println("ACK SENT :" + resACK);
+		      	  
+		      	    	
+		      	    }
+		   
+	        	}
+	        	
+	        	
+	        	
+		         if(msgtype.equals("ORU") || segment.contains("PID")) {
+				   if(!segment.equals("")) {
+					   
+				       
+		     	if (segment.substring(0,3).equals("PID")) { // to check sample no. in SPM section
+		            // Split the line by the pipe character "|"
+		            String[] parts = segment.split("\\|");
+
+		            // Check if there are at least 7 elements in the array
+		                // Extract and print the value after the 6th pipe
+		                String value = parts[3];
+		               
+		                String[] pid = value.split("\\^");
+		                 System.out.println("Patient Id: " + pid[0]);
+		                 
+		                 sampleName=pid[0];
+		                 System.out.println("Sample NO :"+sampleName);
+		                 if(sampleName.isEmpty()) {
+		                	  logMessage("Sample No. not found.... : " , Color.red);
+		                	 
+		                 }
+		                 else {
+		                 logMessage("Sample NO : " + sampleName, Color.red);
+		                 //sampleNo.add(sampleName);
+		                //System.out.println("Patiwnt Id " + pid);
+		    	    	}
+		                 }
+				  
+		     	
+		     	
+		     	 if(segment.substring(0,3).equals("OBR")) {
+		    			
+		    		System.out.println("Check Data type wave from or RAW");
+		    		
+		    		if(segment.contains("CONTINUOUS WAVEFORM")) {
+		    			
+		    			waveform=true;
+		    		}
+		     		 
+		     		 
+		    		}
+				   }
+		     	        }
+		         
+		     
+	        	
+	        	
+	        	
+	        }  //exit inner for loop
+	        
+	        
+	        }  //exit outer for loop
+		
+		  List<String[]> obxSegments = new ArrayList<>();
+		if(waveform==false) {
+		
+		
+        if(msgtype.equals("ORU")) {
+		       ///if message type is ORU only
+		     
+	            String[] lines = redDataText.split(Character.toString(fsChar));
+	            String[] seg = null;
+	            for(String datapacket:lines) {
+	            	
+	            	seg=datapacket.split(Character.toString(crChar));
+	            	
+	            
+	            String pid = "";
+	            for (String line : seg) {
+	            	line=line.replace("\n", "");
+	                String[] segments = line.split("\\|");
+
+	                if (segments[0].contains("PID")) {
+	                    pid = segments[3].split("\\^")[0];
+	                } else if (segments[0].contains("OBX")) {
+	                	segments.toString().replace("\n", "");
+	                    obxSegments.add(segments);
+//	                    String[] val=segments[5].split("\\^");
+	                  //  if(segments.toString().contains("WorkState") ||segments.toString().contains("2305") ) {
+//	                    	if(val[0].contains("1")){// || val[1].contains("Standby")) {
+//	                    		
+//	                    		isStandBy=true;	
+//	                    		GenericServer.logMessage("Monitor in Standby Mode :", Color.MAGENTA);
+//	                    			
+//	                    	}
+	                    		
+	                   // }
+	                    
+	                }
+	            }
+
+	            Workbook workbook;
+	            Sheet sheet;
+	            FileInputStream fis = null;
+
+	            try {
+	                fis = new FileInputStream(PARAM_FILE_NAME);
+	                workbook = new XSSFWorkbook(fis);
+	                sheet = workbook.getSheetAt(0);
+	            } catch (IOException e) {
+	                // File doesn't exist or can't be read; create a new workbook and sheet
+	                workbook = new XSSFWorkbook();
+	                sheet = workbook.createSheet("Param Data");
+
+	                // Create Header Row
+	                Row headerRow = sheet.createRow(0);
+	                headerRow.createCell(0).setCellValue("PID");
+	                headerRow.createCell(1).setCellValue("Measurement ID");
+	                headerRow.createCell(2).setCellValue("Measurement Name");
+	                headerRow.createCell(3).setCellValue("Measurement Sub Id");
+	                headerRow.createCell(4).setCellValue("Value");
+	                headerRow.createCell(5).setCellValue("Unit");
+	                headerRow.createCell(6).setCellValue("Timestamp");
+	                headerRow.createCell(7).setCellValue("Packet Entry Timestamp");
+	                
+	                
+					/*
+					 * headerRow.createCell(0).setCellValue("PID");
+					 * headerRow.createCell(1).setCellValue("SPo2");
+					 * headerRow.createCell(2).setCellValue("Heart Rate");
+					 * headerRow.createCell(3).setCellValue("CO2");
+					 * headerRow.createCell(4).setCellValue("N2O");
+					 * headerRow.createCell(5).setCellValue("ABP_SYS");
+					 * headerRow.createCell(6).setCellValue("ABP_DIA");
+					 * 
+					 * headerRow.createCell(6).setCellValue("Temp");
+					 * headerRow.createCell(7).setCellValue("ECG_HEART_RATE");
+					 * headerRow.createCell(8).setCellValue("Time Stamp");
+					 */
+	            } finally {
+	                if (fis != null) {
+	                    try {
+	                        fis.close();
+	                    } catch (IOException e) {
+	                        e.printStackTrace();
+	                    }
+	                }
+	            }
+
+	            // Find the last row number
+	            int rowNum = sheet.getLastRowNum() + 1;
+
+	            // Populate the Excel sheet with OBX data
+	            for (String[] obxSegment : obxSegments) {
+	                Row row = sheet.createRow(rowNum++);
+	                row.createCell(0).setCellValue(pid);
+
+	                String[] idAndName = obxSegment[3].split("\\^");
+	                row.createCell(1).setCellValue(idAndName[0]);
+	                row.createCell(2).setCellValue(idAndName[1]);
+	                row.createCell(3).setCellValue(obxSegment[4]);
+	                row.createCell(4).setCellValue(obxSegment[5]);
+	                row.createCell(5).setCellValue(obxSegment[6]);
+	                row.createCell(6).setCellValue(obxSegment[14]);
+	                row.createCell(7).setCellValue(TIMESTAMP_FORMAT.format(new Date()));
+	            }
+
+	            try (FileOutputStream fileOut = new FileOutputStream(PARAM_FILE_NAME)) {
+	                workbook.write(fileOut);
+	                System.out.println("Data written to Excel");
+	                GenericServer.logMessage("Data written to Excel", Color.BLUE);
+
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            
+	            
+	            List<OBXSegment> obxSegmentList = new ArrayList<>();
+	            for (String[] obxSegment : obxSegments) {
+	                OBXSegment obxsegment = new OBXSegment();
+	                obxsegment.setPid(pid);
+
+	                String[] idAndName = obxSegment[3].split("\\^");
+	                obxsegment.setParam_id(idAndName[0]);
+	                obxsegment.setParam_name(idAndName[1]);
+	                obxsegment.setParam_value(obxSegment[5]);
+	                obxsegment.setParam_unit(obxSegment[6]);
+	                obxsegment.setParam_referenceRange("");
+	                obxsegment.setTimestamp(obxSegment[14]);//TIMESTAMP_FORMAT.format(new Date()));
+
+	                obxSegmentList.add(obxsegment);
+	            }
+
+	            // Convert list to JSON
+	            ObjectMapper mapper = new ObjectMapper();
+	            mapper.enable(SerializationFeature.INDENT_OUTPUT);
+	            String jsonString;
+				try {
+					jsonString = mapper.writeValueAsString(obxSegmentList);
+					System.out.println(jsonString);
+					saveToFile(jsonString,JSON_FILE_NAME);
+					
+					ABC abc = new ABC();
+					//abc.insertSampleDtlpdfbase64(sampleName, "", "", jsonString);
+				} catch (JsonProcessingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+	            
+	            GenericServer.logMessage("Data written to Excel for PID :" + pid, Color.BLUE);
+	            try {
+	                workbook.close();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+		//}
+		       }
+		
+		}
+		else {
+			
+			
+			System.out.println("waveform Data recieved..");
+			  String[] lines = redDataText.split(Character.toString(crChar));
+	            
+	           
+	    	    
+			     String pid = "";
+		            for (String line : lines) {
+		            	line=line.replace("\n", "");
+		                String[] segments = line.split("\\|");
+
+		                if (segments[0].contains("PID")) {
+		                    pid = segments[3].split("\\^")[0];
+		                } else if (segments[0].contains("OBX")) {
+		                	segments.toString().replace("\n", "");
+		                    obxSegments.add(segments);
+//		                    String[] val=segments[5].split("\\^");
+		                  //  if(segments.toString().contains("WorkState") ||segments.toString().contains("2305") ) {
+//		                    	if(val[0].contains("1")){// || val[1].contains("Standby")) {
+//		                    		
+//		                    		isStandBy=true;	
+//		                    		GenericServer.logMessage("Monitor in Standby Mode :", Color.MAGENTA);
+//		                    			
+//		                    	}
+		                    		
+		                   // }
+		                    
+		                }
+		            }
+	            
+			//OBX||CE|2305^WorkState||1^Standby||||||F
+				            String pid1 = "";
+				            List<OBXSegment> ecgDataPoints = new ArrayList<OBXSegment>();
+				            for (String line : lines) {
+				            	line=line.replace("\n", "");
+				                String[] segments = line.split("\\|");
+				                if(segments[0].equals("OBX") &&segments[2].equals("NA")) {
+				                	
+				                	  List<OBXSegment> obxSegmentList = new ArrayList<>();
+				      	            for (String[] obxSegment : obxSegments) {
+				      	                OBXSegment obxsegment = new OBXSegment();
+				      	                obxsegment.setPid(pid);
+
+				      	                String[] idAndName = obxSegment[3].split("\\^");
+				      	                obxsegment.setParam_id(idAndName[0]);
+				      	                obxsegment.setParam_name(idAndName[1]);
+				      	                obxsegment.setParam_value(obxSegment[4]);
+				      	                obxsegment.setParam_unit(obxSegment[5]);
+				      	                obxsegment.setParam_referenceRange(obxSegment[6]);
+				      	                obxsegment.setTimestamp(TIMESTAMP_FORMAT.format(new Date()));
+
+				      	                obxSegmentList.add(obxsegment);
+				      	            }
+				                
+				                }
+				            
+				            
+				            }
+				            
+				            Workbook workbook;
+				            Sheet sheet;
+				            FileInputStream fis = null;
+
+				            try {
+				                fis = new FileInputStream(PARAM_FILE_NAME);
+				                workbook = new XSSFWorkbook(fis);
+				                sheet = workbook.getSheetAt(1);
+				            } catch (IOException e) {
+				                // File doesn't exist or can't be read; create a new workbook and sheet
+				                workbook = new XSSFWorkbook();
+				                sheet = workbook.createSheet("Waveform Data");
+
+				                // Create Header Row
+				                Row headerRow = sheet.createRow(0);
+				                headerRow.createCell(0).setCellValue("PIDrrr");
+				                headerRow.createCell(1).setCellValue("SPo2");
+				                headerRow.createCell(2).setCellValue("Heart Rate");
+				                headerRow.createCell(3).setCellValue("CO2");
+				                headerRow.createCell(4).setCellValue("N2O");
+				                headerRow.createCell(5).setCellValue("ABP_SYS");
+				                headerRow.createCell(6).setCellValue("ABP_DIA");
+				                
+				                headerRow.createCell(6).setCellValue("Temp");
+				                headerRow.createCell(7).setCellValue("ECG_HEART_RATE");
+				                headerRow.createCell(8).setCellValue("Time Stamp");       } finally {
+				                if (fis != null) {
+				                    try {
+				                        fis.close();
+				                    } catch (IOException e) {
+				                        e.printStackTrace();
+				                    }
+				                }
+				            }
+
+				            // Find the last row number
+				            int rowNum = sheet.getLastRowNum() + 1;
+
+				            // Populate the Excel sheet with OBX data
+				            for (String[] obxSegment : obxSegments) {
+				                Row row = sheet.createRow(rowNum++);
+				                row.createCell(0).setCellValue(pid);
+
+				                String[] idAndName = obxSegment[3].split("\\^");
+				                
+				                row.createCell(1).setCellValue(obxSegment[4]);
+				                row.createCell(2).setCellValue(idAndName[1]);
+				                row.createCell(3).setCellValue(obxSegment[4]);
+				                row.createCell(4).setCellValue(obxSegment[5]);
+				                row.createCell(5).setCellValue(obxSegment[6]);
+				                row.createCell(6).setCellValue(obxSegment[14]);
+				                row.createCell(7).setCellValue(TIMESTAMP_FORMAT.format(new Date()));
+				            }
+
+				            try (FileOutputStream fileOut = new FileOutputStream(PARAM_FILE_NAME)) {
+				                workbook.write(fileOut);
+				                System.out.println("Data written to Excel");
+				            } catch (IOException e) {
+				                e.printStackTrace();
+				            }
+				            
+				            
+				            
+			
+		}
+	
+		}
+  }
+    
+    //end monitor
+    
+    
+    
+    
+    //AIIMS Jodhpur ERBA 580...
+  public static void ERBA580(String redDataText, PrintStream cout) {
+    	
+    	int count=0;
+     	
+     	
+     	
+     	
+     	char fsChar = 0x1C;  //FS
+	 	 
+	 	char crChar=0x0D;   //CR
+    	
+		
+		String[] strData=redDataText.split(Character.toString(fsChar));
+
+        Map<String, List> mp = new HashMap();  		
+		List <String> testCode = new ArrayList<>();
+		List <String> testValue = new ArrayList<>();
+		List<String> sampleNo=new ArrayList<>();
+		String sampleName = "";
+		  String msgtype="";
+		for(String strPKT:strData) {
+			System.out.println("MESSAGE PART RECIEVED:- " + strPKT);
+			String[] segments1 = strPKT.split(Character.toString(crChar));
+	        
+	       // String sampleName = null;
+	     // Print each segment
+	     
+	      
+	        
+	        for (String segment : segments1) {
+	        	
+	        	
+	        	if (segment.contains("MSH")) {
+		      		String[] parts = segment.split("\\|");
+
+		      		
+		      		String value=parts[8];
+		      		String[] MSH = value.split("\\^");
+		      	
+		      		msgtype=MSH[0];
+		      		System.out.println("Incoming msg Type :"+msgtype);
+		      		 saveToFile("Incoming msg Type :"+msgtype,FILE_NAME);
+		      		
+		      		
+		      		
+		      		
+		      	    if(msgtype.equals("ORU") ) {  ///sending ACK when result recieved
+		      	    	 Date currentDate = new Date();
+
+		      	        // Define the desired date format
+		      	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssZ");
+
+		      	        // Format the date
+		      	        String formattedDate = dateFormat.format(currentDate);
+
+		      	        // Print the formatted date
+		      	        System.out.println("Formatted Date: " + formattedDate);
+		      	    	String controlid=parts[9];
+		      	    	String resACK1="MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE"
+			        	 		+ "MSA|AA|1"
+			        	 		+ "";
+		      	    	
+		      	    	//MSH|^~\&|H560|Erba Mannheim|||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE
+		      	    	//MSA|AA|1
+		      	    	StringBuilder msg = new StringBuilder();
+		      	    	
+		      	    	msg.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE").append("\r");
+		      	    	msg.append("MSA|AA|1").append("\r");
+		      	    //	msg.append("MSA|AA|CONTROLID||").append("\r");
+		      	    	msg.append((char)0x1C).append("\r");
+		      	    	
+		      	    	
+		      	    	//check sum
+		      	    	
+		      	    	StringBuilder ACKRESCS = new StringBuilder();
+		      	    	
+		      	  	ACKRESCS.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE");
+		      	  	ACKRESCS.append("MSA|AA|1");
+		      	  					      	    //	msg.append("MSA|AA|CONTROLID||").append("\r");
+		      	  	ACKRESCS.append((char)0x1C);
+
+		      	   	 byte[] messageBytes = resACK1.toString().getBytes();
+
+		      	       // Calculate CRC-16 ANSI (HL7)
+		      	       int crcValue = calculateHL7CRC(messageBytes);
+		      	     
+		      	       GenericServer.logMessage("Check Sum"+crcValue, Color.black);
+		      	  								
+		      	  									//check sum
+		      	       	ACKRESCS.append(crcValue);
+		      	    	
+		      	    	//check sum
+		      	    	String resACK=msg.toString();
+		      	    	resACK=resACK.replaceAll("CONTROLID",controlid);
+		      	    	resACK=resACK.replaceAll("YYYYMMDDHHMMSS",formattedDate);
+		      	    	logMessage("ACK SENT :" + resACK, Color.red);
+		      	    	cout.print(resACK);
+		      	    	System.out.println("ACK SENT :" + resACK);
+		      	    	saveToFile("ACK SENT :" + resACK,FILE_NAME);
+			      		
+		      	    	
+		      	    }
+		   
+	        	}
+	        	
+		         if(msgtype.equals("ORU") || segment.contains("PID")) {
+
+		        	 
+		        	 
+		     	if (segment.contains("PID")) { // to check sample no. in SPM section
+		            // Split the line by the pipe character "|"
+		            String[] parts = segment.split("\\|");
+
+		            // Check if there are at least 7 elements in the array
+		                // Extract and print the value after the 6th pipe
+		                String value = parts[3];
+		               
+		                String[] pid = value.split("\\^");
+		                 System.out.println("Patient Id: " + pid[0]);
+		                 
+		                 sampleName=pid[0];
+		                 System.out.println("Sample NO :"+sampleName);
+		                 logMessage("Sample NO : " + sampleName, Color.red);
+		                 //sampleNo.add(sampleName);
+		                //System.out.println("Patiwnt Id " + pid);
+		                 saveToFile("Sample NO : " + sampleName,FILE_NAME);
+		    	    	}
+		     	
+		     	
+		     	
+		    	if (segment.contains("OBX") || segment.startsWith("OBX")) {
+		            // Split the line by the pipe character "|"
+		    		 String[] parts = segment.split("\\|");
+		    		 
+		    		 
+					count++;
+					if( parts[2].equals("NM")  )  // Ramji Added OBX|1|NM|..
+					{
+
+		             // Check if there are at least 5 elements in the array
+		             if (parts.length > 3) {
+		                 // Extract and print the value after the 4th pipe
+		                 String value = parts[3];
+		                 
+		                // if(value.equals("WBC")|| value.equals("NEU#") || value.equals("LYM#") || value.equals("MON#") || value.equals("EOS#") || value.equals("BAS#") || value.equals("IMG#") || value.equals("NEU%") || value.equals("LYM%") || value.equals("MON%") || value.equals("EOS%") || value.equals("BAS%") || value.equals("IMG%") || value.equals("RBC") || value.equals("HGB") || value.equals("HCT") || value.equals("MCV") || value.equals("MCH") || value.equals("MCHC") || value.equals("RDW-CV") || value.equals("RDW-SD") || value.equals("PLT") || value.equals("MPV") || value.equals("PDW") || value.equals("PCT") || value.equals("PLCC") || value.equals("NRBC#") || value.equals("NRBC%") || value.equals("PLCR") ) {
+		                  			
+		                 String[] tc = value.split("\\^");
+		                // System.out.println("Test Code " + tc[0]);
+		                 testCode.add(tc[1]);
+		          
+		             
+		             
+		             }
+		             
+		             
+		             if (parts.length > 5) {
+		                 // Extract and print the value after the 4th pipe
+		                 String value = parts[5];
+		                 
+		                // if(value.equals("WBC")|| value.equals("NEU#") || value.equals("LYM#") || value.equals("MON#") || value.equals("EOS#") || value.equals("BAS#") || value.equals("IMG#") || value.equals("NEU%") || value.equals("LYM%") || value.equals("MON%") || value.equals("EOS%") || value.equals("BAS%") || value.equals("IMG%") || value.equals("RBC") || value.equals("HGB") || value.equals("HCT") || value.equals("MCV") || value.equals("MCH") || value.equals("MCHC") || value.equals("RDW-CV") || value.equals("RDW-SD") || value.equals("PLT") || value.equals("MPV") || value.equals("PDW") || value.equals("PCT") || value.equals("PLCC") || value.equals("NRBC#") || value.equals("NRBC%") || value.equals("PLCR") ) {
+		                  			
+		                 //String[] tv = value.split("\\^");
+		          
+		                 double number = Double.parseDouble(value);
+			             double truncatedNumber = (int) (number * 10) / 10.0;
+			            // System.out.println("truncatedNumber"+truncatedNumber);
+			             String result = String.format("%.1f", truncatedNumber);
+			            
+		                 testValue.add(result);
+		                 
+		//continue;
+		             }
+		            
+		    	
+		    	}
+					
+		    	}
+		    	
+		    	
+		
+			     
+			       
+		         }
+	        	
+	        	
+	        	
+	        }  //exit inner for loop
+	        
+	        
+	        }  //exit outer for loop
+		
+		
+		 if(msgtype.equals("ORU") ) {   //when mssg type is resullt then only insert the data otherwise break
+			      System.out.println(testCode);
+			     System.out.println(testValue);  
+	   //  if(msgtype.equals("OUL")) {
+			     ABC abc =  new ABC();
+
+			      System.out.println("Sample No:"+sampleName);
+			      System.out.println("Total Test Fetched from MSG"+count);
+			      System.out.println("Total Test Entered"+testCode.size());  
+			      logMessage("Sample No:"+sampleName, Color.BLUE);
+			      
+			      mp.put("TestCode", testCode);
+			      mp.put("TestValue", testValue);
+			     	//mp.put("SampleNO",sampleNo);
+			     	 
+			        System.out.println(testCode);  
+					   
+			        System.out.println(testValue);  
+			        logMessage("Test Code : "+testCode, Color.BLUE);
+			        logMessage("Test Value : "+testValue, Color.BLUE);
+			        
+		        if(!sampleName.equals(null) || !sampleName.equals("") )
+		        	System.out.println("API CALL FOR INSERT");
+		        logMessage("API CALL FOR INSERT", Color.red);
+		    		abc.insert_SysmexXN350COBAS(mp,sampleName);
+		        
+		    //    }
+		
+		}
+  
+  }
+  
+  public static int calculateHL7CRC(byte[] bytes) {
+      // Polynomial used for CRC-16 ANSI (HL7)
+      final int polynomial = 0x11021;  // x^16 + x^12 + x^5 + 1
+
+      // Initialize CRC-32 with the given polynomial
+      CRC32 crc32 = new CRC32();
+      crc32.reset();
+
+      // Update CRC-32 with the message bytes
+      crc32.update(bytes);
+
+      // Get the CRC-32 value as a long (since CRC32 returns a long)
+      long crcResult = crc32.getValue();
+
+      // Mask the CRC-32 result to fit into 16 bits (CRC-16)
+      int crc16 = (int) crcResult & 0xFFFF;
+
+      return crc16;
+  }
+  
+  
+  private static boolean validateInputs(String selectedMachine, String portNumber,String portName) {
+	  
+	  
+      if (selectedMachine == null || selectedMachine.isEmpty()) {
+          JOptionPane.showMessageDialog(null, "Please select a machine name.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+          return false;
+      }
+      if(tcpIpRadioButton.isSelected())
+    		
+    	{
+    	  
+    	  System.out.println("TCP IP");
+      if (portNumber.isEmpty()) {
+          JOptionPane.showMessageDialog(null, "Please enter a port number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+          return false;
+      }
+      
+      try {
+          Integer.parseInt(portNumber);
+      } catch (NumberFormatException e) {
+          JOptionPane.showMessageDialog(null, "Please enter a valid port number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+          return false;
+      }
+      
+    	}
+      
+      else if(comPortRadioButton.isSelected()) {
+    	  System.out.println("COM PORT");
+    	  if (portName.isEmpty()) {
+              JOptionPane.showMessageDialog(null, "Please enter a port Name.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+              return false;
+          }
+    	  
+      }
+     
+      return true;
+  }
+  
+  
+  
+  
+  
+  
+  
+ private static void saveToFile(String data, String jsonFileName) {
+       try (FileWriter fw = new FileWriter(jsonFileName, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw)) {
+           String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+          // out.println("Reecived << "+timestamp + " - " + data);
+       } catch (IOException e) {
+           System.err.println("Error writing to file: " + e.getMessage());
+       }
+   } 
+ 
+ 
+ private static void create_Ecg_Graph(String data) {}
+  
+  
+  
+}

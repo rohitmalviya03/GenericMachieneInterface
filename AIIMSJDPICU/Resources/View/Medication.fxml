@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="686.0" style="-fx-background-color: #ffff;" styleClass="customeBorder" stylesheets="@../styles/newStyles.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MedicationController">
+   <children>
+      <VBox layoutX="-1.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="672.0" spacing="3.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
+         <children>
+          <AnchorPane fx:id="topBar" maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="39.0" prefWidth="653.0" style="-fx-background-color: #555555;">
+               <children>
+                  <HBox layoutX="241.0" layoutY="6.0" prefHeight="39.0" prefWidth="693.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="36.0" prefWidth="445.0" style="-fx-font-weight: bold; -fx-text-fill: #fff; -fx-font-size: 25px;" text="Medication" />
+                        <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="btnTopBar">
+                           <HBox.margin>
+                              <Insets left="220.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="20.0" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <VBox alignment="TOP_RIGHT" prefHeight="532.0" prefWidth="662.0" spacing="5.0">
+               <children>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="682.0">
+                     <children>
+                        <VBox fx:id="pageContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="679.0" spacing="5.0">
+                           <children>
+                              <Label fx:id="lblSelectedMed" alignment="CENTER" graphicTextGap="3.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="669.0" styleClass="pageSubHeader" />
+                              <TitledPane collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="138.0" prefWidth="669.0" text="Medication Type">
+                                 <content>
+                                    <VBox>
+                                       <children>
+                                          <HBox prefHeight="24.0" prefWidth="493.0" spacing="20.0">
+                                             <children>
+                                                <RadioButton fx:id="typeBolus" mnemonicParsing="false" prefHeight="17.0" prefWidth="76.0" text="Bolus">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="medicationType" />
+                                                   </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="typeInfusion" mnemonicParsing="false" prefHeight="21.0" prefWidth="80.0" text="Infusion" toggleGroup="$medicationType" />
+                                                <HBox alignment="TOP_RIGHT" prefHeight="27.0" prefWidth="425.0">
+                                                   <children>
+                                                      <HBox prefHeight="27.0" prefWidth="261.0">
+                                                         <children>
+                                                            <Label prefHeight="27.0" prefWidth="145.0" style="-fx-font-weight: bold;" text="Total Dose given :" />
+                                                            <Label fx:id="lblTotalDose" prefHeight="27.0" prefWidth="122.0" style="-fx-font-weight: bold;" styleClass="headerLabel" text="0.00 mg" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox>
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <HBox>
+                                                         <children>
+                                                            <Label prefHeight="21.0" prefWidth="117.0" text="Medicine Name" />
+                                                            <Label prefHeight="21.0" prefWidth="91.0" style="-fx-text-fill: red;" text="*" />
+                                                         </children>
+                                                      </HBox>
+                                                      <TextField fx:id="textSearchMedication" prefHeight="30.0" prefWidth="691.0" promptText="Start typing to search or Select from Frequently used Medicines" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </TitledPane>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="667.0">
+                                 <children>
+                                    <TitledPane fx:id="bolusPane" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="668.0" styleClass="customeTitledPane" text="Bolus" visible="false">
+                                       <content>
+                                          <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="648.0" spacing="5.0">
+                                             <children>
+                                                <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="658.0" spacing="20.0">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="231.0" spacing="3.0">
+                                                         <children>
+                                                            <HBox spacing="5.0">
+                                                               <children>
+                                                                  <Label prefHeight="21.0" prefWidth="36.0" text="Dose" />
+                                                                  <Label prefHeight="21.0" prefWidth="91.0" style="-fx-text-fill: red;" text="*" />
+                                                                  <Label prefHeight="21.0" prefWidth="29.0" text="Unit" />
+                                                                  <Label prefHeight="21.0" prefWidth="42.0" style="-fx-text-fill: red;" text="*" />
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox spacing="5.0">
+                                                               <children>
+                                                                  <TextField fx:id="bolus_dose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="135.0" promptText="Dose " styleClass="text-field">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                  </TextField>
+                                                                  <ChoiceBox fx:id="choiceUnitBolus" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="81.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox prefHeight="56.0" prefWidth="169.0" spacing="5.0">
+                                                         <children>
+                                                            <Label text=" Date" />
+                                                            <DatePicker fx:id="datePickerBolusDate" opacity="0.8" prefHeight="31.0" prefWidth="152.0" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox fx:id="vbBolusStartTimeControl" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="218.0">
+                                                         <children>
+                                                            <HBox>
+                                                               <children>
+                                                                  <Label prefHeight="21.0" prefWidth="98.0" text="Time (hh:mm)" />
+                                                                  <Button fx:id="btnBolusTime" minWidth="43.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" styleClass="btnTimeNow" text="Now" underline="true" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="91.0" prefWidth="658.0" spacing="20.0">
+                                                   <children>
+                                                      <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="131.0" prefWidth="431.0" spacing="3.0">
+                                                         <children>
+                                                            <Label prefHeight="23.0" prefWidth="143.0" text="Comments" />
+                                                            <TextArea fx:id="txtareaBolus" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="407.0" promptText="Comments" wrapText="true" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </TitledPane>
+                                    <TitledPane fx:id="infusionPane" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="671.0" styleClass="customeTitledPane" text="Infusion" visible="false">
+                                      <content>
+                                          <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="460.0" spacing="5.0">
+                                             <children>
+                                                <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="657.0" spacing="10.0">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="256.0" spacing="3.0">
+                                                         <children>
+                                                            <HBox prefHeight="21.0" prefWidth="258.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label prefHeight="21.0" prefWidth="36.0" text="Dose" />
+                                                                  <Label prefHeight="21.0" prefWidth="91.0" style="-fx-text-fill: red;" text="*" />
+                                                                  <Label prefHeight="21.0" prefWidth="32.0" text="Unit" />
+                                                                  <Label prefHeight="21.0" prefWidth="41.0" style="-fx-text-fill: red;" text="*" />
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="253.0" spacing="5.0">
+                                                               <children>
+                                                                  <TextField fx:id="infusion_dose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="135.0" promptText="Dose " styleClass="text-field">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                  </TextField>
+                                                                  <ChoiceBox fx:id="choiceUnit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="81.0" />
+                                                                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="34.0" style="-fx-font-size: 18;" text="in">
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" />
+                                                                     </HBox.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="135.0" spacing="3.0">
+                                                         <children>
+                                                            <HBox>
+                                                               <children>
+                                                                  <Label prefHeight="21.0" prefWidth="85.0" text="Volume (ml)" />
+                                                                  <Label prefHeight="21.0" prefWidth="55.0" style="-fx-text-fill: red;" text="*" />
+                                                               </children>
+                                                            </HBox>
+                                                            <TextField fx:id="infusion_volume" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" prefHeight="30.0" prefWidth="135.0" promptText="Volume " />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="90.0" spacing="1.0">
+                                                         <children>
+                                                            <HBox prefHeight="23.0" prefWidth="109.0">
+                                                               <children>
+                                                                  <Label prefHeight="23.0" prefWidth="86.0" text="Rate (ml/hr)" />
+                                                                  <Label prefHeight="21.0" prefWidth="11.0" style="-fx-text-fill: red;" text="*" />
+                                                               </children>
+                                                            </HBox>
+                                                            <TextField fx:id="infusion_rate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="88.0" promptText="Rate" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="170.0" spacing="3.0">
+                                                         <children>
+                                                            <Label prefHeight="23.0" prefWidth="159.0" text="Concentration (µg/ml)" />
+                                                            <TextField fx:id="txtConcetrInfusion" disable="true" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="135.0" promptText="Concentration" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                                <HBox spacing="20.0">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="140.0" spacing="5.0">
+                                                         <children>
+                                                            <HBox>
+                                                               <children>
+                                                                  <Label prefHeight="21.0" prefWidth="72.0" text="Start Date" />
+                                                                  <Label prefHeight="21.0" prefWidth="44.0" style="-fx-text-fill: red;" text="*" />
+                                                               </children>
+                                                            </HBox>
+                                                            <DatePicker fx:id="datePickerStartDate" opacity="0.8" prefHeight="31.0" prefWidth="140.0" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox fx:id="vbInfusionStartTimeControl" minHeight="-Infinity" prefHeight="61.0" prefWidth="210.0" spacing="2.0">
+                                                         <children>
+                                                            <HBox>
+                                                               <children>
+                                                                  <HBox>
+                                                                     <children>
+                                                                        <Label prefHeight="21.0" prefWidth="98.0" text="Time (hh:mm)" />
+                                                                        <Label prefHeight="21.0" prefWidth="7.0" style="-fx-text-fill: red;" text="*" />
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Button fx:id="btnStartInfusionTime" minWidth="43.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" styleClass="btnTimeNow" text="Now" underline="true" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                      <Label fx:id="lblInProgress" alignment="BOTTOM_RIGHT" prefHeight="21.0" prefWidth="263.0" style="-fx-font-weight: bold; -fx-text-fill: #1EBC44;" text="Infusion in progress" visible="false">
+                                                         <HBox.margin>
+                                                            <Insets top="30.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="140.0" spacing="5.0">
+                                                         <children>
+                                                            <Label text="Stop Date" />
+                                                            <DatePicker fx:id="datePickerStopDate" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="31.0" prefWidth="140.0" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox fx:id="vbInfusionStopTimeControl" prefHeight="61.0" prefWidth="210.0" spacing="2.0">
+                                                         <children>
+                                                            <HBox>
+                                                               <children>
+                                                                  <Label prefHeight="21.0" prefWidth="104.0" text="Time (hh:mm)" />
+                                                                  <Button fx:id="btnStopInfusionTime" minWidth="43.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" styleClass="btnTimeNow" text="Now" underline="true" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox fx:id="vbDoseInfused" spacing="5.0" visible="false">
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <children>
+                                                            <Label prefHeight="21.0" prefWidth="104.0" text="Dose  Infused " />
+                                                            <Label fx:id="lblDoseInfused" />
+                                                         </children>
+                                                      </VBox>
+                                                      <JFXToggleButton fx:id="toggleBtnStop" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="145.0" text="Stop Infusion" toggleColor="#d70a0a">
+                                                         <HBox.margin>
+                                                            <Insets top="25.0" />
+                                                         </HBox.margin>
+                                                      </JFXToggleButton>
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                                   <children>
+                                                      <VBox prefHeight="55.0" prefWidth="295.0">
+                                                         <children>
+                                                            <Label prefHeight="17.0" prefWidth="100.0" text="Comments" />
+                                                            <TextArea fx:id="txtareaInfusion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="655.0" promptText="Comments" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                      </content>
+                                    </TitledPane>
+                                 </children>
+                              </StackPane>
+                              <HBox fx:id="btnHolder" alignment="BOTTOM_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="680.0" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="lblError" prefHeight="25.0" prefWidth="571.0" style="-fx-text-fill: red;" text="Some error occured !!" visible="false" />
+
+
+                                    <Button fx:id="btnSave" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="saveBtn" text="Save" visible="false" />
+                                 </children>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </VBox>
+                        <AnchorPane fx:id="disablePaneMainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="556.0" prefWidth="686.0" style="-fx-background-color: #505050;" visible="false" />
+                        <AnchorPane fx:id="anchorLoader" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="532.0" prefWidth="684.0" style="-fx-background-color: #505050;" visible="false">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="409.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../res/Spinner.gif" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets right="2.0" />
+               </padding>
+            </VBox>
+            <ListView fx:id="medSearchList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="176.0" prefWidth="657.0" visible="false" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,168 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.common.dao;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.cdac.common.GeneratedEntities.Fluid;
+import com.cdac.common.GeneratedEntities.Fluidvalue;
+import com.cdac.common.pojoClasses.Volume;
+
+public interface GetFluidLogDAo
+{
+
+	/**
+	 * This method returns list of all the fluids available in the Database from
+	 * Fluid entity
+	 *
+	 * @param patientId
+	 * @param caseId
+	 *
+	 * @param userName.
+	 * @return list of all the fluids available in the Database
+	 *
+	 */
+	public List<Fluid> getAllFluid(String userName) throws Exception;
+
+	/**
+	 * This method returns custom list according to the search entry by the user
+	 * from Fluid entity
+	 * 
+	 * @param userEntry
+	 *            - the search entry by the user
+	 * @param patientId
+	 * @param caseId
+	 *
+	 * @param userName.
+	 * @return custom list according to the search entry by the user
+	 *
+	 */
+	public List<Fluid> getCustomList(String userEntry,int patientID, Long caseID, String userName) throws Exception;
+
+	/**
+	 * This method returns maps containing success/error message along with
+	 * fluid added from Fluid entity
+	 *
+	 * @param fluidvalue
+	 *            - the fluid to be added/updated
+	 *
+	 * @param userName.
+	 *
+	 * @return maps containing success/error message along with fluid added
+	 *
+	 */
+	public Map<String,Fluidvalue> addFluid(Fluidvalue fluidvalue, String userName) throws Exception;
+
+	/**
+	 * This method returns map containing success/error message along with list
+	 * of fluid object corresponding to patientID and caseID from Fluid entity
+	 *
+	 * @param patientId
+	 * @param caseId
+	 *
+	 * @param userName.
+	 *
+	 * @return map containing success/error message along with list of fluid
+	 *         object corresponding to patientID and caseID
+	 *
+	 */
+
+	public Map<String, List<Fluidvalue>> viewFluid(Long caseID, String userName) throws Exception;
+
+	/**
+	 * This method returns string containing success/error message for deleting
+	 * a fluid from database from Fluid entity
+	 *
+	 *
+	 * @param fluidValueID
+	 *            - id of the fluid to be deleted
+	 *
+	 * @param userName.
+	 *
+	 *
+	 * @return string containing success/error message for deleting a fluid from
+	 *         database
+	 *
+	 */
+	public String deleteFluid(int fluidValueID,String userName) throws Exception;
+
+	/**
+	 * This method returns fluid object corresponding to the ID provided from
+	 * Fluid entity
+	 *
+	 *
+	 * @param fluidValueID
+	 *            - id of the fluid to be retrieved
+	 *
+	 * @param userName.
+	 *
+	 *
+	 * @return fluid object corresponding to the ID provided
+	 *
+	 */
+	public Fluidvalue getFluidForUpdate(Integer fluidValueId,String userName) throws Exception;
+
+
+	/**
+	 * This method returns total volume  object corresponding to a perticular fluid
+	 * from Fluid entity
+	 *
+	 *
+	 * @param fluidID
+	 *            - id of the fluid whose total volume is to calculate
+	 *
+	 * @param patientId
+	 * @param caseId
+	 * @param userName.
+	 *
+	 *
+	 * @return fluid object corresponding to the ID provided
+	 *
+	 */
+	public Volume getTotalVolume(String fluidName ,int patientID, Long caseID, String userName) throws Exception;
+
+	/**
+	 * This method returns total volume object corresponding to a perticular
+	 * fluid from Fluid entity
+	 *
+	 *
+	 * @param fluidID
+	 *            - id of the fluid whose total volume is to calculate
+	 *
+	 * @param patientId
+	 * @param caseId
+	 * @param userName.
+	 *
+	 *
+	 * @return fluid object corresponding to the ID provided
+	 *
+	 */
+	public Fluidvalue searchFluidValue(Long caseID,Date timeStamp,String fluidName,String userName) throws Exception;
+	
+	/**
+	 * This method returns total volume object corresponding to a perticular
+	 * fluid from Fluid entity
+	 *
+	 *
+	 * @param fluidID
+	 *            - id of the fluid whose total volume is to calculate
+	 *
+	 * @param patientId
+	 * @param caseId
+	 * @param userName.
+	 *
+	 *
+	 * @return fluid object corresponding to the ID provided
+	 *
+	 */
+	public HashMap<String,String> getTotalFluidNameVolume(Long caseID,List<String> fluidNameList,String userName) throws Exception;
+	
+	public Map<String, List<Fluidvalue>> viewTimedFluid(Long caseID, Date startTime, Date endTime, String userName) throws Exception;
+}

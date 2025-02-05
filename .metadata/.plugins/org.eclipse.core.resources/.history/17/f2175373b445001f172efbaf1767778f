@@ -1,0 +1,787 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package listeners;
+
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.infosys.common.GeneratedEntities.IntraopMedicationlog;
+import com.infosys.common.dao.MedicationLogDao;
+import com.infosys.common.dao.MedicationLogDaoImpl;
+import com.infosys.common.pojoClasses.MedicationVolumeUpdation;
+import com.infosys.common.pojoClasses.Volume;
+import com.infosys.common.util.DAOFactory;
+import com.infosys.device.deviceInjectomat.DeviceInjectomatParser;
+import com.infosys.framework.IMedicalDevice;
+import com.infosys.framework.datastructures.IDataObserver;
+import com.infosys.framework.datastructures.NodeBase;
+import com.infosys.framework.datastructures.Parameter;
+
+import application.Main;
+import controllers.MedicationInfusionController;
+import controllers.StopInfusionController;
+import javafx.application.Platform;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+//import kafka.javaapi.producer.Producer;
+import mediatorPattern.ControllerMediator;
+import model.ConfiguredInjectomartSession;
+import model.InfusionPumpModel;
+import model.InjectomartSession;
+import model.PatientSession;
+import model.UserSession;
+import services.GetTotalMedicationVolumeService;
+import services.SaveMedicationService;
+
+/**
+ * InfPumpListener.java Purpose: This class captures frequent changes in
+ * parameter values from Infusion pump device
+ *
+ * @author Rohit_Sharma41
+ *
+ */
+public class InfPumpListener {
+
+	private static final Logger LOG = Logger.getLogger(InfPumpListener.class.getName());
+
+	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+	private String deviceStepsVal;
+	private String volumeLeftVal;
+	private String drugNameVal;
+	private String infusedVolumeVal;
+	private String department = "";
+	private String patientDetails_Name = "";
+	private Long patientDetails_CRNo = 1L;
+	private String age = "";
+	private String gender = "";
+	private String height = "";
+	private String weight = "";
+	private String bmi = "";
+	private String bsa = "";
+	private String deviceStepData;
+//	private Producer<Integer, String> producer;
+	private String producedData = "";
+	private InfusionPumpModel infusionPump;
+	private String data1 = "", data2 = "", data3 = "";
+	private MedicationLogDao  medicationLogDao =  MedicationLogDaoImpl.getInstance();
+	// private boolean infusionStarted = false;
+	
+	private StopInfusionController stopInfusionController=new StopInfusionController();
+	//private Map<String, Boolean> infusionStartedMap = new HashMap<String, Boolean>();
+
+	private EventHandler<WorkerStateEvent> getTotalMedicationVolumeServiceSuccessHandler;
+	private EventHandler<WorkerStateEvent> getTotalMedicationVolumeServiceFailedHandler;
+	private EventHandler<WorkerStateEvent> saveMedicationServiceSuccessHandler;
+	private EventHandler<WorkerStateEvent> saveMedicationServiceFailedHandler;
+
+	public String getDeviceStepsVal() {
+		return deviceStepsVal;
+	}
+
+	public void setDeviceStepsVal(String deviceStepsVal) {
+		this.deviceStepsVal = deviceStepsVal;
+	}
+
+	public String getVolumeLeftVal() {
+		return volumeLeftVal;
+	}
+
+	public void setVolumeLeftVal(String volumeLeftVal) {
+		this.volumeLeftVal = volumeLeftVal;
+	}
+
+	public String getDrugNameVal() {
+		return drugNameVal;
+	}
+
+	public void setDrugNameVal(String drugNameVal) {
+		this.drugNameVal = drugNameVal;
+	}
+
+	public String getInfusedVolumeVal() {
+		return infusedVolumeVal;
+	}
+
+	public void setInfusedVolumeVal(String infusedVolumeVal) {
+		this.infusedVolumeVal = infusedVolumeVal;
+	}
+
+	/**
+	 * This method gets the device parameters and add observer to them to
+	 * monitor any modifications
+	 *
+	 * @param device connected infusion pump
+	 */
+
+	public void listenToTheDevice(IMedicalDevice device)
+	{
+		try
+		{
+			if (device.getNameOfDevice().contains(DeviceInjectomatParser.DEVICE_NAME))
+			{
+				DeviceInjectomatParser deviceInejctomat = (DeviceInjectomatParser) device;
+				DataListener dataListener = new DataListener(device);
+				deviceInejctomat.getNodeByIdentifier(DeviceInjectomatParser.INFUSION_CHANNEL2_INFUSEDVOLUME)
+				        .addObserver(dataListener);
+
+				// Main.getInstance().getDeviceController().getScannedDevices(device.getNameOfDevice());
+				Main.getInstance().getManageDeviceController().getScannedDevices(device.getNameOfDevice());
+			}
+		}
+		catch (Exception e)
+		{
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	/**
+	 * update() method of this class is invoked when a parameter of device is
+	 * modified
+	 *
+	 */
+
+	private class DataListener implements IDataObserver {
+		private IMedicalDevice device;
+
+		@Override
+		public NotificationRule getNotificationRule() {
+			return NotificationRule.EVERY_NODE;
+		}
+
+		public DataListener(IMedicalDevice device) {
+			this.device = device;
+		}
+
+		@Override
+		public List<NodeBase> getNodesUnderObservation() {
+			return null;
+		}
+
+		
+		@Override
+		public void update(NodeBase notificationTriggeringNode, NodeBase nodeThatLeadToEventNotification) {
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try
+					{
+	//					if (ControllerMediator.getInstance().getManageAvailableDevicesController().isInjectomatassigned) {
+							DeviceInjectomatParser deviceInejctomat = (DeviceInjectomatParser) device;
+
+							Parameter serialNo = (Parameter) deviceInejctomat
+									.getNodeByIdentifier(DeviceInjectomatParser.INFUSION_CHANNEL1_SERIALNUMBER);
+
+							Parameter deviceSteps = (Parameter) deviceInejctomat
+									.getNodeByIdentifier(DeviceInjectomatParser.INFUSION_CHANNEL2_DEVICESTEPS);
+
+							Parameter drugName = (Parameter) deviceInejctomat
+									.getNodeByIdentifier(DeviceInjectomatParser.INFUSION_CHANNEL2_DRUGNAME);
+
+							Parameter infusedVolume = (Parameter) deviceInejctomat
+									.getNodeByIdentifier(DeviceInjectomatParser.INFUSION_CHANNEL2_INFUSEDVOLUME);
+
+							Parameter infusionRate = (Parameter) deviceInejctomat
+									.getNodeByIdentifier(DeviceInjectomatParser.INFUSION_CHANNEL2_INFUSIONRATE);
+
+							Parameter mode = (Parameter) deviceInejctomat
+									.getNodeByIdentifier(DeviceInjectomatParser.INFUSION_CHANNEL2_INFUSIONMODE);
+							String deviceStepsVal = (String) deviceSteps.getData();
+							setDeviceStepsVal(deviceStepsVal);
+
+							try {
+								startStopInfusionsOnGrid(String.valueOf(infusionRate.getData()),String.valueOf(infusedVolume.getData()),String.valueOf(serialNo.getData()).trim(),(String) mode.getData());
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								LOG.error("## Exception occured:", e);
+							}
+
+							//---Saving latest value of infusion rate
+							ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().setSyringePumpRecentInfRate(String.valueOf(infusionRate.getData()));
+
+
+							if (InjectomartSession.getInstance() != null) {
+								infusionPump = new InfusionPumpModel();
+								Boolean isExist = false;
+
+								infusionPump.setDeviceName(DeviceInjectomatParser.DEVICE_NAME);
+								infusionPump.setDeviceStep((String) deviceSteps.getData());
+
+								infusionPump.setInfusionMode((String) mode.getData());
+								infusionPump.setInfusionRate((String) infusionRate.getData());
+								infusionPump.setSerialNo(serialNo.getData() + "");
+								infusionPump.setVolumeInfused((String) infusedVolume.getData());
+								
+								
+								List<InfusionPumpModel> configuredInfusionPumpList = new ArrayList<InfusionPumpModel>();
+								configuredInfusionPumpList = InjectomartSession.getInstance()
+										.getConfiguredInfusionPumpList();
+								if (configuredInfusionPumpList == null) {
+									configuredInfusionPumpList = new ArrayList<InfusionPumpModel>();
+									configuredInfusionPumpList.add(infusionPump);
+
+								} else {
+
+									for (InfusionPumpModel infusionPumpObj : configuredInfusionPumpList)
+
+									{
+
+										if (infusionPumpObj.getSerialNo().equalsIgnoreCase((String) serialNo.getData())) {
+											isExist = true;
+
+											break;
+										}
+									}
+									if (!isExist) {
+
+										configuredInfusionPumpList.add(infusionPump);
+									}
+
+								}
+
+								InjectomartSession.getInstance().setConfiguredInfusionPumpList(configuredInfusionPumpList);
+							}
+							List<MedicationVolumeUpdation> configuredDeviceList = new ArrayList<MedicationVolumeUpdation>();
+							if (ConfiguredInjectomartSession.getInstance() != null) {
+
+								configuredDeviceList = ConfiguredInjectomartSession.getInstance().getConfiguredDeviceList();
+							}
+							if (configuredDeviceList != null) {
+								for (MedicationVolumeUpdation obj : configuredDeviceList) {
+									if (obj.getSerialNo().equalsIgnoreCase((String) serialNo.getData()))
+
+									{
+										String volumeArr[] = infusedVolume.getData().toString().split(" ");
+										Float dose = 0f;
+										dose = Float.parseFloat(volumeArr[0]) * Float.parseFloat(obj.getConcentration());
+	//									if (obj.getDosageUnit().equalsIgnoreCase("mg")) {
+	//
+	//									}
+	//									else if(obj.getDosageUnit().equalsIgnoreCase("g")) {
+	//										dose = dose / 1000000;
+	//									}
+										dose = dose / 1000;
+										if (deviceStepsVal.equalsIgnoreCase("Infusion is in progess"))
+										{
+										obj.setRateOfInfusion(infusionRate.getData().toString());
+										}
+										obj.setDosage(dose);
+
+									}
+								}
+							}
+					}
+					catch (NumberFormatException e)
+					{
+						LOG.error("## Exception occured:", e);
+					}
+
+					}
+				//}
+
+			});
+		}
+
+		/**
+		 * This method handles start and stop animation on live medication grid
+		 * @param infusionRate current medicine infusion rate
+		 * @param infusedVol final infused volume
+		 * @param serialNo serial number of the connected infusion pump
+		 * @param mode 
+		 * @throws Exception 
+		 */
+		private void startStopInfusionsOnGrid(String infusionRate, String infusedVol, String serialNo, String mode) throws Exception
+		{
+			
+			
+			 IntraopMedicationlog returnedObj = new IntraopMedicationlog();
+			 IntraopMedicationlog returnedObjEdit = new IntraopMedicationlog();
+			 IntraopMedicationlog returnedObjBolus = new IntraopMedicationlog();
+			//---Medication object saved while configuring Injectomat
+			if (ControllerMediator.getInstance().getAssignInfusionPumpController() != null)
+			{
+				//returnedObj = ControllerMediator.getInstance().getAssignInfusionPumpController().getConfiguredInfPumpMed();
+				returnedObj=ControllerMediator.getInstance().getAssignInfusionPumpController().getConfiguredInfPumpMedMap().get(serialNo);
+			}
+			
+			if (deviceStepsVal.equalsIgnoreCase("Infusion Stopped") && mode.equals("Simple Bolus"))
+				ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getSerialNoInfusionMap().put(serialNo, true);
+
+			//---To skip "initial infusion stop" device packet info
+			if (deviceStepsVal.equalsIgnoreCase("Infusion is in progess"))
+				ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getSerialNoInfusionMap().put(serialNo, true);
+
+			if (ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getSerialNoInfusionMap().get(serialNo) != null)
+			if (ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getSerialNoInfusionMap().get(serialNo))
+			if (returnedObj != null)
+				if (returnedObj.getMedicationLogId() != null && returnedObj.getConcentration()!=null &&returnedObj.getMedicationName()!=null)
+				{
+					Calendar cal=Calendar.getInstance();
+					cal.set(Calendar.SECOND, 0);
+					cal.set(Calendar.MILLISECOND, 0);
+					if (deviceStepsVal.equalsIgnoreCase("Infusion is in progess"))
+					{
+						IntraopMedicationlog returnedObj1 = new IntraopMedicationlog();
+						if(returnedObj.getEndTime() !=null) {
+							
+							returnedObj1.setPatient(returnedObj.getPatient());
+							returnedObj1.setPatientcase(returnedObj.getPatientcase());
+							returnedObj1.setMedicationDosage(returnedObj.getMedicationDosage());
+							returnedObj1.setDosageUnit(returnedObj.getDosageUnit());
+							returnedObj1.setVolume(returnedObj.getVolume());
+							returnedObj1.setBolusInfusion("Infusion");
+							returnedObj1.setMedicationName(returnedObj.getMedicationName());
+							returnedObj1.setFromDevice(true);
+							returnedObj1.setDeviceSerialNumber(returnedObj.getDeviceSerialNumber());
+							returnedObj1.setConcentration(returnedObj.getConcentration());
+							returnedObj1.setRateOfInfusion(infusionRate);
+							returnedObj1.setStartTime(cal.getTime());
+							returnedObj1.setAttachedToPump(returnedObj.getAttachedToPump());
+							returnedObj1.setStartVol(Float.parseFloat(infusedVol.split(" ")[0]));
+							returnedObj=returnedObj1;
+						}
+						
+						if(!ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getInfusionStartedMap().containsKey(returnedObj.getMedicationName()) )
+						{	
+						ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getInfusionStartedMap().put(returnedObj.getMedicationName(),cal);
+						ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getMedsFromInfPump().add(returnedObj.getMedicationName());
+						returnedObj.setRateOfInfusion(infusionRate);
+						Float infVal = Float.parseFloat(returnedObj.getConcentration())
+								* Float.parseFloat(returnedObj.getRateOfInfusion().split(" ")[0]);
+						infVal = (infVal) /  PatientSession.getInstance().getPatient().getWeight();
+						infVal = (infVal)/60;
+						String value = MedicationInfusionController.calculateUnit(infVal);
+						String totalDose;
+						 Volume t1=null;
+						try {
+							t1 = DAOFactory.medicationLog().getTotalDosage(returnedObj.getMedicationName(),returnedObj.getPatient().getPatientId(), returnedObj.getPatientcase().getCaseId(),  UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						 totalDose = t1.getValue() + t1.getUnit();
+						 ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getTotalsValuesMap().put(returnedObj.getMedicationName(),totalDose);
+
+						 totalDose= MedicationInfusionController.calculateUnit(Float.parseFloat(totalDose.split(" ")[0])*1000);
+						String rateVal[] = value.split(" ");
+						ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+						.fillMedicationGridCell(returnedObj.getBolusInfusion() + " start",
+								returnedObj.getMedicationName(), cal, rateVal[0] + rateVal[1], totalDose);
+						//ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().fillMedicationGridCell("infusion start",returnedObj.getMedicationName(), cal, infVal + " \u00B5g/kg/hr", totals);
+						ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getMedicineTotalRateMap().put(returnedObjEdit.getMedicationName(),value);
+
+						}
+							if(returnedObj.getStartTime()==null)
+							{
+								
+								returnedObj.setStartTime(cal.getTime());
+							}
+							if(mode.equals("Basic Infusion")) {
+							if(returnedObj.getStartVol() ==null) {
+								returnedObj.setStartVol(Float.parseFloat(infusedVol.split(" ")[0]));
+							}
+							returnedObj.setEndVol(Float.parseFloat(infusedVol.split(" ")[0]));
+						
+							if(infusionRate!=null)
+							{
+								if(returnedObj.getRateOfInfusion() ==null) {
+									
+									returnedObj.setRateOfInfusion(infusionRate);
+									Float infVal = Float.parseFloat(returnedObjEdit.getConcentration())
+											* Float.parseFloat(returnedObjEdit.getRateOfInfusion().split(" ")[0]);
+									infVal = (infVal) /  PatientSession.getInstance().getPatient().getWeight();
+									infVal = (infVal)/60;
+									String value = MedicationInfusionController.calculateUnit(infVal);
+									//String rateVal[] = value.split(" ");
+									ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getMedicineTotalRateMap().put(returnedObjEdit.getMedicationName(),value);
+									returnedObj.setInfuseDosage((returnedObj.getEndVol()-returnedObj.getStartVol())*(Float.parseFloat(returnedObj.getConcentration())/1000));
+								}
+								else if(!infusionRate.equals(returnedObj.getRateOfInfusion()))
+								{
+									try {
+									
+									returnedObj.setInfuseDosage((returnedObj.getEndVol()-returnedObj.getStartVol())*(Float.parseFloat(returnedObj.getConcentration())/1000));
+									returnedObj.setEndTime(cal.getTime());
+									medicationLogDao.saveMediactions(returnedObj, UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+									
+
+									returnedObjEdit.setPatient(returnedObj.getPatient());
+									returnedObjEdit.setPatientcase(returnedObj.getPatientcase());
+									returnedObjEdit.setMedicationDosage(returnedObj.getMedicationDosage());
+									returnedObjEdit.setDosageUnit(returnedObj.getDosageUnit());
+									returnedObjEdit.setVolume(returnedObj.getVolume());
+									returnedObjEdit.setBolusInfusion("Infusion");
+									returnedObjEdit.setMedicationName(returnedObj.getMedicationName());
+									returnedObjEdit.setFromDevice(true);
+									returnedObjEdit.setDeviceSerialNumber(returnedObj.getDeviceSerialNumber());
+									returnedObjEdit.setConcentration(returnedObj.getConcentration());
+									returnedObjEdit.setRateOfInfusion(infusionRate);
+									returnedObjEdit.setStartTime(cal.getTime());
+									returnedObjEdit.setAttachedToPump(returnedObj.getAttachedToPump());
+									returnedObjEdit.setStartVol(Float.parseFloat(infusedVol.split(" ")[0]));
+									returnedObjEdit.setEndVol(Float.parseFloat(infusedVol.split(" ")[0]));
+									returnedObjEdit.setInfuseDosage((returnedObj.getEndVol()-returnedObj.getStartVol())*(Float.parseFloat(returnedObj.getConcentration())/1000));	
+									
+									returnedObj=medicationLogDao.saveMediactions(returnedObjEdit, UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+									ControllerMediator.getInstance().getAssignInfusionPumpController().getConfiguredInfPumpMedMap().put(serialNo,returnedObj);
+									Float infVal = Float.parseFloat(returnedObj.getConcentration())
+											* Float.parseFloat(returnedObj.getRateOfInfusion().split(" ")[0]);
+									infVal = (infVal) /  PatientSession.getInstance().getPatient().getWeight();
+									infVal = (infVal)/60;
+									
+									String value = MedicationInfusionController.calculateUnit(infVal);
+									
+									String totalDose;
+									 Volume t1=null;
+									
+										t1 = DAOFactory.medicationLog().getTotalDosage(returnedObjEdit.getMedicationName(),returnedObj.getPatient().getPatientId(), returnedObj.getPatientcase().getCaseId(),  UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+									
+									 totalDose = t1.getValue() + t1.getUnit();
+										ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getTotalsValuesMap().put(returnedObj.getMedicationName(),totalDose);
+										
+									 totalDose= MedicationInfusionController.calculateUnit(Float.parseFloat(totalDose.split(" ")[0])*1000);
+									String rateVal[] = value.split(" ");
+									ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+									.fillMedicationGridCell(returnedObj.getBolusInfusion() + " start",
+											returnedObj.getMedicationName(), cal, rateVal[0] + rateVal[1], totalDose);
+									//String rateVal[] = value.split(" ");
+									ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getMedicineTotalRateMap().put(returnedObjEdit.getMedicationName(),value);
+
+									
+									ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getMedicineRateMap().put(returnedObjEdit.getMedicationName(), returnedObj);
+									} catch (Exception e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									
+								}
+								else {
+									returnedObj.setInfuseDosage((returnedObj.getEndVol()-returnedObj.getStartVol())*(Float.parseFloat(returnedObj.getConcentration())/1000));	
+									
+									try {
+										returnedObj=medicationLogDao.saveMediactions(returnedObj, UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+									} catch (Exception e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+										LOG.error("## Exception occured:", e);
+									}
+									ControllerMediator.getInstance().getAssignInfusionPumpController().getConfiguredInfPumpMedMap().put(serialNo,returnedObj);
+									ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getMedicineRateMap().put(returnedObjEdit.getMedicationName(), returnedObj);
+									
+								}
+								
+
+							}
+						
+							
+							}
+							else if (mode.equals("Simple Bolus")) {
+								
+								returnedObj.setEndTime(cal.getTime());
+								if(returnedObj.getEndVol()==null) {
+									returnedObj.setEndVol(returnedObj.getStartVol());
+									returnedObj.setInfuseDosage(0.0f);
+								}
+								returnedObj=medicationLogDao.saveMediactions(returnedObj, UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+
+								
+								returnedObjBolus.setPatient(returnedObj.getPatient());
+								returnedObjBolus.setPatientcase(returnedObj.getPatientcase());
+								returnedObjBolus.setMedicationDosage(returnedObj.getMedicationDosage());
+								returnedObjBolus.setDosageUnit(returnedObj.getDosageUnit());
+								returnedObjBolus.setVolume(returnedObj.getVolume());
+								returnedObjBolus.setBolusInfusion("bolus");
+								returnedObjBolus.setMedicationName(returnedObj.getMedicationName());
+								returnedObjBolus.setFromDevice(true);
+								returnedObjBolus.setDeviceSerialNumber(returnedObj.getDeviceSerialNumber());
+								returnedObjBolus.setConcentration(returnedObj.getConcentration());
+								returnedObjBolus.setRateOfInfusion(infusionRate);
+								returnedObjBolus.setStartTime(cal.getTime());
+								returnedObjBolus.setAttachedToPump(returnedObj.getAttachedToPump());
+								returnedObjBolus.setStartVol(returnedObj.getEndVol());
+								returnedObjBolus.setEndVol(Float.parseFloat(infusedVol.split(" ")[0]));
+								returnedObjBolus.setInfuseDosage((returnedObjBolus.getEndVol()-returnedObjBolus.getStartVol())*(Float.parseFloat(returnedObjBolus.getConcentration())/1000));
+
+								returnedObjBolus=medicationLogDao.saveMediactions(returnedObjBolus, UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+
+								String totalDose;
+								 Volume t1=null;
+								
+									t1 = DAOFactory.medicationLog().getTotalDosage(returnedObj.getMedicationName(),returnedObj.getPatient().getPatientId(), returnedObj.getPatientcase().getCaseId(),  UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+								
+								 totalDose = t1.getValue() + t1.getUnit();
+									ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getTotalsValuesMap().put(returnedObj.getMedicationName(),totalDose);
+									
+								 totalDose= MedicationInfusionController.calculateUnit(Float.parseFloat(totalDose.split(" ")[0])*1000);
+									ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+									.fillMedicationGridCell(returnedObjBolus.getBolusInfusion(),
+											returnedObj.getMedicationName(), cal,
+											MedicationInfusionController.calculateUnit(returnedObjBolus.getInfuseDosage()*1000), totalDose);
+									
+									returnedObjEdit = new IntraopMedicationlog();
+									
+									returnedObjEdit.setPatient(returnedObj.getPatient());
+									returnedObjEdit.setPatientcase(returnedObj.getPatientcase());
+									returnedObjEdit.setMedicationDosage(returnedObj.getMedicationDosage());
+									returnedObjEdit.setDosageUnit(returnedObj.getDosageUnit());
+									returnedObjEdit.setVolume(returnedObj.getVolume());
+									returnedObjEdit.setBolusInfusion("Infusion");
+									returnedObjEdit.setMedicationName(returnedObj.getMedicationName());
+									returnedObjEdit.setFromDevice(true);
+									returnedObjEdit.setDeviceSerialNumber(returnedObj.getDeviceSerialNumber());
+									returnedObjEdit.setConcentration(returnedObj.getConcentration());
+									returnedObjEdit.setRateOfInfusion(infusionRate);
+									returnedObjEdit.setStartTime(cal.getTime());
+									returnedObjEdit.setAttachedToPump(returnedObj.getAttachedToPump());
+									returnedObjEdit.setStartVol(Float.parseFloat(infusedVol.split(" ")[0]));
+									returnedObj=medicationLogDao.saveMediactions(returnedObjEdit, UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+									ControllerMediator.getInstance().getAssignInfusionPumpController().getConfiguredInfPumpMedMap().put(serialNo,returnedObj);
+								
+							}
+
+							
+							/*saveMedicationService.setOnSucceeded(ex ->
+							{
+
+							});
+
+							saveMedicationService.setOnFailed(ex ->
+							{
+								Main.getInstance().getUtility().showNotification("Error", "Error",
+										saveMedicationService.getException().getMessage());
+							});*/
+
+
+							
+						/*});
+						getTotalVolumeService.setOnFailed(e ->
+						{
+							Main.getInstance().getUtility().showNotification("Error", "Error",
+							        getTotalVolumeService.getException().getMessage());
+						});*/
+					}
+					else if (deviceStepsVal.equalsIgnoreCase("Infusion Stopped"))
+					{
+						
+							
+							
+						
+						if (mode.equals("Simple Bolus")) {
+							ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getSerialNoInfusionMap().put(serialNo, false);
+							returnedObjBolus = new IntraopMedicationlog();
+							returnedObjBolus.setPatient(returnedObj.getPatient());
+							returnedObjBolus.setPatientcase(returnedObj.getPatientcase());
+							returnedObjBolus.setMedicationDosage(returnedObj.getMedicationDosage());
+							returnedObjBolus.setDosageUnit(returnedObj.getDosageUnit());
+							returnedObjBolus.setVolume(returnedObj.getVolume());
+							returnedObjBolus.setBolusInfusion("bolus");
+							returnedObjBolus.setMedicationName(returnedObj.getMedicationName());
+							returnedObjBolus.setFromDevice(true);
+							returnedObjBolus.setDeviceSerialNumber(returnedObj.getDeviceSerialNumber());
+							returnedObjBolus.setConcentration(returnedObj.getConcentration());
+							returnedObjBolus.setRateOfInfusion(infusionRate);
+							returnedObjBolus.setStartTime(cal.getTime());
+							returnedObjBolus.setAttachedToPump(returnedObj.getAttachedToPump());
+							returnedObjBolus.setStartVol(returnedObj.getEndVol()==null?0.0f:returnedObj.getEndVol());
+							returnedObjBolus.setEndVol(Float.parseFloat(infusedVol.split(" ")[0]));
+							returnedObjBolus.setInfuseDosage((returnedObjBolus.getEndVol()-returnedObjBolus.getStartVol())*(Float.parseFloat(returnedObjBolus.getConcentration())/1000));
+
+							returnedObjBolus=medicationLogDao.saveMediactions(returnedObjBolus, UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+
+							String totalDose;
+							 Volume t1=null;
+							
+								t1 = DAOFactory.medicationLog().getTotalDosage(returnedObj.getMedicationName(),returnedObj.getPatient().getPatientId(), returnedObj.getPatientcase().getCaseId(),  UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+							
+							 totalDose = t1.getValue() + t1.getUnit();
+								ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getTotalsValuesMap().put(returnedObj.getMedicationName(),totalDose);
+								
+							 totalDose= MedicationInfusionController.calculateUnit(Float.parseFloat(totalDose.split(" ")[0])*1000);
+								ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+								.fillMedicationGridCell(returnedObjBolus.getBolusInfusion(),
+										returnedObj.getMedicationName(), cal,
+										MedicationInfusionController.calculateUnit(returnedObjBolus.getInfuseDosage()*1000), totalDose);
+								
+						}
+						if(ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getInfusionStartedMap().containsKey( returnedObj.getMedicationName()))
+						{
+							
+							GetTotalMedicationVolumeService getTotalVolumeService = GetTotalMedicationVolumeService.getInstance(
+							        returnedObj.getMedicationName(),
+							        PatientSession.getInstance().getPatient().getPatientId(),
+							        PatientSession.getInstance().getPatientCase().getCaseId());
+							getTotalVolumeService.restart();
+
+							IntraopMedicationlog returnedObj1 =returnedObj;
+							getTotalMedicationVolumeServiceSuccessHandler = new EventHandler<WorkerStateEvent>()
+							{
+								@Override
+								public void handle(WorkerStateEvent event)
+								{
+									try
+									{
+										ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getSerialNoInfusionMap().put(serialNo, false);
+										//Date startTime=ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getInfusionStartedMap().get(returnedObj.getMedicationName()).getTime();
+										 
+										ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getInfusionStartedMap().remove(returnedObj1.getMedicationName());
+
+										float totalDose = getTotalVolumeService.getTotalVolume().getValue();
+										DecimalFormat df = new DecimalFormat("###.##");
+										String totals = df.format(totalDose) + " mg";
+
+										//float infusedDosage;
+										Calendar cal=Calendar.getInstance();
+										cal.set(Calendar.SECOND, 0);
+										cal.set(Calendar.MILLISECOND, 0);
+									
+										ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getTotalsValuesMap().put(returnedObj1.getMedicationName(),totals);
+										
+										/*infusedDosage = stopInfusionController.calculateInfusedDose(startTime, cal.getTime(),
+										    infusionRate, returnedObj.getConcentration());*/
+										/*ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().fillMedicationGridCell(
+												  "infusion stop", returnedObj.getMedicationName(),cal,String.valueOf(infusedDosage),totals);*/
+
+
+										returnedObj1.setEndTime(cal.getTime());
+										if(!infusedVol.equals("0.0 ml"))
+										returnedObj1.setEndVol(Float.parseFloat(infusedVol.split(" ")[0]));
+										returnedObj1.setInfuseDosage((returnedObj1.getEndVol()-returnedObj1.getStartVol())*(Float.parseFloat(returnedObj1.getConcentration())/1000));
+
+										//returnedObj.setRateOfInfusion(	ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getSyringePumpRecentInfRate());
+
+										SaveMedicationService saveMedicationService = SaveMedicationService.getInstance(returnedObj1);
+										saveMedicationService.restart();
+
+										saveMedicationServiceSuccessHandler = new EventHandler<WorkerStateEvent>()
+										{
+											@Override
+											public void handle(WorkerStateEvent event)
+											{
+												try
+												{
+													String totalDose;
+													 Volume t1=null;
+													
+														t1 = DAOFactory.medicationLog().getTotalDosage(returnedObj1.getMedicationName(),returnedObj1.getPatient().getPatientId(), returnedObj1.getPatientcase().getCaseId(),  UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+													
+													 totalDose = t1.getValue() + t1.getUnit();
+														ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getTotalsValuesMap().put(returnedObj1.getMedicationName(),totalDose);
+													
+													
+													
+														 totalDose= MedicationInfusionController.calculateUnit(Float.parseFloat(totalDose.split(" ")[0])*1000);
+														 
+													 ControllerMediator.getInstance().getMainController()
+												        .getDrawTabbedCenter().fillMedicationGridCell("infusion stop",
+												        		returnedObj1.getMedicationName(), cal,
+												                MedicationInfusionController.calculateUnit((returnedObj1.getInfuseDosage())*1000), totalDose);
+
+													ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getMedsFromInfPump()
+													.remove( saveMedicationService.getReturnedMedicationLog().getMedicationName());
+													
+
+													saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+															saveMedicationServiceSuccessHandler);
+													saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+															saveMedicationServiceFailedHandler);
+												}
+												catch (Exception e)
+												{
+															LOG.error("## Exception occured:", e);
+
+												}
+											}
+										};
+										saveMedicationService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+												saveMedicationServiceSuccessHandler);
+
+										saveMedicationServiceFailedHandler = new EventHandler<WorkerStateEvent>()
+										{
+											@Override
+											public void handle(WorkerStateEvent event)
+											{
+												try
+												{
+													Main.getInstance().getUtility().showNotification("Error", "Error",
+															saveMedicationService.getException().getMessage());
+
+													saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+															saveMedicationServiceSuccessHandler);
+													saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+															saveMedicationServiceFailedHandler);
+												}
+												catch (Exception e)
+												{
+															LOG.error("## Exception occured:", e);
+
+												}
+											}
+										};
+										saveMedicationService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+												saveMedicationServiceFailedHandler);
+
+
+
+										getTotalVolumeService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+												getTotalMedicationVolumeServiceSuccessHandler);
+										getTotalVolumeService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+												getTotalMedicationVolumeServiceFailedHandler);
+									}
+									catch (Exception e)
+									{
+										LOG.error("## Exception occured:", e);
+
+									}
+								}
+							};
+							getTotalVolumeService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+									getTotalMedicationVolumeServiceSuccessHandler);
+
+							getTotalMedicationVolumeServiceFailedHandler = new EventHandler<WorkerStateEvent>()
+							{
+								@Override
+								public void handle(WorkerStateEvent event)
+								{
+									try
+									{
+										Main.getInstance().getUtility().showNotification("Error", "Error",
+										        getTotalVolumeService.getException().getMessage());
+
+										getTotalVolumeService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+												getTotalMedicationVolumeServiceSuccessHandler);
+										getTotalVolumeService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+												getTotalMedicationVolumeServiceFailedHandler);
+									}
+									catch (Exception e)
+									{
+												LOG.error("## Exception occured:", e);
+
+									}
+								}
+							};
+							getTotalVolumeService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+									getTotalMedicationVolumeServiceFailedHandler);
+
+
+
+						}
+
+
+					}
+				}
+
+
+		}
+
+	}
+
+}

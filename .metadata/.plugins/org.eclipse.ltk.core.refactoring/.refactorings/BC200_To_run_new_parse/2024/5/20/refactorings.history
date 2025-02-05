@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ABC.java&apos; to &apos;BC200_To_run_new_parse/src/server&apos;&#x0D;&#x0A;- Original project: &apos;BC200_To_run_new_parse&apos;&#x0D;&#x0A;- Destination element: &apos;BC200_To_run_new_parse/src/server&apos;&#x0D;&#x0A;- Original element: &apos;server.ABC.java&apos;" description="Copy compilation unit" destination="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;server" element1="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;server{ABC.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1715834816186" units="1" version="1.0"/>
+</session>

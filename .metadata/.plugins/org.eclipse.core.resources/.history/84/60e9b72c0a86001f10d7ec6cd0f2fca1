@@ -1,0 +1,48 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("HL7 Order Sender");
+
+        // Create UI components
+        Label sampleLabel = new Label("Enter Sample Number:");
+        TextField sampleNumberField = new TextField();
+        sampleNumberField.setPromptText("Sample Number");
+
+        Label statusLabel = new Label();
+        Button sendButton = new Button("Send Order");
+
+        sendButton.setOnAction(e -> {
+            String sampleNumber = sampleNumberField.getText();
+            if (!sampleNumber.isEmpty()) {
+                try {
+                    // Generate HL7 message and send to server
+                    String hl7Message = HL7MessageGenerator.generateOrderMessage(sampleNumber);
+                    ServerConnector.sendToServer(hl7Message);
+                    statusLabel.setText("Order sent successfully for sample: " + sampleNumber);
+                } catch (Exception ex) {
+                    statusLabel.setText("Error sending order: " + ex.getMessage());
+                }
+            } else {
+                statusLabel.setText("Please enter a sample number.");
+            }
+        });
+
+        VBox vbox = new VBox(10, sampleLabel, sampleNumberField, sendButton, statusLabel);
+        Scene scene = new Scene(vbox, 400, 200);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}

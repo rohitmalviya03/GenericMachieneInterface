@@ -1,0 +1,33 @@
+package Server;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class dbConnection {
+
+	
+	public static Connection getDbConnection() 
+	{
+		Connection con = null;
+		try {
+			//Class.forName("org.postgresql.Driver");
+			//Class.forName("com.edb.Driver");
+			
+			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+			//uat
+			 //con = DriverManager.getConnection("jdbc:edb://10.226.80.35:5444/hmis_aiims_patna", "hmisaiimsp", "hmisaiimsp");
+			 String databaseURL="jdbc:derby://localhost:1527/myDB";
+			 
+			 
+		//	con = DriverManager.getConnection("jdbc:edb://10.10.11.25:5444/aiims_jodhpur", "aiimsjodhpur", "@iimsjodhpur");  //for UAT AIIMS JD
+			//con = DriverManager.getConnection("jdbc:postgresql://10.226.80.35:5444/bld_nation", "bld_nation", "bld_nation");
+			
+			//con = DriverManager.getConnection("jdbc:edb://10.10.188.11:5444/bld_nation", "bld_nation", "BldNati0n");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return con;
+
+	}
+	
+}

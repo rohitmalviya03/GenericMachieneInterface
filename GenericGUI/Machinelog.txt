@@ -1,0 +1,4 @@
+Selected Machine: ABG, Port Name: COM3Protocol: HL7
+***********Machine Interface Server DB9 Only*************
+Selected Baud Rate :9600
+AIIMS Jodhpur ICU & OT Equipments 

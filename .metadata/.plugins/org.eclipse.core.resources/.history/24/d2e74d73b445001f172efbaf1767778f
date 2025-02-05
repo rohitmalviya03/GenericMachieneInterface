@@ -1,0 +1,244 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.infosys.common.dao;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.apache.log4j.Logger;
+import com.infosys.framework.exceptions.ServiceExceptionWrapper;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.infosys.common.GeneratedEntities.Roles;
+import com.infosys.common.GeneratedEntities.Users;
+import com.infosys.common.pojoClasses.UserWithrRolesForUserAuthentication;
+import com.infosys.common.util.HibernateUtilities;
+
+import utility.Utility;
+
+public class UserAuthenticationDaoImpl implements UserAuthenticationDao
+{
+
+	// ~ Static attributes/initializers
+	// -------------------------------------------------------------
+	private static final Logger LOGGER = Logger.getLogger(UserAuthenticationDaoImpl.class.getName());
+
+	// ~ Instance attributes
+	// ------------------------------------------------------------------------
+
+	// ~ Constructors
+	// -------------------------------------------------------------------------------
+
+	// ~ Methods
+	// ------------------------------------------------------------------------------------
+	
+	private static UserAuthenticationDaoImpl instance = null;
+	private UserAuthenticationDaoImpl()
+	{
+
+	}
+
+	public static UserAuthenticationDaoImpl getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new UserAuthenticationDaoImpl();
+		}
+		return instance;
+	}
+	/**
+	 /**
+	 * This method returns map containing success/error message along with the user object provided login success
+	 * from users entity
+	 *
+	 *
+	 * @param users
+	 * - the user whose credentials is to be validated
+	 *
+	 *
+	 *
+	 *
+	 * @return map containing success/error message along with the user object provided login success.
+	 * @throws Exception
+	 *
+	 */
+
+	//private Session session;
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> validateUserCredentials(Users users) throws Exception
+	{
+		Map<String,Object> userDetails1=new HashMap<String,Object>();
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		List<Users> userDetails=new ArrayList<Users>();
+		Session session = null;
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory= HibernateUtilities.createSessionFactory();
+			session= sessionFactory.openSession();
+			session.getTransaction().begin();
+
+			// To retrieve the user object from the database
+			Query query = session.createQuery("From Users usr "
+					+ " where usr.userName=?");
+
+			query.setParameter(0, users.getUserName());
+			userDetails = query.list();
+
+			// checking whether user exists or not
+
+			//if(userDetails.size()==0)
+			if(userDetails.isEmpty())
+			{
+				userDetails1.put("error", "User name does not exsist. !!!");
+			}
+			else
+			{
+				for(Users users2 : userDetails )
+				{
+					Date date=new Date();
+					users2.setLastActivityDate(date);
+
+					// checking whether user acount is active or deactive
+
+					/*if(!users2.isActive())
+					{
+						userDetails1.put("error", "Your UserID is deactive. Please contact admin. !!!");
+					}
+					else
+					{
+						if(users2.getPassword().equals(new Utility().md5(users.getPassword())))
+						{
+							users2.setLoginAttempt(0);
+							users2.setIsLogged(true);
+							Query query2=session.createQuery("select re.roleId from Usersinroles re where re.userId=:userId");
+							query2.setParameter("userId",users2.getUserId());
+							List<Integer> roles=new ArrayList<Integer>();
+							roles=query2.list();
+							Roles roles2=(Roles) session.get(Roles.class, roles.get(0));
+							UserWithrRolesForUserAuthentication userWithRole= new UserWithrRolesForUserAuthentication();
+						    userWithRole.setUserID(users2.getUserName());
+							userWithRole.setUserName(users2.getFirstName() +" "+ users2.getLastName());
+							userWithRole.setDesignation(roles2.getDescription());
+							userDetails1.put("success", userWithRole);
+
+						}
+						else
+						{
+							// if passowrd entered is wrong login attempt counter incremented
+							if(users2.getLoginAttempt()<5)
+							{
+								users2.setLoginAttempt(users2.getLoginAttempt() +1);
+								userDetails1.put("error", "Password is incorect !!!");
+							}
+							// if the user entered wrong password for more than 5 times their account is deactivated
+							if(users2.getLoginAttempt()>=5)
+							{
+								users2.setActive(false);
+								userDetails1.put("error", "Your UserID is deactive. Please contact admin. !!!");
+							}
+
+						}
+						session.saveOrUpdate(users2);//Data persisted
+						session.getTransaction().commit();// Session commit
+
+					}*/
+
+
+
+
+
+					// checking whether user acount is active or deactive
+
+					if(users2.isActive())
+					{
+						if(users2.getPassword().equals(new Utility().md5(users.getPassword())))
+						{
+							users2.setLoginAttempt(0);
+							users2.setIsLogged(true);
+							Query query2=session.createQuery("select re.roleId from Usersinroles re where re.userId=:userId");
+							query2.setParameter("userId",users2.getUserId());
+							List<Integer> roles=new ArrayList<Integer>();
+							roles=query2.list();
+							Roles roles2=(Roles) session.get(Roles.class, roles.get(0));
+							UserWithrRolesForUserAuthentication userWithRole= new UserWithrRolesForUserAuthentication();
+							userWithRole.setUserID(users2.getUserName());
+							userWithRole.setUserName(users2.getFirstName() +" "+ users2.getLastName());
+							userWithRole.setDesignation(roles2.getDescription());
+							userDetails1.put("success", userWithRole);
+
+						}
+						else
+						{
+							// if passowrd entered is wrong login attempt counter incremented
+							if(users2.getLoginAttempt()<5)
+							{
+								users2.setLoginAttempt(users2.getLoginAttempt() +1);
+								userDetails1.put("error", "Password is incorrect !!!");
+							}
+							// if the user entered wrong password for more than 5 times their account is deactivated
+							if(users2.getLoginAttempt()>=5)
+							{
+								users2.setActive(false);
+								userDetails1.put("error", "Your UserID is deactive. Please contact admin. !!!");
+							}
+
+						}
+
+
+					}
+
+
+					else
+					{
+						userDetails1.put("error", "Your UserID is deactive. Please contact admin. !!!");
+					}
+
+					session.saveOrUpdate(users2);//Data persisted
+					session.getTransaction().commit();// Session commit
+				}
+
+			}
+
+		}
+
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+		return userDetails1;
+
+	}
+
+}

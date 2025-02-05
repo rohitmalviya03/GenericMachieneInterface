@@ -1,0 +1,91 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.infosys.device.deviceDemoA;
+
+import org.apache.log4j.Logger;
+
+import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.SerialPortEvent;
+import com.infosys.framework.AbstractDeviceHandshake;
+import com.infosys.framework.CoreDevice;
+import com.infosys.framework.exceptions.CustomPacketMakerNotFoundException;
+
+public class DeviceDemoAHandshake extends AbstractDeviceHandshake
+{
+	private static final Logger LOG = Logger.getLogger(DeviceDemoAHandshake.class);
+
+	static int deviceCounter;
+
+	DeviceDemoAParser coreDev;
+
+	@Override
+	public String getNameOfDevice()
+	{
+		return "DeviceDemoHandshake";
+	}
+
+	@Override
+	public void initHandshakeLogic()
+	{
+		LOG.info("Handshake logic initialized for:" + getNameOfDevice());
+		// Initialize this handshake and make it ready to identify the device.
+		// The listener method deviceEventOccurred would not start receiving the
+		// data.
+
+		// This method call is for evaluation only. In reality, this should only
+		// be called once the algorithm has confirmed the device identification.
+		setHandshakeStatus(HandshakeStatus.SUCCESSFUL);
+	}
+
+	@Override
+	public CoreDevice getExecutorInstance()
+	{
+		LOG.info("Returning instance of DeviceDemoA Parser");
+		try
+		{
+			coreDev = new DeviceDemoAParser("DeviceDemoA" + deviceCounter, 8);
+			LOG.info("Device instance:" + coreDev);
+			return coreDev;
+		}
+		catch (CustomPacketMakerNotFoundException e)
+		{
+			e.printStackTrace();
+			LOG.error("## Exception occured:", e);
+			// The exception will not occur as CustomPacketMaker Strategy is not
+			// used for this device.
+			return null;
+		}
+	}
+
+	@Override
+	public void deviceEventOccurred(SerialPortEvent dataFromPort)
+	{
+		// Analyze the data here and decide if the device is identified or not.
+		if (dataFromPort.getEventType() == SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
+		{
+			// Some complex/simple algorithm
+
+			// Indicate to the framework that handshake is successful.
+			setHandshakeStatus(HandshakeStatus.SUCCESSFUL);
+
+			// More example:
+			// setHandshakeStatus(HandshakeStatus.NOT_SUCCESSFUL);
+		}
+	}
+
+	@Override
+	public PacketingStrategy getPacketingStrategy()
+	{
+		return PacketingStrategy.MESSAGE_LENGTH;
+	}
+
+	@Override
+	public int getPacketSize()
+	{
+		return 8;
+	}
+}

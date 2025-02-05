@@ -1,0 +1,71 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package services;
+
+import java.util.List;
+
+import com.cdac.common.GeneratedEntities.Fdamedications;
+import com.cdac.common.util.DAOFactory;
+
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import model.UserSession;
+public class SearchFDAMedicationsService extends Service<Void>
+{
+
+	private List<Fdamedications> fdaMedicationsList;
+	private static String search;
+
+	public List<Fdamedications> getFdaMedicationsList()
+	{
+		return fdaMedicationsList;
+	}
+	private static SearchFDAMedicationsService instance = null;
+
+	public static SearchFDAMedicationsService getInstance(String searchVal)
+	{
+		if(instance == null)
+		{
+			instance = new SearchFDAMedicationsService();
+		}
+		search = searchVal;
+		return instance;
+	}
+
+	private SearchFDAMedicationsService() {
+		super();
+	}
+
+
+	@Override
+	protected Task<Void> createTask()
+	{
+		// TODO Auto-generated method stub
+		return new Task<Void>()
+		{
+
+			@Override
+			protected Void call() throws Exception
+			{
+				// call DB method to save new patient details
+
+				try
+				{
+					fdaMedicationsList = DAOFactory.getMasterDataDetails().searchFDAMedications(search,
+					        UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+				}
+				catch (Exception e) 
+				{
+					throw e;
+				}
+
+				return null;
+			}
+
+		};
+	}
+}

@@ -1,0 +1,37 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.framework.common;
+
+import org.apache.log4j.Logger;
+
+import com.cdac.framework.exceptions.NotificationTypeExistsException;
+
+public class NotificationTypeConstants
+{
+	public static Logger LOG = Logger.getLogger(NotificationTypeConstants.class);
+
+	public static NotificationType DEVICE_STATUS_NOTIFICATIONS;
+	public static NotificationType CRITICAL_EVENT_NOTIFICATIONS;
+
+	static
+	{
+		try
+		{
+			DEVICE_STATUS_NOTIFICATIONS = new NotificationType("DeviceStatusNotifications");
+			CRITICAL_EVENT_NOTIFICATIONS = new NotificationType("CriticalEventNotifications");
+		}
+		catch (NotificationTypeExistsException typeExists)
+		{
+			LOG.error("## Exception occured:" + typeExists.getMessage());
+		}
+	}
+
+	private NotificationTypeConstants()
+	{
+		// No need to construct
+	}
+}

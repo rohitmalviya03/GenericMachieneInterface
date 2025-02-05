@@ -1,0 +1,1668 @@
+2025-02-04 10:49:26 - Failed to fetch data. Response Code: 500
+2025-02-04 10:49:26 - Something went wrong.. Internal Server Error
+2025-02-04 10:49:26 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 10:52:33 - Failed to fetch data. Response Code: 404
+2025-02-04 10:52:33 - Something went wrong.. Not Found
+2025-02-04 10:52:33 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 10:53:25 - Failed to fetch data. Response Code: 404
+2025-02-04 10:53:25 - Something went wrong.. Not Found
+2025-02-04 10:53:25 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 10:54:41 - Failed to fetch data. Response Code: 404
+2025-02-04 10:54:41 - Something went wrong.. Not Found
+2025-02-04 10:54:41 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 11:01:12 - Failed to fetch data. Response Code: 500
+2025-02-04 11:01:12 - Something went wrong.. Internal Server Error
+2025-02-04 11:01:12 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 11:03:58 - Response: [{"patFirstName":"961011000125012810000202","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000201","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000203","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000205","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null}]
+2025-02-04 11:03:58 - Save Patient Details API called for PACS 
+2025-02-04 11:03:58 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    }
+]
+2025-02-04 11:03:58 - Update Status API called
+2025-02-04 11:03:58 - Response Body:  Status Updated
+2025-02-04 11:03:58 - Data sends to Mestria is started ::  
+2025-02-04 11:03:58 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 11:03:58 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204110358||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204110358|SAC||||24008676 ORC|NW||||||||20250204110358TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 11:04:01 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 11:04:01 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 11:05:13 - Response: [{"patFirstName":"961011000125012810000202","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000201","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000203","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000205","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null}]
+2025-02-04 11:05:13 - Save Patient Details API called for PACS 
+2025-02-04 11:05:13 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    }
+]
+2025-02-04 11:05:13 - Update Status API called
+2025-02-04 11:05:13 - Response Body:  Status Updated
+2025-02-04 11:05:13 - Data sends to Mestria is started ::  
+2025-02-04 11:05:13 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 11:05:13 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204110513||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204110513|SAC||||24008676 ORC|NW||||||||20250204110513TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 11:05:15 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 11:05:15 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 11:32:23 - Response: [{"patFirstName":"961011000125012810000202","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000201","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000203","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000205","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null}]
+2025-02-04 11:32:23 - Save Patient Details API called for PACS 
+2025-02-04 11:32:24 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    }
+]
+2025-02-04 11:32:24 - Update Status API called
+2025-02-04 11:32:24 - Response Body:  Status Updated
+2025-02-04 11:32:24 - Data sends to Mestria is started ::  
+2025-02-04 11:32:24 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 11:32:24 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204113224||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204113224|SAC||||24008676 ORC|NW||||||||20250204113224TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 11:32:26 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 11:32:26 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 11:35:19 - Response: [{"patFirstName":"961011000125012810000202","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000201","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000203","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null},{"patFirstName":"961011000125012810000205","patLastName":"","patMiddleName":"ROHIT","patGender":null,"patientBirthDate":null,"patCrno":null,"patSampleNo":null,"patSampleType":null,"patSampleCollectionDate":null,"reqDno":null}]
+2025-02-04 11:35:19 - Save Patient Details API called for PACS 
+2025-02-04 11:55:12 - Failed to fetch data. Response Code: 500
+2025-02-04 11:55:12 - Something went wrong.. Internal Server Error
+2025-02-04 11:55:12 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 11:56:31 - Response: [{"patFirstName":"null","patLastName":"patient_lname","patMiddleName":"patient_mname","patGender":"patient_sex","patientBirthDate":"patdob","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"sam_coll_time","reqDno":null},{"patFirstName":"null","patLastName":"patient_lname","patMiddleName":"patient_mname","patGender":"patient_sex","patientBirthDate":"patdob","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"sam_coll_time","reqDno":null},{"patFirstName":"null","patLastName":"patient_lname","patMiddleName":"patient_mname","patGender":"patient_sex","patientBirthDate":"patdob","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"sam_coll_time","reqDno":null},{"patFirstName":"null","patLastName":"patient_lname","patMiddleName":"patient_mname","patGender":"patient_sex","patientBirthDate":"patdob","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"sam_coll_time","reqDno":null}]
+2025-02-04 11:56:31 - Save Patient Details API called for PACS 
+2025-02-04 11:56:31 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    }
+]
+2025-02-04 11:56:31 - Update Status API called
+2025-02-04 11:56:31 - Response Body:  Status Updated
+2025-02-04 11:56:31 - Data sends to Mestria is started ::  
+2025-02-04 11:56:32 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 11:56:32 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204115632||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204115632|SAC||||24008676 ORC|NW||||||||20250204115632TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 11:56:34 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 11:56:34 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:02:23 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null}]
+2025-02-04 12:02:23 - Save Patient Details API called for PACS 
+2025-02-04 12:02:23 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    }
+]
+2025-02-04 12:02:23 - Update Status API called
+2025-02-04 12:02:23 - Response Body:  Status Updated
+2025-02-04 12:02:23 - Data sends to Mestria is started ::  
+2025-02-04 12:02:24 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:02:24 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204120224||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204120224|SAC||||24008676 ORC|NW||||||||20250204120224TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:02:26 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:02:26 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:04:05 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null}]
+2025-02-04 12:04:05 - Save Patient Details API called for PACS 
+2025-02-04 12:04:05 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    }
+]
+2025-02-04 12:04:05 - Update Status API called
+2025-02-04 12:04:05 - Response Body:  Status Updated
+2025-02-04 12:04:05 - Data sends to Mestria is started ::  
+2025-02-04 12:04:05 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:04:06 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204120406||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204120406|SAC||||24008676 ORC|NW||||||||20250204120406TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:04:08 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:04:08 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:04:55 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null}]
+2025-02-04 12:04:55 - Save Patient Details API called for PACS 
+2025-02-04 12:04:55 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    }
+]
+2025-02-04 12:04:55 - Update Status API called
+2025-02-04 12:04:55 - Response Body:  Status Updated
+2025-02-04 12:04:55 - Data sends to Mestria is started ::  
+2025-02-04 12:04:56 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:04:56 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204120456||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204120456|SAC||||24008676 ORC|NW||||||||20250204120456TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:04:58 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:04:58 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:06:52 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":null}]
+2025-02-04 12:06:52 - Save Patient Details API called for PACS 
+2025-02-04 12:06:53 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": null,
+        "status": "0"
+    }
+]
+2025-02-04 12:06:53 - Update Status API called
+2025-02-04 12:06:53 - Response Body:  Status Updated
+2025-02-04 12:06:53 - Data sends to Mestria is started ::  
+2025-02-04 12:06:53 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:06:53 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204120653||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204120653|SAC||||24008676 ORC|NW||||||||20250204120653TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:06:55 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:06:55 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:11:06 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"100"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"104"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"120"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"110"}]
+2025-02-04 12:11:06 - Save Patient Details API called for PACS 
+2025-02-04 12:11:06 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "100",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "104",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "120",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "110",
+        "status": "0"
+    }
+]
+2025-02-04 12:11:06 - Update Status API called
+2025-02-04 12:11:07 - Response Body:  Status Updated
+2025-02-04 12:11:07 - Data sends to Mestria is started ::  
+2025-02-04 12:11:07 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:11:07 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204121107||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204121107|SAC||||24008676 ORC|NW||||||||20250204121107TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:11:09 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:11:09 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:13:31 - Failed to fetch data. Response Code: 500
+2025-02-04 12:13:31 - Something went wrong.. Internal Server Error
+2025-02-04 12:13:31 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 12:14:50 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"100"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"104"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"120"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"110"}]
+2025-02-04 12:14:50 - Save Patient Details API called for PACS 
+2025-02-04 12:14:50 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "100",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "104",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "120",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "110",
+        "status": "0"
+    }
+]
+2025-02-04 12:14:50 - Update Status API called
+2025-02-04 12:14:50 - Response Body:  Status Updated
+2025-02-04 12:14:50 - Data sends to Mestria is started ::  
+2025-02-04 12:14:50 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:14:50 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204121450||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204121450|SAC||||24008676 ORC|NW||||||||20250204121450TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:14:52 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:14:52 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:17:03 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"100"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"104"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"120"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"110"}]
+2025-02-04 12:17:03 - Save Patient Details API called for PACS 
+2025-02-04 12:17:03 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "100",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "104",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "120",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "110",
+        "status": "0"
+    }
+]
+2025-02-04 12:17:03 - Update Status API called
+2025-02-04 12:17:03 - Response Body:  Status Updated
+2025-02-04 12:17:03 - Data sends to Mestria is started ::  
+2025-02-04 12:17:03 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:17:03 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204121703||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204121703|SAC||||24008676 ORC|NW||||||||20250204121703TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:17:05 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:17:05 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:17:47 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"100"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"104"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"120"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"110"}]
+2025-02-04 12:17:47 - Save Patient Details API called for PACS 
+2025-02-04 12:17:47 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "100",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "104",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "120",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "110",
+        "status": "0"
+    }
+]
+2025-02-04 12:17:47 - Update Status API called
+2025-02-04 12:17:47 - Response Body:  Status Updated
+2025-02-04 12:17:47 - Data sends to Mestria is started ::  
+2025-02-04 12:17:47 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:17:47 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204121747||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204121747|SAC||||24008676 ORC|NW||||||||20250204121747TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:17:49 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:17:49 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:18:55 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"100"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"104"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"120"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"110"}]
+2025-02-04 12:18:55 - Save Patient Details API called for PACS 
+2025-02-04 12:18:55 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "100",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "104",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "120",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "110",
+        "status": "0"
+    }
+]
+2025-02-04 12:18:55 - Update Status API called
+2025-02-04 12:18:55 - Response Body:  Status Updated
+2025-02-04 12:18:55 - Data sends to Mestria is started ::  
+2025-02-04 12:18:55 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:18:55 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204121855||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204121855|SAC||||24008676 ORC|NW||||||||20250204121855TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:18:57 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:18:57 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:20:59 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"100"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"104"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"120"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"110"}]
+2025-02-04 12:20:59 - Save Patient Details API called for PACS 
+2025-02-04 12:20:59 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "100",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "104",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "120",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "110",
+        "status": "0"
+    }
+]
+2025-02-04 12:20:59 - Update Status API called
+2025-02-04 12:20:59 - Response Body:  Status Updated
+2025-02-04 12:20:59 - Data sends to Mestria is started ::  
+2025-02-04 12:20:59 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:20:59 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204122059||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204122059|SAC||||24008676 ORC|NW||||||||20250204122059TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:21:01 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:21:01 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:21:50 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"100"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"104"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"120"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"110"}]
+2025-02-04 12:21:50 - Save Patient Details API called for PACS 
+2025-02-04 12:21:50 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "100",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "104",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "120",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "110",
+        "status": "0"
+    }
+]
+2025-02-04 12:21:50 - Update Status API called
+2025-02-04 12:21:51 - Response Body:  Status Updated
+2025-02-04 12:21:51 - Data sends to Mestria is started ::  
+2025-02-04 12:21:51 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:21:51 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204122151||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204122151|SAC||||24008676 ORC|NW||||||||20250204122151TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:21:53 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:21:53 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:24:40 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"100"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"104"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"120"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"110"}]
+2025-02-04 12:24:40 - Save Patient Details API called for PACS 
+2025-02-04 12:24:41 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "100",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "104",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "120",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "110",
+        "status": "0"
+    }
+]
+2025-02-04 12:24:41 - Update Status API called
+2025-02-04 12:24:41 - Response Body:  Status Updated
+2025-02-04 12:24:41 - Data sends to Mestria is started ::  
+2025-02-04 12:24:41 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:24:41 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204122441||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204122441|SAC||||24008676 ORC|NW||||||||20250204122441TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:24:43 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:24:43 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:26:26 - Response: [{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"100"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"104"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"120"},{"patFirstName":"null","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":null,"patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"110"}]
+2025-02-04 12:26:26 - Save Patient Details API called for PACS 
+2025-02-04 12:26:26 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "100",
+        "status": "1"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "104",
+        "status": "1"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "120",
+        "status": "1"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": null,
+        "reqDno": "110",
+        "status": "1"
+    }
+]
+2025-02-04 12:26:26 - Update Status API called
+2025-02-04 12:26:26 - Response Body:  Status Updated
+2025-02-04 12:26:26 - Data sends to Mestria is started ::  
+2025-02-04 12:26:26 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:26:26 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204122626||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204122626|SAC||||24008676 ORC|NW||||||||20250204122626TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:26:28 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:26:28 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:30:50 - Failed to fetch data. Response Code: 500
+2025-02-04 12:30:50 - Something went wrong.. Internal Server Error
+2025-02-04 12:30:50 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 12:31:27 - Failed to fetch data. Response Code: 500
+2025-02-04 12:31:27 - Something went wrong.. Internal Server Error
+2025-02-04 12:31:27 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 12:34:08 - Failed to fetch data. Response Code: 500
+2025-02-04 12:34:08 - Something went wrong.. Internal Server Error
+2025-02-04 12:34:08 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 12:35:48 - Response: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"100"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"104"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"120"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","reqDno":"110"}]
+2025-02-04 12:35:48 - Save Patient Details API called for PACS 
+2025-02-04 12:35:48 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "100",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "104",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "120",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "110",
+        "status": "0"
+    }
+]
+2025-02-04 12:35:48 - Update Status API called
+2025-02-04 12:35:48 - Response Body:  Status Updated
+2025-02-04 12:35:48 - Data sends to Mestria is started ::  
+2025-02-04 12:35:48 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:35:48 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204123548||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204123548|SAC||||24008676 ORC|NW||||||||20250204123548TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:35:51 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:35:51 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:38:43 - Response: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":null,"reqDno":"100"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":null,"reqDno":"104"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":null,"reqDno":"120"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":null,"reqDno":"110"}]
+2025-02-04 12:38:43 - Save Patient Details API called for PACS 
+2025-02-04 12:38:43 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "100",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "104",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "120",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "110",
+        "status": "0"
+    }
+]
+2025-02-04 12:38:43 - Update Status API called
+2025-02-04 12:38:43 - Response Body:  Status Updated
+2025-02-04 12:38:43 - Data sends to Mestria is started ::  
+2025-02-04 12:38:43 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:38:43 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204123843||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204123843|SAC||||24008676 ORC|NW||||||||20250204123843TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:38:45 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:38:45 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:39:20 - Failed to fetch data. Response Code: 500
+2025-02-04 12:39:20 - Something went wrong.. Internal Server Error
+2025-02-04 12:39:20 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 12:39:55 - Failed to fetch data. Response Code: 500
+2025-02-04 12:39:55 - Something went wrong.. Internal Server Error
+2025-02-04 12:39:55 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 12:40:54 - Failed to fetch data. Response Code: 500
+2025-02-04 12:40:54 - Something went wrong.. Internal Server Error
+2025-02-04 12:40:54 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1089)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:424)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-02-04 12:41:31 - Response: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"104","reqDno":"961011000125012810000201"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"120","reqDno":"961011000125012810000203"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"110","reqDno":"961011000125012810000205"}]
+2025-02-04 12:41:31 - Save Patient Details API called for PACS 
+2025-02-04 12:41:31 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000202",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000201",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000203",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000205",
+        "status": "0"
+    }
+]
+2025-02-04 12:41:31 - Update Status API called
+2025-02-04 12:41:31 - Response Body:  Status Updated
+2025-02-04 12:41:31 - Data sends to Mestria is started ::  
+2025-02-04 12:41:31 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:41:31 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204124131||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204124131|SAC||||24008676 ORC|NW||||||||20250204124131TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:41:33 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:41:33 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:43:03 - Response: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"104","reqDno":"961011000125012810000201"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"120","reqDno":"961011000125012810000203"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"110","reqDno":"961011000125012810000205"}]
+2025-02-04 12:43:03 - Save Patient Details API called for PACS 
+2025-02-04 12:43:08 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000202",
+        "status": "1"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000201",
+        "status": "1"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000203",
+        "status": "1"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000205",
+        "status": "1"
+    }
+]
+2025-02-04 12:43:08 - Update Status API called
+2025-02-04 12:43:08 - Response Body:  Status Updated
+2025-02-04 12:43:08 - Data sends to Mestria is started ::  
+2025-02-04 12:43:08 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:43:08 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204124308||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204124308|SAC||||24008676 ORC|NW||||||||20250204124308TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:43:10 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:43:10 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:45:26 - Response: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"104","reqDno":"961011000125012810000201"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"120","reqDno":"961011000125012810000203"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"110","reqDno":"961011000125012810000205"}]
+2025-02-04 12:45:26 - Save Patient Details API called for PACS 
+2025-02-04 12:45:26 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "100",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000202",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "104",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000201",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "120",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000203",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "110",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000205",
+        "status": "1"
+    }
+]
+2025-02-04 12:45:26 - Update Status API called
+2025-02-04 12:45:26 - Response Body:  Status Updated
+2025-02-04 12:45:26 - Data sends to Mestria is started ::  
+2025-02-04 12:45:26 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:45:26 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204124526||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204124526|SAC||||24008676 ORC|NW||||||||20250204124526TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:45:28 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:45:28 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:45:45 - Response: []
+2025-02-04 12:45:45 - Save Patient Details API called for PACS 
+2025-02-04 12:45:45 - Response Body as JSON Array: []
+2025-02-04 12:45:45 - Update Status API called
+2025-02-04 12:45:45 - Response Body:  Status Updated
+2025-02-04 12:45:45 - Data sends to Mestria is started ::  
+2025-02-04 12:45:45 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:45:45 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204124545||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204124545|SAC||||24008676 ORC|NW||||||||20250204124545TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:45:47 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:45:47 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:46:24 - Response: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"104","reqDno":"961011000125012810000201"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"120","reqDno":"961011000125012810000203"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"110","reqDno":"961011000125012810000205"}]
+2025-02-04 12:46:24 - Save Patient Details API called for PACS 
+2025-02-04 12:46:24 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "100",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000202",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "104",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000201",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "120",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000203",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "110",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000205",
+        "status": "1"
+    }
+]
+2025-02-04 12:46:24 - Update Status API called
+2025-02-04 12:46:24 - Response Body:  Status Updated
+2025-02-04 12:46:24 - Data sends to Mestria is started ::  
+2025-02-04 12:46:24 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:46:24 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204124624||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204124624|SAC||||24008676 ORC|NW||||||||20250204124624TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:46:26 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:46:26 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:48:39 - Response: []
+2025-02-04 12:48:39 - Save Patient Details API called for PACS 
+2025-02-04 12:48:39 - Response Body as JSON Array: []
+2025-02-04 12:48:39 - Update Status API called
+2025-02-04 12:48:39 - Response Body:  Status Updated
+2025-02-04 12:48:39 - Data sends to Mestria is started ::  
+2025-02-04 12:48:39 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:48:39 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204124839||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204124839|SAC||||24008676 ORC|NW||||||||20250204124839TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:48:41 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:48:41 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:49:56 - Response: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"120","reqDno":"961011000125012810000203"},{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"110","reqDno":"961011000125012810000205"}]
+2025-02-04 12:49:56 - Save Patient Details API called for PACS 
+2025-02-04 12:49:56 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "100",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000202",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "120",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000203",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "110",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000205",
+        "status": "1"
+    }
+]
+2025-02-04 12:49:56 - Update Status API called
+2025-02-04 12:49:56 - Response Body:  Status Updated
+2025-02-04 12:49:56 - Data sends to Mestria is started ::  
+2025-02-04 12:49:56 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1
+2025-02-04 12:49:56 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204124956||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||AJAY^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN98765454SPM|1|SN98765454||Blood^99BMx|||^^|^^|||P^Patient^||||||20250204124956|SAC||||24008676 ORC|NW||||||||20250204124956TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 12:49:58 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 12:49:58 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1615)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 12:51:25 - Response: []
+2025-02-04 12:51:55 - Response: []
+2025-02-04 12:52:30 - Response: []
+2025-02-04 12:52:30 - No pending data is available
+2025-02-04 12:52:34 - Response: []
+2025-02-04 12:52:34 - No pending data is available

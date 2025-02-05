@@ -1,0 +1,875 @@
+package Server;
+import com.fazecast.jSerialComm.SerialPort;
+import com.formdev.flatlaf.FlatLightLaf;
+
+import Server.ABC;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.*;
+import javax.swing.text.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.zip.CRC32;
+
+
+//Machine Interface GUI   ......###########........... TCP/IP , Serial Communication 
+public class GenericServer {
+
+	
+	
+	//
+	
+    private static JTextPane textPane;
+    protected static String portNumber;
+    protected static int baudRate;
+    
+    protected static String selectedMachine;
+    protected static String selectedProtocol;
+    static ServerSocket server = null;
+    static Socket client = null;
+    static int port;
+    static ExecutorService pool = null;
+    static int clientcount = 0;
+    static  JRadioButton tcpIpRadioButton = new JRadioButton("TCP/IP");
+    static  JRadioButton comPortRadioButton = new JRadioButton("Serial Port");
+	protected static String portName;
+	static  JComboBox<String> comPortComboBox = new JComboBox<>();
+    public static void main(String[] args) {
+    
+
+                                      
+        FlatLightLaf.install();
+
+        // Create the frame
+        JFrame frame = new JFrame("Generic Interface by CDAC Noida");
+       // ImageIcon frameIcon = new ImageIcon("resource/cdac-logo.png"); // Ensure you have this file in your resources folder
+       // frame.setIconImage(frameIcon.getImage());
+        Image image = Toolkit.getDefaultToolkit().getImage("resource/bgimgm.jpg");
+        
+        
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1400, 800);
+        frame.setLocationRelativeTo(null); // Center the frame
+
+        frame.setBackground(Color.blue);
+     
+//        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png");    
+//        f.setIconImage(icon);    
+//        f.setLayout(null);     
+//        f.setSize(400,400);     
+//        f.setVisible(true);     
+//        
+        
+        // Create the main panel with BorderLayout
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Create the top panel with GridBagLayout
+       // JPanel topPanel = new JPanel(new GridBagLayout());
+      //  topPanel.setBackground(new Color(245, 245, 245)); // Light grey background for the top panel
+        
+        
+        // Create the top panel with GridBagLayout and background image
+        Image backgroundImage = Toolkit.getDefaultToolkit().getImage("resource/bgimgm2.jpg");
+
+        JPanel topPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+       // GridBagConstraints gbc = new GridBagConstraints();
+       // gbc.insets = new Insets(5, 5, 5, 5);
+
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        
+        
+        
+        
+
+        // Create and decorate the "Select Machine" panel
+        JPanel machinePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        
+        machinePanel.setBackground(new Color(245, 245, 245));
+        machinePanel.setBorder(BorderFactory.createTitledBorder("Machine  & Protocol Selection"));
+        String[] machines = {"Mindray ICU","Advia2120","Erba680", "Horriba", "Sysmex","Other","ICU"};
+        JComboBox<String> comboBox = new JComboBox<>(machines);
+        machinePanel.add(new JLabel("Select Machine:"));
+        machinePanel.add(comboBox);
+        
+  
+        String[] protocol = {"HL7", "ASTM", "Other"};
+        JComboBox<String> comboBox2 = new JComboBox<>(protocol);
+        
+        machinePanel.add(new JLabel("Protocol:"));
+        machinePanel.add(comboBox2);
+        JLabel baudRateNumberLabel = new JLabel("Baud Rate : ");
+        JTextField baudRateTextField = new JTextField(10);
+        machinePanel.add(baudRateNumberLabel);
+        
+        machinePanel.add(baudRateTextField);
+        JPanel portPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        portPanel.setBackground(new Color(245, 245, 245));
+        portPanel.setBorder(BorderFactory.createTitledBorder("Port Configuration"));
+        JTextField portTextField = new JTextField(10);
+       
+      //  portPanel.add(new JLabel("Port Number:"));
+        JLabel portNumberLabel = new JLabel("Port Number:");
+        
+      //  JTextField portTextField = new JTextField(10);
+        portNumberLabel.setVisible(false); // Initially hidden
+        portTextField.setVisible(false); // Initially hidden
+        portPanel.add(portNumberLabel);
+        portPanel.add(portTextField);
+    
+        
+        portTextField.setVisible(false); 
+
+       
+        ButtonGroup portButtonGroup = new ButtonGroup();
+        portButtonGroup.add(tcpIpRadioButton);
+        portButtonGroup.add(comPortRadioButton);
+        
+        
+        
+        portPanel.add(tcpIpRadioButton);
+        portPanel.add(comPortRadioButton);
+        
+        
+       
+        
+        
+        JLabel comPortLabel = new JLabel("COM Port :  ");
+      
+        comPortLabel.setVisible(false); // Initially hidden
+        comPortComboBox.setVisible(false); // Initially hidden
+      //  portPanel.add(comPortLabel);
+        portPanel.add(comPortComboBox);
+        
+        // Create the buttons
+        JButton button1 = new JButton("Connect to Machine");
+        JButton button2 = new JButton("Download Log");
+        
+        // Style the buttons 
+        button1.setBackground(new Color(70, 130, 180));
+        
+      //  button1.setPreferredSize(new Dimension(150, 50));
+        button1.setForeground(Color.WHITE);
+        button2.setBackground(new Color(70, 130, 180));
+        button2.setForeground(Color.WHITE);
+        JButton exitButton = new JButton("Exit");
+        exitButton.setBackground(new Color(220, 20, 60));
+        exitButton.setForeground(Color.WHITE);
+        // Create the text pane with a scroll pane
+        textPane = new JTextPane();
+        textPane.setEditable(false); 
+        JScrollPane scrollPane = new JScrollPane(textPane);
+
+       
+
+        tcpIpRadioButton.addActionListener(new ActionListener() {   //event on button click to show/hide Port Number  Field
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                portNumberLabel.setVisible(true);
+                portTextField.setVisible(true);
+                comPortLabel.setVisible(false);
+                comPortComboBox.setVisible(false);
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+ 
+        comPortRadioButton.addActionListener(new ActionListener() {  //event on button click to List Port Name Combo box..
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	populatePortComboBox();
+                portNumberLabel.setVisible(false);
+                portTextField.setVisible(false);
+                comPortLabel.setVisible(true);
+                comPortComboBox.setVisible(true);
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+        
+        //download log file
+//        
+//        button2.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                String logContent = textPane.getText();
+//                try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt"))) {
+//                    writer.write(logContent);
+//                    JOptionPane.showMessageDialog(frame, "Log has been downloaded to log.txt");
+//                } catch (IOException ex) {
+//                    ex.printStackTrace();
+//                    JOptionPane.showMessageDialog(frame, "Error occurred while downloading the log.");
+//                }
+//            }
+//        });
+//        
+        
+        //
+        
+        
+        
+        
+        
+        
+        
+        
+        // Action listener for buttons
+        ActionListener buttonListener = new ActionListener() {   //execution on button click event Start Comunication..
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+            	
+            
+            	
+            	if (e.getSource() == exitButton) {   // to close the application
+            	int res=	JOptionPane.showConfirmDialog(frame, "Are you sure to close this application.");
+
+            	if(res==JOptionPane.YES_OPTION){  
+            		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+            		System.exit(0);
+            	}  
+                    
+                    
+            	}
+            	
+            	else if(e.getSource() == button2) {  ///to download log file on button click..
+            		
+            		
+           		 String logContent = textPane.getText();
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:/TcpFiles/property/Machinelog.txt"))) {
+                        writer.write(logContent);
+                        JOptionPane.showMessageDialog(frame, "Log has been downloaded to Machinelog.txt");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(frame, "Error occurred while downloading the log.");
+                    }
+           		
+           	}
+           	
+            	else {   //  to start the Communication when click on start communication 
+            		 
+            		
+            		
+            		
+            		
+              	  try {
+              		  	selectedMachine = (String) comboBox.getSelectedItem();
+              		 
+		                selectedProtocol = (String) comboBox2.getSelectedItem();
+		                portNumber = portTextField.getText();
+		                baudRate = Integer.parseInt(baudRateTextField.getText());
+		                portName=  (String) comPortComboBox.getSelectedItem();
+  					if (validateInputs(selectedMachine, portNumber,portName)) {
+  				
+  		            
+  		                new Thread(() -> {
+  		                    try {
+  		                        
+  		                    	//condition to check that user has selected TCP Ip or COM PORT
+  		                    	
+  		                    	if(tcpIpRadioButton.isSelected())
+  		                    		
+  		                    	{	
+  		                    	
+  		                    	    GenericServer serverobj = new GenericServer(Integer.parseInt(portNumber));
+  		    		                JOptionPane.showMessageDialog(frame, "Selected Machine: " + selectedMachine + "\nPort Number: " + portNumber);
+
+  		    		                String logMessage = "Selected Machine: " + selectedMachine + ", Port Number: " + portNumber + "Protocol: "+selectedProtocol;
+  		    		                logMessage(logMessage, Color.BLUE);
+
+  		                    		
+  		                    	
+  		                      if(selectedMachine.equals("Erba680") && selectedProtocol.equals("HL7")) {
+  		                    	
+  		                    	  serverobj.startServer();  //HL 7 Server
+  		                      
+  		                      
+  		                      }
+  		                      
+  		                      else if(  selectedMachine.equals("Sysmex") )  {
+  		                    	 ASTMServer objServer = new  ASTMServer(Integer.parseInt(portNumber));
+  		                    		                    	 		                    	
+  		                    	objServer.startServer(Integer.parseInt(portNumber),selectedMachine);  //ASTM Server
+  		                    	  
+  		                      
+  		                      
+  		                      }
+  		                      
+  		                    else if(selectedMachine.equals("Other") )  {
+  		                    	
+ 		                    	 ASTMServer objServer = new  ASTMServer(Integer.parseInt(portNumber));
+ 		                    	objServer.startServer(Integer.parseInt(portNumber),selectedMachine);  
+ 		                    	  
+ 		                      }
+  		                      
+  		                    	}
+  		                    	
+  		                    	
+  		                    	else if(comPortRadioButton.isSelected()) {   //condition to check that COM POrt is selected
+  		                    		
+  		                    		JOptionPane.showMessageDialog(frame, "Selected Machine: " + selectedMachine + "\nPort Name:: " + portName);
+
+  		    		                String logMessage = "Selected Machine: " + selectedMachine + ", Port Name: " + portName + "Protocol: "+selectedProtocol;
+  		    		                logMessage(logMessage, Color.BLUE);
+  		    		                
+  		    		           
+  		    		              if(selectedMachine.equals("Advia2120")) {
+  		    		                DB9Server objServer = new DB9Server();
+  		    		            	objServer.startDb9Server(portName, selectedMachine,baudRate);  //DB9 Server 
+  	  		                      }
+  		    		              
+  		    		            if(selectedMachine.equals("ICU")) {
+  		    		                DB9Server objServer = new DB9Server();
+  		    		            	objServer.startDb9Server(portName, selectedMachine,baudRate);  //DB9 Server 
+  	  		                      }
+  		    		            
+  		    		          if(selectedMachine.equals("Mindray ICU")) {
+		    		                DB9Server objServer = new DB9Server();
+		    		            	objServer.startDb9Server(portName, selectedMachine,baudRate);  //DB9 Server 
+	  		                      }
+  		    		          
+  		    		        
+  		    		          if(selectedMachine.equals("Dragger OT")) {
+		    		                DB9Server objServer = new DB9Server();
+		    		            	objServer.startDb9Server(portName, selectedMachine,baudRate);  //DB9 Server 
+	  		                      }
+  		    		                
+  		    		                
+  		                    		
+  		                    	}
+  		                    
+  		                    
+  		                    
+  		                    } catch (IOException e1) {
+  		                        e1.printStackTrace();
+  		                    }
+  		                }).start();
+  						  
+  					  }
+  					
+  				} catch (Exception e1) {
+  					// TODO Auto-generated catch block
+  					e1.printStackTrace();
+  				}
+              	
+            		
+            		
+            
+            }
+            	
+            }
+        };
+
+        button1.addActionListener(buttonListener);   //Start Communication event
+        button2.addActionListener(buttonListener);   //Download log event
+        exitButton.addActionListener(buttonListener);  //Exit Button event
+
+        // Create the button panel and add buttons to it
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 5, 5));  //create button panel and them add into the top panel which is exists in the Main Frame
+        buttonPanel.setBorder(BorderFactory.createTitledBorder("Actions"));  //Border and header line
+        
+        buttonPanel.setBackground(new Color(245, 245, 245)); // Light grey background
+        buttonPanel.setOpaque(true); // Ensure background color is displayed
+        buttonPanel.add(button1);
+        buttonPanel.add(button2);
+        buttonPanel.add(exitButton);
+        
+    
+        
+        
+        //changed the  button font 
+        
+        button1.setFont(new Font("Monospaced",Font.BOLD,12)); 
+        button2.setFont(new Font("Monospaced",Font.BOLD,12));
+        exitButton.setFont(new Font("Monospaced",Font.BOLD,12));
+        
+        
+    
+
+        JPanel hisConfig = new JPanel(new GridLayout(6, 2, 5, 5));
+        hisConfig.setBorder(BorderFactory.createTitledBorder("HIS Configuration"));
+      //  JCheckBox c1 = new JCheckBox("HIS Configuration"); 
+    ////    hisConfig.add(c1);
+        // Create labels and text fields
+        JLabel lblUrl = new JLabel("HIS URL:");
+        JTextField txtUrl = new JTextField();
+        JLabel lblEquipId = new JLabel("Equipment ID:");
+        JTextField txtEquipId = new JTextField();
+        JLabel lblHospitalCode = new JLabel("Hospital Code:");
+        JTextField txtHospitalCode = new JTextField();
+        
+        // Add labels and text fields to the panel
+        hisConfig.add(lblUrl);hisConfig.add(txtUrl);
+        hisConfig.add(lblEquipId); hisConfig.add(txtEquipId);
+        hisConfig.add(lblHospitalCode); hisConfig.add(txtHospitalCode);
+        
+       
+       
+      
+       
+        
+        // Initially hide the additional fields panel
+        hisConfig.setVisible(true);
+        
+        // Add components to the top panel with proper alignment
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+     
+        topPanel.add(machinePanel, gbc);
+
+        gbc.gridy = 1;
+        topPanel.add(portPanel, gbc);
+
+        gbc.gridy = 2;
+      //  topPanel.add(hisConfig,gbc);
+
+       
+
+     
+        gbc.gridy=4;
+        topPanel.add(buttonPanel, gbc);
+        // Add components to the main panel
+        panel.add(topPanel, BorderLayout.NORTH);
+        
+        
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        // Add panel to the frame
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+
+    private static void populatePortComboBox() {
+        SerialPort[] ports = SerialPort.getCommPorts();
+        for (SerialPort port : ports) {
+        	comPortComboBox.addItem(port.getSystemPortName());
+        }
+    }
+	     
+    static void logMessage(String message, Color color) {
+        StyledDocument doc = textPane.getStyledDocument();
+        Style style = textPane.addStyle("Style", null);
+        StyleConstants.setForeground(style, color);
+      //  StyleConstants.setBackground(style, color);
+
+        try {
+            doc.insertString(doc.getLength(), message + "\n", style);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    GenericServer(int port) {
+        this.port = port;
+        pool = Executors.newFixedThreadPool(5);  //max size was 5 change until connections not fully closed
+    }
+
+    public void startServer() throws IOException {
+        server = new ServerSocket(Integer.parseInt(portNumber));
+        logMessage("SERVER BOOTED ON PORT: " + this.port, Color.GREEN);
+        logMessage("ANY CLIENT CAN STOP THE SERVER BY SENDING -1", Color.GREEN);
+
+        while (true) {
+            client = server.accept();
+            clientcount++;
+            logMessage("CONNECTION " + clientcount + " ESTABLISHED WITH CLIENT " + client, Color.BLACK);
+
+            ServerThread runnable = new ServerThread(client, clientcount, this);
+            pool.execute(runnable);
+        }
+    }
+
+    private static class ServerThread implements Runnable {
+
+        GenericServer server = null;
+        Socket client = null;
+        BufferedReader cin;
+        PrintStream cout;
+        Scanner sc = new Scanner(System.in);
+        int id;
+        char s;
+        String si;
+        private String modifiedTimeStr;
+        private String msgcontrolID;
+        private String timeZoneMachine;
+        private String MSHsegment;
+        private String pidmsg;
+        private String[] sampleNOblock;
+        private String sampleNOblock2;
+        private String sampleNO;
+        private String rackNo;
+        private String SEC2val;
+        private String RackSeq;
+        private List testValue;
+
+        ServerThread(Socket client, int count, GenericServer serverR) throws IOException {
+            this.client = client;
+            this.server = serverR;
+            this.id = count;
+            logMessage("CONNECTION " + id + " ESTABLISHED WITH CLIENT " + client, Color.BLACK);
+
+            cin = new BufferedReader(new InputStreamReader(client.getInputStream())); // Obj To receive Msg from Client
+            cout = new PrintStream(client.getOutputStream()); // Obj For Sending Msg to Client
+       
+        
+        
+        }
+
+        public void run() {
+            System.gc();
+            int x = 1, flag = 0, forAck = 0, status = 0;
+            int checkBit = 0;
+            int sendAck = 0;
+            boolean out = false;
+            int replyFlag = 0;
+            boolean isProcessing = false;
+
+            try {
+                char eot = ''; // End-OF-Transmission Bit character
+                char enq = '';
+                char ack = '';
+                String enn = "";
+
+                while (true) {
+                    int red = -1;
+                    byte[] buffer = new byte[800 * 1024]; // a read buffer of 5KiB
+                    byte[] redData;
+                    StringBuilder clientData = new StringBuilder();
+                    String redDataText = "";
+
+                    while ((red = client.getInputStream().read(buffer)) > -1) {
+                        redData = new byte[red];
+                        System.arraycopy(buffer, 0, redData, 0, red);
+                        redDataText = new String(redData, "UTF-8");
+                        logMessage("MSG received: " + redDataText, Color.BLUE);
+                
+                        if(selectedMachine.equals("Erba680") && selectedProtocol.equals("HL7")) {
+                        	ERBA580(redDataText,cout);
+                        
+                        }
+                        
+                        
+                        else if(selectedMachine.equals("Horriba")) {
+                        	
+
+                        }
+                        
+                        
+                        else if(selectedMachine.equals("Sysmex")) {
+			                        	
+                        	
+                        	
+                        }
+			                        
+                        
+                        
+                        
+                    }
+                }
+
+            } catch (Exception e) {
+                logMessage("Error: " + e.getMessage(), Color.RED);
+            }
+        }
+    }
+    
+    //AIIMS Jodhpur ERBA 580...
+  public static void ERBA580(String redDataText, PrintStream cout) {
+    	
+    	int count=0;
+     	
+     	
+     	
+     	
+     	char fsChar = 0x1C;  //FS
+	 	 
+	 	char crChar=0x0D;   //CR
+    	
+		
+		String[] strData=redDataText.split(Character.toString(fsChar));
+
+        Map<String, List> mp = new HashMap();  		
+		List <String> testCode = new ArrayList<>();
+		List <String> testValue = new ArrayList<>();
+		List<String> sampleNo=new ArrayList<>();
+		String sampleName = "";
+		  String msgtype="";
+		for(String strPKT:strData) {
+			System.out.println("MESSAGE PART RECIEVED:- " + strPKT);
+			String[] segments1 = strPKT.split(Character.toString(crChar));
+	        
+	       // String sampleName = null;
+	     // Print each segment
+	     
+	      
+	        
+	        for (String segment : segments1) {
+	        	
+	        	
+	        	if (segment.contains("MSH")) {
+		      		String[] parts = segment.split("\\|");
+
+		      		
+		      		String value=parts[8];
+		      		String[] MSH = value.split("\\^");
+		      	
+		      		msgtype=MSH[0];
+		      		System.out.println("Incoming msg Type :"+msgtype);
+		      		
+		      	    if(msgtype.equals("ORU") ) {  ///sending ACK when result recieved
+		      	    	 Date currentDate = new Date();
+
+		      	        // Define the desired date format
+		      	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssZ");
+
+		      	        // Format the date
+		      	        String formattedDate = dateFormat.format(currentDate);
+
+		      	        // Print the formatted date
+		      	        System.out.println("Formatted Date: " + formattedDate);
+		      	    	String controlid=parts[9];
+		      	    	String resACK1="MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE"
+			        	 		+ "MSA|AA|1"
+			        	 		+ "";
+		      	    	
+		      	    	//MSH|^~\&|H560|Erba Mannheim|||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE
+		      	    	//MSA|AA|1
+		      	    	StringBuilder msg = new StringBuilder();
+		      	    	
+		      	    	msg.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE").append("\r");
+		      	    	msg.append("MSA|AA|1").append("\r");
+		      	    //	msg.append("MSA|AA|CONTROLID||").append("\r");
+		      	    	msg.append((char)0x1C).append("\r");
+		      	    	
+		      	    	
+		      	    	//check sum
+		      	    	
+		      	    	StringBuilder ACKRESCS = new StringBuilder();
+		      	    	
+		      	  	ACKRESCS.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE");
+		      	  	ACKRESCS.append("MSA|AA|1");
+		      	  					      	    //	msg.append("MSA|AA|CONTROLID||").append("\r");
+		      	  	ACKRESCS.append((char)0x1C);
+
+		      	   	 byte[] messageBytes = resACK1.toString().getBytes();
+
+		      	       // Calculate CRC-16 ANSI (HL7)
+		      	       int crcValue = calculateHL7CRC(messageBytes);
+		      	     
+		      	       GenericServer.logMessage("Check Sum"+crcValue, Color.black);
+		      	  								
+		      	  									//check sum
+		      	     ACKRESCS.append(crcValue);
+		      	    	
+		      	    	//check sum
+		      	    	String resACK=msg.toString();
+		      	    	resACK=resACK.replaceAll("CONTROLID",controlid);
+		      	    	resACK=resACK.replaceAll("YYYYMMDDHHMMSS",formattedDate);
+		      	    	logMessage("ACK SENT :" + resACK, Color.red);
+		      	    	cout.print(resACK);
+		      	    	System.out.println("ACK SENT :" + resACK);
+		      	  
+		      	    	
+		      	    }
+		   
+	        	}
+	        	
+	        	
+	        	
+		         if(msgtype.equals("ORU") || segment.contains("PID")) {
+				        
+		     	if (segment.contains("PID")) { // to check sample no. in SPM section
+		            // Split the line by the pipe character "|"
+		            String[] parts = segment.split("\\|");
+
+		            // Check if there are at least 7 elements in the array
+		                // Extract and print the value after the 6th pipe
+		                String value = parts[3];
+		               
+		                String[] pid = value.split("\\^");
+		                 System.out.println("Patient Id: " + pid[0]);
+		                 
+		                 sampleName=pid[0];
+		                 System.out.println("Sample NO :"+sampleName);
+		                 logMessage("Sample NO : " + sampleName, Color.red);
+		                 //sampleNo.add(sampleName);
+		                //System.out.println("Patiwnt Id " + pid);
+		    	    	}
+		     	
+		     	
+		     	
+		    	if (segment.contains("OBX") || segment.startsWith("OBX")) {
+		            // Split the line by the pipe character "|"
+		    		 String[] parts = segment.split("\\|");
+		    		 
+		    		 
+					count++;
+					if( parts[2].equals("NM")  )  // Ramji Added OBX|1|NM|..
+					{
+
+		             // Check if there are at least 5 elements in the array
+		             if (parts.length > 3) {
+		                 // Extract and print the value after the 4th pipe
+		                 String value = parts[3];
+		                 
+		                // if(value.equals("WBC")|| value.equals("NEU#") || value.equals("LYM#") || value.equals("MON#") || value.equals("EOS#") || value.equals("BAS#") || value.equals("IMG#") || value.equals("NEU%") || value.equals("LYM%") || value.equals("MON%") || value.equals("EOS%") || value.equals("BAS%") || value.equals("IMG%") || value.equals("RBC") || value.equals("HGB") || value.equals("HCT") || value.equals("MCV") || value.equals("MCH") || value.equals("MCHC") || value.equals("RDW-CV") || value.equals("RDW-SD") || value.equals("PLT") || value.equals("MPV") || value.equals("PDW") || value.equals("PCT") || value.equals("PLCC") || value.equals("NRBC#") || value.equals("NRBC%") || value.equals("PLCR") ) {
+		                  			
+		                 String[] tc = value.split("\\^");
+		                // System.out.println("Test Code " + tc[0]);
+		                 testCode.add(tc[1]);
+		             }
+		             
+		             
+		             if (parts.length > 5) {
+		                 // Extract and print the value after the 4th pipe
+		                 String value = parts[5];
+		                 
+		                // if(value.equals("WBC")|| value.equals("NEU#") || value.equals("LYM#") || value.equals("MON#") || value.equals("EOS#") || value.equals("BAS#") || value.equals("IMG#") || value.equals("NEU%") || value.equals("LYM%") || value.equals("MON%") || value.equals("EOS%") || value.equals("BAS%") || value.equals("IMG%") || value.equals("RBC") || value.equals("HGB") || value.equals("HCT") || value.equals("MCV") || value.equals("MCH") || value.equals("MCHC") || value.equals("RDW-CV") || value.equals("RDW-SD") || value.equals("PLT") || value.equals("MPV") || value.equals("PDW") || value.equals("PCT") || value.equals("PLCC") || value.equals("NRBC#") || value.equals("NRBC%") || value.equals("PLCR") ) {
+		                  			
+		                 //String[] tv = value.split("\\^");
+		          
+		                 double number = Double.parseDouble(value);
+			             double truncatedNumber = (int) (number * 10) / 10.0;
+			            // System.out.println("truncatedNumber"+truncatedNumber);
+			             String result = String.format("%.1f", truncatedNumber);
+			            
+		                 testValue.add(result);
+		                 
+		//continue;
+		             }
+		            
+		    	
+		    	}
+					
+		    	}
+		    	
+		    	
+		
+			     
+			       
+		         }
+	        	
+	        	
+	        	
+	        }  //exit inner for loop
+	        
+	        
+	        }  //exit outer for loop
+		
+		
+		 if(msgtype.equals("ORU") ) {   //when mssg type is resullt then only insert the data otherwise break
+			      System.out.println(testCode);
+			     System.out.println(testValue);  
+	   //  if(msgtype.equals("OUL")) {
+			     ABC abc =  new ABC();
+
+			      System.out.println("Sample No:"+sampleName);
+			      System.out.println("Total Test Fetched from MSG"+count);
+			      System.out.println("Total Test Entered"+testCode.size());  
+			      mp.put("TestCode", testCode);
+			      mp.put("TestValue", testValue);
+			     	//mp.put("SampleNO",sampleNo);
+			     	 
+			        System.out.println(testCode);  
+					   
+			        System.out.println(testValue);  
+		        if(!sampleName.equals(null) || !sampleName.equals("") )
+		        	System.out.println("API CALL FOR INSERT");
+		    		abc.insert_SysmexXN350COBAS(mp,sampleName);
+		        
+		    //    }
+		
+		}
+  
+  }
+  
+  public static int calculateHL7CRC(byte[] bytes) {
+      // Polynomial used for CRC-16 ANSI (HL7)
+      final int polynomial = 0x11021;  // x^16 + x^12 + x^5 + 1
+
+      // Initialize CRC-32 with the given polynomial
+      CRC32 crc32 = new CRC32();
+      crc32.reset();
+
+      // Update CRC-32 with the message bytes
+      crc32.update(bytes);
+
+      // Get the CRC-32 value as a long (since CRC32 returns a long)
+      long crcResult = crc32.getValue();
+
+      // Mask the CRC-32 result to fit into 16 bits (CRC-16)
+      int crc16 = (int) crcResult & 0xFFFF;
+
+      return crc16;
+  }
+  
+  
+  private static boolean validateInputs(String selectedMachine, String portNumber,String portName) {
+	  
+	  
+      if (selectedMachine == null || selectedMachine.isEmpty()) {
+          JOptionPane.showMessageDialog(null, "Please select a machine name.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+          return false;
+      }
+      if(tcpIpRadioButton.isSelected())
+    		
+    	{
+    	  
+    	  System.out.println("TCP IP");
+      if (portNumber.isEmpty()) {
+          JOptionPane.showMessageDialog(null, "Please enter a port number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+          return false;
+      }
+      
+      try {
+          Integer.parseInt(portNumber);
+      } catch (NumberFormatException e) {
+          JOptionPane.showMessageDialog(null, "Please enter a valid port number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+          return false;
+      }
+      
+    	}
+      
+      else if(comPortRadioButton.isSelected()) {
+    	  System.out.println("COM PORT");
+    	  if (portName.isEmpty()) {
+              JOptionPane.showMessageDialog(null, "Please enter a port Name.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+              return false;
+          }
+    	  
+      }
+     
+      return true;
+  }
+}

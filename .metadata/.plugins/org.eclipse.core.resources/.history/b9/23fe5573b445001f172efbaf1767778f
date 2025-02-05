@@ -1,0 +1,67 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package services;
+
+import java.util.List;
+
+import com.infosys.common.GeneratedEntities.Diagnosiscategory;
+import com.infosys.common.util.DAOFactory;
+
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import model.UserSession;
+public class GetDiagnosisCategoryService extends Service<Void>
+{
+	private static final String VERSION = "ICD-10";
+	private List<Diagnosiscategory> diagnosisCategory;
+
+	public List<Diagnosiscategory> getDiagnosisCategory()
+	{
+		return diagnosisCategory;
+	}
+	
+	private static GetDiagnosisCategoryService instance = null;
+
+	public static GetDiagnosisCategoryService getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new GetDiagnosisCategoryService();
+		}
+		return instance;
+	}
+
+	private GetDiagnosisCategoryService() {
+		super();
+	}
+
+	@Override
+	protected Task<Void> createTask()
+	{
+		return new Task<Void>()
+		{
+
+			@Override
+			protected Void call() throws Exception
+			{
+				try
+				{
+					diagnosisCategory = DAOFactory.getMasterDataDetails().getDiagnosisCategory(VERSION,
+					        UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+				}
+				catch (Exception e) 
+				{
+					throw e;
+				}
+
+				return null;
+			}
+
+		};
+	}
+
+}

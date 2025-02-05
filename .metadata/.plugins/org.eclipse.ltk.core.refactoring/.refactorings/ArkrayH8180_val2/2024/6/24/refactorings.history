@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;MRngNRdgFileADPasigLogic3.java&apos; to &apos;ArkrayH8180_val2/src/mainCreation&apos;&#x0D;&#x0A;- Original project: &apos;ArkrayH8180_val2&apos;&#x0D;&#x0A;- Destination element: &apos;ArkrayH8180_val2/src/mainCreation&apos;&#x0D;&#x0A;- Original element: &apos;mainCreation.MRngNRdgFileADPasigLogic3.java&apos;" description="Copy compilation unit" destination="/src&lt;mainCreation" element1="/src&lt;mainCreation{MRngNRdgFileADPasigLogic3.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1718267727271" units="1" version="1.0"/>
+</session>

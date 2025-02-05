@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">pgipac</property>
+        <property name="hibernate.connection.url">jdbc:mysql://172.16.155.40:3306/intraop_dev</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopAnesthesiarecord" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopAnesthesiamedicationrecord" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopEventlist" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopLocation" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopDevices" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopSurgicalsafety" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopPatientdevicemapping" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopSurgicalsafetychecklist" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopOutput" />
+        <mapping class="com.infosys.common.GeneratedEntities.Auditlog" />
+        <mapping class="com.infosys.common.GeneratedEntities.Patient" />
+        <mapping class="com.infosys.common.GeneratedEntities.Patientcase" />
+        <mapping class="com.infosys.common.GeneratedEntities.Address" />
+        <mapping class="com.infosys.common.GeneratedEntities.Casevalues" />
+        <mapping class="com.infosys.common.GeneratedEntities.Entityvalues" />
+        <mapping class="com.infosys.common.GeneratedEntities.Pac" />
+        <mapping class="com.infosys.common.GeneratedEntities.Answer" />
+        <mapping class="com.infosys.common.GeneratedEntities.Answerset" />
+        <mapping class="com.infosys.common.GeneratedEntities.Question" />
+        <mapping class="com.infosys.common.GeneratedEntities.AdminEntity" />
+        <mapping class="com.infosys.common.GeneratedEntities.Diagnosis" />
+        <mapping class="com.infosys.common.GeneratedEntities.Plannedprocedure" />
+        <mapping class="com.infosys.common.GeneratedEntities.Diagnosiscategory" />
+        <mapping class="com.infosys.common.GeneratedEntities.Procedurecategory" />
+        <mapping class="com.infosys.common.GeneratedEntities.Proceduresubcategory" />
+        <mapping class="com.infosys.common.GeneratedEntities.Proceduresubsubcategory" />
+        <mapping class="com.infosys.common.GeneratedEntities.Diagnosissubcategory" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopEventsmaster" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopEventlog" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopSurgeryevents" />
+        <mapping class="com.infosys.common.GeneratedEntities.IntraopMedicationlog" />
+        <mapping class="com.infosys.common.GeneratedEntities.Fdamedications" />
+        <mapping class="com.infosys.common.GeneratedEntities.Users" />
+        <mapping class="com.infosys.common.GeneratedEntities.Roles" />
+		<mapping class="com.infosys.common.GeneratedEntities.Usersinroles" />
+		<mapping class="com.infosys.common.GeneratedEntities.Deviceconfiguration" />
+		<mapping class="com.infosys.common.GeneratedEntities.Fluid" />
+		<mapping class="com.infosys.common.GeneratedEntities.Fluidvalue" />
+		<mapping class="com.infosys.common.GeneratedEntities.Investigationstests" />
+		<mapping class="com.infosys.common.GeneratedEntities.Investigationtestsparameters" />
+		<mapping class="com.infosys.common.GeneratedEntities.Investigationparameterfields" />
+		<mapping class="com.infosys.common.GeneratedEntities.Investigationstestparametersparent" />
+		<mapping class="com.infosys.common.GeneratedEntities.Investigationmeasuringunits" />
+		<mapping class="com.infosys.common.GeneratedEntities.Investigationmeasuringcategories" />
+		<mapping class="com.infosys.common.GeneratedEntities.Investigationmeasuringunitratios" />
+		<mapping class="com.infosys.common.GeneratedEntities.Investigationsvalues" />
+		<mapping class="com.infosys.common.GeneratedEntities.Investigationvaluescasemapper" />
+		<mapping class="com.infosys.common.GeneratedEntities.Applicationsetting" />
+		<mapping class="com.infosys.common.GeneratedEntities.Specialityot" />
+		<mapping class="com.infosys.common.GeneratedEntities.Recoveryroomreadings" />
+		<mapping class="com.infosys.common.GeneratedEntities.Cannulations" />
+		<mapping class="com.infosys.common.GeneratedEntities.DeviceParameterMaster" />
+		<mapping class="com.infosys.common.GeneratedEntities.AnethesiaMachineData" />
+		<mapping class="com.infosys.common.GeneratedEntities.PatientMonitorData" />
+		
+	</session-factory>
+</hibernate-configuration>

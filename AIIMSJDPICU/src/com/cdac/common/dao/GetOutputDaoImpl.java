@@ -1,0 +1,527 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.common.dao;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.cdac.common.GeneratedEntities.IntraopOutput;
+import com.cdac.common.audit.interceptor.AuditLogInterceptor;
+import com.cdac.common.util.HibernateUtilities;
+import com.cdac.framework.exceptions.ServiceExceptionWrapper;
+
+import services.SaveOutputService;
+
+public class GetOutputDaoImpl implements GetOutputDao
+{
+	private static GetOutputDaoImpl outputDaoImpl = null;
+
+	// ~ Static attributes/initializers
+	/** The Constant LOGGER. */
+	// -------------------------------------------------------------
+	private static final Logger LOGGER = Logger.getLogger(GetOutputDaoImpl.class.getName());
+
+	private GetOutputDaoImpl()
+	{
+
+	}
+
+	public static GetOutputDaoImpl getInstance()
+	{
+		if(outputDaoImpl == null)
+		{
+			outputDaoImpl = new GetOutputDaoImpl();
+		}
+		return outputDaoImpl;
+	}
+
+
+	// ~ Methods
+	// ------------------------------------------------------------------------------------
+
+
+
+
+
+	/**
+	 * This method returns ID of the output record which is saved or updated
+	 * from IntraopOutput entity
+	 *
+	 *
+	 * @param output
+	 * - output object containing the output details which is to be saved
+	 *
+	 *
+	 *
+	 * @param userName.
+	 *
+	 * @return ID of the output record which is saved or updated
+	 *
+	 */
+	@Override
+	public Long saveOrUpdate(IntraopOutput output, String userName) throws Exception
+	{
+
+
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Session session = null;
+		SessionFactory sessionFactory = null;
+		Long returnOutputId;
+		try
+		{
+			// opens a new session from the session factory
+			sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+
+			// for setting created time and created by in case of new record and updated time and updated by in case of exsisting record
+			if(output.getOutputRecordId()!=null)
+			{
+				Date updatedTime= new Date();
+				output.setUpdatedBy(userName);
+				output.setUpdatedTime(updatedTime);
+			}
+			else
+			{
+				Date createdTime= new Date();
+				output.setCreatedBy(userName);
+				output.setCreatedTime(createdTime);
+			}
+
+			// saving/ updating the output details
+			session.saveOrUpdate(output);
+			returnOutputId=output.getOutputRecordId();
+
+			//commits the session
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+		return returnOutputId;
+	}
+
+
+	/**
+	 * This method returns List of output records corresponding to the patientID and caseID
+	 * from IntraopOutput entity
+	 *
+	 *
+	 * @param patientId
+	 *
+	 *
+	 * @param caseId
+	 *
+	 *
+	 *
+	 * @param userName.
+	 *
+	 * @return List of output records corresponding to the patientID and caseID
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<IntraopOutput> fetchOutputList(Long caseID, String userName) throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		List<IntraopOutput> listOfOutputRecords=new ArrayList<IntraopOutput>();
+		Session session = null;
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			// retrieves list of output records
+			Query query=session.createQuery("from IntraopOutput where caseId=?");
+			query.setParameter(0, caseID);
+			listOfOutputRecords=query.list();
+
+			//commits the session
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+		return listOfOutputRecords;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<IntraopOutput> fetchTimedOutputList(Long caseID, Date startTime, Date endTime, String userName) throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		List<IntraopOutput> listOfOutputRecords=new ArrayList<IntraopOutput>();
+		Session session = null;
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			// retrieves list of output records
+			Query query=session.createQuery("from IntraopOutput where caseId=? AND time between ? and ?");
+			query.setParameter(0, caseID);
+			query.setParameter(1, startTime);
+			query.setParameter(2, endTime);
+			
+			listOfOutputRecords=query.list();
+
+			//commits the session
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+		return listOfOutputRecords;
+	}
+
+
+
+	/**
+	 * This method returns String containing success/error message for deleting the output record
+	 * from IntraopOutput entity
+	 *
+	 *
+	 * @param outputRecordId
+	 * - ID of output record to be deleted
+	 *
+	 *
+	 *
+	 * @param userName.
+	 *
+	 * @return String containing success/error message for deleting the output record
+	 *
+	 */
+	@Override
+	public String deleteOutput(Long outputRecordId, String userName) throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Session session = null;
+		String result = "";
+		IntraopOutput output = new IntraopOutput();
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			/// retrieves the output record to be deleted
+			output=(IntraopOutput)session.get(IntraopOutput.class,outputRecordId);
+			session.delete(output);
+			result = "Output Entry Deleted";
+			session.getTransaction().commit();
+//			throw new NullPointerException();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+
+		return result;
+
+	}
+	/**
+	 * This method returns List of output records corresponding to the patientID and caseID
+	 * from IntraopOutput entity
+	 *
+	 *
+	 * @param patientId
+	 *
+	 *
+	 * @param caseId
+	 *
+	 *
+	 *
+	 * @param userName.
+	 *
+	 * @return List of output records corresponding to the patientID and caseID
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public IntraopOutput searchIntraOpOutput(Long caseID,String outputName,Date timeStamp, String userName) throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+
+		IntraopOutput intraopOutput = new IntraopOutput();
+		Session session = null;
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			// retrieves list of output records
+			Query query=session.createQuery("from IntraopOutput where caseId=? and outputType=? and time=?");
+			query.setParameter(0, caseID);
+			query.setParameter(1, outputName);
+			query.setParameter(2, timeStamp);
+
+
+			intraopOutput = (IntraopOutput) query.uniqueResult();
+			//commits the session
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+		return intraopOutput;
+	}
+
+	/**
+	 * This method returns List of output records corresponding to the patientID and caseID
+	 * from IntraopOutput entity
+	 *
+	 *
+	 * @param patientId
+	 *
+	 *
+	 * @param caseId
+	 *
+	 *
+	 *
+	 * @param userName.
+	 *
+	 * @return List of output records corresponding to the patientID and caseID
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public HashMap<String,String> getTotalOutputTypeVolume(Long caseID,List<String> outputNameList,String userName) throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+
+		List<IntraopOutput> listOfOutputRecords=new ArrayList<IntraopOutput>();
+		HashMap<String, String> totalVolumeMap = new HashMap<>();
+		BigDecimal volume;
+		String volumeUnit= "ml";
+		String totalVolume="";
+		Session session = null;
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			// retrieves list of output records
+			Query query=session.createQuery("from IntraopOutput where caseId=? and outputType in (:ids)");
+			query.setParameter(0, caseID);
+			query.setParameterList("ids", outputNameList);
+
+			listOfOutputRecords = query.list();
+
+			for(int i=0;i<outputNameList.size();i++) {
+
+				volume =BigDecimal.ZERO;
+			for(IntraopOutput object: listOfOutputRecords)
+			{
+
+					if(object.getOutputType().equals(outputNameList.get(i))) {
+						if(object.getVolume()!=null)
+						{
+							volume=volume.add(object.getVolume());
+						}
+					}
+
+
+				}
+			totalVolume = volume+volumeUnit;
+			totalVolumeMap.put(outputNameList.get(i),totalVolume);
+
+			}
+
+			//commits the session
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+		return totalVolumeMap;
+	}
+
+}

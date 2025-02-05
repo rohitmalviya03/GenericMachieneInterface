@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;GenericGUI/src/Server&apos;&#x0D;&#x0A;- Original project: &apos;LAB_UI&apos;&#x0D;&#x0A;- Destination element: &apos;GenericGUI/src/Server&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     application.HL7MessageGenerator.java&#x0D;&#x0A;     application.ServerConnector.java" description="Copy compilation units" destination="=GenericGUI/src=/optional=/true=/=/maven.pomderived=/true=/&lt;Server" element1="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;application{HL7MessageGenerator.java" element2="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;application{ServerConnector.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1728880282423" units="2" version="1.0"/>
+</session>

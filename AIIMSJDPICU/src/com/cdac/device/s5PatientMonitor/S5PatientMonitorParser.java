@@ -1,0 +1,682 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.device.s5PatientMonitor;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.cdac.framework.CoreDevice;
+import com.cdac.framework.IPacketMakerStrategy;
+import com.cdac.framework.SystemConfiguration;
+import com.cdac.framework.datastructures.MedicalDeviceData;
+import com.cdac.framework.datastructures.NodeBase;
+import com.cdac.framework.datastructures.Parameter;
+import com.cdac.framework.exceptions.CustomPacketMakerNotFoundException;
+import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.SerialPortEvent;
+
+import mediatorPattern.ControllerMediator;
+
+public class S5PatientMonitorParser extends CoreDevice
+{
+	private static final Logger LOG = Logger.getLogger(S5PatientMonitorParser.class);
+	MedicalDeviceData<List<Byte>> medicalDeviceData;
+
+	public static final String PATIENTMONITOR_ECG_HEARTRATE = "PatientMonitoring.Ecg.HeartRate";
+	public static final String PATIENTMONITOR_ECG_TEMPERATURE1 = "PatientMonitoring.Ecg.Temperature1";
+	public static final String PATIENTMONITOR_ECG_TEMPERATURE2 = "PatientMonitoring.Ecg.Temperature2";
+	public static final String PATIENTMONITOR_SPO2_OXYGENLEVEL = "PatientMonitoring.Spo2.OxygenLevel";
+	public static final String PATIENTMONITOR_IBP_SYSTOLICPRESSURE = "PatientMonitoring.Ibp.SystolicPressure";
+	public static final String PATIENTMONITOR_IBP_DIASTOLICPRESSURE = "PatientMonitoring.Ibp.DiastolicPressure";
+	public static final String PATIENTMONITOR_IBP_MEANPRESSURE = "PatientMonitoring.Ibp.MeanPressure";
+	public static final String PATIENTMONITOR_NIBP_SYSTOLICPRESSURE = "PatientMonitoring.PhyData.SystolicPressure";
+	public static final String PATIENTMONITOR_NIBP_DIASTOLICPRESSURE = "PatientMonitoring.Nibp.DiastolicPressure";
+	public static final String PATIENTMONITOR_NIBP_MEANPRESSURE = "PatientMonitoring.Nibp.MeanPressure";
+	public static final String PATIENTMONITOR_CO2_ET = "PatientMonitoring.Co2.Et";
+	public static final String PATIENTMONITOR_WAVEFORM_ECG = "PatientMonitoring.Waveform.Ecg";
+	public static final String PATIENTMONITOR_WAVEFORM_INVP = "PatientMonitoring.Waveform.InvasiveP";
+	public static final String PATIENTMONITOR_WAVEFORM_PLETH = "PatientMonitoring.Waveform.Pleth";
+	public static final String PATIENTMONITOR_WAVEFORM_RESPIRATORY = "PatientMonitoring.Waveform.Respiratory";
+	public static final String PATIENTMONITOR_EEG_BIS = "PatientMonitoring.Eeg.Bis";
+	public static final String PATIENTMONITOR_AA_ETAGENT = "PatientMonitoring.Aa.EtAgent";
+	public static final String PATIENTMONITOR_AA_FIAGENT = "PatientMonitoring.Aa.FiAgent";
+	public static final String PATIENTMONITOR_AA_MAC = "PatientMonitoring.Aa.MAC";
+
+	/**
+	 * This structure is for saving the trend data in csv file
+	 */
+
+
+	public static final String PATIENTMONITOR_ECG_HEARTRATE_SAVE = "PatientMonitoring.Ecg.HeartRate_Save";
+	//public static final String PATIENTMONITOR_ECG_TEMPERATURE1_SAVE = "PatientMonitoring.Ecg.Temperature1_Save";
+	//public static final String PATIENTMONITOR_ECG_TEMPERATURE2_SAVE = "PatientMonitoring.Ecg.Temperature2_Save";
+	public static final String PATIENTMONITOR_SPO2_OXYGENLEVEL_SAVE = "PatientMonitoring.Spo2.OxygenLevel_Save";
+	/*public static final String PATIENTMONITOR_IBP_SYSTOLICPRESSURE_SAVE = "PatientMonitoring.Ibp.SystolicPressure_Save";
+	public static final String PATIENTMONITOR_IBP_DIASTOLICPRESSURE_SAVE = "PatientMonitoring.Ibp.DiastolicPressure_Save";
+	public static final String PATIENTMONITOR_IBP_MEANPRESSURE_SAVE = "PatientMonitoring.Ibp.MeanPressure_Save";
+	public static final String PATIENTMONITOR_NIBP_SYSTOLICPRESSURE_SAVE = "PatientMonitoring.PhyData.SystolicPressure_Save";
+	public static final String PATIENTMONITOR_NIBP_DIASTOLICPRESSURE_SAVE = "PatientMonitoring.Nibp.DiastolicPressure_Save";
+	public static final String PATIENTMONITOR_NIBP_MEANPRESSURE_SAVE = "PatientMonitoring.Nibp.MeanPressure_Save";
+	public static final String PATIENTMONITOR_CO2_ET_SAVE = "PatientMonitoring.Co2.Et_Save";
+	public static final String PATIENTMONITOR_WAVEFORM_ECG_SAVE = "PatientMonitoring.Waveform.Ecg_Save";
+	public static final String PATIENTMONITOR_WAVEFORM_INVP_SAVE = "PatientMonitoring.Waveform.InvasiveP_Save";
+	public static final String PATIENTMONITOR_WAVEFORM_PLETH_SAVE = "PatientMonitoring.Waveform.Pleth_Save";
+	public static final String PATIENTMONITOR_WAVEFORM_RESPIRATORY_SAVE = "PatientMonitoring.Waveform.Respiratory_Save";
+	public static final String PATIENTMONITOR_EEG_BIS_SAVE = "PatientMonitoring.Eeg.Bis_Save";*/
+
+	private Parameter HeartRate;
+	private Parameter Temperature1;
+	private Parameter Temperature2;
+	private Parameter O2Level;
+	private Parameter IBPSystolicPressure;
+	private Parameter IBPDiastolicPressure;
+	private Parameter IBPMeanPressure;
+	private Parameter NIBPSystolicPressure;
+	private Parameter NIBPDiastolicPressure;
+	private Parameter NIBPMeanPressure;
+	private Parameter ETCO2;
+	private Parameter WaveEcg;
+	private Parameter WaveInvp;
+	private Parameter WavePleth;
+	private Parameter WaveRespiratory;
+	private Parameter BIS;
+	private Parameter etAgent;
+	private Parameter fiAgent;
+	private Parameter mac;
+
+
+	/**
+	 * This structure is for saving the trend data in csv file
+	 */
+	private Parameter HeartRate_Save;
+	//private Parameter Temperature1_Save;
+	//private Parameter Temperature2_Save;
+	private Parameter O2Level_Save;
+	/*private Parameter IBPSystolicPressure_Save;
+	private Parameter IBPDiastolicPressure_Save;
+	private Parameter IBPMeanPressure_Save;
+	private Parameter NIBPSystolicPressure_Save;
+	private Parameter NIBPDiastolicPressure_Save;
+	private Parameter NIBPMeanPressure_Save;
+	private Parameter ETCO2_Save;
+	private Parameter WaveEcg_Save;
+	private Parameter WaveInvp_Save;
+	private Parameter WavePleth_Save;
+	private Parameter WaveRespiratory_Save;
+	private Parameter BIS_Save;*/
+
+	public static final String DEVICE_NAME = "S5PatientMonitor-0";
+	//private static final String DEFAULT_TREND_VALUE = "32000|-32000";
+	private static final String THREE_DASHES = "- - -";
+	private static final String LESS_THAN_30 = "<30";
+	private static final Object GREATER_THAN_250 = ">250";
+
+	private PacketMakerPatientMonitor packetMaker;
+
+	public S5PatientMonitorParser(String workName, int messageLength) throws CustomPacketMakerNotFoundException
+	{
+		super(workName, messageLength, null, PacketingStrategy.CUSTOM);
+		LOG.info("S5PatientMonitorParser constructor called");
+		medicalDeviceData = createIHEDataObject();
+		packetMaker = new PacketMakerPatientMonitor(new byte[] { 0x7e }, new byte[] { 0x7e });
+	}
+	 
+	
+
+	@Override
+	public void deviceEventOccurred(SerialPortEvent dataFromPort)
+	{
+		// TODO Auto-generated method stub
+		if (dataFromPort.getEventType() == SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
+		{
+			byte[] packet = dataFromPort.getReceivedData();
+			////System.out.println("!!!!!!!!!Packets Reached Parser!!!!!!!!!!");
+			/*
+			 * for (byte b : packet) { System.out.print(" " + b); }
+			 */
+			
+			short dxRecordMainType = (short) (((packet[15] & 0xFF) << 8) | packet[14] & 0xFF);
+			if (dxRecordMainType == 0)
+			{
+				parsePhysiologicalData(packet);
+			}
+			
+//			else if (dxRecordMainType == 1 && SystemConfiguration.getInstance().getParseS5Waveform())
+			else if (dxRecordMainType == 1 && ControllerMediator.getInstance().getMainController().isPublishMode())
+			{
+				//if(k%2 ==0 )
+				parseWaveformData(packet);
+			//	k++;
+			}
+			setDataProcessingStatus(Parsing.SUCCESSFUL);
+		}
+
+	}
+
+	@Override
+	public PacketingStrategy getPacketingStrategy()
+	{
+		return PacketingStrategy.CUSTOM;
+	}
+
+	@Override
+	public IPacketMakerStrategy getCustomPacketMaker() throws CustomPacketMakerNotFoundException
+	{
+		return packetMaker;
+	}
+
+	@Override
+	protected MedicalDeviceData createIHEDataObject()
+	{
+		// TODO Auto-generated method stub
+		medicalDeviceData = new MedicalDeviceData<List<Byte>>("S5PatientMonitor");
+
+		HeartRate = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_ECG_HEARTRATE)[2];
+		Temperature1=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_ECG_TEMPERATURE1)[2];
+		Temperature2=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_ECG_TEMPERATURE2)[2];
+		O2Level=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_SPO2_OXYGENLEVEL)[2];
+		IBPSystolicPressure=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_IBP_SYSTOLICPRESSURE)[2];
+		IBPDiastolicPressure=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_IBP_DIASTOLICPRESSURE)[2];
+		IBPMeanPressure=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_IBP_MEANPRESSURE)[2];
+		NIBPSystolicPressure=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_NIBP_SYSTOLICPRESSURE)[2];
+		NIBPDiastolicPressure=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_NIBP_DIASTOLICPRESSURE)[2];
+		NIBPMeanPressure=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_NIBP_MEANPRESSURE)[2];
+		ETCO2 = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_CO2_ET)[2];
+		WaveEcg = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_WAVEFORM_ECG)[2];
+		WaveInvp = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_WAVEFORM_INVP)[2];
+		WavePleth = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_WAVEFORM_PLETH)[2];
+		WaveRespiratory = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_WAVEFORM_RESPIRATORY)[2];
+		BIS = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_EEG_BIS)[2];
+		etAgent = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_AA_ETAGENT)[2];
+		fiAgent = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_AA_FIAGENT)[2];
+		mac = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_AA_MAC)[2];
+
+		/**
+		 * This structure is for saving the trend data in csv file
+		 */
+		HeartRate_Save = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_ECG_HEARTRATE_SAVE)[2];
+		//Temperature1_Save=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_ECG_TEMPERATURE1_SAVE)[2];
+		//Temperature2_Save=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_ECG_TEMPERATURE2_SAVE)[2];
+		O2Level_Save=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_SPO2_OXYGENLEVEL_SAVE)[2];
+		/*IBPSystolicPressure_Save=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_IBP_SYSTOLICPRESSURE_SAVE)[2];
+		IBPDiastolicPressure_Save=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_IBP_DIASTOLICPRESSURE_SAVE)[2];
+		IBPMeanPressure_Save=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_IBP_MEANPRESSURE_SAVE)[2];
+		NIBPSystolicPressure_Save=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_NIBP_SYSTOLICPRESSURE_SAVE)[2];
+		NIBPDiastolicPressure_Save=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_NIBP_DIASTOLICPRESSURE_SAVE)[2];
+		NIBPMeanPressure_Save=(Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_NIBP_MEANPRESSURE_SAVE)[2];
+		ETCO2_Save = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_CO2_ET_SAVE)[2];
+		WaveEcg_Save = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_WAVEFORM_ECG_SAVE)[2];
+		WaveInvp_Save = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_WAVEFORM_INVP_SAVE)[2];
+		WavePleth_Save = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_WAVEFORM_PLETH_SAVE)[2];
+		WaveRespiratory_Save = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_WAVEFORM_RESPIRATORY_SAVE)[2];
+		BIS_Save = (Parameter) medicalDeviceData.createOrGetParameter(PATIENTMONITOR_EEG_BIS_SAVE)[2];*/
+
+		return medicalDeviceData;
+	}
+
+	@Override
+	public NodeBase getNodeByIdentifier(String parameterIdentifier)
+	{
+		NodeBase param = null;
+		switch (parameterIdentifier)
+		{
+
+		case PATIENTMONITOR_ECG_HEARTRATE:
+			param = HeartRate;
+			break;
+
+		case PATIENTMONITOR_ECG_TEMPERATURE1:
+			param = Temperature1;
+			break;
+
+		case PATIENTMONITOR_ECG_TEMPERATURE2:
+			param = Temperature2;
+			break;
+
+		case PATIENTMONITOR_SPO2_OXYGENLEVEL:
+			param = O2Level;
+			break;
+
+		case PATIENTMONITOR_IBP_SYSTOLICPRESSURE:
+			param = IBPSystolicPressure;
+			break;
+
+		case PATIENTMONITOR_IBP_DIASTOLICPRESSURE:
+			param = IBPDiastolicPressure;
+			break;
+
+		case PATIENTMONITOR_IBP_MEANPRESSURE:
+			param = IBPMeanPressure;
+			break;
+
+		case PATIENTMONITOR_NIBP_SYSTOLICPRESSURE:
+			param = NIBPSystolicPressure;
+			break;
+
+		case PATIENTMONITOR_NIBP_DIASTOLICPRESSURE:
+			param = NIBPDiastolicPressure;
+			break;
+
+		case PATIENTMONITOR_NIBP_MEANPRESSURE:
+			param = NIBPMeanPressure;
+			break;
+
+		case PATIENTMONITOR_CO2_ET:
+			param = ETCO2;
+			break;
+
+		case PATIENTMONITOR_AA_ETAGENT:
+			param = etAgent;
+			break;
+
+		case PATIENTMONITOR_AA_MAC:
+			param = mac;
+			break;
+
+		case PATIENTMONITOR_AA_FIAGENT:
+			param = fiAgent;
+			break;
+
+		case PATIENTMONITOR_WAVEFORM_ECG:
+			param = WaveEcg;
+			break;
+
+		case PATIENTMONITOR_WAVEFORM_INVP:
+			param = WaveInvp;
+			break;
+
+		case PATIENTMONITOR_WAVEFORM_PLETH:
+			param = WavePleth;
+			break;
+
+		case PATIENTMONITOR_WAVEFORM_RESPIRATORY:
+			param = WaveRespiratory;
+			break;
+
+		case PATIENTMONITOR_EEG_BIS:
+			param = BIS;
+			break;
+
+		case PATIENTMONITOR_ECG_HEARTRATE_SAVE:
+			param = HeartRate_Save;
+			break;
+
+		/*case PATIENTMONITOR_ECG_TEMPERATURE1_SAVE:
+			param = Temperature1_Save;
+			break;
+
+		case PATIENTMONITOR_ECG_TEMPERATURE2_SAVE:
+			param = Temperature2_Save;
+			break;*/
+
+		case PATIENTMONITOR_SPO2_OXYGENLEVEL_SAVE:
+			param = O2Level_Save;
+			break;
+
+		/*case PATIENTMONITOR_IBP_SYSTOLICPRESSURE_SAVE:
+			param = IBPSystolicPressure_Save;
+			break;
+
+		case PATIENTMONITOR_IBP_DIASTOLICPRESSURE_SAVE:
+			param = IBPDiastolicPressure_Save;
+			break;
+
+		case PATIENTMONITOR_IBP_MEANPRESSURE_SAVE:
+			param = IBPMeanPressure_Save;
+			break;
+
+		case PATIENTMONITOR_NIBP_SYSTOLICPRESSURE_SAVE:
+			param = NIBPSystolicPressure_Save;
+			break;
+
+		case PATIENTMONITOR_NIBP_DIASTOLICPRESSURE_SAVE:
+			param = NIBPDiastolicPressure_Save;
+			break;
+
+		case PATIENTMONITOR_NIBP_MEANPRESSURE_SAVE:
+			param = NIBPMeanPressure_Save;
+			break;
+
+		case PATIENTMONITOR_CO2_ET_SAVE:
+			param = ETCO2_Save;
+			break;
+
+		case PATIENTMONITOR_WAVEFORM_ECG_SAVE:
+			param = WaveEcg_Save;
+			break;
+
+		case PATIENTMONITOR_WAVEFORM_INVP_SAVE:
+			param = WaveInvp_Save;
+			break;
+
+		case PATIENTMONITOR_WAVEFORM_PLETH_SAVE:
+			param = WavePleth_Save;
+			break;
+
+		case PATIENTMONITOR_WAVEFORM_RESPIRATORY_SAVE:
+			param = WaveRespiratory_Save;
+			break;
+
+		case PATIENTMONITOR_EEG_BIS_SAVE:
+			param = BIS_Save;
+			break;*/
+
+		default:
+			param = null;
+		}
+
+		return param;
+
+	}
+
+	private void parsePhysiologicalData(byte[] packet)
+	{
+		// TODO Auto-generated method stub
+		byte[] buffer = new byte[274];
+		byte[] buffer2 = new byte[274];
+		buffer = Arrays.copyOfRange(packet, 44, 318);
+		buffer2 = Arrays.copyOfRange(packet, 600, 874);
+
+		short bis = (short) (((buffer2[103] & 0xFF) << 8) | buffer2[102] & 0xFF);
+		BIS.setValue(String.valueOf(bis));
+
+		//BIS_Save.setValue(String.valueOf(bis));
+		//BIS_Save.setValue(calculateTrendValue(BIS_Save, String.valueOf(bis)));
+
+		short heartRate = (short) (((buffer[7] & 0xFF) << 8) | buffer[6] & 0xFF);
+		//HeartRate.setValue(Math.round(new Double(String.valueOf(heartRate))));
+		/*if (checkDataInvalidLimit(heartRate))
+		{
+			////System.out.println("\n Heart Rate " + heartRate);
+			HeartRate.setValue(Math.round(new Double(String.valueOf(heartRate))));
+		}
+		else
+		{
+			////System.out.println("Heart Rate Data invalid");
+		}*/
+
+		//HeartRate.setValue(heartRate);
+		HeartRate.setValue(heartRateCalculation(heartRate));
+//		HeartRate_Save.setValue(Math.round(new Double(String.valueOf(heartRate))));
+		//HeartRate_Save.setValue(calculateTrendValue(HeartRate_Save, String.valueOf(heartRateCalculation(heartRate))));
+
+		double nibpSystolic = (short)(((buffer[79] & 0xFF) << 8) | buffer[78] & 0xFF);
+		////System.out.println("!!!!!!!!NIBP SYS!!!!" + nibpSystolic / 100);
+//		NIBPSystolicPressure.setValue(String.valueOf(nibpSystolic / 100));
+		NIBPSystolicPressure.setValue(Math.round(new Double(String.valueOf(nibpSystolic / 100))));
+		//NIBPSystolicPressure_Save.setValue(String.valueOf(nibpSystolic / 100));
+		//NIBPSystolicPressure_Save.setValue(calculateTrendValue(NIBPSystolicPressure_Save, String.valueOf(nibpSystolic / 100)));
+
+		double nibpDiastolic = (short)(((buffer[81] & 0xFF) << 8) | buffer[80] & 0xFF);
+		////System.out.println("!!!!!!!!NIBP DIA!!!!" + nibpDiastolic / 100);
+//		NIBPDiastolicPressure.setValue(String.valueOf(nibpDiastolic / 100));
+		NIBPDiastolicPressure.setValue(Math.round(new Double(String.valueOf(nibpDiastolic / 100))));
+		//NIBPDiastolicPressure_Save.setValue(String.valueOf(nibpDiastolic / 100));
+		//NIBPDiastolicPressure_Save.setValue(calculateTrendValue(NIBPDiastolicPressure_Save, String.valueOf(nibpDiastolic / 100)));
+
+		double nibpMean = (short)(((buffer[83] & 0xFF) << 8) | buffer[82] & 0xFF);
+		////System.out.println("!!!!!!!!NIBP mean!!!!" + nibpMean / 100);
+//		NIBPMeanPressure.setValue(String.valueOf(nibpMean / 100));
+		NIBPMeanPressure.setValue(Math.round(new Double(String.valueOf(nibpMean / 100))));
+		//NIBPMeanPressure_Save.setValue(String.valueOf(nibpMean / 100));
+		//NIBPMeanPressure_Save.setValue(calculateTrendValue(NIBPMeanPressure_Save, String.valueOf(nibpMean / 100)));
+
+		double ibpSystolic = (short)(((buffer[23] & 0xFF) << 8) | buffer[22] & 0xFF);
+		////System.out.println("!!!!!!!!ibpSys!!!!" + ibpSystolic / 100);
+		IBPSystolicPressure.setValue(Math.round(new Double(String.valueOf(ibpSystolic / 100))));
+		//IBPSystolicPressure_Save.setValue(Math.round(new Double(String.valueOf(ibpSystolic / 100))));
+		//IBPSystolicPressure_Save.setValue(calculateTrendValue(IBPSystolicPressure_Save, String.valueOf(ibpSystolic / 100)));
+
+		double ibpDiastolic = (short)(((buffer[25] & 0xFF) << 8) | buffer[24] & 0xFF);
+		////System.out.println("ibpDiastolic1 " + ibpDiastolic / 100);
+		IBPDiastolicPressure.setValue(Math.round(new Double(String.valueOf(ibpDiastolic / 100))));
+		//IBPDiastolicPressure_Save.setValue(Math.round(new Double(String.valueOf(ibpDiastolic / 100))));
+		//IBPDiastolicPressure_Save.setValue(calculateTrendValue(IBPDiastolicPressure_Save, String.valueOf(ibpDiastolic / 100)));
+
+
+		double ibpMean1 = (short)(((buffer[27] & 0xFF) << 8) | buffer[26] & 0xFF);
+		////System.out.println("ibpMean1 " + ibpMean1 / 100);
+		IBPMeanPressure.setValue(Math.round(new Double(String.valueOf(ibpMean1 / 100))));
+		//IBPMeanPressure_Save.setValue(Math.round(new Double(String.valueOf(ibpMean1 / 100))));
+		//IBPMeanPressure_Save.setValue(calculateTrendValue(IBPMeanPressure_Save, String.valueOf(ibpMean1 / 100)));
+
+		double SPO2 = (short)(((buffer[125] & 0xFF) << 8) | buffer[124] & 0xFF);
+		////System.out.println("!!!!!!!!!!!SPO2!!!!!" + SPO2 / 100);
+		//O2Level.setValue(Math.round(new Double(String.valueOf(SPO2 / 100))));
+		O2Level.setValue(parametersCalculation(SPO2));
+//		O2Level_Save.setValue(Math.round(new Double(String.valueOf(SPO2/100))));
+		//O2Level_Save.setValue(calculateTrendValue(O2Level_Save, String.valueOf(SPO2Calculation(SPO2))));
+
+		double temp1 = (short) (((buffer[93] & 0xFF) << 8) | buffer[92] & 0xFF);
+		////System.out.println("temp1!!!!!!!!!!!!!!! " + temp1 / 100);
+		Temperature1.setValue(String.valueOf(temp1 / 100));
+		//Temperature1_Save.setValue(String.valueOf(temp1 / 100));
+		//Temperature1_Save.setValue(calculateTrendValue(Temperature1_Save, String.valueOf(temp1 / 100)));
+
+		double temp2 =(short) (((buffer[101] & 0xFF) << 8) | buffer[100] & 0xFF);
+		////System.out.println("temp2 " + temp2 / 100);
+		Temperature2.setValue(String.valueOf(temp2 / 100));
+		//Temperature2_Save.setValue(String.valueOf(temp2 / 100));
+		//Temperature2_Save.setValue(calculateTrendValue(Temperature2_Save, String.valueOf(temp2 / 100)));
+
+		short etCO2 = (short) (((buffer[139] & 0xFF) << 8) | buffer[138] & 0xFF);
+		////System.out.println("etc0000000002 " + etCO2);
+
+		short ambPressure = (short) (((buffer[145] & 0xFF) << 8) | buffer[144] & 0xFF);
+		////System.out.println("ambPressure " + ambPressure);
+
+		double etC =((etCO2 * (short) ((buffer[145] & 0xFF) << 8) | buffer[144] & 0xFF));
+		////System.out.println("!!!!!!!!!!!etc!!!!!!" + etC / 100000);
+		ETCO2.setValue(Math.round(new Double(String.valueOf(etC / 100000))));
+		//ETCO2_Save.setValue(Math.round(new Double(String.valueOf(etC / 100000))));
+
+		double eto2 = (short)(((buffer[153] & 0xFF) << 8) | buffer[152] & 0xFF);
+		////System.out.println("!!!!!!!!!!!et02!!!!!!!!!!" + eto2 / 100);
+
+		double fio2 = (short)(((buffer[155] & 0xFF) << 8) | buffer[154] & 0xFF);
+		// ////System.out.println("!!!!!!!!!!!fi02!!!!!!!!!!" + fio2 / 100);
+
+
+		double etAgentLocal = (short)(((buffer[173] & 0xFF) << 8) | buffer[172] & 0xFF);
+		////System.out.println("!!!!!!!!!!!SPO2!!!!!" + SPO2 / 100);
+		//O2Level.setValue(Math.round(new Double(String.valueOf(SPO2 / 100))));
+		etAgent.setValue(parametersCalculation(etAgentLocal));
+
+
+		double fiAgentLocal = (short)(((buffer[175] & 0xFF) << 8) | buffer[174] & 0xFF);
+		////System.out.println("!!!!!!!!!!!SPO2!!!!!" + SPO2 / 100);
+		//O2Level.setValue(Math.round(new Double(String.valueOf(SPO2 / 100))));
+		fiAgent.setValue(parametersCalculation(fiAgentLocal));
+
+		double macLocal = (short)(((buffer[177] & 0xFF) << 8) | buffer[176] & 0xFF);
+		////System.out.println("!!!!!!!!!!!SPO2!!!!!" + SPO2 / 100);
+		//O2Level.setValue(Math.round(new Double(String.valueOf(SPO2 / 100))));
+		mac.setValue(parametersCalculation(macLocal));
+
+	}
+
+	/**
+	 * This method keeps the trend value updated
+	 *
+	 * @param param
+	 *            previous value of parameter
+	 * @param value
+	 *            current value of parameter
+	 * @param minimum
+	 *            minimum possible value of the parameter
+	 * @param maximum
+	 *            maximum possible value of the parameter
+	 * @return final value of the parameter to be set
+	 */
+	/*private String calculateTrendValue(Parameter param, String value)
+	{
+		String finalValue = DEFAULT_TREND_VALUE;
+		if (Double.parseDouble(value) < -32000)
+		{
+			return DEFAULT_TREND_VALUE;
+		}
+		if(param.getParameterData()==null)
+		{
+			param.setValue(finalValue);
+		}
+
+		String minValue = param.getParameterData().toString().split("\\|")[0];
+		String maxValue = param.getParameterData().toString().split("\\|")[1];
+
+		// If value is less than minimum value, then make it the minimum
+		if (Double.parseDouble(value) <= Double.parseDouble(minValue))
+		{
+			minValue = value + "";
+		}
+
+		// If value is greater than maximum value, then make it the maximum
+		if (Double.parseDouble(value) > Double.parseDouble(maxValue))
+		{
+			maxValue = value + "";
+		}
+
+		finalValue = minValue + "|" + maxValue;
+
+		return finalValue;
+	}*/
+
+	private Object heartRateCalculation(short Value)
+	{
+		if (Value < -32761)
+		{
+			if(Value == -32762 || Value == -32766 || Value == -32767)
+			{
+				return THREE_DASHES;
+			}
+			else if(Value == -32764)
+			{
+				return LESS_THAN_30;
+			}
+			else if(Value == -32763)
+			{
+				return GREATER_THAN_250;
+			}
+			else
+			{
+				// do nothing
+			}
+		}
+		return Math.round(new Double(String.valueOf(Value)));
+	}
+
+	private Object parametersCalculation(double Value)
+	{
+		if (Value < -32761)
+		{
+			if(Value == (double)-32762 || Value == (double)-32766 || Value == (double)-32767)
+			{
+				return THREE_DASHES;
+			}
+			else if(Value == (double)-32764)
+			{
+				return THREE_DASHES;
+			}
+			else if(Value == (double)-32763)
+			{
+				return THREE_DASHES;
+			}
+			else
+			{
+				// do nothing
+			}
+		}
+		return Math.round(new Double(String.valueOf(Value/100)));
+	}
+
+	private void parseWaveformData(byte[] packet)
+	{
+		byte[] bufferForEcg = new byte[600];
+		byte[] bufferForInvp = new byte[200];
+		byte[] bufferForPleth = new byte[200];
+		byte[] bufferForRespiratory = new byte[50];
+
+		byte[] extraBuffer = Arrays.copyOfRange(packet, 40, 1114);
+
+		short length = (short) (((extraBuffer[1] & 0xFF) << 8) | extraBuffer[0] & 0xFF);
+		short offset = (short) (((packet[17] & 0xFF) << 8) | packet[16] & 0xFF);
+		bufferForEcg = Arrays.copyOfRange(extraBuffer, offset + 6, offset + 6 + (length*2));
+		//System.out.println("\nLength of ECG IS " + length);
+
+		length = (short) (((extraBuffer[offset + 6 + (length*2)+1] & 0xFF) << 8) | extraBuffer[offset + 6 + (length*2)] & 0xFF);
+		offset = (short) (((packet[20] & 0xFF) << 8) | packet[19] & 0xFF);
+		bufferForInvp = Arrays.copyOfRange(extraBuffer, offset + 6, offset + 6 +(length*2));
+		//System.out.println("Length of IBP IS " + length);
+
+		length = (short) (((extraBuffer[offset + 6 + (length*2)+1] & 0xFF) << 8) | extraBuffer[offset + 6 + (length*2)] & 0xFF);
+		offset = (short) (((packet[23] & 0xFF) << 8) | packet[22] & 0xFF);
+		bufferForPleth = Arrays.copyOfRange(extraBuffer, offset + 6, offset + 6 + 200);
+		//System.out.println("Length of SPO2 IS " + length);
+
+		length = (short) (((extraBuffer[offset + 6 + (length*2)+1] & 0xFF) << 8) | extraBuffer[offset + 6 + (length*2)] & 0xFF);
+		offset = (short) (((packet[26] & 0xFF) << 8) | packet[25] & 0xFF);
+		bufferForRespiratory = Arrays.copyOfRange(extraBuffer, offset + 6, offset + 6 + 50);
+		//System.out.println("Length of CO2 IS " + length);
+		int[] ecgWaveform = new int[bufferForEcg.length/2], invpWaveform = new int[bufferForInvp.length/2], plethWaveform = new int[bufferForPleth.length/2],
+		        respiratoryWaveform = new int[bufferForRespiratory.length/2];
+		int i = 0, j = 0, x = 0, y = 0;
+//		//System.out.println("\n!!!!!!!ECG SAMPLE!!!!!");
+		for (int n = 0; n < bufferForEcg.length; n += 2)
+		{
+			short wavedata = (short) (((bufferForEcg[n + 1] & 0xFF) << 8) | bufferForEcg[n] & 0xFF);
+			ecgWaveform[i++] = wavedata;
+			System.out.print(wavedata + " ");
+		}
+		////System.out.println("\n!!!!!!!invasive SAMPLE!!!!!");
+		for (int n = 0; n < bufferForInvp.length; n += 2)
+		{
+			short wavedata = (short) (((bufferForInvp[n + 1] & 0xFF) << 8) | bufferForInvp[n] & 0xFF);
+			invpWaveform[j++] = wavedata;
+			System.out.print(wavedata + " ");
+		}
+		////System.out.println("\n!!!!!!!pleth SAMPLE!!!!!");
+		for (int n = 0; n < bufferForPleth.length; n += 2)
+		{
+			short wavedata = (short) (((bufferForPleth[n + 1] & 0xFF) << 8) | bufferForPleth[n] & 0xFF);
+			plethWaveform[x++] = wavedata;
+			System.out.print(wavedata + " ");
+		}
+		////System.out.println("\n!!!!!!!etco2 SAMPLE!!!!!");
+		for (int n = 0; n < bufferForRespiratory.length; n += 2)
+		{
+			short wavedata = (short) (((bufferForRespiratory[n + 1] & 0xFF) << 8) | bufferForRespiratory[n] & 0xFF);
+			respiratoryWaveform[y++] = wavedata;
+			System.out.print(wavedata + " ");
+		}
+
+		WaveEcg.setValue(ecgWaveform);
+		WaveInvp.setValue(invpWaveform);
+		WavePleth.setValue(plethWaveform);
+		WaveRespiratory.setValue(respiratoryWaveform);
+	}
+
+	@Override
+	public int getListeningEvent()
+	{
+		return SerialPort.LISTENING_EVENT_DATA_AVAILABLE;
+	}
+
+	@Override
+	public MedicalDeviceData getDeviceData()
+	{
+		return medicalDeviceData;
+	}
+
+	@Override
+	public void terminate()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+}

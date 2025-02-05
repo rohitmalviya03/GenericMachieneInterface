@@ -1,0 +1,108 @@
+package Server;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+public class dbConnection {
+
+	
+	public static Connection getDbConnection() 
+	{
+		Connection con = null;
+		try {
+			//Class.forName("org.postgresql.Driver");
+			System.out.println("check connection");
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
+			// Connection to SQL Server
+			
+			 String url = "jdbc:sqlserver://<SERVER_NAME>:<PORT>;databaseName=<DATABASE_NAME>";
+		        String user = "<USERNAME>";
+		        String password = "<PASSWORD>";
+
+		        // Establishing the connection
+		        con = DriverManager.getConnection(url, user, password)
+		        		//""
+					
+					//+ ""
+					//+ "\\SQLEXPRESS;databaseName=cdactest;Trusted_Connection=True");
+
+			   // Connection to SQL Server using Windows Authentication
+	       // String url = "jdbc:sqlserver://DRDEEPAKAGARWAL\\SQLEXPRESS;databaseName=NeuroTrauma;integratedSecurity=true;";
+			//con = DriverManager.getConnection("jdbc:postgresql://10.226.80.35:5444/hmis_aiims_patna", "hmisaiimsp", "hmisaiimsp");
+			System.out.println("return connection");
+			} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return con;
+
+	}
+	
+	
+	
+	public static void insertParaValue(List testCode ,List testValue,String sampleno) 
+	{
+		
+		  // Database connection parameters
+        String url = "jdbc:postgresql://localhost:5432/your_database"; // Replace with your database URL
+        String user = "your_username"; // Replace with your database username
+        String password = "your_password"; // Replace with your database password
+
+        // SQL insert statement
+        String sql = "INSERT INTO hmit_result_dtl (hminum_machine_recordid, hminum_machine_id, gnum_hospital_code,hmistr_machine_sampleno, hmistr_machine_test_code, hmistr_result) VALUES (?,?, ?, ?, ?, ?)";
+        // Get current timestamp and add 1 hour to it
+        // Get current date and time
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        // Add 1 hour to the current date and time
+        LocalDateTime modifiedDateTime = currentDateTime.plusHours(1);
+
+        // Format the date and time as DDMMYYHHMMSS
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyHHmm");
+        String formattedTimestamp = modifiedDateTime.format(formatter); // Timestamp in DDMMYYHHMMSS format
+
+        try (Connection conn = getDbConnection()) {
+
+            // Prepare statement
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+System.out.println("at prep statement");
+            for (int i = 0; i < testCode.size(); i++) {
+                // Set values for the query
+            	
+            
+                pstmt.setInt(1, i); // Set hminum_machine_recordid   //need to store any unique id either timestamp+1 or we can delete that column // not mandatoray
+                pstmt.setInt(2, 10001); // Set hminum_machine_id
+                pstmt.setInt(3, 20001); // Set gnum_hospital_code
+                pstmt.setString(4, sampleno);
+                pstmt.setString(5, testCode.get(i).toString()); // Set hmistr_machine_test_code
+                pstmt.setString(6, testValue.get(i).toString()); // Set hmistr_result
+
+                // Execute the insert query
+                pstmt.executeUpdate();
+            }
+
+            System.out.println("Data inserted successfully!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

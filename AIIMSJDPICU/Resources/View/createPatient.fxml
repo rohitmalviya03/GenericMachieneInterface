@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="754.0" style="-fx-background-color: white;" styleClass="customeBorder" stylesheets="@../styles/newStyles.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreatePatientController">
+   <top>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lblHeader" alignment="CENTER" prefHeight="36.0" prefWidth="713.0" styleClass="pageHeader" text="Create Patient" />
+            <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="btnTopBar" text="Button">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="18.0" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="tabPatientDemography" text="Patient Demography">
+                     <content>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="759.0" spacing="10.0">
+                           <children>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="878.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="100.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="CR  Number" />
+                                                <Label text="*" textFill="RED" />
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtCRNum" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="230.0" promptText="CR  Number" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="55.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="First Name" />
+                                                <Label text="*" textFill="RED" />
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtFirstName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="230.0" promptText="First Name" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="100.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Last Name" />
+                                          <TextField fx:id="txtLastName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="230.0" promptText="Last Name" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="878.0" spacing="5.0">
+                                 <children>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="184.0" spacing="5.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="Gender" />
+                                                <Label text="*" textFill="RED" />
+                                             </children>
+                                          </HBox>
+                                          <ChoiceBox fx:id="selectGender" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label text="Patient Age" />
+                                          <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="223.0" spacing="5.0">
+                                             <children>
+                                                <RadioButton fx:id="radioDob" mnemonicParsing="false" selected="true" text="Choose DOB">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="ageToogleGroup" />
+                                                   </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="radioAge" mnemonicParsing="false" text="Enter Age" toggleGroup="$ageToogleGroup" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <StackPane>
+                                       <children>
+                                          <VBox fx:id="vbDatePicker" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="228.0" spacing="5.0">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="Date of Birth" />
+                                                      <Label text="*" textFill="RED" />
+                                                   </children>
+                                                </HBox>
+                                                <DatePicker fx:id="dobPicker" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" promptText="Choose a Date" />
+                                             </children>
+                                          </VBox>
+                                          <HBox fx:id="hbPatientAge" visible="false">
+                                             <children>
+                                                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="166.0" spacing="5.0">
+                                                   <children>
+                                                      <HBox>
+                                                         <children>
+                                                            <Label text="Age" />
+                                                            <Label text="*" textFill="RED" />
+                                                         </children>
+                                                      </HBox>
+                                                      <TextField fx:id="txtAge" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" promptText="Age" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="184.0" spacing="5.0">
+                                                   <children>
+                                                      <HBox>
+                                                         <children>
+                                                            <Label text="Unit" />
+                                                            <Label text="*" textFill="RED" />
+                                                         </children>
+                                                      </HBox>
+                                                      <ChoiceBox fx:id="selectUnit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="130.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="67.0" prefWidth="761.0" spacing="35.0">
+                                 <children>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="121.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Blood Group" />
+                                          <ChoiceBox fx:id="choiceBloodGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="110.0" spacing="5.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="Weight" />
+                                                <Label text="*" textFill="RED" />
+                                             </children>
+                                          </HBox>
+                                          <HBox>
+                                             <children>
+                                                <TextField fx:id="txtWeight" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="65.0" promptText="Weight" />
+                                                <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" style="-fx-background-color: #505050; -fx-text-fill: #ffff;" text="Kg" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="110.0" spacing="5.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="Height" />
+                                                <Label text="*" textFill="RED" />
+                                             </children>
+                                          </HBox>
+                                          <HBox>
+                                             <children>
+                                                <TextField fx:id="txtHeight" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="65.0" promptText="Height" />
+                                                <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" style="-fx-background-color: #505050; -fx-text-fill: #ffff;" text="cm" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="119.0" spacing="5.0">
+                                       <children>
+                                          <Label text="BMI" />
+                                          <HBox>
+                                             <children>
+                                                <TextField fx:id="txtBMI" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="65.0" promptText="BMI">
+                                                   <cursor>
+                                                      <Cursor fx:constant="DISAPPEAR" />
+                                                   </cursor>
+                                                </TextField>
+                                                <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" style="-fx-background-color: #505050; -fx-text-fill: #ffff;" text="Kg/m2" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="110.0" spacing="5.0">
+                                       <children>
+                                          <Label text="BSA" />
+                                          <HBox>
+                                             <children>
+                                                <TextField fx:id="txtBSA" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="65.0" promptText="BSA">
+                                                   <cursor>
+                                                      <Cursor fx:constant="DISAPPEAR" />
+                                                   </cursor>
+                                                </TextField>
+                                                <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" style="-fx-background-color: #505050; -fx-text-fill: #ffff;" text="m2" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" right="5.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </Tab>
+                <Tab fx:id="tabContactDetails" text="Contact Details">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                           <children>
+                              <HBox prefHeight="56.0" prefWidth="858.0" spacing="10.0">
+                                 <children>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="Mobile Number" />
+                                                <Label text="*" textFill="RED" />
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtMobile" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="230.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="Father/Guardian" />
+                                                <Label text="*" textFill="RED" />
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtGuardian" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="230.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Home Phone" />
+                                          <TextField fx:id="txtPhone" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="230.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="61.0" prefWidth="858.0" spacing="10.0">
+                                 <children>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Emergecy Contact Name" />
+                                          <TextField fx:id="txtEmergencyContact" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="230.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Email Id" />
+                                          <TextField fx:id="txtEmail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="230.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" right="10.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabAddressDetails" text="Address Details">
+                     <content>
+                        <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                           <children>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="878.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="100.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="Country" />
+                                                <Label text="*" textFill="RED" />
+                                             </children>
+                                          </HBox>
+                                          <ChoiceBox fx:id="selectCountry" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="55.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="State" />
+                                                <Label text="*" textFill="RED" />
+                                             </children>
+                                          </HBox>
+                                          <StackPane alignment="TOP_LEFT">
+                                             <children>
+                                                <TextField fx:id="txtState" prefHeight="31.0" prefWidth="202.0" promptText="State" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets right="33.0" />
+                                                   </StackPane.margin>
+                                                </TextField>
+                                                <ChoiceBox fx:id="selectState" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+                                             </children>
+                                          </StackPane>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="100.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <Label text="House No" />
+                                          <TextField fx:id="txtHouseNo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="House No" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="878.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="100.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Street" />
+                                          <TextField fx:id="txtStreet" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Street" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="55.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Location" />
+                                          <TextField fx:id="txtLocation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Location" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="100.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <Label text="District" />
+                                          <TextField fx:id="txtDistrict" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="District" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="878.0" spacing="10.0">
+                                 <children>
+                                    <VBox prefHeight="100.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="City/Village" />
+                                                <Label text="*" textFill="RED" />
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtCity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="City/Village" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="55.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Area Category" />
+                                          <ChoiceBox fx:id="selectArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="100.0" prefWidth="233.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Pin Code" />
+                                          <TextField fx:id="txtPincode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Pin Code" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" right="5.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+            <AnchorPane fx:id="disablePaneMainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="287.0" prefWidth="745.0" style="-fx-background-color: #505050;" visible="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="409.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../res/Spinner.gif" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <AnchorPane prefHeight="48.0" prefWidth="754.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="BOTTOM_RIGHT" layoutY="8.0" prefHeight="32.0" prefWidth="746.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lblErrorMsg" prefHeight="22.0" prefWidth="701.0" style="-fx-text-fill: red;" visible="false" />
+                  <Button fx:id="btnBack" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="90.0" styleClass="cancelBtn" text="Back" />
+                  <Button fx:id="btnReset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="90.0" styleClass="cancelBtn" text="Reset" />
+                  <Button fx:id="btnProceed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="90.0" styleClass="saveBtn" text="Proceed" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>

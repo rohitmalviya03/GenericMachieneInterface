@@ -1,0 +1,89 @@
+2025-02-04 14:17:56 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-02-04 14:17:56 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 14:17:56 - Error: The column name gstr_gender_code was not found in this ResultSet.
+2025-02-04 14:17:56 - Stack Trace: org.postgresql.util.PSQLException: The column name gstr_gender_code was not found in this ResultSet.
+	at org.postgresql.jdbc.PgResultSet.findColumn(PgResultSet.java:3094)
+	at org.postgresql.jdbc.PgResultSet.getString(PgResultSet.java:2930)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1693)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 14:19:34 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-02-04 14:19:34 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 14:19:34 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204141934||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204141934|SAC||||24008676 ORC|NW||||||||20250204141934TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 14:19:36 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 14:19:36 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1704)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:07:52 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-02-04 15:10:36 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-02-04 15:10:58 - Stack Trace: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at sun.net.NetworkClient.doConnect(NetworkClient.java:180)
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:558)
+	at sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:698)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1595)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1500)
+	at java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:480)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1675)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:10:58 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:10:58 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204151058||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204151058|SAC||||24008676 ORC|NW||||||||20250204151058TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:11:00 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 15:11:00 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1778)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:13:12 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-02-04 15:13:12 - Response from API: []
+2025-02-04 15:13:12 - Sample no or cr no. not found: []
+2025-02-04 15:13:12 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:13:12 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204151312||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204151312|SAC||||24008676 ORC|NW||||||||20250204151312TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:13:14 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 15:13:14 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1778)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+

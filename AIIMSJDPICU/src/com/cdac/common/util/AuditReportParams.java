@@ -1,0 +1,288 @@
+/*******************************************************************************
+ * Infosys Limited Confidential
+ * Copyright  2019 by Infosys Limited and its affiliates. All rights reserved
+ *******************************************************************************/
+
+package com.cdac.common.util;
+
+public class AuditReportParams {
+
+	
+	 private Float AXCTime, CPBTime, SurgeryTime, Anesthesiatime, HandOverTime, PatientPrepationTime, ShiftingOutTime,OTTime;
+	
+	private Float TotalFentanyl, TotalPropofol, TotalKetamine, TotalVecuronium, TotalCefuroxime, TotalHeparin,
+			TotalProtamine, TotalEACA,TotalMeropenam,TotalVancomysin,TotalMorphine,TotalSufentanyl,TotalEtomidate,TotalAtrcurium
+			,TotalCalciumGluconate,TotalCalciumChloride,TotalDexamethasone,TotalHydrocortisone,TotalMagnesium,TotalXylocard,TotalPhenylephrine,
+			TotalAtropine,TotalAdrenaline;
+	
+	private Float totalNormalSaline, totalRingerLactate;
+
+	public Float getAXCTime() {
+		return AXCTime;
+	}
+
+	public void setAXCTime(Float aXCTime) {
+		AXCTime = aXCTime;
+	}
+
+	public Float getCPBTime() {
+		return CPBTime;
+	}
+
+	public void setCPBTime(Float cPBTime) {
+		CPBTime = cPBTime;
+	}
+
+	public Float getSurgeryTime() {
+		return SurgeryTime;
+	}
+
+	public void setSurgeryTime(Float surgeryTime) {
+		SurgeryTime = surgeryTime;
+	}
+
+	public Float getAnesthesiatime() {
+		return Anesthesiatime;
+	}
+
+	public void setAnesthesiatime(Float anesthesiatime) {
+		Anesthesiatime = anesthesiatime;
+	}
+
+	public Float getHandOverTime() {
+		return HandOverTime;
+	}
+
+	public void setHandOverTime(Float handOverTime) {
+		HandOverTime = handOverTime;
+	}
+
+	public Float getPatientPrepationTime() {
+		return PatientPrepationTime;
+	}
+
+	public void setPatientPrepationTime(Float patientPrepationTime) {
+		PatientPrepationTime = patientPrepationTime;
+	}
+
+	public Float getShiftingOutTime() {
+		return ShiftingOutTime;
+	}
+
+	public void setShiftingOutTime(Float shiftingOutTime) {
+		ShiftingOutTime = shiftingOutTime;
+	}
+
+	public Float getOTTime() {
+		return OTTime;
+	}
+
+	public void setOTTime(Float oTTime) {
+		OTTime = oTTime;
+	}
+
+	public Float getTotalFentanyl() {
+		return TotalFentanyl;
+	}
+
+	public void setTotalFentanyl(Float totalFentanyl) {
+		TotalFentanyl = totalFentanyl;
+	}
+
+	public Float getTotalPropofol() {
+		return TotalPropofol;
+	}
+
+	public void setTotalPropofol(Float totalPropofol) {
+		TotalPropofol = totalPropofol;
+	}
+
+	public Float getTotalKetamine() {
+		return TotalKetamine;
+	}
+
+	public void setTotalKetamine(Float totalKetamine) {
+		TotalKetamine = totalKetamine;
+	}
+
+	public Float getTotalVecuronium() {
+		return TotalVecuronium;
+	}
+
+	public void setTotalVecuronium(Float totalVecuronium) {
+		TotalVecuronium = totalVecuronium;
+	}
+
+	public Float getTotalCefuroxime() {
+		return TotalCefuroxime;
+	}
+
+	public void setTotalCefuroxime(Float totalCefuroxime) {
+		TotalCefuroxime = totalCefuroxime;
+	}
+
+	public Float getTotalHeparin() {
+		return TotalHeparin;
+	}
+
+	public void setTotalHeparin(Float totalHeparin) {
+		TotalHeparin = totalHeparin;
+	}
+
+	public Float getTotalProtamine() {
+		return TotalProtamine;
+	}
+
+	public void setTotalProtamine(Float totalProtamine) {
+		TotalProtamine = totalProtamine;
+	}
+
+	public Float getTotalEACA() {
+		return TotalEACA;
+	}
+
+	public void setTotalEACA(Float totalEACA) {
+		TotalEACA = totalEACA;
+	}
+
+	public Float getTotalMeropenam() {
+		return TotalMeropenam;
+	}
+
+	public void setTotalMeropenam(Float totalMeropenam) {
+		TotalMeropenam = totalMeropenam;
+	}
+
+	public Float getTotalVancomysin() {
+		return TotalVancomysin;
+	}
+
+	public void setTotalVancomysin(Float totalVancomysin) {
+		TotalVancomysin = totalVancomysin;
+	}
+
+	public Float getTotalMorphine() {
+		return TotalMorphine;
+	}
+
+	public void setTotalMorphine(Float totalMorphine) {
+		TotalMorphine = totalMorphine;
+	}
+
+	public Float getTotalSufentanyl() {
+		return TotalSufentanyl;
+	}
+
+	public void setTotalSufentanyl(Float totalSufentanyl) {
+		TotalSufentanyl = totalSufentanyl;
+	}
+
+	public Float getTotalEtomidate() {
+		return TotalEtomidate;
+	}
+
+	public void setTotalEtomidate(Float totalEtomidate) {
+		TotalEtomidate = totalEtomidate;
+	}
+
+	public Float getTotalAtrcurium() {
+		return TotalAtrcurium;
+	}
+
+	public void setTotalAtrcurium(Float totalAtrcurium) {
+		TotalAtrcurium = totalAtrcurium;
+	}
+
+	public Float getTotalCalciumGluconate() {
+		return TotalCalciumGluconate;
+	}
+
+	public void setTotalCalciumGluconate(Float totalCalciumGluconate) {
+		TotalCalciumGluconate = totalCalciumGluconate;
+	}
+
+	public Float getTotalCalciumChloride() {
+		return TotalCalciumChloride;
+	}
+
+	public void setTotalCalciumChloride(Float totalCalciumChloride) {
+		TotalCalciumChloride = totalCalciumChloride;
+	}
+
+	public Float getTotalDexamethasone() {
+		return TotalDexamethasone;
+	}
+
+	public void setTotalDexamethasone(Float totalDexamethasone) {
+		TotalDexamethasone = totalDexamethasone;
+	}
+
+	public Float getTotalHydrocortisone() {
+		return TotalHydrocortisone;
+	}
+
+	public void setTotalHydrocortisone(Float totalHydrocortisone) {
+		TotalHydrocortisone = totalHydrocortisone;
+	}
+
+	public Float getTotalMagnesium() {
+		return TotalMagnesium;
+	}
+
+	public void setTotalMagnesium(Float totalMagnesium) {
+		TotalMagnesium = totalMagnesium;
+	}
+
+	public Float getTotalXylocard() {
+		return TotalXylocard;
+	}
+
+	public void setTotalXylocard(Float totalXylocard) {
+		TotalXylocard = totalXylocard;
+	}
+
+	public Float getTotalPhenylephrine() {
+		return TotalPhenylephrine;
+	}
+
+	public void setTotalPhenylephrine(Float totalPhenylephrine) {
+		TotalPhenylephrine = totalPhenylephrine;
+	}
+
+	public Float getTotalAtropine() {
+		return TotalAtropine;
+	}
+
+	public void setTotalAtropine(Float totalAtropine) {
+		TotalAtropine = totalAtropine;
+	}
+
+	public Float getTotalAdrenaline() {
+		return TotalAdrenaline;
+	}
+
+	public void setTotalAdrenaline(Float totalAdrenaline) {
+		TotalAdrenaline = totalAdrenaline;
+	}
+
+	public Float getTotalNormalSaline() {
+		return totalNormalSaline;
+	}
+
+	public void setTotalNormalSaline(Float totalNormalSaline) {
+		this.totalNormalSaline = totalNormalSaline;
+	}
+
+	public Float getTotalRingerLactate() {
+		return totalRingerLactate;
+	}
+
+	public void setTotalRingerLactate(Float totalRingerLactate) {
+		this.totalRingerLactate = totalRingerLactate;
+	}
+	
+	
+	
+	  
+	  
+}

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="697.0" style="-fx-background-color: #fff;" styleClass="customeBorder" stylesheets="@../styles/newStyles.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AldreteScoreController">
+   <top>
+      <HBox prefHeight="36.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="375.0" styleClass="pageHeader" text="Aldrete Score :   " />
+            <Label fx:id="lblTotalScore" prefHeight="36.0" prefWidth="280.0" styleClass="pageHeader" text="--" />
+            <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="36.0" styleClass="btnTopBar">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="20" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="3.0" BorderPane.alignment="CENTER">
+         <children>
+            <TitledPane collapsible="false" prefHeight="109.0" prefWidth="588.0" styleClass="customeTitledPane" text="Activity">
+               <content>
+                  <VBox prefHeight="85.0" prefWidth="586.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="radioActivity2" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Able to move four extremities on comand">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="activity" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="2" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="radioActivity1" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Able to move two extremities on comand" toggleGroup="$activity" />
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="1" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="radioActivity0" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Able to move no extremities on comand" toggleGroup="$activity" />
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane collapsible="false" prefHeight="109.0" prefWidth="588.0" styleClass="customeTitledPane" text="Circulation">
+               <content>
+                  <VBox prefHeight="85.0" prefWidth="586.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="radioCirculation2" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Systemic blood pressure &lt;=20% of the preanesthesia level">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="circulation" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="2" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="radioCirculation1" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Systemic blood pressure is 20% to 50% of the preanesthesia level" toggleGroup="$circulation" />
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="1" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="radioCirculation0" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Systemic blood pressure &gt;50% of the preanesthesia level" toggleGroup="$circulation" />
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane collapsible="false" prefHeight="109.0" prefWidth="588.0" styleClass="customeTitledPane" text="Oxygen Saturation (Pulse Oximetry)">
+               <content>
+                  <VBox prefHeight="85.0" prefWidth="586.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="radioOxygen2" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="&gt;92% while breathing room air">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="oxygen" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="2" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="radioOxygen1" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Needs supplemental oxygen to maintain saturation &gt;90%" toggleGroup="$oxygen" />
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="1" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="radioOxygen0" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="&lt;90% with supplemental oxygen" toggleGroup="$oxygen" />
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <TitledPane collapsible="false" prefHeight="127.0" prefWidth="339.0" styleClass="customeTitledPane" text="Breathing">
+                     <content>
+                        <VBox prefHeight="85.0" prefWidth="586.0">
+                           <children>
+                              <HBox prefHeight="25.0" prefWidth="290.0" spacing="10.0">
+                                 <children>
+                                    <RadioButton fx:id="radioBreathing2" mnemonicParsing="false" prefHeight="21.0" prefWidth="301.0" text="Able to breathe deeply and cough freely">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="breathing" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="2" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                                 <children>
+                                    <RadioButton fx:id="radioBreathing1" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Dyspnea" toggleGroup="$breathing" />
+                                    <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="1" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                                 <children>
+                                    <RadioButton fx:id="radioBreathing0" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Apnea" toggleGroup="$breathing" />
+                                    <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane collapsible="false" prefHeight="127.0" prefWidth="339.0" styleClass="customeTitledPane" text="Consciousness">
+                     <content>
+                        <VBox prefHeight="85.0" prefWidth="586.0">
+                           <children>
+                              <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                                 <children>
+                                    <RadioButton fx:id="radioConsciousness2" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Fully awake">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="consciousness" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="2" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                                 <children>
+                                    <RadioButton fx:id="radioConsciousness1" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Arousable" toggleGroup="$consciousness" />
+                                    <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="1" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="25.0" prefWidth="572.0" spacing="30.0">
+                                 <children>
+                                    <RadioButton fx:id="radioConsciousness0" mnemonicParsing="false" prefHeight="21.0" prefWidth="515.0" text="Not responding" toggleGroup="$consciousness" />
+                                    <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnReset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="cancelBtn" text="Reset" />
+                  <Button fx:id="btnSave" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="saveBtn" text="Save" />
+               </children>
+               <padding>
+                  <Insets right="3.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="3.0" right="3.0" top="3.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

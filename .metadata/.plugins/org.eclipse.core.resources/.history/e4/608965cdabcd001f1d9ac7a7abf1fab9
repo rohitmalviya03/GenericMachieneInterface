@@ -1,0 +1,95 @@
+package Server;
+
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class HL7MessageGenerator {
+	private static final char START_BLOCK = 0x0B; // <VT> (0B in HEX)
+    private static final char END_BLOCK_1 = 0x1C; // <FS> (1C in HEX)
+    private static final char END_BLOCK_2 = 0x0D; // <CR> (0D in HEX)
+    public static String generateOrderMessage(String sampleNumber,String specimenType)   {
+    	String MSG="";
+    	
+    	if(specimenType.equals("URIN")) {
+    		specimenType="URIN^URIN";
+    		
+    	}
+    	else if(specimenType.equals("BLOOD")) {
+    		specimenType="BC^Blood Culture";
+    	}
+    	try {
+    		
+    	 MSG=START_BLOCK+"MSH|^~\\&|LIS|LAB|myla|BMX|DATETIME||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 \r"
+    			+ "PID|||SAMPLEID||CDAC TEST^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|\r"
+    			+ "PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SAMPLEID\r"
+    			+ "SPM|1|SAMPLEID||SPECIMAN^99BMx|||^^|^^|||P^Patient^||||||DATETIME|\r"
+    			+ "SAC||||24008676 \r"
+    			+ "ORC|NW||||||||DATETIME\r"
+    			+ "TQ1|||||||||R^^\r"
+    			+ "OBR|1|714647||SU^SU^99BMx|LFTM|||||^^||||||^|123456780"+END_BLOCK_1+END_BLOCK_2;
+    	
+    	   String currentTimestamp = generateCurrentTimestamp();
+    	MSG=MSG.replaceAll("SAMPLEID", sampleNumber);
+    	MSG=MSG.replaceAll("DATETIME", currentTimestamp);
+    	MSG=MSG.replaceAll("SPECIMAN", specimenType);
+    	
+    	StringBuffer orderPacket = new StringBuffer();
+    	}
+    	
+    	catch (Exception e) {
+			e.printStackTrace();
+    		// TODO: handle exception
+		}
+    	return MSG;
+    	
+    	
+    }
+    
+    public static String generateOrderMessageDynamic(String crno,String fname,String lname,String mname,String gender,String sampleNumber,String specimenType)   {
+    	String MSG="";
+    	
+    	if(specimenType.equals("URIN")) {
+    		specimenType="URIN^URIN";
+    		
+    	}
+    	else if(specimenType.equals("BLOOD")) {
+    		specimenType="BC^Blood Culture";
+    	}
+    	try {
+    		
+    	 MSG=START_BLOCK+"MSH|^~\\&|LIS|LAB|myla|BMX|DATETIME||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 \r"
+    			+ "PID|||CRNO||Fname^.^^^^^nill|CDAC TEST2|19681025|GENDER|||nill^^nill^^nill^nill|||||S|\r"
+    			+ "PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SAMPLEID\r"
+    			+ "SPM|1|SAMPLEID||SPECIMAN^99BMx|||^^|^^|||P^Patient^||||||DATETIME|\r"
+    			+ "SAC||||24008676 \r"
+    			+ "ORC|NW||||||||DATETIME\r"
+    			+ "TQ1|||||||||R^^\r"
+    			+ "OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780"+END_BLOCK_1+END_BLOCK_2;
+    	
+    	   String currentTimestamp = generateCurrentTimestamp();
+    	MSG=MSG.replaceAll("SAMPLEID", sampleNumber);
+    	MSG=MSG.replaceAll("CRNO", crno);
+    	MSG=MSG.replaceAll("Fname", fname);
+    	MSG=MSG.replaceAll("GENDER", gender);
+    	MSG=MSG.replaceAll("DATETIME", currentTimestamp);
+    	MSG=MSG.replaceAll("SPECIMAN", specimenType);
+    	
+    	StringBuffer orderPacket = new StringBuffer();
+    	}
+    	
+    	catch (Exception e) {
+			e.printStackTrace();
+    		// TODO: handle exception
+		}
+    	return MSG;
+    	
+    	
+    }
+
+
+    private static String generateCurrentTimestamp() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        return dateFormat.format(new Date());
+    }
+}

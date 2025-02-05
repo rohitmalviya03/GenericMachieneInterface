@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
+   <children>
+      <BorderPane fx:id="baseBorderPane" styleClass="customeBorder" stylesheets="@../styles/newStyles.css">
+         <top>
+            <VBox fx:id="headerVbox" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox fx:id="ptDetailsHeader" alignment="TOP_RIGHT" spacing="5.0" styleClass="pageSubHeader">
+                     <children>
+                        <Label fx:id="lblName" maxHeight="-Infinity" minHeight="-Infinity" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="Patient Name">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f8f7f7" glyphName="USER" size="20.0" wrappingWidth="23.142857551574707" />
+                           </graphic>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </Label>
+                        <HBox fx:id="headerStartHbox">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <Label fx:id="lblGender" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="Gender" />
+                                          <Separator orientation="VERTICAL">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Separator>
+                                          <Label fx:id="lblAge" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="Age">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                              <Separator orientation="VERTICAL" />
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <children>
+                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="CR Number" />
+                                    <Label fx:id="lblCrNum" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                              <Separator orientation="VERTICAL" />
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <children>
+                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="Case No" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label fx:id="lblCaseNo" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                              <Separator orientation="VERTICAL" />
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <children>
+                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="Height" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label fx:id="lblHeight" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                              <Separator orientation="VERTICAL" />
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <children>
+                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="Weight" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label fx:id="lblWeight" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                              <Separator orientation="VERTICAL" />
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <children>
+                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="BMI" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label fx:id="lblBMI" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                              <Separator orientation="VERTICAL" />
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <children>
+                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="BSA" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label fx:id="lblBSA" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                              <Separator orientation="VERTICAL" />
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <children>
+                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="Blood Group" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label fx:id="lblBloodGroup" style="-fx-text-fill: #ffff; -fx-font-weight: bold;" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                              <Separator orientation="VERTICAL" />
+                              <VBox>
+                                 <children>
+                                    <Label fx:id="lblOt" style="-fx-font-weight: bold;" text="Selected OT" textFill="#f4d041" />
+                                    <Label fx:id="lblSelectedOT" style="-fx-font-weight: bold;" textFill="#f4d041" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="headerCornerHbox" alignment="TOP_RIGHT">
+                           <children>
+                              <VBox alignment="TOP_RIGHT" prefHeight="51.0" prefWidth="135.0">
+                                 <children>
+                                    <Label fx:id="date" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" style="-fx-font-weight: bold;" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="time" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" style="-fx-font-weight: bold;" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <padding>
+                                    <Insets bottom="5.0" left="50.0" right="5.0" top="2.0" />
+                                 </padding>
+                                 <children>
+                                    <HBox alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity">
+                                       <children>
+                                          <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-text-fill: #C5ECE6; -fx-font-weight: bold;" text="Hi," textFill="WHITE" />
+                                          <Label fx:id="lblLoggedUser" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-text-fill: #C5ECE6; -fx-font-weight: bold;" text="Logged User" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="btnLogout" mnemonicParsing="false" style="-fx-font-size: 12px; -fx-text-fill: #C5ECE6;" styleClass="btnLogOut" text="Logout">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="SIGN_OUT" size="14" style="-fx-fill: #C5ECE6;" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <Button fx:id="close" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeApplication" prefHeight="54.0" prefWidth="68.0" styleClass="dashboardCloseBtn">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#fcfcfc" glyphName="TIMES" size="35" wrappingWidth="24.0" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="2.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox spacing="10.0" style="-fx-background-color: #F0FFFF;">
+                     <children>
+                        <HBox fx:id="controlsHeader" alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="1143.0" style="-fx-background-color: #F0FFFF;">
+                           <children>
+                              <Button fx:id="btnSearchPatient" alignment="BASELINE_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" styleClass="BtnDashboard" text="Search Patient" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="SEARCH" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnSearchCase" alignment="BASELINE_CENTER" contentDisplay="TOP" mnemonicParsing="false" styleClass="BtnDashboard" text="Scheduled Cases" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="PASTE" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnAddPatient" alignment="BASELINE_CENTER" contentDisplay="TOP" mnemonicParsing="false" styleClass="BtnDashboard" text="Add Patient" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="USER" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnEditCase" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Edit Case" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="EDIT" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnManageDevices" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Devices" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="SITEMAP" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnVascularCannulations" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Cannulation" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="THUMB_TACK" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnCPBDetails" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="CPB " textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="MEDKIT" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnEchoDetails" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Echo" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="PENCIL" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="AnesthesiaBtn" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Anesthesia" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="EYEDROPPER" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                        <!--       <Button fx:id="btnFluidsLog" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Fluids Log" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="TINT" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button> -->
+                        <!--       <Button fx:id="btnMedicationLog" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Medication Log" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="PASTE" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button> -->
+                              <Button fx:id="eventsBtn" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Events Log" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="CALENDAR_ALT" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnS5Chart" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Vitals Chart" textFill="#34495e" wrapText="true">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="HEARTBEAT" size="20" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="btnAnesthesiaChart" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Anesthesia Chart" textFill="#34495e">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="BAR_CHART" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnHistoricalView" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Recorded Data" textFill="#34495e">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="BOOK" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnIcuPlan" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" prefHeight="49.0" prefWidth="59.0" styleClass="BtnDashboard" text="ICU Plan" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="EDIT" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnPAC" alignment="BASELINE_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="49.0" prefWidth="59.0" styleClass="BtnDashboard" text="PAC" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="EDIT" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                     <!--          <Button fx:id="btnMedicationHistory" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" styleClass="BtnDashboard" text="Med Log" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                          <FontAwesomeIconView fill="#34495e" glyphName="BOOK" size="20" />
+                                       </graphic>
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Button> -->
+                              <Button fx:id="btnReport" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" prefHeight="49.0" prefWidth="59.0" styleClass="BtnDashboard" text="Report" textFill="#34495e" wrapText="true">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34495e" glyphName="FILE_TEXT" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <StackPane>
+                                 <children>
+                                    <Button fx:id="btnPostOp" alignment="BASELINE_CENTER" contentDisplay="TOP" disable="true" mnemonicParsing="false" prefHeight="52.0" prefWidth="79.0" style="-fx-background-color: #0FA0D6; -fx-text-fill: #fff; -fx-font-weight: bold;" text="Shift Out" textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" size="23" text="" />
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="btnExitCase" alignment="BASELINE_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="52.0" prefWidth="79.0" style="-fx-background-color: #0FA0D6; -fx-text-fill: #fff; -fx-font-weight: bold;" text="Exit Case" textFill="WHITE" visible="false" wrapText="true">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" size="23" text="" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                              <Button fx:id="helpIcon" alignment="BASELINE_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="53.0" style="-fx-background-color: transparent; -fx-font-size: 13;" text="Help" textFill="#34495e" wrapText="true">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#eb9f08" glyphName="QUESTION_CIRCLE" size="25" wrappingWidth="18.428571701049805" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </HBox>
+                        <JFXToggleButton fx:id="toggleButtonPublish" disable="true" prefHeight="60.0" prefWidth="120.0" style="-fx-text-fill: #34495e; -fx-background-color: transparent; -fx-font-size: 14; -fx-font-weight: normal;" text="Publish" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </top>
+         <center>
+            <StackPane fx:id="pageMainContent" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox>
+                     <children>
+                        <Pane fx:id="sidePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
+                        <VBox>
+                           <children>
+                              <Pane fx:id="centerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </Pane>
+                              <Label fx:id="lblCopyright" prefHeight="16.0" prefWidth="307.0" style="-fx-font-size: 11;" text="© Copyright 2019 Infosys Limited. All rights Reserved." />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
+      <AnchorPane fx:id="disablePaneMainContent" opacity="0.5" style="-fx-background-color: #505050;" visible="false">
+         <children>
+            <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+                     <image>
+                        <Image url="@../res/Spinner.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets left="600.0" />
+               </padding>
+            </HBox>
+         </children></AnchorPane>
+   </children>
+</StackPane>

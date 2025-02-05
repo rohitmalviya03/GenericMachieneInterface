@@ -1,0 +1,123 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.infosys.common.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.infosys.common.GeneratedEntities.Investigationstests;
+import com.infosys.common.audit.interceptor.AuditLogInterceptor;
+import com.infosys.common.util.HibernateUtilities;
+import com.infosys.framework.exceptions.ServiceExceptionWrapper;
+
+public class InvestigationTestDaoImpl implements InvestigationTestDao
+{
+
+	// ~ Static attributes/initializers
+	/** The Constant LOGGER. */
+	// -------------------------------------------------------------
+	private static final Logger LOGGER = Logger.getLogger(InvestigationTestDaoImpl.class.getName());
+
+
+
+	// ~ Methods
+	// ------------------------------------------------------------------------------------
+
+	private static InvestigationTestDaoImpl instance = null;
+	private InvestigationTestDaoImpl()
+	{
+
+	}
+
+	public static InvestigationTestDaoImpl getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new InvestigationTestDaoImpl();
+		}
+		return instance;
+	}
+
+	/**
+	 * This method returns list containing all the test available
+	 * from Investigationstests entity
+	 *
+	 *
+	 *
+	 *
+	 * @param patientId
+	 *
+	 *
+	 * @param caseId
+	 *
+	 *
+	 *  @param userName.
+	 *
+	 * @return list containing all the test available
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Investigationstests> fetchListOfTest(String userName)
+			throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		List<Investigationstests> listOfTest=new ArrayList<Investigationstests>();
+		Session session = null;
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			/// retrives all the test from the database
+			Query query=session.createQuery("from Investigationstests where isAvailableInIntraOp=1");
+
+			listOfTest=query.list();
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+		return listOfTest;
+	}
+
+
+}

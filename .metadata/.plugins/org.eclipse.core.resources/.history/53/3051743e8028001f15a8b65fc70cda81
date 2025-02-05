@@ -1,0 +1,29 @@
+package application;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+
+import java.io.OutputStream;
+import java.util.Enumeration;
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+import com.fazecast.jSerialComm.SerialPort;
+public class MainController {
+    @FXML
+    private Label statusLabel;
+
+    @FXML
+    private void connectToComPort() {
+        try {
+        	SerialPort serialPort = SerialPort.getCommPort(portName);
+    		serialPort.setBaudRate(115200);
+    		serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 500, 0);
+    		System.out.println("***********Abott Manglagiri Solution*************");
+    		System.out.println("Port "+portName+" open successfully...");
+    		System.out.println();
+        } catch (Exception e) {
+            statusLabel.setText("Failed to connect: " + e.getMessage());
+        }
+    }
+}

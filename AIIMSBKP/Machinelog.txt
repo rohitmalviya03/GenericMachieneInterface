@@ -1,0 +1,44 @@
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG
+Application  Type : CLIENT
+Server IP :10.226.28.174
+Server Port :50004
+machine Selected :ABG

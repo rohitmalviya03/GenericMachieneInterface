@@ -1,0 +1,18 @@
+import java.io.OutputStream;
+import java.net.Socket;
+
+public class ServerConnector {
+
+    public static void sendToServer(String hl7Message) throws Exception {
+        String serverAddress = "127.0.0.1";  // Replace with actual server IP
+        int port = 12345;  // Replace with actual server port
+
+        try (Socket socket = new Socket(serverAddress, port);
+             OutputStream out = socket.getOutputStream()) {
+            out.write(hl7Message.getBytes());
+            out.flush();
+        } catch (Exception e) {
+            throw new Exception("Error connecting to server: " + e.getMessage());
+        }
+    }
+}

@@ -1,0 +1,404 @@
+package mainCreation;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+/**
+ * @author RahulPrasad
+ */
+
+public class MRngNRdgFileADPasigLogic2 {
+
+	public static void main(String args[]) throws Exception {
+
+		MRngNRdgFileADPasigLogic2 object = new MRngNRdgFileADPasigLogic2();
+		object.waitMethod();
+
+	}
+
+	private synchronized void waitMethod() throws Exception {
+		
+		while (true) {
+			
+			
+			// calling method findUsingIOApi(contains logic for reading file contunusly)
+			// C:\\CloudPathology\\uie\\machines\\Arkray HA8180\\payloads
+			Map res1 = ReadPropertyFile.getPropertyValues();
+			String fileReadPath = (String) res1.get("fileReadPath");
+			// String path = fileReadPath.replace(" ", "%20");
+			System.out.println("file read path " + fileReadPath);
+			
+			findUsingIOApi(fileReadPath);
+			//File f = findUsingIOApi(fileReadPath);
+
+
+			
+			/*
+			   try { this.wait(100); } catch (InterruptedException e) {
+			  
+			  e.printStackTrace(); }
+			*/
+		}   
+
+	}
+
+	public static File findUsingIOApi(String sdir) throws Exception{
+		
+		
+		File dir = new File(sdir);
+		
+		
+		/* code to save  name of file into a file */
+		//String fileSavePath = "C:\\TcpFiles\\property\\CloudPathology\\uie\\machines\\fileSave.txt";
+		
+		String fileSavePath = "C:\\TcpFiles\\property\\fileSave.txt";
+		
+		
+		File fSave = new File(fileSavePath);
+		System.out.println("rahultest");
+		String filenames="";
+		/* code ended  to save  name of file into a file */
+		
+			 Path inputDir = Paths.get(sdir);
+			    if (Files.isDirectory(inputDir)) {
+			        List<Path> filePaths = Files.list(inputDir).collect(Collectors.toList());
+			        for (Path filePath : filePaths) {
+			        	System.out.println("Inside for loop of Path : filePath ");
+			        	//return filePath.toFile();
+			        	
+			        	//----
+			        	System.out.println("rahultest"+filePath.toFile().getName());
+			        	filenames=filePath.toFile().getName();
+			        	
+			        	/* stated code to fetch file name from saveFileRead */
+			        	String fileReadName = null;
+			        	try  
+			        	{  
+			        	File file=new File(fileSavePath);    
+			           
+			        	BufferedReader brr=new BufferedReader(new FileReader(file));
+			        	String savefiles="";
+			        	
+			        	StringBuffer sb=new StringBuffer();      
+			        	String line;  
+			        	while((line=brr.readLine())!=null)  
+			        	{  
+			        		savefiles=savefiles+line;
+			        	sb.append(line);      
+			        	sb.append("\n");     
+			        	}  
+			             
+			        	 
+			        	if(savefiles.contains(filenames))
+			        	{
+			        		  System.out.println("All file name from save.txt : "+filenames);
+			        	}
+			        	else
+			        	{
+			        		System.out.println("file write "+filenames);
+			        		
+			        		try {
+				        		BufferedWriter writer = new BufferedWriter(new FileWriter(fSave,true));
+				        	    writer.append(filenames);
+				        	   
+				        	    writer.append("\n");
+				        	    System.out.println("in else block of file not found in save.txt");
+				        	    writer.close();
+				        	}catch(Exception e) {
+				        		
+				        	}
+			        	}
+			        	
+			        	
+			        	}  
+			        	catch(IOException e)  
+			        	{  
+			        	e.printStackTrace();  
+			        	}  
+			        	
+			        	
+			        	/* code ened to fetch file name  */
+			        	
+			        	
+			 
+			        	 //String[] linesArr = fileReadName.split(System.getProperty("line.separator"));
+			           
+		
+			        	
+			        	/*  code ended to save file name */
+			        	
+			        	
+			        	
+			        	
+			        	
+			        	System.out.println("File Path  :- " + filePath);
+			        	
+			        	
+			        	/* cod started to parse*/
+			        	
+						BufferedReader br = new BufferedReader(new FileReader(filePath.toFile()));
+						//System.out.println("buff file name :"+br.readLine());
+						// code started to search "machine_data\":\\[" in file
+
+						String st;
+						String[] words = null;
+						int count = 0;
+						String machineData = "machine_data\":\\[";
+						while ((st = br.readLine()) != null) {
+
+							System.out.println("json data"+st);
+
+							words = st.split(machineData);
+							String Word1 = words[1];
+							String substr = Word1.substring(0, Word1.length() - 2);
+							System.out.println(".." + substr);
+							// System.out.println("json startred"+Word1);
+							// passing json String to json method
+							// System.out.println("before calling jsonStringParsing() method");
+							jsonStringParsing(substr);
+							// System.out.println("after calling jsonStringParsing() method");
+
+							for (String word : words) {
+								// System.out.println("found..");
+								if (word.equals(machineData)) {
+									System.out.println("json values started   " + word);
+
+									count++;
+								}
+							}
+						}
+			        
+			        	
+			        	
+			        	
+			        
+			        	
+			        //=====
+			        	
+			        	
+			        	
+			        }
+			        
+			    }
+			
+		
+
+		return null;
+	}
+
+	public static void jsonStringParsing(String jsonString) throws Exception {
+		// parsing file
+		System.out.println("value fetched " + jsonString);
+		Object obj = new JSONParser().parse(jsonString);
+
+		// typecasting obj to JSONObject
+		JSONObject jo = (JSONObject) obj;
+
+		// getting sample_id
+		String sample_id = (String) jo.get("sample_id");
+
+		System.out.println("Sample Code :" + sample_id);
+
+		// getting machine details
+		JSONArray ja = (JSONArray) jo.get("mdetails");
+
+		System.out.println(ja.toString());
+		System.out.println("length.." + ja.size());
+		System.out.println(ja.get(0));
+		JSONObject mjo = (JSONObject) ja.get(1);
+		String m_para_id = (String) mjo.get("m_parameter_id");
+		String val = (String) mjo.get("val");
+		System.out.println("Test Code :" + m_para_id);
+		System.out.println("Test Value :" + val);
+
+		// iterating mdetails
+		// String val
+		for (int i = 0; i < 5; i++) {
+			JSONObject mcjo = (JSONObject) ja.get(i);
+			String mpid = (String) mcjo.get("m_parameter_id");
+			String tValue = (String) mcjo.get("val");
+			System.out.print("Test Code" + i + " : " + mpid + "  ");
+			System.out.println("Test Value" + i + " : " + tValue);
+
+			insertSampleDtl(mpid, tValue, sample_id);
+
+		}
+
+	}
+
+	private static TrustManager[] get_trust_mgr() {
+		TrustManager[] certs = new TrustManager[] { new X509TrustManager() {
+			public X509Certificate[] getAcceptedIssuers() {
+				return null;
+			}
+
+			public void checkClientTrusted(X509Certificate[] certs, String t) {
+			}
+
+			public void checkServerTrusted(X509Certificate[] certs, String t) {
+			}
+		} };
+		return certs;
+	}
+
+	// calling database method
+	public static String insertSampleDtl(String tcode, String tval, String sam) {
+
+		System.out.println("Inside insertSampleDtl (type1/type5 query) ");
+
+		System.out.println("in tcodee " + tcode);
+		Map res = ReadPropertyFile.getPropertyValues();
+
+		final String ip = (String) res.get("ip");
+		final String port = (String) res.get("port");
+		final String eqp = (String) res.get("eqp");
+		final String hos = (String) res.get("hos");
+		final String uid = (String) res.get("uid");
+		final String fileReadPath = (String) res.get("fileReadPath");
+		String url = "";
+		// added by rahulprasad
+		tcode = tcode.replace("%", "%25");
+		tcode = tcode.replace("#", "%23");
+		// added by rahulprasad
+		// final String tcode =(String)res.get("tcode");
+
+		// rahul end
+
+		System.out.println("In HERE ip" + ip);
+		System.out.println("In HERE port" + port);
+		System.out.println("In HERE eqp" + eqp);
+		System.out.println("In HERE hos" + hos);
+		// System.out.println("In HERE uid"+uid);
+		System.out.println("In HERE tval" + tval);
+		System.out.println("In HERE tcode" + tcode);
+		System.out.println("In HERE file read path " + fileReadPath);
+
+		
+		
+		int count = 0;
+		String stv = null;
+		if(tval.contains("^"))
+		{
+			//System.out.println("tlen" + tval.length());
+			//System.out.println("Rahul" + tval);
+		
+			
+			String replaceString=tval.replace('^','@');
+			String [] A = replaceString.split("@");
+			String btval = A[2];
+			//System.out.println("tval after double ^ character" + btval);
+			tval = btval;
+			System.out.println("tval after double ^ character" + tval);
+			
+			
+		}
+		else {
+			tval = tval;
+			System.out.println("in else tval  " +tval);
+		}
+		
+	
+		
+			
+			
+			
+			//
+		if(sam != null) {
+		
+			if(tcode.contains("ValueHbA1c") || tcode.contains("ValueIFCC") ||tcode.contains("ValueHbF")||tcode.contains("ValueHbA2"))
+			{
+				
+				
+			}
+		}
+		else {
+			System.out.println("Sample Number not found");
+		}
+		
+		////
+		// url =
+		// "https://aiimskalyani.prd.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp="+eqp+"&hos="+hos+"&tcode="+tcode+"&tval="+tval+"&sam="+sam+"&uid="+uid;
+		
+		
+		
+		
+		
+		
+		url =  ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
+				+ "&hos=" + hos + "&tcode=" + tcode + "&tval=" + tval + "&sam=" + sam + "&uid=" + uid;
+		url = url.replaceAll("\\s", "");
+		System.out.println("In HERE url " + url);
+		StringBuffer response = new StringBuffer();
+		try {
+
+			SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+			TrustManager[] trust_mgr = get_trust_mgr();
+			ssl_ctx.init(null, // key manager
+					trust_mgr, // trust manager
+					new SecureRandom()); // random number generator
+			HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+
+			URL obj = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+			((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+				public boolean verify(String host, SSLSession sess) {
+					if (host.equals(ip))
+						return true;
+					else
+						return false;
+				}
+			});
+
+			con.setRequestMethod("GET");
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.flush();
+			wr.close();
+
+			System.out.println("\nSending 'GET' request to URL : " + url);
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			System.out.println("response " + response.toString());
+			in.close();
+		} catch (Exception s) {
+			s.printStackTrace();
+		}
+		return (response.toString());
+
+	}
+
+}

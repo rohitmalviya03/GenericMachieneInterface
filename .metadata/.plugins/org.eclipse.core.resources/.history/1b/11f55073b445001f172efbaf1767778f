@@ -1,0 +1,128 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.infosys.framework.datastructures;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.infosys.framework.exceptions.KeyExistsException;
+
+public class MedicalDeviceData<T> extends NodeBase<T>
+{
+
+	private Map<String, NodeBase> parametersMap;
+
+	public MedicalDeviceData(String nameOfDevice)
+	{
+		// Parent Node of the Tree.
+		super(nameOfDevice, null);
+		parametersMap = new HashMap<String, NodeBase>();
+	}
+
+	VirtualMedicalDevice<T> addVMD(String referralName, String vmdName) throws KeyExistsException
+	{
+		VirtualMedicalDevice<T> vmd = new VirtualMedicalDevice(vmdName, this);
+		addNewChild(referralName, vmd);
+		return vmd;
+	}
+
+	/**
+	 * VMD name should be unique within this device.
+	 * 
+	 * @param name
+	 * @return
+	 * @throws KeyExistsException
+	 */
+	VirtualMedicalDevice<T> addVMD(String name) throws KeyExistsException
+	{
+		return addVMD(name, name);
+	}
+
+	public VirtualMedicalDevice<T> createOrGetVMD(String name)
+	{
+		VirtualMedicalDevice<T> vmd = (VirtualMedicalDevice<T>) children.get(name);
+		if (vmd == null)
+		{
+			try
+			{
+				vmd = addVMD(name);
+			}
+			catch (KeyExistsException e)
+			{
+				// This will not occur.
+			}
+		}
+
+		return vmd;
+	}
+
+	/**
+	 * Creates a new branch or gets if already exist. The returned array has:
+	 * <br>
+	 * [0] -> VirtualMedicalDevice<br>
+	 * [1] -> Channel<br>
+	 * [2] -> Parameter
+	 * 
+	 * @param parameterNameWithBranch
+	 *            is the full name containing vmd, channel and parameter names
+	 *            separated by dot. Example: VMD.CHANNEL.PARAMETER1
+	 * @return array of the objects in the given branch.
+	 */
+	public NodeBase<T>[] createOrGetParameter(String parameterNameWithBranch)
+	{
+		String[] nodeNames = parameterNameWithBranch.split("\\.");
+		NodeBase<T> [] branch = new NodeBase[3];
+		if(nodeNames.length != 3)
+		{
+			return null;
+		}
+		VirtualMedicalDevice<T> vmd = createOrGetVMD(nodeNames[0]);
+		Channel<T> channel = vmd.createOrGetChannel(nodeNames[1]);
+		Parameter<T> param = channel.createOrGetParameter(nodeNames[2]);
+		
+		// Save the parameter reference in Map for quick get.
+		parametersMap.put(parameterNameWithBranch, param);
+
+		branch[0] = vmd;
+		branch[1] = channel;
+		branch[2] = param;
+		return branch;
+	}
+	
+	public NodeBase<T>[] getBranch(String branchName)
+	{
+		String [] nodeNames = branchName.split("\\.");
+		NodeBase<T> branchNodes[] = new NodeBase[3];
+		if(nodeNames.length != 3)
+		{
+			return null;
+		}
+		
+		branchNodes[0] = (VirtualMedicalDevice<T>) getChild(nodeNames[0]);
+		branchNodes[1] = (Channel<T>) branchNodes[0].getChild(nodeNames[1]);
+		branchNodes[2] = (Parameter<T>) branchNodes[1].getChild(nodeNames[2]);
+
+		return branchNodes;
+	}
+
+	public Collection getAllVMDs()
+	{
+		return getChildren();
+	}
+
+	public VirtualMedicalDevice getVMD(String vmdIdentifier)
+	{
+		return (VirtualMedicalDevice) getChild(vmdIdentifier);
+	}
+	
+	public Map getParametersMap()
+	{
+		return parametersMap;
+	}
+
+}

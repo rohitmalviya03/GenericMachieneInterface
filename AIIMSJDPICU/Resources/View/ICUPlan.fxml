@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="626.0" style="-fx-background-color: #ffffff;" styleClass="customeBorder" stylesheets="@../styles/newStyles.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.IcuPlanController">
+   <top>
+      <HBox prefHeight="37.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="36.0" prefWidth="585.0" styleClass="pageHeader" text="ICU Plan" />
+            <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="btnTopBar">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="20" />
+               </graphic>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <center>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="544.0" prefWidth="620.0" spacing="5.0">
+               <children>
+                  <TitledPane collapsible="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="106.0" prefWidth="615.0" styleClass="customeTitledPane" text="ICU Plan">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <HBox prefHeight="66.0" prefWidth="435.0">
+                                 <children>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="106.0" text="Extubation" />
+                                          <ChoiceBox fx:id="choiceExtubation" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox minWidth="-Infinity" prefHeight="70.0" prefWidth="115.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="113.0" text="Post Ext NIV" textOverrun="CLIP" />
+                                          <ChoiceBox fx:id="choicePostExtubation" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="100.0" text="Sedation (DDL)" />
+                                          <ChoiceBox fx:id="choiceSedation" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="23.0" prefWidth="139.0" text="Analgesia(DDL)">
+                                             <VBox.margin>
+                                                <Insets top="-2.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <ChoiceBox fx:id="choiceAnalgesia" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </ChoiceBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="91.0" text="Paralysis" />
+                                          <ChoiceBox fx:id="choiceParalysis" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane collapsible="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="109.0" prefWidth="600.0" styleClass="customeTitledPane" text="Hemodynamic Goals">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <HBox prefHeight="66.0" prefWidth="435.0">
+                                 <children>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="106.0" text="MAO(mmHg)" />
+                                          <TextField fx:id="txtMao" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="120.0" promptText="MAO" styleClass="text-field">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="135.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="128.0" text="CVP(mmHg)" />
+                                          <TextField fx:id="txtCvp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" promptText="CVP" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="30.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="100.0" text="HR(/min)" />
+                                          <TextField fx:id="txtHr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" promptText="HR" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="113.0" spacing="3.0">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label prefHeight="23.0" prefWidth="139.0" text="SpO2" />
+                                             </children>
+                                          </HBox>
+                                          <TextField fx:id="txtSpO2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" promptText="SpO2" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="25.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane collapsible="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="102.0" prefWidth="600.0" styleClass="customeTitledPane" text="IV Fluids (Maintenance)">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <HBox prefHeight="66.0" prefWidth="435.0">
+                                 <children>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="106.0" text="RL Rate(ml/hr)" />
+                                          <TextField fx:id="txtRlRate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="120.0" promptText="RL Rate" styleClass="text-field">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox minWidth="-Infinity" prefHeight="70.0" prefWidth="115.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="113.0" text="DNS Rate(ml/hr)" />
+                                          <TextField fx:id="txtDns" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0" promptText="DNS" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="100.0" text="DRL" />
+                                          <ChoiceBox fx:id="choiceDrl" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+                  <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="87.0" prefWidth="600.0">
+                     <children>
+                        <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="80.0" prefWidth="186.0">
+                                 <children>
+                                    <Label prefHeight="21.0" prefWidth="156.0" text="Investigations" />
+                                    <ChoiceBox fx:id="choiceInvestigations" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="142.0" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="50.0" top="20.0" />
+                           </HBox.margin>
+                        </HBox>
+                        <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="274.0">
+                           <HBox.margin>
+                              <Insets right="30.0" top="35.0" />
+                           </HBox.margin>
+                           <children>
+                              <Label text="Nurse Name" />
+                              <TextField fx:id="txtNurseName" prefHeight="31.0" prefWidth="132.0" promptText="Nurse Name">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="63.0" prefWidth="600.0">
+                     <children>
+                        <Label fx:id="lblError" prefHeight="35.0" prefWidth="523.0" textFill="RED" visible="false" />
+                        <Button fx:id="btnSave" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="saveBtn" text="Save" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <AnchorPane fx:id="disablePaneMainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="642.0" prefWidth="619.0" style="-fx-background-color: #505050;" visible="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="409.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../res/Spinner.gif" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </StackPane>
+   </center>
+</BorderPane>

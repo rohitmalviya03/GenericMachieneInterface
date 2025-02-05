@@ -1,0 +1,195 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.infosys.common.dao;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.infosys.common.GeneratedEntities.Cannulations;
+import com.infosys.common.audit.interceptor.AuditLogInterceptor;
+import com.infosys.common.util.HibernateUtilities;
+import com.infosys.framework.exceptions.ServiceExceptionWrapper;
+
+public class CannulationsDaoImpl implements CannulationsDao
+{
+
+	/** The Constant LOGGER. */
+	private static final Logger LOGGER = Logger.getLogger(CannulationsDaoImpl.class.getName());
+
+
+	// ~ Methods
+	// ------------------------------------------------------------------------------------
+
+	private static CannulationsDaoImpl instance = null;
+	private CannulationsDaoImpl()
+	{
+
+	}
+
+	public static CannulationsDaoImpl getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new CannulationsDaoImpl();
+		}
+		return instance;
+	}
+
+	/**
+	 * Inserts a new record for anesthesia
+	 *
+	 * @param anesthesiaRecord
+	 * @param userName
+	 * @return Anesthesia record entity
+	 * @throws Exception
+	 */
+	//@SuppressWarnings("unchecked")
+	@Override
+	public void createCannulationRecord(Cannulations cannulationsRecord,String userName)
+			throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Session session = null;
+
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+
+			// for setting created time and created by in case of new record and updated time and updated by in case of exsisting record
+			if(cannulationsRecord.getCannulationsId()!=null)
+			{
+				Date updatedTime= new Date();
+				cannulationsRecord.setUpdatedBy(userName);
+				cannulationsRecord.setUpdatedTime(updatedTime);
+			}
+			else
+			{
+				Date createdTime= new Date();
+				cannulationsRecord.setCreatedBy(userName);
+				cannulationsRecord.setCreatedTime(createdTime);
+			}
+
+
+			// saves/updates the anesthesia record
+			session.saveOrUpdate(cannulationsRecord);
+
+			session.getTransaction().commit();
+			session.close();
+		}
+
+		catch (Exception e)
+		{
+			if (session != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+	}
+
+
+	/**
+	 * Get anesthesia record details
+	 *
+	 * @param patientId
+	 * @param patientCaseId
+	 * @param userName
+	 * @return List of anesthesia record
+	 * @throws Exception
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Cannulations getCannulationRecord(Long patientCaseId, String userName)
+			throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Session session = null;
+		List<Cannulations> cannulationsRecord=new ArrayList<>();
+
+		try
+		{
+
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			// Get event log
+			Query query = session.createQuery("FROM Cannulations c "
+					+ " where c.caseId=?");
+			query.setParameter(0, patientCaseId);
+			cannulationsRecord = query.list();
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+		if(cannulationsRecord.size()>0)
+		{
+			return cannulationsRecord.get(0);
+		}
+		else
+		{
+			return new Cannulations();
+		}
+
+	}
+
+
+
+
+
+
+}
+
+

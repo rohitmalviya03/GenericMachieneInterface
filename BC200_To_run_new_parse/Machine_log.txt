@@ -1,0 +1,6 @@
+connection :Connection Established successful
+ip_port------- :Socket[addr=/192.168.209.23,port=52789,localport=50001]
+Date and Time :2025-02-04T11:48:15.128507300
+ MESSAGE PART RECIEVED:-  :1H|\^&|||NOVA^STP pHOx Ultra^4.5.0.100^Z114210050C||||||||1|20250204114143
+BE
+Acknowledgment  :

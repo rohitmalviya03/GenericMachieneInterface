@@ -1,0 +1,559 @@
+2025-02-04 15:13:57 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-02-04 15:13:57 - Response from API: []
+2025-02-04 15:13:57 - Sample no or cr no. not found: []
+2025-02-04 15:13:57 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:13:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204151357||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204151357|SAC||||24008676 ORC|NW||||||||20250204151357TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:13:59 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 15:13:59 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1778)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:15:05 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-02-04 15:15:05 - Response from API: []
+2025-02-04 15:15:05 - Sample no or cr no. not found: []
+2025-02-04 15:15:05 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:15:05 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204151505||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204151505|SAC||||24008676 ORC|NW||||||||20250204151505TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:15:07 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 15:15:07 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1778)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:19:56 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-02-04 15:19:57 - API call failed. Response code: 500
+2025-02-04 15:20:55 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:20:55 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204152055||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204152055|SAC||||24008676 ORC|NW||||||||20250204152055TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:20:57 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 15:20:57 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1778)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:20:57 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-02-04 15:21:15 - API call failed. Response code: 500
+2025-02-04 15:22:58 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:22:58 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204152258||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204152258|SAC||||24008676 ORC|NW||||||||20250204152258TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:23:46 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-02-04 15:23:46 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
+2025-02-04 15:23:46 - Save Patient Details API called for PACS 
+2025-02-04 15:23:46 - Response Body as JSON Array: [{
+    "hisOrderId": "100",
+    "patientId": "961012100000888",
+    "reqDno": "961011000125012810000202",
+    "status": "1"
+}]
+2025-02-04 15:23:46 - Update Status API called
+2025-02-04 15:23:46 - Response Body:  Status Updated
+2025-02-04 15:23:46 - Data sends to Mestria is started ::  
+2025-02-04 15:23:46 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-02-04 15:23:46 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:23:46 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204152346||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204152346|SAC||||24008676 ORC|NW||||||||20250204152346TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:23:46 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204152346||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204152346|SAC||||24008676 ORC|NW||||||||20250204152346TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:23:48 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 15:23:48 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1618)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:23:48 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 15:23:48 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1778)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:48:17 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 15:48:18 - Response from API: []
+2025-02-04 15:48:18 - Sample no or cr no. not found: []
+2025-02-04 15:48:18 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:48:18 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 15:48:18 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:49:29 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 15:49:29 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"104","reqDno":"961011000125012810000201"}]
+2025-02-04 15:49:29 - Save Patient Details API called for PACS 
+2025-02-04 15:49:29 - Response Body as JSON Array: [{
+    "hisOrderId": "104",
+    "patientId": "961012100000888",
+    "reqDno": "961011000125012810000201",
+    "status": "1"
+}]
+2025-02-04 15:49:29 - Update Status API called
+2025-02-04 15:49:29 - Response Body:  Status Updated
+2025-02-04 15:49:29 - Data sends to Mestria is started ::  
+2025-02-04 15:49:29 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-02-04 15:49:29 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:49:29 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 15:49:29 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:49:29 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204154929||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204154929|SAC||||24008676 ORC|NW||||||||20250204154929TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:49:31 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 15:49:31 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1618)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:55:19 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 15:55:19 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"null","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
+2025-02-04 15:55:19 - Save Patient Details API called for PACS 
+2025-02-04 15:55:19 - Response Body as JSON Array: [{
+    "hisOrderId": "100",
+    "patientId": "961012100000888",
+    "reqDno": "961011000125012810000202",
+    "status": "1"
+}]
+2025-02-04 15:55:19 - Update Status API called
+2025-02-04 15:55:19 - Response Body:  Status Updated
+2025-02-04 15:55:19 - Data sends to Mestria is started ::  
+2025-02-04 15:55:19 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:55:19 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-02-04 15:55:19 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 15:55:19 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:55:19 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204155519||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204155519|SAC||||24008676 ORC|NW||||||||20250204155519TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:55:22 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 15:55:22 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1618)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:56:21 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 15:56:21 - Response from API: []
+2025-02-04 15:56:21 - Sample no or cr no. not found: []
+2025-02-04 15:56:21 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:56:21 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 15:56:21 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:56:57 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 15:57:14 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"null","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
+2025-02-04 15:57:14 - Save Patient Details API called for PACS 
+2025-02-04 15:57:14 - Response Body as JSON Array: [{
+    "hisOrderId": "100",
+    "patientId": "961012100000888",
+    "reqDno": "961011000125012810000202",
+    "status": "1"
+}]
+2025-02-04 15:57:14 - Update Status API called
+2025-02-04 15:57:14 - Response Body:  Status Updated
+2025-02-04 15:57:14 - Data sends to Mestria is started ::  
+2025-02-04 15:57:14 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 15:57:14 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-02-04 15:57:14 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 15:57:14 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 15:57:14 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204155714||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204155714|SAC||||24008676 ORC|NW||||||||20250204155714TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 15:57:16 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 15:57:16 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1618)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:00:13 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 16:04:26 - Stack Trace: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at sun.net.NetworkClient.doConnect(NetworkClient.java:180)
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:558)
+	at sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:848)
+	at sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:678)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1595)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1500)
+	at java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:480)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1675)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:04:26 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 16:04:26 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 16:04:26 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:05:12 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 16:06:18 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"250128BIO0002","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
+2025-02-04 16:06:18 - Save Patient Details API called for PACS 
+2025-02-04 16:06:18 - Response Body as JSON Array: [{
+    "hisOrderId": "100",
+    "patientId": "961012100000888",
+    "reqDno": "961011000125012810000202",
+    "status": "1"
+}]
+2025-02-04 16:06:18 - Update Status API called
+2025-02-04 16:06:18 - Response Body:  Status Updated
+2025-02-04 16:06:18 - Data sends to Mestria is started ::  
+2025-02-04 16:06:18 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-02-04 16:06:18 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 16:06:18 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204160618||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204160618|SAC||||24008676 ORC|NW||||||||20250204160618TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:06:18 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 16:06:18 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:06:20 - Error: Error connecting to server: Connection refused: connect
+2025-02-04 16:06:20 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1618)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:18:07 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 16:18:07 - Response from API: []
+2025-02-04 16:18:07 - Sample no or cr no. not found: []
+2025-02-04 16:18:07 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 16:18:07 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 16:18:07 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:18:13 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 16:18:13 - Response from API: []
+2025-02-04 16:18:13 - Sample no or cr no. not found: []
+2025-02-04 16:18:13 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 16:18:13 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 16:18:13 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:18:42 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 16:18:42 - Response from API: []
+2025-02-04 16:18:42 - Sample no or cr no. not found: []
+2025-02-04 16:18:42 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 16:18:42 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 16:18:42 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:18:45 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 16:18:45 - Response from API: []
+2025-02-04 16:18:45 - Sample no or cr no. not found: []
+2025-02-04 16:18:45 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 16:18:45 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 16:18:45 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:19:35 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 16:19:35 - Response from API: []
+2025-02-04 16:19:35 - Sample no or cr no. not found: []
+2025-02-04 16:19:35 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 16:19:35 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 16:19:35 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:19:40 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 16:19:40 - Response from API: []
+2025-02-04 16:19:40 - Sample no or cr no. not found: []
+2025-02-04 16:19:40 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 16:19:40 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 16:19:40 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-02-04 16:21:11 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-02-04 16:21:23 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"250128BIO0002","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
+2025-02-04 16:21:30 - Save Patient Details API called for PACS 
+2025-02-04 16:21:56 - Response Body as JSON Array: [{
+    "hisOrderId": "100",
+    "patientId": "961012100000888",
+    "reqDno": "961011000125012810000202",
+    "status": "1"
+}]
+2025-02-04 16:22:17 - Update Status API called
+2025-02-04 16:22:31 - Response Body:  Status Updated
+2025-02-04 16:22:55 - Data sends to Mestria is started ::  
+2025-02-04 16:22:57 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-02-04 16:22:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - LIS is Connected on : 10.226.28.174 : 10002
+2025-02-04 16:22:57 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - LIS is Connected on : 10.226.28.174 : 10002
+2025-02-04 16:22:57 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - LIS is Connected on : 10.226.28.174 : 10002
+2025-02-04 16:22:57 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - LIS is Connected on : 10.226.28.174 : 10002
+2025-02-04 16:22:57 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - LIS is Connected on : 10.226.28.174 : 10002
+2025-02-04 16:22:57 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - LIS is Connected on : 10.226.28.174 : 10002
+2025-02-04 16:22:57 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SPM|1|||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||nullSPM|1|null||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - LIS is Connected on : 10.226.28.174 : 10002
+2025-02-04 16:22:57 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||nullSPM|1|null||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||nullSPM|1|null||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - LIS is Connected on : 10.226.28.174 : 10002
+2025-02-04 16:22:57 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||nullSPM|1|null||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - LIS is Connected on : 10.226.28.174 : 10002
+2025-02-04 16:22:57 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:22:57 - LIS is Connected on : 10.226.28.174 : 10002
+2025-02-04 16:22:57 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162257||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204162257|SAC||||24008676 ORC|NW||||||||20250204162257TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-02-04 16:23:15 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
+2025-02-04 16:23:15 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+2025-02-04 16:23:15 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+

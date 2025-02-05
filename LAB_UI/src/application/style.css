@@ -1,0 +1,61 @@
+/* style.css */
+
+/* General styles */
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+}
+
+/* Title styles */
+.label.title {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgb(38, 87, 217);
+    -fx-padding: 15;
+}
+
+/* Label styles */
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: darkslategray;
+}
+
+/* TextField styles */
+.text-field {
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-border-color: #4CAF50;
+    -fx-border-radius: 5px;
+}
+
+/* ComboBox styles */
+.combo-box {
+    -fx-padding: 5px;
+    -fx-font-size: 12px;
+    -fx-border-color: #4CAF50;
+    -fx-border-radius: 5px;
+}
+
+/* Button styles */
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-margin: px;
+    -fx-border-radius: 5px;
+}
+
+/* Status labels styles */
+.label.status {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: red;
+}
+
+/* Layout styles */
+.grid-pane {
+    -fx-padding: 20px;
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+}

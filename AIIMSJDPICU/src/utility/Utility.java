@@ -1,0 +1,384 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package utility;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Optional;
+
+import org.apache.log4j.Logger;
+import org.controlsfx.control.Notifications;
+
+import controllers.DashboardTestController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.stage.StageStyle;
+//import scala.reflect.internal.Trees.Try;
+
+/**
+ * In this class commonly used methods are written
+ *
+ * @author Sudeep_Sahoo
+ *
+ */
+public class Utility {
+	private static final Logger LOG = Logger.getLogger(Utility.class.getName());
+
+	public Boolean confirmDelete() {
+		try {
+
+			Boolean status = false;
+			Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
+			dialog.setTitle("Confirm");
+			dialog.setContentText("Are you sure, you want to delete the record?");
+			dialog.setResizable(true);
+			DialogPane dialogPane = dialog.getDialogPane();
+			try {
+				dialogPane.getStylesheets().add(this.getClass().getResource("/styles/newStyles.css").toString());
+				dialogPane.getStyleClass().add("alertDialog");
+
+			} catch (Exception e) {
+
+				LOG.error("## Exception occured:", e);
+			}
+
+			dialog.initStyle(StageStyle.UNDECORATED);
+			Optional<javafx.scene.control.ButtonType> result = dialog.showAndWait();
+			if (result.get() == javafx.scene.control.ButtonType.OK) {
+				status = true;
+
+			} else {
+				status = false;
+
+			}
+			return status;
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+			return false;
+		}
+	}
+
+	public void errorDialogue(String headerText, String text) {
+		try {
+
+			Alert dialog = new Alert(Alert.AlertType.ERROR);
+			dialog.setTitle(headerText);
+			dialog.setHeaderText(headerText);
+			dialog.setContentText(text);
+			dialog.setResizable(true);
+			DialogPane dialogPane = dialog.getDialogPane();
+			try {
+				dialogPane.getStylesheets().add(this.getClass().getResource("/styles/newStyles.css").toString());
+				dialogPane.getStyleClass().add("errorDiag");
+
+			} catch (Exception e) {
+
+				LOG.error("## Exception occured:", e);
+			}
+
+			dialog.initStyle(StageStyle.UNDECORATED);
+			Optional<javafx.scene.control.ButtonType> result = dialog.showAndWait();
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	public void warningDialogue(String headerText, String text) {
+		try {
+			Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+			dialog.setTitle(headerText);
+			dialog.setHeaderText(headerText);
+			dialog.setContentText(text);
+			dialog.setResizable(true);
+			DialogPane dialogPane = dialog.getDialogPane();
+			dialogPane.getStylesheets().add(this.getClass().getResource("/styles/newStyles.css").toString());
+			dialogPane.getStyleClass().add("warningDiag");
+			dialog.initStyle(StageStyle.UNDECORATED);
+			Optional<javafx.scene.control.ButtonType> result = dialog.showAndWait();
+			System.out.println(result.get());
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	public Boolean confirmDialogue(String text) {
+		try {
+
+			Boolean status = false;
+			Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
+			dialog.setTitle("Confirm");
+			dialog.setContentText(text);
+			dialog.setResizable(true);
+			DialogPane dialogPane = dialog.getDialogPane();
+			try {
+
+				dialogPane.getStylesheets().add(this.getClass().getResource("/styles/newStyles.css").toString());
+				dialogPane.getStyleClass().add("alertDialog");
+
+			} catch (Exception e) {
+
+				LOG.error("## Exception occured:", e);
+			}
+
+			dialog.initStyle(StageStyle.UNDECORATED);
+			Optional<javafx.scene.control.ButtonType> result = dialog.showAndWait();
+			if (result.get() == javafx.scene.control.ButtonType.OK) {
+				status = true;
+
+			} else {
+				status = false;
+
+			}
+			return status;
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+			return false;
+		}
+	}
+
+	public void showNotification(String type, String title, String text) {
+		try {
+
+			Notifications notification = Notifications.create().title(title).text(text).graphic(null)
+					.hideAfter(javafx.util.Duration.seconds(4)).position(Pos.BOTTOM_RIGHT);
+			if (type == "Information") {
+				notification.showInformation();
+			} else if (type == "Error") {
+				notification.showError();
+			} else if (type == "Warning") {
+				notification.showWarning();
+
+			} else if (type == "Confirmation") {
+				notification.showConfirm();
+
+			}
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	public String md5(String input) {
+		try {
+
+			String md5 = null;
+
+			if (null == input)
+				return null;
+
+			try {
+
+				// Create MessageDigest object for MD5
+				MessageDigest digest = MessageDigest.getInstance("MD5");
+
+				// Update input string in message digest
+				digest.update(input.getBytes(), 0, input.length());
+
+				// Converts message digest value in base 16 (hex)
+				md5 = new BigInteger(1, digest.digest()).toString(16);
+
+			} catch (Exception e) {
+
+				/**/
+			}
+			return md5;
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+			return "";
+		}
+	}
+
+	public LocalTime getLocalSystemTime() {
+		try {
+
+			Calendar cal = Calendar.getInstance();
+			int second = cal.get(Calendar.SECOND);
+			int minute = cal.get(Calendar.MINUTE);
+			int hour = cal.get(Calendar.HOUR_OF_DAY);
+			String secondStr = "";
+			String minuteStr = "";
+			String hourStr = "";
+
+			if (hour <= 9) {
+				hourStr = "0" + hour;
+			} else {
+				hourStr = hour + "";
+			}
+			if (minute <= 9) {
+				minuteStr = "0" + minute;
+			} else {
+				minuteStr = minute + "";
+			}
+			if (second <= 9) {
+				secondStr = "0" + second;
+			} else {
+				secondStr = second + "";
+			}
+
+			DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+			LocalTime localTime = LocalTime.parse(hourStr + ":" + minuteStr + ":" + secondStr, timeFormatter);
+			return localTime;
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+			return null;
+		}
+	}
+
+	public HBox getTimeControl() {
+		try {
+
+			ObservableList<String> hourList = FXCollections.observableArrayList();
+			ObservableList<String> minuteList = FXCollections.observableArrayList();
+			ObservableList<String> meridiemList = FXCollections.observableArrayList("AM", "PM");
+			HBox hbox = new HBox();
+			hbox.setMaxHeight(30);
+			Spinner<String> hourSpinner = new Spinner<String>();
+			Spinner<String> minuteSpinner = new Spinner<String>();
+			Spinner<String> meridiemSpinner = new Spinner<String>();
+			hourSpinner.setId("spnrHour");
+			minuteSpinner.setId("spnrMinute");
+			meridiemSpinner.setId("spnrMeridiem");
+			Label labelSeparator = new Label();
+			labelSeparator.setMinHeight(30);
+			labelSeparator.setText(":");
+
+			for (int i = 1; i <= 12; i++) {
+				if (i < 10) {
+					hourList.add("0" + i);
+				} else {
+					hourList.add(i + "");
+				}
+
+			}
+			for (int i = 0; i < 60; i++) {
+				if (i < 10) {
+					minuteList.add("0" + i);
+				} else {
+					minuteList.add(i + "");
+				}
+
+			}
+			SpinnerValueFactory<String> valueFactoryHour = new SpinnerValueFactory.ListSpinnerValueFactory<String>(
+					hourList);
+			SpinnerValueFactory<String> valueFactoryMinute = new SpinnerValueFactory.ListSpinnerValueFactory<String>(
+					minuteList);
+			SpinnerValueFactory<String> valueFactoryMeridiem = new SpinnerValueFactory.ListSpinnerValueFactory<String>(
+					meridiemList);
+			hourSpinner.setValueFactory(valueFactoryHour);
+			minuteSpinner.setValueFactory(valueFactoryMinute);
+			meridiemSpinner.setValueFactory(valueFactoryMeridiem);
+			hourSpinner.setMaxWidth(60);
+			hourSpinner.setMaxHeight(25);
+			minuteSpinner.setMaxWidth(60);
+			minuteSpinner.setMaxHeight(25);
+			meridiemSpinner.setMaxWidth(70);
+			meridiemSpinner.setMaxHeight(25);
+
+			hourSpinner.setOnScroll(event -> {
+				if (event.getDeltaY() < 0) {
+					hourSpinner.decrement();
+				} else if (event.getDeltaY() > 0) {
+					hourSpinner.increment();
+				}
+			});
+			minuteSpinner.setOnScroll(event -> {
+				if (event.getDeltaY() < 0) {
+					minuteSpinner.decrement();
+				} else if (event.getDeltaY() > 0) {
+					minuteSpinner.increment();
+				}
+			});
+			meridiemSpinner.setOnScroll(event -> {
+				if (event.getDeltaY() < 0) {
+					meridiemSpinner.decrement();
+				} else if (event.getDeltaY() > 0) {
+					meridiemSpinner.increment();
+				}
+			});
+
+			// hbox.setStyle("-fx-background-color:#1bb27f");
+			hbox.setSpacing(2);
+			hbox.getChildren().add(hourSpinner);
+			hbox.getChildren().add(labelSeparator);
+			hbox.getChildren().add(minuteSpinner);
+			hbox.getChildren().add(meridiemSpinner);
+
+			return hbox;
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+			return null;
+		}
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public LocalTime getTime(HBox hBox) {
+		try {
+
+			Spinner<String> hourSpinner = new Spinner<>();
+			Spinner<String> minuteSpinner = new Spinner<>();
+			Spinner<String> meridiemSpinner = new Spinner<>();
+			hourSpinner = (Spinner) hBox.getChildren().get(0);
+			minuteSpinner = (Spinner) hBox.getChildren().get(2);
+			meridiemSpinner = (Spinner) hBox.getChildren().get(3);
+			String minuteStr = "";
+			String hourStr = "";
+
+			int hourInt = 0;
+			int minuteInt = 0;
+			hourInt = Integer.valueOf(hourSpinner.getValue());
+			if (meridiemSpinner.getValue().equalsIgnoreCase("PM")) {
+				if (hourInt != 12) {
+					hourInt = 12 + hourInt;
+				}
+
+			} else {
+
+				if (hourInt == 12) {
+					hourInt = 0;
+				}
+			}
+			minuteInt = Integer.valueOf(minuteSpinner.getValue());
+
+			if (hourInt <= 9) {
+				hourStr = "0" + hourInt;
+			} else {
+				hourStr = hourInt + "";
+			}
+			if (minuteInt <= 9) {
+				minuteStr = "0" + minuteInt;
+			} else {
+				minuteStr = minuteInt + "";
+			}
+
+			DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+			LocalTime localTime = LocalTime.parse(hourStr + ":" + minuteStr, timeFormatter);
+			return localTime;
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+			return null;
+		}
+	}
+
+}

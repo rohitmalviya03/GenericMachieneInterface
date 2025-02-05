@@ -1,0 +1,164 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.common.GeneratedEntities;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "echo_details", catalog = "intraop_dev")
+public class EchoDetails implements java.io.Serializable {
+
+	private Integer echoDetailsID;
+	private Long caseID;
+	private String createdBy;
+	private Date createdTime;
+	private String updatedBy;
+	private Date updatedTime;
+	private String preDetails;
+	private String intraOpDetails;
+	private String postDetails;
+	private String newFindings;
+	private String machineName;
+	private String probeSize;
+	private String bloodOnTip;
+	private String insertedBy;
+	private String difficultyInInsertion;
+
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "EchoDetailsID", unique = true, nullable = false)
+	public Integer getEchoDetailsID() {
+		return echoDetailsID;
+	}
+	public void setEchoDetailsID(Integer echoDetailsID) {
+		this.echoDetailsID = echoDetailsID;
+	}
+	@Column(name = "CaseID")
+	public Long getCaseID() {
+		return caseID;
+	}
+	public void setCaseID(Long caseID) {
+		this.caseID = caseID;
+	}
+	@Column(name = "CreatedBy")
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	@Column(name = "CreatedTime")
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+	@Column(name = "UpdatedBy")
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	@Column(name = "UpdatedTime")
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+	@Column(name = "PreDetails")
+	public String getPreDetails() {
+		return preDetails;
+	}
+	public void setPreDetails(String preDetails) {
+		this.preDetails = preDetails;
+	}
+	@Column(name = "IntraOpDetails")
+	public String getIntraOpDetails() {
+		return intraOpDetails;
+	}
+	public void setIntraOpDetails(String intraOpDetails) {
+		this.intraOpDetails = intraOpDetails;
+	}
+	@Column(name = "PostDetails")
+	public String getPostDetails() {
+		return postDetails;
+	}
+	public void setPostDetails(String postDetails) {
+		this.postDetails = postDetails;
+	}
+	@Column(name = "NewFindings")
+	public String getNewFindings() {
+		return newFindings;
+	}
+	public void setNewFindings(String newFindings) {
+		this.newFindings = newFindings;
+	}
+	@Column(name = "ChangeInDiagnosis")
+	public String getChangeInDiagnosis() {
+		return changeInDiagnosis;
+	}
+	public void setChangeInDiagnosis(String changeInDiagnosis) {
+		this.changeInDiagnosis = changeInDiagnosis;
+	}
+	private String changeInDiagnosis;
+
+	@Column(name = "MachineName", length = 45)
+	public String getMachineName() {
+		return machineName;
+	}
+	public void setMachineName(String machineName) {
+		this.machineName = machineName;
+	}
+
+	@Column(name = "ProbeSize", length = 45)
+	public String getProbeSize() {
+		return probeSize;
+	}
+	public void setProbeSize(String probeSize) {
+		this.probeSize = probeSize;
+	}
+
+	@Column(name = "BloodOnTip", length = 45)
+	public String getBloodOnTip() {
+		return bloodOnTip;
+	}
+	public void setBloodOnTip(String bloodOnTip) {
+		this.bloodOnTip = bloodOnTip;
+	}
+
+	@Column(name = "InsertedBy", length = 100)
+	public String getInsertedBy() {
+		return insertedBy;
+	}
+	public void setInsertedBy(String insertedBy) {
+		this.insertedBy = insertedBy;
+	}
+
+	@Column(name = "DifficultyInInsertion", length = 1000)
+	public String getDifficultyInInsertion() {
+		return difficultyInInsertion;
+	}
+	public void setDifficultyInInsertion(String difficultyInInsertion) {
+		this.difficultyInInsertion = difficultyInInsertion;
+	}
+
+
+}

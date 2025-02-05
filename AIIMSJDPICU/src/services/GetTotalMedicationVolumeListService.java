@@ -1,0 +1,83 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package services;
+
+import java.util.HashMap;
+import java.util.List;
+
+import com.cdac.common.pojoClasses.Volume;
+import com.cdac.common.util.DAOFactory;
+
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import model.UserSession;
+public class GetTotalMedicationVolumeListService extends Service<Void> {
+
+	private static List<String> medicationName;
+	private static int patientID;
+	private static long caseID;
+	private Volume totalVolume = new Volume();
+	private HashMap<String,String> totalUsage;
+
+	private static GetTotalMedicationVolumeListService instance = null;
+	
+	public HashMap<String, String> getTotalUsage()
+	{
+		return totalUsage;
+	}
+
+	public Volume getTotalVolume()
+	{
+		return totalVolume;
+	}
+
+	public static GetTotalMedicationVolumeListService getInstance(List<String> medicationNameVal, int patientIDVal, long caseIDVal)
+	{
+		if(instance == null)
+		{
+			instance = new GetTotalMedicationVolumeListService();
+		}
+		medicationName = medicationNameVal;
+		patientID = patientIDVal;
+		caseID = caseIDVal;
+		return instance;
+	}
+
+	private GetTotalMedicationVolumeListService() {
+		super();
+	}
+
+
+
+
+	@Override
+	protected Task<Void> createTask()
+	{
+		// TODO Auto-generated method stub
+		return new Task<Void>()
+		{
+
+			@Override
+			protected Void call() throws Exception
+			{
+				// call DB method to save new patient details
+
+				try
+				{
+					totalUsage = DAOFactory.medicationLog().getTotalDosageListOfMedication(medicationName, patientID, caseID,  UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+				}
+				catch (Exception e)
+				{
+					throw e;
+				}
+
+				return null;
+			}
+
+		};
+	}
+}

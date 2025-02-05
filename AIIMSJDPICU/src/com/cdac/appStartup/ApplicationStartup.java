@@ -1,0 +1,224 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.appStartup;
+
+import java.util.ArrayList;
+
+import org.apache.log4j.Logger;
+
+import com.cdac.framework.DeviceIdentificationService;
+import com.cdac.framework.DeviceScanner;
+import com.cdac.framework.FwkServices;
+import com.cdac.framework.IDeviceHandshake;
+import com.cdac.framework.SystemConfiguration;
+import com.cdac.framework.Work;
+
+public class ApplicationStartup
+{
+	private static final Logger LOG = Logger.getLogger(ApplicationStartup.class);
+	private static ApplicationStartup appStartup;
+	private static SystemConfiguration configuration;
+	private static ArrayList<String> listOfHandshakeClasses;
+	ScanningInitiatorAndRunner scanRunner;
+
+	private ApplicationStartup()
+	{
+		try
+		{
+			configuration = SystemConfiguration.getInstance();
+			scanRunner = new ScanningInitiatorAndRunner();
+			listOfHandshakeClasses = new ArrayList<String>();//(ArrayList<String>) configuration.getListOfHandshakeClasses();
+		}
+		catch(Exception e)
+		{
+			LOG.error("## Exception occured:", e);
+		}
+
+	}
+
+	public static void main(String[] args)
+	{
+		// For testing only. Use this to run the back-end application
+		// stand-alone i.e without the front-end application.
+		initialize();
+		startIdentifyingDevicesAutomatically();
+	}
+
+	public static void initialize()
+	{
+		try
+		{
+			// Initialize the framework at the time of loading.
+			LOG.info("Starting Framework");
+			appStartup = new ApplicationStartup();
+	//		appStartup.constructAndRegisterHandshakes();//TODO Sahil G made changes
+
+			LOG.info("Readying scan device service to run every 3 seconds");
+			appStartup.scanRunner.executeRepeatedly(configuration.getRepeatIntervalOfIdentificationService());
+
+			LOG.info("Readying the data dump service");
+			//DeviceDataSaveService dataSaveService = DeviceDataSaveService.getInstance();
+			//long dataSaveTimeInterval = configuration.getDataDumpTime();
+
+			// TODO: Stop these services on terminate.
+			//dataSaveService.executeRepeatedly(dataSaveTimeInterval, dataSaveTimeInterval);
+
+			// Initialize UIService.
+			FwkServices.getInstance();
+		}
+		catch(Exception e)
+		{
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	public static void startIdentifyingDevicesAutomatically()
+	{
+		try {
+			appStartup.scanRunner.setAutoIdentificationService(Boolean.TRUE);
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	public static void stopIdentifyingDevicesAutomatically()
+	{
+		try {
+			appStartup.scanRunner.setAutoIdentificationService(Boolean.FALSE);
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	/**
+	 * TODO
+	 * Set a single handshake class
+	 * @param handshakeClass
+	 */
+	public static void setHandshakeClass(String handshakeClass)
+	{
+		try {
+			listOfHandshakeClasses.clear();
+			DeviceIdentificationService.getInstance().getHandshakeList().clear();
+			listOfHandshakeClasses.add(handshakeClass);
+			appStartup.constructAndRegisterHandshakes();
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	public static void stopDevices()
+	{
+		try {
+			DeviceScanner.getInstance().removeListeners();
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	public static void stopDevice(String deviceName)
+	{
+		try {
+			DeviceScanner.getInstance().removeListener(deviceName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	public static boolean getAutoDeviceIdentificationStatus()
+	{
+		try {
+			return appStartup.scanRunner.getAutoIdentificationService();
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+		}
+		return false;
+	}
+
+	/**
+	 * This method constructs and registers all the device handshakes.
+	 */
+	public void constructAndRegisterHandshakes()
+	{
+		LOG.info("Registering handshakes");
+		for (String handshakeClass : listOfHandshakeClasses)
+		{
+			try
+			{
+				IDeviceHandshake deviceHandshake = (IDeviceHandshake) Class.forName(handshakeClass).newInstance();
+				DeviceIdentificationService.getInstance().registerHandshakes(deviceHandshake);
+				LOG.info("Registered handshake:" + deviceHandshake.getNameOfDevice());
+			}
+			catch (InstantiationException e)
+			{
+				LOG.error("## Exception occured:", e);
+			}
+			catch (IllegalAccessException e)
+			{
+				LOG.error("## Exception occured:", e);
+			}
+			catch (ClassNotFoundException e)
+			{
+				LOG.error("## Exception occured:", e);
+			}
+		}
+	}
+
+	/**
+	 * Repeatedly scan for new devices.
+	 *
+	 * @author Sahil_Jain08
+	 *
+	 */
+	private class ScanningInitiatorAndRunner extends Work
+	{
+		private DeviceScanner devScanner = DeviceScanner.getInstance();
+
+		private volatile boolean autoIdentifyDevices = false;
+
+		public ScanningInitiatorAndRunner()
+		{
+			super("ScanningInitiatorAndRunner");
+		}
+
+		@Override
+		public Object workLogic()
+		{
+			try {
+				devScanner.refreshListOfAvailablePorts();
+				if (autoIdentifyDevices)
+				{
+					devScanner.identifyDeviceAndRegisterPorts();
+				}
+				// Configure devices manually.
+				//devScanner.executeManualConfigurationRequests();
+
+				// Run diagnostics.
+				if (!autoIdentifyDevices)
+				{
+					devScanner.checkDeviceHeartbeat();
+				}
+			} catch (Exception e) {
+				LOG.error("## Exception occured:", e);
+			}
+
+			return null;
+		}
+
+		public void setAutoIdentificationService(boolean doIdentification)
+		{
+			autoIdentifyDevices = doIdentification;
+		}
+
+		public boolean getAutoIdentificationService()
+		{
+			return autoIdentifyDevices;
+		}
+
+	}
+}

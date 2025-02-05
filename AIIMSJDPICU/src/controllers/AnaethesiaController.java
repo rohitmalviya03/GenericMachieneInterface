@@ -1,0 +1,1891 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package controllers;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import org.apache.log4j.Logger;
+
+import com.cdac.common.GeneratedEntities.Fdamedications;
+import com.cdac.common.GeneratedEntities.IntraopAnesthesiamedicationrecord;
+import com.cdac.common.GeneratedEntities.IntraopAnesthesiarecord;
+import com.cdac.common.pojoClasses.AnesthesiaFetchListWithMedication;
+import com.cdac.common.util.Validations;
+
+import application.Main;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import model.MasterDataSession;
+import model.PatientSession;
+import model.UserSession;
+import services.CreateAnesthesiaService;
+import services.GetAnesthesiaRecordService;
+import services.SearchFDAMedicationsService;
+
+/**
+ *
+ * This controller is used for Anesthesia Details Window
+ *
+ * @author Sudeep_Sahoo
+ *
+ */
+public class AnaethesiaController implements Initializable {
+
+	private static final Logger LOGGER = Logger.getLogger(AnaethesiaController.class.getName());
+
+	@FXML
+	private Button btnClose;
+
+	@FXML
+	private TabPane tabPaneAnaesthesiaDetails;
+
+	@FXML
+	private Tab tabGA;
+
+	@FXML
+	private TitledPane titledPaneSA;
+
+	@FXML
+	private TextField txtSA_Size;
+
+	@FXML
+	private TextField txtSA_NoAtempt;
+
+	@FXML
+	private TextArea txtSA_Comments;
+
+	@FXML
+	private TitledPane titledPane_Mask;
+
+	@FXML
+	private TextArea txtMask_Comments;
+
+	@FXML
+	private TitledPane titledPane_ETT;
+
+	@FXML
+	private TextField txtETT_Size;
+
+	@FXML
+	private TextField txtETT_FixedAt;
+
+	@FXML
+	private TextField txtETT_NoAtempt;
+
+	@FXML
+	private TextArea txtETT_Comments;
+
+	@FXML
+	private TitledPane titledPane_Ventilation;
+
+	@FXML
+	private RadioButton radioSpontaneous;
+
+	@FXML
+	private ToggleGroup ventilation;
+
+	@FXML
+	private RadioButton radioControlled;
+
+	@FXML
+	private TitledPane titlePaneSpontaneous;
+
+	@FXML
+	private TextArea txtSpontaneousCommnts;
+
+	@FXML
+	private TitledPane titlePaneControlled;
+
+	@FXML
+	private TextField txtAirwayPressure;
+
+	@FXML
+	private TextField txtFiO2;
+
+	@FXML
+	private TextField txtVT;
+
+	@FXML
+	private TextField txtRR;
+
+	@FXML
+	private TextField txtIE;
+
+	@FXML
+	private TextArea txtControlComments;
+
+	@FXML
+	private Tab tab_RA;
+
+	@FXML
+	private TextArea txtRAComments;
+
+	@FXML
+	private TitledPane spinalPane;
+
+	@FXML
+	private TextField txtSpinalSite;
+
+	@FXML
+	private TextField txtSpinalNeedle;
+
+	@FXML
+	private TextField txtSpinalSensary;
+
+	@FXML
+	private TitledPane epiduralPane;
+
+	@FXML
+	private TextField txtEpiduralSite;
+
+	@FXML
+	private TextField txtEpiduralNeedle;
+
+	@FXML
+	private TextField txtEpiduralCatheter;
+
+	@FXML
+	private TitledPane ULBPane;
+
+	@FXML
+	private RadioButton radioULB_Brachial;
+
+	@FXML
+	private ToggleGroup Ulb;
+
+	@FXML
+	private RadioButton radioULB_Peripheral;
+
+	@FXML
+	private ChoiceBox<String> dropdownULB;
+
+	@FXML
+	private TitledPane LLBPane;
+
+	@FXML
+	private RadioButton radioLLB_Lumbar;
+
+	@FXML
+	private ToggleGroup Llb;
+
+	@FXML
+	private RadioButton radioLLB_Sacral;
+
+	@FXML
+	private ChoiceBox<String> dropdownLLB;
+
+	@FXML
+	private Tab Tab_MAC;
+
+	@FXML
+	private TextArea txtMAC_Comments;
+
+	@FXML
+	private Button btnReset;
+
+	@FXML
+	private Button btnSave;
+
+	@FXML
+	private ChoiceBox<String> choiceRAType;
+
+	@FXML
+	private TextField txtMedicine;
+
+	@FXML
+	private TextField txtVolume;
+
+	@FXML
+	private TextField txtAdjustment;
+
+	@FXML
+	private Button btnAdd;
+
+	@FXML
+	private Label lblErrorMsg;
+
+	@FXML
+	private ListView<String> medSearchList;
+
+	@FXML
+	private Button btnDelete;
+
+	@FXML
+	private TableView<IntraopAnesthesiamedicationrecord> tbleMedication;
+
+	@FXML
+	private TableColumn<IntraopAnesthesiamedicationrecord, String> clmnRAType;
+
+	@FXML
+	private TableColumn<IntraopAnesthesiamedicationrecord, String> clmnMedicine;
+
+	@FXML
+	private TableColumn<IntraopAnesthesiamedicationrecord, Float> clmnVolume;
+
+	@FXML
+	private TableColumn<IntraopAnesthesiamedicationrecord, Float> clmnAdjustment;
+
+	@FXML
+	private AnchorPane disablePaneMainContent;
+
+	@FXML
+	private RadioButton radioULB_None;
+
+	@FXML
+	private RadioButton radioVentilationNone;
+
+	@FXML
+	private RadioButton radioLLB_None;
+
+	@FXML
+	private HBox hbDropdownLLB;
+
+	@FXML
+	private HBox hbDropdownULB;
+
+	@FXML
+	private ChoiceBox<String> choiceCoughUncough;
+
+	private String ventilationValue = "";
+	private String ulbValue = "";
+	private String llbValue = "";
+	private IntraopAnesthesiarecord anesthesiaRecord = new IntraopAnesthesiarecord();
+	private String selectedSearchVal = "";
+	private List<String> brachialList;
+	private List<String> peripheralList;
+	private List<String> lumbarList;
+	private List<String> sacralList;
+	private boolean anesthesiaObjCreated;
+	private Boolean fromSearch = false;
+	private List<IntraopAnesthesiamedicationrecord> medicationList = new ArrayList<IntraopAnesthesiamedicationrecord>();
+
+	// Event Handlers
+
+	private ChangeListener<Toggle> ventilationListener;
+	private ChangeListener<Toggle> UlbListener;
+	private ChangeListener<Toggle> LlbListener;
+	private EventHandler<MouseEvent> btnResetHandler;
+	private EventHandler<MouseEvent> btnCloseHandler;
+	private EventHandler<MouseEvent> btnSaveHandler;
+	private EventHandler<MouseEvent> btnAddHandler;
+	private EventHandler<MouseEvent> btnDeleteHandler;
+	private ChangeListener<Boolean> txtMedicineFucousChangeListener;
+	private ChangeListener<String> txtMedicineChangeListener;
+	private ChangeListener<String> medSearchListChangeListener;
+	private EventHandler<WorkerStateEvent> createAnesthesiaServiceSuccessHandler;
+	private EventHandler<WorkerStateEvent> createAnesthesiaServiceFailedHandler;
+	private EventHandler<WorkerStateEvent> getAnesthesiaRecordServiceSuccessHandler;
+	private EventHandler<WorkerStateEvent> getAnesthesiaRecordServiceFailedHandler;
+	private EventHandler<WorkerStateEvent> searchFDAMedicationsServiceSuccessHandler;
+	private EventHandler<WorkerStateEvent> searchFDAMedicationsServiceFailedHandler;
+
+	private ChangeListener<IntraopAnesthesiamedicationrecord> tableChangeListener;
+
+	private int anaethesiaLogId = 0;
+
+	/**
+	 * This method initializes the all Event handlers and Default values on page
+	 * load
+	 */
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		try {
+			List<String> listAnaesthesiaSubType = new ArrayList<String>();
+			listAnaesthesiaSubType.add("Select");
+			listAnaesthesiaSubType.add("Spinal");
+			listAnaesthesiaSubType.add("Epidural");
+			listAnaesthesiaSubType.add("Upper Limb Block");
+			listAnaesthesiaSubType.add("Lower Limb Block");
+			choiceRAType.getItems().clear();
+			choiceRAType.getItems().addAll(listAnaesthesiaSubType);
+			choiceRAType.getSelectionModel().select("Select");
+			lblErrorMsg.setText("");
+			
+			
+
+			List<String> listCoughUncough = new ArrayList<String>();
+			listCoughUncough.add("Select");
+			listCoughUncough.add("Cuffed");
+			listCoughUncough.add("Uncuffed");
+			choiceCoughUncough.getItems().clear();
+			choiceCoughUncough.getItems().addAll(listCoughUncough);
+			choiceCoughUncough.getSelectionModel().select("Select");
+			// ---set RadioGroup for radiobuttons
+			try {
+				setRadioButtons();
+			} catch (Exception e1) {
+
+				LOGGER.error("## Exception occured:", e1);
+			}
+
+			// ---Fetch lists to be bind with dropdowns
+			try {
+				// callGetMasterDataAnesthesiaService();
+				fillDropDowns();
+			} catch (Exception e1) {
+
+				LOGGER.error("## Exception occured:", e1);
+			}
+
+			// ---Table devices column parameters
+			clmnRAType.setCellValueFactory(
+					new PropertyValueFactory<IntraopAnesthesiamedicationrecord, String>("anesthesiaSubType"));
+			clmnMedicine.setCellValueFactory(
+					new PropertyValueFactory<IntraopAnesthesiamedicationrecord, String>("medicine"));
+			clmnVolume
+					.setCellValueFactory(new PropertyValueFactory<IntraopAnesthesiamedicationrecord, Float>("volume"));
+			clmnAdjustment.setCellValueFactory(
+					new PropertyValueFactory<IntraopAnesthesiamedicationrecord, Float>("adjustment"));
+
+			ventilationListener = new ChangeListener<Toggle>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+
+					if (newValue != null) {
+						ventilationValue = newValue.getUserData().toString();
+						if (ventilationValue.equalsIgnoreCase("Spontaneous")) {
+							titlePaneSpontaneous.setVisible(true);
+							titlePaneControlled.setVisible(false);
+
+						} else if (ventilationValue.equalsIgnoreCase("Controlled")) {
+							titlePaneSpontaneous.setVisible(false);
+							titlePaneControlled.setVisible(true);
+
+						} else {
+							titlePaneSpontaneous.setVisible(false);
+							titlePaneControlled.setVisible(false);
+						}
+					}
+
+				}
+
+			};
+			ventilation.selectedToggleProperty().addListener(ventilationListener);
+
+			UlbListener = new ChangeListener<Toggle>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+
+					if (newValue != null) {
+						hbDropdownULB.setVisible(true);
+						ulbValue = newValue.getUserData().toString();
+						if (ulbValue.equalsIgnoreCase("Brachial Plexus Blocks")) {
+
+							// dropdownULB.setItems(brachialList);
+
+							dropdownULB.getItems().clear();
+							dropdownULB.getItems().addAll(brachialList);
+							dropdownULB.getSelectionModel().select(0);
+
+						} else if (ulbValue.equalsIgnoreCase("Peripheral Nerve Blocks")) {
+
+							// dropdownULB.setItems(peripheralList);
+
+							dropdownULB.getItems().clear();
+							dropdownULB.getItems().setAll(peripheralList);
+							dropdownULB.getSelectionModel().select(0);
+						} else {
+							dropdownULB.getItems().clear();
+							hbDropdownULB.setVisible(false);
+						}
+
+					}
+
+				}
+
+			};
+			Ulb.selectedToggleProperty().addListener(UlbListener);
+
+			LlbListener = new ChangeListener<Toggle>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+
+					if (newValue != null) {
+						llbValue = newValue.getUserData().toString();
+						hbDropdownLLB.setVisible(true);
+
+						if (llbValue.equalsIgnoreCase("Lumbar Plexus Nerve Blocks")) {
+
+							// dropdownLLB.setItems(lumbarList);
+
+							dropdownLLB.getItems().clear();
+							dropdownLLB.getItems().addAll(lumbarList);
+							dropdownLLB.getSelectionModel().select(0);
+						} else if (llbValue.equalsIgnoreCase("Sacral Plexus Nerve Blocks")) {
+
+							// dropdownLLB.setItems(sacralList);
+
+							dropdownLLB.getItems().clear();
+							dropdownLLB.getItems().addAll(sacralList);
+							dropdownLLB.getSelectionModel().select(0);
+						} else {
+							dropdownLLB.getItems().clear();
+							hbDropdownLLB.setVisible(false);
+						}
+
+					}
+
+				}
+
+			};
+			Llb.selectedToggleProperty().addListener(LlbListener);
+
+			btnCloseHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+				public void handle(javafx.scene.input.MouseEvent event) {
+
+					removeListener();
+					Main.getInstance().getStageManager().closeSecondaryStage();
+
+				}
+			};
+			btnClose.addEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+
+			btnResetHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+				public void handle(javafx.scene.input.MouseEvent event) {
+
+					String selectedTab = tabPaneAnaesthesiaDetails.getSelectionModel().getSelectedItem().getText();
+
+					if (selectedTab.trim().equalsIgnoreCase("General Anaesthesia")) {
+						txtSA_Size.setText("");
+						txtSA_NoAtempt.setText("");
+						txtSA_Comments.setText("");
+						txtETT_Size.setText("");
+						txtETT_FixedAt.setText("");
+						txtETT_NoAtempt.setText("");
+						txtETT_Comments.setText("");
+						txtMask_Comments.setText("");
+						txtSpontaneousCommnts.setText("");
+						txtControlComments.setText("");
+						txtAirwayPressure.setText("");
+						txtFiO2.setText("");
+						txtVT.setText("");
+						txtRR.setText("");
+						txtIE.setText("");
+						ventilation.selectToggle(radioVentilationNone);
+
+					} else if (selectedTab.trim().equalsIgnoreCase("Regional Anaesthesia")) {
+
+						txtSpinalSite.setText("");
+						txtSpinalNeedle.setText("");
+						txtSpinalSensary.setText("");
+						txtEpiduralSite.setText("");
+						txtEpiduralNeedle.setText("");
+						txtEpiduralCatheter.setText("");
+						txtRAComments.setText("");
+						txtMedicine.setText("");
+						txtVolume.setText("");
+						txtAdjustment.setText("");
+						choiceRAType.getSelectionModel().select("Select");
+						dropdownULB.getSelectionModel().select("Select");
+						dropdownLLB.getSelectionModel().select("Select");
+						medicationList = new ArrayList<>();
+						tbleMedication.getItems().addAll(medicationList);
+						Llb.selectToggle(radioLLB_None);
+						Ulb.selectToggle(radioULB_None);
+					} else if (selectedTab.trim().equalsIgnoreCase("MAC")) {
+						txtMAC_Comments.setText("");
+					}
+				}
+			};
+			btnReset.addEventHandler(MouseEvent.MOUSE_CLICKED, btnResetHandler);
+
+			btnSaveHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+				public void handle(javafx.scene.input.MouseEvent event) {
+					// ---create IntraopAnesthesiarecord obj then call
+					// ---CreateAnesthesiaService and save Anesthesia details
+					if (isEmptyForm()) {
+
+						lblErrorMsg.setText("Please enter atleast one field to save.");
+						lblErrorMsg.setVisible(true);
+					} else {
+						if (isValidForm()) {
+							lblErrorMsg.setVisible(false);
+							try {
+								saveAnesthesiaDetails();
+							} catch (Exception e1) {
+
+								LOGGER.error("## Exception occured:", e1);
+							}
+						} else {
+							lblErrorMsg.setVisible(true);
+						}
+					}
+				}
+			};
+			btnSave.addEventHandler(MouseEvent.MOUSE_CLICKED, btnSaveHandler);
+
+			btnAddHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+				public void handle(javafx.scene.input.MouseEvent event) {
+					try {
+						addMedication();
+					} catch (Exception e1) {
+						LOGGER.error("## Exception occured:", e1);
+					}
+				}
+			};
+			btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, btnAddHandler);
+			// ---show selected medicationSearchList item on lblSelectedMed
+			// label
+
+			txtMedicineChangeListener = new ChangeListener<String>() {
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+					if (!fromSearch) {
+						lblErrorMsg.setVisible(false);
+						if (Validations.isAlphaNumericWithSpaceAndSpecialCharacter(txtMedicine.getText())) {
+							if (newValue.length() >= 5 && !newValue.isEmpty() && !newValue.equals("")) {
+								if (!newValue.equalsIgnoreCase(selectedSearchVal)) {
+									
+									medSearchList.getItems().addAll(new ArrayList<>());
+
+									try {
+										callSearchFDAMEdService(newValue);
+									} catch (Exception e1) {
+
+										LOGGER.error("## Exception occured:", e1);
+									}
+								}
+
+							} else if (newValue.length() < 5) {
+								medSearchList.getSelectionModel().clearSelection();
+								medSearchList.setVisible(false);
+							}
+						} else {
+							lblErrorMsg.setVisible(true);
+							lblErrorMsg.setText("Please enter a valid search entry");
+						}
+					} else {
+						fromSearch = false;
+					}
+				}
+			};
+			txtMedicine.textProperty().addListener(txtMedicineChangeListener);
+
+			medSearchListChangeListener = new ChangeListener<String>() {
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+					lblErrorMsg.setVisible(false);
+
+					if (newValue != null) {
+						fromSearch = true;
+						selectedSearchVal = newValue;
+						txtMedicine.setText(selectedSearchVal);
+						medSearchList.setVisible(false);
+
+					}
+				}
+			};
+
+			medSearchList.getSelectionModel().selectedItemProperty().addListener(medSearchListChangeListener);
+
+			txtMedicineFucousChangeListener = new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue,
+						Boolean newPropertyValue) {
+					if (!newPropertyValue) {
+						medSearchList.setVisible(false);
+					}
+				}
+			};
+
+			txtMedicine.focusedProperty().addListener(txtMedicineFucousChangeListener);
+
+			// ---Enable buttons only when a table row is selected.
+
+			tableChangeListener = new ChangeListener<IntraopAnesthesiamedicationrecord>() {
+
+				@Override
+				public void changed(ObservableValue<? extends IntraopAnesthesiamedicationrecord> observable,
+						IntraopAnesthesiamedicationrecord oldValue, IntraopAnesthesiamedicationrecord newValue) {
+
+					if (newValue != null) {
+						btnDelete.setVisible(true);
+
+					}
+				}
+			};
+
+			tbleMedication.getSelectionModel().selectedItemProperty().addListener(tableChangeListener);
+
+			btnDeleteHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+				public void handle(javafx.scene.input.MouseEvent event) {
+					try {
+						deleteMedicine(tbleMedication.getSelectionModel().getSelectedIndex());
+					} catch (Exception e) {
+
+						LOGGER.error("## Exception occured:", e);
+					}
+					btnDelete.setVisible(false);
+				}
+			};
+			btnDelete.addEventHandler(MouseEvent.MOUSE_CLICKED, btnDeleteHandler);
+
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					txtSA_Size.requestFocus();
+				}
+			});
+
+		} catch (Exception e) {
+
+			LOGGER.error("## Exception occured:" + e);
+
+			Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+		}
+
+	}
+
+	/**
+	 * This method fetches search list of FDA Medications from database
+	 *
+	 * @param searchVal
+	 * @throws Exception
+	 */
+	private void callSearchFDAMEdService(String searchVal) throws Exception {
+
+		try {
+
+			List<String> fdamedicationsSearchList = new ArrayList<>();
+			SearchFDAMedicationsService searchFDAMedicationsService = SearchFDAMedicationsService
+					.getInstance(searchVal);
+			searchFDAMedicationsService.restart();
+			medSearchList.getItems().clear();
+
+			searchFDAMedicationsServiceSuccessHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+
+					List<Fdamedications> fdamedicationsSearchListDB = new ArrayList<>();
+
+					fdamedicationsSearchListDB = searchFDAMedicationsService.getFdaMedicationsList();
+					if (fdamedicationsSearchListDB != null) {
+						for (Fdamedications obj : fdamedicationsSearchListDB) {
+
+							fdamedicationsSearchList.add(obj.getMedicationsName());
+						}
+
+						// medSearchList.setItems(fdamedicationsSearchList);
+						if (fdamedicationsSearchList != null && fdamedicationsSearchList.size() != 0) {
+							medSearchList.setVisible(true);
+							medSearchList.getItems().addAll(fdamedicationsSearchList);
+						}
+
+					}
+
+					searchFDAMedicationsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							searchFDAMedicationsServiceSuccessHandler);
+					searchFDAMedicationsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							searchFDAMedicationsServiceFailedHandler);
+				}
+			};
+
+			searchFDAMedicationsService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+					searchFDAMedicationsServiceSuccessHandler);
+
+			searchFDAMedicationsServiceFailedHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+					Main.getInstance().getUtility().showNotification("Error", "Error",
+							searchFDAMedicationsService.getException().getMessage());
+
+					searchFDAMedicationsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							searchFDAMedicationsServiceSuccessHandler);
+					searchFDAMedicationsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							searchFDAMedicationsServiceFailedHandler);
+				}
+			};
+
+			searchFDAMedicationsService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+					searchFDAMedicationsServiceFailedHandler);
+
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+			Main.getInstance().getUtility().showNotification("Error", "Error",
+					"Something went wrong.Could not search medication.");
+		}
+
+	}
+
+	/**
+	 * This method fetches data lists to be populated into dropdowns on screen
+	 * i.e lumbarList, peripheralList, sacralList and brachialList
+	 */
+
+	private void fillDropDowns() {
+		try {
+			lumbarList = new ArrayList<>();
+			lumbarList.add("Select");
+			peripheralList = new ArrayList<>();
+			peripheralList.add("Select");
+			sacralList = new ArrayList<>();
+			sacralList.add("Select");
+			brachialList = new ArrayList<String>();
+			brachialList.add("Select");
+
+			if (MasterDataSession.getInstance().getMasterDataMap().get("Lumbar Plexus Nerve Blocks") != null) {
+				lumbarList.addAll(MasterDataSession.getInstance().getMasterDataMap().get("Lumbar Plexus Nerve Blocks"));
+			}
+			if (MasterDataSession.getInstance().getMasterDataMap().get("Peripheral Nerve Blocks") != null) {
+				peripheralList
+						.addAll(MasterDataSession.getInstance().getMasterDataMap().get("Peripheral Nerve Blocks"));
+			}
+			if (MasterDataSession.getInstance().getMasterDataMap().get("Truncal and Cutaneous Nerve Blocks") != null) {
+				sacralList.addAll(
+						MasterDataSession.getInstance().getMasterDataMap().get("Truncal and Cutaneous Nerve Blocks"));
+			}
+			if (MasterDataSession.getInstance().getMasterDataMap().get("Brachial Plexus Blocks") != null) {
+				brachialList.addAll(MasterDataSession.getInstance().getMasterDataMap().get("Brachial Plexus Blocks"));
+			}
+
+			dropdownLLB.getItems().clear();
+			dropdownULB.getItems().clear();
+			dropdownLLB.getItems().addAll(lumbarList);
+			dropdownULB.getItems().addAll(brachialList);
+			dropdownLLB.getSelectionModel().select(0);
+			dropdownULB.getSelectionModel().select(0);
+			// ---call GetAnesthesiaRecordService and check whether
+			// anesthesia
+			// ---record already available for selected patient
+			int patientId = 0;
+			long caseId = 0;
+			if (PatientSession.getInstance().getPatient() != null) {
+				patientId = PatientSession.getInstance().getPatient().getPatientId();
+			}
+			if (PatientSession.getInstance().getPatientCase() != null) {
+				caseId = PatientSession.getInstance().getPatientCase().getCaseId();
+			}
+
+			callGetAnesthesiaRecordService(patientId, caseId);
+		} catch (Exception e1) {
+
+			LOGGER.error("## Exception occured:", e1);
+		}
+
+	}
+
+	/**
+	 *
+	 * This method is used to add Anesthesia medication details in database
+	 *
+	 * @throws Exception
+	 */
+	private void addMedication() throws Exception {
+
+		try {
+			if (!isIncompleteMedicationForm()) {
+				if (isValidMedicationForm()) {
+					Boolean medicationFlag = false;
+					lblErrorMsg.setVisible(false);
+					lblErrorMsg.setText("");
+					for (IntraopAnesthesiamedicationrecord medicine : medicationList) {
+						if (medicine.getAnesthesiaSubType()
+								.equalsIgnoreCase(choiceRAType.getSelectionModel().getSelectedItem())
+								&& medicine.getMedicine().equalsIgnoreCase(txtMedicine.getText())) {
+							medicationFlag = true;
+							break;
+						}
+					}
+					if (!medicationFlag) {
+						IntraopAnesthesiamedicationrecord medicationDetails = new IntraopAnesthesiamedicationrecord();
+						medicationDetails.setAnesthesiaSubType(choiceRAType.getSelectionModel().getSelectedItem());
+						medicationDetails.setMedicine(txtMedicine.getText());
+						medicationDetails.setVolume(Float.parseFloat(txtVolume.getText()));
+						medicationDetails.setAdjustment(Float.parseFloat(txtAdjustment.getText()));
+						medicationDetails.setAnesthesiaType("Regional anaesthesia");
+						medicationList.add(medicationDetails);
+						// tbleMedication.setItems(medicationList);
+						tbleMedication.getItems().clear();
+						tbleMedication.getItems().addAll(medicationList);
+						choiceRAType.getSelectionModel().select("Select");
+						txtMedicine.setText("");
+						txtVolume.setText("");
+						txtAdjustment.setText("");
+					} else {
+						lblErrorMsg.setText("Medication for the selected sub type has been already added.");
+						lblErrorMsg.setVisible(true);
+					}
+				} else {
+					lblErrorMsg.setVisible(true);
+				}
+			} else {
+				lblErrorMsg.setVisible(true);
+				lblErrorMsg.setText("*Please Fill all the details for medication.");
+			}
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+			// Main.getInstance().getUtility().showNotification("Error",
+			// "Error", "Something went wrong");
+		}
+
+	}
+
+	/**
+	 *
+	 * This method is used to save anesthesia details being provided
+	 *
+	 * @throws Exception
+	 */
+	private void saveAnesthesiaDetails() throws Exception {
+
+		try {
+			disablePaneMainContent.setVisible(true);
+			anesthesiaRecord = new IntraopAnesthesiarecord();
+			if (anaethesiaLogId != 0) {
+				anesthesiaRecord.setAnesthesiaRecordId(anaethesiaLogId);
+			}
+
+			if (anesthesiaRecord == null) {
+
+				anesthesiaRecord
+						.setCreatedBy(UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+				anesthesiaRecord.setCreatedTime(new Date());
+			} else if (anesthesiaRecord != null) {
+				anesthesiaRecord
+						.setUpdatedBy(UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+				anesthesiaRecord.setUpdatedTime(new Date());
+			}
+
+			if (PatientSession.getInstance().getPatient() != null) {
+				anesthesiaRecord.setPatient(PatientSession.getInstance().getPatient());
+			}
+			if (PatientSession.getInstance().getPatientCase() != null) {
+				anesthesiaRecord.setPatientcase(PatientSession.getInstance().getPatientCase());
+			}
+
+			// ---GENERAL ANESTHEISA
+			// ---Setting SuperGlotic Airway values
+			if (txtSA_Size.getText() != null && !txtSA_Size.getText().trim().isEmpty()) {
+				anesthesiaRecord.setGaSupraglotticSize(txtSA_Size.getText());
+			}
+			if (txtSA_NoAtempt.getText() != null && !txtSA_NoAtempt.getText().trim().isEmpty()) {
+				anesthesiaRecord.setGaSupraglotticAttempts(txtSA_NoAtempt.getText());
+			}
+			if (txtSA_Comments.getText() != null && !txtSA_Comments.getText().trim().isEmpty()) {
+				anesthesiaRecord.setGaSupraglotticComment(txtSA_Comments.getText().trim());
+			}
+			// ---Setting ETT values
+			if (txtETT_Size.getText() != null && !txtETT_Size.getText().trim().isEmpty() ) {
+				anesthesiaRecord.setGaEttsize(txtETT_Size.getText());
+			}
+			if (txtETT_FixedAt.getText() != null && !txtETT_FixedAt.getText().trim().isEmpty() )
+				anesthesiaRecord.setGaEttfixedAt(txtETT_FixedAt.getText());
+			if (txtETT_NoAtempt.getText() != null && !txtETT_NoAtempt.getText().trim().isEmpty()) {
+				anesthesiaRecord.setGaEttattempts(txtETT_NoAtempt.getText());
+			}
+			if (choiceCoughUncough.getSelectionModel().getSelectedIndex() != 0) {
+				anesthesiaRecord.setcuffedUncuffed(choiceCoughUncough.getSelectionModel().getSelectedItem());
+			}
+			if (txtETT_Comments.getText() != null && !txtETT_Comments.getText().trim().isEmpty()) {
+				anesthesiaRecord.setGaEttcomment(txtETT_Comments.getText().trim());
+			}
+			// ---Setting Mask Values
+			if (txtMask_Comments.getText() != null && !txtMask_Comments.getText().trim().isEmpty()) {
+				anesthesiaRecord.setGaMaskComment(txtMask_Comments.getText().trim());
+			}
+			// ---Setting Ventilation spontaneous Values
+			if (!ventilationValue.trim().equals("")) {
+				anesthesiaRecord.setGaVentilation(ventilationValue);
+			}
+
+			if (ventilation.getSelectedToggle().getUserData().toString().equalsIgnoreCase("Controlled")) {
+				if (txtAirwayPressure.getText() != null && !txtAirwayPressure.getText().trim().isEmpty()) {
+					anesthesiaRecord.setGaAirPressure(txtAirwayPressure.getText());
+				}
+				if (txtFiO2.getText() != null && !txtFiO2.getText().trim().isEmpty()) {
+					anesthesiaRecord.setGaFiO2(txtFiO2.getText());
+				}
+				if (txtVT.getText() != null && !txtVT.getText().trim().isEmpty()) {
+					anesthesiaRecord.setGaVt(txtVT.getText());
+				}
+				if (txtRR.getText() != null && !txtRR.getText().trim().isEmpty()) {
+					anesthesiaRecord.setGaRr(txtRR.getText());
+				}
+				if (txtIE.getText() != null && !txtIE.getText().trim().isEmpty()) {
+					anesthesiaRecord.setGaIe(txtIE.getText());
+				}
+				if (txtControlComments.getText() != null && !txtControlComments.getText().trim().isEmpty()) {
+					anesthesiaRecord.setGaVentilationComment(txtControlComments.getText().trim());
+				}
+
+			} else if (ventilation.getSelectedToggle().getUserData().toString().equalsIgnoreCase("Spontaneous")) {
+				if (txtSpontaneousCommnts.getText() != null && !txtSpontaneousCommnts.getText().trim().isEmpty()) {
+					anesthesiaRecord.setGaVentilationComment(txtSpontaneousCommnts.getText().trim());
+				}
+			}
+
+			// ---REGIONAL ANESTHESIA
+			// ---Setting Spinal values
+			if (txtSpinalSite.getText() != null && !txtSpinalSite.getText().trim().isEmpty()) {
+				anesthesiaRecord.setRaSpinalSite(txtSpinalSite.getText());
+			}
+			if (txtSpinalNeedle.getText() != null && !txtSpinalNeedle.getText().trim().isEmpty()) {
+				anesthesiaRecord.setRaSpinalNeedle(txtSpinalNeedle.getText());
+			}
+			if (txtSpinalSensary.getText() != null && !txtSpinalSensary.getText().trim().isEmpty()) {
+				anesthesiaRecord.setRaSpinalHsl(txtSpinalSensary.getText());
+			}
+
+			// --- Setting Epidural values
+			if (txtEpiduralSite.getText() != null && !txtEpiduralSite.getText().trim().isEmpty()) {
+				anesthesiaRecord.setRaEpiduralSite(txtEpiduralSite.getText());
+			}
+			if (txtEpiduralNeedle.getText() != null && !txtEpiduralNeedle.getText().trim().isEmpty()) {
+				anesthesiaRecord.setRaEpiduralNeedle(txtEpiduralNeedle.getText());
+			}
+			if (txtEpiduralCatheter.getText() != null && !txtEpiduralCatheter.getText().trim().isEmpty()) {
+				anesthesiaRecord.setRaEpiduralCfixedAt(txtEpiduralCatheter.getText());
+			}
+
+			if (!ulbValue.trim().equals("") && !ulbValue.trim().equalsIgnoreCase("None")) {
+				anesthesiaRecord.setRaUlbsite(ulbValue);
+				if (ulbValue.trim().equalsIgnoreCase("Brachial Plexus Blocks")) {
+					anesthesiaRecord.setRaUlbBpbapproach(dropdownULB.getSelectionModel().getSelectedItem());
+				} else if (ulbValue.trim().equalsIgnoreCase("Peripheral Nerve Blocks")) {
+					anesthesiaRecord.setRaUlbPnbapproach(dropdownULB.getSelectionModel().getSelectedItem());
+				}
+			}
+
+			if (!llbValue.trim().equals("") && !llbValue.trim().equalsIgnoreCase("None")) {
+				anesthesiaRecord.setRaLlbsite(llbValue);
+				if (llbValue.trim().equalsIgnoreCase("Lumbar Plexus Nerve Blocks")) {
+					anesthesiaRecord.setRaLlbLpnbapproach(dropdownLLB.getSelectionModel().getSelectedItem());
+
+				} else if (llbValue.trim().equalsIgnoreCase("Sacral Plexus Nerve Blocks")) {
+					anesthesiaRecord.setRaLlbSpnbapproach(dropdownLLB.getSelectionModel().getSelectedItem());
+
+				}
+			}
+
+			// --- Setting RaCommnets values
+			if (txtRAComments.getText() != null && !txtRAComments.getText().trim().isEmpty()) {
+				anesthesiaRecord.setRaComments(txtRAComments.getText().trim());
+			}
+			// --- Setting MAC values
+			if (txtMAC_Comments.getText() != null && !txtMAC_Comments.getText().trim().isEmpty()) {
+				anesthesiaRecord.setMacComment(txtMAC_Comments.getText().trim());
+			}
+
+			// ---call CreateAnesthesiaService
+			callCreateAnesthesiaService();
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+			Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+		}
+
+	}
+
+	/**
+	 * This method calls CreateAnesthesiaService for saving input to database
+	 *
+	 * @throws Exception
+	 */
+	private void callCreateAnesthesiaService() throws Exception {
+
+		try {
+			anesthesiaObjCreated = false;
+			if (anesthesiaRecord != null) {
+				if (anesthesiaRecord.getAnesthesiaRecordId() != null) {
+					anesthesiaObjCreated = true;
+				}
+			}
+
+			CreateAnesthesiaService createAnesthesiaService = CreateAnesthesiaService.getInstance(anesthesiaRecord,
+					medicationList);
+			createAnesthesiaService.restart();
+
+			createAnesthesiaServiceSuccessHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+					anesthesiaRecord = createAnesthesiaService.getCreatedAnesthesiaRecord();
+					disablePaneMainContent.setVisible(false);
+					createAnesthesiaService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							createAnesthesiaServiceSuccessHandler);
+					createAnesthesiaService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							createAnesthesiaServiceFailedHandler);
+
+					Main.getInstance().getStageManager().closeSecondaryStage();
+					removeListener();
+
+					if (anesthesiaObjCreated) {
+						Main.getInstance().getUtility().showNotification("Information", "Success",
+								"Anesthesia details updated successfully!");
+					} else {
+
+						Main.getInstance().getUtility().showNotification("Information", "Success",
+								"Anesthesia details saved successfully!");
+					}
+				}
+			};
+
+			createAnesthesiaService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+					createAnesthesiaServiceSuccessHandler);
+
+			createAnesthesiaServiceFailedHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+
+					disablePaneMainContent.setVisible(false);
+
+					createAnesthesiaService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							createAnesthesiaServiceSuccessHandler);
+					createAnesthesiaService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							createAnesthesiaServiceFailedHandler);
+
+					Main.getInstance().getUtility().showNotification("Error", "Error",
+							createAnesthesiaService.getException().getMessage());
+				}
+			};
+
+			createAnesthesiaService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+					createAnesthesiaServiceFailedHandler);
+
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+			Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+		}
+	}
+
+	/**
+	 *
+	 * This method fetches anesthesia records for passed CaseId and patientId
+	 *
+	 * @param patientId
+	 * @param caseId
+	 * @throws Exception
+	 */
+	private void callGetAnesthesiaRecordService(int patientId, long caseId) throws Exception {
+
+		try {
+			GetAnesthesiaRecordService getAnesthesiaRecordService = GetAnesthesiaRecordService.getInstance(patientId,
+					caseId);
+			getAnesthesiaRecordService.restart();
+
+			getAnesthesiaRecordServiceSuccessHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+					AnesthesiaFetchListWithMedication returnList = getAnesthesiaRecordService
+							.getAnesthesiaRecordfromDB();
+
+					if (returnList != null && returnList.getAnesthesiaRecord() != null
+							&& returnList.getAnesthesiaRecord().getAnesthesiaRecordId() != null) {
+						try {
+							anesthesiaRecord = returnList.getAnesthesiaRecord();
+							anaethesiaLogId = anesthesiaRecord.getAnesthesiaRecordId();
+							medicationList = returnList.getListOfAnesthesiaMedication();
+							// tbleMedication.setItems(medicationList);
+							tbleMedication.getItems().addAll(medicationList);
+							if (anesthesiaRecord != null) {
+								if (anesthesiaRecord.getAnesthesiaRecordId() != null) {
+									fillAnesthesiaScreen(anesthesiaRecord);
+								}
+							}
+
+						} catch (Exception e2) {
+							LOGGER.error("## Exception occured:", e2);
+						}
+					}
+					disablePaneMainContent.setVisible(false);
+
+					getAnesthesiaRecordService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							getAnesthesiaRecordServiceSuccessHandler);
+					getAnesthesiaRecordService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							getAnesthesiaRecordServiceFailedHandler);
+				}
+			};
+
+			getAnesthesiaRecordService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+					getAnesthesiaRecordServiceSuccessHandler);
+
+			getAnesthesiaRecordServiceFailedHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+					Main.getInstance().getUtility().showNotification("Error", "Error",
+							getAnesthesiaRecordService.getException().getMessage());
+					disablePaneMainContent.setVisible(false);
+
+					getAnesthesiaRecordService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							getAnesthesiaRecordServiceSuccessHandler);
+					getAnesthesiaRecordService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							getAnesthesiaRecordServiceFailedHandler);
+				}
+			};
+
+			getAnesthesiaRecordService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+					getAnesthesiaRecordServiceFailedHandler);
+
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+			Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+		}
+	}
+
+	/**
+	 * This method populate all fields with fetched Anesthesia Details from data
+	 * base
+	 *
+	 * @param obj
+	 * @throws Exception
+	 */
+	private void fillAnesthesiaScreen(IntraopAnesthesiarecord obj) throws Exception {
+
+		try {
+			// ---GENERAL ANESTHEISA
+			// ---Setting SuperGlotic Airway textboxes
+			if (obj.getGaSupraglotticSize() != null) {
+				txtSA_Size.setText(obj.getGaSupraglotticSize());
+			}
+			if (obj.getGaSupraglotticAttempts() != null) {
+				txtSA_NoAtempt.setText(obj.getGaSupraglotticAttempts());
+			}
+			if (obj.getGaSupraglotticComment() != null) {
+				txtSA_Comments.setText(obj.getGaSupraglotticComment());
+			}
+
+			// ---Setting ETT textboxes
+			if (obj.getGaEttsize() != null) {
+				txtETT_Size.setText(obj.getGaEttsize());
+			}
+			if (obj.getGaEttfixedAt() != null) {
+				txtETT_FixedAt.setText(obj.getGaEttfixedAt());
+			}
+			if (obj.getGaEttattempts() != null) {
+				txtETT_NoAtempt.setText(obj.getGaEttattempts());
+			}
+			if (obj.getcuffedUncuffed() != null) {
+				choiceCoughUncough.getSelectionModel().select(obj.getcuffedUncuffed());
+			}
+			if (obj.getGaEttcomment() != null) {
+				txtETT_Comments.setText(obj.getGaEttcomment());
+			}
+
+			// ---Setting Mask textboxes
+			if (obj.getGaMaskComment() != null) {
+				txtMask_Comments.setText(obj.getGaMaskComment());
+			}
+
+			// ---Setting Ventilation textboxes
+			if (obj.getGaVentilation() != null) {
+				if (obj.getGaVentilation().equalsIgnoreCase("Spontaneous")) {
+					if (obj.getGaVentilationComment() != null)
+						txtSpontaneousCommnts.setText(obj.getGaVentilationComment());
+
+					ventilation.selectToggle(radioSpontaneous);
+
+				} else if (obj.getGaVentilation().equalsIgnoreCase("Controlled")) {
+					if (obj.getGaVentilationComment() != null) {
+						txtControlComments.setText(obj.getGaVentilationComment());
+					}
+					if (obj.getGaAirPressure() != null) {
+						txtAirwayPressure.setText(obj.getGaAirPressure());
+					}
+					if (obj.getGaFiO2() != null) {
+						txtFiO2.setText(obj.getGaFiO2());
+					}
+					if (obj.getGaVt() != null) {
+						txtVT.setText(obj.getGaVt());
+					}
+					if (obj.getGaRr() != null) {
+						txtRR.setText(obj.getGaRr());
+					}
+					if (obj.getGaIe() != null) {
+						txtIE.setText(obj.getGaIe());
+					}
+
+					ventilation.selectToggle(radioControlled);
+
+				}
+			}
+
+			// ---REGIONAL ANESTHESIA
+			// ---Setting Spinal textboxes
+			if (obj.getRaSpinalSite() != null) {
+				txtSpinalSite.setText(obj.getRaSpinalSite());
+			}
+			if (obj.getRaSpinalNeedle() != null) {
+				txtSpinalNeedle.setText(obj.getRaSpinalNeedle());
+			}
+			if (obj.getRaSpinalHsl() != null) {
+				txtSpinalSensary.setText(obj.getRaSpinalHsl());
+			}
+
+			// --- Setting Epidural textboxes
+
+			if (obj.getRaEpiduralSite() != null) {
+				txtEpiduralSite.setText(obj.getRaEpiduralSite());
+			}
+			if (obj.getRaEpiduralNeedle() != null) {
+				txtEpiduralNeedle.setText(obj.getRaEpiduralNeedle());
+			}
+			if (obj.getRaEpiduralCfixedAt() != null) {
+				txtEpiduralCatheter.setText(obj.getRaEpiduralCfixedAt());
+			}
+			if (obj.getRaUlbsite() != null) {
+				if (obj.getRaUlbsite().equalsIgnoreCase("Brachial Plexus Blocks")) {
+					Ulb.selectToggle(radioULB_Brachial);
+					if (obj.getRaUlbBpbapproach() != null) {
+						dropdownULB.getSelectionModel().select(obj.getRaUlbBpbapproach());
+					}
+				} else if (obj.getRaUlbsite().equalsIgnoreCase("Peripheral Nerve Blocks")) {
+					Ulb.selectToggle(radioULB_Peripheral);
+					if (obj.getRaUlbPnbapproach() != null) {
+						dropdownULB.getSelectionModel().select(obj.getRaUlbPnbapproach());
+					}
+				} else {
+					Ulb.selectToggle(radioULB_None);
+				}
+			}
+			if (obj.getRaLlbsite() != null) {
+				if (obj.getRaLlbsite().equalsIgnoreCase("Lumbar Plexus Nerve Blocks")) {
+					Llb.selectToggle(radioLLB_Lumbar);
+					if (obj.getRaLlbLpnbapproach() != null) {
+						dropdownLLB.getSelectionModel().select(obj.getRaLlbLpnbapproach());
+					}
+
+				} else if (obj.getRaLlbsite().equalsIgnoreCase("Sacral Plexus Nerve Blocks")) {
+					Llb.selectToggle(radioLLB_Sacral);
+					if (obj.getRaLlbSpnbapproach() != null) {
+						dropdownLLB.getSelectionModel().select(obj.getRaLlbSpnbapproach());
+					}
+				} else {
+					Llb.selectToggle(radioLLB_None);
+				}
+			}
+			// --- Setting RaComment textboxes
+			if (obj.getRaComments() != null) {
+				txtRAComments.setText(obj.getRaComments());
+			}
+			// --- Setting MAC textboxes
+			if (obj.getMacComment() != null) {
+				txtMAC_Comments.setText(obj.getMacComment());
+			}
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+			Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+		}
+	}
+
+	/**
+	 * This method sets toggle group for radio buttons
+	 *
+	 * @throws Exception
+	 */
+
+	private void setRadioButtons() throws Exception {
+
+		try {
+			// ---ventilation
+			ventilation = new ToggleGroup();
+			radioSpontaneous.setUserData("Spontaneous");
+			radioSpontaneous.setToggleGroup(ventilation);
+			radioControlled.setUserData("Controlled");
+			radioControlled.setToggleGroup(ventilation);
+			radioVentilationNone.setUserData("None");
+			radioVentilationNone.setToggleGroup(ventilation);
+			ventilation.selectToggle(radioVentilationNone);
+			titlePaneSpontaneous.setVisible(false);
+			titlePaneControlled.setVisible(false);
+
+			// ---Upper Limb Block
+			Ulb = new ToggleGroup();
+			radioULB_Brachial.setUserData("Brachial Plexus Blocks");
+			radioULB_Brachial.setToggleGroup(Ulb);
+
+			radioULB_Peripheral.setUserData("Peripheral Nerve Blocks");
+			radioULB_Peripheral.setToggleGroup(Ulb);
+
+			radioULB_None.setUserData("None");
+			radioULB_None.setToggleGroup(Ulb);
+
+			Ulb.selectToggle(radioULB_None);
+
+			// ---Lower Limb Block
+			Llb = new ToggleGroup();
+			radioLLB_Lumbar.setUserData("Lumbar Plexus Nerve Blocks");
+			radioLLB_Lumbar.setToggleGroup(Llb);
+
+			radioLLB_Sacral.setUserData("Sacral Plexus Nerve Blocks");
+			radioLLB_Sacral.setToggleGroup(Llb);
+
+			radioLLB_None.setUserData("None");
+			radioLLB_None.setToggleGroup(Llb);
+
+			Llb.selectToggle(radioLLB_None);
+
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+			Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+		}
+	}
+
+	/**
+	 *
+	 * This method is used to delete a medication and reload the medication
+	 * table
+	 *
+	 * @param index
+	 * @throws Exception
+	 */
+	private void deleteMedicine(int index) throws Exception {
+
+		try {
+
+			tbleMedication.getItems().clear();
+			medicationList.remove(index);
+			tbleMedication.getItems().addAll(medicationList);
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+			Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+		}
+	}
+
+	/**
+	 * This method is used to check the empty Anesthesia Details Form
+	 *
+	 * @return
+	 */
+	private boolean isEmptyForm() {
+		try {
+
+			if (txtSA_Size.getText() != null && !txtSA_Size.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtSA_NoAtempt.getText() != null && !txtSA_NoAtempt.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtSA_Comments.getText() != null && !txtSA_Comments.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtETT_Size.getText() != null && !txtETT_Size.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtETT_FixedAt.getText() != null && !txtETT_FixedAt.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtETT_NoAtempt.getText() != null && !txtETT_NoAtempt.getText().trim().isEmpty()) {
+				return false;
+			}
+			if (!choiceCoughUncough.getValue().equalsIgnoreCase("Select")) {
+				return false;
+			}
+
+			if (txtETT_Comments.getText() != null && !txtETT_Comments.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtMask_Comments.getText() != null && !txtMask_Comments.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtSpontaneousCommnts.getText() != null && !txtSpontaneousCommnts.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtAirwayPressure.getText() != null && !txtAirwayPressure.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtFiO2.getText() != null && !txtFiO2.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtVT.getText() != null && !txtVT.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtRR.getText() != null && !txtRR.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtIE.getText() != null && !txtIE.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtControlComments.getText() != null && !txtControlComments.getText().trim().isEmpty()) {
+				return false;
+			}
+			if (txtSpinalSite.getText() != null && !txtSpinalSite.getText().trim().isEmpty()) {
+				return false;
+			}
+			if (txtSpinalNeedle.getText() != null && !txtSpinalNeedle.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtSpinalSensary.getText() != null && !txtSpinalSensary.getText().trim().isEmpty()) {
+				return false;
+			}
+			if (txtEpiduralSite.getText() != null && !txtEpiduralSite.getText().trim().isEmpty()) {
+				return false;
+			}
+			if (txtEpiduralNeedle.getText() != null && !txtEpiduralNeedle.getText().trim().isEmpty()) {
+				return false;
+			}
+			if (txtEpiduralCatheter.getText() != null && !txtEpiduralCatheter.getText().trim().isEmpty()) {
+				return false;
+			}
+			if (dropdownULB.getSelectionModel().getSelectedIndex() != 0) {
+				return false;
+			}
+			if (dropdownLLB.getSelectionModel().getSelectedIndex() != 0) {
+				return false;
+			}
+
+			if (txtRAComments.getText() != null && !txtRAComments.getText().trim().isEmpty()) {
+				return false;
+			}
+
+			if (txtMAC_Comments.getText() != null && !txtMAC_Comments.getText().trim().isEmpty()) {
+				return false;
+			}
+			return true;
+
+		} catch (Exception e) {
+
+			LOGGER.error("## Exception occured:" + e);
+			return false;
+		}
+
+	}
+
+	/**
+	 *
+	 * This method is used to validate Anesthesia Details Form
+	 *
+	 * @return
+	 */
+	private boolean isValidForm() {
+		try {
+
+//			if (txtSA_Size.getText() != null && !txtSA_Size.getText().trim().isEmpty()
+//					&& !Validations.isAlphaNumericWithSpace(txtSA_Size.getText())) {
+//				lblErrorMsg.setText("Please enter a valid Superglottic Airway Size value");
+//				return false;
+//			}
+//			if (txtSA_Size.getText() != null && !txtSA_Size.getText().trim().isEmpty()
+//					&& !Validations.maxLength(txtSA_Size.getText(), 10)) {
+//				lblErrorMsg.setText("Please enter a Superglottic Airway Size value less than 10 character");
+//				return false;
+//			}
+
+			if (txtSA_NoAtempt.getText() != null && !txtSA_NoAtempt.getText().trim().isEmpty()
+					&& !Validations.isDigitWithoutDot(txtSA_NoAtempt.getText())) {
+				lblErrorMsg.setText("Please enter a valid number for Superglottic Airway No Of Attempts");
+				return false;
+			}
+
+			if (txtSA_NoAtempt.getText() != null && !txtSA_NoAtempt.getText().trim().isEmpty()
+					&& !Validations.nonZeroBigDecimal(txtSA_NoAtempt.getText())) {
+				lblErrorMsg.setText("*Please enter value more than 0 for Superglottic Airway No Of Attempts");
+				return false;
+			}
+
+			if (txtSA_NoAtempt.getText() != null && !txtSA_NoAtempt.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtSA_NoAtempt.getText(), 10)) {
+				lblErrorMsg.setText("Please enter a  value less than 10 digits for Superglottic Airway No Of Attempts");
+				return false;
+			}
+
+			if (txtSA_Comments.getText() != null && !txtSA_Comments.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtSA_Comments.getText(), 2000)) {
+				lblErrorMsg.setText("*Please enter Superglottic Airway Comments less than 2000 characters");
+				return false;
+			}
+
+//			if (txtETT_Size.getText() != null && !txtETT_Size.getText().trim().isEmpty()
+//					&& !Validations.isDigit(txtETT_Size.getText())) {
+//				lblErrorMsg.setText("Please enter a valid ETT Size value");
+//				return false;
+//			}
+//			if (txtETT_Size.getText() != null && !txtETT_Size.getText().trim().isEmpty()
+//					&& !Validations.maxLength(txtETT_Size.getText(), 10)) {
+//				lblErrorMsg.setText("Please enter a ETT Size value less than 10 character");
+//				return false;
+//			}
+
+			if (txtETT_FixedAt.getText() != null && !txtETT_FixedAt.getText().trim().isEmpty()
+					&& !Validations.isAlphaNumericWithSpace(txtETT_FixedAt.getText())) {
+				lblErrorMsg.setText("Please enter a valid ETT Fixed at value");
+				return false;
+			}
+			if (txtETT_FixedAt.getText() != null && !txtETT_FixedAt.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtETT_FixedAt.getText(), 45)) {
+				lblErrorMsg.setText("Please enter a ETT Fixed at value less than 45 character");
+				return false;
+			}
+			if (txtETT_NoAtempt.getText() != null && !txtETT_NoAtempt.getText().trim().isEmpty()
+					&& !Validations.isDigitWithoutDot(txtETT_NoAtempt.getText())) {
+				lblErrorMsg.setText("Please enter a valid number for  ETT No Of Attempts");
+				return false;
+			}
+
+			if (txtETT_NoAtempt.getText() != null && !txtETT_NoAtempt.getText().trim().isEmpty()
+					&& !Validations.nonZeroBigDecimal(txtETT_NoAtempt.getText())) {
+				lblErrorMsg.setText("*Please enter value more than 0 for ETT No Of Attempts");
+				return false;
+			}
+
+			if (txtETT_NoAtempt.getText() != null && !txtETT_NoAtempt.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtETT_NoAtempt.getText(), 10)) {
+				lblErrorMsg.setText("Please enter a  value less than 10 digits for ETT No Of Attempts");
+				return false;
+			}
+			if (txtETT_Comments.getText() != null && !txtETT_Comments.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtETT_Comments.getText(), 2000)) {
+				lblErrorMsg.setText("*Please enter ETT Comments less than 2000 characters");
+				return false;
+			}
+
+			if (txtMask_Comments.getText() != null && !txtMask_Comments.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtMask_Comments.getText(), 2000)) {
+				lblErrorMsg.setText("*Please enter Mask Comments less than 2000 characters");
+				return false;
+			}
+			if (txtSpontaneousCommnts.getText() != null && !txtSpontaneousCommnts.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtSpontaneousCommnts.getText(), 2000)) {
+				lblErrorMsg.setText("*Please enter Ventilation Spontaneous Comments less than 2000 characters");
+				return false;
+			}
+			if (txtAirwayPressure.getText() != null && !txtAirwayPressure.getText().trim().isEmpty()
+					&& !Validations.isDigit(txtAirwayPressure.getText())) {
+				lblErrorMsg.setText("*Please enter a valid Airway Pressure value");
+				return false;
+			}
+
+			if (txtAirwayPressure.getText() != null && !txtAirwayPressure.getText().trim().isEmpty()
+					&& !Validations.decimalsUpto2places10(txtAirwayPressure.getText())) {
+				lblErrorMsg.setText("*Please enter Airway Pressure upto 10 digits and decimal upto 3 digits only");
+				return false;
+			}
+
+			if (txtAirwayPressure.getText() != null && !txtAirwayPressure.getText().trim().isEmpty()
+					&& !Validations.nonZeroBigDecimal(txtAirwayPressure.getText())) {
+				lblErrorMsg.setText("*Please enter value more than  0  for Airway Pressure");
+				return false;
+			}
+			if (txtFiO2.getText() != null && !txtFiO2.getText().trim().isEmpty()
+					&& !Validations.isDigit(txtFiO2.getText())) {
+				lblErrorMsg.setText("*Please enter a valid FiO2 value");
+				return false;
+			}
+
+			if (txtFiO2.getText() != null && !txtFiO2.getText().trim().isEmpty()
+					&& !Validations.decimalsUpto2places10(txtFiO2.getText())) {
+				lblErrorMsg.setText("*Please enter FiO2 upto 10 digits and decimal upto 3 digits only");
+				return false;
+			}
+			if (txtFiO2.getText() != null && !txtFiO2.getText().trim().isEmpty()
+					&& !Validations.nonZeroBigDecimal(txtFiO2.getText())) {
+				lblErrorMsg.setText("*Please enter value more than  0  for FiO2");
+				return false;
+			}
+			if (txtVT.getText() != null && !txtVT.getText().trim().isEmpty() && !Validations.isDigit(txtVT.getText())) {
+				lblErrorMsg.setText("*Please enter a valid VT value");
+				return false;
+			}
+
+			if (txtVT.getText() != null && !txtVT.getText().trim().isEmpty()
+					&& !Validations.decimalsUpto2places10(txtVT.getText())) {
+				lblErrorMsg.setText("*Please enter VT upto 10 digits and decimal upto 3 digits only");
+				return false;
+			}
+			if (txtVT.getText() != null && !txtVT.getText().trim().isEmpty()
+					&& !Validations.nonZeroBigDecimal(txtVT.getText())) {
+				lblErrorMsg.setText("*Please enter value more than  0  for VT");
+				return false;
+			}
+
+			if (txtRR.getText() != null && !txtRR.getText().trim().isEmpty() && !Validations.isDigit(txtRR.getText())) {
+				lblErrorMsg.setText("*Please enter a valid RR value");
+				return false;
+			}
+
+			if (txtRR.getText() != null && !txtRR.getText().trim().isEmpty()
+					&& !Validations.decimalsUpto2places10(txtRR.getText())) {
+				lblErrorMsg.setText("*Please enter RR upto 10 digits and decimal upto 3 digits only");
+				return false;
+			}
+
+			if (txtRR.getText() != null && !txtRR.getText().trim().isEmpty()
+					&& !Validations.nonZeroBigDecimal(txtRR.getText())) {
+				lblErrorMsg.setText("*Please enter value more than  0  for RR");
+				return false;
+			}
+
+			if (txtControlComments.getText() != null && !txtControlComments.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtControlComments.getText(), 2000)) {
+				lblErrorMsg.setText("*Please enter Ventilation Controlled Comments less than 2000 characters");
+				return false;
+			}
+
+			if (txtSpinalSite.getText() != null && !txtSpinalSite.getText().trim().isEmpty()
+					&& !Validations.isAlphaNumericWithSpace(txtSpinalSite.getText())) {
+				lblErrorMsg.setText("Please enter a valid RA Spinal Site value");
+				return false;
+			}
+			if (txtSpinalSite.getText() != null && !txtSpinalSite.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtSpinalSite.getText(), 45)) {
+				lblErrorMsg.setText("Please enter a RA Spinal Site value less than 45 character");
+				return false;
+			}
+
+			if (txtSpinalNeedle.getText() != null && !txtSpinalNeedle.getText().trim().isEmpty()
+					&& !Validations.isAlphaNumericWithSpace(txtSpinalNeedle.getText())) {
+				lblErrorMsg.setText("Please enter a valid RA Spinal Needle value");
+				return false;
+			}
+			if (txtSpinalNeedle.getText() != null && !txtSpinalNeedle.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtSpinalNeedle.getText(), 10)) {
+				lblErrorMsg.setText("Please enter a RA Spinal Needle value less than 10 character");
+				return false;
+			}
+			if (txtSpinalSensary.getText() != null && !txtSpinalSensary.getText().trim().isEmpty()
+					&& !Validations.isAlphaNumericWithSpace(txtSpinalSensary.getText())) {
+				lblErrorMsg.setText("Please enter a valid RA Spinal Higest Sensory Level value");
+				return false;
+			}
+			if (txtSpinalSensary.getText() != null && !txtSpinalSensary.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtSpinalSensary.getText(), 45)) {
+				lblErrorMsg.setText("Please enter a RA Spinal Higest Sensory Level value less than 45 character");
+				return false;
+			}
+
+			if (txtEpiduralSite.getText() != null && !txtEpiduralSite.getText().trim().isEmpty()
+					&& !Validations.isAlphaNumericWithSpace(txtEpiduralSite.getText())) {
+				lblErrorMsg.setText("Please enter a valid RA Epidural Site value");
+				return false;
+			}
+			if (txtEpiduralSite.getText() != null && !txtEpiduralSite.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtEpiduralSite.getText(), 45)) {
+				lblErrorMsg.setText("Please enter a RA Epidural Site value less than 45 character");
+				return false;
+			}
+			if (txtEpiduralNeedle.getText() != null && !txtEpiduralNeedle.getText().trim().isEmpty()
+					&& !Validations.isAlphaNumericWithSpace(txtEpiduralNeedle.getText())) {
+				lblErrorMsg.setText("Please enter a valid Epidural Spinal Needle value");
+				return false;
+			}
+			if (txtEpiduralNeedle.getText() != null && !txtEpiduralNeedle.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtEpiduralNeedle.getText(), 10)) {
+				lblErrorMsg.setText("Please enter a Epidural Spinal Needle value less than 10 character");
+				return false;
+			}
+			if (txtEpiduralCatheter.getText() != null && !txtEpiduralCatheter.getText().trim().isEmpty()
+					&& !Validations.isAlphaNumericWithSpace(txtEpiduralCatheter.getText())) {
+				lblErrorMsg.setText("Please enter a valid RA Epidural Higest Sensory Level value");
+				return false;
+			}
+			if (txtEpiduralCatheter.getText() != null && !txtEpiduralCatheter.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtEpiduralCatheter.getText(), 45)) {
+				lblErrorMsg.setText("Please enter a RA Epidural Catheter fixed value  less than 45 character");
+				return false;
+			}
+			if (ventilation.getSelectedToggle().getUserData().toString().equalsIgnoreCase("Controlled")) {
+				if (txtAirwayPressure.getText().isEmpty() && txtFiO2.getText().isEmpty() && txtVT.getText().isEmpty()
+						&& txtRR.getText().isEmpty() && txtIE.getText().isEmpty()
+						&& txtControlComments.getText().isEmpty()) {
+					lblErrorMsg.setText("Please enter atleast one of the controlled parameter.");
+					return false;
+				}
+			} else if (ventilation.getSelectedToggle().getUserData().toString().equalsIgnoreCase("Spontaneous")
+					&& (txtSpontaneousCommnts.getText() == null
+							|| txtSpontaneousCommnts.getText().trim().equalsIgnoreCase(""))) {
+				{
+					lblErrorMsg.setText("Please enter Spontaneous comments.");
+					return false;
+				}
+
+			}
+			if (!Ulb.getSelectedToggle().getUserData().toString().equalsIgnoreCase("None")
+					&& dropdownULB.getSelectionModel().getSelectedIndex() == 0) {
+				lblErrorMsg.setText("Please select ULB Nerve Block.");
+				return false;
+			}
+			if (!Llb.getSelectedToggle().getUserData().toString().equalsIgnoreCase("None")
+					&& dropdownLLB.getSelectionModel().getSelectedIndex() == 0) {
+				lblErrorMsg.setText("Please select LLB Nerve Block.");
+				return false;
+			}
+
+			if (txtRAComments.getText() != null && !txtRAComments.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtRAComments.getText(), 2000)) {
+				lblErrorMsg.setText("*Please enter RA Comments less than 2000 characters");
+				return false;
+			}
+			if (txtMAC_Comments.getText() != null && !txtMAC_Comments.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtMAC_Comments.getText(), 2000)) {
+				lblErrorMsg.setText("*Please enter MAC Comments less than 2000 characters");
+				return false;
+			}
+			return true;
+		} catch (Exception e) {
+
+			LOGGER.error("## Exception occured:" + e);
+			return false;
+		}
+
+	}
+
+	/**
+	 * This method is used to check empty mediaction form
+	 *
+	 * @return
+	 */
+	private boolean isIncompleteMedicationForm() {
+		try {
+
+			if (choiceRAType.getSelectionModel().getSelectedIndex() == 0) {
+				return true;
+			}
+			if (txtMedicine.getText() == null || txtMedicine.getText().trim().isEmpty()) {
+				return true;
+			}
+			if (txtVolume.getText() == null || txtVolume.getText().trim().isEmpty()) {
+				return true;
+			}
+			if (txtAdjustment.getText() == null || txtAdjustment.getText().trim().isEmpty()) {
+				return true;
+			}
+		} catch (Exception e) {
+
+			LOGGER.error("## Exception occured:" + e);
+		}
+		return false;
+	}
+
+	/**
+	 * This method is used to validate mediaction form
+	 *
+	 * @return
+	 */
+	private boolean isValidMedicationForm() {
+
+		try {
+			if (!fromSearch) {
+				if (txtMedicine.getText() != null && !txtMedicine.getText().trim().isEmpty()
+						&& !Validations.isAlphaNumericWithSpaceAndSpecialCharacter(txtMedicine.getText().trim())) {
+					lblErrorMsg.setText("*Please enter a valid medicine name");
+					return false;
+				}
+			}
+
+			if (txtMedicine.getText() != null && !txtMedicine.getText().trim().isEmpty()
+					&& !Validations.maxLength(txtMedicine.getText(), 1000)) {
+				lblErrorMsg.setText("*Please enter medicine name less than 1000");
+				return false;
+			}
+
+			if (txtVolume.getText() != null && !txtVolume.getText().trim().isEmpty()
+					&& !Validations.isDigit(txtVolume.getText())) {
+				lblErrorMsg.setText("*Please enter a valid volume value");
+				return false;
+			}
+
+			if (txtVolume.getText() != null && !txtVolume.getText().trim().isEmpty()
+					&& !Validations.decimalsUpto2places(txtVolume.getText())) {
+				lblErrorMsg.setText("*Please enter volume upto 4 digits and decimal upto 2 digits only");
+				return false;
+			}
+			if (txtVolume.getText() != null && !txtVolume.getText().trim().isEmpty()
+					&& !Validations.nonZeroBigDecimal(txtVolume.getText())) {
+				lblErrorMsg.setText("*Please enter value more than  0  for volume");
+				return false;
+			}
+
+			if (txtAdjustment.getText() != null && !txtAdjustment.getText().trim().isEmpty()
+					&& !Validations.isDigit(txtAdjustment.getText())) {
+				lblErrorMsg.setText("*Please enter a valid adjustment value");
+				return false;
+			}
+
+			if (txtAdjustment.getText() != null && !txtAdjustment.getText().trim().isEmpty()
+					&& !Validations.decimalsUpto2places(txtAdjustment.getText())) {
+				lblErrorMsg.setText("*Please enter adjustment upto 4 digits and decimal upto 2 digits only");
+				return false;
+			}
+
+			if (txtAdjustment.getText() != null && !txtAdjustment.getText().trim().isEmpty()
+					&& !Validations.nonZeroBigDecimal(txtAdjustment.getText())) {
+				lblErrorMsg.setText("*Please enter value more than  0  for adjustment");
+				return false;
+			}
+			return true;
+		} catch (Exception e) {
+
+			LOGGER.error("## Exception occured:" + e);
+			return false;
+		}
+
+	}
+
+	/**
+	 * This method is used to remove listeners
+	 */
+	public void removeListener() {
+		try {
+			btnAdd.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnAddHandler);
+			btnClose.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+			btnReset.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnResetHandler);
+			btnDelete.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnDeleteHandler);
+			btnSave.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnSaveHandler);
+			txtMedicine.textProperty().removeListener(txtMedicineChangeListener);
+			txtMedicine.focusedProperty().removeListener(txtMedicineFucousChangeListener);
+			medSearchList.getSelectionModel().selectedItemProperty().removeListener(medSearchListChangeListener);
+			ventilation.selectedToggleProperty().removeListener(ventilationListener);
+			Ulb.selectedToggleProperty().removeListener(UlbListener);
+			Llb.selectedToggleProperty().removeListener(LlbListener);
+			tbleMedication.getSelectionModel().selectedItemProperty().removeListener(tableChangeListener);
+
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+		}
+
+	}
+}

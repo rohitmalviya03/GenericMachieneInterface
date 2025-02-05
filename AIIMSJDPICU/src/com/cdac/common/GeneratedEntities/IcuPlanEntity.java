@@ -1,0 +1,233 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.common.GeneratedEntities;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * @author rohi.bhardwaj
+ *
+ */
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "icu_plan_details", catalog = "intraop_dev")
+public class IcuPlanEntity implements java.io.Serializable {
+	private Integer icuPlanId;
+	private String extubation;
+	private String postExtubation;
+	private String sedation;
+	private String analgesia;
+	private String paralysis;
+	private BigDecimal mao;
+	private BigDecimal cvp;
+	private BigDecimal hr;
+	private BigDecimal spO2;
+	private BigDecimal rlRate;
+	private BigDecimal dnsRate;
+	private String drl;
+	private String investigations;
+	private String nurseName;
+	private long caseId;
+	private String createdBy;
+	private Date createdTime;
+	private String updatedBy;
+	private Date updatedTime;
+
+
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "IcuPlanId", unique = true, nullable = false)
+	public Integer getIcuPlanId() {
+		return icuPlanId;
+	}
+
+	public void setIcuPlanId(Integer icuPlanId) {
+		this.icuPlanId = icuPlanId;
+	}
+
+	@Column(name = "Extubation")
+	public String getExtubation() {
+		return extubation;
+	}
+
+	public void setExtubation(String extubation) {
+		this.extubation = extubation;
+	}
+
+	@Column(name = "PostExtubation")
+	public String getPostExtubation() {
+		return postExtubation;
+	}
+
+	public void setPostExtubation(String postExtubation) {
+		this.postExtubation = postExtubation;
+	}
+
+	@Column(name = "Sedation")
+	public String getSedation() {
+		return sedation;
+	}
+
+	public void setSedation(String sedation) {
+		this.sedation = sedation;
+	}
+
+	@Column(name = "Analgesia")
+	public String getAnalgesia() {
+		return analgesia;
+	}
+
+	public void setAnalgesia(String analgesia) {
+		this.analgesia = analgesia;
+	}
+
+	@Column(name = "Paralysis")
+	public String getParalysis() {
+		return paralysis;
+	}
+
+	public void setParalysis(String paralysis) {
+		this.paralysis = paralysis;
+	}
+
+	@Column(name = "MAO")
+	public BigDecimal getMao() {
+		return mao;
+	}
+
+	public void setMao(BigDecimal mao) {
+		this.mao = mao;
+	}
+
+	@Column(name = "Cvp")
+	public BigDecimal getCvp() {
+		return cvp;
+	}
+
+	public void setCvp(BigDecimal cvp) {
+		this.cvp = cvp;
+	}
+
+	@Column(name = "Hr")
+	public BigDecimal getHr() {
+		return hr;
+	}
+
+	public void setHr(BigDecimal hr) {
+		this.hr = hr;
+	}
+
+	@Column(name = "SpO2")
+	public BigDecimal getSpO2() {
+		return spO2;
+	}
+
+	public void setSpO2(BigDecimal spO2) {
+		this.spO2 = spO2;
+	}
+
+	@Column(name = "RlRate")
+	public BigDecimal getRlRate() {
+		return rlRate;
+	}
+
+	public void setRlRate(BigDecimal rlRate) {
+		this.rlRate = rlRate;
+	}
+
+	@Column(name = "Drl")
+	public String getDrl() {
+		return drl;
+	}
+
+	public void setDrl(String drl) {
+		this.drl = drl;
+	}
+
+	@Column(name = "Investigations")
+	public String getInvestigations() {
+		return investigations;
+	}
+
+	public void setInvestigations(String investigations) {
+		this.investigations = investigations;
+	}
+
+	@Column(name = "Nurse_Name")
+	public String getNurseName() {
+		return nurseName;
+	}
+
+	public void setNurseName(String nurseName) {
+		this.nurseName = nurseName;
+	}
+
+	@Column(name = "DnsRate")
+	public BigDecimal getDnsRate() {
+		return dnsRate;
+	}
+
+	public void setDnsRate(BigDecimal dnsRate) {
+		this.dnsRate = dnsRate;
+	}
+
+	@Column(name = "CaseId")
+	public long getCaseId() {
+		return caseId;
+	}
+
+	public void setCaseId(long caseId) {
+		this.caseId = caseId;
+	}
+
+	@Column(name = "CreatedBy")
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@Column(name = "CreatedTime")
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	@Column(name = "UpdatedBy")
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	@Column(name = "UpdatedTime")
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
+
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
+}

@@ -1,0 +1,68 @@
+import ca.uhn.hl7v2.model.v251.message.OML_O33;
+import ca.uhn.hl7v2.model.v251.segment.MSH;
+import ca.uhn.hl7v2.model.v251.segment.PID;
+import ca.uhn.hl7v2.model.v251.segment.PV1;
+import ca.uhn.hl7v2.model.v251.segment.SPM;
+import ca.uhn.hl7v2.model.v251.segment.OBR;
+import ca.uhn.hl7v2.parser.PipeParser;
+import ca.uhn.hl7v2.HL7Exception;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class HL7MessageGenerator {
+
+    public static String generateOrderMessage(String sampleNumber) throws HL7Exception {
+        // Create a new OML_O33 message for each request
+        OML_O33 message = new OML_O33();
+        message.initQuickstart("OML", "O33", "P");
+
+        // Set MSH (Message Header) information
+        MSH msh = message.getMSH();
+        msh.getSendingApplication().getNamespaceID().setValue("LIS");
+        msh.getSendingFacility().getNamespaceID().setValue("LAB");
+        msh.getReceivingApplication().getNamespaceID().setValue("myla");
+        msh.getReceivingFacility().getNamespaceID().setValue("BMX");
+        msh.getDateTimeOfMessage().getTimeOfAnEvent().setValue(currentTimestamp());
+        msh.getMessageType().getMessageCode().setValue("OML");
+        msh.getMessageType().getTriggerEvent().setValue("O33");
+        msh.getMessageControlID().setValue("MSG-" + currentTimestamp());
+        msh.getProcessingID().getProcessingID().setValue("P");
+        msh.getVersionID().getVersionID().setValue("2.5.1");
+
+        // Set PID (Patient Information) segment
+        PID pid = message.getPATIENT().getPID();
+        pid.getPatientID().getIDNumber().setValue("116548120");  // Patient ID
+        pid.getPatientName(0).getFamilyName().getSurname().setValue("KUMAR");
+        pid.getPatientName(0).getGivenName().setValue("RAJiv");
+        pid.getDateTimeOfBirth().getTimeOfAnEvent().setValue("19681025");
+        pid.getAdministrativeSex().setValue("M");
+
+        // Set PV1 (Patient Visit) segment
+        PV1 pv1 = message.getPATIENT().getPATIENT_VISIT().getPV1();
+        pv1.getAssignedPatientLocation().getPointOfCare().setValue("GW-NEW CUBICAL WARD-J");
+        pv1.getAssignedPatientLocation().getBed().setValue("8-FCGW-J-29");
+        pv1.getAssignedPatientLocation().getFacility().getNamespaceID().setValue("AIIMSBHOPAL");
+
+        // Set SPM (Specimen Information) segment with dynamic sample number
+        SPM spm = message.getSPECIMEN(0).getSPM();
+        spm.getSpecimenID().getEntityIdentifier().setValue(sampleNumber);  // Use provided sample number
+        spm.getSpecimenType().getText().setValue("URIN");
+        spm.getSpecimenType().getIdentifier().setValue("URIN");
+
+        // Set OBR (Observation Request) segment with dynamic sample number
+        OBR obr = message.getORDER().getORDER_DETAIL().getOBR();
+        obr.getUniversalServiceIdentifier().getIdentifier().setValue("SU");
+        obr.getUniversalServiceIdentifier().getText().setValue("SU");
+        obr.getFillerOrderNumber().getEntityIdentifier().setValue(sampleNumber);  // Dynamic sample number
+
+        // Convert message to HL7 string format using PipeParser
+        PipeParser parser = new PipeParser();
+        return parser.encode(message);
+    }
+
+    // Method to generate the current timestamp in the format yyyyMMddHHmmss
+    private static String currentTimestamp() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        return dateFormat.format(new Date());
+    }
+}

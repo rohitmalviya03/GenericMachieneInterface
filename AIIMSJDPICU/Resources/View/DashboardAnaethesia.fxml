@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="210.0" prefWidth="512.0" style="-fx-background-color: #fff;" styleClass="customeBorder" stylesheets="@../styles/newStyles.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardAnaestheiaController">
+   <top>
+      <HBox prefHeight="36.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lblTime" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="115.0" style="-fx-font-weight: bold;" styleClass="pageHeader" />
+            <Label alignment="CENTER" prefHeight="36.0" prefWidth="263.0" styleClass="pageHeader" text="Anesthesia" />
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="93.0" style="-fx-font-weight: bold;" styleClass="pageHeader" />
+            <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="36.0" styleClass="btnTopBar">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="20" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox prefHeight="66.0" prefWidth="435.0">
+                     <children>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="106.0" text="Ppeak (cmH20)" />
+                              <TextField fx:id="txtPpeak" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="100.0" promptText="Ppeak" styleClass="text-field">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox minWidth="-Infinity" prefHeight="70.0" prefWidth="115.0" spacing="3.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="113.0" text="Pmean (cmH20)" />
+                              <TextField fx:id="txtPmean" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" promptText="Pmean" />
+                           </children>
+                        </VBox>
+                        <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="100.0" text="PEEP (cmH20)" />
+                              <TextField fx:id="txtPEEP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="30.0" prefWidth="100.0" promptText="PEEP" />
+                           </children>
+                        </VBox>
+                        <VBox minWidth="-Infinity" prefHeight="60.0" prefWidth="155.0" spacing="3.0">
+                           <children>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Label prefHeight="23.0" prefWidth="139.0" text="CircuitO2 (%)" />
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="txtCircuitO2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="30.0" prefWidth="100.0" promptText="CircuitO2" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="66.0" prefWidth="435.0">
+                     <children>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="115.0" spacing="3.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="78.0" text="TVexp (ml)" />
+                              <TextField fx:id="txtTVexp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="100.0" promptText="TVexp" styleClass="text-field">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox minWidth="-Infinity" prefHeight="70.0" prefWidth="115.0" spacing="3.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="113.0" text="MVexp (l/min)" />
+                              <TextField fx:id="txtMVexp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" promptText="MVexp" />
+                           </children>
+                        </VBox>
+                        <VBox minWidth="-Infinity" prefHeight="61.0" prefWidth="151.0" spacing="3.0">
+                           <children>
+                              <Label prefHeight="23.0" prefWidth="152.0" text="RR (rpm)" />
+                              <TextField fx:id="txtRR" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="30.0" prefWidth="100.0" promptText="RR" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" prefHeight="59.0" prefWidth="526.0">
+                     <children>
+                        <Label fx:id="lblError" prefHeight="21.0" prefWidth="430.0" textFill="RED" />
+                        <Button fx:id="btnSave" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="saveBtn" text="Save" />
+                     </children>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <AnchorPane fx:id="disablePaneMainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="162.0" prefWidth="500.0" style="-fx-background-color: #505050;" visible="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="409.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../res/Spinner.gif" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="719.0" style="-fx-background-color: white;" styleClass="customeBorder" stylesheets="@../styles/newStyles.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchCaseController">
+   <top>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="680.0" styleClass="pageHeader" text="Scheduled Cases" />
+            <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="btnTopBar" text="Button">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="18.0" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="706.0" spacing="5.0">
+         <children>
+            <HBox prefHeight="126.0" prefWidth="683.0" spacing="15.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="184.0" style="-fx-font-weight: bold;" text="Procedure Date Between:" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="170.0" spacing="5.0">
+                                 <children>
+                                    <Label text="From Date" />
+                                    <DatePicker fx:id="datePickerStartDate" promptText="Choose Date" />
+                                 </children>
+                              </VBox>
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="170.0" spacing="5.0">
+                                 <children>
+                                    <Label text="To Date" />
+                                    <DatePicker fx:id="datePickerEndDate" promptText="Choose Date" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="153.0" spacing="5.0">
+                     <children>
+                        <Label text="OT Name" />
+                        <ChoiceBox fx:id="choiceOT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="150.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <Button fx:id="btnSearch" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="120.0" styleClass="saveBtn" text="Search">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="16" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="45.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <StackPane>
+               <children>
+                  <TableView fx:id="tableViewAllCase" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="686.0">
+                     <columns>
+                        <TableColumn fx:id="columnCRNumber" maxWidth="131.0" minWidth="131.0" prefWidth="131.0" text="CR Number" />
+                        <TableColumn fx:id="columnFirstName" prefWidth="168.0" text="First Name" />
+                        <TableColumn fx:id="columnLastName" prefWidth="141.0" text="Last Name" />
+                        <TableColumn fx:id="columnDate" maxWidth="317.0" minWidth="137.0" prefWidth="158.0" text="Procedure Date" />
+                        <TableColumn fx:id="columnStatus" maxWidth="231.0" minWidth="87.0" prefWidth="87.0" text="Status" />
+                     </columns>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </TableView>
+                  <StackPane fx:id="stackPaneLoader" visible="false">
+                     <children>
+                        <AnchorPane opacity="0.7" style="-fx-background-color: #ddd;">
+                           <children>
+                              <HBox layoutX="283.0" layoutY="113.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="138.0" spacing="5.0">
+                                 <children>
+                                    <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../loading.gif" />
+                                       </image>
+                                    </ImageView>
+                                    <Label prefHeight="40.0" prefWidth="82.0" style="-fx-font-size: 15;" text="Fetching..." />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </children>
+            </StackPane>
+            <HBox alignment="BOTTOM_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="686.0" spacing="10.0">
+               <children>
+                  <Pagination fx:id="paginator" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="690.0" visible="false">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Pagination>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="683.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lblError" prefHeight="29.0" prefWidth="416.0" textFill="RED" visible="false" />
+                  <Button fx:id="btnLoadcase" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" styleClass="saveBtn" text="Load Case" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="20.0" right="10.0" top="20.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

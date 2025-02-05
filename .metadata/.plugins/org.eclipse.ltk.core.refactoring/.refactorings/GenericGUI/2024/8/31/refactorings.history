@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;GenericGUI/resource/GMEI_2 (2).jpg&apos; to &apos;GMEI_Final.jpg&apos;" description="Rename resource &apos;GMEI_2 (2).jpg&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="resource/GMEI_2 (2).jpg" name="GMEI_Final.jpg" stamp="1722573729988" updateReferences="true"/>
+</session>

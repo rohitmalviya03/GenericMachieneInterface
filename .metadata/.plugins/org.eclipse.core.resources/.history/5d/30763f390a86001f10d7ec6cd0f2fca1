@@ -1,0 +1,24 @@
+import ca.uhn.hl7v2.model.v251.message.OML_O21;
+import ca.uhn.hl7v2.model.v251.segment.PID;
+import ca.uhn.hl7v2.model.v251.segment.OBR;
+import ca.uhn.hl7v2.parser.PipeParser;
+
+public class HL7MessageGenerator {
+
+    public static String generateOrderMessage(String sampleNumber) throws Exception {
+        OML_O21 message = new OML_O21();
+        message.initQuickstart("OML", "O21", "P");
+
+        // Set up patient information
+        PID pid = message.getPATIENT().getPID();
+        pid.getPatientID().getIDNumber().setValue("12345");  // Dummy patient ID
+
+        // Set up order details with sample number
+        OBR obr = message.getORDER().getOBR();
+        obr.getFillerOrderNumber().getEntityIdentifier().setValue(sampleNumber); // Set sample number
+
+        // Convert message to HL7 pipe-delimited string
+        PipeParser parser = new PipeParser();
+        return parser.encode(message);
+    }
+}

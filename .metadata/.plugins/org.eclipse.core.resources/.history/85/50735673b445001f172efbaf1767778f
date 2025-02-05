@@ -1,0 +1,67 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package services;
+
+import java.util.List;
+import java.util.Map;
+
+import com.infosys.common.GeneratedEntities.Entityvalues;
+import com.infosys.common.util.DAOFactory;
+
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import model.UserSession;
+public class GetMasterDataMedService extends Service<Void>
+{
+	private Map<String, List<Entityvalues>> entityDetailsObject;
+
+	public Map<String, List<Entityvalues>> getEntityDetailsObject()
+	{
+		return entityDetailsObject;
+	}
+	
+	private static GetMasterDataMedService instance = null;
+
+	public static GetMasterDataMedService getInstance() {
+		if (instance == null) {
+			instance = new GetMasterDataMedService();
+		}
+		return instance;
+	}
+
+	private GetMasterDataMedService() {
+		super();
+	}
+
+	@Override
+	protected Task<Void> createTask()
+	{
+		// TODO Auto-generated method stub
+		return new Task<Void>()
+		{
+
+			@Override
+			protected Void call() throws Exception
+			{
+				// call DB method to save new patient details
+
+				try
+				{
+					entityDetailsObject = DAOFactory.getMasterDataDetails()
+					        .getMasterDataForMedication(UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+				}
+				catch (Exception e) 
+				{
+					throw e;
+				}
+
+				return null;
+			}
+
+		};
+	}
+}

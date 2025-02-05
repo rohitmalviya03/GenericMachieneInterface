@@ -1,0 +1,29 @@
+eqp = 100024
+hos = 99918
+uid = 10716
+ip =https://aiimsgorakhpur.in
+ip_test = hmis.rcil.gov.in
+local_port = 8082
+ip.l = 10.226.49.207
+port = 50001
+formatid = 20047
+server_ip=10.226.28.174
+portname=COM3
+httpcheck=0
+server_port=50001
+baudrate=9600
+order_port=52000
+
+graph_path=C:/Users/rohitmalviya/Desktop/BIORED
+fileReadPath=C:/Users/rohitmalviya/Desktop/BKPPP/Arkraylog
+fileSavePath=C:/TcpFiles/property/fileSave.txt
+fileImgPath=C:/TcpFiles/property/images
+
+
+db_url=localhost:5432/testdbicu
+db_user=postgres
+db_pwd=root
+
+--db_url=edb://localhost:5444/aiims_jodhpur
+--db_user=aiimsjodhpur
+--db_pwd=@aiimsjodhpur

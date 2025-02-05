@@ -1,0 +1,27 @@
+package Server;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.jdatepicker.impl.JFormattedTextField.AbstractFormatter;
+
+public class DateLabelFormatter extends AbstractFormatter {
+
+    private static final String DATE_PATTERN = "yyyy-MM-dd"; // Define your date pattern
+    private final SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_PATTERN, Locale.ENGLISH);
+
+    @Override
+    public Object stringToValue(String text) throws ParseException {
+        return dateFormatter.parse(text); // Convert text to Date
+    }
+
+    @Override
+    public String valueToString(Object value) throws ParseException {
+        if (value != null) {
+            Date date = (Date) value; // Convert Date to text
+            return dateFormatter.format(date);
+        }
+        return "";
+    }
+}

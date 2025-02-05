@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;AIIMSJPHL7&apos; to &apos;GenericGUI&apos;" description="Rename resource &apos;AIIMSJPHL7&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/AIIMSJPHL7" name="GenericGUI" stamp="1719554205227" updateReferences="true"/>
+</session>

@@ -1,0 +1,465 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package controllers;
+
+import java.math.BigDecimal;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import org.apache.log4j.Logger;
+
+import com.infosys.common.GeneratedEntities.IntraopOutput;
+import com.infosys.common.GeneratedEntities.Patient;
+import com.infosys.common.GeneratedEntities.Patientcase;
+import com.infosys.common.util.Validations;
+
+import application.Main;
+import javafx.application.Platform;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import mediatorPattern.ControllerMediator;
+import model.PatientSession;
+import services.SaveAndGetTotalOutputService;
+
+/**
+ * This controller is used to Add out put from main Dashboard
+ *
+ * @author Sudeep_Sahoo
+ *
+ *
+ */
+public class DashboardOutputController implements Initializable {
+
+	@FXML
+	private Label lblTime;
+
+	@FXML
+	private Label lblSelectetMethod;
+
+	@FXML
+	private Button btnClose;
+
+	@FXML
+	private Label lblOutputName;
+
+	@FXML
+	private VBox vbVolume;
+
+	@FXML
+	private Label lblVolume;
+
+	@FXML
+	private TextField txtVolume;
+
+	@FXML
+	private Label lblError;
+
+	@FXML
+	private Button btnSave;
+
+	@FXML
+	private AnchorPane disablePaneMainContent;
+
+	private Patient patient;
+	private Patientcase patientCase;
+	private IntraopOutput outPutDetails;
+	private Calendar selectedTime;
+
+	public void setSelectedTime(Calendar selectedTime) {
+		this.selectedTime = selectedTime;
+	}
+
+	private EventHandler<WorkerStateEvent> saveUpdateOutputServiceSuccessHandler;
+
+	private EventHandler<WorkerStateEvent> saveUpdateOutputServiceFailedHandler;
+
+	private EventHandler<MouseEvent> btnCloseHandler;
+
+	private EventHandler<MouseEvent> btnSaveHandler;
+	private EventHandler<javafx.scene.input.KeyEvent> enterKeyPressEventHandler;
+
+	private boolean isTertiaryWindow;
+
+	private boolean fromHistoryScreen;
+
+	/**
+	 * Setter for History Screen.
+	 *
+	 * @param fromHistoryScreen
+	 *            Boolean parameter to set.
+	 */
+	public void setFromHistoryScreen(boolean fromHistoryScreen) {
+		this.fromHistoryScreen = fromHistoryScreen;
+	}
+
+	public boolean isTertiaryWindow() {
+		return isTertiaryWindow;
+	}
+
+	public void setTertiaryWindow(boolean isTertiaryWindow) {
+		this.isTertiaryWindow = isTertiaryWindow;
+	}
+
+	public TextField getTxtVolume() {
+		return txtVolume;
+	}
+
+	public void setOutPutDetails(IntraopOutput outPutDetails) {
+		this.outPutDetails = outPutDetails;
+	}
+
+	public Label getLblTime() {
+		return lblTime;
+	}
+
+	// public Label getLblSelectetMethod() {
+	// return lblSelectetMethod;
+	// }
+
+	public Label getLblOutputName() {
+		return lblOutputName;
+	}
+
+	// public String getSelectedOutputName() {
+	// return selectedOutputName;
+	// }
+
+	// public void setSelectedOutputName(String selectedOutputName) {
+	// this.selectedOutputName = selectedOutputName;
+	// }
+
+	// public String getTimeString() {
+	// return timeString;
+	// }
+
+	// public void setTimeString(String timeString) {
+	// this.timeString = timeString;
+	// }
+
+	private static final Logger LOG = Logger.getLogger(DashboardOutputController.class.getName());
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		try {
+			ControllerMediator.getInstance().registerDashboardOutputController(this);
+			if (PatientSession.getInstance().getPatient() != null)
+				patient = PatientSession.getInstance().getPatient();
+			if (PatientSession.getInstance().getPatientCase() != null)
+				patientCase = PatientSession.getInstance().getPatientCase();
+			btnCloseHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+				public void handle(javafx.scene.input.MouseEvent event) {
+					try {
+						closePopup();
+					} catch (Exception e) {
+						LOG.error("## Exception occured:", e);
+					}
+				}
+			};
+			btnClose.addEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+			btnSaveHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+				public void handle(javafx.scene.input.MouseEvent event) {
+					try {
+						saveOutput();
+					} catch (Exception e) {
+						LOG.error("## Exception occured:", e);
+
+					}
+				}
+			};
+			btnSave.addEventHandler(MouseEvent.MOUSE_CLICKED, btnSaveHandler);
+
+			enterKeyPressEventHandler = new EventHandler<javafx.scene.input.KeyEvent>() {
+
+				@Override
+				public void handle(javafx.scene.input.KeyEvent event) {
+
+					if (event.getCode().equals(KeyCode.ENTER)) {
+						try {
+							saveOutput();
+						} catch (Exception e) {
+							LOG.error("## Exception occured:", e);
+						}
+					}
+				}
+			};
+			txtVolume.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, enterKeyPressEventHandler);
+
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					txtVolume.requestFocus();
+				}
+			});
+
+
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+			Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+		}
+
+	}
+
+	/**
+	 * This method is used to close Fluid window
+	 */
+	private void closePopup() {
+		try {
+			removeEventHandlers();
+			if (isTertiaryWindow)
+				Main.getInstance().getStageManager().closeTertiaryStage();
+			else
+				Main.getInstance().getStageManager().closeSecondaryStage();
+		} catch (Exception e) {
+
+		}
+
+	}
+
+	/**
+	 * This method is used to remove all event handlers and nullify the class
+	 * level variables
+	 */
+	private void removeEventHandlers() {
+		try {
+			btnClose.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+			btnSave.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnSaveHandler);
+			txtVolume.removeEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, enterKeyPressEventHandler);
+			patient = null;
+			patientCase = null;
+			outPutDetails = null;
+			saveUpdateOutputServiceSuccessHandler = null;
+			saveUpdateOutputServiceFailedHandler = null;
+			btnCloseHandler = null;
+			btnSaveHandler = null;
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+		}
+
+	}
+
+	/**
+	 * This method is used to call save output service and save output details
+	 * in data base
+	 */
+	private void saveOutput() {
+		try {
+
+			if (txtVolume.getText() != null && !txtVolume.getText().trim().isEmpty()) {
+
+				if (validate()) {
+					lblError.setVisible(false);
+					disablePaneMainContent.setVisible(true);
+
+					if (outPutDetails.getOutputRecordId() != null) {
+						outPutDetails.setVolume(BigDecimal.valueOf((new Double(txtVolume.getText()))));
+					} else {
+						/*
+						 * Calendar cal = Calendar.getInstance(); if
+						 * (selectedTime != null) {
+						 * cal.setTime(selectedTime.getTime()); } else {
+						 * cal.set(Calendar.HOUR_OF_DAY,
+						 * Integer.valueOf(lblTime.getText().split(":")[0]));
+						 * cal.set(Calendar.MINUTE,
+						 * Integer.valueOf(lblTime.getText().split(":")[1]));
+						 * cal.set(Calendar.SECOND, 0);
+						 * cal.set(Calendar.MILLISECOND, 0); }
+						 */
+
+						outPutDetails.setPatientcase(patientCase);
+						outPutDetails.setPatient(patient);
+						outPutDetails.setTime(selectedTime.getTime());
+						outPutDetails.setOutputType(lblOutputName.getText());
+						outPutDetails.setVolume(BigDecimal.valueOf((new Double(txtVolume.getText()))));
+					}
+
+					List<String> outputList = new ArrayList<String>();
+					outputList.add(lblOutputName.getText());
+
+					SaveAndGetTotalOutputService saveUpdateOutputService = SaveAndGetTotalOutputService.getInstance(
+							outPutDetails, PatientSession.getInstance().getPatientCase().getCaseId(), outputList);// new
+					// SaveOutputService(outPutDetails);
+					saveUpdateOutputService.restart();
+
+					saveUpdateOutputServiceSuccessHandler = new EventHandler<WorkerStateEvent>() {
+
+						@Override
+						public void handle(WorkerStateEvent event) {
+							// Main.getInstance().getUtility().showNotification("Information",
+							// "Success",
+							// "Output saved successfully!");
+
+							// List<String> outputList = new
+							// ArrayList<String>();
+							// outputList.add(lblOutputName.getText());
+							//
+							// GetTotalOutputTypeVolumeService
+							// getOutputTotalsListService =
+							// GetTotalOutputTypeVolumeService
+							// .getInstance(PatientSession.getInstance().getPatientCase().getCaseId(),
+							// outputList);
+							// getOutputTotalsListService.restart();
+							//
+							// getOutputTotalsListServiceSuccessHandler = new
+							// EventHandler<WorkerStateEvent>() {
+							//
+							// @Override
+							// public void handle(WorkerStateEvent event) {
+							// Map<String, String> returnTotalsMap =
+							// getOutputTotalsListService.getTotalVolume();
+							//
+							// ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+							// .fillOutputGridCell(lblOutputName.getText(),
+							// lblTime.getText(),
+							// txtVolume.getText(),
+							// returnTotalsMap.get(lblOutputName.getText()));
+							// getOutputTotalsListService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							// getOutputTotalsListServiceSuccessHandler);
+							// getOutputTotalsListService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							// getOutputTotalsListServiceFailedHandler);
+							//
+							// closePopup();
+							// Main.getInstance().getUtility().showNotification("Information",
+							// "Success",
+							// "Output saved successfully!");
+							// }
+							//
+							// };
+							//
+							// getOutputTotalsListService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							// getOutputTotalsListServiceSuccessHandler);
+							//
+							// getOutputTotalsListServiceFailedHandler = new
+							// EventHandler<WorkerStateEvent>() {
+							//
+							// @Override
+							// public void handle(WorkerStateEvent event) {
+							// Main.getInstance().getUtility().showNotification("Error",
+							// "Error",
+							// getOutputTotalsListService.getException().getMessage());
+							// getOutputTotalsListService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							// getOutputTotalsListServiceSuccessHandler);
+							// getOutputTotalsListService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							// getOutputTotalsListServiceFailedHandler);
+							// }
+							//
+							// };
+							//
+							// getOutputTotalsListService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							// getOutputTotalsListServiceFailedHandler);
+
+							try {
+								Map<String, String> returnTotalsMap = saveUpdateOutputService.getTotalVolume();
+								Calendar cal = Calendar.getInstance();
+								cal.setTime(outPutDetails.getTime());
+								if (fromHistoryScreen) {
+									ControllerMediator.getInstance().getGridHistoricalViewController()
+											.fillOutputGridCell(lblOutputName.getText(), cal, txtVolume.getText(),
+													returnTotalsMap.get(lblOutputName.getText()));
+								}
+								ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+										.fillOutputGridCell(lblOutputName.getText(), cal, txtVolume.getText(),
+												returnTotalsMap.get(lblOutputName.getText()));
+								disablePaneMainContent.setVisible(false);
+								saveUpdateOutputService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+										saveUpdateOutputServiceSuccessHandler);
+								saveUpdateOutputService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+										saveUpdateOutputServiceFailedHandler);
+								closePopup();
+								Main.getInstance().getUtility().showNotification("Information", "Success",
+										"Output saved successfully!");
+							} catch (Exception e) {
+								LOG.error("## Exception occured:", e);
+							}
+
+						}
+
+					};
+
+					saveUpdateOutputService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							saveUpdateOutputServiceSuccessHandler);
+
+					saveUpdateOutputServiceFailedHandler = new EventHandler<WorkerStateEvent>() {
+
+						@Override
+						public void handle(WorkerStateEvent event) {
+							try {
+								Main.getInstance().getUtility().showNotification("Error", "Error",
+										saveUpdateOutputService.getException().getMessage());
+								disablePaneMainContent.setVisible(false);
+								saveUpdateOutputService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+										saveUpdateOutputServiceSuccessHandler);
+								saveUpdateOutputService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+										saveUpdateOutputServiceFailedHandler);
+							} catch (Exception e) {
+								LOG.error("## Exception occured:", e);
+								Main.getInstance().getUtility().showNotification("Error", "Error",
+										"Something went wrong");
+							}
+						}
+
+					};
+
+					saveUpdateOutputService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							saveUpdateOutputServiceFailedHandler);
+
+				}
+			} else {
+				lblError.setVisible(true);
+				lblError.setText("*Please enter Volume.");
+			}
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	/**
+	 * This method is used to validate Add output form
+	 *
+	 * @return
+	 */
+	private boolean validate() {
+
+		try {
+
+			if (!Validations.isDigit(txtVolume.getText())) {
+				lblError.setText("*Please enter a valid volume value.");
+				return false;
+			}
+			if (!Validations.decimalsUpto2places(txtVolume.getText())) {
+				lblError.setText("*Please enter volume upto 4 digits and" + "\n" + " upto 2 decimal only.");
+				return false;
+			}
+
+			if (!Validations.nonZeroBigDecimal(txtVolume.getText())) {
+				lblError.setText("*Please enter volume value more than 0.");
+				return false;
+			}
+
+			return true;
+
+		} catch (Exception e) {
+			LOG.error("## Exception occured:", e);
+			return false;
+		}
+	}
+
+}

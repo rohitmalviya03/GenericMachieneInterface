@@ -1,0 +1,38 @@
+2025-01-17 14:36:06 - Response: []
+2025-01-17 14:36:06 - Save Patient Details API called
+2025-01-17 14:36:06 - Response Body as JSON Array: []
+2025-01-17 14:36:06 - Update Status API called
+2025-01-17 14:36:06 - Data sends to pacs is started ::  
+2025-01-17 14:36:06 - Error: Unable to parse URL jdbc:postgresql:/10.226.80.35:5444/hmis_aiims_patna
+2025-01-17 14:36:06 - Stack Trace: org.postgresql.util.PSQLException: Unable to parse URL jdbc:postgresql:/10.226.80.35:5444/hmis_aiims_patna
+	at org.postgresql.Driver.connect(Driver.java:281)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:247)
+	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1140)
+	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-01-17 14:36:56 - Response: []
+2025-01-17 14:36:56 - Save Patient Details API called
+2025-01-17 14:36:56 - Response Body as JSON Array: []
+2025-01-17 14:36:56 - Update Status API called
+2025-01-17 14:36:56 - Data sends to pacs is started ::  
+2025-01-17 14:36:56 - Error: Unable to parse URL jdbc:postgresql://10.226.80.35:5444//hmis_aiims_patna
+2025-01-17 14:36:56 - Stack Trace: org.postgresql.util.PSQLException: Unable to parse URL jdbc:postgresql://10.226.80.35:5444//hmis_aiims_patna
+	at org.postgresql.Driver.connect(Driver.java:281)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:247)
+	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1140)
+	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+

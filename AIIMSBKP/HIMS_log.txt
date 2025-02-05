@@ -1,0 +1,8 @@
+sam : HbA2NORMAL
+TestCode : HbA
+TestValue : 097.4
+https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100019&hos=33104&tcode=HbA&tval=097.4&sam=HbA2NORMAL&uid=10716
+sam : HbA2NORMAL
+TestCode : HbA2
+TestValue : 002.6
+https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100019&hos=33104&tcode=HbA2&tval=002.6&sam=HbA2NORMAL&uid=10716

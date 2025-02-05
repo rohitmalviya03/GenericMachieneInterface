@@ -1,0 +1,106 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class JsonParserExample {
+    public static void main(String[] args) {
+        String jsonString = "{\n" +
+                "    \"patientDetails\": {\n" +
+                "        \"requisitionType\": \"General\",\n" +
+                "        \"patientName\": {\n" +
+                "            \"firstName\": \"John\",\n" +
+                "            \"middleName\": \"H.\",\n" +
+                "            \"lastName\": \"Doe\"\n" +
+                "        },\n" +
+                "        \"age\": \"45\",\n" +
+                "        \"gender\": \"male\",\n" +
+                "        \"fatherName\": \"Robert Doe\",\n" +
+                "        \"spouseName\": \"Jane Doe\",\n" +
+                "        \"patientCrNo\": \"987654321\",\n" +
+                "        \"mobileNo\": \"555-1234\",\n" +
+                "        \"billingCategory\": \"Private\",\n" +
+                "        \"crossMatchRequired\": \"Yes\"\n" +
+                "    },\n" +
+                "    \"requisitionDetails\": {\n" +
+                "        \"hospitalType\": \"Specialty\",\n" +
+                "        \"othersHospitalName\": \"\",\n" +
+                "        \"priority\": \"Urgent\",\n" +
+                "        \"departmentName\": \"Cardiology\",\n" +
+                "        \"bedNo\": \"A101\",\n" +
+                "        \"transHistory\": \"Previous transfusions: 2\",\n" +
+                "        \"hospitalContactNo\": \"555-5678\",\n" +
+                "        \"patientABO\": \"O\",\n" +
+                "        \"patientRH\": \"Positive\",\n" +
+                "        \"sampleType\": \"EDTA\",\n" +
+                "        \"unitName\": \"Unit 1\",\n" +
+                "        \"crNoAdmissionNo\": \"CR123456\",\n" +
+                "        \"doctorInCharge\": \"Dr. Smith\",\n" +
+                "        \"noOfSampleVialTube\": \"2\",\n" +
+                "        \"wardName\": \"Ward 5\",\n" +
+                "        \"transReason\": \"Anemia\",\n" +
+                "        \"doctorContactNo\": \"555-6789\",\n" +
+                "        \"isAutologous\": true\n" +
+                "    },\n" +
+                "    \"componentDetails\": {\n" +
+                "        \"components\": [\n" +
+                "            {\n" +
+                "                \"type\": \"Red Blood Cells\",\n" +
+                "                \"noOfUnits\": \"2\",\n" +
+                "                \"volume\": \"350\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"type\": \"Plasma\",\n" +
+                "                \"noOfUnits\": \"1\",\n" +
+                "                \"volume\": \"200\"\n" +
+                "            }\n" +
+                "        ],\n" +
+                "        \"requirementDate\": \"12-Sep-2024\",\n" +
+                "        \"volSpecific\": true,\n" +
+                "        \"singleDonorPlatelet\": false,\n" +
+                "        \"antibodyScreeningCharge\": true,\n" +
+                "        \"indication\": \"Severe blood loss\"\n" +
+                "    },\n" +
+                "    \"diagnosisDetail\": {\n" +
+                "        \"icdCode\": \"D50.9\",\n" +
+                "        \"diagnosisName\": \"Iron deficiency anemia\",\n" +
+                "        \"diagnosisType\": \"Chronic\",\n" +
+                "        \"diagnosisSite\": \"General\",\n" +
+                "        \"icd\": true,\n" +
+                "        \"snomedCt\": true\n" +
+                "    }\n" +
+                "}";
+
+        JSONObject jsonObject = new JSONObject(jsonString);
+
+        // Extract patient details
+        JSONObject patientDetails = jsonObject.getJSONObject("patientDetails");
+        JSONObject patientName = patientDetails.getJSONObject("patientName");
+        System.out.println("Patient Name: " + patientName.getString("firstName") + " " + patientName.getString("middleName") + " " + patientName.getString("lastName"));
+        System.out.println("Age: " + patientDetails.getString("age"));
+        System.out.println("Gender: " + patientDetails.getString("gender"));
+        System.out.println("Patient CR No: " + patientDetails.getString("patientCrNo"));
+
+        // Extract requisition details
+        JSONObject requisitionDetails = jsonObject.getJSONObject("requisitionDetails");
+        System.out.println("Hospital Type: " + requisitionDetails.getString("hospitalType"));
+        System.out.println("Priority: " + requisitionDetails.getString("priority"));
+        System.out.println("Department Name: " + requisitionDetails.getString("departmentName"));
+        System.out.println("Patient ABO: " + requisitionDetails.getString("patientABO"));
+
+        // Extract component details
+        JSONObject componentDetails = jsonObject.getJSONObject("componentDetails");
+        JSONArray components = componentDetails.getJSONArray("components");
+        for (int i = 0; i < components.length(); i++) {
+            JSONObject component = components.getJSONObject(i);
+            System.out.println("Component Type: " + component.getString("type"));
+            System.out.println("Number of Units: " + component.getString("noOfUnits"));
+            System.out.println("Volume: " + component.getString("volume"));
+        }
+        System.out.println("Requirement Date: " + componentDetails.getString("requirementDate"));
+
+        // Extract diagnosis details
+        JSONObject diagnosisDetail = jsonObject.getJSONObject("diagnosisDetail");
+        System.out.println("ICD Code: " + diagnosisDetail.getString("icdCode"));
+        System.out.println("Diagnosis Name: " + diagnosisDetail.getString("diagnosisName"));
+        System.out.println("Diagnosis Type: " + diagnosisDetail.getString("diagnosisType"));
+    }
+}

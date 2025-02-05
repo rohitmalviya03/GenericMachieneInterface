@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;dbConnection.java&apos; to &apos;IGIMSP/src/Server&apos;&#x0D;&#x0A;- Original project: &apos;AIIMSBKP&apos;&#x0D;&#x0A;- Destination element: &apos;IGIMSP/src/Server&apos;&#x0D;&#x0A;- Original element: &apos;Server.dbConnection.java&apos;" description="Copy compilation unit" destination="=IGIMSP/src&lt;Server" element1="/src&lt;Server{dbConnection.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1730797908078" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="719.0" style="-fx-background-color: white;" styleClass="customeBorder" stylesheets="@../styles/newStyles.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchPatientController">
+   <top>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="680.0" styleClass="pageHeader" text="Search Patient" />
+            <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="btnTopBar" text="Button">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="18.0" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="706.0" spacing="5.0">
+         <children>
+            <HBox prefHeight="56.0" prefWidth="858.0" spacing="10.0">
+               <children>
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="210.0" spacing="5.0">
+                     <children>
+                        <Label text="CR Number" />
+                        <TextField fx:id="txtCRNum" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="CR Number" />
+                     </children>
+                  </VBox>
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="210.0" spacing="5.0">
+                     <children>
+                        <Label text="First Name" />
+                        <TextField fx:id="txtFirstName" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="First Name" />
+                     </children>
+                  </VBox>
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="210.0" spacing="5.0">
+                     <children>
+                        <Label text="Last Name" />
+                        <TextField fx:id="txtLastName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Last Name" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="61.0" prefWidth="858.0" spacing="10.0">
+               <children>
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="210.0" spacing="5.0">
+                     <children>
+                        <Label text="Contact Number" />
+                        <TextField fx:id="txtContactNum" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Contact Number" />
+                     </children>
+                  </VBox>
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="199.0" spacing="5.0" visible="false">
+                     <children>
+                        <Label text="Case Number" />
+                        <TextField fx:id="txtCaseNum" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Case Number" />
+                     </children>
+                  </VBox>
+                  <Button fx:id="btnSearch" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="120.0" styleClass="saveBtn" text="Search">
+                     <HBox.margin>
+                        <Insets left="5.0" right="-5.0" top="25.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="16" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnCreate" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="122.0" styleClass="saveBtn" text="Create Patient">
+                     <HBox.margin>
+                        <Insets top="25.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="687.0">
+               <children>
+                  <TableView fx:id="tablePatient" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="688.0">
+                    <columns>
+                      <TableColumn fx:id="columnCRNumber" maxWidth="114.0" minWidth="114.0" prefWidth="114.0" text="CR Number" />
+                      <TableColumn fx:id="columnFirstName" maxWidth="116.0" minWidth="116.0" prefWidth="116.0" text="First Name" />
+                        <TableColumn fx:id="columnLastName" maxWidth="91.0" minWidth="91.0" prefWidth="91.0" text="LastName" />
+                        <TableColumn fx:id="columnAge" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="Age" />
+                        <TableColumn fx:id="columnUnit" maxWidth="57.0" minWidth="57.0" prefWidth="57.0" text="Unit" />
+                        <TableColumn fx:id="columnContact" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" text="Contact" />
+                        <TableColumn fx:id="columnFatherGuardian" maxWidth="151.0" minWidth="151.0" prefWidth="151.0" text="Father/Guardian" />
+                    </columns>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </TableView>
+                  <StackPane fx:id="stackPaneLoader" visible="false">
+                     <children>
+                        <AnchorPane opacity="0.7" style="-fx-background-color: #ddd;">
+                           <children>
+                              <HBox layoutX="283.0" layoutY="113.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="138.0" spacing="5.0">
+                                 <children>
+                                    <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../Resources/loading.gif" />
+                                       </image>
+                                    </ImageView>
+                                    <Label prefHeight="40.0" prefWidth="82.0" style="-fx-font-size: 15;" text="Fetching..." />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </children>
+            </StackPane>
+            <HBox alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="676.0" spacing="10.0">
+               <children>
+                  <Pagination fx:id="paginator" prefHeight="53.0" prefWidth="675.0" visible="false">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Pagination>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lblError" prefHeight="29.0" prefWidth="416.0" textFill="RED" visible="false" />
+                  <Button fx:id="btnEdit" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" styleClass="saveBtn" text="Edit Patient" />
+                  <Button fx:id="btnViewCase" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" styleClass="saveBtn" text="View Cases" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="20.0" right="10.0" top="20.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

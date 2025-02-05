@@ -1,0 +1,187 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.infosys.common.GeneratedEntities;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+@Entity
+@Table(name="anethesiamachinedata", catalog = "intraop_dev",uniqueConstraints = { @UniqueConstraint(columnNames = "AnesthesiaMachineDataID")})
+public class AnethesiaMachineData {
+	private int anesthesiaMachineDataID;
+	private Long caseId;
+	private String pPeak;
+	private String pMean;
+	private Deviceconfiguration deviceId;
+	private String createdBy;
+	private Date createdTime;
+	private String updatedBy;
+	private Date updatedTime;
+	private String peep;
+	private String circuitO2;
+	private String tvExp;
+	private String mvExp;
+	private String rr;
+	private Date timeStamp;
+	
+	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "AnesthesiaMachineDataID", length = 11,unique = true, nullable = false)
+	public int getAnesthesiaMachineDataID() {
+		return anesthesiaMachineDataID;
+	}
+
+	public void setAnesthesiaMachineDataID(int anesthesiaMachineDataID) {
+		this.anesthesiaMachineDataID = anesthesiaMachineDataID;
+	}
+	
+	@Column(name = "CaseID")
+	public Long getCaseId() {
+		return caseId;
+	}
+
+	public void setCaseId(Long caseId) {
+		this.caseId = caseId;
+	}
+
+	@Column(name = "Ppeak", length = 50)
+	public String getpPeak() {
+		return pPeak;
+	}
+
+	public void setpPeak(String pPeak) {
+		this.pPeak = pPeak;
+	}
+	
+	@Column(name = "Pmean", length = 50)
+	public String getpMean() {
+		return pMean;
+	}
+
+	public void setpMean(String pMean) {
+		this.pMean = pMean;
+	}
+
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="DeviceID")
+	public Deviceconfiguration getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(Deviceconfiguration deviceId) {
+		this.deviceId = deviceId;
+	}
+
+	@Column(name = "CreatedBy", length = 45)
+	public String getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CreatedTime", length = 19)
+	public Date getCreatedTime() {
+		return this.createdTime;
+	}
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	@Column(name = "UpdatedBy", length = 45)
+	public String getUpdatedBy() {
+		return this.updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "UpdatedTime", length = 19)
+	public Date getUpdatedTime() {
+		return this.updatedTime;
+	}
+
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+	
+	@Column(name = "PEEP", length = 45)
+	public String getPeep() {
+		return peep;
+	}
+
+	public void setPeep(String peep) {
+		this.peep = peep;
+	}
+	
+	@Column(name = "CircuitO2", length = 45)
+	public String getCircuitO2() {
+		return circuitO2;
+	}
+
+	public void setCircuitO2(String circuitO2) {
+		this.circuitO2 = circuitO2;
+	}
+	
+	@Column(name = "TVexp", length = 45)
+	public String getTvExp() {
+		return tvExp;
+	}
+
+	public void setTvExp(String tvExp) {
+		this.tvExp = tvExp;
+	}
+	
+	@Column(name = "MVexp", length = 45)
+	public String getMvExp() {
+		return mvExp;
+	}
+
+	public void setMvExp(String mvExp) {
+		this.mvExp = mvExp;
+	}
+	
+	@Column(name = "RR", length = 45)
+	public String getRr() {
+		return rr;
+	}
+
+	public void setRr(String rr) {
+		this.rr = rr;
+	}
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "TimeStamp", length = 19)
+	public Date getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(Date timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+}
+
+
+
+

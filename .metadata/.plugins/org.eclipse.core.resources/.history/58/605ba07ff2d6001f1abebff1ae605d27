@@ -1,0 +1,1651 @@
+/*
+ * 
+ * Designed and Developed By Rohit Malviya
+ * Date : 10/10/2024
+ * Purpose : Microbiology Instruments integration with HIS
+ * Mode : Bidirectional
+ * Status : Working for MIcrobiology Result Process for Antibiogram data
+ *   
+ */
+package Server;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.formdev.flatlaf.FlatLightLaf;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.BufferedReader;
+import org.jdatepicker.impl.*;
+import org.jdatepicker.util.*;
+
+public class AIIMSLAB {
+
+	private static JLabel statusLabel;
+	private static JLabel connectionStatusLabel;
+	static final String FILE_NAME = "./machineLog.txt"; // File to save the data
+	private static boolean isListening = false;
+	private static final char START_BLOCK = 0x0B; // <VT> (0B in HEX)
+	private static final char END_BLOCK_1 = 0x1C; // <FS> (1C in HEX)
+	private static final char END_BLOCK_2 = 0x0D; // <CR> (0D in HEX)
+	private static ScheduledExecutorService scheduler;   
+	private static JTextArea logTextArea;
+
+	private static  JButton startSchedulerButton;
+	static Map res = ReadPropertyFile.getPropertyValues();
+	static int result_port =  Integer.parseInt((String) res.get("result_port"));
+	
+	static String aiimsUrl = (String) res.get("API_URL");
+	private static JComboBox modeTypeComboBox;
+	private static Date fromDate;
+	private static Date toDate;
+	private static JDatePickerImpl datePicker1;
+	private static JDatePickerImpl datePicker2;
+	private static JFrame frame;
+	public static void main(String[] args) {
+		// Create the main frame
+		FlatLightLaf.install();
+
+		 frame = new JFrame("Generic Machine Interface");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(1500, 1200);//
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximizes the frame to full screen
+		//frame.setUndecorated(true); // Removes title bar and borders for true full-screen mode
+
+		frame.setLayout(new GridBagLayout());
+		frame.getContentPane().setBackground(Color.decode("#F0F8FF")); // Light blue background
+
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.insets = new Insets(10, 10, 10, 10);
+
+		// Title
+		JLabel titleLabel = new JLabel("Generic Medical Equipment Interface (GMEI) .");
+		titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+		titleLabel.setForeground(Color.decode("#2E8B57")); // Sea green color
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 2;
+		frame.add(titleLabel, gbc);
+		
+		
+		//  To Select Mode
+		
+		
+		JLabel modeLabel = new JLabel("Select Mode:");
+		modeLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		frame.add(modeLabel, gbc);
+
+		String[] modeTypes = {"PACS", "Mestria","Horriba"};
+		//String[] modeTypes = {"Horriba"};
+		 modeTypeComboBox = new JComboBox<>(modeTypes);
+		modeTypeComboBox.setSelectedItem("PACS"); // Default selection
+		modeTypeComboBox.setFont(new Font("Arial", Font.PLAIN, 14));
+		
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		frame.add(modeTypeComboBox, gbc);
+
+		
+		
+		//
+		
+		
+
+		// Sample number label and text field
+		JLabel sampleLabel = new JLabel("Enter Sample Number:");
+		sampleLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+		gbc.gridx = 0;
+		gbc.gridwidth = 1;
+		gbc.gridy = 2;
+		frame.add(sampleLabel, gbc);
+
+		JTextField sampleNumberField = new JTextField(20);
+		sampleNumberField.setBorder(BorderFactory.createCompoundBorder(
+				new LineBorder(Color.decode("#2E8B57"), 1),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5) // Padding
+				));
+		sampleNumberField.setFont(new Font("Arial", Font.PLAIN, 14));
+		gbc.gridx = 1;
+		frame.add(sampleNumberField, gbc);
+
+		// Specimen type label and combo box
+		JLabel specimenLabel = new JLabel("Select Specimen Type:");
+		specimenLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		frame.add(specimenLabel, gbc);
+		
+		
+
+		String[] specimenTypes = {"URIN", "BLOOD", "OTHER"};
+		JComboBox<String> specimenTypeComboBox = new JComboBox<>(specimenTypes);
+		specimenTypeComboBox.setSelectedItem("URIN"); // Default selection
+		specimenTypeComboBox.setFont(new Font("Arial", Font.PLAIN, 14));
+		gbc.gridx = 1;
+		frame.add(specimenTypeComboBox, gbc);
+
+		// Status labels
+		statusLabel = new JLabel("");
+		statusLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		gbc.gridx = 0;
+		gbc.gridy = 9;
+		gbc.gridwidth = 2;
+		frame.add(statusLabel, gbc);
+
+		connectionStatusLabel = new JLabel("");
+		connectionStatusLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		gbc.gridy = 10;
+		frame.add(connectionStatusLabel, gbc);
+
+		// Add "From Date" label and date picker in one row
+		JLabel fromDateLabel = new JLabel("From Date:");
+		fromDateLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+		gbc.gridy = 4;
+		gbc.gridx = 0;
+		
+		frame.add(fromDateLabel, gbc);
+
+		UtilDateModel model1 = new UtilDateModel();
+		JDatePanelImpl datePanel1 = new JDatePanelImpl(model1, new java.util.Properties());
+		 datePicker1 = new JDatePickerImpl(datePanel1, new DateLabelFormatter());
+		 
+		 
+		 
+		gbc.gridx = 1; // Place the date picker next to the label
+		frame.add(datePicker1, gbc);
+
+		// Add "To Date" label and date picker in the same row
+		JLabel toDateLabel = new JLabel("To Date:");
+		toDateLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+		//gbc.gridx = 1; // Continue placing in the same row
+		gbc.gridy = 5;
+		gbc.gridx = 0;
+		frame.add(toDateLabel, gbc);
+
+		UtilDateModel model2 = new UtilDateModel();
+		JDatePanelImpl datePanel2 = new JDatePanelImpl(model2, new java.util.Properties());
+		 datePicker2 = new JDatePickerImpl(datePanel2, new DateLabelFormatter());
+		//gbc.gridy = 5; // Place the second date picker next to the second label
+		gbc.gridx = 1;
+		frame.add(datePicker2, gbc);
+
+		
+		
+		
+		// Send button with enhanced styling
+		JButton sendButton = new JButton("Send Order Manually ");
+		sendButton.setFont(new Font("Arial", Font.BOLD, 16));
+		sendButton.setBackground(Color.decode("#2E8B57")); // Sea green button
+		sendButton.setForeground(Color.WHITE);
+		sendButton.setFocusPainted(false);
+		sendButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+		sendButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		gbc.gridy = 6;
+		gbc.gridwidth = 2;
+		 gbc.gridx = 0;
+		frame.add(sendButton, gbc);
+		  
+		
+		
+	
+
+		// Handle send button click  
+		sendButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String sampleNumber = sampleNumberField.getText();
+				String specimenType = (String) specimenTypeComboBox.getSelectedItem();
+				String mode=	(String) modeTypeComboBox.getSelectedItem();
+
+
+				if (sampleNumber == null || sampleNumber.trim().isEmpty()) {
+					// Show a message dialog box with the warning
+					JOptionPane.showMessageDialog(frame, "Sample  Number is required. ", "Input Error", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+
+
+				if (!sampleNumber.isEmpty()) {
+					try {
+						// Generate HL7 message and send to server
+						
+						
+						String hl7Message ="";
+								if(mode.equals("Mestria")) {
+									hl7Message=HL7MessageGenerator.generateOrderMessageMB(sampleNumber, specimenType);
+								
+								}
+								else if(mode.equals("PACS")) {
+							/*
+							 * HL7MessageGenerator.generateHL7MessagePACS(his_order_id, patient_id,
+							 * patient_fname, patient_mname, patient_lname, patient_sex, patient_birth_date,
+							 * phone_number, email_id, patient_weight, patient_type, patient_history,
+							 * center_id, modality, test_id, test_name, referring_physician_id,
+							 * referring_physician_name, radiologist_id, technician_id);
+							 * 
+							 * 
+							 * 
+							 */
+									
+									sendToPacsfromAIIMSDB();
+									
+								}
+								else {
+									
+									hl7Message=	HL7MessageGenerator.generateHL7MessageHoriba(sampleNumber);
+									
+								}
+							
+						ServerConnector.sendToServer(hl7Message);
+						updateStatusLabel("Order sent successfully for sample: " + sampleNumber);
+						saveToFile("Order sent successfully for sample: " + sampleNumber, FILE_NAME);
+						saveToFile(hl7Message, FILE_NAME);
+
+					} catch (Exception ex) {
+						updateStatusLabel("Error sending order: " + ex.getMessage());
+						saveToFile("Stack Trace: " + getStackTraceAsString(ex), FILE_NAME);
+
+					}
+				} else {
+					updateStatusLabel("Please enter a sample number.");
+				}
+			}
+		});
+
+		// Add button to start listener
+		JButton startListenerButton = new JButton("Transfer Result to HIS ");
+		startListenerButton.setFont(new Font("Arial", Font.BOLD, 16));
+		startListenerButton.setBackground(Color.decode("#2E8B57")); // Sea green button
+		startListenerButton.setForeground(Color.WHITE);
+		startListenerButton.setFocusPainted(false);
+		startListenerButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+		startListenerButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		gbc.gridy = 7;
+		frame.add(startListenerButton, gbc);
+
+		// Handle listener button click
+		startListenerButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (!isListening) {
+					// Start the listener when the button is clicked
+					startListener(result_port);
+				} else {
+					updateConnectionStatusLabel("Listener is already running.");
+				}
+			}
+		});
+		startSchedulerButton = new JButton("Get Pending Worklist");
+		  //gbc.gridx = 8;
+		gbc.gridy = 8;
+		startSchedulerButton.setPreferredSize(new Dimension(120, 40));
+		startSchedulerButton.setBackground(new Color(33, 150, 243));
+		startSchedulerButton.setForeground(Color.WHITE);
+		startSchedulerButton.addActionListener(
+				
+				//e -> startScheduler());    
+				e ->{
+					try {
+						try {
+							fetchPendingOrders();
+						} catch (UnsupportedEncodingException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				});
+		
+		startSchedulerButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		frame.add(startSchedulerButton, gbc);
+		// Add a footer label for credits or additional info
+		JLabel footerLabel = new JLabel("GMEI © CDAC  2024");
+		footerLabel.setFont(new Font("Arial", Font.ITALIC, 10));
+		footerLabel.setForeground(Color.GRAY);
+		gbc.gridy = 11;
+		gbc.gridwidth = 2;
+		frame.add(footerLabel, gbc);
+
+		logTextArea = new JTextArea();
+		logTextArea.setFont(new Font("Arial", Font.PLAIN, 14));
+		logTextArea.setEditable(false); // Prevent user from editing logs
+		logTextArea.setBackground(Color.decode("#F5F5F5"));
+		JScrollPane logScrollPane = new JScrollPane(logTextArea);
+		logScrollPane.setPreferredSize(new Dimension(400, 400));
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		gbc.gridheight = 50;
+		frame.add(logScrollPane, gbc);
+
+
+		// Display the frame
+		frame.setLocationRelativeTo(null); // Center the frame on the screen
+		frame.setVisible(true);
+	}
+
+	public static void startListener(int port) {
+		new Thread(() -> {
+			try (ServerSocket serverSocket = new ServerSocket(port)) {
+				updateConnectionStatusLabel("Listener started on port " + port + ".");
+				addLogEntry("Listener started on port " + port + ".");
+				isListening = true;
+
+				// Continuously accept new clients
+				while (isListening) {
+					Socket clientSocket = serverSocket.accept();  // Accept a client connection
+					updateConnectionStatusLabel("Client connected: " + clientSocket.getInetAddress());
+					addLogEntry("Client connected: " + clientSocket.getInetAddress());
+					// Handle the client connection in a separate thread
+					try {
+						String mode=	(String) modeTypeComboBox.getSelectedItem();
+
+						if(mode.equals("Mestria")) {  //Handle result data for Mestria Server
+						
+						handleMbClient(clientSocket);
+						}
+						else if(mode.equals("PACS") ){   //Handle result data for PACS Server
+						handlePacsClient(clientSocket);
+						}
+						else {
+							handleHorribaClient(clientSocket);
+							
+						}
+						
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						addLogEntry("Error in listener ");
+					}
+				}
+			} catch (IOException e) {
+				updateConnectionStatusLabel("Error on listener: " + e.getMessage());
+				saveToFile("Stack Trace: " + getStackTraceAsString(e), FILE_NAME);
+				addLogEntry("Error in listener ");
+				e.printStackTrace();
+			}
+		}).start();
+	}
+
+
+	
+
+	//start codr to fetch dta fformapi
+	private static JSONArray fetchSampleAndSendHL7() {   //API to fetch pending detailss
+		// Declare the JSONArray to store the response data
+		final JSONArray[] jsonResponse = new JSONArray[1]; // Using array to allow assignment within the inner class
+		SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+			@Override
+			protected Void doInBackground() throws Exception {
+				try {
+					System.out.println("Calling API");
+					// Open the connection to the API
+					URL url = new URL("http://10.226.28.174:8085/api/patients");
+					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+					connection.setRequestMethod("GET"); // Assuming it's a GET request to fetch sample data
+					connection.setRequestProperty("Content-Type", "application/json");
+					connection.setDoInput(true);
+
+					// Get the response code
+					int responseCode = connection.getResponseCode();
+					System.out.println("Response Code: " + responseCode);
+					if (responseCode == HttpURLConnection.HTTP_OK) { // Success
+						// Read the response
+						BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+						String inputLine;
+						StringBuilder response = new StringBuilder();
+
+						while ((inputLine = in.readLine()) != null) {
+							response.append(inputLine);
+						}
+						in.close();
+						System.out.println("Response: " + response.toString());
+						saveToFile("Response: " + response.toString(), FILE_NAME);
+
+						// Parse the JSON response as a JSONArray
+						jsonResponse[0] = new JSONArray(response.toString());
+					} else {
+						saveToFile("Failed to fetch data. Response Code: " + responseCode,FILE_NAME);
+
+						System.out.println("Failed to fetch data. Response Code: " + responseCode);
+					}
+				} catch (IOException e) {
+					System.out.println("Error fetching sample data: " + e.getMessage());
+					saveToFile("Stack Trace: " + getStackTraceAsString(e), FILE_NAME);
+					addLogEntry("Error fetching sample data: ");
+					e.printStackTrace();
+				}
+				return null; // Return null from background thread
+			}
+
+			@Override
+			protected void done() {
+				// The task has completed, you can handle the result in the main thread
+				try {
+					// If the background task was successful, the jsonResponse is already populated
+					if (jsonResponse[0] != null) {
+						System.out.println("Successfully fetched data: " + jsonResponse[0]);
+						for (int i = 0; i < jsonResponse[0].length(); i++) {
+							JSONObject patient = jsonResponse[0].getJSONObject(i);
+
+							// Extract fields from each patient object
+							String firstName = patient.getString("pat_first_name");
+							String lastName = patient.getString("pat_last_name");
+							String middleName = patient.optString("pat_middle_name", ""); // Optional field
+							String gender = patient.getString("pat_gender");
+							int age = patient.getInt("pat_age");
+							String crno = patient.getString("pat_crno");
+							String sampleNo = patient.getString("pat_sample_no");
+							String sampleType = patient.getString("pat_sample_type");
+							String sampleCollectionDate = patient.getString("pat_sample_collection_date");
+							String sampleStatusCode = patient.getString("pat_sample_status_code");
+
+							// Call function to process each patient's data
+							// processPatientData(firstName, lastName, middleName, gender, age, crno, sampleNo, sampleType, sampleCollectionDate, sampleStatusCode);
+							String hl7Message = HL7MessageGenerator.generateOrderMessageDynamic(crno,firstName, lastName, middleName, gender,  sampleNo, sampleType);
+							//  System.out.println(hl7Message);
+							ServerConnector.sendToServer(hl7Message);
+
+						}
+					} else {
+						System.out.println("No data received.");
+					}
+				} catch (Exception e) {
+					saveToFile("Stack Trace: " + getStackTraceAsString(e), FILE_NAME);
+					// addLogEntry("Some Issue in fetching data");
+					e.printStackTrace();
+				}
+			}
+		};
+		worker.execute();  // Run in background thread to keep UI responsive
+
+		// Return the JSONArray after the background task is complete
+		// Since SwingWorker executes asynchronously, it won't immediately return the data,
+		// so you may need to handle it via a callback or future mechanism.
+		return jsonResponse[0];  // This will be null initially until the task completes
+	}
+
+	private static void startScheduler() {
+
+		try {
+			if (scheduler == null || scheduler.isShutdown()) {
+				scheduler = Executors.newScheduledThreadPool(1);
+				scheduler.scheduleAtFixedRate(() -> {
+					try {
+						String mode=	(String) modeTypeComboBox.getSelectedItem();
+
+						if(mode.equals("Mestria")) {
+							System.out.println("API CALL for Mestira");
+						JSONArray jsonResponse = fetchSampleAndSendHL7();
+						//   System.out.println("RMM"+jsonResponse);
+						}
+						else if(mode.equals("PACS")) {
+							System.out.println("API CALL for PACS");
+						JSONArray jsonResponse=getPendingOrderListPACS();
+						}
+						//   
+
+					} catch (Exception e) {
+						saveToFile("Error in scheduler: " + e.getMessage(),FILE_NAME);
+						addLogEntry("Error in scheduler ");
+						//  appendMessage("Error in scheduler: " + e.getMessage());
+					}
+				}, 0, 1, TimeUnit.MINUTES);  // Runs every 1 minute
+				//     appendMessage("Scheduler started. Fetching data every 1 minute.");
+				statusLabel.setText("Scheduler started. Fetching data every 1 minute.");
+				addLogEntry("Scheduler started. Fetching data every 1 minute.");
+			}}
+
+		catch (Exception e) {
+			saveToFile("Stack Trace: " + getStackTraceAsString(e), FILE_NAME);
+			addLogEntry("Error in scheduler ");
+
+			// TODO: handle exception
+		}
+	}
+
+
+
+	//end code for scehdulat to get data from api
+
+	// Method to handle each client connection in its own thread
+	private static void handleMbClient(Socket clientSocket) throws ClassNotFoundException {
+		new Thread(() -> {
+			try {
+				InputStream input = clientSocket.getInputStream();
+				OutputStream output = clientSocket.getOutputStream();
+
+				BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+				PrintWriter writer = new PrintWriter(output, true);
+
+				String line;
+				StringBuilder receivedData = new StringBuilder();
+
+
+				int order_packet_buffer_counter = 0;
+				int red = -1;
+				byte[] buffer = new byte[800 * 1024]; // a read buffer of 5KiB
+				byte[] redData;
+				StringBuilder clientData = new StringBuilder();
+				String redDataText = "";
+
+				while ((red = clientSocket.getInputStream().read(buffer)) > -1) // **Code Starts For Receiving Client
+					// Messages
+				{					
+
+					redData = new byte[red];
+
+					System.arraycopy(buffer, 0, redData, 0, red);
+
+					redDataText = new String(redData, "UTF-8"); // assumption that client sends data UTF-8 encoded
+					System.out.println(redDataText);
+
+
+
+					//Stream<T> stream;
+
+
+					// When data is received, log it and send back an ACK
+					String receivedMessage = redDataText.toString();
+					System.out.println("Received message: " + receivedMessage);
+					// updateStatusLabel("Data received: " + receivedMessage);
+					saveToFile("Received : "+receivedMessage, FILE_NAME);
+					// Send ACK response
+					String ackResponse = generateAckResponse(receivedMessage);
+					//if(!ackResponse.equals("NO_ACK")) {
+					writer.println(ackResponse);  // Send ACK response
+					writer.flush();
+					System.out.println("Sent ACK response: " + ackResponse);
+					saveToFile("Sent ACK response: " + ackResponse, FILE_NAME);
+					//}
+
+					//Process Result
+
+
+
+					String[] msgPart=receivedMessage.split("\r");
+
+					String[] mshpart;
+
+
+					String[] msgtypeField;
+					String msgType="";
+
+					//  saveToFile("Recieved MSG Type : " + msgType, FILE_NAME);
+
+
+					String[] SPMMSGFILED;
+
+					String[] msgSection = null;
+					String sampleNo="";
+					String resultTimeStamp="";
+					String sampleType="";
+					String organismName="";
+					String organismCode="";
+
+					String micValue="";
+					String[] mainresult;
+					String[] antiBiotic;
+
+					//					for(int i=0;i<msgPart.length;i++) {
+					//						System.out.println("MSG SECTION:: "+msgPart[i]);
+					//						
+					//						
+					//						msgSection=msgPart[i].split("\\|");
+					//				}
+
+					JSONObject antibioticResult = new JSONObject();
+					JSONObject mainJson = new JSONObject();
+					JSONArray antibiotics = new JSONArray();
+					JSONArray antibioticsArray = new JSONArray();
+					List<result_parameter> resultData = new ArrayList<>();
+
+					for(int j=0;j<msgPart.length;j++) {
+
+
+						msgSection=msgPart[j].split("\\|");
+						for(int i =0;i<msgSection.length;i++) {
+
+							result_parameter resultUnit = new result_parameter();
+							msgSection[i]=msgSection[i].replaceAll("\\n", "");
+							if(msgSection[i].equals("MSH")) {
+								msgType=msgSection[8];
+								resultTimeStamp=msgSection[6];
+								System.out.println("MSG TYPE: "+msgType);
+								saveToFile("MSG TYPE: "+msgType, FILE_NAME);
+								continue;
+
+							}
+
+							else if(msgSection[i].equals("SPM")) {
+								sampleNo=msgSection[3];
+								String[] data=msgSection[4].split("\\^");
+								sampleType=data[0];
+								System.out.println("SAMPLE NO :"+sampleNo);
+								System.out.println("SAMPLLE Type"+sampleType);
+								saveToFile("SAMPLE NO :"+sampleNo, FILE_NAME);
+								saveToFile("SAMPLLE Type"+sampleType, FILE_NAME);
+
+								//resultData.add(resultUnit);
+
+							}
+
+							else if(msgSection[i].equals("OBX")) {
+								if(msgSection[1].equals("1")) {
+									String splitOrg=msgSection[5]; 
+
+									String[] data=splitOrg.split("\\^");
+									organismName=data[1];
+									organismCode=data[0];
+									System.out.println("Organism type :"+organismName);
+									saveToFile("Organism type :"+organismName , FILE_NAME);
+
+									if(organismCode.equals("BC")) {
+
+										continue;
+									}
+									//resultUnit.setOrganismName(organismName);
+									//resultUnit.setOrganismCode(organismCode);
+									//resultData.add(resultUnit);
+								}
+								else {
+									if(Integer.parseInt(msgSection[1])>2 && msgSection[2].equals("SN")) {
+										micValue=msgSection[5];
+										resultUnit.setPatient_id(sampleNo);
+										System.out.println("MIC Value :"+micValue);
+										saveToFile("MIC Value :"+micValue, FILE_NAME);
+										resultUnit.setMiCValue(micValue);
+										//resultData.add(resultUnit);
+										mainresult=msgSection[8].split("\\^");
+										antiBiotic=msgSection[3].split("\\^");
+										System.out.println("antiBiotic LIS CODE :"+antiBiotic[0]);
+										saveToFile("antiBiotic :"+antiBiotic[0], FILE_NAME);
+										System.out.println("antiBiotic Name :"+antiBiotic[1]);
+										saveToFile("antiBiotic :"+antiBiotic[1], FILE_NAME);
+										//System.out.println("Result  :"+mainresult[0] +" :: "+mainresult[1] );
+
+
+
+
+
+										resultUnit.setSample_type(sampleType);
+										resultUnit.setOrganismName(organismName);
+										resultUnit.setOrganismCode(organismCode);
+										resultUnit.setAntiBioticCode(antiBiotic[0]);
+										resultUnit.setAntiBiotic_Name(antiBiotic[1]);
+										resultUnit.setResult(mainresult[0]);
+										resultData.add(resultUnit);
+
+
+
+									}
+								}
+
+
+
+							}
+						}
+
+						//System.out.println(resultData);
+
+
+
+
+
+					}
+
+
+
+					//end Resullt Process
+
+
+
+
+					JSONArray jsonArray = new JSONArray();
+					JSONObject sampleObject = new JSONObject();
+					Set<String> uniqueEntries = new HashSet<>();
+
+					for (result_parameter result : resultData) {
+						try {
+							// Only set sampleNo and sampleType once
+							if (sampleObject.length() == 0) {
+								// sampleObject.put("results", new JSONArray()); 
+								sampleObject.put("resultTimeStamp", resultTimeStamp);
+								sampleObject.put("sampleType", result.getSample_type());
+								sampleObject.put("sampleNo", result.getPatient_id());
+
+
+
+
+							}
+
+							// Create the antibiotic result object
+							JSONObject jsonObject = new JSONObject();
+							jsonObject.put("antiBioticName", result.getAntiBiotic_Name());
+							jsonObject.put("organismCode", result.getOrganismCode());
+							jsonObject.put("organismName", result.getOrganismName());
+							jsonObject.put("micValue", result.getMiCValue());
+							jsonObject.put("antiBioticCode", result.getAntiBioticCode());
+							jsonObject.put("result", result.getResult());
+
+							String uniqueKey = result.getAntiBioticCode() + "|" + result.getOrganismName();
+
+							// Check if this antibiotic result combination already exists
+							if (!uniqueEntries.contains(uniqueKey)) {
+								uniqueEntries.add(uniqueKey);
+
+								// Check if "results" key exists and is a JSONArray
+								if (!sampleObject.has("results")) {
+									sampleObject.put("results", new JSONArray());
+								}
+
+								// Add jsonObject to the "results" JSONArray
+								sampleObject.getJSONArray("results").put(jsonObject);
+							}
+
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					// Add the sample object to the array if it has results
+					try {
+						if (sampleObject.length() > 0 && sampleObject.getJSONArray("results").length() > 0) {
+							jsonArray.put(sampleObject);
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					// Print or save the JSON array
+					try {
+						System.out.println(jsonArray.toString(4)); 
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+
+
+
+					//Calling method to insert organism data
+					/*
+					insertOrganismData.insertParaValue(sampleNo,organismCode,resultData);  //To store data in Local DB   //Working1
+
+
+					  try {
+
+							insertOrganismData.insertParaValueJson(sampleNo,jsonArray.toString(4));
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}  //insertjson
+					try {
+						insertOrganismData.sendPostRequest(jsonArray.toString(4),sampleNo);  //To Store data in UAT or Prod Database  //Working
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+
+					 */
+
+				}
+
+			} catch (IOException e) {
+				updateStatusLabel("Error handling client: " + e.getMessage());
+				saveToFile("Stack Trace: " + getStackTraceAsString(e), FILE_NAME);
+
+				e.printStackTrace();
+			} 
+
+
+			/* finally {
+				try {
+					clientSocket.close();  // Close the client socket after communication
+					updateConnectionStatusLabel("Client disconnected.");
+				} catch (IOException ex) {
+					updateStatusLabel("Error closing client socket: " + ex.getMessage());
+				}
+			}*/
+		}).start();
+	}
+
+	private static String generateAckResponse(String receivedMessage) {
+		String ackTemplate = START_BLOCK+"MSH|^~\\&|HL72LIS||LIS|BMX|myla|YYYYMMDDHHMMSS+0530||ACK^R22|CONTROLID|P|2.5.1\r"
+				+ "MSA|AA|CONTROLID\r"+END_BLOCK_1+END_BLOCK_2;
+
+		String[] msgPart = receivedMessage.split("\r");
+		String[] mshPart = msgPart[0].split("\\|");
+
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssZ");
+		String formattedDate = dateFormat.format(currentDate);
+
+		//if(mshPart[0].equals("MSH")) {
+		String controlId = mshPart[9];  // Extract CONTROLID from received message
+		ackTemplate = ackTemplate.replace("CONTROLID", controlId);
+		ackTemplate = ackTemplate.replace("YYYYMMDDHHMMSS", formattedDate);
+		return ackTemplate;
+		//}
+		//return "NO_ACK";
+
+	}
+	public static void updateStatusLabel(String message) {
+		SwingUtilities.invokeLater(() -> statusLabel.setText(message));
+	}
+
+	public static void updateConnectionStatusLabel(String message) {
+		SwingUtilities.invokeLater(() -> connectionStatusLabel.setText(message));
+	}
+
+	public static void saveToFile(String data, String jsonFileName) {
+		try (FileWriter fw = new FileWriter(jsonFileName, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				PrintWriter out = new PrintWriter(bw)) {
+			String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+			out.println(timestamp + " - " + data);
+		} catch (IOException e) {
+			System.err.println("Error writing to file: " + e.getMessage());
+		}
+	}
+
+	private static void addLogEntry(String logEntry) {
+		logTextArea.append(logEntry + "\n");
+		logTextArea.setCaretPosition(logTextArea.getDocument().getLength()); // Auto-scroll to the bottom
+	}
+
+	static String getStackTraceAsString(Exception e) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		e.printStackTrace(pw);
+		return sw.toString();
+	}
+	
+	
+	
+	
+	// PACS WorkFlow..     
+	
+	
+	private static void fetchPendingOrders() throws JSONException, UnsupportedEncodingException {
+	    // Get the selected dates from the date pickers
+	    Date fromDate = (Date) datePicker1.getModel().getValue();
+	    Date toDate = (Date) datePicker2.getModel().getValue();
+
+	    if (fromDate == null) {
+	        JOptionPane.showMessageDialog(frame, "Select fromDate", "Input Error", JOptionPane.WARNING_MESSAGE);
+	        return;
+	    }
+
+	    if (toDate == null) {
+	        JOptionPane.showMessageDialog(frame, "Select toDate", "Input Error", JOptionPane.WARNING_MESSAGE);
+	        return;
+	    }
+	    
+
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String formattedFromDate = dateFormat.format(fromDate);
+	    String formattedToDate = dateFormat.format(toDate);
+
+	    // Construct JSON parameters
+	    String jsonParam = "{\"fromDate\":\"" + formattedFromDate + "\", \"toDate\":\"" + formattedToDate + "\"}";
+
+	    // URL encode the JSON parameter
+	    String encodedJsonParam = URLEncoder.encode(jsonParam, StandardCharsets.UTF_8.toString());
+
+	    try {
+	        // Construct the complete URL with the encoded JSON parameter
+	        URL url = new URL(aiimsUrl + "/api/v1/pacs/pendingpatientdetials?json=" + encodedJsonParam);
+	        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	        connection.setRequestMethod("GET");
+	        connection.setRequestProperty("Content-Type", "application/json");
+	        connection.setDoInput(true);
+
+	        // Get the response code
+	        int responseCode = connection.getResponseCode();
+	        System.out.println("Response Code: " + responseCode);
+	        if (responseCode == HttpURLConnection.HTTP_OK) {
+	            // Read the response
+	            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	            String inputLine;
+	            StringBuilder response = new StringBuilder();
+
+	            while ((inputLine = in.readLine()) != null) {
+	                response.append(inputLine);
+	            }
+	            in.close();
+	            System.out.println("Response: " + response.toString());
+	            saveToFile("Response: " + response.toString(), FILE_NAME);
+
+	            // Parse the JSON response as a JSONArray
+	            JSONArray jsonResponse = new JSONArray(response.toString());
+
+	            // Process the received JSON array
+	            for (int i = 0; i < jsonResponse.length(); i++) {
+	                JSONObject patient = jsonResponse.getJSONObject(i);
+	                // Extract fields from each patient object and generate HL7 message
+	                // (Similar to your previous logic)
+	                // ...
+	            }
+	            
+	            savePatientDetailsDb(response.toString());
+	            
+	            
+	            
+	            
+	            
+	            
+	        } else {
+	            System.out.println("Failed to fetch data. Response Code: " + responseCode);
+	        }
+	    } catch (IOException e) {
+	        System.out.println("Error fetching sample data: " + e.getMessage());
+	        saveToFile("Stack Trace: " + getStackTraceAsString(e), FILE_NAME);
+	        e.printStackTrace();
+	    }
+	}
+
+	// Example button action listener
+	//button.addActionListener(e -> fetchPendingOrders());
+
+	
+	
+	
+	private static void  savePatientDetailsDb(String jsonResponse){
+		  saveToFile("Save Patient Details API called",FILE_NAME);
+		
+		JSONArray jsonArray = null;
+		
+        HttpURLConnection connection;
+		try {
+             URL url = new URL(aiimsUrl + "/api/v1/pacs/save");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoInput(true);
+            connection.setDoOutput(true); // This allows sending data in the request body
+            StringBuilder response = new StringBuilder();
+            String inputLine = null;
+            // Writing to the output stream
+            try (OutputStream os = connection.getOutputStream()) {
+               
+				byte[] input1 = jsonResponse.getBytes("UTF-8"); // Ensure response is in valid format
+                os.write(input1, 0, input1.length);
+            }
+
+            // Checking the response code
+            int statusCode = connection.getResponseCode();
+            System.out.println("Response Code: " + statusCode);
+
+            // Read the response body
+            try (BufferedReader inn = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String inputLinee;
+                StringBuilder responseBody = new StringBuilder();
+                while ((inputLinee = inn.readLine()) != null) {
+                    responseBody.append(inputLinee);
+                }
+                // Printing the response body
+                //System.out.println("Response Body: " + responseBody.toString());
+           
+                 jsonArray = new JSONArray(responseBody.toString());
+                System.out.println("Response Body as JSON Array: " + jsonArray.toString(4)); // Pretty print with indent level 4
+                saveToFile("Response Body as JSON Array: " + jsonArray.toString(4), FILE_NAME);
+                
+                
+                if(jsonArray!=null) {
+                	
+                	updateStatusatHIS(jsonArray);
+                }
+            
+            } catch (JSONException e) {
+                System.out.println("Error parsing JSON array: " + e.getMessage());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        
+        }
+        
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	private static void updateStatusatHIS(JSONArray jsonArray ){
+		
+		  saveToFile("Update Status API called",FILE_NAME);
+		   HttpURLConnection connection;	
+		   JSONArray jsonArray1 = null;
+		try {
+            URL url = new URL(aiimsUrl + "/api/v1/pacs/updatestatus");
+           connection = (HttpURLConnection) url.openConnection();
+           connection.setRequestMethod("POST");
+           connection.setRequestProperty("Content-Type", "application/json");
+           connection.setDoInput(true);
+           connection.setDoOutput(true); // This allows sending data in the request body
+           StringBuilder response = new StringBuilder();
+           String inputLine = null;
+           // Writing to the output stream
+           try (OutputStream os = connection.getOutputStream()) {
+              
+				byte[] input1 = jsonArray.toString(4).toString().getBytes("UTF-8"); // Ensure response is in valid format
+               os.write(input1, 0, input1.length);
+           } catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+           // Checking the response code
+           int statusCode = connection.getResponseCode();
+           System.out.println("Response Code: " + statusCode);
+
+           // Read the response body
+           try (BufferedReader inn = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+               String inputLinee;
+               StringBuilder responseBody = new StringBuilder();
+               while ((inputLinee = inn.readLine()) != null) {
+                   responseBody.append(inputLinee);
+               }
+               // Printing the response body
+               System.out.println("Response Body: " + responseBody.toString());
+          
+               JSONArray jsonArray2 = new JSONArray(responseBody.toString());
+               saveToFile("Response Body:  " + responseBody.toString(), FILE_NAME);
+              // System.out.println("Response Body as JSON Array: " + jsonArray.toString(4)); // Pretty print with indent level 4
+              // saveToFile("Response Body: " + connection.getResponseMessage(), FILE_NAME);
+           
+           } catch (JSONException e) {
+               System.out.println("Error parsing JSON array: " + e.getMessage());
+           }
+
+       } catch (IOException e) {
+           e.printStackTrace();
+       
+       }
+		
+		
+		sendToPacsfromAIIMSDB();
+		
+		
+	}
+	
+	
+
+	private static void  sendToPacsfromAIIMSDB(){// Fetch data from the server in house at aiims RB
+		
+		saveToFile("Data sends to pacs is started ::  ", FILE_NAME);
+			SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+				@Override
+				protected Void doInBackground() throws Exception {
+					String sampleId = null; // Initialize sampleId to store fetched sample number
+					try {
+						Class.forName("org.postgresql.Driver");
+						try (Connection conn = DriverManager.getConnection(AppConfig.POSTGRES_URL, AppConfig.POSTGRES_USER,
+								AppConfig.POSTGRES_PASSWORD)) {
+							
+							
+							String query = "SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;"
+									+ "";
+							try (PreparedStatement stmt = conn.prepareStatement(query)) {
+								ResultSet rs = stmt.executeQuery();
+								while (rs.next()) {
+
+									String his_order_id = rs.getString("his_order_id");
+									String patient_id = rs.getString("patient_id");
+									String patient_fname = rs.getString("patient_fname");
+									String patient_mname = rs.getString("patient_mname");
+									String patient_lname = rs.getString("patient_lname");
+									String patient_sex = rs.getString("patient_gender");
+
+									//
+									String phone_number = rs.getString("phone_number");
+									String email_id = rs.getString("email_id");
+									String patient_weight = rs.getString("patient_weight");
+									String patient_type = rs.getString("patient_type");
+									String patient_history = rs.getString("patient_history");
+									String center_id = rs.getString("center_id");
+									String patient_birth_date = rs.getString("patient_birth_date");
+									String modality = rs.getString("modality");
+									String test_id = rs.getString("test_id");
+									String test_name = rs.getString("test_name");
+									String referring_physician_id = rs.getString("referring_physician_id");
+									String referring_physician_name = rs.getString("referring_physician_name");
+									String radiologist_id = rs.getString("radiologist_id");
+									String technician_id = rs.getString("technician_id");
+
+									String hl7Message = HL7MessageGenerator.generateHL7MessagePACS(his_order_id, patient_id, patient_fname,
+											patient_mname, patient_lname, patient_sex, patient_birth_date, phone_number,
+											email_id, patient_weight, patient_type, patient_history, center_id,
+											modality, test_id, test_name, referring_physician_id, referring_physician_name,
+											radiologist_id, technician_id);
+									System.out.println(hl7Message);
+									ServerConnector.sendToServer(hl7Message);
+									
+								}
+							}
+						} catch (Exception e) {
+							
+							saveToFile("Error: " + e.getMessage(), FILE_NAME);
+							saveToFile("Stack Trace: " + getStackTraceAsString(e), FILE_NAME);
+
+						}
+					} catch (ClassNotFoundException e) {
+						
+						saveToFile("Stack Trace: " + getStackTraceAsString(e), FILE_NAME);
+
+					}
+				
+					return null;
+				}
+			};
+			worker.execute(); // Run in background thread to keep UI responsive
+		}
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//
+	
+	
+	
+	/// function to fetch patinet data from HIS sever /// pending worklist...   not in use currently
+
+		private static JSONArray getPendingOrderListPACS() {
+			// Declare the JSONArray to store the response data
+			final JSONArray[] jsonResponse = new JSONArray[1]; // Using array to allow assignment within the inner class
+			SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+				@Override
+				protected Void doInBackground() throws Exception {
+					try {
+						
+						 fromDate = (Date) datePicker1.getModel().getValue();
+				          // Get the selected date from "To Date" date picker
+				           toDate = (Date) datePicker2.getModel().getValue();
+
+				           SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+				        // Format the dates to the specified format
+				        String formattedFromDate = dateFormat.format(fromDate);
+				        String formattedToDate = dateFormat.format(toDate);
+						System.out.println("Calling API");
+						// Open the connection to the API
+						
+						String jsonParam = null ;
+						  if (fromDate != null && toDate != null) {
+				                // Convert dates to strings (ISO format, or any format needed)
+				                String fromDateString = new java.text.SimpleDateFormat("yyyy-mm-dd").format(fromDate);
+				                String toDateString = new java.text.SimpleDateFormat("yyyy-mm-dd").format(toDate);
+				                
+				                // Construct JSON parameters
+				                jsonParam = "{\"fromDate\":\"" + formattedFromDate + "\", \"toDate\":\"" + formattedToDate + "\"}";
+						  }
+						  else if(fromDate == null) {
+							  
+							  
+								JOptionPane.showMessageDialog(frame, "Select Date", "Input Error", JOptionPane.WARNING_MESSAGE);
+								return null;
+							  
+						  }
+						  
+						
+						 
+						  // URL encode the JSON parameter
+						    String encodedJsonParam = URLEncoder.encode(jsonParam, StandardCharsets.UTF_8.toString());
+
+						    // Construct the complete URL with the encoded JSON parameter
+						    URL url = new URL(aiimsUrl + "/api/v1/pacs/pendingpatientdetials?json=" + encodedJsonParam);
+						    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+						    connection.setRequestMethod("GET"); // Assuming it's a GET request to fetch sample data
+						    connection.setRequestProperty("Content-Type", "application/json");
+						    connection.setDoInput(true);
+						    	
+						// Get the response code
+						int responseCode = connection.getResponseCode();
+						System.out.println("Response Code: " + responseCode);
+						if (responseCode == HttpURLConnection.HTTP_OK) { // Success
+							// Read the response
+							BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+							String inputLine;
+							StringBuilder response = new StringBuilder();
+
+							while ((inputLine = in.readLine()) != null) {
+								response.append(inputLine);
+							}
+							in.close();
+							System.out.println("Response: " + response.toString());
+							saveToFile("Response: " + response.toString(), FILE_NAME);
+
+							// Parse the JSON response as a JSONArray
+							jsonResponse[0] = new JSONArray(response.toString());
+							
+							
+							
+							
+							
+							//aiims api
+							
+						
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+						} else {
+							saveToFile("Failed to fetch data. Response Code: " + responseCode, FILE_NAME);
+							
+							System.out.println("Failed to fetch data. Response Code: " + responseCode);
+						}
+					} catch (IOException e) {
+						System.out.println("Error fetching sample data: " + e.getMessage());
+						
+						saveToFile("Stack Trace: " + getStackTraceAsString(e), FILE_NAME);
+						// addLogEntry("Error fetching sample data: ");
+						e.printStackTrace();
+					}
+					return null; // Return null from background thread
+				}
+
+				@Override
+				protected void done() {
+					// The task has completed, you can handle the result in the main thread
+					
+					
+					JSONArray jsonArray = null;
+			        HttpURLConnection connection;
+					try {
+			             URL url = new URL(aiimsUrl + "/api/v1/pacs/save");
+			            connection = (HttpURLConnection) url.openConnection();
+			            connection.setRequestMethod("POST");
+			            connection.setRequestProperty("Content-Type", "application/json");
+			            connection.setDoInput(true);
+			            connection.setDoOutput(true); // This allows sending data in the request body
+			            StringBuilder response = new StringBuilder();
+			            String inputLine = null;
+			            // Writing to the output stream
+			            try (OutputStream os = connection.getOutputStream()) {
+			               
+							byte[] input1 = jsonResponse[0].toString().getBytes("UTF-8"); // Ensure response is in valid format
+			                os.write(input1, 0, input1.length);
+			            }
+
+			            // Checking the response code
+			            int statusCode = connection.getResponseCode();
+			            System.out.println("Response Code: " + statusCode);
+
+			            // Read the response body
+			            try (BufferedReader inn = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+			                String inputLinee;
+			                StringBuilder responseBody = new StringBuilder();
+			                while ((inputLinee = inn.readLine()) != null) {
+			                    responseBody.append(inputLinee);
+			                }
+			                // Printing the response body
+			                //System.out.println("Response Body: " + responseBody.toString());
+			           
+		                     jsonArray = new JSONArray(responseBody.toString());
+		                    System.out.println("Response Body as JSON Array: " + jsonArray.toString(4)); // Pretty print with indent level 4
+		                    saveToFile("Response Body as JSON Array: " + jsonArray.toString(4), FILE_NAME);
+			            
+			            } catch (JSONException e) {
+		                    System.out.println("Error parsing JSON array: " + e.getMessage());
+		                }
+
+			        } catch (IOException e) {
+			            e.printStackTrace();
+			        
+			        }
+			        
+			        
+			        //  update status
+					
+				     //HttpURLConnection connection;
+						try {
+				             URL url = new URL(aiimsUrl + "/api/v1/pacs/updatestatus");
+				            connection = (HttpURLConnection) url.openConnection();
+				            connection.setRequestMethod("POST");
+				            connection.setRequestProperty("Content-Type", "application/json");
+				            connection.setDoInput(true);
+				            connection.setDoOutput(true); // This allows sending data in the request body
+				            StringBuilder response = new StringBuilder();
+				            String inputLine = null;
+				            // Writing to the output stream
+				            try (OutputStream os = connection.getOutputStream()) {
+				               
+								byte[] input1 = jsonArray.toString(4).toString().getBytes("UTF-8"); // Ensure response is in valid format
+				                os.write(input1, 0, input1.length);
+				            } catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+				            // Checking the response code
+				            int statusCode = connection.getResponseCode();
+				            System.out.println("Response Code: " + statusCode);
+
+				            // Read the response body
+				            try (BufferedReader inn = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+				                String inputLinee;
+				                StringBuilder responseBody = new StringBuilder();
+				                while ((inputLinee = inn.readLine()) != null) {
+				                    responseBody.append(inputLinee);
+				                }
+				                // Printing the response body
+				                System.out.println("Response Body: " + responseBody.toString());
+				           
+			                    JSONArray jsonArray2 = new JSONArray(responseBody.toString());
+			                   // System.out.println("Response Body as JSON Array: " + jsonArray.toString(4)); // Pretty print with indent level 4
+			                    saveToFile("Response Body: " + connection.getResponseMessage(), FILE_NAME);
+				            
+				            } catch (JSONException e) {
+			                    System.out.println("Error parsing JSON array: " + e.getMessage());
+			                }
+
+				        } catch (IOException e) {
+				            e.printStackTrace();
+				        
+				        }
+					
+					//end
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					try {
+						// If the background task was successful, the jsonResponse is already populated
+						if (jsonResponse[0] != null) {
+							System.out.println("Successfully fetched data: " + jsonResponse[0]);
+							for (int i = 0; i < jsonResponse[0].length(); i++) {
+								JSONObject patient = jsonResponse[0].getJSONObject(i);
+
+								// Extract fields from each patient object
+								String his_order_id = patient.getString("hisOrderId");
+								String patient_id = patient.getString("patientId");
+								String patient_fname = patient.getString("patientFname");
+								String patient_mname = patient.getString("patientMname");
+								String patient_lname = patient.getString("patientLname");
+								String patient_sex = patient.getString("patientGender");
+
+								//
+								String phone_number = patient.getString("phoneNumber");
+								String email_id = patient.getString("emailId");
+								String patient_weight = patient.getString("patientWeight");
+								String patient_type = patient.getString("patientType");
+								String patient_history = patient.getString("patientHistory");
+								String center_id = patient.getString("centerId");
+								String patient_birth_date = patient.getString("patientBirthDate");
+								String modality = patient.getString("modality");
+								String test_id = patient.getString("testId");
+								String test_name = patient.getString("testName");
+								String referring_physician_id = patient.getString("referringPhysicianId");
+								String referring_physician_name = patient.getString("referringPhysicianName");
+								String radiologist_id = patient.getString("radiologistId");
+								String technician_id = patient.getString("technicianId");
+
+								String hl7Message;
+								try {
+									hl7Message = HL7MessageGenerator.generateHL7MessagePACS(his_order_id, patient_id, patient_fname,
+											patient_mname, patient_lname, patient_sex, patient_birth_date, phone_number,
+											email_id, patient_weight, patient_type, patient_history, center_id,
+											modality, test_id, test_name, referring_physician_id, referring_physician_name,
+											radiologist_id, technician_id);
+									//ServerConnector.sendToServer(hl7Message);
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								// System.out.println(hl7Message);
+							
+
+							}
+						} else {
+							System.out.println("No data received.");
+						}
+					} catch (Exception e) {
+						saveToFile("Stack Trace: " + getStackTraceAsString(e), FILE_NAME);
+						// addLogEntry("Some Issue in fetching data");
+						e.printStackTrace();
+					}
+				}
+			};
+			worker.execute(); // Run in background thread to keep UI responsive
+
+			// Return the JSONArray after the background task is complete
+			// Since SwingWorker executes asynchronously, it won't immediately return the
+			// data,
+			// so you may need to handle it via a callback or future mechanism.
+			return jsonResponse[0]; // This will be null initially until the task completes
+		}
+
+	
+	
+		private static void handlePacsClient(Socket clientSocket) {
+			
+			saveToFile("Start PACS HL7 Result parsing : ", FILE_NAME);
+			
+			
+			// TODO Auto-generated method stub			
+			new Thread(() -> {
+				try {
+					InputStream input = clientSocket.getInputStream();
+					OutputStream output = clientSocket.getOutputStream();
+
+					BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+					PrintWriter writer = new PrintWriter(output, true);
+
+					String line;
+					StringBuilder receivedData = new StringBuilder();
+
+
+					int order_packet_buffer_counter = 0;
+					int red = -1;
+					byte[] buffer = new byte[800 * 1024]; // a read buffer of 5KiB
+					byte[] redData;
+					StringBuilder clientData = new StringBuilder();
+					String redDataText = "";
+
+					while ((red = clientSocket.getInputStream().read(buffer)) > -1) // **Code Starts For Receiving Client
+						// Messages
+					{					
+
+						redData = new byte[red];
+
+						System.arraycopy(buffer, 0, redData, 0, red);
+
+						redDataText = new String(redData, "UTF-8"); // assumption that client sends data UTF-8 encoded
+						System.out.println(redDataText);
+
+
+
+						//Stream<T> stream;
+
+
+						// When data is received, log it and send back an ACK
+						String receivedMessage = redDataText.toString();
+						System.out.println("Received message: " + receivedMessage);
+						// updateStatusLabel("Data received: " + receivedMessage);
+						saveToFile("Received : "+receivedMessage, FILE_NAME);
+						// Send ACK response
+						String ackResponse = generateAckResponse(receivedMessage);
+						//if(!ackResponse.equals("NO_ACK")) {
+						writer.println(ackResponse);  // Send ACK response
+						writer.flush();
+						System.out.println("Sent ACK response: " + ackResponse);
+						saveToFile("Sent ACK response: " + ackResponse, FILE_NAME);
+			
+					}
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+			}).start();
+			
+		}
+			
+			
+			
+		//Horriba Jodhpur
+		
+		
+		
+private static void handleHorribaClient(Socket clientSocket) {
+			
+			saveToFile("Start Horriba HL7 Result parsing : ", FILE_NAME);
+			
+			
+			// TODO Auto-generated method stub			
+			new Thread(() -> {
+				try {
+					InputStream input = clientSocket.getInputStream();
+					OutputStream output = clientSocket.getOutputStream();
+
+					BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+					PrintWriter writer = new PrintWriter(output, true);
+
+					String line;
+					StringBuilder receivedData = new StringBuilder();
+
+
+					int order_packet_buffer_counter = 0;
+					int red = -1;
+					byte[] buffer = new byte[800 * 1024]; // a read buffer of 5KiB
+					byte[] redData;
+					StringBuilder clientData = new StringBuilder();
+					String redDataText = "";
+
+					while ((red = clientSocket.getInputStream().read(buffer)) > -1) // **Code Starts For Receiving Client
+						// Messages
+					{					
+
+						redData = new byte[red];
+
+						System.arraycopy(buffer, 0, redData, 0, red);
+
+						redDataText = new String(redData, "UTF-8"); // assumption that client sends data UTF-8 encoded
+						System.out.println(redDataText);
+
+
+
+						//Stream<T> stream;
+
+
+						// When data is received, log it and send back an ACK
+						String receivedMessage = redDataText.toString();
+						System.out.println("Received message: " + receivedMessage);
+						// updateStatusLabel("Data received: " + receivedMessage);
+						saveToFile("Received : "+receivedMessage, FILE_NAME);
+						// Send ACK response
+						String ackResponse = generateAckResponse(receivedMessage);
+						//if(!ackResponse.equals("NO_ACK")) {
+						writer.println(ackResponse);  // Send ACK response
+						writer.flush();
+						System.out.println("Sent ACK response: " + ackResponse);
+						saveToFile("Sent ACK response: " + ackResponse, FILE_NAME);
+			
+					}
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+			}).start();
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+		}
+	
+	
+	
+	
+	

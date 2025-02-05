@@ -1,0 +1,1649 @@
+package Server;
+
+import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.SerialPortEvent;
+
+
+import Server.ABC;
+
+public class DB9Server {
+	
+	
+	
+ 	private static List<String> resultPacketList = new ArrayList();
+		private static String sampleNo;
+		private static String tcc;
+		private static int nakCount=0;
+		private static String lastpkttobeSent;
+		
+		static Map res = ReadPropertyFile.getPropertyValues();
+		static  String portName =     (String) res.get("portname");
+		static  String formatID =     (String) res.get("formatid");
+		static String pdfDir = 			(String) res.get("pdfdir");
+		static char cr = 13;
+		static char lf = 10;
+		static char etx='';
+
+		static  char stx='';
+		static  char NAK='';
+        
+		static String sample_no="";
+		static String testval="";
+		static String testcode="";
+	
+	//Added by Rohit 20/06/2024 
+	//Advia 2120, Aboot , Biored-D10 ,           //pls add machine name if any new machine solution is added in this file
+	
+	
+	public  void startDb9Server(String portName,String machineId,int baudRate){
+	
+	
+	//ended by Rohit
+	
+	
+	
+	
+		SerialPort serialPort = SerialPort.getCommPort(portName);
+	        serialPort.setBaudRate(baudRate);
+	        serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 500, 0);
+	        System.out.println("***********Machine Interface Server DB9 Only*************");
+	        GenericServer.logMessage("***********Machine Interface Server DB9 Only*************", Color.MAGENTA);
+
+	        GenericServer.logMessage("Selected Baud Rate :"+baudRate, Color.MAGENTA);
+	        System.out.println("Format ID:  "+formatID);
+	        
+	        System.out.println("Selected port :  "+portName);
+	        //formatID="30001";
+	        System.out.println("*********************************************************");
+	        System.out.println("\n");
+	        if (serialPort != null&&serialPort.openPort()) {
+	        	
+	        	
+	        if(formatID.equals("30001")) {
+	        	System.out.println("Selected Machine is :--->>  Advia 2120");
+	        	
+	        	Advia(serialPort);   //IGIMS Patna  Advia
+	        	
+	        }
+	        else if(formatID.equals("30002")) {
+	        	System.out.println("Selected Machine is :--->>  Biored ");
+	        	BioredD10(serialPort); //IGIMS Patna Biored
+	        }
+	        
+	        else if(formatID.equals("30003")) {
+	        	System.out.println("Selected Machine is :--->>  Abott Manglagiri ");
+	        	AbottManglagiri(serialPort); //AIIMS Manglagiri Aboott
+	        }
+	        
+	        else if(formatID.equals("30003")){
+	        	System.out.println("AIIMS Jodhpur ICU & OT Equipments ");
+	        	GenericServer.logMessage("AIIMS Jodhpur ICU & OT Equipments ", Color.MAGENTA);
+	 	       
+	        	AIIMSJDH(serialPort);
+	        	
+	        }
+	        else {
+	        	
+	        	System.out.println("AIIMS Jodhpur ICU & OT Equipments ");
+	        	GenericServer.logMessage("Mindray Anesthisia System ", Color.MAGENTA);
+	        	MindraySeriesA(serialPort);
+	        }
+	        
+	        
+	        }
+	        
+	        else {
+	        	
+	        	System.out.println("Currently  port is not open...");
+	        }
+	        
+
+	
+	}
+	
+	
+	
+	
+	
+	public static void AbottManglagiri(SerialPort serialPort){
+		
+		// serialPort = SerialPort.getCommPort(portName);
+		serialPort.setBaudRate(115200);
+		serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 500, 0);
+		System.out.println("***********Abott Manglagiri Solution*************");
+		
+		while(true) {
+			if (serialPort.openPort()) {
+				try {
+
+					OutputStream outputStream = serialPort.getOutputStream();
+
+					String dataToSend = "0I "+cr+lf+"^"+"";    //  new initilization data packet with charcter
+
+
+					String newPacketLRC = "";
+
+					outputStream.write(dataToSend.getBytes());
+					outputStream.flush();
+
+					byte[] buffer = new byte[2048];
+					int len;
+					StringBuilder response = new StringBuilder();
+					StringBuilder receivedData = new StringBuilder();
+					StringBuilder resultPacket = new StringBuilder();
+
+					// Create a thread to continuously read data from the port
+					StringBuffer databuffer= new StringBuffer();
+					String SampleNo="";
+					List<String> list = new ArrayList<String>();
+
+					Map<String, List> mp = new HashMap();  //added by Rohit...
+					List <String> testCode = new ArrayList<>();
+					List <String> testValue = new ArrayList<>();
+					List <String> testCodeupdated = new ArrayList<>();
+					List <String> testValueupdated = new ArrayList<>();
+
+					
+					
+					int charCount=0;
+					while (true) {
+
+
+						int numRead = serialPort.readBytes(buffer, buffer.length);
+
+						if (numRead > 0) {
+							for (int i = 0; i < numRead; i++) {
+								char c = (char) buffer[i];
+
+								receivedData.append(c);
+
+								char nextCh=(char) buffer[i+1];
+								byte[] buffer1 = new byte[1024];
+								
+								long bytesToWrite=10;
+								byte[] ackBytes = { 0x06 } ; // ASCII code for ACK character
+
+								//ACK MSG
+								outputStream.write(ackBytes);
+								outputStream.flush();
+								//end ACK msg
+								
+								
+							//	System.out.println("count"+charCount);
+								if(c=='~' && charCount<1) {
+									//System.out.println("Data Recieved From Machine ::  "+receivedData.toString());
+
+									charCount++;
+									//receivedData.setLength(0);
+
+								}
+
+								else if ( charCount==1 && c=='~') {
+									
+									charCount=0;
+									System.out.println("Data Recieved From Machine ::  "+receivedData.toString());
+									
+									
+									
+									String[] resPkt=receivedData.toString().split(Character.toString(cr)+Character.toString(lf));
+									int lineCount=0;
+									
+									
+									String sampleNopkt=resPkt[3];
+									
+//									String samNopkt=resPkt[3].substring(7);
+//									//System.out.println("Sample No. packet: "+samNopkt);
+//									int startIndex=samNopkt.indexOf("(");
+//									int endIndex=samNopkt.indexOf(")");
+//									SampleNo=samNopkt.substring(startIndex+1,endIndex);
+									for(int j=4;j<resPkt.length;j++) {
+										lineCount++;
+										//System.out.println("Linee :: "+resPkt[j]);
+										String tc=resPkt[j].substring(0,3);
+										if(!resPkt[j].contains("SD")) {
+										if(testCode.size()<10){
+											testCode.add(tc);
+												
+											
+										}}
+
+										
+										
+										
+										if(resPkt[j].contains("ID(")) {
+											
+											int startIndex=resPkt[j].indexOf("(");
+											int endIndex=resPkt[j].indexOf(")");
+											SampleNo=resPkt[j].substring(startIndex+1,endIndex);
+											SampleNo=SampleNo.replaceAll(" ","");
+										}
+										
+										
+										
+										if(resPkt[j].contains("norm")) {
+											String tv=resPkt[j].substring(15);
+											//tv=tv.replaceAll(".","");
+											tv=tv.replaceAll(" ","");
+											tv=tv.replaceAll("RBC/ul","");
+											tv=tv.replaceAll("WBC/ul","");//
+											tv=tv.replaceAll("mg/dl","");
+											tv=tv.replaceAll("\\>","");
+											tv=tv.replaceAll("\\<","");
+											if(testValue.size()<10){
+												if( Double.valueOf(tv)<=0.9) {
+													
+													testValue.add("Negative");
+												}
+												else if(Double.valueOf(tv)>=1) {
+													testValue.add("Positive");}
+											
+											
+										//	testValue.add("Noraml");
+											
+											}
+											
+											
+										}
+										
+										
+										
+										else if(resPkt[j].contains("pos")) {
+											String tv=resPkt[j].substring(15);
+											//tv=tv.replaceAll(".","");
+											tv=tv.replaceAll(" ","");
+											tv=tv.replaceAll("RBC/ul","");
+											tv=tv.replaceAll("WBC/ul","");//
+											tv=tv.replaceAll("mg/dl","");
+											tv=tv.replaceAll("\\>","");
+											tv=tv.replaceAll("\\<","");
+											if(testValue.size()<10){
+												testValue.add("Positive");
+											
+										//	testValue.add("Noraml");
+											
+											}
+											
+										
+										}
+										
+										else if(resPkt[j].contains("+")) {
+											String tv=resPkt[j].substring(16);
+											//tv=tv.replaceAll(".","");
+											tv=tv.replaceAll(" ","");
+											tv=tv.replaceAll("RBC/ul","");
+											tv=tv.replaceAll("mg/dl","");
+											tv=tv.replaceAll("WBC/ul","");
+											tv=tv.replaceAll("\\>","");
+											tv=tv.replaceAll("\\<","");
+											
+											char someChar = '+';
+											int count = 0;
+											 
+											for (int k = 0; k < resPkt[j].length(); k++) {
+											    if (resPkt[j].charAt(k) == someChar) {
+											        count++;
+											    }
+											   }
+											if(testValue.size()<10){
+												if(count==1) {
+													testValue.add("+");
+													
+												}
+												else if(count==2) {
+													testValue.add("++");
+												}
+												else if(count==3) {
+														testValue.add("+++");
+												}
+												else if(count==4) {
+														testValue.add("++++");
+												}
+											
+											}
+										
+											
+										}
+										else if(resPkt[j].contains("neg")) {
+											String tv=resPkt[j].substring(18);
+											tv=tv.replaceAll("RBC/ul","");
+											tv=tv.replaceAll("mg/dl","");
+											tv=tv.replaceAll("WBC/ul","");
+											//testValue.add(tv);
+											tv=tv.replaceAll("\\>","");
+											tv=tv.replaceAll("\\<","");
+											if(testValue.size()<10){
+											testValue.add("Negative");
+											}
+										}
+										
+//										else if(resPkt[j].contains("SD")) {
+//											
+//										
+//
+//											
+//											
+//										}
+										else {
+											System.out.println(resPkt[j].contains("SD"));
+											if(!resPkt[j].contains("SD")) {
+											String tv=resPkt[j].substring(17);
+											if(testValue.size()<10){
+												tv=tv.replaceAll("\\>","");
+												tv=tv.replaceAll("\\<","");
+												testValue.add(tv);
+											
+											}}
+											
+										}
+										
+
+									}
+									
+									 mp.put("TestCode",testCode);
+                            		 mp.put("TestValue",testValue);
+									 ABC abc = new ABC();
+                            		 
+									 System.out.println("Sample No.  : " +SampleNo );
+									 //System.out.println("testCode Size : " +testCode.size() );
+
+									 System.out.println("testCode: " +testCode );
+
+									// System.out.println("testValue Size: " +testValue.size() );
+									 System.out.println("testValue: " +testValue);
+									 abc.insert_SysmexXN350(mp,SampleNo); 
+									 testValue.clear();
+									 testCode.clear();
+									 receivedData.setLength(0);
+									
+									
+									
+									
+								}
+
+							}
+
+
+
+
+						}
+
+						else {
+							//System.out.println("Port is free");
+
+						}
+
+
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					// Close the port when done
+					serialPort.closePort();
+				}
+			} else {
+				//System.out.println("Error: Unable to open the serial port.");
+			}
+		}
+		
+		
+	}
+	
+	
+	//IGIMS Patna Advia 2120 Solution 
+	public static void Advia(SerialPort serialPort ) {
+		
+		
+		  while(true) {
+		        if (serialPort.openPort()) {
+		            try {
+		                // Send initialize packet
+		               // String initializePacket = "dfbcvb";
+		                
+		                OutputStream outputStream = serialPort.getOutputStream();
+
+		                // Data to be sent
+		               // String dataToSend = "30hI25"+cr+lf+"";//stx+"0I 5e"+etx;//;"30hI73"+"";//"PS          ";// LIS green with this I pkt
+		                
+		                //String dataToSend = "0I "+cr+lf+"5E"+"";    //new initilization data packet Hexacode
+		              
+		                String dataToSend = "0I "+cr+lf+"^"+"";    //  new initilization data packet with charcter
+		                
+		               
+		                String newPacketLRC = "";
+		                
+		                
+		                // Send the data
+		                outputStream.write(dataToSend.getBytes());
+		                outputStream.flush();
+		                System.out.println("Communication Started.....Initlization packet Sent");
+		                GenericServer.logMessage("Communication Started.....Initlization packet Sent", Color.BLUE);
+		                System.out.println(dataToSend);
+		                GenericServer.logMessage(dataToSend, Color.BLUE);
+		                
+//		              serialPort.getOutputStream().write(initializePacket.getBytes());
+
+		                // Read the response
+		                byte[] buffer = new byte[2048];
+		                int len;
+		                StringBuilder response = new StringBuilder();
+		                StringBuilder receivedData = new StringBuilder();
+		                StringBuilder resultPacket = new StringBuilder();
+		                
+		                // Create a thread to continuously read data from the port
+		                StringBuffer databuffer= new StringBuffer();
+		                String SampleNo=null;
+		                List<String> list = new ArrayList<String>();
+		                
+		                Map<String, List> mp = new HashMap();  //added by Rohit...
+		        		List <String> testCode = new ArrayList<>();
+		        		List <String> testValue = new ArrayList<>();
+		        		List <String> testCodeupdated = new ArrayList<>();
+		        		List <String> testValueupdated = new ArrayList<>();
+
+		                while (true) {
+		                    // Check if there are bytes available to be read
+		                	
+		                	
+		                	
+		                	 int numRead = serialPort.readBytes(buffer, buffer.length);
+		                     
+		                     if (numRead > 0) {
+		                         for (int i = 0; i < numRead; i++) {
+		                             char c = (char) buffer[i];
+		                             
+		                             //System.out.println("recieved char :"+c);
+		                             
+		                             
+		                             receivedData.append(c);
+		                             
+		                             char nextCh=(char) buffer[i+1];
+		                             byte[] buffer1 = new byte[1024];
+		                            
+		                             long bytesToWrite=10;
+		                             byte[] ackBytes = { 0x06 } ; // ASCII code for ACK character
+		                         	
+		                          //   serialPort.writeBytes(dataToSend.getBytes(), dataToSend.length()); 
+		                             
+		                        //     databuffer.toString().split("");
+		                          // Assuming port is your port object
+		                            // serialPort.writeBytes(ackBytes, ackBytes.length); 
+		 							//port.writeBytes(buffer1, bytesToWrite);
+		                             
+		                             
+//		                             if (c != stx) {
+//		                            	 
+//		                            	 databuffer.append(c); 
+//		                             }
+//		                             System.out.println("databuffer"+databuffer);
+		                             
+//		                            if(c=='0') {
+//		                            	String s="1S          "+cr+lf;
+//		                            	char lrc = calculateLRC(s);
+//		                            	String str="1S          "+cr+lf+lrc+"";
+//		                            	
+//		                            	 outputStream.write(str.getBytes());
+//		                                 outputStream.flush();
+//		                                // System.out.println("data sent after reciving first 0  "+str);
+//		                            	 
+//		                            }
+//		                            
+//		                            if(c==0) {
+//		                            	
+//		                            	String s="1S          "+cr+lf;
+//		                            	char lrc = calculateLRC(s);
+//		                            	String str="1S          "+cr+lf+lrc+"";
+//		                            	
+//		                            	 outputStream.write(str.getBytes());
+//		                                 outputStream.flush();
+//		                                // System.out.println("data sent after reciving first 0   "+str);
+//		                            	 
+//		                            }
+		                             
+		                             if(receivedData.toString().length()== 1 && receivedData.toString().equals("0")) {
+		                           	  System.out.println("Data Recieved From Machine ::  "+receivedData.toString());
+		                           	GenericServer.logMessage("Data Recieved From Machine ::  "+receivedData.toString(), Color.BLUE);
+		            			     	String s="1S          "+cr+lf;
+		            			     	char lrc = calculateLRC(s);
+		            			     	String str="1S          "+cr+lf+lrc+"";
+		            			     	
+		            			     	 outputStream.write(str.getBytes());
+		            			          outputStream.flush();
+		            			          System.out.println("data sent after reciving first 0   "+str);
+		            			         	GenericServer.logMessage("data sent after reciving first 0   "+str, Color.BLUE);
+		            			         receivedData.setLength(0);
+		            			     	 
+		                           	 
+		                           	 
+		                            }
+		                            
+		                            if(receivedData.toString().length()== 1 && receivedData.toString().equals(0)) {
+		                           	  System.out.println("Data Recieved From Machine ::  "+receivedData.toString());
+		                           	GenericServer.logMessage("Data Recieved From Machine ::  "+receivedData.toString(), Color.BLUE);
+		             			     	String s="1S          "+cr+lf;
+		             			     	char lrc = calculateLRC(s);
+		             			     	String str="1S          "+cr+lf+lrc+"";
+		             			     	
+		             			     	 outputStream.write(str.getBytes());
+		             			          outputStream.flush();
+		             			          System.out.println("data sent after reciving first 0   "+str);
+		             			      	GenericServer.logMessage("data sent after reciving first 0   "+str, Color.BLUE);
+		             			          receivedData.setLength(0);
+		             			     	 
+		                            	 
+		                            	 
+		                             }
+		                            
+		                            else if(receivedData.toString().length()== 1 && receivedData.toString().equals("") && nakCount<1) {  //NAK CHECK
+		                           	// System.out.println("Data Recieved from machine : "+ receivedData.toString());
+		                           	 
+		                           	 nakCount++;
+		                           	 
+		                           	 
+		                           	  System.out.println("Data Recieved From Machine ::  "+receivedData.toString());
+		                           	GenericServer.logMessage("Data Recieved From Machine ::  "+receivedData.toString(), Color.BLUE);
+		             			     	String s="1S          "+cr+lf;
+		             			     	char lrc = calculateLRC(s);
+		             			     	String str="1S          "+cr+lf+lrc+"";
+		             			     	
+		             			     	 outputStream.write(lastpkttobeSent.getBytes());
+		             			          outputStream.flush();
+		             			          System.out.println("data sent after reciving NAK   "+lastpkttobeSent);
+		             			     	GenericServer.logMessage("data sent after reciving NAK   "+lastpkttobeSent, Color.BLUE);
+		             			          receivedData.setLength(0);
+		             			     	 
+		                            	 
+		                            	 
+		                             }
+		                            
+		                            else if(receivedData.toString().equals("") && nakCount==1) {
+		                           	 
+		                           	   outputStream.write(dataToSend.getBytes());
+		                                  outputStream.flush();
+		                                  System.out.println("Again NAK recieved I Packet Sent");
+		                                  GenericServer.logMessage("Again NAK recieved I Packet Sent", Color.BLUE);
+		                                  System.out.println(dataToSend);
+		                                  nakCount=0;
+		                                  receivedData.setLength(0);
+		                            }
+		                            
+		                            
+		                             
+		                             
+		                             
+		                             
+
+//		                             	}
+			                             	
+			                             	 else if (c == etx) {
+			                            	 receivedData.append(etx);
+			                            	 System.out.println("::::::::Data Received from Machine:::::: " );
+			                            	  GenericServer.logMessage("::::::::Data Received from Machine:::::: " , Color.BLUE);
+			                            	 System.out.println(receivedData.toString());
+			                            	 GenericServer.logMessage(receivedData.toString(), Color.MAGENTA);
+			                            	 
+		                            	  int indexofStx=receivedData.toString().indexOf(stx);
+			                            	 char[] character_array = receivedData.toString().toCharArray();
+			                            	 if(character_array[indexofStx+2] =='R') {
+			                            		 resultPacket.append(receivedData.toString());
+			                            		 resultPacketList.add(receivedData.toString());
+		                            		 char ch=character_array[indexofStx+1];
+		                            		 
+		                            		// int intValue = Character.getNumericValue(ch);
+		                            		 char na=(char) (ch+1);
+		                            		 
+		                            		// System.out.println("character_array[2]"+ na);
+		                            		// String str = String.valueOf(na);
+		                            		 String str1=na+"Z                  0"+cr+lf;
+		                            		 String Zpkt=""+na+"Z                  0"+cr+lf;
+		                            		 
+		                            		 //String Zpkt=""+na+"Z          "+cr+lf;
+		                            		 //Zpkt=""+na+"Z          "+cr+lf+lrc+etx;
+		                            		 char lrc = calculateLRC(str1);
+		                            		 Zpkt=ch+""+na+"Z                  0"+cr+lf+lrc+etx;
+		                            		 
+		                            		 lastpkttobeSent=Zpkt;
+//		                            		 serialPort.writeBytes(Zpkt.getBytes(), Zpkt.length()); 
+//		                            		 outputStream.write(ch);
+//		                                     outputStream.flush();
+//		                                     
+		                                     outputStream.write(Zpkt.getBytes());
+		                                     outputStream.flush();
+		                                     System.out.println("Data Sent after result captured   "+ch+"\n"+Zpkt);  
+		                                     GenericServer.logMessage("Data Sent after result captured   "+ch+"\n"+Zpkt , Color.BLUE);
+		                            		 
+		                                     
+		                                   //  receivedData.setLength(0); 
+		                                     
+		                                     
+		                                     
+		                                     //pareing start
+		                                     
+		                                     
+		                                // System.out.println("RSS"+resultPacketList.size());
+		                                    	
+		                                     
+		                                     		String str=receivedData.toString();//resultPacketList.get(ii);
+		                                    		 
+		                                    		 int indexofStx1=str.toString().indexOf(stx);
+		                                    		 String sampleName="";
+		                                    		 String[] resultSplit= str.split(" ");
+		                                    		 
+		                                    		 sampleName=resultSplit[1].replaceAll("0000", "");
+		                                    		 
+		                                    		 System.out.println("sample NO:"+sampleName);
+		                                    		 GenericServer.logMessage("sample NO:"+sampleName , Color.BLUE);
+
+		                                    		  receivedData.setLength(0); 
+
+		                                    	        	
+		                                    	    //appendRecordToFile(sampleName);
+		                                    	           // System.out.println(sampleName+" is not present in the log file.");
+		                                    	            // Perform alternative action or exit
+		                                    	        
+		                                    		   
+
+		                                    		 
+		                                    		 
+		                                    		 resultSplit= str.split(Character.toString(cr)+Character.toString(lf));
+		                                    		 String testresults=resultSplit[1];
+		                                    		 
+		                                    		 String[] testresultsData=testresults.split("  ");
+		                                    		 
+		                                    		 
+		                                    		 
+		                                    		 	ArrayList<String> substrings = new ArrayList<>();
+		                                    	        int length = testresults.length();
+		                                    	        
+		                                    	        for (int n = 0; n < length; n += 9) {
+		                                    	            substrings.add(testresults.substring(n, Math.min(length, n + 9)).trim());
+		                                    	        }
+		                                    	        
+		                                    	        
+		                                    	        System.out.println("LIST   :"+substrings);
+		                                    	        System.out.println("substrings size   :"+substrings.size());
+		                                    	        GenericServer.logMessage("LIST   :"+substrings, Color.BLUE);
+		                                    	        GenericServer.logMessage("substrings size   :"+substrings.size() , Color.BLUE);
+		                                    	        
+		                                    	        
+		                                    	        for(int k=0;k<substrings.size();k++){  //28
+		                                    	        	
+		                                    	        	
+		                                    	        	
+		                                    	        	
+		                                    	        	String segment=substrings.get(k);
+		                                    	        	
+		                                    	        	if(!segment.contains(" ")) {
+		                                    	        		
+		                                    	        		int ind=substrings.indexOf(segment);
+		                                    	        		
+		                                    	        		//System.out.println("index of stirng:"+ind); 
+		                                    	        		
+		                                    	        		if(ind<9){
+		                                    	        			//System.out.println("ROHT"+segment.substring(0,1)); 
+		                                    	        			
+		                                    	        			if(testCode.isEmpty() && ind==0) {
+		                                    	        				testCode.add(segment.substring(0,1));
+		                                        	        			testValue.add(segment.substring(1));
+		                                    	        			}
+		                                    	        			if(!testCode.isEmpty() && !testCode.contains(segment.substring(0,1))) {
+		                                    	        				testCode.add(segment.substring(0,1));
+		                                        	        			testValue.add(segment.substring(1));
+		                                    	        			}
+		                                    	        			
+		                                    	        		}
+		                                    	        		else{
+		                                    	        			
+		                                    	        			segment.substring(0,2);
+		                                    	        			if(!testCode.isEmpty()&&!testCode.contains(segment.substring(0,1))) {
+		                                    	        			testCode.add(segment.substring(0,2));
+		                                    	        			testValue.add(segment.substring(2));
+		                                    	        			}
+		                                    	        		}
+		                                    	        
+		                                    	        	}
+		                                    	        	else {
+		                                    	        		testCode.add(segment.substring(0,2));
+		                                	        			testValue.add(segment.substring(2));
+		                                    	        		
+		                                    	        	}
+		                                    	        	
+		                                    	        	}
+		                                    	        
+		                                    	        	
+		                                    	     receivedData.setLength(0); 
+		                                    		
+		                                    	     System.out.println("Sample NO "+sampleName);
+		                                    		 System.out.println("TestCode "+testCode);
+		                                    		 
+		                                    		 System.out.println("TestValue "+testValue);
+		                                    		 
+		                                    		 System.out.println("TestCode "+testCode.size());
+		                                    		 
+		                                    		 System.out.println("TestValue "+testValue.size());
+		                                    		 GenericServer.logMessage("Sample NO "+sampleName , Color.RED);
+		                                    		 GenericServer.logMessage("TestCode "+testCode , Color.RED);
+		                                    		 GenericServer.logMessage("TestValue "+testValue , Color.RED);
+		                                    		 GenericServer.logMessage("TestCode "+testCode.size() , Color.BLUE);
+		                                    		 GenericServer.logMessage("TestValue "+testValue.size() , Color.BLUE);
+		                                    		 
+		                                    		 
+		                                    		 
+		                                    		 int size=testValue.size();
+		                                    		 
+		                                    		 
+		                                    		 System.out.println("Testcode   :  Testvalue");
+		                                    		 GenericServer.logMessage("Testcode   :  Testvalue" , Color.BLUE);
+		                                    		 for(int m=0;m<testCode.size();m++) {
+		                                    			 
+		                                    			 System.out.println(testCode.get(m)+"       :        "+testValue.get(m));
+		                                    			 GenericServer.logMessage(testCode.get(m)+"       :        "+testValue.get(m) , Color.BLUE);
+		                                    			// System.out.println(testValue.get(i));
+		                                    		 }
+//		                                    		 System.out.println("TestCode Size : "+testCode.size());
+//		                                    		 System.out.println("TestValue Size ."+testValue.size());
+		                                    		 mp.put("TestCode",testCode);
+		                                    		 mp.put("TestValue",testValue);
+		                                    		 
+		                                    		
+		                                    		 
+		                                    		 //test code and test vale parsing start 
+		                                    		 
+
+		                                    		 
+		                                    		 
+		                                    		 //end parsing
+		                                    		 ABC abc = new ABC();
+		                                    		 
+		                                    		 abc.insert_SysmexXN350(mp,sampleName);   //type 5
+		                                    		 //resultPacketList.remove(i);
+		                                    		 testCode.clear();
+		                                    		 testValue.clear();
+		                                    		 
+		                                    	 }
+			                            	 
+			                            	 
+		                                    // }
+		                                     
+		                                     
+		                                     
+		                            	 //}
+		                            	 
+		                            	 else {
+		                            	 
+		                            	 try {
+		                            		 
+		                            	 int indexofStx1=receivedData.toString().indexOf(stx);
+		                            	 char indexChar = receivedData.charAt(indexofStx1+1);
+		                            	// System.out.println("indexChar"+indexChar);
+		                            	 String msg= processMachineData(Character.toString(indexChar));
+//		                               // Calculate LRC for the entire string
+//		                               
+		    
+		                               	String newPacket=msg.charAt(0)+"S          "+cr+lf;
+		                               
+		                              	char lrc = calculateLRC(newPacket);
+		                                newPacketLRC=indexChar+""+newPacket+lrc+"";
+		                                //outputStream.write(indexChar);
+		                               // outputStream.flush();
+		                                outputStream.write(newPacketLRC.getBytes());
+		                                outputStream.flush();
+		                                //System.out.println("Data Sent   "+indexChar);
+		                                System.out.println("Server ::   "+newPacketLRC);
+		                                
+		                                lastpkttobeSent=newPacketLRC;
+		                               //  databuffer.append(receivedData.toString());
+		                             
+		                                receivedData.setLength(0); // Clear the buffer
+		                                 
+		                                 
+		                                String data= receivedData.toString();
+		                                
+		                            	 
+		                            }
+		                            	 
+		                            	 catch (Exception e) {
+		                                     System.err.println("An error occurred: " + e.getMessage());
+		                                     outputStream.write(dataToSend.getBytes());
+		                                     outputStream.flush();
+		                                    
+		                                    
+		                                 }
+		                            	 
+		                            	 }
+		                             
+		                             } else {
+		                                // receivedData.append(c);
+		                             }
+		                             
+		                         }
+		                         
+		                         
+		                       //  System.out.println("Data Buffer ::"+databuffer);
+//		                    if (serialPort.bytesAvailable() > 0) {
+//		                        // Read data from the serial port
+//		                       // byte[] buffer = new byte[1024];
+//		                        int bytesRead = serialPort.getInputStream().read(buffer);
+		//
+//		                        // Process the received data
+//		                      
+//		                        
+//		                        
+//		                        if (bytesRead > 0) {
+//		                            String receivedData = new String(buffer, 0, bytesRead);
+//		                            System.out.println("Received Data from Machine: " + receivedData);
+//		                           
+//		                            
+//		                            
+//		                            char indexChar = receivedData.charAt(1);
+//		                           // char resultChar = 0;
+//		                           
+//		                            
+//		                            
+//		                            //getMsgFormat(indexChar);
+//		                           // outputStream.write(sToken.getBytes());
+//		                            //outputStream.flush();
+//		                            //System.out.println("Send data to machine successss"+sToken);
+//		                         // System.out.println(";;;"+resultChar);
+//		                            String msg= processMachineData(Character.toString(indexChar));
+//		                           // Calculate LRC for the entire string
+//		                           
+		//
+//		                           	String newPacket=msg.charAt(0)+"S          "+cr+lf;
+//		                           
+//		                           	String lrc = calculateLRC(newPacket);
+//		                            newPacketLRC=indexChar+""+newPacket+lrc+"";
+//		                           //System.out.println("Next data to be sent::"+newPacketLRC);
+//		                           
+//		                           
+//		                        }
+		                    }
+		                     
+		                     else {
+		                    	// System.out.println("Result Packet List "+resultPacketList);
+		                    	// System.out.println("Result Packet List Size "+resultPacketList.size());
+		                    	 //for(String str:resultPacketList) {
+		                    	
+		                     
+		                     }
+
+		                  //  String dataToSend1 = "LIS_COMMAND";
+		                   // serialPort.getOutputStream().write(newPacketLRC.getBytes());
+//		                    outputStream.write(newPacketLRC.getBytes());
+//		                    outputStream.flush();
+//		                    System.out.println("Data Sent   "+newPacketLRC);
+		                    try {
+								Thread.sleep(100);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+		                }
+		            } catch (IOException e) {
+		                e.printStackTrace();
+		            } finally {
+		                // Close the port when done
+		                serialPort.closePort();
+		            }
+		        } else {
+		          //  System.out.println("Error: Unable to open the serial port.");
+		        }
+		    }
+	}
+
+
+	//IGIMS Patna Biored Solution with Graph PDF upload
+	public static void BioredD10(SerialPort port ) {
+		port.setBaudRate(9600);
+        port.setNumDataBits(8);
+        port.setNumStopBits(1);
+        port.setParity(SerialPort.NO_PARITY);
+        StringBuilder receivedData = new StringBuilder();
+        // Create a thread to continuously read data from the port
+        StringBuffer databuffer= new StringBuffer();
+        String SampleNo=null;
+        List<String> list = new ArrayList<String>();
+		Thread readerThread = new Thread(() -> {
+        	
+            while (true) {
+                byte[] buffer = new byte[1024];
+                int numRead = port.readBytes(buffer, buffer.length);
+                
+                if (numRead > 0) {
+                    for (int i = 0; i < numRead; i++) {
+                        char c = (char) buffer[i];
+                        byte[] buffer1 = new byte[1024];
+                      
+                        long bytesToWrite=10;
+                        byte[] ackBytes = { 0x06 }; // ASCII code for ACK character
+                    	
+                     // Assuming port is your port object
+                     port.writeBytes(ackBytes, ackBytes.length); 
+						//port.writeBytes(buffer1, bytesToWrite);
+                        
+                        if (c == '\n') {
+                            System.out.println("Received data: " + receivedData.toString());
+                            databuffer.append(receivedData.toString());
+                          // System.out.println("Data buffer"+databuffer);
+                         //  splitFunction(receivedData.toString());
+                           list.add(receivedData.toString());
+                         //  System.out.println(list);
+                         //  System.out.println(list);
+                           receivedData.setLength(0); // Clear the buffer
+                            
+                            
+                           String data= receivedData.toString();
+                    	
+                        
+                        } else {
+                            receivedData.append(c);
+                        }
+                    }
+                    
+                   // System.out.println(list);
+                   
+                    for(String str:list) {
+                    	
+                    	//System.out.println("str");
+                    	
+                    	if(str.contains("O|1")) { //A1c^AREA
+                    		
+                    	String [] data1=	str.split("\\|");
+                    //	System.out.println(data1);
+                    	 sample_no=data1[2];
+                    	}
+                    	
+                    	if(str.contains("A1c^AREA")) { 
+                    		
+                    		String [] data2=	str.split("\\|");
+                            //	System.out.println(data1);
+                            	 testval=data2[3];
+                            	 testcode=data2[2];
+                    		
+                    	}
+                    }
+                 
+                    
+                    
+
+                    if(receivedData.toString().contains("")) {
+                    //if( !testval.equals(null) && !testval.equals("")  ) {
+                    	
+                    	 receivedData.setLength(0);
+                        System.out.println("SAMPLE NO :: "+sample_no);
+                        System.out.println("test coe:: "+testcode);
+                        System.out.println("test val:: "+testval); 
+                    try {
+                    	//pdfDir
+                    	System.out.println("PDF directory ::  "+pdfDir);
+                    	
+                    	
+            			String base64val=fileReadAndConvertBase64(pdfDir,sample_no);
+            			// System.out.println("base 64 for sample no. -->>> "+sample_no+"<<----->>"+base64val); 
+            			
+            			if(base64val.equals(null)|| base64val.equals("")) {
+            				
+            				//System.out.println("Base 64 is null");
+            			}
+            			else {
+            				
+            			ABC abc= new ABC();
+            			
+//            			 if (isDataPresent(sample_no)) {
+//             	            System.out.println(sample_no+" is present in the log file.");
+//             	            // Proceed with further processing
+////             	            receivedData.setLength(0); 
+//             	            continue;
+//             	        }
+            			// else {
+            			
+            				 appendRecordToFile(sample_no);
+            			
+            				 abc.insertSampleDtlpdfbase64(sample_no, "A1c",testval,base64val);
+            			//continue;
+            			// }
+            			
+            			}
+            		} catch (Exception e) {
+            			// TODO Auto-generated catch block
+            			e.printStackTrace();
+            		}
+                    
+                }
+                
+                    
+                }
+//                
+//                else {
+//                	
+//                	System.out.println("ROHIT");
+//                }
+             
+                
+               
+            }
+            
+           
+        }
+        
+        		);
+     
+        readerThread.start();
+		
+		
+	}
+	public  static String processMachineData(String msg) {
+    	
+	    //    System.out.println("Packet From Machine::::" + msg);
+
+	        char lastChar = msg.charAt(msg.length() - 1);
+
+	        // Assuming ASCII characters
+	        int nextCharCode = (lastChar + 1) % 128;
+
+	        if (nextCharCode > 'Z') 
+	        {
+	            nextCharCode = '0';
+	        }
+
+	        char nextChar = (char) nextCharCode;
+
+	      // System.out.println("nextChar"+nextChar);
+	        return String.valueOf(nextChar) ;
+	    
+	    }
+	
+	
+	  public static char calculateLRC(String input) {
+	        int lrc = 0;
+	        for (int i = 0; i < input.length(); i++) {
+	            lrc ^= input.charAt(i); // XOR operation
+	            
+	        }
+	        if(lrc==03) {
+	        	
+	        	lrc=127;
+	        }
+	        //System.out.println("lrc  "+lrc);
+	        return (char) lrc;
+	    }
+	  
+	  
+	  
+	  public static String fileReadAndConvertBase64(String sourceFolderPath,String sam) {
+	    	String base64String="";
+			try {
+				File sourceFolder = new File(sourceFolderPath);
+				// System.out.println("sourceFolder: " + sourceFolder.getPath());
+
+				// List PDF files in the source folder
+				File[] pdfFiles = sourceFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".pdf"));
+				StringBuilder str = new StringBuilder();
+				
+				  Arrays.sort(pdfFiles, Comparator.comparingLong(File::lastModified));
+
+			//	System.out.println(111);
+				if (pdfFiles != null && pdfFiles.length > 0) {
+					// System.out.println("pdfFiles.length"+pdfFiles.length);
+
+					
+					
+					for (File pdfFile : pdfFiles) {
+						// Convert the PDF file to Base64
+
+						 //System.out.println("pdfFiles"+pdfFile);
+						
+						String fileName = pdfFile.getName();
+						int hyphenIndex = fileName.indexOf("-");
+						if (hyphenIndex != -1) {
+							
+							
+							
+							String filePrefix = fileName.substring(0, hyphenIndex);
+							//str.append("Base64 representation for " + pdfFile.getName() + base64String);
+							String dd="";
+//							 try {
+//								 pdfFile= compressPDF(pdfFile);
+//						            System.out.println("PDF compressed successfully.");
+//						        } catch (IOException e) {
+//						            e.printStackTrace();
+//						        }
+							if(sam.equals(filePrefix)) {
+								
+								base64String = convertToBase64(pdfFile);
+								//base64String = convertToBase642(dd,dd);
+								System.out.println("Base 64 is genereted ::>>   "+pdfFile);
+								//System.out.println(base64String);
+								//break;
+							}
+							else{
+								System.out.println("File Not found for Sample No ---->"+sam);
+								//break;
+								//base64String=null;
+							}
+							// str.append("Base64 representation for " + pdfFile.getName() + ": " +
+							// filePrefix);
+							// logger.info("Base64 representation for " + pdfFile.getName() + ": " +
+							// filePrefix);
+						//	logger.info("Base64 representation for " + filePrefix + ":------------" + base64String);
+							
+						//	System.out.println("base64:::   "+filePrefix+" -- "+base64String);
+						}
+						// str.append("Base64 representation for " + pdfFile.getName() + base64String);
+						// logger.info("Base64 representation for " + pdfFile.getName()+":------------"
+						// + base64String);
+						// System.out.println("Base64 representation for " + pdfFile.getme() + ":\n" +
+						// base64String);
+					}
+				} else {
+					// System.out.println("No PDF files found in the source folder.");
+				}
+	//logger.info(""+str.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return base64String;
+		}
+	  
+	  public static void appendRecordToFile(String record) {
+	        try {
+	            // Open the file for appending
+	        	
+
+	        	String FILE_PATH="D://Samplerecord.txt";
+	            FileWriter fileWriter = new FileWriter(FILE_PATH, true);
+	            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+	            // Write the record to the file
+	            printWriter.println(record);
+
+	            // Close the file
+	            printWriter.close();
+	            System.out.println("Record appended successfully.");
+	        } catch (IOException e) {
+	            System.out.println("An error occurred while appending the record: " + e.getMessage());
+	        }
+	    }
+
+	  
+	  private static String convertToBase64(File file) throws Exception {
+			FileInputStream fileInputStream = new FileInputStream(file);
+			byte[] bytes = new byte[(int) file.length()];
+			fileInputStream.read(bytes);
+			fileInputStream.close();
+
+		
+			return Base64.getEncoder().encodeToString(bytes);
+		}
+
+	  
+	  
+	  private static   void MindraySeriesA(SerialPort serialPort) {
+		  
+		  
+		  
+		  
+		  System.out.println("Inside the Function  of AIIMS Jodhpur ICU Devices");
+		   GenericServer.logMessage("Inside the Function  of AIIMS Jodhpur ICU Devices", Color.MAGENTA);
+		  
+		  
+		   serialPort.setBaudRate(19200);
+		   GenericServer.logMessage("BAUD RATE "+19200, Color.MAGENTA);
+			serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 500, 0);
+		
+			
+			while(true) {
+				if (serialPort.openPort()) {
+					try {
+
+						OutputStream outputStream = serialPort.getOutputStream();
+
+					
+						outputStream.write(new byte[]{126,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,14,0,0,0,0,0,64,126});
+						outputStream.flush();
+						
+						Byte [] data = {126,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,14,0,0,0,0,0,64,126};
+						  GenericServer.logMessage("Data sent"+data, Color.BLUE);
+						  System.out.println("126,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,14,0,0,0,0,0,64,126");
+					/*	
+						try {
+							outputStream.write(new byte[]{126,72,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,8,9,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,93,126});
+							outputStream.flush();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						
+						}
+						
+*/						
+						
+						byte[] buffer = new byte[2048];
+						int len;
+						StringBuilder response = new StringBuilder();
+						StringBuilder receivedData = new StringBuilder();
+						StringBuilder resultPacket = new StringBuilder();
+
+						// Create a thread to continuously read data from the port
+						StringBuffer databuffer= new StringBuffer();
+						String SampleNo="";
+						List<String> list = new ArrayList<String>();
+
+						Map<String, List> mp = new HashMap();  //added by Rohit...
+						List <String> testCode = new ArrayList<>();
+						List <String> testValue = new ArrayList<>();
+						List <String> testCodeupdated = new ArrayList<>();
+						List <String> testValueupdated = new ArrayList<>();
+
+						
+						
+						int charCount=0;
+						while (true) {
+
+
+							int numRead = serialPort.readBytes(buffer, buffer.length);
+						 System.out.println("Incoming data recieved"+serialPort.getInputStream());
+							if (numRead > 0) {
+								for (int i = 0; i < numRead; i++) {
+									char c = (char) buffer[i];
+
+									receivedData.append(c);
+									System.out.println("Data Recieved : "+receivedData);
+									  GenericServer.logMessage("Data Recieved : "+receivedData, Color.MAGENTA);
+								}
+							}
+							parsePhysiologicalData(buffer);
+						}
+						
+						
+					} catch (Exception e) {
+					e.printStackTrace();
+					}
+					
+					}
+				
+				
+			}	
+		
+	  }
+	  
+	  
+	  
+	  private static   void AIIMSJDH(SerialPort serialPort) {
+		  
+		  
+		  
+		  
+		  System.out.println("Inside the Function  of AIIMS Jodhpur ICU Devices");
+		   GenericServer.logMessage("Inside the Function  of AIIMS Jodhpur ICU Devices", Color.MAGENTA);
+		  
+		  
+		   serialPort.setBaudRate(19200);
+		   GenericServer.logMessage("BAUD RATE "+19200, Color.MAGENTA);
+			serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 500, 0);
+		
+			
+			while(true) {
+				if (serialPort.openPort()) {
+					try {
+
+						OutputStream outputStream = serialPort.getOutputStream();
+
+					
+						outputStream.write(new byte[]{126,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,14,0,0,0,0,0,64,126});
+						outputStream.flush();
+						
+						Byte [] data = {126,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,14,0,0,0,0,0,64,126};
+						  GenericServer.logMessage("Data sent"+data, Color.BLUE);
+						  System.out.println("126,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,14,0,0,0,0,0,64,126");
+					/*	
+						try {
+							outputStream.write(new byte[]{126,72,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,8,9,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,93,126});
+							outputStream.flush();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						
+						}
+						
+*/						
+						
+						byte[] buffer = new byte[2048];
+						int len;
+						StringBuilder response = new StringBuilder();
+						StringBuilder receivedData = new StringBuilder();
+						StringBuilder resultPacket = new StringBuilder();
+
+						// Create a thread to continuously read data from the port
+						StringBuffer databuffer= new StringBuffer();
+						String SampleNo="";
+						List<String> list = new ArrayList<String>();
+
+						Map<String, List> mp = new HashMap();  //added by Rohit...
+						List <String> testCode = new ArrayList<>();
+						List <String> testValue = new ArrayList<>();
+						List <String> testCodeupdated = new ArrayList<>();
+						List <String> testValueupdated = new ArrayList<>();
+
+						
+						
+						int charCount=0;
+						while (true) {
+
+
+							int numRead = serialPort.readBytes(buffer, buffer.length);
+						 System.out.println("Incoming data recieved"+serialPort.getInputStream());
+							if (numRead > 0) {
+								for (int i = 0; i < numRead; i++) {
+									char c = (char) buffer[i];
+
+									receivedData.append(c);
+									System.out.println("Data Recieved : "+receivedData);
+									  GenericServer.logMessage("Data Recieved : "+receivedData, Color.MAGENTA);
+								}
+							}
+							parsePhysiologicalData(buffer);
+						}
+						
+						
+					} catch (Exception e) {
+					e.printStackTrace();
+					}
+					
+					}
+				
+				
+			}	
+		
+	  }
+		  
+	  public void deviceEventOccurred(SerialPortEvent dataFromPort)
+		{
+		  
+		  System.out.println("Inside check receving data");
+			// TODO Auto-generated method stub
+			if (dataFromPort.getEventType() == SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
+			{
+				byte[] packet = dataFromPort.getReceivedData();
+				////System.out.println("!!!!!!!!!Packets Reached Parser!!!!!!!!!!");
+				/*
+				 * for (byte b : packet) { System.out.print(" " + b); }
+				 */
+				
+				short dxRecordMainType = (short) (((packet[15] & 0xFF) << 8) | packet[14] & 0xFF);
+				if (dxRecordMainType == 0)
+				{
+					parsePhysiologicalData(packet);
+				}
+				
+//				else if (dxRecordMainType == 1 && SystemConfiguration.getInstance().getParseS5Waveform())
+			//	else if (dxRecordMainType == 1 && ControllerMediator.getInstance().getMainController().isPublishMode())
+			//	{
+					//if(k%2 ==0 )
+					//parseWaveformData(packet);
+				//	k++;
+			//	}
+			
+			}
+
+		}
+	  
+	  private static void parsePhysiologicalData(byte[] packet)
+	  
+		{
+		  
+		  System.out.println("Inside parse physiological data");
+			// TODO Auto-generated method stub
+			byte[] buffer = new byte[274];
+			byte[] buffer2 = new byte[274];
+			buffer = Arrays.copyOfRange(packet, 44, 318);
+			buffer2 = Arrays.copyOfRange(packet, 600, 874);
+
+			short bis = (short) (((buffer2[103] & 0xFF) << 8) | buffer2[102] & 0xFF);
+			//BIS.setValue(String.valueOf(bis));
+
+			//BIS_Save.setValue(String.valueOf(bis));
+			//BIS_Save.setValue(calculateTrendValue(BIS_Save, String.valueOf(bis)));
+
+			short heartRate = (short) (((buffer[7] & 0xFF) << 8) | buffer[6] & 0xFF);
+			//HeartRate.setValue(Math.round(new Double(String.valueOf(heartRate))));
+			/*if (checkDataInvalidLimit(heartRate))
+			{
+				////System.out.println("\n Heart Rate " + heartRate);
+				HeartRate.setValue(Math.round(new Double(String.valueOf(heartRate))));
+			}
+			else
+			{
+				////System.out.println("Heart Rate Data invalid");
+			}*/
+
+			//HeartRate.setValue(heartRate);
+			//HeartRate.setValue(heartRateCalculation(heartRate));
+//			HeartRate_Save.setValue(Math.round(new Double(String.valueOf(heartRate))));
+			//HeartRate_Save.setValue(calculateTrendValue(HeartRate_Save, String.valueOf(heartRateCalculation(heartRate))));
+
+			double nibpSystolic = (short)(((buffer[79] & 0xFF) << 8) | buffer[78] & 0xFF);
+			////System.out.println("!!!!!!!!NIBP SYS!!!!" + nibpSystolic / 100);
+//			NIBPSystolicPressure.setValue(String.valueOf(nibpSystolic / 100));
+			//NIBPSystolicPressure.setValue(Math.round(new Double(String.valueOf(nibpSystolic / 100))));
+			//NIBPSystolicPressure_Save.setValue(String.valueOf(nibpSystolic / 100));
+			//NIBPSystolicPressure_Save.setValue(calculateTrendValue(NIBPSystolicPressure_Save, String.valueOf(nibpSystolic / 100)));
+
+			double nibpDiastolic = (short)(((buffer[81] & 0xFF) << 8) | buffer[80] & 0xFF);
+			////System.out.println("!!!!!!!!NIBP DIA!!!!" + nibpDiastolic / 100);
+//			NIBPDiastolicPressure.setValue(String.valueOf(nibpDiastolic / 100));
+			//NIBPDiastolicPressure.setValue(Math.round(new Double(String.valueOf(nibpDiastolic / 100))));
+			//NIBPDiastolicPressure_Save.setValue(String.valueOf(nibpDiastolic / 100));
+			//NIBPDiastolicPressure_Save.setValue(calculateTrendValue(NIBPDiastolicPressure_Save, String.valueOf(nibpDiastolic / 100)));
+
+			double nibpMean = (short)(((buffer[83] & 0xFF) << 8) | buffer[82] & 0xFF);
+			////System.out.println("!!!!!!!!NIBP mean!!!!" + nibpMean / 100);
+//			NIBPMeanPressure.setValue(String.valueOf(nibpMean / 100));
+		//	NIBPMeanPressure.setValue(Math.round(new Double(String.valueOf(nibpMean / 100))));
+			//NIBPMeanPressure_Save.setValue(String.valueOf(nibpMean / 100));
+			//NIBPMeanPressure_Save.setValue(calculateTrendValue(NIBPMeanPressure_Save, String.valueOf(nibpMean / 100)));
+
+			double ibpSystolic = (short)(((buffer[23] & 0xFF) << 8) | buffer[22] & 0xFF);
+			////System.out.println("!!!!!!!!ibpSys!!!!" + ibpSystolic / 100);
+		//	IBPSystolicPressure.setValue(Math.round(new Double(String.valueOf(ibpSystolic / 100))));
+			//IBPSystolicPressure_Save.setValue(Math.round(new Double(String.valueOf(ibpSystolic / 100))));
+			//IBPSystolicPressure_Save.setValue(calculateTrendValue(IBPSystolicPressure_Save, String.valueOf(ibpSystolic / 100)));
+
+			double ibpDiastolic = (short)(((buffer[25] & 0xFF) << 8) | buffer[24] & 0xFF);
+			////System.out.println("ibpDiastolic1 " + ibpDiastolic / 100);
+		//	IBPDiastolicPressure.setValue(Math.round(new Double(String.valueOf(ibpDiastolic / 100))));
+			//IBPDiastolicPressure_Save.setValue(Math.round(new Double(String.valueOf(ibpDiastolic / 100))));
+			//IBPDiastolicPressure_Save.setValue(calculateTrendValue(IBPDiastolicPressure_Save, String.valueOf(ibpDiastolic / 100)));
+
+
+			double ibpMean1 = (short)(((buffer[27] & 0xFF) << 8) | buffer[26] & 0xFF);
+			////System.out.println("ibpMean1 " + ibpMean1 / 100);
+		//	IBPMeanPressure.setValue(Math.round(new Double(String.valueOf(ibpMean1 / 100))));
+			//IBPMeanPressure_Save.setValue(Math.round(new Double(String.valueOf(ibpMean1 / 100))));
+			//IBPMeanPressure_Save.setValue(calculateTrendValue(IBPMeanPressure_Save, String.valueOf(ibpMean1 / 100)));
+
+			double SPO2 = (short)(((buffer[125] & 0xFF) << 8) | buffer[124] & 0xFF);
+			////System.out.println("!!!!!!!!!!!SPO2!!!!!" + SPO2 / 100);
+			//O2Level.setValue(Math.round(new Double(String.valueOf(SPO2 / 100))));
+		//	O2Level.setValue(parametersCalculation(SPO2));
+//			O2Level_Save.setValue(Math.round(new Double(String.valueOf(SPO2/100))));
+			//O2Level_Save.setValue(calculateTrendValue(O2Level_Save, String.valueOf(SPO2Calculation(SPO2))));
+
+			double temp1 = (short) (((buffer[93] & 0xFF) << 8) | buffer[92] & 0xFF);
+			////System.out.println("temp1!!!!!!!!!!!!!!! " + temp1 / 100);
+		//	Temperature1.setValue(String.valueOf(temp1 / 100));
+			//Temperature1_Save.setValue(String.valueOf(temp1 / 100));
+			//Temperature1_Save.setValue(calculateTrendValue(Temperature1_Save, String.valueOf(temp1 / 100)));
+
+			double temp2 =(short) (((buffer[101] & 0xFF) << 8) | buffer[100] & 0xFF);
+			////System.out.println("temp2 " + temp2 / 100);
+		//	Temperature2.setValue(String.valueOf(temp2 / 100));
+			//Temperature2_Save.setValue(String.valueOf(temp2 / 100));
+			//Temperature2_Save.setValue(calculateTrendValue(Temperature2_Save, String.valueOf(temp2 / 100)));
+
+			short etCO2 = (short) (((buffer[139] & 0xFF) << 8) | buffer[138] & 0xFF);
+			////System.out.println("etc0000000002 " + etCO2);
+
+			short ambPressure = (short) (((buffer[145] & 0xFF) << 8) | buffer[144] & 0xFF);
+			////System.out.println("ambPressure " + ambPressure);
+
+			double etC =((etCO2 * (short) ((buffer[145] & 0xFF) << 8) | buffer[144] & 0xFF));
+			////System.out.println("!!!!!!!!!!!etc!!!!!!" + etC / 100000);
+		//	ETCO2.setValue(Math.round(new Double(String.valueOf(etC / 100000))));
+			//ETCO2_Save.setValue(Math.round(new Double(String.valueOf(etC / 100000))));
+
+			double eto2 = (short)(((buffer[153] & 0xFF) << 8) | buffer[152] & 0xFF);
+			////System.out.println("!!!!!!!!!!!et02!!!!!!!!!!" + eto2 / 100);
+
+			double fio2 = (short)(((buffer[155] & 0xFF) << 8) | buffer[154] & 0xFF);
+			// ////System.out.println("!!!!!!!!!!!fi02!!!!!!!!!!" + fio2 / 100);
+
+
+			double etAgentLocal = (short)(((buffer[173] & 0xFF) << 8) | buffer[172] & 0xFF);
+			////System.out.println("!!!!!!!!!!!SPO2!!!!!" + SPO2 / 100);
+			//O2Level.setValue(Math.round(new Double(String.valueOf(SPO2 / 100))));
+			//etAgent.setValue(parametersCalculation(etAgentLocal));
+
+
+			double fiAgentLocal = (short)(((buffer[175] & 0xFF) << 8) | buffer[174] & 0xFF);
+			////System.out.println("!!!!!!!!!!!SPO2!!!!!" + SPO2 / 100);
+			//O2Level.setValue(Math.round(new Double(String.valueOf(SPO2 / 100))));
+		//	fiAgent.setValue(parametersCalculation(fiAgentLocal));
+
+			double macLocal = (short)(((buffer[177] & 0xFF) << 8) | buffer[176] & 0xFF);
+			////System.out.println("!!!!!!!!!!!SPO2!!!!!" + SPO2 / 100);
+			//O2Level.setValue(Math.round(new Double(String.valueOf(SPO2 / 100))));
+		//	mac.setValue(parametersCalculation(macLocal));
+
+		}
+	  
+	  
+	  public void parsingLogic(byte[] completeMessage)
+		{
+			// ********PARAMETERS INITIALIZATION********//
+
+			short respirationWave = 0;
+			short ecgHeartRate = 0;
+			float temperature1 = 0;
+			float temperature2 = 0;
+			int respirationRate = 0;
+			short spo2Wave = 0;
+			short oxygenLevel = 0;
+			short nibpSystolicPressure = 0;
+			short nibpDiastolicPressure = 0;
+			short ibpWave = 0;
+			short ibpSystolicPressure = 0;
+			short ibpDiastolicPressure = 0;
+
+			// *********ECG WAVE1********//
+
+//			int[] ecgWave1 = { (short) (((completeMessage[1] & 0xFF) << 8) | completeMessage[0] & 0xFF),
+//			        (short) (((completeMessage[3] & 0xFF) << 8) | completeMessage[2] & 0xFF),
+//			        (short) (((completeMessage[5] & 0xFF) << 8) | completeMessage[4] & 0xFF) };
+
+			int ecgWave = (short) (((completeMessage[4] & 0xFF) << 8) | completeMessage[3] & 0xFF);
+		
+			int[] ecgWave1 = { (short) (((completeMessage[4] & 0xFF) << 8) | completeMessage[3] & 0xFF),
+			        (short) (((completeMessage[6] & 0xFF) << 8) | completeMessage[5] & 0xFF),
+			        (short) (((completeMessage[8] & 0xFF) << 8) | completeMessage[7] & 0xFF) };
+
+
+			// *********ECG WAVE2********//
+			int[] ecgWave2 = { (short) (((completeMessage[10] & 0xFF) << 8) | completeMessage[9] & 0xFF),
+			        (short) (((completeMessage[12] & 0xFF) << 8) | completeMessage[11] & 0xFF),
+			        (short) (((completeMessage[14] & 0xFF) << 8) | completeMessage[13] & 0xFF) };
+
+//			 int[] ecgWave2 = { (short) (((completeMessage[11] & 0xFF) << 8) |
+//			 completeMessage[10] & 0xFF),
+//			 (short) (((completeMessage[13] & 0xFF) << 8) | completeMessage[12] &
+//			 0xFF),
+//			 (short) (((completeMessage[15] & 0xFF) << 8) | completeMessage[14] &
+//			 0xFF) };
+
+
+			// *********ECG WAVE3********//
+			int[] ecgWave3 = { (short) (((completeMessage[16] & 0xFF) << 8) | completeMessage[15] & 0xFF),
+			        (short) (((completeMessage[18] & 0xFF) << 8) | completeMessage[17] & 0xFF),
+			        (short) (((completeMessage[20] & 0xFF) << 8) | completeMessage[19] & 0xFF) };
+
+//			int[] ecgWave3 = { (short) (((completeMessage[17] & 0xFF) << 8) | completeMessage[16] & 0xFF),
+//			        (short) (((completeMessage[19] & 0xFF) << 8) | completeMessage[18] & 0xFF),
+//					(short) (((completeMessage[21] & 0xFF) << 8) | completeMessage[20] & 0xFF) };
+
+
+
+			// ********RESPIRATION WAVE********//
+			respirationWave = (short) (((completeMessage[22] & 0xFF) << 8) | completeMessage[21] & 0xFF);
+//			respirationWave = (short) (((completeMessage[23] & 0xFF) << 8) | completeMessage[22] & 0xFF);
+
+			// *********HEART RATE********//
+			ecgHeartRate = (short) (((completeMessage[24] & 0xFF) << 8) | completeMessage[23] & 0xFF);
+//			ecgHeartRate = (short) (((completeMessage[25] & 0xFF) << 8) | completeMessage[24] & 0xFF);
+
+			// *********TEMPERATURE 1********//
+			temperature1 = (short) (((completeMessage[26] & 0xFF) << 8) | completeMessage[25] & 0xFF);
+//			temperature1 = (short) (((completeMessage[27] & 0xFF) << 8) | completeMessage[26] & 0xFF);
+
+			// *********TEMPERATURE 2********//
+			temperature2 = (short) (((completeMessage[28] & 0xFF) << 8) | completeMessage[27] & 0xFF);
+//			temperature2 = (short) (((completeMessage[29] & 0xFF) << 8) | completeMessage[28] & 0xFF);
+
+			// *********RESPIRATION RATE********//
+			respirationRate = (completeMessage[29] & 0xFF);
+//			respirationRate = (completeMessage[30] & 0xFF);
+
+			// *********SPO2 WAVE********//
+			spo2Wave = (short) (((completeMessage[36] & 0xFF) << 8) | completeMessage[35] & 0xFF);
+//			spo2Wave = (short) (((completeMessage[37] & 0xFF) << 8) | completeMessage[36] & 0xFF);
+
+			// *********OXYGEN LEVEL********//
+			oxygenLevel = (short) (((completeMessage[42] & 0xFF) << 8) | completeMessage[41] & 0xFF);
+//			oxygenLevel = (short) (((completeMessage[43] & 0xFF) << 8) | completeMessage[42] & 0xFF);
+
+			// *********NIBP SYSTOLIC PRESSURE********//
+			nibpSystolicPressure = (short) (((completeMessage[48] & 0xFF) << 8) | completeMessage[47] & 0xFF);
+//			nibpSystolicPressure = (short) (((completeMessage[49] & 0xFF) << 8) | completeMessage[48] & 0xFF);
+
+			// *********NIBP DIASTOLIC PRESSURE********//
+			nibpDiastolicPressure = (short) (((completeMessage[50] & 0xFF) << 8) | completeMessage[49] & 0xFF);
+//			nibpDiastolicPressure = (short) (((completeMessage[51] & 0xFF) << 8) | completeMessage[50] & 0xFF);
+
+			// *********IBP WAVE********//
+			ibpWave = (short) (((completeMessage[58] & 0xFF) << 8) | completeMessage[57] & 0xFF);
+//			ibpWave = (short) (((completeMessage[59] & 0xFF) << 8) | completeMessage[58] & 0xFF);
+			
+
+			// *********IBP SYSTOLIC PRESSURE********//
+			ibpSystolicPressure = (short) (((completeMessage[70] & 0xFF) << 8) | completeMessage[69] & 0xFF);
+//			ibpSystolicPressure = (short) (((completeMessage[71] & 0xFF) << 8) | completeMessage[70] & 0xFF);
+			
+
+			// *********IBP DIASTOLIC PRESSURE********//
+			ibpDiastolicPressure = (short) (((completeMessage[72] & 0xFF) << 8) | completeMessage[71] & 0xFF);
+//			ibpDiastolicPressure = (short) (((completeMessage[73] & 0xFF) << 8) | completeMessage[72] & 0xFF);
+		
+		}
+	  
+}

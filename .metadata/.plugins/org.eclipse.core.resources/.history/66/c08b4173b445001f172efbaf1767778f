@@ -1,0 +1,365 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package application;
+
+import java.io.IOException;
+
+import org.apache.log4j.Logger;
+
+import com.infosys.appStartup.ApplicationStartup;
+import com.infosys.framework.FwkServices;
+import com.infosys.framework.common.NotificationTypeConstants;
+
+import controllers.BackendObserver;
+import controllers.ManageAvailableDevicesController;
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import listeners.AnesthesiaParametersListener;
+import listeners.AnesthesiaSettingsListener;
+import listeners.AnesthesiaWaveformListener;
+import listeners.InfPumpListener;
+import listeners.PTMonitorListener;
+import listeners.S5PMListener;
+import listeners.S5PMWaveformListener;
+import utility.KafkaProducer;
+import utility.PlotAnesthesiaGraph;
+import utility.PlotGraphs;
+import utility.PlotTrendGraph;
+import utility.Utility;
+
+public class Main extends Application implements Runnable {
+	@FXML
+	private BorderPane pane;
+	@FXML
+	private Label time;
+	@FXML
+	private Label date;
+	@FXML
+	private Label patientName;
+	@FXML
+	private Pane centerPane;
+	@FXML
+	private VBox sideTab;
+	@FXML
+	private Label crNumber;
+	@FXML
+	private Button close;
+	@FXML
+	private Pane graphLayout;
+	@FXML
+	private Pane gridTimeLine;
+	@FXML
+	private ImageView imageBg;
+
+	private static final Logger LOG = Logger.getLogger(Main.class.getName());
+	private static Main mainObj;
+
+	private KafkaProducer kafkaProducer;
+	private PlotGraphs plotGraphs;
+	private PlotAnesthesiaGraph plotAnesthesiaGraph;
+	private PlotTrendGraph plotTrendGraph;
+	private PTMonitorListener ptMonitorListener;
+	private InfPumpListener infPumpListenerObj;
+	// Added for Anesthesia Machine
+	private AnesthesiaSettingsListener anesthesiaSettingsListener;
+	private AnesthesiaParametersListener anesthesiaParametersListener;
+	private AnesthesiaWaveformListener anesthesiaWaveformListener;
+	private S5PMWaveformListener s5PMWaveformListener;
+
+
+	// Added for S5PatientMonitor
+	private S5PMListener s5pmListenerObj;
+
+	private Utility utitlity;
+
+	private ManageAvailableDevicesController ManageDeviceController;
+	private BackendObserver eventRegistration;
+	// private DrawTabbedCenter drawTabbedCenter;
+
+	private Stage parentStage;
+//	private Stage childStage;
+//	private Scene parentScene;
+	private String lastFxmlScreen;
+//	private StackPane childStackPane;
+//	private StackPane stackPane;
+	private StageManager stageManager;
+
+
+	public static Main getInstance()
+	{
+		return mainObj;
+	}
+	public PlotGraphs getPlotGraphs()
+	{
+		return plotGraphs;
+	}
+	public PTMonitorListener getPTMonitorListener()
+	{
+		return ptMonitorListener;
+	}
+	public InfPumpListener getInfPumpListener()
+	{
+		return infPumpListenerObj;
+	}
+
+	// Added for Anesthesia Machine
+	public AnesthesiaSettingsListener getAnesthesiaSettingsListener()
+	{
+		return anesthesiaSettingsListener;
+	}
+
+	public AnesthesiaParametersListener getAnesthesiaParametersListener()
+	{
+		return anesthesiaParametersListener;
+	}
+
+	public AnesthesiaWaveformListener getAnesthesiaWaveformListener()
+	{
+		return anesthesiaWaveformListener;
+	}
+
+	// Added for S5 Patient Monitor
+	public S5PMListener getS5pmListener()
+	{
+		return s5pmListenerObj;
+	}
+	public S5PMWaveformListener getS5PMWaveformListener()
+	{
+		return s5PMWaveformListener;
+	}
+
+	public ManageAvailableDevicesController getManageDeviceController() {
+		return ManageDeviceController;
+	}
+	public Utility getUtility()
+	{
+		return utitlity;
+	}
+
+	public Stage getParentStage()
+	{
+		return parentStage;
+	}
+
+//	public void setParentStage(Stage parentStage)
+//	{
+//		this.parentStage = parentStage;
+//	}
+
+//	public Stage getChildStage()
+//	{
+//		return childStage;
+//	}
+
+//	public void setChildStage(Stage childStage)
+//	{
+//		this.childStage = childStage;
+//	}
+
+//	public StackPane getChildStackPane()
+//	{
+//		return childStackPane;
+//	}
+
+//	public void setChildStackPane(StackPane childStackPane)
+//	{
+//		this.childStackPane = childStackPane;
+//	}
+
+//	public Scene getParentScene()
+//	{
+//		return parentScene;
+//	}
+
+//	public void setParentScene(Scene parentScene)
+//	{
+//		this.parentScene = parentScene;
+//	}
+
+	public String getLastFxmlScreen()
+	{
+		return lastFxmlScreen;
+	}
+
+	public void setLastFxmlScreen(String lastFxmlScreen)
+	{
+		this.lastFxmlScreen = lastFxmlScreen;
+	}
+
+	public KafkaProducer getKafkaProducer()
+	{
+		return kafkaProducer;
+	}
+	public PlotAnesthesiaGraph getPlotAnesthesiaGraph()
+	{
+		return plotAnesthesiaGraph;
+	}
+
+	/*
+	 * public DrawTabbedCenter getDrawTabbedCenter() { return drawTabbedCenter;
+	 * }
+	 */
+	public PlotTrendGraph getPlotTrendGraph()
+	{
+		return plotTrendGraph;
+	}
+
+	public StageManager getStageManager()
+	{
+		return stageManager;
+	}
+
+
+	public static void main(String[] args)
+	{
+//		BasicConfigurator.configure();
+		ApplicationStartup.initialize();
+		launch(args);
+	}
+
+	@Override
+	public void run()
+	{
+
+
+	}
+
+	@Override
+	public void start(Stage primaryStage)
+	{
+		try
+		{
+			stageManager = new StageManager(primaryStage);
+			// ---show Login screen
+						openLoginPage();
+
+//			File file = new File("IntraOpPatientReport.jrxml");
+//			String path = file.getAbsolutePath();
+//			LOG.info("Path is : " + path);
+//			LOG.info("Reached : " + LOG.getName());
+			initializeObjects();
+
+			// ---this method is called if any backend event occurs
+			registerForEvents();
+
+
+
+
+		}
+		catch (Exception e)
+		{
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	/**
+	 * This method initializes the required objects once while app startup
+	 *
+	 * @throws IOException
+	 */
+	public void initializeObjects() throws IOException
+	{
+		mainObj = this;
+
+
+		// ---Initialize Kafka Producer
+		kafkaProducer = new KafkaProducer();
+
+		// ---for starting graphs plot
+		plotGraphs = new PlotGraphs();
+
+		// ---for starting Anesthesia graphs plot
+		plotAnesthesiaGraph = new PlotAnesthesiaGraph();
+
+		// ---Patient Monitor Listener
+		ptMonitorListener = new PTMonitorListener();
+
+		// ---Infusion Pump listener
+		infPumpListenerObj = new InfPumpListener();
+
+		// ---Anesthesia Listener for MeasuredData
+		anesthesiaSettingsListener = new AnesthesiaSettingsListener();
+
+		// ---Anesthesia Listener for StatusData
+		anesthesiaParametersListener = new AnesthesiaParametersListener();
+
+		// ---Anesthesia Listener for Waveform
+		anesthesiaWaveformListener = new AnesthesiaWaveformListener();
+
+		// S5 Patient Monitor Listener
+		s5pmListenerObj = new S5PMListener();
+
+		// S5 Patient Monitor Listener
+		s5PMWaveformListener = new S5PMWaveformListener();
+
+		// ---Utility Notification messages
+		utitlity = new Utility();
+
+
+		ManageDeviceController= new ManageAvailableDevicesController();
+
+		eventRegistration = new BackendObserver();
+
+		parentStage = new Stage();
+
+		lastFxmlScreen = "Blank";
+
+		// drawTabbedCenter = new DrawTabbedCenter();
+
+		plotTrendGraph=new PlotTrendGraph();
+	}
+
+	/**
+	 * This method registers the class for any backend events
+	 */
+	public void registerForEvents()
+	{
+
+		FwkServices.getInstance().registerForBackendEvents(eventRegistration,
+				NotificationTypeConstants.DEVICE_STATUS_NOTIFICATIONS);
+
+		FwkServices.getInstance().registerForBackendEvents(eventRegistration,
+				NotificationTypeConstants.CRITICAL_EVENT_NOTIFICATIONS);
+
+	}
+
+	/**
+	 * This method contains code for loading Login.fxml, i.e Login screen
+	 *
+	 * @param primaryStage
+	 * @throws IOException
+	 */
+	public void openLoginPage() throws IOException
+	{
+		stageManager.switchScene(FxmlView.SPLASH_LOADER);
+//		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
+//		Pane root = fxmlLoader.load();
+//
+//		childStackPane = new StackPane();
+//		childStackPane.getChildren().add(root);
+//
+//		Scene scene = new Scene(childStackPane);
+//		scene.getStylesheets().add(this.getClass().getResource("/styles/newStyles.css").toString());
+//
+//		primaryStage.setScene(scene);
+//		primaryStage.initStyle(StageStyle.UNDECORATED); //---hide windows border with close-minimize btns
+//		primaryStage.show();
+//
+//		parentStage = primaryStage;
+	}
+
+
+
+
+}

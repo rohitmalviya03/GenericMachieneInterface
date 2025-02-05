@@ -1,0 +1,393 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package controllers;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import org.apache.log4j.Logger;
+
+import com.cdac.common.GeneratedEntities.EchoDetails;
+import com.cdac.common.util.Validations;
+
+import application.Main;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import model.PatientSession;
+import services.GetEchoDetailsService;
+import services.SaveEchoDetailsService;
+
+public class EchoDetailsController implements Initializable {
+
+	@FXML
+	private Button btnClose;
+
+	@FXML
+	private TextArea txtAreaPreDetails;
+
+	@FXML
+	private TextArea txtAreaIntraOpDetails;
+
+	@FXML
+	private TextArea txtAreaPostDetails;
+
+	@FXML
+	private Label lblError;
+
+	@FXML
+	private Button btnSave;
+
+	@FXML
+	private AnchorPane disablePaneMainContent;
+
+    @FXML
+    private TextArea txtAreaNewFindings;
+
+    @FXML
+    private TextArea txtAreaChangeInDiagnosis;
+
+    @FXML
+    private ChoiceBox<String> cbMachineName;
+
+    @FXML
+    private ChoiceBox<String> cbProbeSize;
+
+    @FXML
+    private ChoiceBox<String> cbBloodOnTip;
+
+    @FXML
+    private TextField txtInsertedBy;
+
+    @FXML
+    private TextArea txtDifficulty;
+
+
+	private static final Logger LOGGER = Logger.getLogger(EventsController.class.getName());
+	private EventHandler<MouseEvent> btnCloseHandler;
+	private EventHandler<MouseEvent> btnSaveHandler;
+
+	private EventHandler<WorkerStateEvent> saveEchoDetailsServiceSuccessHandler;
+	private EventHandler<WorkerStateEvent> saveEchoDetailsServiceFailedHandler;
+	private EventHandler<WorkerStateEvent> getEchoDetailsServiceSuccessHandler;
+	private EventHandler<WorkerStateEvent> getEchoDetailsServiceFailedHandler;
+
+	private List<String> machineNameList = new ArrayList<String>();
+	private List<String> probeSizeList = new ArrayList<String>();
+	private List<String> bloodOnTipList = new ArrayList<String>();
+
+	private int echoDetailsID = 0;
+	private long caseId = 0;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		if (PatientSession.getInstance().getPatientCase() != null) {
+			caseId = PatientSession.getInstance().getPatientCase().getCaseId();
+
+		}
+
+		btnCloseHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+			public void handle(javafx.scene.input.MouseEvent event) {
+
+				closePopup();
+			}
+		};
+		btnClose.addEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+
+		btnSaveHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+			public void handle(javafx.scene.input.MouseEvent event) {
+				saveEchoDetails();
+			}
+		};
+		btnSave.addEventHandler(MouseEvent.MOUSE_CLICKED, btnSaveHandler);
+
+		machineNameList.add("Select");
+		machineNameList.add("GE");
+		machineNameList.add("Phillips");
+		machineNameList.add("Others");
+
+		cbMachineName.getItems().clear();
+		cbMachineName.getItems().addAll(machineNameList);
+		cbMachineName.getSelectionModel().select(0);
+
+		probeSizeList.add("Select");
+		probeSizeList.add("Adult");
+		probeSizeList.add("Pediatric");
+		probeSizeList.add("Neo-Natal");
+
+		cbProbeSize.getItems().clear();
+		cbProbeSize.getItems().addAll(probeSizeList);
+		cbProbeSize.getSelectionModel().select(0);
+
+		bloodOnTipList.add("Select");
+		bloodOnTipList.add("Yes");
+		bloodOnTipList.add("No");
+
+		cbBloodOnTip.getItems().clear();
+		cbBloodOnTip.getItems().addAll(bloodOnTipList);
+		cbBloodOnTip.getSelectionModel().select(0);
+
+		getEchoDetails();
+	}
+
+	/**
+	 * This method is used to close the Events Log Window and calls the remove
+	 * listeners method
+	 */
+	private void closePopup() {
+		try {
+
+			 removeListeners();
+			Main.getInstance().getStageManager().closeSecondaryStage();
+
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+		}
+
+	}
+
+	private void saveEchoDetails() {
+		if (isValidForm()) {
+
+			lblError.setVisible(false);
+			disablePaneMainContent.setVisible(true);
+			EchoDetails echoDetailsOBJ = new EchoDetails();
+			if (echoDetailsID != 0) {
+				echoDetailsOBJ.setEchoDetailsID(echoDetailsID);
+			}
+			echoDetailsOBJ.setCaseID(caseId);
+			echoDetailsOBJ.setPreDetails(txtAreaPreDetails.getText().trim());
+			echoDetailsOBJ.setIntraOpDetails(txtAreaIntraOpDetails.getText().trim());
+			echoDetailsOBJ.setPostDetails(txtAreaPostDetails.getText().trim());
+			echoDetailsOBJ.setNewFindings(txtAreaNewFindings.getText().trim());
+			echoDetailsOBJ.setChangeInDiagnosis(txtAreaChangeInDiagnosis.getText().trim());
+			if(cbBloodOnTip.getSelectionModel().getSelectedIndex() != 0)
+			{
+				echoDetailsOBJ.setBloodOnTip(cbBloodOnTip.getSelectionModel().getSelectedItem());
+			}
+			if(cbMachineName.getSelectionModel().getSelectedIndex() != 0)
+			{
+				echoDetailsOBJ.setMachineName(cbMachineName.getSelectionModel().getSelectedItem());
+			}
+			if(cbProbeSize.getSelectionModel().getSelectedIndex() != 0)
+			{
+				echoDetailsOBJ.setProbeSize(cbProbeSize.getSelectionModel().getSelectedItem());
+			}
+
+			echoDetailsOBJ.setInsertedBy(txtInsertedBy.getText().trim());
+			echoDetailsOBJ.setDifficultyInInsertion(txtDifficulty.getText().trim());
+
+			SaveEchoDetailsService saveEchoDetailsService = SaveEchoDetailsService.getInstance(echoDetailsOBJ);
+			saveEchoDetailsService.restart();
+
+			// ---on service success
+
+			saveEchoDetailsServiceSuccessHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+
+					disablePaneMainContent.setVisible(false);
+					closePopup();
+					saveEchoDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							saveEchoDetailsServiceSuccessHandler);
+					saveEchoDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							saveEchoDetailsServiceFailedHandler);
+					if (echoDetailsID != 0) {
+						Main.getInstance().getUtility().showNotification("Information", "Success",
+								"Echo Details updated successfully!");
+					} else {
+
+						Main.getInstance().getUtility().showNotification("Information", "Success",
+								"Echo Details saved successfully!");
+					}
+				}
+			};
+
+			saveEchoDetailsService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+					saveEchoDetailsServiceSuccessHandler);
+
+			saveEchoDetailsServiceFailedHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+
+					disablePaneMainContent.setVisible(false);
+					saveEchoDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+							saveEchoDetailsServiceSuccessHandler);
+					saveEchoDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+							saveEchoDetailsServiceFailedHandler);
+					Main.getInstance().getUtility().showNotification("Error", "Error",
+							saveEchoDetailsService.getException().getMessage());
+				}
+			};
+
+			saveEchoDetailsService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+					saveEchoDetailsServiceFailedHandler);
+
+		} else {
+			lblError.setVisible(true);
+		}
+	}
+
+	private boolean isValidForm() {
+		if (txtAreaPreDetails.getText().trim().isEmpty() && txtAreaIntraOpDetails.getText().trim().isEmpty()
+				&& txtAreaPostDetails.getText().trim().isEmpty()
+				&& txtAreaNewFindings.getText().trim().isEmpty()
+				&& txtAreaChangeInDiagnosis.getText().trim().isEmpty()
+				&& txtInsertedBy.getText().trim().isEmpty()
+				&& txtDifficulty.getText().trim().isEmpty()
+				&& cbBloodOnTip.getSelectionModel().getSelectedIndex()==0
+				&& cbMachineName.getSelectionModel().getSelectedIndex() == 0
+				&& cbProbeSize.getSelectionModel().getSelectedIndex() ==0) {
+			lblError.setText("*Please enter atleast one field to save.");
+			return false;
+		}
+		if (txtAreaPreDetails.getText()!= null && txtAreaPreDetails.getText().trim() != null && !txtAreaPreDetails.getText().trim().isEmpty()
+				&& !Validations.maxLength(txtAreaPreDetails.getText().trim(), 2000)) {
+
+			lblError.setText("*Please enter Pre Echo Details less than 2000 characters");
+			return false;
+		}
+		if (txtAreaIntraOpDetails.getText()!= null && txtAreaIntraOpDetails.getText().trim() != null && !txtAreaIntraOpDetails.getText().trim().isEmpty()
+				&& !Validations.maxLength(txtAreaIntraOpDetails.getText().trim(), 2000)) {
+
+			lblError.setText("*Please enter IntraOp Echo Details less than 2000 characters");
+			return false;
+		}
+		if (txtAreaNewFindings.getText()!= null && txtAreaNewFindings.getText().trim() != null && !txtAreaNewFindings.getText().trim().isEmpty()
+				&& !Validations.maxLength(txtAreaNewFindings.getText().trim(), 2000)) {
+
+			lblError.setText("*Please enter New Findings less than 2000 characters");
+			return false;
+		}
+		if (txtAreaChangeInDiagnosis.getText()!= null && txtAreaChangeInDiagnosis.getText().trim() != null && !txtAreaChangeInDiagnosis.getText().trim().isEmpty()
+				&& !Validations.maxLength(txtAreaChangeInDiagnosis.getText().trim(), 2000)) {
+
+			lblError.setText("*Please enter Change in Diagnosis less than 2000 characters");
+			return false;
+		}
+		if (txtAreaPostDetails.getText()!= null && txtAreaPostDetails.getText().trim() != null && !txtAreaPostDetails.getText().trim().isEmpty()
+				&& !Validations.maxLength(txtAreaPostDetails.getText().trim(), 2000)) {
+
+			lblError.setText("*Please enter Post Echo Details less than 2000 characters");
+			return false;
+		}
+
+		if (txtInsertedBy.getText()!= null && txtInsertedBy.getText().trim() != null && !txtInsertedBy.getText().trim().isEmpty()
+				&& !Validations.maxLength(txtInsertedBy.getText().trim(), 100)) {
+
+			lblError.setText("*Please enter Inserted By less than 100 characters");
+			return false;
+		}
+		if (txtDifficulty.getText()!= null && txtDifficulty.getText().trim() != null && !txtDifficulty.getText().trim().isEmpty()
+				&& !Validations.maxLength(txtDifficulty.getText().trim(), 1000)) {
+
+			lblError.setText("*Please enter Difficulty In Insertion less than 1000 characters");
+			return false;
+		}
+
+		return true;
+	}
+
+	private void getEchoDetails() {
+		disablePaneMainContent.setVisible(true);
+
+		GetEchoDetailsService getEchoDetailsService = GetEchoDetailsService.getInstance(caseId);
+		getEchoDetailsService.restart();
+
+		// ---on service success
+
+		getEchoDetailsServiceSuccessHandler = new EventHandler<WorkerStateEvent>() {
+
+			@Override
+			public void handle(WorkerStateEvent event) {
+
+				EchoDetails echoDetailsRecord = getEchoDetailsService.getEchoRecord();
+
+				if (echoDetailsRecord.getEchoDetailsID() != null) {
+					echoDetailsID = echoDetailsRecord.getEchoDetailsID();
+					if (echoDetailsRecord.getPreDetails() != null) {
+						txtAreaPreDetails.setText(echoDetailsRecord.getPreDetails());
+					}
+					if (echoDetailsRecord.getIntraOpDetails() != null) {
+						txtAreaIntraOpDetails.setText(echoDetailsRecord.getIntraOpDetails());
+					}
+					if (echoDetailsRecord.getNewFindings() != null) {
+						txtAreaNewFindings.setText(echoDetailsRecord.getNewFindings());
+					}if (echoDetailsRecord.getChangeInDiagnosis() != null) {
+						txtAreaChangeInDiagnosis.setText(echoDetailsRecord.getChangeInDiagnosis());
+					}
+					if (echoDetailsRecord.getPostDetails() != null) {
+						txtAreaPostDetails.setText(echoDetailsRecord.getPostDetails());
+					}
+					if (echoDetailsRecord.getInsertedBy() != null) {
+						txtInsertedBy.setText(echoDetailsRecord.getInsertedBy());
+					}
+					if (echoDetailsRecord.getDifficultyInInsertion() != null) {
+						txtDifficulty.setText(echoDetailsRecord.getDifficultyInInsertion());
+					}
+					if (echoDetailsRecord.getBloodOnTip() != null) {
+						cbBloodOnTip.getSelectionModel().select(echoDetailsRecord.getBloodOnTip());
+					}
+					if (echoDetailsRecord.getMachineName() != null) {
+						cbMachineName.getSelectionModel().select(echoDetailsRecord.getMachineName());
+					}
+					if (echoDetailsRecord.getProbeSize() != null) {
+						cbProbeSize.getSelectionModel().select(echoDetailsRecord.getProbeSize());
+					}
+
+				}
+
+				disablePaneMainContent.setVisible(false);
+
+				getEchoDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+						getEchoDetailsServiceSuccessHandler);
+				getEchoDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+						getEchoDetailsServiceFailedHandler);
+
+			}
+		};
+
+		getEchoDetailsService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+				getEchoDetailsServiceSuccessHandler);
+
+		getEchoDetailsServiceFailedHandler = new EventHandler<WorkerStateEvent>() {
+
+			@Override
+			public void handle(WorkerStateEvent event) {
+
+				disablePaneMainContent.setVisible(false);
+				getEchoDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+						getEchoDetailsServiceSuccessHandler);
+				getEchoDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+						getEchoDetailsServiceFailedHandler);
+				Main.getInstance().getUtility().showNotification("Error", "Error",
+						getEchoDetailsService.getException().getMessage());
+			}
+		};
+
+		getEchoDetailsService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED, getEchoDetailsServiceFailedHandler);
+
+	}
+	private void removeListeners(){
+		btnSave.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnSaveHandler);
+		btnClose.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+	}
+
+}

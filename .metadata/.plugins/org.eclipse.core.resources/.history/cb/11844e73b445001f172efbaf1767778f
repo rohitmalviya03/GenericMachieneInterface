@@ -1,0 +1,428 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.infosys.common.util;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class Validations
+{
+
+	// checks if the string contains only aplhabets with spaces but not at the begenning or end and only one space allowed between words
+	public static boolean isAlpha(String name)
+	{
+		if(name!=null)
+		{
+			String regex ="^[a-zA-Z]+( [a-zA-z]+)*$";
+			return name.trim().matches(regex);
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+
+	// for email
+	public static boolean validEmail(String name)
+	{
+		if(name!=null)
+		{
+			String regex ="^(.+)@(.+)$";
+			return name.trim().matches(regex);
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+
+	// checks if only digits
+	public static boolean isDigit(String digits)
+	{
+		if(digits!=null)
+		{
+			//String regex = "[0-9]+";
+			String regex = "(?<=^| )\\d+(\\.\\d+)?(?=$| )";
+			return digits.trim().matches(regex);
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	// checks if only digits
+	public static boolean isDigitWithoutDot(String digits)
+	{
+		if(digits!=null)
+		{
+			String regex = "[0-9]+";
+			//String regex = "(?<=^| )\\d+(\\.\\d+)?(?=$| )";
+			return digits.trim().matches(regex);
+		}
+		else
+		{
+			return false;
+		}
+	}
+	/// for non zero integer
+	public static boolean nonZeroInt(String value)
+	{
+		if(value!=null)
+		{
+			Integer valueInt=new Integer(value.trim());
+			if(valueInt>0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+		return false;
+	}
+	// for non zero big decimal
+	public static boolean nonZeroBigDecimal(String value)
+	{
+		if(value!=null)
+		{
+			BigDecimal valueInt=new BigDecimal(value.trim());
+			BigDecimal zero=new BigDecimal(0);
+			int result=valueInt.compareTo(zero);
+			if(result == 0 || result == -1)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+
+		}
+		return false;
+	}
+
+	// for > than zero
+	public static boolean greaterThanZero(String value)
+	{
+		if (value != null)
+		{
+			Double d = Double.parseDouble(value);
+			if (d >= 0)
+				return true;
+			else
+				return false;
+
+		}
+		return false;
+	}
+
+	// for non zero float
+	public static boolean nonZeroFloat(String value)
+	{
+		if(value!=null)
+		{
+			Float valueInt=new Float(value.trim());
+
+			if(valueInt>0)
+			{
+				return true;
+			}
+
+		}
+		return false;
+	}
+
+
+	/// checks for  more than minimum length
+	public static boolean minLength(String value, int minLimit)
+	{
+
+		if(value!=null)
+		{
+			return value.trim().length()>=minLimit;
+		}
+		return false;
+	}
+
+	/// checks for  with in maximum length
+	public static boolean maxLength(String value, int maxLimit)
+	{
+		if(value!=null)
+		{
+			return value.trim().length()<=maxLimit;
+		}
+		return false;
+	}
+
+
+	/// for specified length range
+	public static boolean isInRange(String value,int minLimit, int maxLimit )
+	{
+		if(value!=null && minLimit!=maxLimit)
+		{
+			return value.trim().length()<=maxLimit && value.trim().length()>=minLimit;
+		}
+		return false;
+	}
+
+	/// for specified  range
+	public static boolean isInValueRange(String value,int minLimit, int maxLimit )
+	{
+		if(value!=null && minLimit!=maxLimit)
+		{
+			Integer value1=new Integer(value.trim());
+			Integer minLimit1=new Integer(minLimit);
+			Integer maxLimit1=new Integer(maxLimit);
+
+			return value1<=maxLimit1 && value1>=minLimit1;
+		}
+		return false;
+	}
+
+	/// for only alphaNumeric with space(but not at the begenning and end and Only 1 Space between words ) and  No special character
+
+	public static boolean isAlphaNumericWithSpace(String value)
+	{
+
+		if(value!=null)
+		{
+			//String pattern = "^[^-\\s][a-zA-Z0-9_\\s-]+$";
+			String regex ="^[a-zA-Z0-9]+( [a-zA-z0-9]+)*$";
+			return value.trim().matches(regex);
+		}
+		return false;
+	}
+	public static boolean isAlphaNumericWithMultipleSpaces(String value)
+	{
+
+		if(value!=null)
+		{
+			//String pattern = "^[^-\\s][a-zA-Z0-9_\\s-]+$";
+			String regex ="^[a-zA-Z0-9]+( +[a-zA-z0-9]+)*$";
+			return value.trim().matches(regex);
+		}
+		return false;
+	}
+
+	/// for only alpha with space(but not at the begenning and end and Only 1 Space between words ) and  .(Dot)
+
+	public static boolean isAlphaWithSpaceAndDot(String value)
+	{
+
+		if(value!=null)
+		{
+			String regex ="(?:[a-zA-Z][a-zA-Z .]*)?";
+			return value.trim().matches(regex);
+		}
+		return false;
+	}
+
+	/// for only alphaNumeric with space(but not at the begenning and end and Only 1 Space between words ) and some specified special character
+
+	public static boolean isAlphaNumericWithSpaceAndSpecialCharacter(String value)
+	{
+
+		if(value!=null)
+		{
+			String regex ="(?:[a-zA-Z0-9][a-zA-Z0-9 ,\\+().-]*)?";
+			return value.trim().matches(regex);
+		}
+		return false;
+	}
+
+	/// for only alphaNumeric with space(but not at the begenning and end and Only 1 Space between words ) and some specified special character
+
+		public static boolean isAlphaNumericWithSpaceAndDot(String value)
+		{
+
+			if(value!=null)
+			{
+				String regex ="([a-zA-Z0-9][a-zA-Z0-9 .]*)?";
+				return value.trim().matches(regex);
+			}
+			return false;
+		}
+
+	/// for only alphaNumeric with space(but not at the begenning and end and Only 1 Space between words ) and some specified special character
+
+		public static boolean isAlphaNumericWithSpaceAndSpecialCharacterWithSlash(String value)
+		{
+
+			if(value!=null)
+			{
+				String regex ="(?:[a-zA-Z0-9][a-zA-Z0-9 \\/#,\\\\+().-]*)?";
+				return value.trim().matches(regex);
+			}
+			return false;
+		}
+
+
+
+
+
+	/// for only alphaNumeric without space and  No special character
+	public static boolean isAlphaNumericWithOutSpace(String value)
+	{
+
+		if(value!=null)
+		{
+			String pattern= "^[a-zA-Z0-9]*$";
+			return value.trim().matches(pattern);
+		}
+		return false;
+	}
+
+
+
+	/// checks for past date
+	public static boolean pastDateCheck(Date checkDate)
+	{
+		if(checkDate!=null)
+		{
+			Date currentDate= new Date();
+
+			return currentDate.after(checkDate);
+		}
+		return false;
+	}
+
+
+
+
+	///checks for future date
+	public static boolean futureDateCheck(Date checkDate)
+	{
+		if(checkDate!=null)
+		{
+			Date currentDate= new Date();
+			return currentDate.before(checkDate);
+		}
+		return false;
+	}
+
+
+
+
+	/// checks for if start time is before than end time
+	public static boolean startEndTimeCheck(Date startTime,Date endTime)
+	{
+		if(startTime!=null && endTime!=null)
+		{
+			return startTime.before(endTime);
+		}
+		return false;
+	}
+
+
+
+
+	/// for checking number upto 5 digits and decimal places allowed upto 2 places only
+	public static boolean decimalsUpto2places(String decimal)
+	{
+		if(decimal!=null)
+		{
+			//String pattern ="^\\d+(\\.\\d{1,2})?$";
+			String pattern ="^[0-9]{1,4}+(\\.\\d{1,2})?$";
+
+			return decimal.trim().matches(pattern);
+		}
+		return false;
+	}
+	/// for checking number upto 5 digits and decimal places allowed upto 2 places only
+	public static boolean decimalsUpto2places3digit(String decimal)
+	{
+		if(decimal!=null)
+		{
+			//String pattern ="^\\d+(\\.\\d{1,2})?$";
+			String pattern ="^[0-9]{1,3}+(\\.\\d{1,2})?$";
+
+			return decimal.trim().matches(pattern);
+		}
+		return false;
+	}
+
+	/// for checking number upto 5 digits and decimal places allowed upto 2 places only
+		public static boolean decimalsUpto2placesAndLength3(String decimal)
+		{
+			if(decimal!=null)
+			{
+				//String pattern ="^\\d+(\\.\\d{1,2})?$";
+				String pattern ="^[0-9]{1,3}+(\\.\\d{1,3})?$";
+
+				return decimal.trim().matches(pattern);
+			}
+			return false;
+		}
+		/// for checking number upto 5 digits and decimal places allowed upto 2 places only
+		public static boolean decimalsUpto2placesAndLength4(String decimal)
+		{
+			if(decimal!=null)
+			{
+				//String pattern ="^\\d+(\\.\\d{1,2})?$";
+				String pattern ="^[0-9]{1,4}+(\\.\\d{1,2})?$";
+
+				return decimal.trim().matches(pattern);
+			}
+			return false;
+		}
+	/// for checking decimal places allowed upto 2 places only
+	public static boolean decimalsUpto2places10(String decimal)
+	{
+		if(decimal!=null)
+		{
+			//String pattern ="^\\d+(\\.\\d{1,2})?$";
+			String pattern ="^[0-9]{1,10}+(\\.\\d{1,3})?$";
+
+			return decimal.trim().matches(pattern);
+		}
+		return false;
+	}
+	public static boolean decimalsWithNegative(String decimal)
+	{
+		if(decimal!=null)
+		{
+			//String pattern ="^\\d+(\\.\\d{1,2})?$";
+		//	String pattern ="^[+-]?[0-9]{1,10}(?:\\.[0-9]{1,2})?$";
+			String pattern ="^-?\\d{1,10}(\\.\\d{1,2})?$";
+
+			return decimal.trim().matches(pattern);
+		}
+		return false;
+	}
+	public static boolean numberWithSlash(String num)
+	{
+		if(num!=null)
+		{
+			String pattern ="^\\d{1,3}+\\/\\d{1,3}+$";
+
+			return num.trim().matches(pattern);
+		}
+		return false;
+	}
+
+
+	// for checking if only spaces is entered
+	public static boolean isEmpty(String value)
+	{
+		if(value!=null)
+		{
+			return value.trim().isEmpty();
+
+		}
+		return false;
+	}
+
+
+
+}

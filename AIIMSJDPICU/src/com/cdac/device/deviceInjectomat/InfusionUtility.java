@@ -1,0 +1,97 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.device.deviceInjectomat;
+
+public class InfusionUtility
+{
+	static InfusionUtility deviceService;
+	public String alarmStatus;
+	public String decimalConversion;
+	public String unit;
+
+	private InfusionUtility()
+	{
+		alarmStatus = null;
+		decimalConversion = null;
+		unit = null;
+	}
+
+	public static InfusionUtility getInstance()
+	{
+		if (deviceService == null)
+		{
+			deviceService = new InfusionUtility();
+			return deviceService;
+		}
+		else
+		{
+			return deviceService;
+		}
+	}
+
+	public String convertToDecimal(String temp, int length)
+	{
+		StringBuilder temporary = new StringBuilder();
+		String output = temp.substring(0, length);
+		// convert hex to decimal
+		float decimal = Long.parseLong(output, 16);
+		if (length == 8)
+		{
+			decimal = decimal / 1000;
+
+		}
+		temporary.append(decimal);
+		decimalConversion = temporary.toString();
+		return decimalConversion;
+	}
+
+	public String unitEncoding(byte byte1, byte byte2)
+	{
+		String s1 = String.format("%8s", Integer.toBinaryString(byte1 & 0xFF)).replace(' ', '0');
+		String s2 = String.format("%8s", Integer.toBinaryString(byte2 & 0xFF)).replace(' ', '0');
+		String s3 = s1.concat(s2);
+		String s4 = s3.substring(3, 16);
+		if (s4.equals("0011001010000"))
+			unit = "ml/h";
+		else if (s4.equals("0100010110000"))
+			unit = "U/kg/h";
+		else if (s4.equals("0001000000000"))
+			unit = "ng";
+		return unit;
+	}
+
+	public String alarmStatus(byte byte1, byte byte2, byte byte3, byte byte4)
+	{
+		String s1 = String.format("%8s", Integer.toBinaryString(byte1 & 0xFF)).replace(' ', '0');
+		String s2 = String.format("%8s", Integer.toBinaryString(byte2 & 0xFF)).replace(' ', '0');
+		String s3 = String.format("%8s", Integer.toBinaryString(byte3 & 0xFF)).replace(' ', '0');
+		String s4 = String.format("%8s", Integer.toBinaryString(byte4 & 0xFF)).replace(' ', '0');
+		String s5 = s1.concat(s2).concat(s3).concat(s4);
+
+		if (s5.charAt(4) == '1')
+			alarmStatus = "Power disconnection";
+		// else if (s5.charAt(31) == '1')
+		// alarmStatus = "End of limit volume";
+		// else if (s5.charAt(15) == '1')
+		// alarmStatus = "End of limit volume pre alarm";
+		else if (s5.charAt(29) == '1')
+			alarmStatus = "End of Infusion";
+		else if (s5.charAt(13) == '1')
+			alarmStatus = "End of Infusion pre alarm";
+		else if (s5.charAt(12) == '1')
+			alarmStatus = "Battery pre alarm";
+		else if (s5.charAt(28) == '1')
+			alarmStatus = "Battery";
+		else if (s5.charAt(23) == '1')
+			alarmStatus = "Disengagement";
+		else if (s5.charAt(24) == '1')
+			alarmStatus = "Plunger Head";
+		else
+			alarmStatus = "";
+		return alarmStatus;
+	}
+}

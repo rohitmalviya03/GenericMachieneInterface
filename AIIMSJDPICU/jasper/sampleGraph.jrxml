@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2018-03-01T18:39:39 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sampleGraph" pageWidth="500" pageHeight="595" orientation="Landscape" columnWidth="460" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ae354130-4a57-4f29-85e9-730bf4df1827">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<subDataset name="chartDataSet" uuid="119b7f0e-01ef-4e2b-b628-d76f51e83768">
+		<field name="month" class="java.lang.Integer"/>
+		<field name="hoursNormal" class="java.lang.Double"/>
+		<field name="hoursTravel" class="java.lang.Double"/>
+		<field name="hoursOvertime" class="java.lang.Double"/>
+		<field name="hoursTotalCumulative" class="java.lang.Double"/>
+	</subDataset>
+	<parameter name="CHART_DATA" class="java.util.List" isForPrompting="false"/>
+	<summary>
+		<band height="282" splitType="Stretch">
+			<multiAxisChart>
+				<chart evaluationTime="Report">
+					<reportElement x="62" y="17" width="419" height="235" uuid="8a16251e-8c1a-4384-8487-9be8f6c274e5"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend position="Right"/>
+				</chart>
+				<multiAxisPlot>
+					<plot/>
+					<axis position="rightOrBottom">
+						<lineChart>
+							<chart evaluationTime="Report">
+								<reportElement positionType="Float" x="0" y="25" width="270" height="175" backcolor="#FFFFFF" uuid="4a755d76-1350-4921-a0be-20ae9e485e12"/>
+								<chartTitle color="#000000"/>
+								<chartSubtitle color="#000000"/>
+								<chartLegend textColor="#000000" backgroundColor="#FFFFFF" position="Right"/>
+							</chart>
+							<categoryDataset>
+								<dataset>
+									<datasetRun subDataset="chartDataSet" uuid="abec2dce-b670-4e84-b71f-469d954dbcb5">
+										<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CHART_DATA})]]></dataSourceExpression>
+									</datasetRun>
+								</dataset>
+								<categorySeries>
+									<seriesExpression><![CDATA["Total Cum"]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{month}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{hoursTotalCumulative}]]></valueExpression>
+								</categorySeries>
+							</categoryDataset>
+							<linePlot isShowLines="true" isShowShapes="true">
+								<plot>
+									<seriesColor seriesOrder="0" color="#9900CC"/>
+								</plot>
+								<categoryAxisFormat>
+									<axisFormat/>
+								</categoryAxisFormat>
+								<valueAxisLabelExpression><![CDATA["Total Cum"]]></valueAxisLabelExpression>
+								<valueAxisFormat>
+									<axisFormat labelColor="#000000" tickLabelColor="#000000" tickLabelMask="#,##0" axisLineColor="#000000"/>
+								</valueAxisFormat>
+							</linePlot>
+						</lineChart>
+					</axis>
+					<axis>
+						<barChart>
+							<chart evaluationTime="Report">
+								<reportElement x="0" y="0" width="0" height="0" backcolor="#FFFFFF" uuid="723abd06-b593-422a-b679-043084525a8c"/>
+								<chartTitle color="#000000"/>
+								<chartSubtitle color="#000000"/>
+								<chartLegend textColor="#000000" backgroundColor="#FFFFFF" position="Right"/>
+							</chart>
+							<categoryDataset>
+								<dataset>
+									<datasetRun subDataset="chartDataSet" uuid="abec2dce-b670-4e84-b71f-469d954dbcb5">
+										<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CHART_DATA})]]></dataSourceExpression>
+									</datasetRun>
+								</dataset>
+								<categorySeries>
+									<seriesExpression><![CDATA["Normal"]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{month}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{hoursNormal}]]></valueExpression>
+								</categorySeries>
+								<categorySeries>
+									<seriesExpression><![CDATA["Travel"]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{month}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{hoursTravel}]]></valueExpression>
+								</categorySeries>
+								<categorySeries>
+									<seriesExpression><![CDATA["Overtime"]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{month}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{hoursOvertime}]]></valueExpression>
+								</categorySeries>
+							</categoryDataset>
+							<barPlot>
+								<plot/>
+								<itemLabel/>
+								<categoryAxisFormat>
+									<axisFormat/>
+								</categoryAxisFormat>
+								<valueAxisLabelExpression><![CDATA["h"]]></valueAxisLabelExpression>
+								<valueAxisFormat>
+									<axisFormat labelColor="#000000" tickLabelColor="#000000" tickLabelMask="#,##0" axisLineColor="#000000"/>
+								</valueAxisFormat>
+							</barPlot>
+						</barChart>
+					</axis>
+				</multiAxisPlot>
+			</multiAxisChart>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,398 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.common.dao;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.cdac.common.GeneratedEntities.AnethesiaMachineData;
+import com.cdac.common.audit.interceptor.AuditLogInterceptor;
+import com.cdac.common.util.HibernateUtilities;
+import com.cdac.framework.exceptions.ServiceExceptionWrapper;
+
+public class AnethesiaMachineDataDaoImpl implements AnethesiaMachineDataDao
+{
+
+	/** The Constant LOGGER. */
+	private static final Logger LOGGER = Logger.getLogger(AnethesiaMachineDataDaoImpl.class.getName());
+
+
+	// ~ Methods
+	// ------------------------------------------------------------------------------------
+	
+	private static AnethesiaMachineDataDaoImpl instance = null;
+	private AnethesiaMachineDataDaoImpl()
+	{
+
+	}
+
+	public static AnethesiaMachineDataDaoImpl getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new AnethesiaMachineDataDaoImpl();
+		}
+		return instance;
+	}
+	/**
+	 * Inserts a new record for AnethesiaMachineData
+	 *
+	 * @param anethesiaMachineDataList
+	 * @param userName
+	 * @return AnethesiaMachineData record entity
+	 * @throws Exception
+	 */
+	//@SuppressWarnings("unchecked")
+	@Override
+	public void createAnethesiaMachineData(AnethesiaMachineData anethesiaMachineData,String userName)
+			throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Session session = null;
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+			// for setting created time and created by in case of new record and updated time and updated by in case of exsisting record
+			if(anethesiaMachineData.getAnesthesiaMachineDataID() >0)
+			{
+				Date updatedTime= new Date();
+				anethesiaMachineData.setUpdatedBy(userName);
+				anethesiaMachineData.setUpdatedTime(updatedTime);
+			}
+			else
+			{
+				Date createdTime= new Date();
+				anethesiaMachineData.setCreatedBy(userName);
+				anethesiaMachineData.setCreatedTime(createdTime);
+			}
+			// saves/updates the anesthesia record 
+			
+				session.saveOrUpdate(anethesiaMachineData);
+			
+			
+			session.getTransaction().commit();
+			
+			session.close();
+		}
+
+		catch (Exception e)
+		{
+			if (session != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+	}
+
+
+	/**
+	 * Get AnethesiaMachineData record details
+	 *
+	 * @param patientId
+	 * @param patientCaseId
+	 * @param userName
+	 * @return List of AnethesiaMachineData record
+	 * @throws Exception
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public AnethesiaMachineData getAnethesiaMachineData(Long anethesiaMachineDataId, String userName)
+			throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Session session = null;
+		List<AnethesiaMachineData> anethesiaMachineData=new ArrayList<>();
+
+		try
+		{
+
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			// Get event log
+			Query query = session.createQuery("FROM AnethesiaMachineData a "
+					+ " where a.anesthesiaMachineDataID=?");
+			query.setParameter(0, anethesiaMachineDataId);
+			anethesiaMachineData = query.list();
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+		if(anethesiaMachineData.size()>0)
+		{
+			return anethesiaMachineData.get(0);
+		}
+		else
+		{
+			return new AnethesiaMachineData();
+		}
+
+	}
+
+	/**
+	 * Get AnethesiaMachineData record details
+	 *
+	 * @param patientId
+	 * @param patientCaseId
+	 * @param userName
+	 * @return List of AnethesiaMachineData record
+	 * @throws Exception
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public AnethesiaMachineData getAnethesiaMachineDataTimeCase(Long caseId, Date timeStamp, String userName)
+			throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Session session = null;
+		List<AnethesiaMachineData> anethesiaMachineData=new ArrayList<>();
+
+		try
+		{
+
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+			Date startDate = timeStamp;
+			Calendar cal = Calendar.getInstance();
+			 cal.setTime(startDate);
+			 
+			 Date endDate = cal.getTime();
+			 endDate.setSeconds(59);
+			// Get event log
+			Query query = session.createQuery("FROM AnethesiaMachineData a "
+					+ " where a.caseId=? and a.timeStamp between ? and ?");
+			query.setParameter(0, caseId);
+			query.setParameter(1, startDate);
+			query.setParameter(2, endDate);
+			anethesiaMachineData = query.list();
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+		if(anethesiaMachineData.size()>0)
+		{
+			return anethesiaMachineData.get(0);
+		}
+		else
+		{
+			return new AnethesiaMachineData();
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AnethesiaMachineData> getAllAnethesiaMachineData(Long caseId, String userName)
+			throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Session session = null;
+		List<AnethesiaMachineData> anethesiaMachineDataList=new ArrayList<>();
+
+		try
+		{
+
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			// Get event log
+			Query query = session.createQuery("FROM AnethesiaMachineData a where a.caseId=?");
+			query.setParameter(0, caseId);
+			anethesiaMachineDataList = query.list();
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+		
+			return anethesiaMachineDataList;
+		
+	
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AnethesiaMachineData> getTimedAnethesiaMachineData(Long caseId, Date startTime, Date endTime, String userName)
+			throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Session session = null;
+		List<AnethesiaMachineData> anethesiaMachineDataList=new ArrayList<>();
+
+		try
+		{
+
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			// Get event log
+			Query query = session.createQuery("FROM AnethesiaMachineData a where a.caseId=? and a.timeStamp between ? and ?");
+			query.setParameter(0, caseId);
+			query.setParameter(1, startTime);
+			query.setParameter(2, endTime);
+			anethesiaMachineDataList = query.list();
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2)
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+		
+			return anethesiaMachineDataList;
+		
+	
+		
+	}
+
+
+
+
+}
+
+

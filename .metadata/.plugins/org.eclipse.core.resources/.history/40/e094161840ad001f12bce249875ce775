@@ -1,0 +1,16 @@
+eqp = 100019
+hos = 33104
+ip =https://aiimsjodhpur.uat.dcservices.in
+#http://10.226.28.174:8380
+#
+db_url=rohitmalviya\\SQLEXPRESS03
+db_user=sa
+db_pwd=Aiims@327
+db_name=test2
+uid = 10716
+
+httpcheck=0
+formatid=12345
+server_ip=192.168.64.123
+server_port=50004
+graph_path=C:/Users/rohitmalviya/Desktop/LIS Manual/MachineDataLog&LIS_MANUAL/C_Program Files (x86)_Sebia_minicap/Phoresis/PDF

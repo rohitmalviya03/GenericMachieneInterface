@@ -1,0 +1,731 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.infosys.common.dao;
+
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.json.simple.JSONObject;
+
+import com.infosys.common.GeneratedEntities.Fluidvalue;
+import com.infosys.common.GeneratedEntities.IntraopAnesthesiarecord;
+import com.infosys.common.GeneratedEntities.IntraopEventlog;
+import com.infosys.common.GeneratedEntities.IntraopMedicationlog;
+import com.infosys.common.GeneratedEntities.IntraopOutput;
+import com.infosys.common.GeneratedEntities.IntraopReportFile;
+import com.infosys.common.GeneratedEntities.Patient;
+import com.infosys.common.GeneratedEntities.Patientcase;
+import com.infosys.common.GeneratedEntities.Recoveryroomreadings;
+import com.infosys.common.audit.interceptor.AuditLogInterceptor;
+import com.infosys.common.util.HibernateUtilities;
+import com.infosys.framework.exceptions.ServiceExceptionWrapper;
+
+//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
+/**
+ * @author Akash_Sethi
+ *
+ */
+public class PatientReportDaoImpl implements PatientReportDao {
+
+	// ~ Static attributes/initializers
+	/** The Constant LOGGER. */
+	// -------------------------------------------------------------
+	private static final Logger LOGGER = Logger.getLogger(GetPatientDaoImpl.class.getName());
+	private static PatientReportDaoImpl instance = null;
+
+	// ~ Methods
+	// ------------------------------------------------------------------------------------
+
+	private PatientReportDaoImpl() {
+
+	}
+
+	public static PatientReportDaoImpl getInstance() {
+		if (instance == null) {
+			instance = new PatientReportDaoImpl();
+		}
+		return instance;
+	}
+
+	// TODO: check the throw exceptio, it should not be JSONException
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> getPatientAndCaseDetailsReport(Long caseID, Integer patientID, String userName)
+			throws Exception {
+
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Patient patient;
+		Session session = null;
+		SessionFactory hbsessionFactory = null;
+		Map<String, Object> patientReport = new HashMap<String, Object>();
+
+		try {
+			// opens a new session from the session factory
+			hbsessionFactory = HibernateUtilities.createSessionFactory();
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = hbsessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			// This method gets all the patient and case details in the
+			// PatientReport
+			// JSON Object
+			try {
+				getPatientCaseDetails(caseID, patientID, patientReport, session);
+
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+
+			try {
+				getDrugDetails(caseID, patientID, patientReport, session);
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+			try {
+				getEventDetails(caseID, patientID, patientReport, session);
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+			try {
+				getFluidsTotals(caseID, patientID, patientReport, session);
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+
+			try {
+				getOutputTotals(caseID, patientID, patientReport, session);
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+			try {
+				getAnesthesiaDetails(caseID, patientID, patientReport, session);
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+			try {
+				getRecoveryRoomReadingsDetails(caseID, patientID, patientReport, session);
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+			try {
+				getCannulationRecord(caseID, patientID, patientReport, session);
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+			try {
+				getCPBRecord(caseID, patientID, patientReport, session);
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+			try {
+				getEchoRecord(caseID, patientID, patientReport, session);
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+
+			try {
+				getICUPlanRecord(caseID, patientID, patientReport, session);
+			} catch (Exception e) {
+				LOGGER.info(e.getMessage());
+			}
+
+			session.getTransaction().commit(); // Session commit
+		} catch (Exception e) {
+			if (session != null && session.getTransaction() != null) {
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		} finally {
+			try {
+				if (session != null) {
+					session.close(); // Session closes
+				}
+			} catch (Exception e2) {
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+		return patientReport;
+	}
+
+	/**
+	 * getEventDetails - This method gets the list of all the Events logged
+	 * against the case Order by the time of occurance.
+	 *
+	 * @param caseID
+	 * @param patientID
+	 * @param patientEventsReport
+	 * @param session
+	 */
+
+	@SuppressWarnings("unchecked")
+	private void getEventDetails(Long caseID, Integer patientID, Map<String, Object> patientEventsReport,
+			Session session) {
+		List<IntraopEventlog> lstEvents = new ArrayList<IntraopEventlog>();
+		List<Object[]> result = new ArrayList<Object[]>();
+
+		Query query = session.createQuery(
+				"FROM IntraopEventlog evl,Patient cpt, Patientcase cpc  where cpt.patientId=cpc.patient.patientId and cpt.patientId=evl.patient.patientId and cpc.caseId=evl.patientcase.caseId and "
+						+ "cpt.patientId=? and cpc.caseId=? order by eventTime asc");
+
+		query.setParameter(0, patientID);
+		query.setParameter(1, caseID);
+		result = (List<Object[]>) query.list();
+
+		if (result.isEmpty()) {
+			patientEventsReport.put("Error", "No Events Found for the Case ID ");
+		} else {
+			IntraopEventlog iEL = null;
+
+			for (Object[] obj : result) {
+				iEL = (IntraopEventlog) obj[0];
+
+				IntraopEventlog iElog = new IntraopEventlog();
+				SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
+				String eventDateTime = formatter.format(iEL.getEventTime());
+				try {
+					iElog.setEventTime(formatter.parse(eventDateTime));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					LOGGER.error("## Exception occured:", e);
+					e.printStackTrace();
+				}
+
+				iElog.setCustomEventName(iEL.getCustomEventName());
+				iElog.setComments(iEL.getComments());
+				lstEvents.add(iElog);
+			}
+
+			patientEventsReport.put("EventsList", lstEvents);
+		}
+
+	}
+
+	/**
+	 * getDrugDetails - This method gets the total amount of Drugs injected into
+	 * the patient during the case
+	 *
+	 * @param caseID
+	 * @param patientID
+	 * @param patientFluidsReport
+	 * @param session
+	 */
+
+	@SuppressWarnings("unchecked")
+	private void getDrugDetails(Long caseID, Integer patientID, Map<String, Object> patientDrugsReport,
+			Session session) {
+		List<IntraopMedicationlog> lstMedications = new ArrayList<IntraopMedicationlog>();
+		List<Object[]> result = new ArrayList<Object[]>();
+
+		String hsql = "select Medlg.medicationName, SUM(Medlg.infuseDosage) As DOSE,cpc.caseId, Medlg.dosageUnit FROM "
+				+ " IntraopMedicationlog Medlg,Patient cpt, Patientcase cpc "
+				+ " where cpt.patientId=cpc.patient.patientId and cpt.patientId=Medlg.patient.patientId and cpc.caseId=Medlg.patientcase.caseId "
+				+ " and cpt.patientId=:patient_id and cpc.caseId=:case_id "
+				+ " group by Medlg.medicationName, cpc.caseId order by Medlg.medicationName asc";
+		Query query = session.createQuery(hsql);
+
+		query.setParameter("patient_id", patientID);
+		query.setParameter("case_id", caseID);
+		result = query.list();
+
+		if (result.isEmpty()) {
+			patientDrugsReport.put("Error", "No Drugs Found for the Case ID ");
+		} else {
+
+			for (Object[] iMedL : result) {
+
+				String strdosageUnit = "";
+				float dose = 0.0f;
+				String strMedicineName = iMedL[0].toString();
+
+				if (iMedL[1] != null)
+					dose = Float.parseFloat(iMedL[1].toString());
+				if (iMedL[3] != null)
+					strdosageUnit = iMedL[3].toString();
+
+				IntraopMedicationlog iMedlog = new IntraopMedicationlog();
+				iMedlog.setMedicationName(strMedicineName);
+
+				BigDecimal doseDecimal = new BigDecimal(dose);
+				BigDecimal doseRounded = doseDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+				iMedlog.setInfuseDosage(Float.valueOf(doseRounded.toEngineeringString()));
+				iMedlog.setDosageUnit("mg");
+				lstMedications.add(iMedlog);
+			}
+
+			patientDrugsReport.put("DrugList", lstMedications);
+		}
+
+	}
+
+	/**
+	 * getDrugDetails - This method gets the total amount of Drugs injected into
+	 * the patient during the case
+	 *
+	 * @param caseID
+	 * @param patientID
+	 * @param patientFluidsReport
+	 * @param session
+	 */
+
+	@SuppressWarnings("unchecked")
+	private void getOutputTotals(Long caseID, Integer patientID, Map<String, Object> patientOutputReport,
+			Session session) {
+		List<IntraopOutput> lstOutputs = new ArrayList<IntraopOutput>();
+		List<Object[]> result = new ArrayList<Object[]>();
+
+		String hsql = "select Medlg.outputType, SUM(Medlg.volume) As DOSE,cpc.caseId FROM "
+				+ " IntraopOutput Medlg,Patient cpt, Patientcase cpc "
+				+ " where cpt.patientId=cpc.patient.patientId and cpt.patientId=Medlg.patient.patientId and cpc.caseId=Medlg.patientcase.caseId "
+				+ " and cpt.patientId=:patient_id and cpc.caseId=:case_id "
+				+ " group by Medlg.outputType, cpc.caseId order by Medlg.outputType asc";
+		Query query = session.createQuery(hsql);
+
+		query.setParameter("patient_id", patientID);
+		query.setParameter("case_id", caseID);
+		result = query.list();
+
+		if (result.isEmpty()) {
+			patientOutputReport.put("Error", "No Drugs Found for the Case ID ");
+		} else {
+
+			for (Object[] iMedL : result) {
+
+				BigDecimal volume;
+				String strOutputType = iMedL[0].toString();
+
+				if (iMedL[1] != null) {
+					volume = new BigDecimal(iMedL[1].toString());
+				} else {
+					volume = new BigDecimal("0");
+				}
+
+				IntraopOutput iOutlog = new IntraopOutput();
+				iOutlog.setOutputType(strOutputType);
+				iOutlog.setVolume(volume);
+				lstOutputs.add(iOutlog);
+			}
+
+			patientOutputReport.put("OutputList", lstOutputs);
+		}
+
+	}
+
+	private void getPatientCaseDetails(Long caseID, Integer patientID, Map<String, Object> patientReport,
+			Session session) {
+		/// retrieves the list of parameters fields for the provided test ID
+		Query query = session
+				.createQuery("FROM Patient cpe,Patientcase cce WHERE cpe.patientId=cce.patient.patientId and "
+						+ "cpe.patientId=? and cce.caseId=?");
+
+		query.setParameter(0, patientID);
+		query.setParameter(1, caseID);
+
+		List<Object[]> result = new ArrayList<Object[]>();
+		result = (List<Object[]>) query.list();
+		Patient PatientEntity = null;
+		Patientcase CaseEntity = null;
+
+		for (Object[] obj : result) {
+			PatientEntity = (Patient) obj[0];
+			CaseEntity = (Patientcase) obj[1];
+		}
+
+		if (PatientEntity != null && CaseEntity != null) {
+			patientReport.put("name", PatientEntity.getFirstName() + " " + PatientEntity.getLastName());
+			patientReport.put("cRNumber", PatientEntity.getCrnumber());
+			patientReport.put("age", PatientEntity.getAge());
+			patientReport.put("ageUnit", PatientEntity.getAgeUnit());
+			patientReport.put("gender", PatientEntity.getGender());
+			patientReport.put("bloodGroup", PatientEntity.getBloodGroup());
+			patientReport.put("height", PatientEntity.getHeight());
+			patientReport.put("weight", PatientEntity.getWeight());
+			patientReport.put("guardianName", PatientEntity.getGuardianName());
+			patientReport.put("mobilePhone", PatientEntity.getMobilephone());
+			patientReport.put("bmi", PatientEntity.getBmi());
+			patientReport.put("bsa", PatientEntity.getBsa());
+			patientReport.put("city", PatientEntity.getAddress().getCityVillage());
+			patientReport.put("state", PatientEntity.getAddress().getState());
+			patientReport.put("caseNumber", CaseEntity.getCaseId());
+			patientReport.put("caseDate", CaseEntity.getCaseDateTime());
+			patientReport.put("surgeryType", CaseEntity.getSurgeryType());
+			patientReport.put("wardNumber", CaseEntity.getWardNumber());
+			patientReport.put("unit", CaseEntity.getUnit());
+			patientReport.put("diagnosis", CaseEntity.getDiagnosisValues());
+			patientReport.put("plannedProcedure", CaseEntity.getPlannedProcedureValues());
+			patientReport.put("plannedProcedureDate", CaseEntity.getPlannedProcedureDateTime());
+			patientReport.put("admitDate", CaseEntity.getAdmitDateTime());
+			patientReport.put("diagnosisText", CaseEntity.getDiagnosisText());
+			patientReport.put("plannedProcedureText", CaseEntity.getPlannedProcedureText());
+			patientReport.put("anesthesiologists", CaseEntity.getAnesthesiologists());
+			patientReport.put("otheranesthesiologists", CaseEntity.getOtherAnesthesiologists());
+			patientReport.put("surgeons", CaseEntity.getSurgeons());
+			patientReport.put("euroScore", CaseEntity.getEuroscore());
+			patientReport.put("glassgow", CaseEntity.getGlassgowCommaScore());
+			patientReport.put("nyha", CaseEntity.getNyha());
+			patientReport.put("speciality", CaseEntity.getSpeciality());
+			patientReport.put("ot", CaseEntity.getoT());
+
+		} else {
+			patientReport = null;
+		}
+	}
+
+	/**
+	 * getFluidsTotals - This method gets the total amount of Fluids injected
+	 * into the patient during the case
+	 *
+	 * @param caseID
+	 * @param patientID
+	 * @param patientFluidsReport
+	 * @param session
+	 */
+
+	@SuppressWarnings("unchecked")
+	private void getFluidsTotals(Long caseID, Integer patientID, Map<String, Object> patientFluidsReport,
+			Session session) {
+		List<Fluidvalue> lstFluids = new ArrayList<Fluidvalue>();
+		List<Object[]> result = new ArrayList<Object[]>();
+
+		String hsql = "select FV.fluidName, SUM(FV.volume) As Volume,FV.volumeUnit, FV.caseId FROM " + " Fluidvalue FV "
+				+ " where FV.patientId=:patient_id and FV.caseId=:case_id "
+				+ " group by FV.fluidName, FV.caseId order by FV.fluidName asc";
+		Query query = session.createQuery(hsql);
+
+		query.setParameter("patient_id", patientID);
+		query.setParameter("case_id", caseID);
+		result = query.list();
+
+		if (result.isEmpty()) {
+			patientFluidsReport.put("Error", "No Fluids Found for the Case ID ");
+		} else {
+
+			for (Object[] iFluids : result) {
+
+				String strVolumneUnit = "";
+				float volumne = 0.0f;
+
+				if (iFluids[1] != null)
+					volumne = Float.parseFloat(iFluids[1].toString());
+				String strFluidName = iFluids[0].toString();
+				if (iFluids[2] != null)
+					strVolumneUnit = iFluids[2].toString();
+
+				Fluidvalue iFluidlog = new Fluidvalue();
+				iFluidlog.setFluidName(strFluidName);
+				iFluidlog.setVolume(volumne);
+				iFluidlog.setVolumeUnit(strVolumneUnit);
+				lstFluids.add(iFluidlog);
+			}
+
+			patientFluidsReport.put("FluidsList", lstFluids);
+		}
+
+	}
+
+	/**
+	 * getAnesthesiaDetails - This method get the details for the Anesthesia
+	 * Record. All the fields are listed. Fetch them through the
+	 * IntraopAnesthesiarecord object properties.
+	 *
+	 * @param caseID
+	 * @param patientID
+	 * @param patientFluidsReport
+	 * @param session
+	 */
+
+	@SuppressWarnings("unchecked")
+	private void getAnesthesiaDetails(Long caseID, Integer patientID, Map<String, Object> patientRecoveryRoomReport,
+			Session session) {
+		Query query = session.createQuery(
+				"FROM IntraopAnesthesiarecord evl,Patient cpt, Patientcase cpc  where cpt.patientId=cpc.patient.patientId and cpt.patientId=evl.patient.patientId and cpc.caseId=evl.patientcase.caseId and "
+						+ "cpt.patientId=:patient_id and cpc.caseId=:case_id order by AnesthesiaRecordID desc ");
+
+		query.setParameter("patient_id", patientID);
+		query.setParameter("case_id", caseID);
+
+		List<Object[]> result = new ArrayList<Object[]>();
+		result = (List<Object[]>) query.list();
+		IntraopAnesthesiarecord AnesthesiaRecord = null;
+
+		for (Object[] obj : result) {
+			AnesthesiaRecord = (IntraopAnesthesiarecord) obj[0];
+			if (AnesthesiaRecord != null) {
+				break;
+			}
+
+		}
+		if (AnesthesiaRecord != null) {
+			patientRecoveryRoomReport.put("lstAnesthesiaRecord", AnesthesiaRecord);
+		} else {
+			patientRecoveryRoomReport.put("lstAnesthesiaRecord", null);
+		}
+	}
+
+	/**
+	 * getRecoveryRoomReadingsDetails - This method gets the recovery room
+	 * details for the Particular case. All the instructions are available.
+	 *
+	 * @param caseID
+	 * @param patientID
+	 * @param patientFluidsReport
+	 * @param session
+	 */
+
+	@SuppressWarnings("unchecked")
+	private void getRecoveryRoomReadingsDetails(Long caseID, Integer patientID,
+			Map<String, Object> patientRecoveryRoomReport, Session session) {
+		Query query = session.createQuery(
+				"FROM Recoveryroomreadings evl,Patient cpt, Patientcase cpc  where cpt.patientId=cpc.patient.patientId and cpt.patientId=evl.patient.patientId and cpc.caseId=evl.patientcase.caseId and "
+						+ "cpt.patientId=:patient_id and cpc.caseId=:case_id ");
+
+		query.setParameter("patient_id", patientID);
+		query.setParameter("case_id", caseID);
+
+		List<Object[]> result = new ArrayList<Object[]>();
+		result = (List<Object[]>) query.list();
+		Recoveryroomreadings RecoveryRoom = null;
+		Patient PatientEntity = null;
+		Patientcase CaseEntity = null;
+
+		for (Object[] obj : result) {
+			RecoveryRoom = (Recoveryroomreadings) obj[0];
+			PatientEntity = (Patient) obj[1];
+			CaseEntity = (Patientcase) obj[2];
+		}
+
+		if (RecoveryRoom != null) {
+			patientRecoveryRoomReport.put("lstRecoveryRoom", RecoveryRoom);
+		} else {
+			patientRecoveryRoomReport.put("lstRecoveryRoom", null);
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public void getCannulationRecord(Long caseID, Integer patientID, Map<String, Object> patientRecoveryRoomReport,
+			Session session) {
+		Query query = session.createQuery("FROM Cannulations c " + " where c.caseId=?");
+		query.setParameter(0, caseID);
+		List<Object[]> result = new ArrayList<Object[]>();
+		result = (List<Object[]>) query.list();
+
+		if (!result.isEmpty()) {
+			patientRecoveryRoomReport.put("cannulations", result.get(0));
+		} else {
+			patientRecoveryRoomReport.put("cannulations", null);
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public void getCPBRecord(Long caseID, Integer patientID, Map<String, Object> patientRecoveryRoomReport,
+			Session session) {
+		Query query = session.createQuery("FROM CPBDetails c " + " where c.caseID=?");
+		query.setParameter(0, caseID);
+		List<Object[]> result = new ArrayList<Object[]>();
+		result = (List<Object[]>) query.list();
+
+		if (!result.isEmpty()) {
+			patientRecoveryRoomReport.put("cpbDetails", result.get(0));
+		} else {
+			patientRecoveryRoomReport.put("cpbDetails", null);
+		}
+
+	}
+	@SuppressWarnings("unchecked")
+	public void getEchoRecord(Long caseID, Integer patientID, Map<String, Object> patientRecoveryRoomReport,
+			Session session) {
+		Query query = session.createQuery("FROM EchoDetails c " + " where c.caseID=?");
+		query.setParameter(0, caseID);
+		List<Object[]> result = new ArrayList<Object[]>();
+		result = (List<Object[]>) query.list();
+
+		if (!result.isEmpty()) {
+			patientRecoveryRoomReport.put("echoDetails", result.get(0));
+		} else {
+			patientRecoveryRoomReport.put("echoDetails", null);
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public void getICUPlanRecord(Long caseID, Integer patientID, Map<String, Object> patientRecoveryRoomReport,
+			Session session) {
+		Query query = session.createQuery("FROM IcuPlanEntity c " + " where c.caseId=?");
+		query.setParameter(0, caseID);
+		List<Object[]> result = new ArrayList<Object[]>();
+		result = (List<Object[]>) query.list();
+
+		if (!result.isEmpty()) {
+			patientRecoveryRoomReport.put("icuPlanDetails", result.get(0));
+		} else {
+			patientRecoveryRoomReport.put("icuPlanDetails", null);
+		}
+
+	}
+
+	/**
+	 * Report Saving starts here################################################
+	 */
+
+	@Override
+	public JSONObject uploadFile(String userName, IntraopReportFile intraopReportFile) {
+
+		JSONObject dataJson = new JSONObject();
+		Session session = null;
+
+		try {
+			// opens a new session from the session factory
+			SessionFactory sessionFactory = HibernateUtilities.createSessionFactory();
+			// For logging audit record
+			AuditLogInterceptor interceptor = new AuditLogInterceptor();
+			session = sessionFactory.withOptions().interceptor(interceptor).openSession();
+			interceptor.setSession(session);
+			interceptor.setUserName(userName);
+			session.getTransaction().begin();
+
+			if (intraopReportFile != null) {
+
+				// intraopReportFile.setCaseID(caseId);
+				// intraopReportFile.setPatientID(patientId);
+				intraopReportFile.setCreatedBy(userName);
+				Date uploadedDate = new Date();
+				intraopReportFile.setCreatedTime(uploadedDate);
+				session.saveOrUpdate(intraopReportFile);
+				dataJson.put("data", intraopReportFile.getFileName());
+
+			}
+			session.getTransaction().commit(); // Session commit
+
+		} catch (Exception e) {
+			if (session.getTransaction() != null) // If transaction is
+													// open,rollback
+				session.getTransaction().rollback();
+
+		} finally {
+			session.close(); // Session close
+		}
+		return dataJson;
+	}
+
+	@Override
+	public IntraopReportFile getFile(Long caseId) {
+
+		SessionFactory sessionFactory = null;
+		try {
+			sessionFactory = HibernateUtilities.createSessionFactory();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Session session = sessionFactory.openSession();
+		List<IntraopReportFile> result = new ArrayList<IntraopReportFile>();
+		IntraopReportFile fileDetailsObject = new IntraopReportFile();
+		try { // opens a new session from the session factory
+			session.getTransaction().begin();
+
+			Query query = session.createQuery("FROM IntraopReportFile fe WHERE  fe.caseID=? ");
+
+			query.setParameter(0, caseId);
+
+			result = query.list();
+
+			if (result.isEmpty()) {
+
+				fileDetailsObject.setFileName("No File Found.");
+				fileDetailsObject.setReportID(0);
+				return fileDetailsObject;
+			} else {
+				fileDetailsObject.setFileName(result.get(0).getFileName());
+				fileDetailsObject.setReportID(result.get(0).getReportID());
+				fileDetailsObject.setPatientReportData(result.get(0).getPatientReportData());
+			}
+
+			session.getTransaction().commit(); // Session commit
+		} catch (Exception e) {
+			if (session.getTransaction() != null) // If transaction is
+													// open,rollback
+				session.getTransaction().rollback();
+
+		} finally {
+			session.close(); // Session close
+		}
+		return fileDetailsObject;
+	}
+
+	/**
+	 * Report Saving ends here################################################
+	 */
+
+	private boolean checkNotNull(Object field) {
+		Boolean isNotNull = false;
+		if (field != null)
+			isNotNull = true;
+		return isNotNull;
+	}
+
+	@Override
+	public Map<String, Object> getAnesthesiaDetailsForReport(Long caseID, Integer patientID, String userName)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getPostOpInstructionsForReport(Long caseID, Integer patientID, String userName)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getTotalOfDrugsForReport(Long caseID, Integer patientID, String userName)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getEventDetailsForReport(Long caseID, Integer patientID, String userName)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getTotalOfFluidsForReport(Long caseID, Integer patientID, String userName)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getTotalOfOutputsForReport(Long caseID, Integer patientID, String userName)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

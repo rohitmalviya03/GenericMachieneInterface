@@ -1,0 +1,1143 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package controllers;
+
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import org.apache.log4j.Logger;
+import org.apache.poi.ss.formula.functions.Vlookup;
+
+import com.cdac.common.GeneratedEntities.IntraopMedicationlog;
+import com.cdac.common.GeneratedEntities.Patient;
+import com.cdac.common.GeneratedEntities.Patientcase;
+import com.cdac.common.dao.MedicationLogDao;
+import com.cdac.common.dao.MedicationLogDaoImpl;
+import com.cdac.common.pojoClasses.Volume;
+import com.cdac.common.util.DAOFactory;
+import com.cdac.common.util.Validations;
+
+import application.Main;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import mediatorPattern.ControllerMediator;
+import model.PatientSession;
+import model.UserSession;
+import services.SaveAndGetTotalMedicationService;
+import services.SearchDefaultUnitService;
+
+/**
+ * MedicationInfusionController.java<br>
+ * Purpose:This class contains logic to handle MedicationInfusion screen inputs
+ *
+ * @author Rohit_Sharma41
+ *
+ */
+public class MedicationInfusionController implements Initializable {
+
+	@FXML
+	private Label lblSelectetMethod;
+
+	public Label getLblSelectetMethod() {
+		return lblSelectetMethod;
+	}
+
+	@FXML
+	private Label lblTime;
+
+	@FXML
+	private Button btnClose;
+
+	@FXML
+	private HBox hbMedication;
+
+	@FXML
+	private VBox VBMedication;
+
+	@FXML
+	private Label lblMedicineName;
+
+	@FXML
+	private TextField txtDose;
+
+	@FXML
+	private ChoiceBox<String> choiceUnit;
+
+	@FXML
+	private Label lblIn;
+	
+	@FXML
+	private Label doseLabel;
+	
+	@FXML
+	private Label volumeLabel;
+
+	@FXML
+	private VBox vbVolume;
+
+	@FXML
+	private TextField txtVolume;
+
+	@FXML
+	private VBox vbConcen;
+
+	@FXML
+	private TextField txtConcentration;
+
+	@FXML
+	private Label lblError;
+
+	@FXML
+	private Button btnSave;
+
+	@FXML
+	private VBox vbRate;
+
+	@FXML
+	private TextField txtRate;
+
+	@FXML
+	private AnchorPane disablePaneMainContent;
+
+	// private List<String> units;
+	private Patient patient;
+	private Patientcase patientCase;
+	private IntraopMedicationlog medicationLog,medicationLog1;
+	public String medicationType = "";
+
+	private Calendar selectedTime;
+
+	public void setSelectedTime(Calendar selectedTime) {
+		this.selectedTime = selectedTime;
+	}
+
+	private EventHandler<MouseEvent> btnCloseHandler;
+
+	private ChangeListener<Boolean> txtVolumeChangeListener;
+
+	private ChangeListener<Boolean> choiceUnitChangeListener;
+
+	private ChangeListener<Boolean> txtDoseChangeListener;
+
+	private EventHandler<MouseEvent> btnSaveHandler;
+
+	private EventHandler<WorkerStateEvent> saveMedicationServiceSuccessHandler;
+
+	private EventHandler<WorkerStateEvent> saveMedicationServiceFailedHandler;
+
+	private EventHandler<WorkerStateEvent> searchDefaultUnitSuccessHandler;
+
+	private EventHandler<WorkerStateEvent> searchDefaultUnitFailedHandler;
+
+	protected EventHandler<WorkerStateEvent> getTotalVolumeServiceSuccessHandler;
+
+	protected EventHandler<WorkerStateEvent> getTotalVolumeServiceFailedHandler;
+
+	private EventHandler<javafx.scene.input.KeyEvent> enterKeyPressEventHandler;
+
+	private boolean isTertiaryWindow;
+
+	private boolean fromHistoryScreen;
+	
+	private boolean isEditWindow = false;
+	
+	
+
+	public boolean isEditWindow() {
+		return isEditWindow;
+	}
+
+	public void setEditWindow(boolean isEditWindow) {
+		this.isEditWindow = isEditWindow;
+	}
+
+	public void setFromHistoryScreen(boolean fromHistoryScreen) {
+		this.fromHistoryScreen = fromHistoryScreen;
+	}
+
+	public boolean isTertiaryWindow() {
+		return isTertiaryWindow;
+	}
+
+	public void setTertiaryWindow(boolean isTertiaryWindow) {
+		this.isTertiaryWindow = isTertiaryWindow;
+	}
+
+	public void setMedicationLog(IntraopMedicationlog medicationLog) {
+		this.medicationLog = medicationLog;
+	}
+
+	public Label getLblTime() {
+		return lblTime;
+	}
+
+	public void setLblTime(Label lblTime) {
+		this.lblTime = lblTime;
+	}
+
+	public Label getLblMedicineName() {
+		return lblMedicineName;
+	}
+
+	public void setLblMedicineName(Label lblMedicineName) {
+		this.lblMedicineName = lblMedicineName;
+	}
+
+	public String getMedicationType() {
+		return medicationType;
+	}
+
+	public void setMedicationType(String medicationType) {
+		this.medicationType = medicationType;
+	}
+
+	public ChoiceBox<String> getChoiceUnit() {
+		return choiceUnit;
+	}
+
+	private static final Logger LOG = Logger.getLogger(MedicationInfusionController.class.getName());
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		try
+		{
+			ControllerMediator.getInstance().registerMedicationInfusionController(this);
+
+			// lblTime.setStyle("-fx-font-size:14");
+
+			if (PatientSession.getInstance().getPatient() != null)
+				patient = PatientSession.getInstance().getPatient();
+			if (PatientSession.getInstance().getPatientCase() != null)
+				patientCase = PatientSession.getInstance().getPatientCase();
+
+			// units = FXCollections.observableArrayList("Select", "g", "mg");
+			List<String> unitDD = new ArrayList<String>();
+			String unit = "\u00B5" + "g";
+			unitDD.add("g");
+			unitDD.add("mg");
+			unitDD.add(unit);
+
+			choiceUnit.getItems().addAll(unitDD);
+//			choiceUnit.getSelectionModel().select("mg");
+
+			btnCloseHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+				public void handle(javafx.scene.input.MouseEvent event)
+				{
+					try
+					{
+						closePopup();
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+					}
+
+				}
+			};
+			btnClose.addEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+
+			txtVolumeChangeListener = new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldPropertyValue,Boolean newPropertyValue)
+				{
+					try
+					{
+						if (!newPropertyValue) {
+							if (!txtVolume.getText().matches("^\\d*\\.?\\d*$")) {
+								txtVolume.setText("");
+
+								lblError.setVisible(true);
+
+								lblError.setText("Please enter valid volume.");
+							}
+
+							else {
+								// lblError.setVisible(false);
+								calculateConcentration();
+							}
+						}
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+						Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+					}
+				}
+			};
+
+			txtDoseChangeListener = new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldPropertyValue,
+						Boolean newPropertyValue) {
+					try
+					{
+						if (!newPropertyValue) {
+
+							if (!txtDose.getText().matches("^\\d*\\.?\\d*$")) {
+								txtDose.setText("");
+								lblError.setText("Please enter valid Dose.");
+								lblError.setVisible(true);
+
+							}
+
+							else {
+								// lblError.setVisible(false);
+
+								calculateConcentration();
+							}
+
+						}
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+						Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+					}
+				}
+			};
+
+			choiceUnitChangeListener = new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldPropertyValue,
+						Boolean newPropertyValue) {
+					try
+					{
+						if (!newPropertyValue) {
+
+							calculateConcentration();
+						}
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+						Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+					}
+				}
+			};
+
+			txtVolume.focusedProperty().addListener(txtVolumeChangeListener);
+			txtDose.focusedProperty().addListener(txtDoseChangeListener);
+			choiceUnit.focusedProperty().addListener(choiceUnitChangeListener);
+
+			btnSaveHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+				public void handle(javafx.scene.input.MouseEvent event) {
+
+					try
+					{
+						saveMedication();
+						
+						vbConcen.setDisable(false);
+						vbVolume.setDisable(false);
+						lblIn.setDisable(false);
+						VBMedication.setDisable(false);
+						txtDose.setDisable(false);
+						choiceUnit.setDisable(false);
+					}
+					catch (Exception e)
+					{
+						e.printStackTrace();
+						LOG.error("## Exception occured:", e);
+						Main.getInstance().getUtility().showNotification("Error", "Error", "Something went wrong");
+					}
+				}
+			};
+			btnSave.addEventHandler(MouseEvent.MOUSE_CLICKED, btnSaveHandler);
+
+
+			enterKeyPressEventHandler = new EventHandler<javafx.scene.input.KeyEvent>() {
+
+				@Override
+				public void handle(javafx.scene.input.KeyEvent event) {
+
+					if (event.getCode().equals(KeyCode.ENTER)) {
+						try {
+							saveMedication();
+						} catch (Exception e) {
+							LOG.error("## Exception occured:", e);
+						}
+					}
+				}
+			};
+			txtDose.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, enterKeyPressEventHandler);
+			txtRate.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, enterKeyPressEventHandler);
+			txtVolume.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, enterKeyPressEventHandler);
+			choiceUnit.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, enterKeyPressEventHandler);
+
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+
+					try
+					{
+						txtDose.requestFocus();
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+					}
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			LOG.error("## Exception occured:", e);
+		}
+
+	}
+
+	/**
+	 * This method checks medication type, whether it is Infusion or bolus
+	 */
+	public void checkMedType()
+	{
+		try
+		{
+			if (lblSelectetMethod.getText().equalsIgnoreCase("Bolus"))
+			{
+				medicationType = "Bolus";
+				vbConcen.setVisible(false);
+				vbVolume.setVisible(false);
+				vbRate.setVisible(false);
+				lblIn.setVisible(false);
+				VBMedication.setDisable(false);
+
+			}
+			else if (lblSelectetMethod.getText().equalsIgnoreCase("Infusion"))
+			{
+				medicationType = "Infusion";
+				if(isEditWindow) {
+					
+					vbConcen.setDisable(true);
+					vbVolume.setDisable(true);
+					lblIn.setDisable(true);
+					VBMedication.setDisable(true);
+					txtDose.setDisable(true);
+					choiceUnit.setDisable(true);
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	public void prePopulateTextfields()
+	{
+		DecimalFormat df = new DecimalFormat("###.##");
+		if (medicationLog!=null && medicationLog.getMedicationLogId() != null)
+		{
+			if (medicationLog.getBolusInfusion().equalsIgnoreCase("Infusion"))
+			{
+				try{
+				String dose = medicationLog.getDosageUnit().toString();
+				if(dose.equalsIgnoreCase("g"))
+				{
+					Float f = medicationLog.getMedicationDosage() / 1000;
+					txtDose.setText(f.toString());
+				}
+				else if(dose.equalsIgnoreCase("�g"))
+				{
+					Float f = medicationLog.getMedicationDosage() * 1000;
+					txtDose.setText(df.format(f).toString());
+				}
+				else
+				{
+					
+					
+					txtDose.setText(medicationLog.getMedicationDosage().toString());
+				}
+				if(isEditWindow) {
+					
+					Float dosage = 	StopInfusionController.calculateInfusedDose(medicationLog.getStartTime(), selectedTime.getTime(), medicationLog.getRateOfInfusion(), medicationLog.getConcentration());
+					dosage= medicationLog.getMedicationDosage() - dosage;
+					if( dosage <=0 ) 
+						dosage=0.0F;
+					
+					
+					if(dose.equalsIgnoreCase("g"))
+					{
+						dosage = dosage/ 1000;
+						
+					}
+					else if(dose.equalsIgnoreCase("�g"))
+					{
+						dosage =dosage *1000;
+						
+					}
+					volumeLabel.setText("Vol Left(ml)");
+					doseLabel.setText("Dose Left");
+					txtDose.setText(df.format(dosage).toString());
+					
+				}
+				double volumeValue =((Float.valueOf(medicationLog.getRateOfInfusion().split(" ")[0]))*(selectedTime.getTimeInMillis() -  medicationLog.getStartTime().getTime())*1.0)/(60*60*1000*1.0);
+				volumeValue = medicationLog.getVolume()-volumeValue;
+				choiceUnit.getSelectionModel().select(dose);
+				txtVolume.setText(df.format(volumeValue).toString());
+				txtRate.setText(medicationLog.getRateOfInfusion().split(" ")[0]);
+				txtConcentration.setText(medicationLog.getConcentration());
+				}
+				catch(Exception e){
+					e.printStackTrace();
+					LOG.error("## Exception occured:", e);
+				}
+			}
+			else if (medicationLog.getBolusInfusion().equalsIgnoreCase("Bolus"))
+			{
+
+					String dose = medicationLog.getDosageUnit().toString();
+					if(dose.equalsIgnoreCase("g"))
+					{
+						Float f = medicationLog.getInfuseDosage() / 1000;
+						txtDose.setText(f.toString());
+					}
+					else if(dose.equalsIgnoreCase("�g"))
+					{
+						Float f = medicationLog.getInfuseDosage() * 1000;
+						txtDose.setText(f.toString());
+					}
+					else
+					{
+						txtDose.setText(medicationLog.getInfuseDosage().toString());
+					}
+					choiceUnit.getSelectionModel().select(medicationLog.getDosageUnit().toString());
+			}
+		}
+		else
+		{
+			SearchDefaultUnitService searchDefaultUnitService = SearchDefaultUnitService.getInstance(lblMedicineName.getText());
+			searchDefaultUnitService.restart();
+
+			searchDefaultUnitSuccessHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+					try
+					{
+						String defaultUnit = searchDefaultUnitService.getDefaultUnit();
+						if(defaultUnit!=null && defaultUnit!="null")
+						{
+							choiceUnit.getSelectionModel().select(defaultUnit);
+						}
+						else
+						{
+							choiceUnit.getSelectionModel().select("mg");
+						}
+						disablePaneMainContent.setVisible(false);
+						searchDefaultUnitService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+								searchDefaultUnitSuccessHandler);
+						searchDefaultUnitService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+								searchDefaultUnitFailedHandler);
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+					}
+
+				}
+
+			};
+
+			searchDefaultUnitService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+					searchDefaultUnitSuccessHandler);
+
+			searchDefaultUnitFailedHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+					try
+					{
+						choiceUnit.getSelectionModel().select("mg");
+						disablePaneMainContent.setVisible(false);
+						searchDefaultUnitService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+								searchDefaultUnitSuccessHandler);
+						searchDefaultUnitService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+								searchDefaultUnitFailedHandler);
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+					}
+				}
+
+			};
+
+			searchDefaultUnitService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+					searchDefaultUnitFailedHandler);
+
+		}
+
+	}
+	/**
+	 * This method remove active event handlers from all the components
+	 */
+	private void removeEventHandlers() {
+		btnClose.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+		btnSave.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnSaveHandler);
+		txtVolume.focusedProperty().removeListener(txtVolumeChangeListener);
+		txtDose.focusedProperty().removeListener(txtDoseChangeListener);
+		choiceUnit.focusedProperty().removeListener(choiceUnitChangeListener);
+
+		txtVolume.removeEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, enterKeyPressEventHandler);
+		txtDose.removeEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, enterKeyPressEventHandler);
+		txtRate.removeEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, enterKeyPressEventHandler);
+		choiceUnit.removeEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, enterKeyPressEventHandler);
+
+		patient = null;
+		patientCase = null;
+		medicationLog = null;
+
+		medicationType = null;
+
+		btnCloseHandler = null;
+
+		txtVolumeChangeListener = null;
+
+		choiceUnitChangeListener = null;
+
+		txtDoseChangeListener = null;
+
+		btnSaveHandler = null;
+
+		saveMedicationServiceSuccessHandler = null;
+
+		saveMedicationServiceFailedHandler = null;
+
+		getTotalVolumeServiceSuccessHandler = null;
+
+		getTotalVolumeServiceFailedHandler = null;
+
+		searchDefaultUnitFailedHandler = null;
+
+		searchDefaultUnitSuccessHandler = null;
+	}
+
+	/**
+	 * This method closes Medication Infusion screen
+	 */
+	private void closePopup()
+	{
+		removeEventHandlers();
+		// Stage stage = Main.getInstance().getChildStage();
+		// Main.getInstance().setChildStage((Stage) stage.getOwner());
+		// stage.close();
+		if (isTertiaryWindow)
+			Main.getInstance().getStageManager().closeTertiaryStage();
+		else
+			Main.getInstance().getStageManager().closeSecondaryStage();
+		isEditWindow = false;
+		vbConcen.setDisable(false);
+		vbVolume.setDisable(false);
+		lblIn.setDisable(false);
+		VBMedication.setDisable(false);
+		txtDose.setDisable(false);
+		choiceUnit.setDisable(false);
+	}
+
+	/**
+	 * This method calculates concentration of doses based on volume, dose and
+	 * unit
+	 */
+	private void calculateConcentration()
+	{
+		txtConcentration.setText("");
+
+		//if (choiceUnit.getSelectionModel().getSelectedIndex() != 0 && !txtVolume.getText().isEmpty()
+		if (!txtVolume.getText().isEmpty() && !txtDose.getText().isEmpty()) {
+			if (validateDoseAndVolume()) {
+				lblError.setVisible(false);
+				float concentration = 0;
+
+				if (choiceUnit.getSelectionModel().getSelectedItem().equalsIgnoreCase("mg")) {
+					concentration = (Float.parseFloat(txtDose.getText()) * 1000)
+							/ Float.parseFloat(txtVolume.getText());
+				} else if (choiceUnit.getSelectionModel().getSelectedItem().equalsIgnoreCase("g")) {
+					concentration = (Float.parseFloat(txtDose.getText()) * 1000000)
+							/ Float.parseFloat(txtVolume.getText());
+				} else {
+
+					concentration = Float.parseFloat(txtDose.getText()) / Float.parseFloat(txtVolume.getText());
+				}
+				txtConcentration.setText(concentration + "");
+
+			} else {
+				lblError.setVisible(true);
+			}
+		}
+
+	}
+
+	/**
+	 * This method saves data for selected medicine into database
+	 */
+	private void saveMedication()
+	{
+
+		boolean isvalid = IsValidForm();
+
+		calculateConcentration();
+
+		if (isvalid) {
+			disablePaneMainContent.setVisible(true);
+			lblError.setVisible(false);
+			btnSave.setDisable(true);
+
+			Float infusedDose = 0f;
+			if (choiceUnit.getSelectionModel().getSelectedItem().equalsIgnoreCase("g")) {
+				infusedDose = Float.parseFloat(txtDose.getText()) * 1000;
+			} else if (choiceUnit.getSelectionModel().getSelectedItem().equalsIgnoreCase("mg")) {
+				infusedDose = Float.parseFloat(txtDose.getText());
+			} else {
+				infusedDose = Float.parseFloat(txtDose.getText()) / 1000;
+			}
+
+			if (medicationLog.getMedicationLogId() != null)
+			{
+				if (medicationType.equalsIgnoreCase("bolus"))
+				{
+					// medicationLog.setInfuseDosage((Float.parseFloat(txtDose.getText())));
+					medicationLog.setInfuseDosage(infusedDose);
+//					medicationLog.setMedicationDosage(infusedDose);
+					medicationLog.setDosageUnit(choiceUnit.getSelectionModel().getSelectedItem().toString());
+				}
+				else if (medicationType.equalsIgnoreCase("infusion"))
+				{
+					// update new infusion details
+					Calendar cal = Calendar.getInstance();
+					if (selectedTime != null) {
+						cal.setTime(selectedTime.getTime());
+					} else {
+						cal.set(Calendar.HOUR_OF_DAY, Integer.valueOf(lblTime.getText().split(":")[0]));
+						cal.set(Calendar.MINUTE, Integer.valueOf(lblTime.getText().split(":")[1]));
+						cal.set(Calendar.SECOND, 0);
+						cal.set(Calendar.MILLISECOND, 0);
+					}
+
+					medicationLog.setPatient(patient);
+					medicationLog.setPatientcase(patientCase);
+					medicationLog.setMedicationDosage(infusedDose);
+					medicationLog.setDosageUnit(choiceUnit.getSelectionModel().getSelectedItem());
+					medicationLog.setMedicationName(lblMedicineName.getText());
+					
+					medicationLog.setBolusInfusion("Infusion");
+					medicationLog.setConcentration(txtConcentration.getText());
+					medicationLog.setVolume(Float.parseFloat(txtVolume.getText()));
+					
+					if(isEditWindow) {
+	
+					float dosage =	StopInfusionController.calculateInfusedDose(medicationLog.getStartTime(), selectedTime.getTime(), medicationLog.getRateOfInfusion(), medicationLog.getConcentration());
+					medicationLog.setInfuseDosage(dosage);
+					medicationLog.setEndTime(selectedTime.getTime());
+					medicationLog1 = new IntraopMedicationlog();
+					medicationLog1.setPatient(patient);
+					medicationLog1.setPatientcase(patientCase);
+					medicationLog1.setDosageUnit(choiceUnit.getSelectionModel().getSelectedItem());
+					medicationLog1.setMedicationName(lblMedicineName.getText());
+					medicationLog1.setStartTime(cal.getTime());
+					medicationLog1.setMedicationDosage(infusedDose);
+						medicationLog1.setBolusInfusion("Infusion");
+						medicationLog1.setConcentration(txtConcentration.getText());
+						medicationLog1.setVolume(Float.parseFloat(txtVolume.getText()));
+						medicationLog1.setRateOfInfusion(txtRate.getText() + " ml/hr");
+					}
+					else {
+					medicationLog.setRateOfInfusion(txtRate.getText() + " ml/hr");
+					medicationLog.setStartTime(cal.getTime());
+					}
+				}
+			}
+			else
+			{
+
+				Calendar cal = Calendar.getInstance();
+				if (selectedTime != null) {
+					cal.setTime(selectedTime.getTime());
+				} else {
+					cal.set(Calendar.HOUR_OF_DAY, Integer.valueOf(lblTime.getText().split(":")[0]));
+					cal.set(Calendar.MINUTE, Integer.valueOf(lblTime.getText().split(":")[1]));
+					cal.set(Calendar.SECOND, 0);
+					cal.set(Calendar.MILLISECOND, 0);
+				}
+
+				medicationLog.setPatient(patient);
+				medicationLog.setPatientcase(patientCase);
+				medicationLog.setDosageUnit(choiceUnit.getSelectionModel().getSelectedItem());
+				medicationLog.setMedicationName(lblMedicineName.getText());
+				medicationLog.setStartTime(cal.getTime());
+				if (medicationType.equalsIgnoreCase("Infusion")) {
+					medicationLog.setMedicationDosage(infusedDose);
+					medicationLog.setBolusInfusion("Infusion");
+					medicationLog.setConcentration(txtConcentration.getText());
+					medicationLog.setVolume(Float.parseFloat(txtVolume.getText()));
+					medicationLog.setRateOfInfusion(txtRate.getText() + " ml/hr");
+				} else if (medicationType.equalsIgnoreCase("bolus")) {
+					medicationLog.setInfuseDosage(infusedDose);
+					medicationLog.setBolusInfusion("Bolus");
+				}
+			}
+			SaveAndGetTotalMedicationService saveMedicationService = SaveAndGetTotalMedicationService.getInstance(
+					medicationLog, lblMedicineName.getText(), patient.getPatientId(), patientCase.getCaseId());
+			saveMedicationService.restart();
+
+			saveMedicationServiceSuccessHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+					try
+					{
+						IntraopMedicationlog returnedMedicationLog = new IntraopMedicationlog();
+						MedicationLogDao medicationLogDao =  MedicationLogDaoImpl.getInstance();
+						String totalDose;
+						if(isEditWindow)
+						{	returnedMedicationLog=medicationLogDao.saveMediactions(medicationLog1, UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+						 Volume t1 = DAOFactory.medicationLog().getTotalDosage(medicationLog1.getMedicationName(), patient.getPatientId(), patientCase.getCaseId(),  UserSession.getInstance().getUserWithrRolesForUserAuthentication().getUserID());
+						 totalDose = t1.getValue() + t1.getUnit();
+						}
+						else
+						{returnedMedicationLog = saveMedicationService.getReturnedMedicationLog();
+						 totalDose = saveMedicationService.getTotalVolume().getValue() + saveMedicationService.getTotalVolume().getUnit();
+						}
+						isEditWindow = false;
+						
+						ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getTotalsValuesMap().put(returnedMedicationLog.getMedicationName(),totalDose);
+						
+						totalDose= calculateUnit(Float.parseFloat(totalDose.split(" ")[0])*1000);
+
+						if (returnedMedicationLog.getBolusInfusion().equalsIgnoreCase("bolus")) {
+							Calendar cal = Calendar.getInstance();
+							cal.setTime(returnedMedicationLog.getStartTime());
+							if (fromHistoryScreen) {
+								ControllerMediator.getInstance().getGridHistoricalViewController().fillMedicationGridCell(
+										returnedMedicationLog.getBolusInfusion(), lblMedicineName.getText(), cal,
+										calculateUnit(returnedMedicationLog.getInfuseDosage()*1000), totalDose);
+							}
+
+							ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+									.fillMedicationGridCell(returnedMedicationLog.getBolusInfusion(),
+											lblMedicineName.getText(), cal,
+											calculateUnit(returnedMedicationLog.getInfuseDosage()*1000), totalDose);
+					
+						} else if (returnedMedicationLog.getBolusInfusion().equalsIgnoreCase("infusion")) {
+							Float infVal = Float.parseFloat(returnedMedicationLog.getConcentration())
+									* Float.parseFloat(returnedMedicationLog.getRateOfInfusion().split(" ")[0]);
+							infVal = (infVal) / patient.getWeight();
+							infVal = (infVal)/60;
+							
+							String value = calculateUnit(infVal);
+							String rateVal[] = value.split(" ");
+							Calendar cal = Calendar.getInstance();
+							cal.setTime(returnedMedicationLog.getStartTime());
+
+							ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+									.getInfusionStartedMap().put(lblMedicineName.getText(), cal);
+							ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getMedicineTotalRateMap().put(returnedMedicationLog.getMedicationName(),value);
+
+							
+							ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getMedicineRateMap().put(returnedMedicationLog.getMedicationName(), returnedMedicationLog);
+
+							if (fromHistoryScreen) {
+								ControllerMediator.getInstance().getGridHistoricalViewController().fillMedicationGridCell(returnedMedicationLog.getBolusInfusion() + " start",
+										lblMedicineName.getText(), cal, rateVal[0] + rateVal[1], totalDose);
+							}
+
+							ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+									.fillMedicationGridCell(returnedMedicationLog.getBolusInfusion() + " start",
+											lblMedicineName.getText(), cal, rateVal[0] + rateVal[1], totalDose);
+													}
+
+						// GetTotalMedicationVolumeService getTotalVolumeService =
+						// GetTotalMedicationVolumeService
+						// .getInstance(lblMedicineName.getText(),
+						// patient.getPatientId(), patientCase.getCaseId());
+						// getTotalVolumeService.restart();
+
+						// getTotalVolumeServiceSuccessHandler = new
+						// EventHandler<WorkerStateEvent>() {
+						//
+						// @Override
+						// public void handle(WorkerStateEvent event) {
+						// float totalDose =
+						// getTotalVolumeService.getTotalVolume().getValue();
+						// DecimalFormat df = new DecimalFormat("###.##");
+						// String totals = df.format(totalDose) + " mg";
+						//
+						// if
+						// (returnedMedicationLog.getBolusInfusion().equalsIgnoreCase("bolus"))
+						// {
+						// ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+						// .fillMedicationGridCell(returnedMedicationLog.getBolusInfusion(),
+						// lblMedicineName.getText(), lblTime.getText(),
+						// String.valueOf(returnedMedicationLog.getInfuseDosage()),
+						// totals);
+						// } else if
+						// (returnedMedicationLog.getBolusInfusion().equalsIgnoreCase("infusion"))
+						// {
+						// Float infVal =
+						// Float.parseFloat(returnedMedicationLog.getConcentration())
+						// *
+						// Float.parseFloat(returnedMedicationLog.getRateOfInfusion().split("
+						// ")[0]);
+						// infVal = (infVal) / patient.getWeight();
+						//
+						// ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+						// .getInfusionStartedMap().put(lblMedicineName.getText(),
+						// lblTime.getText());
+						// ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+						// .fillMedicationGridCell(returnedMedicationLog.getBolusInfusion()
+						// + " start",
+						// lblMedicineName.getText(), lblTime.getText(), infVal + "
+						// \u00B5g/kg/hr",
+						// totals);
+						// }
+						// getTotalVolumeService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+						// getTotalVolumeServiceSuccessHandler);
+						// getTotalVolumeService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+						// getTotalVolumeServiceFailedHandler);
+						// }
+						//
+						// };
+						//
+						// getTotalVolumeService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+						// getTotalVolumeServiceSuccessHandler);
+						//
+						// getTotalVolumeServiceFailedHandler = new
+						// EventHandler<WorkerStateEvent>() {
+						//
+						// @Override
+						// public void handle(WorkerStateEvent event) {
+						// Main.getInstance().getUtility().showNotification("Error",
+						// "Error",
+						// getTotalVolumeService.getException().getMessage());
+						// getTotalVolumeService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+						// getTotalVolumeServiceSuccessHandler);
+						// getTotalVolumeService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+						// getTotalVolumeServiceFailedHandler);
+						// }
+						//
+						// };
+						//
+						// getTotalVolumeService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+						// getTotalVolumeServiceFailedHandler);
+						disablePaneMainContent.setVisible(false);
+						saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+								saveMedicationServiceSuccessHandler);
+						saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+								saveMedicationServiceFailedHandler);
+						closePopup();
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+					}
+
+				}
+
+			};
+
+			saveMedicationService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+					saveMedicationServiceSuccessHandler);
+
+			saveMedicationServiceFailedHandler = new EventHandler<WorkerStateEvent>() {
+
+				@Override
+				public void handle(WorkerStateEvent event) {
+					try
+					{
+						Main.getInstance().getUtility().showNotification("Error", "Error",
+								saveMedicationService.getException().getMessage());
+						disablePaneMainContent.setVisible(false);
+						saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+								saveMedicationServiceSuccessHandler);
+						saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+								saveMedicationServiceFailedHandler);
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+					}
+				}
+
+			};
+
+			saveMedicationService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+					saveMedicationServiceFailedHandler);
+		} else {
+			lblError.setVisible(true);
+			// lblError.setText("*Please enter mandatory fields to save.");
+		}
+	}
+
+	
+	/**
+	 * This method checks textfields on the screen for invalid input
+	 *
+	 * @return true/false depending upon whether all conditions are satisfied
+	 */
+	private boolean IsValidForm()
+	{
+		if (medicationType.equalsIgnoreCase("Infusion")) {
+			// if (lblMedicineName.getText() == null ||
+			// lblMedicineName.getText().trim().equalsIgnoreCase("")
+			// || txtVolume.getText() == null ||
+			// txtVolume.getText().trim().equalsIgnoreCase("")
+			// || txtDose.getText() == null ||
+			// txtDose.getText().trim().equalsIgnoreCase("")
+			// || txtRate.getText() == null ||
+			// txtRate.getText().trim().equalsIgnoreCase("")
+			// || choiceUnit.getSelectionModel().getSelectedIndex() == 0) {
+			//
+			// return false;
+			// }
+			boolean isValid = validateInfusionForm();
+			return isValid;
+		} else {
+			if (txtDose.getText() == null || txtDose.getText().trim().equalsIgnoreCase("")) {
+				lblError.setText("*Please enter mandatory fields to save.");
+				return false;
+			}
+			if (!Validations.isDigit(txtDose.getText())) {
+				lblError.setText("*Please enter a valid Dose.");
+				return false;
+			}
+
+			if (!Validations.decimalsUpto2places(txtDose.getText())) {
+				lblError.setText("*Please enter Dose upto 4 digits and decimal upto 2 digits only.");
+				return false;
+			}
+
+			// if (!Validations.nonZeroBigDecimal(txtDose.getText())) {
+			if (!Validations.greaterThanZero(txtDose.getText()))
+			{
+				lblError.setText("*Please enter Dose more than or equal to 0.");
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * This method checks textfields on the infusion screen for invalid input
+	 *
+	 * @return true/false depending upon whether all conditions are satisfied
+	 */
+	private boolean validateInfusionForm()
+	{
+
+		if (txtDose.getText().isEmpty() || txtRate.getText().isEmpty()
+				|| choiceUnit.getSelectionModel().getSelectedItem() == null || txtVolume.getText().isEmpty()) {
+			lblError.setText("*Please fill all the mandatory fields");
+			return false;
+		}
+		if (!validateDoseAndVolume()) {
+			return false;
+		}
+		if (txtConcentration.getText().isEmpty()) {
+			calculateConcentration();
+		}
+
+		if (txtRate.getText() != null && !txtRate.getText().trim().equals("")) {
+			if (!Validations.isDigit(txtRate.getText())) {
+				lblError.setText("*Rate can only have digits");
+				return false;
+			}
+
+			if (!Validations.decimalsUpto2places(txtRate.getText())) {
+				lblError.setText("*Please enter Rate upto 4 digits and decimal upto 2 digits only");
+				return false;
+			}
+
+			if (!Validations.nonZeroBigDecimal(txtRate.getText())) {
+				lblError.setText("*Please enter Rate value more than 0");
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * This method validates dose and volume textfields for valid inputs
+	 *
+	 * @return true/false depending upon whether inputs are valid
+	 */
+	private boolean validateDoseAndVolume()
+	{
+
+		if (!Validations.isDigit(txtDose.getText())) {
+			lblError.setText("*Please enter a valid value Dose.");
+			return false;
+		}
+
+		if (!Validations.decimalsUpto2places(txtDose.getText())) {
+			lblError.setText("*Please enter Dose upto 4 digits and decimal upto 2 digits only.");
+			return false;
+		}
+
+		if (!Validations.nonZeroBigDecimal(txtDose.getText())) {
+			lblError.setText("*Please enter Dose value more than 0.");
+			return false;
+		}
+		if (!Validations.isDigit(txtVolume.getText())) {
+			lblError.setText("*Volume can only have digits.");
+			return false;
+		}
+		if(!txtRate.getText().isEmpty()){
+		if (Float.valueOf(txtRate.getText()) > 1200) {
+			lblError.setText("*Maximum rate of infusion allowed is 1200 ml/hr.");
+			return false;
+		}
+		}
+
+		if (!Validations.decimalsUpto2places(txtVolume.getText())) {
+			lblError.setText("*Please enter Volume upto 4 digits and decimal upto 2 digits only.");
+			return false;
+		}
+
+		if (!Validations.nonZeroBigDecimal(txtVolume.getText())) {
+			lblError.setText("*Please enter Volume value more than 0.");
+			return false;
+		}
+
+		return true;
+	}
+
+	
+	public static String calculateUnit (float unit ) {
+		DecimalFormat df = new DecimalFormat("###.##");
+		
+		 if (unit >=1000000) {
+			
+			unit = unit/1000000;
+			return df.format(unit).toString() + " " + "g";
+		}
+		 else if(unit >=1000 ) {
+				unit = unit/1000;
+				return df.format(unit).toString() + " " + "mg";
+			}
+		return df.format(unit).toString() + " " + "\u00B5g";
+	}
+
+}
+

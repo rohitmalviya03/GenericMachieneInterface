@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="1050.0" style="-fx-background-color: white;" styleClass="customeBorder" stylesheets="@../styles/newStyles.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AnaethesiaController">
+   <top>
+      <HBox prefHeight="36.0" prefWidth="853.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="1010.0" styleClass="pageHeader" text="Anaesthesia Details" />
+            <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="btnTopBar">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="20" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <StackPane BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="2.0" right="2.0" />
+         </BorderPane.margin>
+         <children>
+            <TabPane fx:id="tabPaneAnaesthesiaDetails" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="tabGA" text="General Anaesthesia ">
+                     <content>
+                        <VBox prefHeight="518.0" prefWidth="873.0" spacing="3.0">
+                           <children>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="878.0" spacing="5.0">
+                                 <children>
+                                    <TitledPane fx:id="titledPaneSA" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="233.0" prefWidth="510.0" styleClass="customeTitledPane" text="Supraglottic Airway">
+                                       <content>
+                                          <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="191.0" prefWidth="497.0" spacing="20.0">
+                                             <children>
+                                                <VBox prefHeight="167.0" prefWidth="486.0" spacing="10.0">
+                                                   <children>
+                                                      <HBox spacing="10.0">
+                                                         <children>
+                                                            <VBox prefHeight="56.0" prefWidth="125.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Size (mm)" />
+                                                                  <TextField fx:id="txtSA_Size" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="125.0" promptText="Size" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox prefHeight="47.0" prefWidth="125.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="No of Attempts" />
+                                                                  <TextField fx:id="txtSA_NoAtempt" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="125.0" promptText="No of Attempts" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="105.0" prefWidth="486.0" spacing="10.0">
+                                                         <children>
+                                                            <VBox prefHeight="86.0" prefWidth="507.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Comments" />
+                                                                  <TextArea fx:id="txtSA_Comments" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="486.0" promptText="Comments" wrapText="true" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </content>
+                                    </TitledPane>
+                                    <TitledPane fx:id="titledPane_ETT" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="233.0" prefWidth="510.0" styleClass="customeTitledPane" text="ETT/DLT">
+                                       <content>
+                                          <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="489.0" spacing="20.0">
+                                             <children>
+                                                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="187.0" prefWidth="489.0" spacing="10.0">
+                                                   <children>
+                                                      <HBox prefHeight="60.0" prefWidth="451.0" spacing="10.0">
+                                                         <children>
+                                                            <VBox prefHeight="60.0" prefWidth="84.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Size (mm/Fr)" />
+                                                                  <TextField fx:id="txtETT_Size" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="78.0" promptText="Size" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="125.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="No of Attempts" />
+                                                                  <TextField fx:id="txtETT_NoAtempt" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="125.0" promptText="No of Attempts" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox prefHeight="60.0" prefWidth="103.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Fixed at" />
+                                                                  <TextField fx:id="txtETT_FixedAt" prefHeight="30.0" prefWidth="172.0" promptText="Fixed at" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="147.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label prefHeight="21.0" prefWidth="150.0" text="Cuffed/Uncuffed" />
+                                                                  <ChoiceBox fx:id="choiceCoughUncough" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="143.0" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="119.0" prefWidth="489.0" spacing="10.0">
+                                                         <children>
+                                                            <VBox prefHeight="119.0" prefWidth="486.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Comments" />
+                                                                  <TextArea fx:id="txtETT_Comments" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="486.0" promptText="Comments" wrapText="true" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="100.0" prefWidth="200.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <padding>
+                                                <Insets top="-10.0" />
+                                             </padding>
+                                          </HBox>
+                                       </content>
+                                    </TitledPane>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="279.0" prefWidth="1028.0" spacing="5.0">
+                                 <children>
+                                    <TitledPane fx:id="titledPane_Ventilation" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="277.0" prefWidth="510.0" styleClass="customeTitledPane" text="Ventilation">
+                                       <content>
+                                          <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="500.0" spacing="5.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="500.0" spacing="10.0">
+                                                   <children>
+                                                      <RadioButton fx:id="radioSpontaneous" mnemonicParsing="false" text="Spontaneous">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="ventilation" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
+                                                      <RadioButton fx:id="radioControlled" mnemonicParsing="false" text="Controlled" toggleGroup="$ventilation" />
+                                                      <RadioButton fx:id="radioVentilationNone" mnemonicParsing="false" text="None">
+
+                                                      </RadioButton>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets left="-8.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <StackPane maxWidth="-Infinity" minWidth="-Infinity">
+                                                   <children>
+                                                      <TitledPane fx:id="titlePaneSpontaneous" alignment="TOP_LEFT" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="500.0" styleClass="customeTitledPane" text="Spontaneous" visible="false">
+                                                         <content>
+                                                            <VBox prefHeight="60.0" prefWidth="194.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Comments" />
+                                                                  <TextArea fx:id="txtSpontaneousCommnts" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="486.0" promptText="Comments" wrapText="true" />
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                         <padding>
+                                                            <Insets top="-2.0" />
+                                                         </padding>
+                                                      </TitledPane>
+                                                      <TitledPane fx:id="titlePaneControlled" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="500.0" styleClass="customeTitledPane" text="Controlled" visible="false">
+                                                         <content>
+                                                            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="164.0" prefWidth="500.0">
+                                                               <children>
+                                                                  <HBox prefHeight="56.0" prefWidth="856.0" spacing="5.0">
+                                                                     <children>
+                                                                        <VBox minWidth="-Infinity" prefHeight="47.0" prefWidth="106.0" spacing="5.0">
+                                                                           <children>
+                                                                              <Label text="Airway Pressure" />
+                                                                              <TextField fx:id="txtAirwayPressure" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="95.0" promptText="Airway Pressure" styleClass="text-field" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                        <VBox minWidth="-Infinity" prefHeight="47.0" prefWidth="88.0" spacing="5.0">
+                                                                           <children>
+                                                                              <Label text="FiO2" />
+                                                                              <TextField fx:id="txtFiO2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="88.0" promptText="FiO2" styleClass="text-field" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                        <VBox minWidth="-Infinity" prefHeight="47.0" prefWidth="88.0" spacing="5.0">
+                                                                           <children>
+                                                                              <Label text="VT" />
+                                                                              <TextField fx:id="txtVT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="88.0" promptText="VT" styleClass="text-field" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                        <VBox minWidth="-Infinity" prefHeight="47.0" prefWidth="88.0" spacing="5.0">
+                                                                           <children>
+                                                                              <Label text="RR" />
+                                                                              <TextField fx:id="txtRR" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="88.0" promptText="RR" styleClass="text-field" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                        <VBox minWidth="-Infinity" prefHeight="47.0" prefWidth="88.0" spacing="5.0">
+                                                                           <children>
+                                                                              <Label text="I:E" />
+                                                                              <TextField fx:id="txtIE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="88.0" promptText="I:E" styleClass="text-field" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets left="-5.0" />
+                                                                     </VBox.margin>
+                                                                  </HBox>
+                                                                  <HBox prefHeight="30.0" prefWidth="797.0" spacing="5.0">
+                                                                     <children>
+                                                                        <VBox prefHeight="60.0" prefWidth="194.0" spacing="5.0">
+                                                                           <children>
+                                                                              <Label text="Comments" />
+                                                                              <TextArea fx:id="txtControlComments" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="486.0" promptText="Comments" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                         <padding>
+                                                            <Insets top="-2.0" />
+                                                         </padding>
+                                                      </TitledPane>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets left="-8.0" />
+                                                   </VBox.margin>
+                                                </StackPane>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </TitledPane>
+                                    <TitledPane fx:id="titledPane_Mask" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="277.0" prefWidth="500.0" styleClass="customeTitledPane" text="Mask">
+                                       <content>
+                                          <VBox prefHeight="60.0" prefWidth="194.0" spacing="5.0">
+                                             <children>
+                                                <Label text="Comments" />
+                                                <TextArea fx:id="txtMask_Comments" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="486.0" promptText="Comments" wrapText="true" />
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </TitledPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </Tab>
+                <Tab fx:id="tab_RA" text="Regional Anaesthesia ">
+                     <content>
+                        <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="878.0" spacing="5.0">
+                           <children>
+                              <HBox prefHeight="93.0" prefWidth="1037.0" spacing="5.0">
+                                 <children>
+                                    <TitledPane fx:id="spinalPane" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="513.0" styleClass="customeTitledPane" text="Spinal">
+                                       <content>
+                                          <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="46.0" prefWidth="514.0" spacing="20.0">
+                                             <children>
+                                                <VBox prefHeight="116.0" prefWidth="411.0" spacing="5.0">
+                                                   <children>
+                                                      <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" spacing="3.0">
+                                                         <children>
+                                                            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="168.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Site" />
+                                                                  <TextField fx:id="txtSpinalSite" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="165.0" promptText="Site" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="168.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Needle" />
+                                                                  <TextField fx:id="txtSpinalNeedle" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="165.0" promptText="Needle" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox prefHeight="60.0" prefWidth="168.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Highest Sensary Level" />
+                                                                  <TextField fx:id="txtSpinalSensary" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="165.0" promptText="Highest Sensary Level" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <padding>
+                                                <Insets left="2.0" top="-8.0" />
+                                             </padding>
+                                          </HBox>
+                                       </content>
+                                    </TitledPane>
+                                    <TitledPane fx:id="epiduralPane" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="515.0" styleClass="customeTitledPane" text="Epidural">
+                                       <content>
+                                          <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="84.0" prefWidth="514.0" spacing="5.0">
+                                             <children>
+                                                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="524.0" spacing="10.0">
+                                                   <children>
+                                                      <HBox prefHeight="42.0" prefWidth="514.0" spacing="3.0">
+                                                         <children>
+                                                            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="168.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Site" />
+                                                                  <TextField fx:id="txtEpiduralSite" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="165.0" promptText="Site" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="168.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Needle" />
+                                                                  <TextField fx:id="txtEpiduralNeedle" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="165.0" promptText="Needle" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="168.0" spacing="5.0">
+                                                               <children>
+                                                                  <Label text="Catheter Fixed Value" />
+                                                                  <TextField fx:id="txtEpiduralCatheter" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="165.0" promptText="Catheter Fixed Value" styleClass="text-field" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="-5.0" />
+                                                   </HBox.margin>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </content>
+                                    </TitledPane>
+                                 </children>
+                              </HBox>
+                              <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="109.0" prefWidth="1037.0" spacing="5.0">
+                                 <children>
+                                    <TitledPane fx:id="ULBPane" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="513.0" styleClass="customeTitledPane" text="Upper Limb Block">
+                                       <content>
+                                          <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="66.0" prefWidth="518.0" spacing="5.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="498.0" spacing="10.0">
+                                                   <children>
+                                                      <RadioButton fx:id="radioULB_Brachial" mnemonicParsing="false" prefHeight="21.0" prefWidth="196.0" text="Brachial Plexus Blocks">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="Ulb" />
+                                                         </toggleGroup>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </RadioButton>
+                                                      <RadioButton fx:id="radioULB_Peripheral" mnemonicParsing="false" prefHeight="21.0" prefWidth="206.0" text="Peripheral Nerve Blocks" toggleGroup="$Ulb">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </RadioButton>
+                                                      <RadioButton fx:id="radioULB_None" mnemonicParsing="false" prefHeight="21.0" prefWidth="109.0" text="None" toggleGroup="$Ulb">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </RadioButton>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets top="-5.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox fx:id="hbDropdownULB" prefHeight="26.0" prefWidth="498.0" spacing="20.0" visible="false">
+                                                   <children>
+                                                      <Label prefHeight="21.0" prefWidth="175.0" text="Select Nerve Block :" />
+                                                      <ChoiceBox fx:id="dropdownULB" prefHeight="31.0" prefWidth="235.0" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </TitledPane>
+                                    <TitledPane fx:id="LLBPane" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="513.0" styleClass="customeTitledPane" text="Lower Limb Block">
+                                       <content>
+                                          <VBox prefHeight="74.0" prefWidth="426.0" spacing="5.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="500.0" spacing="10.0">
+                                                   <children>
+                                                      <RadioButton fx:id="radioLLB_Lumbar" mnemonicParsing="false" text="Lumbar Plexus Nerve Blocks">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="Llb" />
+                                                         </toggleGroup>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </RadioButton>
+                                                      <RadioButton fx:id="radioLLB_Sacral" mnemonicParsing="false" text="Sacral Plexus Nerve Blocks" toggleGroup="$Llb">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </RadioButton>
+                                                      <RadioButton fx:id="radioLLB_None" mnemonicParsing="false" prefHeight="21.0" prefWidth="66.0" text="None" toggleGroup="$Llb">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </RadioButton>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets top="-5.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox fx:id="hbDropdownLLB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="500.0" spacing="10.0" visible="false">
+                                                   <children>
+                                                      <Label prefHeight="21.0" prefWidth="215.0" text="Select Nerve Block :" />
+                                                      <ChoiceBox fx:id="dropdownLLB" prefHeight="31.0" prefWidth="235.0" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </TitledPane>
+                                 </children>
+                              </HBox>
+                              <HBox spacing="5.0">
+                                 <VBox.margin>
+                                    <Insets top="-8.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <TitledPane collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="513.0" styleClass="customeTitledPane" text=" Medication">
+                                       <content>
+                                          <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="513.0">
+                                             <children>
+                                                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="243.0" prefWidth="513.0">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="137.0" prefWidth="510.0" spacing="5.0">
+                                                         <children>
+                                                            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="1037.0" spacing="10.0">
+                                                               <children>
+                                                                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="212.0" spacing="5.0">
+                                                                     <children>
+                                                                        <Label text="Regional Anaesthesia Type" />
+                                                                        <ChoiceBox fx:id="choiceRAType" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="210.0" />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="212.0" spacing="5.0">
+                                                                     <children>
+                                                                        <Label text="Medicine" />
+                                                                        <TextField fx:id="txtMedicine" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="210.0" promptText="Medicine" styleClass="text-field" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="503.0" spacing="10.0">
+                                                               <children>
+                                                                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="130.0" spacing="5.0">
+                                                                     <children>
+                                                                        <Label text="Volume" />
+                                                                        <HBox>
+                                                                           <children>
+                                                                              <TextField fx:id="txtVolume" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="95.0" promptText="Volume" styleClass="text-field" />
+                                                                              <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #505050;" text="ml" textFill="WHITE" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="132.0" spacing="5.0">
+                                                                     <children>
+                                                                        <Label text="Adjustment" />
+                                                                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="149.0">
+                                                                           <children>
+                                                                              <TextField fx:id="txtAdjustment" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="95.0" promptText="Adjustment" styleClass="text-field" />
+                                                                              <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #505050;" text="ml" textFill="WHITE" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <Button fx:id="btnAdd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="55.0" style="-fx-font-size: 12;" styleClass="saveBtn" text="Add">
+                                                                     <HBox.margin>
+                                                                        <Insets top="26.0" />
+                                                                     </HBox.margin>
+                                                                  </Button>
+                                                                  <Button fx:id="btnDelete" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="55.0" style="-fx-font-size: 12;" styleClass="cancelBtn" text="Delete" visible="false">
+                                                                     <HBox.margin>
+                                                                        <Insets top="26.0" />
+                                                                     </HBox.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                      <TableView fx:id="tbleMedication" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="504.0">
+                                                        <columns>
+                                                          <TableColumn fx:id="clmnRAType" prefWidth="90.0" text="Type" />
+                                                          <TableColumn fx:id="clmnMedicine" prefWidth="208.0" text="Medicine" />
+                                                            <TableColumn fx:id="clmnVolume" prefWidth="94.0" text="Volume(ml)" />
+                                                            <TableColumn fx:id="clmnAdjustment" prefWidth="108.0" text="Adjustment(ml)" />
+                                                        </columns>
+                                                         <VBox.margin>
+                                                            <Insets top="-10.0" />
+                                                         </VBox.margin>
+                                                      </TableView>
+                                                   </children>
+                                                </VBox>
+                                                <ListView fx:id="medSearchList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="210.0" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets right="-141.0" top="65.0" />
+                                                   </StackPane.margin>
+                                                </ListView>
+                                             </children>
+                                             <padding>
+                                                <Insets left="7.0" />
+                                             </padding>
+                                          </StackPane>
+                                       </content>
+                                    </TitledPane>
+                                    <TitledPane animated="false" collapsible="false" prefHeight="302.0" prefWidth="513.0" styleClass="customeTitledPane" text="Comments">
+                                       <content>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <TextArea fx:id="txtRAComments" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="486.0" promptText="Comments" wrapText="true" />
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </TitledPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="Tab_MAC" text="MAC">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="889.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <TitledPane collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="430.0" styleClass="customeTitledPane" text="MAC">
+                                       <content>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="430.0">
+                                             <children>
+                                                <VBox prefHeight="149.0" prefWidth="432.0" spacing="5.0">
+                                                   <children>
+                                                      <Label text="Comments" />
+                                                      <TextArea fx:id="txtMAC_Comments" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="422.0" promptText="Comments" wrapText="true" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="5.0" top="20.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </TitledPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" top="5.0" />
+                           </padding>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+            <AnchorPane fx:id="disablePaneMainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="565.0" prefWidth="1034.0" style="-fx-background-color: #505050;" visible="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="409.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../res/Spinner.gif" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="1045.0" spacing="10.0">
+         <children>
+            <Label fx:id="lblErrorMsg" prefHeight="21.0" prefWidth="825.0" textFill="RED" />
+            <Button fx:id="btnReset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="29.0" prefWidth="90.0" styleClass="cancelBtn" text="Reset" />
+            <Button fx:id="btnSave" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="29.0" prefWidth="90.0" styleClass="saveBtn" text="Save" />
+         </children>
+         <padding>
+            <Insets right="10.0" top="1.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>

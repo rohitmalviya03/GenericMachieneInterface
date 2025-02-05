@@ -1,0 +1,281 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.device.deviceInjectomat;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.log4j.Logger;
+
+import com.cdac.framework.IPacketMakerStrategy;
+
+public class InjectomatPacketMaker implements IPacketMakerStrategy
+{
+	private static final Logger LOG = Logger.getLogger(InjectomatPacketMaker.class);
+	byte[] arrayOfStartBytes;
+	private int packetSize;
+	ArrayList<Byte> partialMessage;
+	private Queue<byte[]> completeMessages;
+	private List<Byte> packetUnderConstruction;
+	
+	private boolean firstByteMatched = false;
+	private boolean startBytesMatched = false;
+
+	InjectomatPacketMaker(byte[] startBytes, int packetSize)
+	{
+		arrayOfStartBytes = startBytes;
+		partialMessage = new ArrayList<Byte>();
+		completeMessages = new ConcurrentLinkedQueue<byte[]>();
+		packetUnderConstruction = new ArrayList<Byte>();
+		this.packetSize = packetSize;
+		completeMessages = new ConcurrentLinkedQueue<byte[]>();
+		packetUnderConstruction = new ArrayList<Byte>(packetSize);
+	}
+	
+	public Queue<byte[]> makePacket(byte[] data)
+	{
+		for (byte tempByte : data)
+		{
+			packetUnderConstruction.add(new Byte(tempByte));
+		}
+
+		if (!startBytesMatched)
+		{
+			if (packetUnderConstruction.size() < arrayOfStartBytes.length)
+			{
+				return completeMessages;// We haven't yet got enough bytes to check the start bytes
+			}
+				// Run the loop till the length
+				int length = packetUnderConstruction.size();
+				for (int i = 0; i < length; i++)
+				{
+					if (!firstByteMatched && !(packetUnderConstruction.remove(0) == arrayOfStartBytes[0]))
+					{
+						continue;
+					}
+					else
+					{
+						firstByteMatched = true;
+						if(packetUnderConstruction.size()>0)
+						{
+							if (packetUnderConstruction.get(0) == arrayOfStartBytes[1])
+							{
+								i++;
+								packetUnderConstruction.remove(0);
+								if(packetUnderConstruction.size()>0)
+								{
+									if (packetUnderConstruction.get(0) == arrayOfStartBytes[2])
+									{
+										i++;
+										packetUnderConstruction.remove(0);
+										if(packetUnderConstruction.size()>0)
+										{
+											if (packetUnderConstruction.get(0) == arrayOfStartBytes[3])
+											{
+												i++;
+												packetUnderConstruction.remove(0);
+												startBytesMatched = true;
+												break;
+											}
+											else
+											{
+												firstByteMatched = false;
+												continue;
+											}
+										}
+										else
+										{
+											break;
+										}
+									}
+									else
+									{
+										firstByteMatched = false;
+										continue;
+									}
+								}
+								else
+								{
+									break;
+								}
+							}
+							else
+							{
+								firstByteMatched = false;
+								continue;
+							}
+						}
+						else
+						{
+							break;
+						}
+					}
+				}
+		}
+		else // Time to make packets
+		{
+			int length = packetUnderConstruction.size();
+			for (int j = 0; j < length; j++)
+			{
+				byte toBeAdded = packetUnderConstruction.remove(0);
+				partialMessage.add(toBeAdded);
+				if (partialMessage.size()==packetSize-4)
+				{
+					// Packet is complete and we are ready to make new
+					// packet
+
+					completeMessages.add(converTobyteArray(partialMessage));
+					partialMessage.clear();
+					firstByteMatched = false;
+					startBytesMatched = false;
+					break;
+				}
+			}
+
+		}
+
+		return completeMessages;
+	}
+	
+	private byte[] converTobyteArray(ArrayList<Byte> message)
+	{
+		//Byte[] completeMessageTemp = new Byte[message.size() + packetSize];
+		byte[] completeMessageArray = new byte[message.size() + arrayOfStartBytes.length];
+		
+		for(int i=0;i<arrayOfStartBytes.length;i++)
+		{
+			completeMessageArray[i] = arrayOfStartBytes[i];
+		}
+		for(int i=arrayOfStartBytes.length;i<packetSize;i++)
+		{
+			completeMessageArray[i] = message.get(i-arrayOfStartBytes.length);
+		}
+		//completeMessageArray = ArrayUtils.toPrimitive(message.toArray(completeMessageTemp));
+		return completeMessageArray;
+	}
+
+	/*@Override
+	public Queue<byte[]> makePacket(byte[] data)
+	{
+		System.out.println("Making packet:");
+		for (byte singleByte : data)
+		{
+			System.out.print(singleByte + " ");
+		}
+
+		for (byte tempByte : data)
+		{
+			packetUnderConstruction.add(new Byte(tempByte));
+		}
+
+		LOG.info("Incoming and previous data:" + packetUnderConstruction);
+
+		if (packetUnderConstruction.size() < packetSize)
+		{
+			LOG.info("Returning empty queue as size of packetUnderConstruction is insufficient.");
+			// Incomplete packet available. So return an empty queue.
+			return completeMessages;
+		}
+		else
+		{
+			int startByteIndex = getPacketStartIndex(packetUnderConstruction);
+			LOG.info("Start byte index in packet:" + startByteIndex);
+			if (startByteIndex == 0 && packetUnderConstruction.size() >= packetSize)
+			{
+				while(packetUnderConstruction.size() >= packetSize)
+				{
+					// Keep creating packets
+					for (int index = 0; index < packetSize; index++) {
+						completePacket[index] = packetUnderConstruction.remove(0);
+					}
+					completeMessages.add(completePacket);
+				}
+			}
+			else if (startByteIndex > 0)
+			{
+				// Discard data till start bytes
+				for (int index = 0; index < startByteIndex; index++)
+				{
+					byte discard = packetUnderConstruction.remove(0);
+					LOG.info("~~~~~~~~~~~~~~~~~~ Data discarded from InjectomatPacketMaker:" + discard);
+				}
+
+				if (packetUnderConstruction.size() == packetSize)
+				{
+					for (int index = 0; index < packetSize; index++)
+					{
+						completePacket[index] = packetUnderConstruction.remove(0);
+					}
+					completeMessages.add(completePacket);
+				}
+			}
+			else
+			{
+				// startByteIndex < 0
+				// Do Nothing.
+			}
+		}
+		return completeMessages;
+	}*/
+
+	/**
+	 * Finds and returns the index where the start bytes are found in the given
+	 * list of bytes
+	 *
+	 * @param searchInPacket
+	 * @return -1 if the index is not found
+	 *//*
+	private int getPacketStartIndex(List<Byte> searchInPacket)
+	{
+		int packetIndex = 0;
+		byte byteInPacket = searchInPacket.get(packetIndex);
+
+		if (searchInPacket.size() < startBytes.length)
+		{
+			return -1;
+		}
+
+		while (packetIndex < searchInPacket.size())
+		{
+			boolean match = true;
+			if (byteInPacket == startBytes[0])
+			{
+				int startByteIndex = 1;
+				while (startByteIndex < startBytes.length)
+				{
+					if (searchInPacket.get(packetIndex + startByteIndex) != startBytes[startByteIndex])
+					{
+						match = false;
+						break;
+					}
+					else
+					{
+						startByteIndex++;
+					}
+				}
+			}
+			else
+			{
+				match = false;
+			}
+
+			if (match)
+			{
+				return packetIndex;
+			}
+			packetIndex++;
+			byteInPacket = searchInPacket.get(packetIndex);
+		}
+
+		// Start bytes not found
+		return -1;
+	}*/
+
+}

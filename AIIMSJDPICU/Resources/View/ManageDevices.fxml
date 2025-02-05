@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="839.0" style="-fx-background-color: #ffff;" styleClass="customeBorder" stylesheets="@../styles/newStyles.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageDevicesController">
+   <top>
+      <HBox prefHeight="36.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="36.0" prefWidth="803.0" styleClass="pageHeader" text="Manage Devices" />
+            <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="36.0" styleClass="btnTopBar">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="20.0" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane>
+               <children>
+                  <StackPane fx:id="stackPaneLoader" minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="718.0" visible="false">
+                     <children>
+                        <AnchorPane opacity="0.7" style="-fx-background-color: #ddd;">
+                           <children>
+                              <HBox layoutX="289.0" layoutY="113.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" spacing="5.0">
+                                 <children>
+                                    <ImageView fitHeight="45.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../Resources/loading.gif" />
+                                       </image>
+                                    </ImageView>
+                                    <Label prefHeight="40.0" prefWidth="82.0" style="-fx-font-size: 15;" text="Fetching..." />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+                  <TableView fx:id="tableDevices" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="825.0">
+                    <columns>
+                      <TableColumn fx:id="columnDepartment" maxWidth="98.0" minWidth="98.0" prefWidth="98.0" text="Department" />
+                      <TableColumn fx:id="columnModel" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" text="Model" />
+                        <TableColumn fx:id="columnSerialNo" minWidth="100.0" prefWidth="100.0" text="Serial No" />
+                        <TableColumn fx:id="columnMedicine" minWidth="190.0" prefWidth="190.0" text="Medicine" />
+                        <TableColumn fx:id="columnWard" minWidth="65.0" prefWidth="65.0" text="Ward" />
+                        <TableColumn fx:id="columnOTno" maxWidth="70.0" minWidth="70.0" prefWidth="68.0" text="OT #" />
+                        <TableColumn fx:id="columnPortNo" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Port #" />
+                        <TableColumn fx:id="columnStatus" maxWidth="135.0" minWidth="135.0" prefWidth="135.0" text="Status" />
+                    </columns>
+                  </TableView>
+               </children>
+            </StackPane>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="93.0" prefWidth="760.0" spacing="10.0">
+               <children>
+                  <Button fx:id="btnDelete" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" styleClass="cancelBtn" text="Delete" visible="false">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="18.0" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="6.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnUpdate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" styleClass="saveBtn" text="Update" visible="false">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PENCIL_SQUARE" size="20.0" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="6.0" />
+                     </HBox.margin>
+                  </Button>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="120.0">
+                     <children>
+                        <Button fx:id="btnConnect" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" styleClass="saveBtn" text="Connect" visible="false">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUG" size="18.0" />
+                           </graphic></Button>
+                        <Button fx:id="btnDisconnect" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" styleClass="cancelBtn" text="Disconnect" visible="false">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="BAN" size="18.0" />
+                           </graphic></Button>
+                     </children>
+                  </StackPane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" right="10.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="5.0" right="5.0" top="10.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

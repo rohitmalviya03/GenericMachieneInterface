@@ -1,0 +1,48 @@
+package application;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
+public class MainController {
+    @FXML
+    private TextField textField1;
+
+    @FXML
+    private TextField textField2;
+
+    @FXML
+    private ComboBox<String> comboBox1;
+
+    @FXML
+    private ComboBox<String> comboBox2;
+
+    @FXML
+    private Button button1;
+
+    @FXML
+    private Button button2;
+
+    @FXML
+    private TextArea logArea;
+
+    @FXML
+    private void handleButton1Action() {
+        String text1 = textField1.getText();
+        String text2 = textField2.getText();
+        String combo1 = comboBox1.getValue();
+        String combo2 = comboBox2.getValue();
+        logArea.appendText("Button 1 clicked\n");
+        logArea.appendText("TextField1: " + text1 + "\n");
+        logArea.appendText("TextField2: " + text2 + "\n");
+        logArea.appendText("ComboBox1: " + combo1 + "\n");
+        logArea.appendText("ComboBox2: " + combo2 + "\n");
+    }
+
+    @FXML
+    private void handleButton2Action() {
+        logArea.appendText("Button 2 clicked\n");
+    }
+}

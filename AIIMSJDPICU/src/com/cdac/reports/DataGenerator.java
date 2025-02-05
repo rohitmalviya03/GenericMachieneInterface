@@ -1,0 +1,46 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.reports;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+
+
+
+public class DataGenerator {
+	public static void main(String[] args) throws JRException, IOException, SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:mysql://chdsez297402d:3306/intraop_dev", "root", "pgipac");
+		// Compile jrxml file.
+		JasperReport jasperReport = JasperCompileManager
+				.compileReport("Resorces/jasperReportIntraOp.jrxml");
+
+		// Parameters for report
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("pacID", 765);
+
+		// DataSource
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+		// Export to PDF.
+		JasperExportManager.exportReportToPdfFile(jasperPrint, "Resorces/jasperReportTest.pdf");
+
+		System.out.println("Done!");
+	}
+}

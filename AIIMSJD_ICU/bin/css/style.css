@@ -1,0 +1,30 @@
+/* styles.css */
+
+.grid-pane {
+    -fx-padding: 20;
+    -fx-alignment: center;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.text-field, .password-field {
+    -fx-pref-width: 200px;
+}
+
+.button {
+    -fx-background-color: #007ACC;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 20px;
+}
+
+.button:hover {
+    -fx-background-color: #005FA3;
+}
+
+.label {
+    -fx-text-fill: red;
+}

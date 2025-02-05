@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPaneLogin" styleClass="customeBorder" stylesheets="@../styles/newStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+   <top>
+      <HBox fx:id="hbPageHeaderContainer" styleClass="pageHeader" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lblHeader" alignment="CENTER" prefHeight="36.0" prefWidth="763.0" styleClass="pageHeader" text="Anaesthesia Information Management System" textAlignment="CENTER" />
+            <Button fx:id="btnClose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="37.0" prefWidth="35.0" styleClass="btnTopBar">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="20" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox fx:id="vbMainContainer" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane fx:id="stackpaneBGHolder" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="755.0">
+               <children>
+                  <ImageView fx:id="imageBg" fitHeight="439.0" fitWidth="820.0" pickOnBounds="true" preserveRatio="true" />
+                  <StackPane prefHeight="443.0" prefWidth="792.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="443.0" prefWidth="824.0">
+                           <children>
+                              <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="320.0" style="-fx-border-color: #3FD1E3; -fx-background-color: #000; -fx-opacity: 0.7; -fx-border-width: 2;">
+                                 <children>
+                                    <StackPane>
+                                       <children>
+                                          <VBox fx:id="vbLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="325.0">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="24.0" prefWidth="228.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #fff;" text="User Login" />
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="64.0" prefWidth="223.0">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="215.0" spacing="5.0">
+                                                         <children>
+                                                            <Label style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="User Name" />
+                                                            <TextField fx:id="txtUsername" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" promptText="User Name" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="10.0" top="5.0" />
+                                                   </padding>
+                                                </HBox>
+                                                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="215.0" spacing="5.0">
+                                                   <children>
+                                                      <Label style="-fx-text-fill: #ffff; -fx-font-weight: bold;" text="Password" />
+                                                      <PasswordField fx:id="txtPassword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" promptText="Password" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="10.0" top="5.0" />
+                                                   </padding>
+                                                </VBox>
+                                                <Label fx:id="lblError" prefHeight="21.0" prefWidth="270.0" style="-fx-text-fill: #F64848;" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="8.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="233.0" spacing="20.0">
+                                                   <children>
+                                                      <Button fx:id="btnReset" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-opacity: 1;" styleClass="cancelBtn" text="Reset123" textAlignment="CENTER">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="WHITE" glyphName="REPEAT" size="20.0" />
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="btnLogin" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-opacity: 1;" styleClass="saveBtn" text="Login" textAlignment="CENTER">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="WHITE" glyphName="SIGN_IN" size="20.0" wrappingWidth="19.428571701049805" />
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="10.0" top="5.0" />
+                                                   </padding>
+                                                </HBox>
+                                                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="93.0" prefWidth="288.0">
+                                                   <children>
+                                                      <Label fx:id="lblErrorCapsLock" text="Caps Lock is on !" textFill="#f2d151" />
+                                                      <Label fx:id="lblMessage" prefHeight="18.0" prefWidth="278.0" style="-fx-text-fill: #ffff;" text="Connecting to the Server . Please wait...">
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                             <padding>
+                                                <Insets left="37.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox fx:id="vbOTSelection" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="325.0" spacing="20.0" visible="false">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="27.0" prefWidth="300.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #fff;" text="Select OT" />
+                                                <ChoiceBox fx:id="choiceOT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="302.0" />
+                                                <Label fx:id="lblErrorOT" prefHeight="21.0" prefWidth="301.0" style="-fx-text-fill: red;" text="* Please Select OT" />
+                                                <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="306.0">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <Button fx:id="btnProceed" mnemonicParsing="false" prefHeight="31.0" prefWidth="153.0" styleClass="saveBtn" text="Proceed" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets left="10.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="-10.0" top="-30.0" />
+                                 </VBox.margin>
+                              </Pane>
+                           </children>
+                        </VBox>
+                        <ImageView fx:id="lodingImg" fitHeight="66.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <StackPane.margin>
+                              <Insets top="-80.0" />
+                           </StackPane.margin>
+                        </ImageView>
+                        <Pane fx:id="paneLoader" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.36" prefHeight="431.0" prefWidth="806.0" style="-fx-background-color: #515353;" visible="false">
+                           <StackPane.margin>
+                              <Insets right="2.0" top="-8.0" />
+                           </StackPane.margin>
+                        </Pane>
+                     </children>
+                  </StackPane>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

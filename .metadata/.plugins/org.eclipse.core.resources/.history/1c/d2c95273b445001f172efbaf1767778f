@@ -1,0 +1,451 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package controllers;
+
+import java.math.BigDecimal;
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.ResourceBundle;
+
+import org.apache.log4j.Logger;
+
+import com.infosys.common.GeneratedEntities.IntraopMedicationlog;
+
+import application.Main;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import mediatorPattern.ControllerMediator;
+import model.PatientSession;
+import services.GetTotalMedicationVolumeService;
+import services.SaveMedicationService;
+
+/**
+ * StopInfusionController.java<br>
+ * Purpose:This class contains logic to handle Stop Infusion screen inputs
+ *
+ * @author Rohit_Sharma41
+ *
+ */
+public class StopInfusionController implements Initializable {
+
+	@FXML
+	private Button btnClose;
+
+	@FXML
+	private HBox hbMedication;
+
+	@FXML
+	private VBox VBMedication;
+
+	@FXML
+	private Label lblMedicineName;
+
+	@FXML
+	private Label lblStartTime;
+
+	@FXML
+	private Label lblStopTime;
+
+	@FXML
+	private TextField txtInfusedDose;
+
+	/*@FXML
+	private Label lblInfusedDose;*/
+
+	public TextField getTxtInfusedDose()
+	{
+		return txtInfusedDose;
+	}
+
+	@FXML
+	private Label lblRate;
+
+	@FXML
+	private Button btnStop;
+
+	private boolean isTertiaryWindow;
+
+	private boolean fromHistoryScreen;
+
+	public void setFromHistoryScreen(boolean fromHistoryScreen)
+	{
+		this.fromHistoryScreen = fromHistoryScreen;
+	}
+
+	public boolean isTertiaryWindow()
+	{
+		return isTertiaryWindow;
+	}
+
+	public void setTertiaryWindow(boolean isTertiaryWindow)
+	{
+		this.isTertiaryWindow = isTertiaryWindow;
+	}
+
+	public Label getLblMedicineName() {
+		return lblMedicineName;
+	}
+
+	public Label getLblStartTime() {
+		return lblStartTime;
+	}
+
+	public Label getLblStopTime() {
+		return lblStopTime;
+	}
+
+	/*public Label getLblInfusedDose() {
+		return lblInfusedDose;
+	}*/
+
+	public Label getLblRate() {
+		return lblRate;
+	}
+
+	static final int MINUTES_PER_HOUR = 60;
+	static final int SECONDS_PER_MINUTE = 60;
+	static final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
+
+	private IntraopMedicationlog medicationLog;
+	// private String infusedDosage;
+	private Calendar endTime;
+	private EventHandler<MouseEvent> btnCloseHandler;
+
+	private EventHandler<MouseEvent> btnStopHandler;
+
+	protected EventHandler<WorkerStateEvent> getTotalVolumeServiceSuccessHandler;
+
+	protected EventHandler<WorkerStateEvent> getTotalVolumeServiceFailedHandler;
+
+	protected EventHandler<WorkerStateEvent> saveMedicationServiceSuccessHandler;
+
+	protected EventHandler<WorkerStateEvent> saveMedicationServiceFailedHandler;
+
+	public void setEndTime(Calendar endTime) {
+		this.endTime = endTime;
+	}
+
+	public void setMedicationLog(IntraopMedicationlog medicationLog) {
+		this.medicationLog = medicationLog;
+	}
+
+	private static final Logger LOG = Logger.getLogger(StopInfusionController.class.getName());
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		try
+		{
+			ControllerMediator.getInstance().registerStopInfusionController(this);
+
+			btnCloseHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+				public void handle(javafx.scene.input.MouseEvent event) {
+					try
+					{
+						closePopup();
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+					}
+				}
+			};
+			btnClose.addEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+
+			btnStopHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+
+				public void handle(javafx.scene.input.MouseEvent event) {
+					try
+					{
+						medicationLog.setInfuseDosage(Float.parseFloat(txtInfusedDose.getText()));
+						SaveMedicationService saveMedicationService = SaveMedicationService.getInstance(medicationLog);
+						saveMedicationService.restart();
+						saveMedicationServiceSuccessHandler = new EventHandler<WorkerStateEvent>()
+						{
+
+							@Override
+							public void handle(WorkerStateEvent event)
+							{
+								try
+								{
+									closePopup();
+
+									ControllerMediator.getInstance().getMainController().getDrawTabbedCenter()
+									        .getInfusionStartedMap().remove(lblMedicineName.getText());
+
+									GetTotalMedicationVolumeService getTotalVolumeService = GetTotalMedicationVolumeService
+									        .getInstance(lblMedicineName.getText(),
+									                PatientSession.getInstance().getPatient().getPatientId(),
+									                PatientSession.getInstance().getPatientCase().getCaseId());
+									getTotalVolumeService.restart();
+
+									getTotalVolumeServiceSuccessHandler = new EventHandler<WorkerStateEvent>()
+									{
+
+										@Override
+										public void handle(WorkerStateEvent event)
+										{
+											try
+											{
+												Float totalDose = getTotalVolumeService.getTotalVolume().getValue();
+												
+												ControllerMediator.getInstance().getMainController().getDrawTabbedCenter().getTotalsValuesMap().put(lblMedicineName.getText(), totalDose.toString() + " " + "mg");
+												
+												 String totals =MedicationInfusionController.calculateUnit(totalDose*1000);
+												Calendar cal = Calendar.getInstance();
+												cal.setTime(
+												        saveMedicationService.getReturnedMedicationLog().getEndTime());
+												if (fromHistoryScreen)
+													ControllerMediator.getInstance().getGridHistoricalViewController()
+													        .fillMedicationGridCell("infusion stop",
+													                lblMedicineName.getText(), cal,
+													                MedicationInfusionController.calculateUnit(Float.parseFloat(txtInfusedDose.getText())*1000), totals);
+												ControllerMediator.getInstance().getMainController()
+												        .getDrawTabbedCenter().fillMedicationGridCell("infusion stop",
+												                lblMedicineName.getText(), cal,
+												                MedicationInfusionController.calculateUnit(Float.parseFloat(txtInfusedDose.getText())*1000), totals);
+												getTotalVolumeService.removeEventHandler(
+												        WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+												        getTotalVolumeServiceSuccessHandler);
+												getTotalVolumeService.removeEventHandler(
+												        WorkerStateEvent.WORKER_STATE_FAILED,
+												        getTotalVolumeServiceFailedHandler);
+											}
+											catch (Exception e)
+											{
+												LOG.error("## Exception occured:", e);
+											}
+										}
+
+									};
+
+									getTotalVolumeService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+									        getTotalVolumeServiceSuccessHandler);
+
+									getTotalVolumeServiceFailedHandler = new EventHandler<WorkerStateEvent>()
+									{
+
+										@Override
+										public void handle(WorkerStateEvent event)
+										{
+											try
+											{
+												Main.getInstance().getUtility().showNotification("Error", "Error",
+												        getTotalVolumeService.getException().getMessage());
+												getTotalVolumeService.removeEventHandler(
+												        WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+												        getTotalVolumeServiceSuccessHandler);
+												getTotalVolumeService.removeEventHandler(
+												        WorkerStateEvent.WORKER_STATE_FAILED,
+												        getTotalVolumeServiceFailedHandler);
+											}
+											catch (Exception e)
+											{
+												LOG.error("## Exception occured:", e);
+											}
+										}
+
+									};
+
+									getTotalVolumeService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+									        getTotalVolumeServiceFailedHandler);
+									saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+									        saveMedicationServiceSuccessHandler);
+									saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+									        saveMedicationServiceFailedHandler);
+								}
+								catch (Exception e)
+								{
+									LOG.error("## Exception occured:", e);
+
+								}
+							}
+
+						};
+						saveMedicationService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+						        saveMedicationServiceSuccessHandler);
+						saveMedicationServiceFailedHandler = new EventHandler<WorkerStateEvent>()
+						{
+
+							@Override
+							public void handle(WorkerStateEvent event)
+							{
+								try
+								{
+									Main.getInstance().getUtility().showNotification("Error", "Error",
+									        saveMedicationService.getException().getMessage());
+									saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+									        saveMedicationServiceSuccessHandler);
+									saveMedicationService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+									        saveMedicationServiceFailedHandler);
+								}
+								catch (Exception e)
+								{
+									LOG.error("## Exception occured:", e);
+								}
+							}
+
+						};
+						saveMedicationService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+						        saveMedicationServiceFailedHandler);
+					}
+					catch (Exception e)
+					{
+						LOG.error("## Exception occured:", e);
+					}
+				}
+			};
+			btnStop.addEventHandler(MouseEvent.MOUSE_CLICKED, btnStopHandler);
+		}
+		catch (Exception e)
+		{
+			LOG.error("## Exception occured:", e);
+		}
+
+	}
+
+	/**
+	 * This method remove active event handlers from all components
+	 */
+	private void removeEventHandlers() {
+		btnClose.addEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+		btnStop.addEventHandler(MouseEvent.MOUSE_CLICKED, btnStopHandler);
+	}
+
+	/**
+	 * This method closes Stop Infusion window
+	 */
+	private void closePopup()
+	{
+		removeEventHandlers();
+
+		if (isTertiaryWindow)
+			Main.getInstance().getStageManager().closeTertiaryStage();
+		else
+			Main.getInstance().getStageManager().closeSecondaryStage();
+
+	}
+
+	/**
+	 * This method fill values in infused dosage and rate textfields
+	 */
+	public void setInfuseDosenRateText()
+	{
+		try
+		{
+			float calcDose = calculateInfusedDose(medicationLog.getStartTime(), endTime.getTime(),
+			        medicationLog.getRateOfInfusion(), medicationLog.getConcentration());
+			// infusedDosage = String.valueOf(calcDose);
+			medicationLog.setInfuseDosage(calcDose);
+			medicationLog.setEndTime(endTime.getTime());
+			txtInfusedDose.setText(String.valueOf(calcDose));
+			lblRate.setText(medicationLog.getRateOfInfusion());
+		}
+		catch (Exception e)
+		{
+			LOG.error("## Exception occured:", e);
+		}
+	}
+
+	/**
+	 * This method calculates infused dosage value
+	 *
+	 * @param infusionStartTime timestamp when infusion start
+	 * @param infusionStopTime timestamp when infusion end
+	 * @param infusionRate rate at which infusion proceeds
+	 * @param infusionConcentration concentration used in the infusion
+	 * @return calculated dosage
+	 */
+	public static float calculateInfusedDose(Date infusionStartTime, Date infusionStopTime, String infusionRate,
+	        String infusionConcentration)
+	{
+		float infusedDose = 0f;
+		try
+		{
+			infusionRate = infusionRate.split(" ")[0];
+			Instant startInstant = infusionStartTime.toInstant();
+			LocalDateTime startLocalDateTime = LocalDateTime.ofInstant(startInstant, ZoneId.systemDefault());
+			Instant stopInstant = infusionStopTime.toInstant();
+			LocalDateTime stopLocalDateTime = LocalDateTime.ofInstant(stopInstant, ZoneId.systemDefault());
+			long time[] = getTime(startLocalDateTime, stopLocalDateTime);
+			Period period = getPeriod(startLocalDateTime, stopLocalDateTime);
+
+			Float diffHours = (period.getDays() * 24) + time[0] + (Float.valueOf(time[1]) / 60)
+					+ (Float.valueOf(time[2]) / (60 * 60));
+
+			Float volumeInjected = 0f;
+			double dose = 0;
+			double doseCal = 0;
+			volumeInjected = Float.parseFloat(infusionRate) * diffHours;
+
+			dose = volumeInjected * Float.parseFloat(infusionConcentration);
+			doseCal = dose / 1000;
+			if (doseCal != 0) {
+
+				BigDecimal doseDecimal = new BigDecimal(doseCal);
+				BigDecimal doseRounded = doseDecimal.setScale(3, BigDecimal.ROUND_HALF_UP);
+				infusedDose = Float.parseFloat(doseRounded.toString());
+			}
+
+
+		}
+		catch (Exception e)
+		{
+			LOG.error("## Exception occured:", e);
+
+		}
+		return infusedDose;
+	}
+
+	/**
+	 * This method return an array containing hours, minutes & secs
+	 * between dob and now LocalDateTime objects
+	 *
+	 * @param dob start timestamp
+	 * @param now end timestamp
+	 * @return array containing hours, minutes & secs
+	 */
+	private static long[] getTime(LocalDateTime dob, LocalDateTime now) {
+		LocalDateTime today = LocalDateTime.of(now.getYear(), now.getMonthValue(), now.getDayOfMonth(), dob.getHour(),
+				dob.getMinute(), dob.getSecond());
+		Duration duration = Duration.between(today, now);
+
+		long seconds = duration.getSeconds();
+
+		long hours = seconds / SECONDS_PER_HOUR;
+		long minutes = ((seconds % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE);
+		long secs = (seconds % SECONDS_PER_MINUTE);
+
+		return new long[] { hours, minutes, secs };
+	}
+
+	/**
+	 * This method returns period between dob and now LocalDateTime objects
+	 *
+	 * @param dob start timestamp
+	 * @param now  end timestamp
+	 * @return period
+	 */
+	private static Period getPeriod(LocalDateTime dob, LocalDateTime now) {
+		return Period.between(dob.toLocalDate(), now.toLocalDate());
+	}
+
+}

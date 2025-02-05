@@ -1,0 +1,64 @@
+Selected Machine: Sysmex, Port Number: 54001Protocol: HL7
+SERVER BOOTED ON PORT: 54001
+ANY CLIENT CAN STOP THE SERVER BY SENDING -1
+MESSAGE PART RECIEVED:- 
+Server: 
+MESSAGE PART RECIEVED:- 1H|\^&|||U-WAM^00-21_Build003^A6643^^^^AU501736||||||||LIS2-A2|202406181850578D
+ HEADER ADDED TO query_Packet_List: 
+Server: 
+MESSAGE PART RECIEVED:- 2P|1|||||||UF8
+query_Packet_List clear: 
+Server: 
+MESSAGE PART RECIEVED:- 3O|1|1806PAT0048||^^^C-URO\^^^C-BLD\^^^C-BIL\^^^C-KET\^^^C-GLU\^^^C-PRO\^^^C-PH\^^^C-NIT\^^^C-LEU\^^^C-S.G.(Ref)\^^^C-COLOR\^^^C-ColorRANK\^^^C-CLOUD\^^^C-Error Code\|R||20240618183307||||N|||20240618183329|*||||||||||F90
+query_Packet_List clear: 
+Server: 
+MESSAGE PART RECIEVED:- 4R|1|^^^C-URO^A^1^S^  0003^01|normal^RAW|||N||||^^device||20240618183634|UC-35003A
+
+query_Packet_List clear: 
+Server: 
+MESSAGE PART RECIEVED:- 5R|2|^^^C-URO^A^1^S^  0003^01|normal^MAINFORMAT|||N||||^^device||20240618183634|UC-350040
+query_Packet_List clear: 
+Server: 
+MESSAGE PART RECIEVED:- 6R|3|^^^C-BLD^A^1^S^  0003^01|-^RAW|||N||||^^device||20240618183634|UC-3500BE
+query_Packet_List clear: 
+Server: 
+MESSAGE PART RECIEVED:- 7R|4|^^^C-BLD^A^1^S^  0003^01|-^MAINFORMAT|||N||||^^device||20240618183634|UC-3500C4
+query_Packet_List clear: 
+Server: 
+MESSAGE PART RECIEVED:- 0R|5|^^^C-BIL^A^1^S^  0003^01|-^RAW|||N||||^^device||20240618183634|UC-3500BF
+query_Packet_List clear: 
+Server: 
+MESSAGE PART RECIEVED:- 
+enter eot to filter data and split function
+<####>14list------------------[2P|1|||||||U, F8, 3O|1|1806PAT0048||^^^C-URO\^^^C-BLD\^^^C-BIL\^^^C-KET\^^^C-GLU\^^^C-PRO\^^^C-PH\^^^C-NIT\^^^C-LEU\^^^C-S.G.(Ref)\^^^C-COLOR\^^^C-ColorRANK\^^^C-CLOUD\^^^C-Error Code\|R||20240618183307||||N|||20240618183329|*||||||||||F, 90, 4R|1|^^^C-URO^A^1^S^  0003^01|normal^RAW|||N||||^^device||20240618183634|UC-3500, 3A, 5R|2|^^^C-URO^A^1^S^  0003^01|normal^MAINFORMAT|||N||||^^device||20240618183634|UC-3500, 40, 6R|3|^^^C-BLD^A^1^S^  0003^01|-^RAW|||N||||^^device||20240618183634|UC-3500, BE, 7R|4|^^^C-BLD^A^1^S^  0003^01|-^MAINFORMAT|||N||||^^device||20240618183634|UC-3500, C4, 0R|5|^^^C-BIL^A^1^S^  0003^01|-^RAW|||N||||^^device||20240618183634|UC-3500, BF]
+parsing start
+ The_Value_of Q2P|1|||||||U
+TestCode : C-URO
+TestValue : normal
+TestCode:C-URO
+TestValue:normal
+sam:1806PAT0048
+
+Sending 'GET' request to URL : http://10.226.28.174:8380/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100014&hos=90000&tcode=C-URO&tval=normal&sam=1806PAT0048&uid=10716
+response--:2406000022 	   
+responce :1+OK
+Only First Result Value Insert if ResultPacket1
+TestCode : C-BLD
+TestValue : NIL
+TestCode:C-BLD
+TestValue:NIL
+sam:1806PAT0048
+
+Sending 'GET' request to URL : http://10.226.28.174:8380/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100014&hos=90000&tcode=C-BLD&tval=NIL&sam=1806PAT0048&uid=10716
+response--:2406000023 	   
+responce :1+OK
+Only First Result Value Insert if ResultPacket2
+Selected Machine: Horriba, Port Number: 
+Selected Machine: Horriba, Port Number: 
+Selected Machine: Horriba, Port Number: 
+Selected Machine: Horriba, Port Number: 
+Selected Machine: Horriba, Port Number: 
+Selected Machine: Horriba, Port Number: 
+Selected Machine: Horriba, Port Number: 
+Selected Machine: Horriba, Port Number: 
+Selected Machine: Horriba, Port Number: 

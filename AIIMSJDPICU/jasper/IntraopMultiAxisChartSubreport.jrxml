@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2018-04-09T18:59:33 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="IntraOpMultiAxisGraph" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f7b70cfe-eb37-4438-b153-22596624be5d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="chartDataSet" uuid="119b7f0e-01ef-4e2b-b628-d76f51e83768">
+		<field name="serie" class="java.lang.String"/>
+		<field name="category" class="java.lang.String"/>
+		<field name="value" class="java.lang.Double"/>
+	</subDataset>
+	<subDataset name="Dataset1" uuid="497af865-59f8-4eae-8e1d-dbe75eb342da">
+		<field name="serie" class="java.lang.String"/>
+		<field name="category" class="java.lang.String"/>
+		<field name="value" class="java.lang.Double"/>
+	</subDataset>
+	<parameter name="CHART_DATASET" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<parameter name="CHART_DATASET2" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<parameter name="CHART_DATASET3" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<parameter name="CHART_DATASET4" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="367" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+			<multiAxisChart>
+				<chart evaluationTime="Report">
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="802" height="367" isRemoveLineWhenBlank="true" uuid="7658787b-9b81-40e1-b1d4-c44dbc967fba"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<multiAxisPlot>
+					<plot/>
+					<axis>
+						<lineChart>
+							<chart evaluationTime="Report">
+								<reportElement x="0" y="0" width="0" height="0" backcolor="#FFFFFF" uuid="193cc73b-8fbb-4f0a-99ce-8717e1dd5b2a"/>
+								<chartTitle color="#000000"/>
+								<chartSubtitle color="#000000"/>
+								<chartLegend textColor="#000000" backgroundColor="#FFFFFF"/>
+							</chart>
+							<categoryDataset>
+								<dataset>
+									<datasetRun subDataset="Dataset1" uuid="abec2dce-b670-4e84-b71f-469d954dbcb5">
+										<dataSourceExpression><![CDATA[$P{CHART_DATASET2}]]></dataSourceExpression>
+									</datasetRun>
+								</dataset>
+								<categorySeries>
+									<seriesExpression><![CDATA[$F{serie}]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{value}]]></valueExpression>
+								</categorySeries>
+							</categoryDataset>
+							<linePlot>
+								<plot/>
+								<categoryAxisFormat>
+									<axisFormat/>
+								</categoryAxisFormat>
+								<valueAxisFormat>
+									<axisFormat tickLabelColor="#FFFFFF"/>
+								</valueAxisFormat>
+							</linePlot>
+						</lineChart>
+					</axis>
+					<axis>
+						<lineChart>
+							<chart evaluationTime="Report">
+								<reportElement x="0" y="0" width="0" height="0" forecolor="#FF505E" backcolor="#FFFFFF" uuid="3e2a6422-ee2a-4655-b06e-ffb756f0749b"/>
+								<chartTitle color="#FF505E"/>
+								<chartSubtitle color="#FF505E"/>
+								<chartLegend textColor="#FF505E" backgroundColor="#FFFFFF"/>
+							</chart>
+							<categoryDataset>
+								<dataset>
+									<datasetRun subDataset="Dataset1" uuid="abec2dce-b670-4e84-b71f-469d954dbcb5">
+										<dataSourceExpression><![CDATA[$P{CHART_DATASET3}]]></dataSourceExpression>
+									</datasetRun>
+								</dataset>
+								<categorySeries>
+									<seriesExpression><![CDATA[$F{serie}]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{value}]]></valueExpression>
+								</categorySeries>
+							</categoryDataset>
+							<linePlot>
+								<plot backcolor="#FF505E"/>
+								<categoryAxisFormat>
+									<axisFormat labelColor="#FF505E" tickLabelColor="#FF505E" axisLineColor="#FF505E"/>
+								</categoryAxisFormat>
+								<valueAxisFormat>
+									<axisFormat labelColor="#FF505E" tickLabelColor="#FF505E" axisLineColor="#FF505E"/>
+								</valueAxisFormat>
+							</linePlot>
+						</lineChart>
+					</axis>
+					<axis>
+						<lineChart>
+							<chart evaluationTime="Report">
+								<reportElement x="0" y="0" width="0" height="0" backcolor="#FFFFFF" uuid="3e2a6422-ee2a-4655-b06e-ffb756f0749b"/>
+								<chartTitle color="#000000"/>
+								<chartSubtitle color="#000000"/>
+								<chartLegend textColor="#000000" backgroundColor="#FFFFFF"/>
+							</chart>
+							<categoryDataset>
+								<dataset>
+									<datasetRun subDataset="Dataset1" uuid="abec2dce-b670-4e84-b71f-469d954dbcb5">
+										<dataSourceExpression><![CDATA[$P{CHART_DATASET}]]></dataSourceExpression>
+									</datasetRun>
+								</dataset>
+								<categorySeries>
+									<seriesExpression><![CDATA[$F{serie}]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{value}]]></valueExpression>
+								</categorySeries>
+							</categoryDataset>
+							<linePlot>
+								<plot/>
+								<categoryAxisFormat>
+									<axisFormat tickLabelColor="#0B4AEA"/>
+								</categoryAxisFormat>
+								<valueAxisFormat>
+									<axisFormat labelColor="#0B4AEA" tickLabelColor="#0B4AEA" axisLineColor="#0B4AEA"/>
+								</valueAxisFormat>
+							</linePlot>
+						</lineChart>
+					</axis>
+					<axis>
+						<lineChart>
+							<chart evaluationTime="Report">
+								<reportElement x="0" y="0" width="0" height="0" forecolor="#FF505E" backcolor="#FFFFFF" uuid="3e2a6422-ee2a-4655-b06e-ffb756f0749b"/>
+								<chartTitle color="#000000"/>
+								<chartSubtitle color="#000000"/>
+								<chartLegend textColor="#000000" backgroundColor="#FFFFFF"/>
+							</chart>
+							<categoryDataset>
+								<dataset>
+									<datasetRun subDataset="Dataset1" uuid="abec2dce-b670-4e84-b71f-469d954dbcb5">
+										<dataSourceExpression><![CDATA[$P{CHART_DATASET4}]]></dataSourceExpression>
+									</datasetRun>
+								</dataset>
+								<categorySeries>
+									<seriesExpression><![CDATA[$F{serie}]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{value}]]></valueExpression>
+								</categorySeries>
+							</categoryDataset>
+							<linePlot>
+								<plot backcolor="#DB50FF"/>
+								<categoryAxisFormat>
+									<axisFormat labelColor="#DB50FF" tickLabelColor="#FF505E" axisLineColor="#DB50FF"/>
+								</categoryAxisFormat>
+								<valueAxisFormat>
+									<axisFormat labelColor="#31F777" tickLabelColor="#31F777" axisLineColor="#31F777"/>
+								</valueAxisFormat>
+							</linePlot>
+						</lineChart>
+					</axis>
+				</multiAxisPlot>
+			</multiAxisChart>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,524 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package controllers;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import org.apache.log4j.Logger;
+
+import com.cdac.common.GeneratedEntities.CPBDetails;
+import com.cdac.common.util.Validations;
+
+import application.Main;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import model.PatientSession;
+import services.GetCPBDetailsService;
+import services.SaveCPBDetailsService;
+
+public class CPBDetailsController implements Initializable {
+
+	@FXML
+	private Button btnClose;
+
+	@FXML
+	private TextField txtPrimeNS;
+
+	@FXML
+	private TextField txtPrimeBlood;
+
+	@FXML
+	private TextField txtPrimeAlbumin;
+
+	@FXML
+	private TextField txtPrimeMannitol;
+
+	@FXML
+	private TextField txtPrimeNaHCO3;
+
+	@FXML
+	private TextField txtPrimeCaCl2;
+
+	@FXML
+	private TextField txtPrimeHeparin;
+
+	@FXML
+	private TextField txtPreCPBPrime;
+
+	@FXML
+	private TextField txtPreCPBCrystalloidCPG;
+
+	@FXML
+	private TextField txtPreCPBNS;
+
+	@FXML
+	private TextField txtPreCPBRL;
+
+	@FXML
+	private TextField txtPreCPBBlood;
+
+	@FXML
+	private TextField txtPreCPBNaHCO3;
+
+	@FXML
+	private TextField txtPostCPBIVF;
+
+	@FXML
+	private TextField txtPostCPBBlood;
+
+	@FXML
+	private TextField txtPostCPBFFP;
+
+	@FXML
+	private TextField txtPostCPBPC;
+
+	@FXML
+	private TextField txtPostCPBALB;
+
+	@FXML
+	private TextField txtPostCPBNetBalance;
+
+	@FXML
+	private TextArea txtAreaPrimeDetails;
+
+	@FXML
+	private TextArea txtAreaPreDetails;
+
+	@FXML
+	private TextArea txtAreaPostDetails;
+
+	@FXML
+	private Button btnSave;
+
+	@FXML
+	private AnchorPane disablePaneMainContent;
+
+	@FXML
+	private Label lblError;
+
+
+	private EventHandler<MouseEvent> btnCloseHandler;
+	private EventHandler<MouseEvent> btnSaveHandler;
+
+	private EventHandler<WorkerStateEvent> saveCPBDetailsServiceSuccessHandler;
+	private EventHandler<WorkerStateEvent> saveCPBDetailsServiceFailedHandler;
+	private EventHandler<WorkerStateEvent> getCPBDetailsServiceSuccessHandler;
+	private EventHandler<WorkerStateEvent> getCPBDetailsServiceFailedHandler;
+
+	private int cpbDetailsID = 0;
+
+	private long caseId = 0;
+	private static final Logger LOGGER = Logger.getLogger(EventsController.class.getName());
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+
+
+
+		if (PatientSession.getInstance().getPatientCase() != null) {
+			caseId = PatientSession.getInstance().getPatientCase().getCaseId();
+
+		}
+
+		btnCloseHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+			public void handle(javafx.scene.input.MouseEvent event) {
+
+				closePopup();
+			}
+		};
+		btnClose.addEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+
+		btnSaveHandler = new EventHandler<javafx.scene.input.MouseEvent>() {
+			public void handle(javafx.scene.input.MouseEvent event) {
+				saveCPBDetails();
+			}
+		};
+		btnSave.addEventHandler(MouseEvent.MOUSE_CLICKED, btnSaveHandler);
+		getCPBDetails();
+	}
+
+	/**
+	 * This method is used to close the Events Log Window and calls the remove
+	 * listeners method
+	 */
+	private void closePopup() {
+		try {
+
+			 removeListeners();
+			Main.getInstance().getStageManager().closeSecondaryStage();
+
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:" + e);
+		}
+
+	}
+
+	private void saveCPBDetails() {
+
+		if (isValidForm()) {
+		disablePaneMainContent.setVisible(true);
+		CPBDetails cpbDetailsOBJ = new CPBDetails();
+		if (cpbDetailsID != 0) {
+			cpbDetailsOBJ.setcPBDetailsID(cpbDetailsID);
+		}
+		cpbDetailsOBJ.setCaseID(caseId);
+		cpbDetailsOBJ.setPrimeNS(txtPrimeNS.getText().trim());
+		cpbDetailsOBJ.setPrimeBlood(txtPrimeBlood.getText().trim());
+		cpbDetailsOBJ.setPrimeAlbumin(txtPrimeAlbumin.getText().trim());
+		cpbDetailsOBJ.setPrimeMannitol(txtPrimeMannitol.getText().trim());
+		cpbDetailsOBJ.setPrimeNaHCO3(txtPrimeNaHCO3.getText().trim());
+		cpbDetailsOBJ.setPrimeCaCl2(txtPrimeCaCl2.getText().trim());
+		cpbDetailsOBJ.setPrimeHeparin(txtPrimeHeparin.getText().trim());
+		cpbDetailsOBJ.setPrimeDetails(txtAreaPrimeDetails.getText().trim());
+
+		cpbDetailsOBJ.setPrePrime(txtPreCPBPrime.getText().trim());
+		cpbDetailsOBJ.setPreCrystalloidCPG(txtPreCPBCrystalloidCPG.getText().trim());
+		cpbDetailsOBJ.setPreNS(txtPreCPBNS.getText().trim());
+		cpbDetailsOBJ.setPreRL(txtPreCPBRL.getText().trim());
+		cpbDetailsOBJ.setPreBlood(txtPreCPBBlood.getText().trim());
+		cpbDetailsOBJ.setPreNaHCO3(txtPreCPBNaHCO3.getText().trim());
+		cpbDetailsOBJ.setPreDetails(txtAreaPreDetails.getText().trim());
+
+		cpbDetailsOBJ.setPostIVF(txtPostCPBIVF.getText().trim());
+		cpbDetailsOBJ.setPostBlood(txtPostCPBBlood.getText().trim());
+		cpbDetailsOBJ.setPostFFP(txtPostCPBFFP.getText().trim());
+		cpbDetailsOBJ.setPostPC(txtPostCPBPC.getText().trim());
+		cpbDetailsOBJ.setPostALB(txtPostCPBALB.getText().trim());
+		cpbDetailsOBJ.setPostNetBalance(txtPostCPBNetBalance.getText().trim());
+		cpbDetailsOBJ.setPostDetails(txtAreaPostDetails.getText().trim());
+
+		SaveCPBDetailsService saveCPBDetailsService = SaveCPBDetailsService.getInstance(cpbDetailsOBJ);
+		saveCPBDetailsService.restart();
+
+		// ---on service success
+
+		saveCPBDetailsServiceSuccessHandler = new EventHandler<WorkerStateEvent>() {
+
+			@Override
+			public void handle(WorkerStateEvent event) {
+
+				disablePaneMainContent.setVisible(false);
+				closePopup();
+				saveCPBDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+						saveCPBDetailsServiceSuccessHandler);
+				saveCPBDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+						saveCPBDetailsServiceFailedHandler);
+				if (cpbDetailsID != 0) {
+					Main.getInstance().getUtility().showNotification("Information", "Success",
+							"CPB Details updated successfully!");
+				} else {
+
+					Main.getInstance().getUtility().showNotification("Information", "Success",
+							"CPB Details saved successfully!");
+				}
+			}
+		};
+
+		saveCPBDetailsService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+				saveCPBDetailsServiceSuccessHandler);
+
+		saveCPBDetailsServiceFailedHandler = new EventHandler<WorkerStateEvent>() {
+
+			@Override
+			public void handle(WorkerStateEvent event) {
+
+				disablePaneMainContent.setVisible(false);
+				saveCPBDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+						saveCPBDetailsServiceSuccessHandler);
+				saveCPBDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+						saveCPBDetailsServiceFailedHandler);
+				Main.getInstance().getUtility().showNotification("Error", "Error",
+						saveCPBDetailsService.getException().getMessage());
+			}
+		};
+
+		saveCPBDetailsService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED, saveCPBDetailsServiceFailedHandler);
+		} else {
+			lblError.setVisible(true);
+		}
+	}
+
+	private void getCPBDetails() {
+
+		try {
+
+				lblError.setVisible(false);
+				disablePaneMainContent.setVisible(true);
+				GetCPBDetailsService getCPBDetailsService = GetCPBDetailsService.getInstance(caseId);
+				getCPBDetailsService.restart();
+
+				getCPBDetailsServiceSuccessHandler = new EventHandler<WorkerStateEvent>() {
+
+					@Override
+					public void handle(WorkerStateEvent event) {
+						try {
+							CPBDetails cpbDetails = getCPBDetailsService.getcpbRecord();
+							if (cpbDetails.getcPBDetailsID() != null) {
+								cpbDetailsID = cpbDetails.getcPBDetailsID();
+
+								if (cpbDetails.getPrimeNS() != null) {
+									txtPrimeNS.setText(cpbDetails.getPrimeNS());
+								}
+								if (cpbDetails.getPrimeBlood() != null) {
+									txtPrimeBlood.setText(cpbDetails.getPrimeBlood());
+								}
+								if (cpbDetails.getPrimeAlbumin() != null) {
+									txtPrimeAlbumin.setText(cpbDetails.getPrimeAlbumin());
+								}
+								if (cpbDetails.getPrimeMannitol() != null) {
+									txtPrimeMannitol.setText(cpbDetails.getPrimeMannitol());
+								}
+								if (cpbDetails.getPrimeNaHCO3() != null) {
+									txtPrimeNaHCO3.setText(cpbDetails.getPrimeNaHCO3());
+								}
+								if (cpbDetails.getPrimeCaCl2() != null) {
+									txtPrimeCaCl2.setText(cpbDetails.getPrimeCaCl2());
+								}
+								if (cpbDetails.getPrimeHeparin() != null) {
+									txtPrimeHeparin.setText(cpbDetails.getPrimeHeparin());
+								}
+								if (cpbDetails.getPrimeDetails() != null) {
+									txtAreaPrimeDetails.setText(cpbDetails.getPrimeDetails());
+								}
+
+								if (cpbDetails.getPrePrime() != null) {
+									txtPreCPBPrime.setText(cpbDetails.getPrePrime());
+								}
+								if (cpbDetails.getPreCrystalloidCPG() != null) {
+									txtPreCPBCrystalloidCPG.setText(cpbDetails.getPreCrystalloidCPG());
+								}
+								if (cpbDetails.getPreNS() != null) {
+									txtPreCPBNS.setText(cpbDetails.getPreNS());
+								}
+								if (cpbDetails.getPreRL() != null) {
+									txtPreCPBRL.setText(cpbDetails.getPreRL());
+								}
+								if (cpbDetails.getPreBlood() != null) {
+									txtPreCPBBlood.setText(cpbDetails.getPreBlood());
+								}
+								if (cpbDetails.getPreNaHCO3() != null) {
+									txtPreCPBNaHCO3.setText(cpbDetails.getPreNaHCO3());
+								}
+								if (cpbDetails.getPreDetails() != null) {
+									txtAreaPreDetails.setText(cpbDetails.getPreDetails());
+								}
+
+								if (cpbDetails.getPostIVF() != null) {
+									txtPostCPBIVF.setText(cpbDetails.getPostIVF());
+								}
+								if (cpbDetails.getPostBlood() != null) {
+									txtPostCPBBlood.setText(cpbDetails.getPostBlood());
+								}
+								if (cpbDetails.getPostFFP() != null) {
+									txtPostCPBFFP.setText(cpbDetails.getPostFFP());
+								}
+								if (cpbDetails.getPostPC() != null) {
+									txtPostCPBPC.setText(cpbDetails.getPostPC());
+								}
+								if (cpbDetails.getPostALB() != null) {
+									txtPostCPBALB.setText(cpbDetails.getPostALB());
+								}
+								if (cpbDetails.getPostNetBalance() != null) {
+									txtPostCPBNetBalance.setText(cpbDetails.getPostNetBalance());
+								}
+								if (cpbDetails.getPostDetails() != null) {
+									txtAreaPostDetails.setText(cpbDetails.getPostDetails());
+								}
+
+							}
+							disablePaneMainContent.setVisible(false);
+
+						} catch (Exception e) {
+							disablePaneMainContent.setVisible(false);
+							LOGGER.error("## Exception occured:", e);
+
+						}
+					}
+
+				};
+
+				getCPBDetailsService.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+						getCPBDetailsServiceSuccessHandler);
+
+				getCPBDetailsServiceFailedHandler = new EventHandler<WorkerStateEvent>() {
+
+					@Override
+					public void handle(WorkerStateEvent event) {
+						try {
+							disablePaneMainContent.setVisible(false);
+							getCPBDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+									getCPBDetailsServiceSuccessHandler);
+							getCPBDetailsService.removeEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+									getCPBDetailsServiceFailedHandler);
+						} catch (Exception e) {
+							LOGGER.error("## Exception occured:", e);
+						}
+					}
+
+				};
+
+				getCPBDetailsService.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED,
+						getCPBDetailsServiceFailedHandler);
+
+		} catch (Exception e) {
+			LOGGER.error("## Exception occured:", e);
+		}
+
+	}
+
+	private boolean isValidForm() {
+
+		if (txtPrimeNS.getText().trim().isEmpty() && txtPrimeBlood.getText().trim().isEmpty() && txtPrimeAlbumin.getText().trim().isEmpty()
+				&& txtPrimeMannitol.getText().trim().isEmpty() && txtPrimeNaHCO3.getText().trim().isEmpty()
+				&& txtPrimeCaCl2.getText().trim().isEmpty() && txtPrimeHeparin.getText().trim().isEmpty()
+				&& txtAreaPrimeDetails.getText().trim().isEmpty() && txtPreCPBPrime.getText().trim().isEmpty()
+				&& txtPreCPBCrystalloidCPG.getText().trim().isEmpty() && txtPreCPBNS.getText().trim().isEmpty()
+				&& txtPreCPBRL.getText().trim().isEmpty() && txtPreCPBBlood.getText().trim().isEmpty()
+				&& txtPreCPBNaHCO3.getText().trim().isEmpty() && txtAreaPreDetails.getText().trim().isEmpty()
+				&& txtPostCPBIVF.getText().trim().isEmpty() && txtPostCPBBlood.getText().trim().isEmpty()
+				&& txtPostCPBFFP.getText().trim().isEmpty() && txtPostCPBPC.getText().trim().isEmpty()
+				&& txtPostCPBALB.getText().trim().isEmpty() && txtPostCPBNetBalance.getText().trim().isEmpty()
+				&& txtAreaPostDetails.getText().trim().isEmpty()) {
+
+			lblError.setText("*Please enter atleast one field to save.");
+			return false;
+		}
+		if (!txtPrimeNS.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPrimeNS.getText().trim())) {
+
+			lblError.setText("*Please enter Prime NS upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPrimeBlood.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPrimeBlood.getText().trim())) {
+
+			lblError.setText("*Please enter Prime Blood upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPrimeAlbumin.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPrimeAlbumin.getText().trim())) {
+
+			lblError.setText("*Please enter Prime Albumin upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPrimeMannitol.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPrimeMannitol.getText().trim())) {
+
+			lblError.setText("*Please enter Prime Mannitol upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPrimeNaHCO3.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPrimeNaHCO3.getText().trim())) {
+
+			lblError.setText("*Please enter Prime NaHCO3 upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPrimeCaCl2.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPrimeCaCl2.getText().trim())) {
+
+			lblError.setText("*Please enter Prime CaCl2 upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPrimeHeparin.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPrimeHeparin.getText().trim())) {
+
+			lblError.setText("*Please enter Prime Heparin upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (txtAreaPrimeDetails.getText().trim() != null && !txtAreaPrimeDetails.getText().trim().isEmpty()
+				&& !Validations.maxLength(txtAreaPrimeDetails.getText().trim(), 2000)) {
+
+			lblError.setText("*Please enter Prime Other Details less than 2000 characters");
+			return false;
+		}
+
+		if (!txtPreCPBPrime.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPreCPBPrime.getText().trim())) {
+
+			lblError.setText("*Please enter Pre CPB Prime upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPreCPBCrystalloidCPG.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPreCPBCrystalloidCPG.getText().trim())) {
+
+			lblError.setText("*Please enter Pre CPB Crystalloid upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPreCPBNS.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPreCPBNS.getText().trim())) {
+
+			lblError.setText("*Please enter Pre CPB NS upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPreCPBRL.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPreCPBRL.getText().trim())) {
+
+			lblError.setText("*Please enter Pre CPB RL upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPreCPBBlood.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPreCPBBlood.getText().trim())) {
+
+			lblError.setText("*Please enter Pre CPB Blood upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPreCPBNaHCO3.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPreCPBNaHCO3.getText().trim())) {
+
+			lblError.setText("*Please enter Pre CPB NaHCO3 upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+
+		if (txtAreaPreDetails.getText().trim() != null && !txtAreaPreDetails.getText().trim().isEmpty()
+				&& !Validations.maxLength(txtAreaPreDetails.getText().trim(), 2000)) {
+
+			lblError.setText("*Please enter Pre CPB Other Details less than 2000 characters");
+			return false;
+		}
+
+		if (!txtPostCPBIVF.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPostCPBIVF.getText().trim())) {
+
+			lblError.setText("*Please enter Post CPB IVF upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPostCPBBlood.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPostCPBBlood.getText().trim())) {
+
+			lblError.setText("*Please enter Post CPB Blood upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPostCPBFFP.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPostCPBFFP.getText().trim())) {
+
+			lblError.setText("*Please enter Post CPB FFP upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPostCPBPC.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPostCPBPC.getText().trim())) {
+
+			lblError.setText("*Please enter Post CPB PC upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		if (!txtPostCPBALB.getText().trim().isEmpty() && !Validations.decimalsUpto2placesAndLength4(txtPostCPBALB.getText().trim())) {
+
+			lblError.setText("*Please enter Post CPB ALB upto 4 digits and decimal upto 2 digits only");
+			return false;
+		}
+		
+
+		if (txtAreaPostDetails.getText().trim() != null && !txtAreaPostDetails.getText().trim().isEmpty()
+				&& !Validations.maxLength(txtAreaPostDetails.getText().trim(), 2000)) {
+
+			lblError.setText("*Please enter Post CPB Other Details less than 2000 characters");
+			return false;
+		}
+
+		return true;
+	}
+
+	private void removeListeners(){
+		btnSave.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnSaveHandler);
+		btnClose.removeEventHandler(MouseEvent.MOUSE_CLICKED, btnCloseHandler);
+	}
+}

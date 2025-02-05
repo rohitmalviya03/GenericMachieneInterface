@@ -1,0 +1,215 @@
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+package com.cdac.common.dao;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.apache.log4j.Logger;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.cdac.common.GeneratedEntities.Entityvalues;
+import com.cdac.common.GeneratedEntities.IntraopDevices;
+import com.cdac.common.util.HibernateUtilities;
+import com.cdac.framework.exceptions.ServiceExceptionWrapper;
+
+public class DeviceConfigurationFetchListDaoImpl implements DeviceConfigurationFetchListDao
+{
+	// ~ Static attributes/initializers
+	// -------------------------------------------------------------
+	private static final Logger LOGGER = Logger.getLogger(DeviceConfigurationFetchListDaoImpl.class.getName());
+
+	// ~ Instance attributes
+	// ------------------------------------------------------------------------
+
+	// ~ Constructors
+	// -------------------------------------------------------------------------------
+
+	// ~ Methods
+	// ------------------------------------------------------------------------------------
+	
+	private static DeviceConfigurationFetchListDaoImpl instance = null;
+	private DeviceConfigurationFetchListDaoImpl()
+	{
+
+	}
+
+	public static DeviceConfigurationFetchListDaoImpl getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new DeviceConfigurationFetchListDaoImpl();
+		}
+		return instance;
+	}
+	
+	/**
+	 * This method returns map containg list of models for a specific make.
+	 *from IntraopDevices entity
+	 * @param make
+	 * name of the maker corresponding to which models list is required
+	 * @return map containg list of models for a specific make.
+	 * @throws Exception 
+	 *
+	 */
+
+	//private Session session;
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, List<Entityvalues>> DeviceConfigurationfetchList(String make) throws Exception
+	{
+
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Map<String, List<Entityvalues>> map=new HashMap<String, List<Entityvalues>>();
+		Session session=null;
+		List<Entityvalues> entityvaluesList=new ArrayList<Entityvalues>();
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory =HibernateUtilities.createSessionFactory();
+			session= sessionFactory.openSession();
+			
+			session.getTransaction().begin();
+			
+			/// retrieves list of devices corresponding to the provided make
+			Query query=session.createQuery("select id1 from IntraopDevices id1 where id1.make=?");
+			/// retrieves list of models names corresponding to the provided make
+			Query query1=session.createQuery("select distinct id.model  from IntraopDevices id where id.make=?");
+
+
+			query.setParameter(0, make);
+			query1.setParameter(0, make);
+
+			List<IntraopDevices> listOfModels=new ArrayList<IntraopDevices>();
+			listOfModels=query.list();
+			List<String> models=query1.list();
+			for (String string : models) 
+			{
+				for(IntraopDevices devices:listOfModels)
+				{ 
+					if(string.equals(devices.getModel()))
+					{
+						Entityvalues entityvalues=new Entityvalues();
+						entityvalues.setEntityId(devices.getDeviceId());
+						entityvalues.setEntityValue(devices.getModel());
+						entityvaluesList.add(entityvalues);
+						break;
+					}
+
+				}
+			}
+			map.put("List of models", entityvaluesList);
+			
+			/// session commited
+			session.getTransaction().commit();
+		}
+
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try 
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2) 
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+		return map;
+	}
+	/**
+	 * This method returns map containg list of serial numbers for a specific model.
+	 *from IntraopDevices entity
+	 * @param model
+	 * name of the model corresponding to which serial numerbers  is required
+	 * @return map containg list of serial numbers for a specific model.
+	 * @throws Exception 
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, List<Entityvalues>> serialNumberFetchList(String model) throws Exception
+	{
+		LOGGER.debug("Logger Name: " + LOGGER.getName());
+		Map<String, List<Entityvalues>> map=new HashMap<String, List<Entityvalues>>();
+		Session session=null;
+		List<Entityvalues> entityvaluesList=new ArrayList<Entityvalues>();
+		try
+		{
+			// opens a new session from the session factory
+			SessionFactory sessionFactory =HibernateUtilities.createSessionFactory();
+			session= sessionFactory.openSession();
+			session.getTransaction().begin();
+			
+			/// retrieves the list of devices coresponding to the provided model
+			Query query=session.createQuery("from IntraopDevices id" + " where id.model=?");
+			
+			query.setParameter(0, model);
+			List<IntraopDevices> listOfModels=new ArrayList<IntraopDevices>();
+			listOfModels=query.list();
+			for(IntraopDevices devices:listOfModels)
+			{
+				Entityvalues entityvalues=new Entityvalues();
+				entityvalues.setEntityId(devices.getDeviceId());
+				entityvalues.setEntityValue(devices.getSerialNumber());
+				entityvaluesList.add(entityvalues);
+			}
+			map.put("List of serial number", entityvaluesList);
+			
+			/// session commited
+			session.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			if (session != null && session.getTransaction() != null)
+			{
+				// If transaction is open,rollback
+				session.getTransaction().rollback();
+			}
+			LOGGER.error("## Exception occured:" + e.getMessage());
+			throw new ServiceExceptionWrapper(e);
+		}
+		finally
+		{
+			try 
+			{
+				if(session != null)
+				{
+					session.close(); // Session closes
+				}
+			}
+			catch (Exception e2) 
+			{
+				LOGGER.error("## Exception occured:" + e2.getMessage());
+				throw new ServiceExceptionWrapper(e2);
+			}
+		}
+
+
+		return map;
+	}
+
+}

@@ -1,0 +1,183 @@
+package projectICU;
+
+/*******************************************************************************
+ * � 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+import org.apache.log4j.Logger;
+
+import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.SerialPortEvent;
+import AbstractDeviceHandshake;
+import CoreDevice;
+import IPacketMakerStrategy;
+import CustomPacketMakerNotFoundException;
+
+public class S5PatientMonitorHandshake extends AbstractDeviceHandshake
+{
+	private static final Logger LOG = Logger.getLogger(S5PatientMonitorHandshake.class);
+	static int deviceCounter;
+	S5PatientMonitorParser coreDev;
+	private PacketMakerPatientMonitor packetMaker;
+
+	@Override
+	public String getNameOfDevice()
+	{
+		// TODO Auto-generated method stub
+		return "S5PatientMonitorHandshake";
+	}
+
+	@Override
+	public void initHandshakeLogic()
+	{
+		// TODO Auto-generated method stub
+		OutputStream out = getOutputStream();
+		setComPortParameters(19200, 8, SerialPort.ONE_STOP_BIT, SerialPort.EVEN_PARITY);
+		packetMaker = new PacketMakerPatientMonitor(new byte[] { 0x7e }, new byte[] { 0x7e });
+		try
+		{
+			if (out != null)
+			{
+				/*
+				 * The transmission interval is set to 1 second we can later on
+				 * bind it to the UI Request for physiological data
+				 */
+				/*out.write(new byte[] { 0x7e, 0x31, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+				        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, (byte) 0xff, 0x00, 0x00, 0x00, 0x00, 0x00,
+				        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00,
+				        0x0e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x7e });*/
+				out.write(new byte[]{126,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,14,0,0,0,0,0,64,126});
+				out.flush();
+				/*
+				out.write(new byte[]{(byte)0x7e,(byte)0x31,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,
+(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0xff,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,
+(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x01,(byte)0x0a,(byte)0x00,(byte)0x0e,(byte)0x00,(byte)0x00,(byte)0x00,
+(byte)0x00,(byte)0x00,(byte)0x49,(byte)0x7e});
+				out.flush();*/
+				
+				/*
+				 * Request for multiple waveform(ECG,IBP,O2) The waveform set
+				 * selection can also be bind to UI
+				 */
+				/*out.write(new byte[]{126,72,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,8,9,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,93,126});
+				out.flush();*/
+				/*out.write(new byte[] { 0x7e, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+				        0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, (byte) 0xff, 0x00, 0x00, 0x00, 0x00, 0x00,
+				        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+				        0x00, 0x01, 0x04, 0x0a, (byte) 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+				        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x56,
+				        0x7e });
+				out.flush();*/
+			}
+			else
+			{
+				System.out.println("Output stream is null here");
+			}
+		}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+		}
+	}
+
+	@Override
+	public void deviceEventOccurred(SerialPortEvent dataFromPort)
+	{
+		// TODO Auto-generated method stub
+
+		if (dataFromPort.getEventType() == SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
+		{
+			byte[] dataPacket = dataFromPort.getReceivedData();
+			OutputStream out = getOutputStream();
+			/*System.out.print("packet in handshake is ");
+			for (byte b : dataPacket)
+				System.out.print(b + " ");*/
+
+			byte total = 0x00;
+			for (int j = 0; j < dataPacket.length - 1; j++)
+			{
+				total += dataPacket[j];
+			}
+			byte checksumValue = dataPacket[dataPacket.length - 1];
+
+			if (checksumValue == total)
+			{
+			
+			/*try {
+				if (out != null)
+				{
+					out.write(new byte[]{126,72,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,8,9,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,93,126});
+					out.flush();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			
+				try {
+					out.write(new byte[]{126,72,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,8,9,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,93,126});
+					out.flush();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					LOG.error("## Exception occured:", e);
+				}
+				
+				
+				setHandshakeStatus(HandshakeStatus.SUCCESSFUL);
+			}
+			else
+			{
+				setHandshakeStatus(HandshakeStatus.NOT_SUCCESSFUL);
+			}
+		}
+
+	}
+
+	@Override
+	public PacketingStrategy getPacketingStrategy()
+	{
+		// TODO Auto-generated method stub
+		return PacketingStrategy.CUSTOM;
+	}
+
+	@Override
+	public IPacketMakerStrategy getCustomPacketMaker() throws CustomPacketMakerNotFoundException
+	{
+		return packetMaker;
+	}
+
+
+	@Override
+	public CoreDevice getExecutorInstance()
+	{
+		// TODO Auto-generated method stub
+
+		try
+		{
+			coreDev = new S5PatientMonitorParser("S5PatientMonitor-" + deviceCounter, 8);
+			LOG.info("Device instance:" + coreDev);
+			return coreDev;
+		}
+		catch (CustomPacketMakerNotFoundException e)
+		{
+			// The exception will not occur as CustomPacketMaker Strategy is not
+			// used for this device.
+			return null;
+		}
+	}
+
+	@Override
+	public int getListeningEvent()
+	{
+		return SerialPort.LISTENING_EVENT_DATA_AVAILABLE;
+	}
+
+}

@@ -1,0 +1,2278 @@
+/*******************************************************************************
+ * © 2018-2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+ * Version: 1.0.0.0
+ *
+ * This Program is protected by copyright laws, international treaties and other pending or existing intellectual property rights in India, the United States and other countries. Except as expressly permitted, any unauthorized reproduction, storage, transmission in any form or by any means (including without limitation electronic, mechanical, printing, photocopying, recording or otherwise), or any distribution of this Program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law. 
+ *******************************************************************************/
+	package com.infosys.common.GeneratedEntities;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.math.BigInteger;
+
+@Entity
+@Table(name="auditintraopreport1")
+public class AuditIntraOpReport1 implements Serializable {
+       private static final long serialVersionUID = 1L;
+
+       @Id
+   	@GeneratedValue(strategy = IDENTITY)
+       private Integer auditReportID;
+
+
+       private String abg;
+
+       private Integer aldreteScore;
+
+       private Float anesthesiaTime;
+
+       private String anesthesiologists;
+
+       private String arterialUltrasoundBlind;
+
+       private String arterySite;
+
+       private String arterySize;
+
+       private BigDecimal auc;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="AXC_OFF")
+       private Date axcOff;
+
+       @Lob
+       @Column(name="AXC_OFF_COMMENT")
+       private String axcOffComment;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="AXC_ON")
+       private Date axcOn;
+
+       @Lob
+       @Column(name="AXC_ON_COMMENT")
+       private String axcOnComment;
+
+       private Float AXCTime;
+
+       private String backup_Active;
+
+       private BigDecimal beatsPerMinutes;
+
+       private String biochemistry;
+
+       private String bleedingIssues;
+
+       private String bloodOnTip;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       private Date cannulation;
+
+       @Lob
+       @Column(name="CANNULATION_COMMENT")
+       private String cannulationComment;
+
+       private String cannulationsInsertedBy;
+
+       private Long caseID;
+
+       private String catheterisation;
+
+       private String centralLineSite;
+
+       private String centralUltrasoundBlind;
+
+       @Lob
+       private String changeInDiagnosis;
+
+       private String coagulogram;
+
+       private String comorbidities;
+
+       private String complications;
+
+       private String coughedUncoughed;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="CPB_OFF")
+       private Date cpbOff;
+
+       @Lob
+       @Column(name="CPB_OFF_COMMENT")
+       private String cpbOffComment;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="CPB_ON")
+       private Date cpbOn;
+
+       @Lob
+       @Column(name="CPB_ON_COMMENT")
+       private String cpbOnComment;
+
+       private Float CPBTime;
+
+       private String createdBy;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       private Date createdTime;
+
+       private BigDecimal cvp;
+
+       private String cxr;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       private Date decannulation;
+
+       @Lob
+       @Column(name="DECANNULATION_COMMENT")
+       private String decannulationComment;
+
+       private String ecg;
+
+       private String echoInsertedBy;
+
+       private Float epiduralAdjustment;
+
+       private String epiduralMedication;
+
+       private Float epiduralVolume;
+
+       private Float fluidNormalSaline;
+
+       private Float fluidRingerLactate;
+
+       private String GA_AirPressure;
+
+       private String GA_ETTAttempts;
+
+       private String GA_ETTFixedAt;
+
+       private String GA_ETTSize;
+
+       private String GA_FiO2;
+
+       @Column(name="GA_IE")
+       private String gaIe;
+
+       @Column(name="GA_RR")
+       private String gaRr;
+
+       private String GA_SupraglotticAttempts;
+
+       @Lob
+       private String GA_SupraglotticComment;
+
+       private String GA_SupraglotticSize;
+
+       private String GA_Ventilation;
+
+       @Lob
+       private String GA_VentilationComment;
+
+       @Column(name="GA_VT")
+       private String gaVt;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       private Date hand_Over_Time;
+
+       @Lob
+       private String hand_Over_Time_Comment;
+
+       private Float handOverTime;
+
+       private String hemogram;
+
+       private BigDecimal hr;
+
+       private String ICU_Analgesia;
+
+       private String ICU_Extubation;
+
+       @Column(name="ICU_NIV")
+       private String icuNiv;
+
+       private String ICU_Paralysis;
+
+       private String ICU_Sedation;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       private Date incision;
+
+       @Lob
+       @Column(name="INCISION_COMMENT")
+       private String incisionComment;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       private Date induction_Time;
+
+       @Lob
+       private String induction_Time_Comment;
+
+       private BigDecimal inotropicScore;
+
+       private String insertionLength;
+
+       private String insertionSize;
+
+       @Lob
+       private String intraOPDetails;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       private Date intubation_Time;
+
+       @Lob
+       private String intubation_Time_Comment;
+
+       private String investigations;
+
+       @Lob
+       private String IVLineBloodDetails;
+
+       @Lob
+       private String IVLineInfusionDetails;
+
+       @Lob
+       private String IVLineInoTropsDetails;
+
+       @Lob
+       private String IVLineIVFluidsDetails;
+
+       private String leads;
+
+       private Float llbAdjustment;
+
+       private String llbMedication;
+
+       private Float llbVolume;
+
+       private String LTPleural;
+
+       @Lob
+       private String MAC_Comment;
+
+       private String machineName;
+
+       private BigDecimal mao;
+
+       private Float medAdrenaline;
+
+       private Float medAtrcurium;
+
+       private Float medAtropine;
+
+       private Float medCalciumChloride;
+
+       private Float medCalciumGluconate;
+
+       private Float medCefuroxime;
+
+       private Float medDexamethasone;
+
+       private Float medEaca;
+
+       private Float medEtomidate;
+
+       private Float medFentanyl;
+
+       private Float medHeparin;
+
+       private Float medHydrocortisone;
+
+       private Float medKetamine;
+
+       private Float medMagnesium;
+
+       private Float medMeropenam;
+
+       private Float medMorphine;
+
+       private Float medPhenylephrine;
+
+       private Float medPropofol;
+
+       private Float medProtamine;
+
+       private Float medSufentanyl;
+
+       private Float medVancomysin;
+
+       private Float medVecuronium;
+
+       private Float medXylocard;
+
+       private String methodOfInsertion;
+
+       private String mode;
+
+       private String negativeSuction;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="NEW_EVENT_1")
+       private Date newEvent1;
+
+       @Lob
+       @Column(name="NEW_EVENT_1_COMMENT")
+       private String newEvent1Comment;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="NEW_EVENT_2")
+       private Date newEvent2;
+
+       @Column(name="NEW_EVENT_2_COMMENT")
+       private String newEvent2Comment;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="NEW_EVENT_3")
+       private Date newEvent3;
+
+       @Lob
+       @Column(name="NEW_EVENT_3_COMMENT")
+       private String newEvent3Comment;
+
+       @Lob
+       private String newFindings;
+
+       @Column(name="NS_RATE")
+       private String nsRate;
+
+       private String ot;
+
+       private String otherAnesthesiologists;
+
+       private Float OTTime;
+
+       private String pacingSupport;
+
+       private String PACUDate;
+
+       private String PACUTime;
+
+       private String patientPosition;
+
+       private Float patientPreparationTime;
+
+       private String pc;
+
+       private String peripheralSite;
+
+       private String peripheralSize;
+
+       private String peripheralUltrasoundBlind;
+
+       private String postALB;
+
+       private String postBlood;
+
+       @Lob
+       private String postDetails;
+
+       @Lob
+       private String postEchoDetails;
+
+       private String postFFP;
+
+       private String postIVF;
+
+       private String postNetBalance;
+
+       private String postPC;
+
+       private String preBlood;
+
+       private String preCrystalloidCPG;
+
+       @Lob
+       private String preDetails;
+
+       @Lob
+       private String preEchoDetails;
+
+       private String preNaHCO3;
+
+       private String preNS;
+
+       private String prePrime;
+
+       private String preRL;
+
+       private String primeAlbumin;
+
+       private String primeBlood;
+
+       private String primeCaCl2;
+
+       @Lob
+       private String primeDetails;
+
+       private String primeHeparin;
+
+       private String primeMannitol;
+
+       private String primeNaHCO3;
+
+       private String primeNS;
+
+       private String probeSize;
+
+       private String pulmonaryFunctionTest;
+
+       private String RA_EpiduralCfixedAt;
+
+       private String RA_EpiduralNeedle;
+
+       private String RA_EpiduralSite;
+
+       private String RA_LlbLpnbapproach;
+
+       private String RA_Llbsite;
+
+       private String RA_LlbSpnbapproach;
+
+       private String RA_SpinalHsl;
+
+       private String RA_SpinalNeedle;
+
+       private String RA_SpinalSite;
+
+       private String RA_UlbBpbapproach;
+
+       private String RA_UlbPnbapproach;
+
+       private String RA_Ulbsite;
+
+       @Column(name="RL_RATE")
+       private BigDecimal rlRate;
+
+       private String rs;
+
+       private String RTPleural;
+
+       private Float shiftingOutTime;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="SKIN_CLOSURE")
+       private Date skinClosure;
+
+       @Column(name="SKIN_CLOSURE_COMMENT")
+       private String skinClosureComment;
+
+       @Column(name="SO_DBP")
+       private String soDbp;
+
+       @Column(name="SO_MBP")
+       private String soMbp;
+
+       @Column(name="SO_PR")
+       private BigDecimal soPr;
+
+       private String SO_RespSupport;
+
+       @Column(name="SO_RR")
+       private BigDecimal soRr;
+
+       @Column(name="SO_SBP")
+       private String soSbp;
+
+       @Column(name="SO_SPO2")
+       private BigDecimal soSpo2;
+
+       @Column(name="SO_TEMP")
+       private BigDecimal soTemp;
+
+       private String specialInstructions;
+
+       private Float spinalAdjustment;
+
+       private String spinalMedication;
+
+       private Float spinalVolume;
+
+       private BigDecimal spo2;
+
+       private String stressThallium;
+
+       private String surgeons;
+
+       private Float surgeryTime;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       private Date time_In;
+
+       @Lob
+       private String time_In_Comment;
+
+       private String tmt;
+
+       private Float ulbAdjustment;
+
+       private String ulbMedication;
+
+       private Float ulbVolume;
+
+       private String updatedBy;
+
+       @Temporal(TemporalType.TIMESTAMP)
+       private Date updatedTime;
+
+       private String vein;
+       
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="NEW_EVENT_4")
+       private Date newEvent4;
+
+       @Lob
+       @Column(name="NEW_EVENT_4_COMMENT")
+       private String newEvent4Comment;
+       
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="NEW_EVENT_5")
+       private Date newEvent5;
+
+       @Lob
+       @Column(name="NEW_EVENT_5_COMMENT")
+       private String newEvent5Comment;
+       
+       
+       @Temporal(TemporalType.TIMESTAMP)
+       @Column(name="SHIFTOUT_TIME")
+       private Date shiftoutTime;
+
+       @Lob
+       @Column(name="SHIFTOUT_TIME_COMMENT")
+       private String shiftoutTimeComment;
+        
+
+       public Integer getAuditReportID() {
+              return auditReportID;
+       }
+
+       public void setAuditReportID(Integer auditReportID) {
+              this.auditReportID = auditReportID;
+       }
+
+	public String getAbg() {
+		return abg;
+	}
+
+	public void setAbg(String abg) {
+		this.abg = abg;
+	}
+
+	public Integer getAldreteScore() {
+		return aldreteScore;
+	}
+
+	public void setAldreteScore(Integer aldreteScore) {
+		this.aldreteScore = aldreteScore;
+	}
+
+	public Float getAnesthesiaTime() {
+		return anesthesiaTime;
+	}
+
+	public void setAnesthesiaTime(Float anesthesiaTime) {
+		this.anesthesiaTime = anesthesiaTime;
+	}
+
+	public String getAnesthesiologists() {
+		return anesthesiologists;
+	}
+
+	public void setAnesthesiologists(String anesthesiologists) {
+		this.anesthesiologists = anesthesiologists;
+	}
+
+	public String getArterialUltrasoundBlind() {
+		return arterialUltrasoundBlind;
+	}
+
+	public void setArterialUltrasoundBlind(String arterialUltrasoundBlind) {
+		this.arterialUltrasoundBlind = arterialUltrasoundBlind;
+	}
+
+	public String getArterySite() {
+		return arterySite;
+	}
+
+	public void setArterySite(String arterySite) {
+		this.arterySite = arterySite;
+	}
+
+	public String getArterySize() {
+		return arterySize;
+	}
+
+	public void setArterySize(String arterySize) {
+		this.arterySize = arterySize;
+	}
+
+	public BigDecimal getAuc() {
+		return auc;
+	}
+
+	public void setAuc(BigDecimal auc) {
+		this.auc = auc;
+	}
+
+	public Date getAxcOff() {
+		return axcOff;
+	}
+
+	public void setAxcOff(Date axcOff) {
+		this.axcOff = axcOff;
+	}
+
+	public String getAxcOffComment() {
+		return axcOffComment;
+	}
+
+	public void setAxcOffComment(String axcOffComment) {
+		this.axcOffComment = axcOffComment;
+	}
+
+	public Date getAxcOn() {
+		return axcOn;
+	}
+
+	public void setAxcOn(Date axcOn) {
+		this.axcOn = axcOn;
+	}
+
+	public String getAxcOnComment() {
+		return axcOnComment;
+	}
+
+	public void setAxcOnComment(String axcOnComment) {
+		this.axcOnComment = axcOnComment;
+	}
+
+	public Float getAXCTime() {
+		return AXCTime;
+	}
+
+	public void setAXCTime(Float aXCTime) {
+		AXCTime = aXCTime;
+	}
+
+	public String getBackup_Active() {
+		return backup_Active;
+	}
+
+	public void setBackup_Active(String backup_Active) {
+		this.backup_Active = backup_Active;
+	}
+
+	public BigDecimal getBeatsPerMinutes() {
+		return beatsPerMinutes;
+	}
+
+	public void setBeatsPerMinutes(BigDecimal beatsPerMinutes) {
+		this.beatsPerMinutes = beatsPerMinutes;
+	}
+
+	public String getBiochemistry() {
+		return biochemistry;
+	}
+
+	public void setBiochemistry(String biochemistry) {
+		this.biochemistry = biochemistry;
+	}
+
+	public String getBleedingIssues() {
+		return bleedingIssues;
+	}
+
+	public void setBleedingIssues(String bleedingIssues) {
+		this.bleedingIssues = bleedingIssues;
+	}
+
+	public String getBloodOnTip() {
+		return bloodOnTip;
+	}
+
+	public void setBloodOnTip(String bloodOnTip) {
+		this.bloodOnTip = bloodOnTip;
+	}
+
+	public Date getCannulation() {
+		return cannulation;
+	}
+
+	public void setCannulation(Date cannulation) {
+		this.cannulation = cannulation;
+	}
+
+	public String getCannulationComment() {
+		return cannulationComment;
+	}
+
+	public void setCannulationComment(String cannulationComment) {
+		this.cannulationComment = cannulationComment;
+	}
+
+	public String getCannulationsInsertedBy() {
+		return cannulationsInsertedBy;
+	}
+
+	public void setCannulationsInsertedBy(String cannulationsInsertedBy) {
+		this.cannulationsInsertedBy = cannulationsInsertedBy;
+	}
+
+	public Long getCaseID() {
+		return caseID;
+	}
+
+	public void setCaseID(Long caseID) {
+		this.caseID = caseID;
+	}
+
+	public String getCatheterisation() {
+		return catheterisation;
+	}
+
+	public void setCatheterisation(String catheterisation) {
+		this.catheterisation = catheterisation;
+	}
+
+	public String getCentralLineSite() {
+		return centralLineSite;
+	}
+
+	public void setCentralLineSite(String centralLineSite) {
+		this.centralLineSite = centralLineSite;
+	}
+
+	public String getCentralUltrasoundBlind() {
+		return centralUltrasoundBlind;
+	}
+
+	public void setCentralUltrasoundBlind(String centralUltrasoundBlind) {
+		this.centralUltrasoundBlind = centralUltrasoundBlind;
+	}
+
+	public String getChangeInDiagnosis() {
+		return changeInDiagnosis;
+	}
+
+	public void setChangeInDiagnosis(String changeInDiagnosis) {
+		this.changeInDiagnosis = changeInDiagnosis;
+	}
+
+	public String getCoagulogram() {
+		return coagulogram;
+	}
+
+	public void setCoagulogram(String coagulogram) {
+		this.coagulogram = coagulogram;
+	}
+
+	public String getComorbidities() {
+		return comorbidities;
+	}
+
+	public void setComorbidities(String comorbidities) {
+		this.comorbidities = comorbidities;
+	}
+
+	public String getComplications() {
+		return complications;
+	}
+
+	public void setComplications(String complications) {
+		this.complications = complications;
+	}
+
+	public String getCoughedUncoughed() {
+		return coughedUncoughed;
+	}
+
+	public void setCoughedUncoughed(String coughedUncoughed) {
+		this.coughedUncoughed = coughedUncoughed;
+	}
+
+	public Date getCpbOff() {
+		return cpbOff;
+	}
+
+	public void setCpbOff(Date cpbOff) {
+		this.cpbOff = cpbOff;
+	}
+
+	public String getCpbOffComment() {
+		return cpbOffComment;
+	}
+
+	public void setCpbOffComment(String cpbOffComment) {
+		this.cpbOffComment = cpbOffComment;
+	}
+
+	public Date getCpbOn() {
+		return cpbOn;
+	}
+
+	public void setCpbOn(Date cpbOn) {
+		this.cpbOn = cpbOn;
+	}
+
+	public String getCpbOnComment() {
+		return cpbOnComment;
+	}
+
+	public void setCpbOnComment(String cpbOnComment) {
+		this.cpbOnComment = cpbOnComment;
+	}
+
+	public Float getCPBTime() {
+		return CPBTime;
+	}
+
+	public void setCPBTime(Float cPBTime) {
+		CPBTime = cPBTime;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	public BigDecimal getCvp() {
+		return cvp;
+	}
+
+	public void setCvp(BigDecimal cvp) {
+		this.cvp = cvp;
+	}
+
+	public String getCxr() {
+		return cxr;
+	}
+
+	public void setCxr(String cxr) {
+		this.cxr = cxr;
+	}
+
+	public Date getDecannulation() {
+		return decannulation;
+	}
+
+	public void setDecannulation(Date decannulation) {
+		this.decannulation = decannulation;
+	}
+
+	public String getDecannulationComment() {
+		return decannulationComment;
+	}
+
+	public void setDecannulationComment(String decannulationComment) {
+		this.decannulationComment = decannulationComment;
+	}
+
+	public String getEcg() {
+		return ecg;
+	}
+
+	public void setEcg(String ecg) {
+		this.ecg = ecg;
+	}
+
+	public String getEchoInsertedBy() {
+		return echoInsertedBy;
+	}
+
+	public void setEchoInsertedBy(String echoInsertedBy) {
+		this.echoInsertedBy = echoInsertedBy;
+	}
+
+	public Float getEpiduralAdjustment() {
+		return epiduralAdjustment;
+	}
+
+	public void setEpiduralAdjustment(Float epiduralAdjustment) {
+		this.epiduralAdjustment = epiduralAdjustment;
+	}
+
+	public String getEpiduralMedication() {
+		return epiduralMedication;
+	}
+
+	public void setEpiduralMedication(String epiduralMedication) {
+		this.epiduralMedication = epiduralMedication;
+	}
+
+	public Float getEpiduralVolume() {
+		return epiduralVolume;
+	}
+
+	public void setEpiduralVolume(Float epiduralVolume) {
+		this.epiduralVolume = epiduralVolume;
+	}
+
+	public Float getFluidNormalSaline() {
+		return fluidNormalSaline;
+	}
+
+	public void setFluidNormalSaline(Float fluidNormalSaline) {
+		this.fluidNormalSaline = fluidNormalSaline;
+	}
+
+	public Float getFluidRingerLactate() {
+		return fluidRingerLactate;
+	}
+
+	public void setFluidRingerLactate(Float fluidRingerLactate) {
+		this.fluidRingerLactate = fluidRingerLactate;
+	}
+
+	public String getGA_AirPressure() {
+		return GA_AirPressure;
+	}
+
+	public void setGA_AirPressure(String gA_AirPressure) {
+		GA_AirPressure = gA_AirPressure;
+	}
+
+	public String getGA_ETTAttempts() {
+		return GA_ETTAttempts;
+	}
+
+	public void setGA_ETTAttempts(String gA_ETTAttempts) {
+		GA_ETTAttempts = gA_ETTAttempts;
+	}
+
+	public String getGA_ETTFixedAt() {
+		return GA_ETTFixedAt;
+	}
+
+	public void setGA_ETTFixedAt(String gA_ETTFixedAt) {
+		GA_ETTFixedAt = gA_ETTFixedAt;
+	}
+
+	public String getGA_ETTSize() {
+		return GA_ETTSize;
+	}
+
+	public void setGA_ETTSize(String gA_ETTSize) {
+		GA_ETTSize = gA_ETTSize;
+	}
+
+	public String getGA_FiO2() {
+		return GA_FiO2;
+	}
+
+	public void setGA_FiO2(String gA_FiO2) {
+		GA_FiO2 = gA_FiO2;
+	}
+
+	public String getGaIe() {
+		return gaIe;
+	}
+
+	public void setGaIe(String gaIe) {
+		this.gaIe = gaIe;
+	}
+
+	public String getGaRr() {
+		return gaRr;
+	}
+
+	public void setGaRr(String gaRr) {
+		this.gaRr = gaRr;
+	}
+
+	public String getGA_SupraglotticAttempts() {
+		return GA_SupraglotticAttempts;
+	}
+
+	public void setGA_SupraglotticAttempts(String gA_SupraglotticAttempts) {
+		GA_SupraglotticAttempts = gA_SupraglotticAttempts;
+	}
+
+	public String getGA_SupraglotticComment() {
+		return GA_SupraglotticComment;
+	}
+
+	public void setGA_SupraglotticComment(String gA_SupraglotticComment) {
+		GA_SupraglotticComment = gA_SupraglotticComment;
+	}
+
+	public String getGA_SupraglotticSize() {
+		return GA_SupraglotticSize;
+	}
+
+	public void setGA_SupraglotticSize(String gA_SupraglotticSize) {
+		GA_SupraglotticSize = gA_SupraglotticSize;
+	}
+
+	public String getGA_Ventilation() {
+		return GA_Ventilation;
+	}
+
+	public void setGA_Ventilation(String gA_Ventilation) {
+		GA_Ventilation = gA_Ventilation;
+	}
+
+	public String getGA_VentilationComment() {
+		return GA_VentilationComment;
+	}
+
+	public void setGA_VentilationComment(String gA_VentilationComment) {
+		GA_VentilationComment = gA_VentilationComment;
+	}
+
+	public String getGaVt() {
+		return gaVt;
+	}
+
+	public void setGaVt(String gaVt) {
+		this.gaVt = gaVt;
+	}
+
+	public Date getHand_Over_Time() {
+		return hand_Over_Time;
+	}
+
+	public void setHand_Over_Time(Date hand_Over_Time) {
+		this.hand_Over_Time = hand_Over_Time;
+	}
+
+	public String getHand_Over_Time_Comment() {
+		return hand_Over_Time_Comment;
+	}
+
+	public void setHand_Over_Time_Comment(String hand_Over_Time_Comment) {
+		this.hand_Over_Time_Comment = hand_Over_Time_Comment;
+	}
+
+	public Float getHandOverTime() {
+		return handOverTime;
+	}
+
+	public void setHandOverTime(Float handOverTime) {
+		this.handOverTime = handOverTime;
+	}
+
+	public String getHemogram() {
+		return hemogram;
+	}
+
+	public void setHemogram(String hemogram) {
+		this.hemogram = hemogram;
+	}
+
+	public BigDecimal getHr() {
+		return hr;
+	}
+
+	public void setHr(BigDecimal hr) {
+		this.hr = hr;
+	}
+
+	public String getICU_Analgesia() {
+		return ICU_Analgesia;
+	}
+
+	public void setICU_Analgesia(String iCU_Analgesia) {
+		ICU_Analgesia = iCU_Analgesia;
+	}
+
+	public String getICU_Extubation() {
+		return ICU_Extubation;
+	}
+
+	public void setICU_Extubation(String iCU_Extubation) {
+		ICU_Extubation = iCU_Extubation;
+	}
+
+	public String getIcuNiv() {
+		return icuNiv;
+	}
+
+	public void setIcuNiv(String icuNiv) {
+		this.icuNiv = icuNiv;
+	}
+
+	public String getICU_Paralysis() {
+		return ICU_Paralysis;
+	}
+
+	public void setICU_Paralysis(String iCU_Paralysis) {
+		ICU_Paralysis = iCU_Paralysis;
+	}
+
+	public String getICU_Sedation() {
+		return ICU_Sedation;
+	}
+
+	public void setICU_Sedation(String iCU_Sedation) {
+		ICU_Sedation = iCU_Sedation;
+	}
+
+	public Date getIncision() {
+		return incision;
+	}
+
+	public void setIncision(Date incision) {
+		this.incision = incision;
+	}
+
+	public String getIncisionComment() {
+		return incisionComment;
+	}
+
+	public void setIncisionComment(String incisionComment) {
+		this.incisionComment = incisionComment;
+	}
+
+	public Date getInduction_Time() {
+		return induction_Time;
+	}
+
+	public void setInduction_Time(Date induction_Time) {
+		this.induction_Time = induction_Time;
+	}
+
+	public String getInduction_Time_Comment() {
+		return induction_Time_Comment;
+	}
+
+	public void setInduction_Time_Comment(String induction_Time_Comment) {
+		this.induction_Time_Comment = induction_Time_Comment;
+	}
+
+	public BigDecimal getInotropicScore() {
+		return inotropicScore;
+	}
+
+	public void setInotropicScore(BigDecimal inotropicScore) {
+		this.inotropicScore = inotropicScore;
+	}
+
+	public String getInsertionLength() {
+		return insertionLength;
+	}
+
+	public void setInsertionLength(String insertionLength) {
+		this.insertionLength = insertionLength;
+	}
+
+	public String getInsertionSize() {
+		return insertionSize;
+	}
+
+	public void setInsertionSize(String insertionSize) {
+		this.insertionSize = insertionSize;
+	}
+
+	public String getIntraOPDetails() {
+		return intraOPDetails;
+	}
+
+	public void setIntraOPDetails(String intraOPDetails) {
+		this.intraOPDetails = intraOPDetails;
+	}
+
+	public Date getIntubation_Time() {
+		return intubation_Time;
+	}
+
+	public void setIntubation_Time(Date intubation_Time) {
+		this.intubation_Time = intubation_Time;
+	}
+
+	public String getIntubation_Time_Comment() {
+		return intubation_Time_Comment;
+	}
+
+	public void setIntubation_Time_Comment(String intubation_Time_Comment) {
+		this.intubation_Time_Comment = intubation_Time_Comment;
+	}
+
+	public String getInvestigations() {
+		return investigations;
+	}
+
+	public void setInvestigations(String investigations) {
+		this.investigations = investigations;
+	}
+
+	public String getIVLineBloodDetails() {
+		return IVLineBloodDetails;
+	}
+
+	public void setIVLineBloodDetails(String iVLineBloodDetails) {
+		IVLineBloodDetails = iVLineBloodDetails;
+	}
+
+	public String getIVLineInfusionDetails() {
+		return IVLineInfusionDetails;
+	}
+
+	public void setIVLineInfusionDetails(String iVLineInfusionDetails) {
+		IVLineInfusionDetails = iVLineInfusionDetails;
+	}
+
+	public String getIVLineInoTropsDetails() {
+		return IVLineInoTropsDetails;
+	}
+
+	public void setIVLineInoTropsDetails(String iVLineInoTropsDetails) {
+		IVLineInoTropsDetails = iVLineInoTropsDetails;
+	}
+
+	public String getIVLineIVFluidsDetails() {
+		return IVLineIVFluidsDetails;
+	}
+
+	public void setIVLineIVFluidsDetails(String iVLineIVFluidsDetails) {
+		IVLineIVFluidsDetails = iVLineIVFluidsDetails;
+	}
+
+	public String getLeads() {
+		return leads;
+	}
+
+	public void setLeads(String leads) {
+		this.leads = leads;
+	}
+
+	public Float getLlbAdjustment() {
+		return llbAdjustment;
+	}
+
+	public void setLlbAdjustment(Float llbAdjustment) {
+		this.llbAdjustment = llbAdjustment;
+	}
+
+	public String getLlbMedication() {
+		return llbMedication;
+	}
+
+	public void setLlbMedication(String llbMedication) {
+		this.llbMedication = llbMedication;
+	}
+
+	public Float getLlbVolume() {
+		return llbVolume;
+	}
+
+	public void setLlbVolume(Float llbVolume) {
+		this.llbVolume = llbVolume;
+	}
+
+	public String getLTPleural() {
+		return LTPleural;
+	}
+
+	public void setLTPleural(String lTPleural) {
+		LTPleural = lTPleural;
+	}
+
+	public String getMAC_Comment() {
+		return MAC_Comment;
+	}
+
+	public void setMAC_Comment(String mAC_Comment) {
+		MAC_Comment = mAC_Comment;
+	}
+
+	public String getMachineName() {
+		return machineName;
+	}
+
+	public void setMachineName(String machineName) {
+		this.machineName = machineName;
+	}
+
+	public BigDecimal getMao() {
+		return mao;
+	}
+
+	public void setMao(BigDecimal mao) {
+		this.mao = mao;
+	}
+
+	public Float getMedAdrenaline() {
+		return medAdrenaline;
+	}
+
+	public void setMedAdrenaline(Float medAdrenaline) {
+		this.medAdrenaline = medAdrenaline;
+	}
+
+	public Float getMedAtrcurium() {
+		return medAtrcurium;
+	}
+
+	public void setMedAtrcurium(Float medAtrcurium) {
+		this.medAtrcurium = medAtrcurium;
+	}
+
+	public Float getMedAtropine() {
+		return medAtropine;
+	}
+
+	public void setMedAtropine(Float medAtropine) {
+		this.medAtropine = medAtropine;
+	}
+
+	public Float getMedCalciumChloride() {
+		return medCalciumChloride;
+	}
+
+	public void setMedCalciumChloride(Float medCalciumChloride) {
+		this.medCalciumChloride = medCalciumChloride;
+	}
+
+	public Float getMedCalciumGluconate() {
+		return medCalciumGluconate;
+	}
+
+	public void setMedCalciumGluconate(Float medCalciumGluconate) {
+		this.medCalciumGluconate = medCalciumGluconate;
+	}
+
+	public Float getMedCefuroxime() {
+		return medCefuroxime;
+	}
+
+	public void setMedCefuroxime(Float medCefuroxime) {
+		this.medCefuroxime = medCefuroxime;
+	}
+
+	public Float getMedDexamethasone() {
+		return medDexamethasone;
+	}
+
+	public void setMedDexamethasone(Float medDexamethasone) {
+		this.medDexamethasone = medDexamethasone;
+	}
+
+	public Float getMedEaca() {
+		return medEaca;
+	}
+
+	public void setMedEaca(Float medEaca) {
+		this.medEaca = medEaca;
+	}
+
+	public Float getMedEtomidate() {
+		return medEtomidate;
+	}
+
+	public void setMedEtomidate(Float medEtomidate) {
+		this.medEtomidate = medEtomidate;
+	}
+
+	public Float getMedFentanyl() {
+		return medFentanyl;
+	}
+
+	public void setMedFentanyl(Float medFentanyl) {
+		this.medFentanyl = medFentanyl;
+	}
+
+	public Float getMedHeparin() {
+		return medHeparin;
+	}
+
+	public void setMedHeparin(Float medHeparin) {
+		this.medHeparin = medHeparin;
+	}
+
+	public Float getMedHydrocortisone() {
+		return medHydrocortisone;
+	}
+
+	public void setMedHydrocortisone(Float medHydrocortisone) {
+		this.medHydrocortisone = medHydrocortisone;
+	}
+
+	public Float getMedKetamine() {
+		return medKetamine;
+	}
+
+	public void setMedKetamine(Float medKetamine) {
+		this.medKetamine = medKetamine;
+	}
+
+	public Float getMedMagnesium() {
+		return medMagnesium;
+	}
+
+	public void setMedMagnesium(Float medMagnesium) {
+		this.medMagnesium = medMagnesium;
+	}
+
+	public Float getMedMeropenam() {
+		return medMeropenam;
+	}
+
+	public void setMedMeropenam(Float medMeropenam) {
+		this.medMeropenam = medMeropenam;
+	}
+
+	public Float getMedMorphine() {
+		return medMorphine;
+	}
+
+	public void setMedMorphine(Float medMorphine) {
+		this.medMorphine = medMorphine;
+	}
+
+	public Float getMedPhenylephrine() {
+		return medPhenylephrine;
+	}
+
+	public void setMedPhenylephrine(Float medPhenylephrine) {
+		this.medPhenylephrine = medPhenylephrine;
+	}
+
+	public Float getMedPropofol() {
+		return medPropofol;
+	}
+
+	public void setMedPropofol(Float medPropofol) {
+		this.medPropofol = medPropofol;
+	}
+
+	public Float getMedProtamine() {
+		return medProtamine;
+	}
+
+	public void setMedProtamine(Float medProtamine) {
+		this.medProtamine = medProtamine;
+	}
+
+	public Float getMedSufentanyl() {
+		return medSufentanyl;
+	}
+
+	public void setMedSufentanyl(Float medSufentanyl) {
+		this.medSufentanyl = medSufentanyl;
+	}
+
+	public Float getMedVancomysin() {
+		return medVancomysin;
+	}
+
+	public void setMedVancomysin(Float medVancomysin) {
+		this.medVancomysin = medVancomysin;
+	}
+
+	public Float getMedVecuronium() {
+		return medVecuronium;
+	}
+
+	public void setMedVecuronium(Float medVecuronium) {
+		this.medVecuronium = medVecuronium;
+	}
+
+	public Float getMedXylocard() {
+		return medXylocard;
+	}
+
+	public void setMedXylocard(Float medXylocard) {
+		this.medXylocard = medXylocard;
+	}
+
+	public String getMethodOfInsertion() {
+		return methodOfInsertion;
+	}
+
+	public void setMethodOfInsertion(String methodOfInsertion) {
+		this.methodOfInsertion = methodOfInsertion;
+	}
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+
+	public String getNegativeSuction() {
+		return negativeSuction;
+	}
+
+	public void setNegativeSuction(String negativeSuction) {
+		this.negativeSuction = negativeSuction;
+	}
+
+	public Date getNewEvent1() {
+		return newEvent1;
+	}
+
+	public void setNewEvent1(Date newEvent1) {
+		this.newEvent1 = newEvent1;
+	}
+
+	public String getNewEvent1Comment() {
+		return newEvent1Comment;
+	}
+
+	public void setNewEvent1Comment(String newEvent1Comment) {
+		this.newEvent1Comment = newEvent1Comment;
+	}
+
+	public Date getNewEvent2() {
+		return newEvent2;
+	}
+
+	public void setNewEvent2(Date newEvent2) {
+		this.newEvent2 = newEvent2;
+	}
+
+	public String getNewEvent2Comment() {
+		return newEvent2Comment;
+	}
+
+	public void setNewEvent2Comment(String newEvent2Comment) {
+		this.newEvent2Comment = newEvent2Comment;
+	}
+
+	public Date getNewEvent3() {
+		return newEvent3;
+	}
+
+	public void setNewEvent3(Date newEvent3) {
+		this.newEvent3 = newEvent3;
+	}
+
+	public String getNewEvent3Comment() {
+		return newEvent3Comment;
+	}
+
+	public void setNewEvent3Comment(String newEvent3Comment) {
+		this.newEvent3Comment = newEvent3Comment;
+	}
+
+	public String getNewFindings() {
+		return newFindings;
+	}
+
+	public void setNewFindings(String newFindings) {
+		this.newFindings = newFindings;
+	}
+
+	public String getNsRate() {
+		return nsRate;
+	}
+
+	public void setNsRate(String nsRate) {
+		this.nsRate = nsRate;
+	}
+
+	public String getOt() {
+		return ot;
+	}
+
+	public void setOt(String ot) {
+		this.ot = ot;
+	}
+
+	public String getOtherAnesthesiologists() {
+		return otherAnesthesiologists;
+	}
+
+	public void setOtherAnesthesiologists(String otherAnesthesiologists) {
+		this.otherAnesthesiologists = otherAnesthesiologists;
+	}
+
+	public Float getOTTime() {
+		return OTTime;
+	}
+
+	public void setOTTime(Float oTTime) {
+		OTTime = oTTime;
+	}
+
+	public String getPacingSupport() {
+		return pacingSupport;
+	}
+
+	public void setPacingSupport(String pacingSupport) {
+		this.pacingSupport = pacingSupport;
+	}
+
+	public String getPACUDate() {
+		return PACUDate;
+	}
+
+	public void setPACUDate(String pACUDate) {
+		PACUDate = pACUDate;
+	}
+
+	public String getPACUTime() {
+		return PACUTime;
+	}
+
+	public void setPACUTime(String pACUTime) {
+		PACUTime = pACUTime;
+	}
+
+	public String getPatientPosition() {
+		return patientPosition;
+	}
+
+	public void setPatientPosition(String patientPosition) {
+		this.patientPosition = patientPosition;
+	}
+
+	public Float getPatientPreparationTime() {
+		return patientPreparationTime;
+	}
+
+	public void setPatientPreparationTime(Float patientPreparationTime) {
+		this.patientPreparationTime = patientPreparationTime;
+	}
+
+	public String getPc() {
+		return pc;
+	}
+
+	public void setPc(String pc) {
+		this.pc = pc;
+	}
+
+	public String getPeripheralSite() {
+		return peripheralSite;
+	}
+
+	public void setPeripheralSite(String peripheralSite) {
+		this.peripheralSite = peripheralSite;
+	}
+
+	public String getPeripheralSize() {
+		return peripheralSize;
+	}
+
+	public void setPeripheralSize(String peripheralSize) {
+		this.peripheralSize = peripheralSize;
+	}
+
+	public String getPeripheralUltrasoundBlind() {
+		return peripheralUltrasoundBlind;
+	}
+
+	public void setPeripheralUltrasoundBlind(String peripheralUltrasoundBlind) {
+		this.peripheralUltrasoundBlind = peripheralUltrasoundBlind;
+	}
+
+	public String getPostALB() {
+		return postALB;
+	}
+
+	public void setPostALB(String postALB) {
+		this.postALB = postALB;
+	}
+
+	public String getPostBlood() {
+		return postBlood;
+	}
+
+	public void setPostBlood(String postBlood) {
+		this.postBlood = postBlood;
+	}
+
+	public String getPostDetails() {
+		return postDetails;
+	}
+
+	public void setPostDetails(String postDetails) {
+		this.postDetails = postDetails;
+	}
+
+	public String getPostEchoDetails() {
+		return postEchoDetails;
+	}
+
+	public void setPostEchoDetails(String postEchoDetails) {
+		this.postEchoDetails = postEchoDetails;
+	}
+
+	public String getPostFFP() {
+		return postFFP;
+	}
+
+	public void setPostFFP(String postFFP) {
+		this.postFFP = postFFP;
+	}
+
+	public String getPostIVF() {
+		return postIVF;
+	}
+
+	public void setPostIVF(String postIVF) {
+		this.postIVF = postIVF;
+	}
+
+	public String getPostNetBalance() {
+		return postNetBalance;
+	}
+
+	public void setPostNetBalance(String postNetBalance) {
+		this.postNetBalance = postNetBalance;
+	}
+
+	public String getPostPC() {
+		return postPC;
+	}
+
+	public void setPostPC(String postPC) {
+		this.postPC = postPC;
+	}
+
+	public String getPreBlood() {
+		return preBlood;
+	}
+
+	public void setPreBlood(String preBlood) {
+		this.preBlood = preBlood;
+	}
+
+	public String getPreCrystalloidCPG() {
+		return preCrystalloidCPG;
+	}
+
+	public void setPreCrystalloidCPG(String preCrystalloidCPG) {
+		this.preCrystalloidCPG = preCrystalloidCPG;
+	}
+
+	public String getPreDetails() {
+		return preDetails;
+	}
+
+	public void setPreDetails(String preDetails) {
+		this.preDetails = preDetails;
+	}
+
+	public String getPreEchoDetails() {
+		return preEchoDetails;
+	}
+
+	public void setPreEchoDetails(String preEchoDetails) {
+		this.preEchoDetails = preEchoDetails;
+	}
+
+	public String getPreNaHCO3() {
+		return preNaHCO3;
+	}
+
+	public void setPreNaHCO3(String preNaHCO3) {
+		this.preNaHCO3 = preNaHCO3;
+	}
+
+	public String getPreNS() {
+		return preNS;
+	}
+
+	public void setPreNS(String preNS) {
+		this.preNS = preNS;
+	}
+
+	public String getPrePrime() {
+		return prePrime;
+	}
+
+	public void setPrePrime(String prePrime) {
+		this.prePrime = prePrime;
+	}
+
+	public String getPreRL() {
+		return preRL;
+	}
+
+	public void setPreRL(String preRL) {
+		this.preRL = preRL;
+	}
+
+	public String getPrimeAlbumin() {
+		return primeAlbumin;
+	}
+
+	public void setPrimeAlbumin(String primeAlbumin) {
+		this.primeAlbumin = primeAlbumin;
+	}
+
+	public String getPrimeBlood() {
+		return primeBlood;
+	}
+
+	public void setPrimeBlood(String primeBlood) {
+		this.primeBlood = primeBlood;
+	}
+
+	public String getPrimeCaCl2() {
+		return primeCaCl2;
+	}
+
+	public void setPrimeCaCl2(String primeCaCl2) {
+		this.primeCaCl2 = primeCaCl2;
+	}
+
+	public String getPrimeDetails() {
+		return primeDetails;
+	}
+
+	public void setPrimeDetails(String primeDetails) {
+		this.primeDetails = primeDetails;
+	}
+
+	public String getPrimeHeparin() {
+		return primeHeparin;
+	}
+
+	public void setPrimeHeparin(String primeHeparin) {
+		this.primeHeparin = primeHeparin;
+	}
+
+	public String getPrimeMannitol() {
+		return primeMannitol;
+	}
+
+	public void setPrimeMannitol(String primeMannitol) {
+		this.primeMannitol = primeMannitol;
+	}
+
+	public String getPrimeNaHCO3() {
+		return primeNaHCO3;
+	}
+
+	public void setPrimeNaHCO3(String primeNaHCO3) {
+		this.primeNaHCO3 = primeNaHCO3;
+	}
+
+	public String getPrimeNS() {
+		return primeNS;
+	}
+
+	public void setPrimeNS(String primeNS) {
+		this.primeNS = primeNS;
+	}
+
+	public String getProbeSize() {
+		return probeSize;
+	}
+
+	public void setProbeSize(String probeSize) {
+		this.probeSize = probeSize;
+	}
+
+	public String getPulmonaryFunctionTest() {
+		return pulmonaryFunctionTest;
+	}
+
+	public void setPulmonaryFunctionTest(String pulmonaryFunctionTest) {
+		this.pulmonaryFunctionTest = pulmonaryFunctionTest;
+	}
+
+	public String getRA_EpiduralCfixedAt() {
+		return RA_EpiduralCfixedAt;
+	}
+
+	public void setRA_EpiduralCfixedAt(String rA_EpiduralCfixedAt) {
+		RA_EpiduralCfixedAt = rA_EpiduralCfixedAt;
+	}
+
+	public String getRA_EpiduralNeedle() {
+		return RA_EpiduralNeedle;
+	}
+
+	public void setRA_EpiduralNeedle(String rA_EpiduralNeedle) {
+		RA_EpiduralNeedle = rA_EpiduralNeedle;
+	}
+
+	public String getRA_EpiduralSite() {
+		return RA_EpiduralSite;
+	}
+
+	public void setRA_EpiduralSite(String rA_EpiduralSite) {
+		RA_EpiduralSite = rA_EpiduralSite;
+	}
+
+	public String getRA_LlbLpnbapproach() {
+		return RA_LlbLpnbapproach;
+	}
+
+	public void setRA_LlbLpnbapproach(String rA_LlbLpnbapproach) {
+		RA_LlbLpnbapproach = rA_LlbLpnbapproach;
+	}
+
+	public String getRA_Llbsite() {
+		return RA_Llbsite;
+	}
+
+	public void setRA_Llbsite(String rA_Llbsite) {
+		RA_Llbsite = rA_Llbsite;
+	}
+
+	public String getRA_LlbSpnbapproach() {
+		return RA_LlbSpnbapproach;
+	}
+
+	public void setRA_LlbSpnbapproach(String rA_LlbSpnbapproach) {
+		RA_LlbSpnbapproach = rA_LlbSpnbapproach;
+	}
+
+	public String getRA_SpinalHsl() {
+		return RA_SpinalHsl;
+	}
+
+	public void setRA_SpinalHsl(String rA_SpinalHsl) {
+		RA_SpinalHsl = rA_SpinalHsl;
+	}
+
+	public String getRA_SpinalNeedle() {
+		return RA_SpinalNeedle;
+	}
+
+	public void setRA_SpinalNeedle(String rA_SpinalNeedle) {
+		RA_SpinalNeedle = rA_SpinalNeedle;
+	}
+
+	public String getRA_SpinalSite() {
+		return RA_SpinalSite;
+	}
+
+	public void setRA_SpinalSite(String rA_SpinalSite) {
+		RA_SpinalSite = rA_SpinalSite;
+	}
+
+	public String getRA_UlbBpbapproach() {
+		return RA_UlbBpbapproach;
+	}
+
+	public void setRA_UlbBpbapproach(String rA_UlbBpbapproach) {
+		RA_UlbBpbapproach = rA_UlbBpbapproach;
+	}
+
+	public String getRA_UlbPnbapproach() {
+		return RA_UlbPnbapproach;
+	}
+
+	public void setRA_UlbPnbapproach(String rA_UlbPnbapproach) {
+		RA_UlbPnbapproach = rA_UlbPnbapproach;
+	}
+
+	public String getRA_Ulbsite() {
+		return RA_Ulbsite;
+	}
+
+	public void setRA_Ulbsite(String rA_Ulbsite) {
+		RA_Ulbsite = rA_Ulbsite;
+	}
+
+	public BigDecimal getRlRate() {
+		return rlRate;
+	}
+
+	public void setRlRate(BigDecimal rlRate) {
+		this.rlRate = rlRate;
+	}
+
+	public String getRs() {
+		return rs;
+	}
+
+	public void setRs(String rs) {
+		this.rs = rs;
+	}
+
+	public String getRTPleural() {
+		return RTPleural;
+	}
+
+	public void setRTPleural(String rTPleural) {
+		RTPleural = rTPleural;
+	}
+
+	public Float getShiftingOutTime() {
+		return shiftingOutTime;
+	}
+
+	public void setShiftingOutTime(Float shiftingOutTime) {
+		this.shiftingOutTime = shiftingOutTime;
+	}
+
+	public Date getSkinClosure() {
+		return skinClosure;
+	}
+
+	public void setSkinClosure(Date skinClosure) {
+		this.skinClosure = skinClosure;
+	}
+
+	public String getSkinClosureComment() {
+		return skinClosureComment;
+	}
+
+	public void setSkinClosureComment(String skinClosureComment) {
+		this.skinClosureComment = skinClosureComment;
+	}
+
+	public String getSoDbp() {
+		return soDbp;
+	}
+
+	public void setSoDbp(String soDbp) {
+		this.soDbp = soDbp;
+	}
+
+	public String getSoMbp() {
+		return soMbp;
+	}
+
+	public void setSoMbp(String soMbp) {
+		this.soMbp = soMbp;
+	}
+
+	public BigDecimal getSoPr() {
+		return soPr;
+	}
+
+	public void setSoPr(BigDecimal soPr) {
+		this.soPr = soPr;
+	}
+
+	public String getSO_RespSupport() {
+		return SO_RespSupport;
+	}
+
+	public void setSO_RespSupport(String sO_RespSupport) {
+		SO_RespSupport = sO_RespSupport;
+	}
+
+	public BigDecimal getSoRr() {
+		return soRr;
+	}
+
+	public void setSoRr(BigDecimal soRr) {
+		this.soRr = soRr;
+	}
+
+	public String getSoSbp() {
+		return soSbp;
+	}
+
+	public void setSoSbp(String soSbp) {
+		this.soSbp = soSbp;
+	}
+
+	public BigDecimal getSoSpo2() {
+		return soSpo2;
+	}
+
+	public void setSoSpo2(BigDecimal soSpo2) {
+		this.soSpo2 = soSpo2;
+	}
+
+	public BigDecimal getSoTemp() {
+		return soTemp;
+	}
+
+	public void setSoTemp(BigDecimal soTemp) {
+		this.soTemp = soTemp;
+	}
+
+	public String getSpecialInstructions() {
+		return specialInstructions;
+	}
+
+	public void setSpecialInstructions(String specialInstructions) {
+		this.specialInstructions = specialInstructions;
+	}
+
+	public Float getSpinalAdjustment() {
+		return spinalAdjustment;
+	}
+
+	public void setSpinalAdjustment(Float spinalAdjustment) {
+		this.spinalAdjustment = spinalAdjustment;
+	}
+
+	public String getSpinalMedication() {
+		return spinalMedication;
+	}
+
+	public void setSpinalMedication(String spinalMedication) {
+		this.spinalMedication = spinalMedication;
+	}
+
+	public Float getSpinalVolume() {
+		return spinalVolume;
+	}
+
+	public void setSpinalVolume(Float spinalVolume) {
+		this.spinalVolume = spinalVolume;
+	}
+
+	public BigDecimal getSpo2() {
+		return spo2;
+	}
+
+	public void setSpo2(BigDecimal spo2) {
+		this.spo2 = spo2;
+	}
+
+	public String getStressThallium() {
+		return stressThallium;
+	}
+
+	public void setStressThallium(String stressThallium) {
+		this.stressThallium = stressThallium;
+	}
+
+	public String getSurgeons() {
+		return surgeons;
+	}
+
+	public void setSurgeons(String surgeons) {
+		this.surgeons = surgeons;
+	}
+
+	public Float getSurgeryTime() {
+		return surgeryTime;
+	}
+
+	public void setSurgeryTime(Float surgeryTime) {
+		this.surgeryTime = surgeryTime;
+	}
+
+	public Date getTime_In() {
+		return time_In;
+	}
+
+	public void setTime_In(Date time_In) {
+		this.time_In = time_In;
+	}
+
+	public String getTime_In_Comment() {
+		return time_In_Comment;
+	}
+
+	public void setTime_In_Comment(String time_In_Comment) {
+		this.time_In_Comment = time_In_Comment;
+	}
+
+	public String getTmt() {
+		return tmt;
+	}
+
+	public void setTmt(String tmt) {
+		this.tmt = tmt;
+	}
+
+	public Float getUlbAdjustment() {
+		return ulbAdjustment;
+	}
+
+	public void setUlbAdjustment(Float ulbAdjustment) {
+		this.ulbAdjustment = ulbAdjustment;
+	}
+
+	public String getUlbMedication() {
+		return ulbMedication;
+	}
+
+	public void setUlbMedication(String ulbMedication) {
+		this.ulbMedication = ulbMedication;
+	}
+
+	public Float getUlbVolume() {
+		return ulbVolume;
+	}
+
+	public void setUlbVolume(Float ulbVolume) {
+		this.ulbVolume = ulbVolume;
+	}
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
+
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
+	public String getVein() {
+		return vein;
+	}
+
+	public void setVein(String vein) {
+		this.vein = vein;
+	}
+
+	public Date getNewEvent4() {
+		return newEvent4;
+	}
+
+	public void setNewEvent4(Date newEvent4) {
+		this.newEvent4 = newEvent4;
+	}
+
+	public String getNewEvent4Comment() {
+		return newEvent4Comment;
+	}
+
+	public void setNewEvent4Comment(String newEvent4Comment) {
+		this.newEvent4Comment = newEvent4Comment;
+	}
+
+	public Date getNewEvent5() {
+		return newEvent5;
+	}
+
+	public void setNewEvent5(Date newEvent5) {
+		this.newEvent5 = newEvent5;
+	}
+
+	public String getNewEvent5Comment() {
+		return newEvent5Comment;
+	}
+
+	public void setNewEvent5Comment(String newEvent5Comment) {
+		this.newEvent5Comment = newEvent5Comment;
+	}
+
+	public Date getShiftoutTime() {
+		return shiftoutTime;
+	}
+
+	public void setShiftoutTime(Date shiftoutTime) {
+		this.shiftoutTime = shiftoutTime;
+	}
+
+	public String getShiftoutTimeComment() {
+		return shiftoutTimeComment;
+	}
+
+	public void setShiftoutTimeComment(String shiftoutTimeComment) {
+		this.shiftoutTimeComment = shiftoutTimeComment;
+	}
+
+       
+}
+
