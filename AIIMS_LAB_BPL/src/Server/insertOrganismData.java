@@ -140,12 +140,15 @@ public class insertOrganismData {
     
     
     public static void sendPostRequest(String jsonData,String sampleno) {
-        String urlString = "http://10.226.28.174:8380/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=6&sampleno="+sampleno; // Replace with your endpoint
-        HttpURLConnection connection = null;
-
+       // String urlString = "http://10.226.28.174:8380/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=6&sampleno="+sampleno; // Replace with your endpoint
+     
         try {
             // Create URL object
-            URL url = new URL(urlString);
+            //URL url = new URL(urlString);
+        	   URL url = new URL(AIIMSLAB.aiimsUrl + "/api/v1/pacs/saveorganismresult");
+      	     
+               HttpURLConnection connection = null;
+
             connection = (HttpURLConnection) url.openConnection();
 
             // Set up the connection
@@ -168,9 +171,7 @@ public class insertOrganismData {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
+            
         }
     }
 

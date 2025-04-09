@@ -1,194 +1,0 @@
-2025-02-04 16:25:10 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:25:10 - Response from API: []
-2025-02-04 16:25:10 - Sample no or cr no. not found: []
-2025-02-04 16:25:10 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hrgnum_Puk=?
-2025-02-04 16:25:10 - Error: ERROR: invalid input syntax for type numeric: "250128BIO0002"
-2025-02-04 16:25:10 - Stack Trace: org.postgresql.util.PSQLException: ERROR: invalid input syntax for type numeric: "250128BIO0002"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
-	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
-	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
-	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
-	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
-	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
-	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1742)
-	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-02-04 16:26:22 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:26:22 - Response from API: []
-2025-02-04 16:26:22 - Sample no or cr no. not found: []
-2025-02-04 16:26:22 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:26:22 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162622||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204162622|SAC||||24008676 ORC|NW||||||||20250204162622TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:26:22 - LIS is Connected on : 10.226.28.174 : 10002
-2025-02-04 16:26:22 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162622||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204162622|SAC||||24008676 ORC|NW||||||||20250204162622TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:26:22 - Updated status to 2 for ID: 250128BIO0002
-2025-02-04 16:27:07 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:27:07 - Response from API: []
-2025-02-04 16:27:07 - Sample no or cr no. not found: []
-2025-02-04 16:27:07 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:27:14 - Data sends to Mestria is started  for sample no ::  250128BIO0001
-2025-02-04 16:27:14 - Response from API: []
-2025-02-04 16:27:14 - Sample no or cr no. not found: []
-2025-02-04 16:27:14 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:27:45 - Data sends to Mestria is started  for sample no ::  250128BIO0001
-2025-02-04 16:27:45 - Response from API: []
-2025-02-04 16:27:45 - Sample no or cr no. not found: []
-2025-02-04 16:27:45 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:28:14 - Data sends to Mestria is started  for sample no ::  250128BIO0001
-2025-02-04 16:28:14 - Response from API: []
-2025-02-04 16:28:14 - Sample no or cr no. not found: []
-2025-02-04 16:28:14 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:28:20 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:28:20 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"250128BIO0002","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
-2025-02-04 16:28:20 - Save Patient Details API called for PACS 
-2025-02-04 16:28:20 - Response Body as JSON Array: [{
-    "hisOrderId": "100",
-    "patientId": "961012100000888",
-    "reqDno": "961011000125012810000202",
-    "status": "1"
-}]
-2025-02-04 16:28:20 - Update Status API called
-2025-02-04 16:28:20 - Response Body:  Status Updated
-2025-02-04 16:28:20 - Data sends to Mestria is started ::  
-2025-02-04 16:28:20 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
-2025-02-04 16:28:20 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:28:20 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162820||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204162820|SAC||||24008676 ORC|NW||||||||20250204162820TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:28:20 - LIS is Connected on : 10.226.28.174 : 10002
-2025-02-04 16:28:20 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204162820||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204162820|SAC||||24008676 ORC|NW||||||||20250204162820TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:28:20 - Updated status to 2 for ID: 250128BIO0002
-2025-02-04 16:35:08 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:35:08 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"250128BIO0002","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
-2025-02-04 16:35:08 - Save Patient Details API called for PACS 
-2025-02-04 16:35:08 - Response Body as JSON Array: [{
-    "hisOrderId": "100",
-    "patientId": "961012100000888",
-    "reqDno": "961011000125012810000202",
-    "status": "1"
-}]
-2025-02-04 16:35:08 - Update Status API called
-2025-02-04 16:35:08 - Response Body:  Status Updated
-2025-02-04 16:35:08 - Data sends to Mestria is started ::  
-2025-02-04 16:35:08 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
-2025-02-04 16:35:08 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:35:08 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204163508||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204163508|SAC||||24008676 ORC|NW||||||||20250204163508TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:35:08 - LIS is Connected on : 10.226.28.174 : 10002
-2025-02-04 16:35:08 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204163508||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204163508|SAC||||24008676 ORC|NW||||||||20250204163508TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:35:08 - Updated status to 2 for ID: 250128BIO0002
-2025-02-04 16:44:58 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:44:58 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"250128BIO0002","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
-2025-02-04 16:44:58 - Save Patient Details API called for PACS 
-2025-02-04 16:44:58 - Response Body as JSON Array: [{
-    "hisOrderId": "100",
-    "patientId": "961012100000888",
-    "reqDno": "961011000125012810000202",
-    "status": "1"
-}]
-2025-02-04 16:44:58 - Update Status API called
-2025-02-04 16:44:58 - Response Body:  Status Updated
-2025-02-04 16:44:58 - Data sends to Mestria is started ::  
-2025-02-04 16:44:58 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:44:58 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
-2025-02-04 16:44:58 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204164458||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204164458|SAC||||24008676 ORC|NW||||||||20250204164458TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:44:58 - LIS is Connected on : 10.226.28.174 : 10002
-2025-02-04 16:44:58 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204164458||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204164458|SAC||||24008676 ORC|NW||||||||20250204164458TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:44:58 - Updated status to 2 for ID: 250128BIO0002
-2025-02-04 16:46:14 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:46:14 - Response from API: []
-2025-02-04 16:46:14 - Sample no or cr no. not found: []
-2025-02-04 16:46:14 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:46:54 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:46:54 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"250128BIO0002","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
-2025-02-04 16:46:54 - Save Patient Details API called for PACS 
-2025-02-04 16:46:54 - Response Body as JSON Array: [{
-    "hisOrderId": "100",
-    "patientId": "961012100000888",
-    "reqDno": "961011000125012810000202",
-    "status": "1"
-}]
-2025-02-04 16:46:54 - Update Status API called
-2025-02-04 16:46:54 - Response Body:  Status Updated
-2025-02-04 16:46:54 - Data sends to Mestria is started ::  
-2025-02-04 16:46:54 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:46:54 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
-2025-02-04 16:46:54 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204164654||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204164654|SAC||||24008676 ORC|NW||||||||20250204164654TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:46:54 - LIS is Connected on : 10.226.28.174 : 10002
-2025-02-04 16:46:54 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204164654||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204164654|SAC||||24008676 ORC|NW||||||||20250204164654TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:46:54 - Updated status to 2 for ID: 250128BIO0002
-2025-02-04 16:47:35 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:47:35 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"250128BIO0002","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
-2025-02-04 16:47:35 - Save Patient Details API called for PACS 
-2025-02-04 16:47:35 - Response Body as JSON Array: [{
-    "hisOrderId": "100",
-    "patientId": "961012100000888",
-    "reqDno": "961011000125012810000202",
-    "status": "1"
-}]
-2025-02-04 16:47:35 - Update Status API called
-2025-02-04 16:47:35 - Response Body:  Status Updated
-2025-02-04 16:47:35 - Data sends to Mestria is started ::  
-2025-02-04 16:47:35 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
-2025-02-04 16:47:35 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204164735||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204164735|SAC||||24008676 ORC|NW||||||||20250204164735TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:47:35 - LIS is Connected on : 10.226.28.174 : 10002
-2025-02-04 16:47:35 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204164735||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204164735|SAC||||24008676 ORC|NW||||||||20250204164735TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:47:35 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:47:35 - Updated status to 2 for ID: 250128BIO0002
-2025-02-04 16:49:18 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:49:18 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"250128BIO0002","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
-2025-02-04 16:49:18 - Save Patient Details API called for PACS 
-2025-02-04 16:49:18 - Response Body as JSON Array: [{
-    "hisOrderId": "100",
-    "patientId": "961012100000888",
-    "reqDno": "961011000125012810000202",
-    "status": "1"
-}]
-2025-02-04 16:49:18 - Update Status API called
-2025-02-04 16:49:18 - Response Body:  Status Updated
-2025-02-04 16:49:18 - Data sends to Mestria is started ::  
-2025-02-04 16:49:18 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:49:18 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
-2025-02-04 16:49:18 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204164918||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204164918|SAC||||24008676 ORC|NW||||||||20250204164918TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:49:18 - LIS is Connected on : 10.226.28.174 : 10002
-2025-02-04 16:49:18 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204164918||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204164918|SAC||||24008676 ORC|NW||||||||20250204164918TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:49:18 - Updated status to 2 for ID: 250128BIO0002
-2025-02-04 16:50:53 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:50:56 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"250128BIO0002","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
-2025-02-04 16:50:56 - Save Patient Details API called for PACS 
-2025-02-04 16:50:59 - Response Body as JSON Array: [{
-    "hisOrderId": "100",
-    "patientId": "961012100000888",
-    "reqDno": "961011000125012810000202",
-    "status": "1"
-}]
-2025-02-04 16:50:59 - Update Status API called
-2025-02-04 16:50:59 - Response Body:  Status Updated
-2025-02-04 16:50:59 - Data sends to Mestria is started ::  
-2025-02-04 16:50:59 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:50:59 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
-2025-02-04 16:50:59 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204165059||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204165059|SAC||||24008676 ORC|NW||||||||20250204165059TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:50:59 - LIS is Connected on : 10.226.28.174 : 10002
-2025-02-04 16:50:59 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204165059||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204165059|SAC||||24008676 ORC|NW||||||||20250204165059TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:50:59 - Updated status to 2 for ID: 250128BIO0002
-2025-02-04 16:52:12 - Data sends to Mestria is started  for sample no ::  250128BIO0002
-2025-02-04 16:52:12 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":"-","patMiddleName":"-","patGender":"F","patientBirthDate":"null","patCrno":"961012100000888","patSampleNo":"250128BIO0002","patSampleType":"","patSampleCollectionDate":"2025-01-28 11:36:02.0","hisOrderId":"100","reqDno":"961011000125012810000202"}]
-2025-02-04 16:52:12 - Save Patient Details API called for PACS 
-2025-02-04 16:52:12 - Response Body as JSON Array: [{
-    "hisOrderId": "100",
-    "patientId": "961012100000888",
-    "reqDno": "961011000125012810000202",
-    "status": "1"
-}]
-2025-02-04 16:52:12 - Update Status API called
-2025-02-04 16:52:13 - Response Body:  Status Updated
-2025-02-04 16:52:13 - Data sends to Mestria is started ::  
-2025-02-04 16:52:13 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
-2025-02-04 16:52:13 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
-2025-02-04 16:52:13 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250204165213||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204165213|SAC||||24008676 ORC|NW||||||||20250204165213TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:52:13 - LIS is Connected on : 10.226.28.174 : 10002
-2025-02-04 16:52:13 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250204165213||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||961012100000888||Prachiiiiiii    ^.^^^^^nill|CDAC TEST2|19681025|F|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250128BIO0002SPM|1|250128BIO0002||^99BMx|||^^|^^|||P^Patient^||||||20250204165213|SAC||||24008676 ORC|NW||||||||20250204165213TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-02-04 16:52:13 - Updated status to 2 for ID: 250128BIO0002

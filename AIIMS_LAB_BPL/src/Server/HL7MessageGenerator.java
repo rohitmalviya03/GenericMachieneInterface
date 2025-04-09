@@ -2,6 +2,7 @@ package Server;
 
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -56,20 +57,28 @@ public class HL7MessageGenerator {
     		
     		String gender,
     		String sampleNumber,
-    		String specimenType)   {
+    		String specimenType,
+    		String Age)   {
     	String MSG="";
     	
-    	if(specimenType.equals("URIN")) {
+    	if(specimenType.equals("1021")) {
     		specimenType="URIN^URIN";
     		
     	}
-    	else if(specimenType.equals("BLOOD")) {
+    	else if(specimenType.equals("1002")) {
     		specimenType="BC^Blood Culture";
     	}
     	try {
     		
+    		 LocalDate today = LocalDate.now();
+    	        LocalDate dob = today.minusYears(Integer.parseInt(Age));
+
+    	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+    	        String dobStr = dob.format(formatter);
+
+    	        System.out.println("DOB (estimated): " + dobStr);
     	 MSG=START_BLOCK+"MSH|^~\\&|LIS|LAB|myla|BMX|DATETIME||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 \r"
-    			+ "PID|||CRNO||Fname^.^^^^^nill|CDAC TEST2|19681025|GENDER|||nill^^nill^^nill^nill|||||S|\r"
+    			+ "PID|||CRNO||Fname^.^^^^^nill|CDAC TEST2|AGE|GENDER|||nill^^nill^^nill^nill|||||S|\r"
     			+ "PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SAMPLEID\r"
     			+ "SPM|1|SAMPLEID||SPECIMAN^99BMx|||^^|^^|||P^Patient^||||||DATETIME|\r"
     			+ "SAC||||24008676 \r"
@@ -84,6 +93,7 @@ public class HL7MessageGenerator {
     	MSG=MSG.replaceAll("GENDER", gender);
     	MSG=MSG.replaceAll("DATETIME", currentTimestamp);
     	MSG=MSG.replaceAll("SPECIMAN", specimenType);
+    	MSG=MSG.replaceAll("AGE", dobStr);
     	
     	StringBuffer orderPacket = new StringBuffer();
     	}
@@ -107,7 +117,7 @@ public class HL7MessageGenerator {
 			String pat_lname, String pat_gender, String patient_birth_date, String phone_number, String email_id,
 			String patient_weight, String patient_type, String patient_history, String center_id, String modality,
 			String test_id, String test_name, String referring_physician_id, String referring_physician_name,
-			String radiologist_id, String technician_id) {
+			String radiologist_id, String technician_id,String visitNo) {
 		// Customize HL7 message generation based on your requirements
 
 		/*
@@ -187,7 +197,7 @@ public class HL7MessageGenerator {
 		OrderMSg = OrderMSg.replaceAll("PatientLast", formatValue(pat_lname));
 		OrderMSg = OrderMSg.replaceAll("PatientFirst", formatValue(pat_fname));
 		OrderMSg = OrderMSg.replaceAll("PatientMiddle", formatValue(pat_mname));
-		OrderMSg = OrderMSg.replaceAll("Title", "_");
+		OrderMSg = OrderMSg.replaceAll("Title", "-");
 		OrderMSg = OrderMSg.replaceAll("Gender", formatValue(pat_gender));
 		OrderMSg = OrderMSg.replaceAll("Phone", formatValue(phone_number));
 		OrderMSg = OrderMSg.replaceAll("History", formatValue(patient_history));
@@ -201,12 +211,16 @@ public class HL7MessageGenerator {
 		OrderMSg = OrderMSg.replaceAll("RefPhyName", formatValue(referring_physician_name));
 		OrderMSg = OrderMSg.replaceAll("RadiologistID", formatValue(radiologist_id));
 		OrderMSg = OrderMSg.replaceAll("TechnicianID", formatValue(technician_id));
+		OrderMSg = OrderMSg.replaceAll("VisitNumber", formatValue(visitNo));
 
 		String oldOrderMSgTemplate = START_BLOCK   //This is not in use;
 				+ "MSH|^~\\&|HIS_APP|HIS_HOSPITAL|PACS_APP|PACS_HOSPITAL|202410151230||ORM^O01|MSG001|P|2.3\r\n"
 				+ "PID|1||123456||Doe^John^^Mr.||19800101|M|||||555-1234^john.doe@example.com^No relevant history\r\n"
 				+ "PV1|1|||||||123^Dr. Smith||||||||||OP||50\r\n" + "ORC|NW|||||||||||789\r\n"
 				+ "OBR|1|HOID123|Center456|TST001^CT Scan Head||||||||||||||||||||CR||||||||||TECH456\r\n" + "";
+
+		
+		OrderMSg = OrderMSg.replaceAll("null", "");
 
 		return OrderMSg;
 
@@ -216,7 +230,7 @@ public class HL7MessageGenerator {
     
     
 	private static String formatValue(String value) {
-	    return value == null ? "-" : value;
+	    return (value == null || value.trim().isEmpty()) ? "-" : value.trim();
 	}
 
     

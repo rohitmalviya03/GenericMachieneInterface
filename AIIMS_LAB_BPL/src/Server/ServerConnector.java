@@ -20,12 +20,12 @@ public class ServerConnector {
 	static String server_port = (String) res.get("server_port");
 	 private static ServerSocket serverSocket;
 	    private static boolean listening = true; // Flag to control listening state
-    public static void sendToServer(String hl7Message) throws Exception {
+    public static int sendToServer(String hl7Message) throws Exception {
         String serverAddress = server_ip;//"10.226.28.174";  // Replace with actual server IP
         int port = Integer.parseInt(server_port);//8002;  // Replace with actual server port
         
        // AIIMSLAB.updateConnectionStatusLabel("LIS is trying to connect on : "+ server_ip +" : "+server_port );
-        
+        int res=0;
         try (Socket socket = new Socket(serverAddress, port);
              OutputStream out = socket.getOutputStream()) {
         	 InputStream in = socket.getInputStream();
@@ -39,18 +39,22 @@ public class ServerConnector {
             out.write(hl7Message.getBytes());
             out.flush();
             AIIMSLAB.saveToFile("Sent :  "+ hl7Message , AIIMSLAB.FILE_NAME);
-          	
+            res=1;
           //  new Thread(new ResponseReceiver(socket)).start();
             
             
         } catch (Exception e) {
+        	res=0;
         	   AIIMSLAB.updateConnectionStatusLabel("Error connecting to server : " + e.getMessage() );
         	   System.out.println("Error connecting to server : " + e.getMessage() );
+        	 //  AIIMSLAB.addLogEntry("Something Went Wrong");
+        	   AIIMSLAB.saveToFile("Stack Trace: " + AIIMSLAB.getStackTraceAsString(e), AIIMSLAB.FILE_NAME);
+				
             throw new Exception("Error connecting to server: " + e.getMessage());
          
         }
         
-        
+        return res;
     }
     
     public static String receiveFromServer() {
@@ -81,9 +85,13 @@ public class ServerConnector {
                      processReceivedData(response.toString().trim());
                  } catch (Exception e) {
                      System.err.println("Error handling client connection: " + e.getMessage());
+                     AIIMSLAB.saveToFile("Stack Trace: " + AIIMSLAB.getStackTraceAsString(e), AIIMSLAB.FILE_NAME);
+         			
                  }
              }
          } catch (Exception e) {
+        	  AIIMSLAB.saveToFile("Stack Trace: " + AIIMSLAB.getStackTraceAsString(e), AIIMSLAB.FILE_NAME);
+  			
              System.err.println("Error starting server: " + e.getMessage());
          }
 		return response.toString();
