@@ -1,0 +1,574 @@
+package mainCreation;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+/**
+ * @author RahulPrasad
+ */
+
+public class MRngNRdgFileADPasigLogic3 {
+
+	private static String savefiles;
+	public static void main(String args[]) throws Exception {
+
+		MRngNRdgFileADPasigLogic3 object = new MRngNRdgFileADPasigLogic3();
+		object.waitMethod();
+
+	}
+
+	private synchronized void waitMethod() throws Exception {
+		
+		while (true) {
+			
+			
+			// calling method findUsingIOApi(contains logic for reading file contunusly)
+			// C:\\CloudPathology\\uie\\machines\\Arkray HA8180\\payloads
+			Map res1 = ReadPropertyFile.getPropertyValues();
+			String fileReadPath = (String) res1.get("fileReadPath");
+			
+			String fileReadPath2 = (String) res1.get("fileImgPath");
+			// String path = fileReadPath.replace(" ", "%20");
+			//System.out.println("file read path " + fileReadPath);
+			
+			findUsingIOApi(fileReadPath);
+			//File f = findUsingIOApi(fileReadPath);
+
+
+			
+			/*
+			   try { this.wait(100); } catch (InterruptedException e) {
+			  
+			  e.printStackTrace(); }
+			*/
+		}   
+
+	}
+
+	public static File findUsingIOApi(String sdir) throws Exception{
+		
+		
+		File dir = new File(sdir);
+		
+		
+		/* code to save  name of file into a file */
+		//String fileSavePath = "C:\\TcpFiles\\property\\CloudPathology\\uie\\machines\\fileSave.txt";
+		Map res1 = ReadPropertyFile.getPropertyValues();
+		
+		String fileSavePath = (String) res1.get("fileSavePath");;//"C:\\TcpFiles\\property\\fileSave.txt";
+		
+		
+		File fSave = new File(fileSavePath);
+		//System.out.println("rahultest");
+		String filenames="";
+		/* code ended  to save  name of file into a file */
+		
+			 Path inputDir = Paths.get(sdir);
+			    if (Files.isDirectory(inputDir)) {
+			        List<Path> filePaths = Files.list(inputDir).collect(Collectors.toList());
+			        for (Path filePath : filePaths) {
+			        	//System.out.println("Inside for loop of Path : filePath ");
+			        	//return filePath.toFile();
+			        	
+			        	//----
+			        	//System.out.println("rahultest"+filePath.toFile().getName());
+			        	filenames=filePath.toFile().getName();
+			        	
+			        	/* stated code to fetch file name from saveFileRead */
+			        	String fileReadName = null;
+			        	try  
+			        	{  
+			        	File file=new File(fileSavePath);    
+			           
+			        	BufferedReader brr=new BufferedReader(new FileReader(file));
+			        	 savefiles="";
+			        	
+			        	StringBuffer sb=new StringBuffer();      
+			        	String line;  
+			        	while((line=brr.readLine())!=null)  
+			        	{  
+			        		savefiles=savefiles+line;
+			        	sb.append(line);      
+			        	sb.append("\n");     
+			        	}  
+			             
+			        	 
+			        	if(savefiles.contains(filenames))
+			        	{
+			        		 // System.out.println("All file name from save.txt : "+filenames);
+			        		  continue;
+			        	}
+			        	else
+			        	{
+			        		//System.out.println("file write "+filenames);
+			        		
+			        		try {
+				        		BufferedWriter writer = new BufferedWriter(new FileWriter(fSave,true));
+				        	    writer.append(filenames);
+				        	   
+				        	    writer.append("\n");
+				        	 //   System.out.println("in else block of file not found in save.txt");
+				        	    writer.close();
+				        	}catch(Exception e) {
+				        		
+				        	}
+			        	}
+			        	
+			        	
+			        	}  
+			        	catch(IOException e)  
+			        	{  
+			        	e.printStackTrace();  
+			        	}  
+			        	
+			        	
+			        	/* code ened to fetch file name  */
+			        	
+			        	
+			 
+			        	 //String[] linesArr = fileReadName.split(System.getProperty("line.separator"));
+			           
+		
+			        	
+			        	/*  code ended to save file name */
+			        	
+			        	
+			        	
+			        	
+			        	
+			        	System.out.println("File Path  :- " + filePath);
+			        	
+			        	
+			        	/* cod started to parse*/
+			        	
+						BufferedReader br = new BufferedReader(new FileReader(filePath.toFile()));
+						//System.out.println("buff file name :"+br.readLine());
+						// code started to search "machine_data\":\\[" in file
+
+						String st;
+						String[] words = null;
+						int count = 0;
+						String machineData = "machine_data\":";
+						while ((st = br.readLine()) != null) {
+
+							//System.out.println("json data"+st);
+
+							words = st.split(machineData);
+							String Word1 = words[1];
+						
+							
+							if (Word1 != null && Word1.length() > 0) {
+								Word1 = Word1.substring(0, Word1.length() - 1);
+				        }
+							
+							
+							System.out.println("Word1   "+Word1);
+							String substr = Word1.substring(0, Word1.length() - 2);
+							
+							
+							Gson gson = new Gson();
+							
+							JsonArray Jsonobjs = gson.fromJson(Word1, JsonArray.class);
+							
+							
+							
+						//	String[] Word2=Word1.split("]},");
+							
+							 //substr = Word2[0].substring(0, Word2[0].length() - 2);
+							
+							
+							
+							for(int i=0;i<Jsonobjs.size();i++) {
+								jsonStringParsing(Jsonobjs.get(i).toString());
+//								
+							}
+
+							
+						//	System.out.println(".." + substr);
+							// System.out.println("json startred"+Word1);
+							// passing json String to json method
+							// System.out.println("before calling jsonStringParsing() method");
+							
+							try {
+								System.out.println();
+								//jsonStringParsing(substr);
+							// System.out.println("after calling jsonStringParsing() method");
+							}
+							catch (Exception e) {
+								e.printStackTrace();  
+								// TODO: handle exception
+							}
+							for (String word : words) {
+								// System.out.println("found..");
+								if (word.equals(machineData)) {
+								//	System.out.println("json values started   " + word);
+
+									count++;
+								}
+							}
+						}
+			        
+			        	
+			        	
+			        	
+			        
+			        	
+			        //=====
+			        	
+			        	
+			        	
+			        }
+			        
+			    }
+			
+		
+
+		return null;
+	}
+
+	public static void jsonStringParsing(String jsonString) throws Exception {
+		// parsing file
+		System.out.println("value fetched " + jsonString);
+		
+		Map res1 = ReadPropertyFile.getPropertyValues();
+		String fileImgPath = (String) res1.get("fileImgPath");
+		
+		//Gson gson = new Gson();
+		
+		//JsonObject testJsoon = gson.fromJson(jsonString, JsonObject.class);
+		
+		
+		
+		Object obj = new JSONParser().parse(jsonString);
+
+		// typecasting obj to JSONObject
+		JSONObject jo = (JSONObject) obj;
+		
+		// getting sample_id
+		String sample_id = (String) jo.get("sample_id");
+
+		System.out.println("Sample Code :" + sample_id);
+			if(sample_id.equals(null)|| sample_id.equals("") ) {
+				
+				System.out.println("Sample is Not found in File");
+				
+			}
+			
+			else {
+		// getting machine details
+		JSONArray ja = (JSONArray) jo.get("mdetails");
+
+		System.out.println(ja.toString());
+		System.out.println("length.." + ja.size());
+		System.out.println(ja.get(0));
+		JSONObject mjo = (JSONObject) ja.get(1);
+		String m_para_id = (String) mjo.get("m_parameter_id");
+		String val = (String) mjo.get("val");
+		System.out.println("Test Code :" + m_para_id);
+		System.out.println("Test Value :" + val);
+
+		
+		
+		List<String > tc = new ArrayList<String>();
+		List<String > tv = new ArrayList<String>();
+		// iterating mdetails
+		// String val
+		
+		StringBuffer testCode = new StringBuffer();
+		StringBuffer testvalue = new StringBuffer();
+		String base64 = null;
+		for (int i = 0; i < 5; i++) {
+			JSONObject mcjo = (JSONObject) ja.get(i);
+			String mpid = (String) mcjo.get("m_parameter_id");
+			String tValue = (String) mcjo.get("val");
+			
+			System.out.print("Test Code" + i + " : " + mpid + "  ");
+			System.out.println("Test Value" + i + " : " + tValue);
+			tc.add(mpid);
+			tv.add(tValue);
+//			if(mpid.contains("ValueHbA1c")) // || mpid.contains("ValueIFCC") ||mpid.contains("ValueHbF")||mpid.contains("ValueHbA2"))
+//			{
+//			
+//			testCode.append(mpid+"$");
+//			testvalue.append(tValue+"$");
+//			}
+		//	insertSampleDtl(mpid, tValue, sample_id,base64);
+			//addedby rohit to check image name and generate base 64 
+		/*
+		 * if(mpid.equals("image")){ String imgdata = (String) mcjo.get("val");
+		 * System.out.println(imgdata);
+		 * 
+		 * base64=fileReadAndConvertBase64(fileImgPath,imgdata+".png");
+		 * 
+		 * System.out.println(base64); }
+		 */
+			
+			//ended by rohit
+			
+			insertSampleDtl(mpid, tValue, sample_id);
+
+		}
+		
+		
+		
+		System.out.println(testCode);
+		System.out.println(testvalue);
+		//insertSampleDtl(testCode.toString(), testvalue.toString(), sample_id,base64);   //uncomment for send data to HIS API
+		
+			}
+	
+	
+	}
+
+	
+
+	// calling database method
+	public static String insertSampleDtl(String tcode, String tval, String sam ) {
+
+		System.out.println("Inside insertSampleDtl (type1/type5 query) ");
+
+		System.out.println("in tcodee " + tcode);
+		Map res = ReadPropertyFile.getPropertyValues();
+String Res= "";
+		final String ip = (String) res.get("ip");
+		final String port = (String) res.get("port");
+		final String eqp = (String) res.get("eqp");
+		final String hos = (String) res.get("hos");
+		final String uid = (String) res.get("uid");
+		final String fileReadPath = (String) res.get("fileReadPath");
+		String url = "";
+		
+		tcode = tcode.replace("%", "%25");
+		tcode = tcode.replace("#", "%23");
+		
+		// final String tcode =(String)res.get("tcode");
+
+		
+
+		System.out.println("In HERE ip" + ip);
+		System.out.println("In HERE port" + port);
+		System.out.println("In HERE eqp" + eqp);
+		System.out.println("In HERE hos" + hos);
+		// System.out.println("In HERE uid"+uid);
+		System.out.println("In HERE tval" + tval);
+		System.out.println("In HERE tcode" + tcode);
+		System.out.println("In HERE file read path " + fileReadPath);
+
+		
+		
+		int count = 0;
+		String stv = null;
+		if(tval.contains("^"))
+		{
+			//System.out.println("tlen" + tval.length());
+			//System.out.println("Rahul" + tval);
+		
+			
+			String replaceString=tval.replace('^','@');
+			String [] A = replaceString.split("@");
+			String btval = A[2];
+			//System.out.println("tval after double ^ character" + btval);
+			tval = btval;
+			System.out.println("tval after double ^ character" + tval);
+			
+			
+		}
+		else {
+			tval = tval;
+			System.out.println("in else tval  " +tval);
+		}
+		
+	
+		
+			
+			
+			
+			//
+		if(!sam.isEmpty()) {
+		
+			if(tcode.contains("ValueHbA1c") || tcode.contains("ValueIFCC") ||tcode.contains("ValueHbF")||tcode.contains("ValueHbA2"))
+			{
+				
+				
+
+			
+			
+		
+		////
+		// url =
+		// "https://aiimskalyani.prd.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp="+eqp+"&hos="+hos+"&tcode="+tcode+"&tval="+tval+"&sam="+sam+"&uid="+uid;
+		
+		
+		
+		
+		
+		
+		url =  ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
+				+ "&hos=" + hos + "&tcode=" + tcode + "&tval=" + tval + "&sam=" + sam + "&uid=" + uid;
+		//url = url.replaceAll("\\s", "");
+		System.out.println("In HERE url " + url);
+		StringBuffer response = new StringBuffer();
+		try {
+
+			
+			URL obj = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+			con.setRequestMethod("GET");
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.flush();
+			wr.close();
+
+		
+			
+			//String jsonInputString = "{'pdfbase64':"+ base64data+"}";
+//			String jsonInputString = "{\"pdfbase64\":\"" + base64data + "\"}";
+//
+//			try(OutputStream os = con.getOutputStream()) {
+//			    byte[] input = jsonInputString.getBytes("utf-8");
+//			    os.write(input, 0, input.length);			
+//			}
+			System.out.println("\nSending 'GET' request to URL : " + url);
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			
+			Res= response.toString();
+			System.out.println("response " + response.toString());
+			System.out.println("-----------------------------------------------------------------------");
+			in.close();
+			
+		} catch (Exception s) {
+			s.printStackTrace();
+		}
+		
+			}
+		}
+		else {
+			System.out.println("Sample Number not found");
+			//return "not";
+			
+		}	
+		//return (response.toString());
+		return Res ;
+		
+		
+		
+		//
+		
+
+	}
+	
+	
+	//Generate base64 for PNG Graph
+	
+	
+    public static String fileReadAndConvertBase64(String sourceFolderPath,String sam) {
+    	String base64String="";
+		try {
+			File sourceFolder = new File(sourceFolderPath);
+		
+
+			// List PDF files in the source folder
+			File[] pdfFiles = sourceFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".png"));
+			StringBuilder str = new StringBuilder();
+			
+			  Arrays.sort(pdfFiles, Comparator.comparingLong(File::lastModified));
+
+	
+			if (pdfFiles != null && pdfFiles.length > 0) {
+			
+				
+				for (File pdfFile : pdfFiles) {
+				
+					String fileName = pdfFile.getName();
+					int hyphenIndex = fileName.indexOf("-");
+					if (hyphenIndex != -1) {
+						
+						
+						
+						String filePrefix = fileName.substring(0, hyphenIndex);
+					
+						String dd="";
+
+						if(sam.equals(fileName)) {
+							
+							base64String = convertToBase64(pdfFile);
+							
+							System.out.println("Base 64 is genereted ::>>   "+base64String);
+							
+						}
+						else{
+						//	System.out.println("File Not found for Sample No ---->"+sam);
+							
+						}
+						
+					}
+				
+				}
+			} else {
+				
+			}
+//logger.info(""+str.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return base64String;
+	}
+    private static String convertToBase64(File file) throws Exception {
+		FileInputStream fileInputStream = new FileInputStream(file);
+		byte[] bytes = new byte[(int) file.length()];
+		fileInputStream.read(bytes);
+		fileInputStream.close();
+
+	
+		return Base64.getEncoder().encodeToString(bytes);
+	}
+    
+	//end rohit
+	
+
+}

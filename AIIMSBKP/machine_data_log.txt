@@ -1,187 +1,132 @@
-2025-01-30 16:24:56 - ABG SOLUTION  
-2025-01-30 16:24:56 - 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2025-01-30 16:24:56 - ACK SENT: 
-2025-01-30 16:27:07 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:27:07 - Server Ip :10.226.28.174
-2025-01-30 16:27:07 - Port :50004
-2025-01-30 16:27:10 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:27:10 - Server Ip :10.226.28.174
-2025-01-30 16:27:10 - Port :50004
-2025-01-30 16:27:10 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:27:10 - Server Ip :10.226.28.174
-2025-01-30 16:27:10 - Port :50004
-2025-01-30 16:27:10 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:27:10 - Server Ip :10.226.28.174
-2025-01-30 16:27:10 - Port :50004
-2025-01-30 16:27:10 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:27:10 - Server Ip :10.226.28.174
-2025-01-30 16:27:10 - Port :50004
-2025-01-30 16:28:23 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:28:23 - Server Ip :10.226.28.174
-2025-01-30 16:28:23 - Port :50004
-2025-01-30 16:28:28 - ABG SOLUTION  
-2025-01-30 16:28:42 - 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2025-01-30 16:28:58 - ACK SENT: 
-2025-01-30 16:30:27 - ABG SOLUTION  
-2025-01-30 16:50:05 - TestCode details: null
-2025-01-30 16:50:13 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:50:13 - Server Ip :10.226.28.174
-2025-01-30 16:50:13 - Port :50004
-2025-01-30 16:50:26 - ABG SOLUTION  
-2025-01-30 16:50:26 - 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2025-01-30 16:50:26 - ACK SENT: 
-2025-01-30 16:50:48 - ABG SOLUTION  
-2025-01-30 16:50:58 - ABG SOLUTION  
-2025-01-30 16:50:59 - ABG SOLUTION  
-2025-01-30 16:50:59 - ABG SOLUTION  
-2025-01-30 16:50:59 - ABG SOLUTION  
-2025-01-30 16:51:00 - ABG SOLUTION  
-2025-01-30 16:51:00 - ABG SOLUTION  
-2025-01-30 16:51:00 - ABG SOLUTION  
-2025-01-30 16:51:23 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:51:23 - Server Ip :10.226.28.174
-2025-01-30 16:51:23 - Port :50004
-2025-01-30 16:52:02 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:52:02 - Server Ip :10.226.28.174
-2025-01-30 16:52:02 - Port :50004
-2025-01-30 16:52:13 - ABG SOLUTION  
-2025-01-30 16:52:13 - 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2025-01-30 16:52:13 - ACK SENT: 
-2025-01-30 16:52:21 - ABG SOLUTION  
-2025-01-30 16:56:16 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:56:16 - Server Ip :10.226.28.174
-2025-01-30 16:56:16 - Port :50004
-2025-01-30 16:56:31 - TestCode details: null
-2025-01-30 16:56:45 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:56:45 - Server Ip :10.226.28.174
-2025-01-30 16:56:45 - Port :50004
-2025-01-30 16:56:50 - ABG SOLUTION  
-2025-01-30 16:56:53 - 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2025-01-30 16:56:53 - ACK SENT: 
-2025-01-30 16:57:45 - ABG SOLUTION  
-2025-01-30 16:57:55 - 
-2025-01-30 16:57:57 - ACK SENT: 
-2025-01-30 16:58:09 - TestCode details: [BE(B), BEecf, Ca++, Ca++(7.4), Glu, HCO3-, HCO3std, Hct, K+, Lac, Na+, SO2c, TCO2, THbc, pCO2[ETB]173, pH, pO2, Temp]
-2025-01-30 16:58:09 - Testvalue details: [2.6, 2.9, 1.03, 1.04, 180, 27.2, 27.0, 31, 2.8, 1.0, 155, 99, 28.5, 9.6, 41, 7.43, 116, 37.0]
-2025-01-30 16:58:15 - Data inserted successfully for Samle NO:   12345
-2025-01-30 17:33:18 - TestCode details: null
-2025-01-30 17:33:18 - TestCode details: null
-2025-01-30 17:33:19 - TestCode details: null
-2025-01-30 17:33:19 - TestCode details: null
-2025-01-30 17:33:19 - TestCode details: null
-2025-01-30 17:33:19 - TestCode details: null
-2025-01-30 17:33:19 - TestCode details: null
-2025-01-30 17:33:20 - TestCode details: null
-2025-01-30 17:33:20 - TestCode details: null
-2025-01-30 17:33:20 - TestCode details: null
-2025-01-30 17:33:20 - TestCode details: null
+2025-03-20 11:09:03 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
+2025-03-20 11:09:03 - SERVER BOOTED ON PORT: 50004
+2025-03-20 11:09:03 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
+2025-03-20 11:09:27 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/192.168.146.62,port=50484,localport=50004]
+2025-03-20 11:09:44 - Data  RECIEVED :- MSH|^~\&|||||20250310172520||QRY^Q02|1|P|2.3.1||||||ASCII|||QRD|20250310172520|R|D|5|||RD|100325BIO487|OTH|||T|QRF||||||RCT|COR|ALL||
+2025-03-20 11:09:44 - ACK SENT:  MSH|^~\&|||||20250320110944||QCK^Q02|1|P|2.3.1||||0||ASCII|||MSA|AA|1|Message accepted|||0|ERR|0|QAK|SR|OK|
+2025-03-20 11:09:44 - Test Code <<--- :: --->>>[CREAT, SGOT, UREA, SGPT]
+2025-03-20 11:50:01 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
+2025-03-20 11:50:01 - SERVER BOOTED ON PORT: 50004
+2025-03-20 11:50:01 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
+2025-03-20 11:51:06 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=60005,localport=50004]
+2025-03-20 11:51:21 - Data  RECIEVED :- MSH|^~\&|||||20250310172520||QRY^Q02|1|P|2.3.1||||||ASCII|||QRD|20250310172520|R|D|5|||RD|100325BIO487|OTH|||T|QRF||||||RCT|COR|ALL||
+2025-03-20 11:51:21 - ACK SENT:  MSH|^~\&|||||20250320115121||QCK^Q02|1|P|2.3.1||||0||ASCII|||MSA|AA|1|Message accepted|||0|ERR|0|QAK|SR|OK|
+2025-03-20 11:51:21 - Test Code <<--- :: --->>>[CREAT, SGOT, UREA, SGPT]
+2025-03-24 15:41:08 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
+2025-03-24 15:41:08 - SERVER BOOTED ON PORT: 50004
+2025-03-24 15:41:08 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
+2025-03-24 15:41:17 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=52185,localport=50004]
+2025-03-24 15:41:29 - Data  RECIEVED :- MSH|^~\&|||||20250310172520||QRY^Q02|1|P|2.3.1||||||ASCII|||QRD|20250310172520|R|D|5|||RD|100325BIO487|OTH|||T|QRF||||||RCT|COR|ALL||
+2025-03-24 15:41:29 - ACK SENT:  MSH|^~\&|||||20250324154129||QCK^Q02|1|P|2.3.1||||0||ASCII|||MSA|AA|1|Message accepted|||0|ERR|0|QAK|SR|OK|
+2025-03-24 15:41:29 - Test Code <<--- :: --->>>[CREAT, SGOT, UREA, SGPT]
+2025-03-24 15:44:13 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
+2025-03-24 15:44:13 - SERVER BOOTED ON PORT: 50004
+2025-03-24 15:44:13 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
+2025-03-24 15:44:14 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=52622,localport=50004]
+2025-03-24 15:44:15 - Data  RECIEVED :- MSH|^~\&|||||20250310172520||QRY^Q02|1|P|2.3.1||||||ASCII|||QRD|20250310172520|R|D|5|||RD|100325BIO487|OTH|||T|QRF||||||RCT|COR|ALL||
+2025-03-24 15:44:15 - ACK SENT:  MSH|^~\&|||||20250324154415||QCK^Q02|1|P|2.3.1||||0||ASCII|||MSA|AA|1|Message accepted|||0|ERR|0|QAK|SR|OK|
+2025-03-24 15:44:15 - Test Code <<--- :: --->>>[CREAT, SGOT, UREA, SGPT]
+2025-03-24 16:19:00 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
+2025-03-24 16:19:00 - SERVER BOOTED ON PORT: 50004
+2025-03-24 16:19:00 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
+2025-03-24 16:19:09 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=55695,localport=50004]
+2025-03-24 16:19:12 - Data  RECIEVED :- MSH|^~\&|||||20250310172626||ORU^R01|2|P|2.3.1||||0||ASCII|||PID|3|||||||O|||||||||||||||||||||||OBR|3|180225BIO462|1|^|N|20250218150955|20250218144649|20250218144649||||||20250218144649|Serum|||||||||||||||||||||||||||||||||OBX|1|NM|023|SGOT|20.096438|U/L|-|N|||F||20.096438|20250218152319|||0|OBX|2|NM|024|SGPT|26.676058|U/L|-|N|||F||26.676058|20250218152328|||0|
+2025-03-24 16:19:12 - ACK SENT:  MSH|^~\&|||||20250324161912||ACK^R01|2|P|2.3.1||||0||ASCII|||MSA|AA|2|Message accepted|||0|
+2025-03-24 16:19:12 - Test Code : []
+2025-03-24 16:19:12 - Test Value : []
+2025-03-24 16:19:12 - Test Code : []
+2025-03-24 16:19:12 - Test Value : []
+2025-03-24 16:19:12 - Test Code : []
+2025-03-24 16:19:12 - Test Value : []
+2025-03-24 16:19:12 - Test Code : [023]
+2025-03-24 16:19:12 - Test Value : [20.096438]
+2025-03-24 16:19:12 - Test Code : [023, 024]
+2025-03-24 16:19:12 - Test Value : [20.096438, 26.676058]
+2025-03-24 16:19:12 - Test Code : [023, 024]
+2025-03-24 16:19:12 - Test Value : [20.096438, 26.676058]
+2025-03-24 16:42:05 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
+2025-03-24 16:42:05 - SERVER BOOTED ON PORT: 50004
+2025-03-24 16:42:05 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
+2025-03-24 16:42:08 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=56401,localport=50004]
+2025-03-24 16:42:08 - Data  RECIEVED :- MSH|^~\&|||||20250310172626||ORU^R01|2|P|2.3.1||||0||ASCII|||PID|3|||||||O|||||||||||||||||||||||OBR|3|180225BIO462|1|^|N|20250218150955|20250218144649|20250218144649||||||20250218144649|Serum|||||||||||||||||||||||||||||||||OBX|1|NM|023|SGOT|20.096438|U/L|-|N|||F||20.096438|20250218152319|||0|OBX|2|NM|024|SGPT|26.676058|U/L|-|N|||F||26.676058|20250218152328|||0|
+2025-03-24 16:42:08 - ACK SENT:  MSH|^~\&|||||20250324164208||ACK^R01|2|P|2.3.1||||0||ASCII|||MSA|AA|2|Message accepted|||0|
+2025-03-24 16:42:08 - Test Code : []
+2025-03-24 16:42:08 - Test Value : []
+2025-03-24 16:42:08 - Test Code : []
+2025-03-24 16:42:08 - Test Value : []
+2025-03-24 16:42:08 - Test Code : []
+2025-03-24 16:42:08 - Test Value : []
+2025-03-24 16:42:09 - java.util.IllegalFormatConversionException: f != java.lang.String
+	at java.util.Formatter$FormatSpecifier.failConversion(Formatter.java:4302)
+	at java.util.Formatter$FormatSpecifier.printFloat(Formatter.java:2806)
+	at java.util.Formatter$FormatSpecifier.print(Formatter.java:2753)
+	at java.util.Formatter.format(Formatter.java:2520)
+	at java.util.Formatter.format(Formatter.java:2455)
+	at java.lang.String.format(String.java:2940)
+	at Server.GenericV_04_03_01$ServerThread.SYS_480_RB(GenericV_04_03_01.java:1430)
+	at Server.GenericV_04_03_01$ServerThread.run(GenericV_04_03_01.java:1030)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-03-24 16:42:30 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
+2025-03-24 16:42:31 - SERVER BOOTED ON PORT: 50004
+2025-03-24 16:42:31 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
+2025-03-24 16:42:33 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=56403,localport=50004]
+2025-03-24 16:42:40 - Data  RECIEVED :- MSH|^~\&|||||20250324163949||ORU^R01|33|P|2.3.1||||0||ASCII|||
+PID|27|||||||O|||||||||||||||||||||||
+OBR|27|240325BIO444|3|^|N|20250324155517|20250324155517|||1^63||||20250324155517|Serum|||||||||||||||||||||||||||||||||
+OBX|1|NM|009|CREAT|1.019771|mg/dL|-|N|||F||1.019771|20250324160803|||0|
+OBX|2|NM|023|SGOT|35.396854|U/L|-|N|||F||35.396854|20250324160738|||0|
+OBX|3|NM|024|SGPT|86.199862|U/L|-|N|||F||86.199862|20250324160746|||0|
+OBX|4|NM|031|UREA|30.243783|mg/dL|-|N|||F||30.243783|20250324160555|||0|
+
+2025-03-24 16:42:40 - ACK SENT:  MSH|^~\&|||||20250324164240||ACK^R01|33|P|2.3.1||||0||ASCII|||MSA|AA|33|Message accepted|||0|
+2025-03-24 16:42:40 - Test Code : []
+2025-03-24 16:42:40 - Test Value : []
+2025-03-24 16:42:40 - Test Code : []
+2025-03-24 16:42:40 - Test Value : []
+2025-03-24 16:42:40 - Test Code : []
+2025-03-24 16:42:40 - Test Value : []
+2025-03-24 16:42:40 - java.util.IllegalFormatConversionException: f != java.lang.String
+	at java.util.Formatter$FormatSpecifier.failConversion(Formatter.java:4302)
+	at java.util.Formatter$FormatSpecifier.printFloat(Formatter.java:2806)
+	at java.util.Formatter$FormatSpecifier.print(Formatter.java:2753)
+	at java.util.Formatter.format(Formatter.java:2520)
+	at java.util.Formatter.format(Formatter.java:2455)
+	at java.lang.String.format(String.java:2940)
+	at Server.GenericV_04_03_01$ServerThread.SYS_480_RB(GenericV_04_03_01.java:1430)
+	at Server.GenericV_04_03_01$ServerThread.run(GenericV_04_03_01.java:1030)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-03-24 16:43:49 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
+2025-03-24 16:43:49 - SERVER BOOTED ON PORT: 50004
+2025-03-24 16:43:49 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
+2025-03-24 16:43:52 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=56416,localport=50004]
+2025-03-24 16:43:53 - Data  RECIEVED :- MSH|^~\&|||||20250324163949||ORU^R01|33|P|2.3.1||||0||ASCII|||
+PID|27|||||||O|||||||||||||||||||||||
+OBR|27|240325BIO444|3|^|N|20250324155517|20250324155517|||1^63||||20250324155517|Serum|||||||||||||||||||||||||||||||||
+OBX|1|NM|009|CREAT|1.019771|mg/dL|-|N|||F||1.019771|20250324160803|||0|
+OBX|2|NM|023|SGOT|35.396854|U/L|-|N|||F||35.396854|20250324160738|||0|
+OBX|3|NM|024|SGPT|86.199862|U/L|-|N|||F||86.199862|20250324160746|||0|
+OBX|4|NM|031|UREA|30.243783|mg/dL|-|N|||F||30.243783|20250324160555|||0|
+
+2025-03-24 16:43:53 - ACK SENT:  MSH|^~\&|||||20250324164353||ACK^R01|33|P|2.3.1||||0||ASCII|||MSA|AA|33|Message accepted|||0|
+2025-03-24 16:43:53 - Test Code : []
+2025-03-24 16:43:53 - Test Value : []
+2025-03-24 16:43:53 - Test Code : []
+2025-03-24 16:43:53 - Test Value : []
+2025-03-24 16:43:53 - Test Code : []
+2025-03-24 16:43:53 - Test Value : []
+2025-03-24 16:43:53 - Test Code : [009]
+2025-03-24 16:43:53 - Test Value : [1.02]
+2025-03-24 16:43:53 - Test Code : [009, 023]
+2025-03-24 16:43:53 - Test Value : [1.02, 35.40]
+2025-03-24 16:43:53 - Test Code : [009, 023, 024]
+2025-03-24 16:43:53 - Test Value : [1.02, 35.40, 86.20]
+2025-03-24 16:43:53 - Test Code : [009, 023, 024, 031]
+2025-03-24 16:43:53 - Test Value : [1.02, 35.40, 86.20, 30.24]
+2025-03-24 16:43:53 - Test Code : [009, 023, 024, 031]
+2025-03-24 16:43:53 - Test Value : [1.02, 35.40, 86.20, 30.24]

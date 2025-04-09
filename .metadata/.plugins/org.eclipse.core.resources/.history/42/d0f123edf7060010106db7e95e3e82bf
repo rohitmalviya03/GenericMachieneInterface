@@ -1,0 +1,4 @@
+2025-03-22 13:59:50 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 13:59:50 - Response from API: [{"patFirstName":"Test Usr One    ","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":null,"patSampleType":"Special","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 13:59:50 - Save Patient Details API called for PACS 
+2025-03-22 13:59:50 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?

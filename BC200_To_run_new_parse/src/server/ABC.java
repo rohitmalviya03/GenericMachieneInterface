@@ -1473,7 +1473,7 @@ else {
 */		//--------------http- AIIMS Bhubneshwat--------
 //		url = ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp + "&hos="
 //				+ hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
-		url = "https://" + ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=5&eqp=" + 100002
+		url =  ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=5&eqp=" + eqp
 				+ "&hos=" + hos + "&tcode=" + stra + "&tval=" + strb + "&sam=" + sam + "&uid=" + uid;
 		  String modifiedString = url.replace("tval=$", "tval=");
 		  String  modifiedString1 = modifiedString.replace("%", "_");

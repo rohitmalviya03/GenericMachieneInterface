@@ -1,0 +1,165 @@
+2025-03-22 14:53:02 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 14:53:18 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 14:53:26 - Save Patient Details API called for PACS 
+2025-03-22 14:54:31 - Update Status API called
+2025-03-22 14:54:45 - Response Body:  Status Updated
+2025-03-22 14:55:17 - Data sends to Mestria is started ::  
+2025-03-22 14:55:23 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-03-22 14:56:05 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-03-22 14:57:01 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 14:57:01 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 14:57:01 - Save Patient Details API called for PACS 
+2025-03-22 14:57:01 - Update Status API called
+2025-03-22 14:57:01 - Response Body:  Status Updated
+2025-03-22 14:57:01 - Data sends to Mestria is started ::  
+2025-03-22 14:57:01 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-03-22 14:57:01 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 14:57:01 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322145701||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322145701|SAC||||24008676 ORC|NW||||||||20250322145701TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:00:15 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 15:00:15 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:00:15 - Save Patient Details API called for PACS 
+2025-03-22 15:00:15 - Update Status API called
+2025-03-22 15:00:15 - Response Body:  Status Updated
+2025-03-22 15:00:15 - Data sends to Mestria is started ::  
+2025-03-22 15:00:15 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-03-22 15:00:15 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 15:01:13 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 15:01:13 - Response from API: []
+2025-03-22 15:01:13 - Sample no or cr no. not found: []
+2025-03-22 15:01:13 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 15:02:45 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 15:02:45 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:02:45 - Save Patient Details API called for PACS 
+2025-03-22 15:02:45 - Update Status API called
+2025-03-22 15:02:45 - Response Body:  Status Updated
+2025-03-22 15:02:45 - Data sends to Mestria is started ::  
+2025-03-22 15:02:46 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 15:02:46 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0
+2025-03-22 15:02:46 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322150246||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322150246|SAC||||24008676 ORC|NW||||||||20250322150246TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:02:46 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-22 15:02:46 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250322150246||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322150246|SAC||||24008676 ORC|NW||||||||20250322150246TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:02:46 - Updated status to 2 for ID: 250321MIC00001
+2025-03-22 15:13:19 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 15:13:19 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:13:19 - Save Patient Details API called for PACS 
+2025-03-22 15:13:19 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 15:15:55 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 15:15:55 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:15:55 - Save Patient Details API called for PACS 
+2025-03-22 15:15:55 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 15:16:40 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 15:16:40 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:16:40 - Save Patient Details API called for PACS 
+2025-03-22 15:16:40 - Update Status API called
+2025-03-22 15:16:40 - Response Body:  Status Updated
+2025-03-22 15:16:40 - Data sends to Mestria is started ::  
+2025-03-22 15:16:40 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0
+2025-03-22 15:16:40 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 15:16:40 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322151640||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322151640|SAC||||24008676 ORC|NW||||||||20250322151640TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:16:40 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-22 15:16:40 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250322151640||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322151640|SAC||||24008676 ORC|NW||||||||20250322151640TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:16:40 - Updated status to 1 for ID: 250321MIC00001
+2025-03-22 15:19:21 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 15:19:21 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:19:21 - Save Patient Details API called for PACS 
+2025-03-22 15:19:21 - Update Status API called
+2025-03-22 15:19:21 - Response Body:  Status Updated
+2025-03-22 15:19:21 - Data sends to Mestria is started ::  
+2025-03-22 15:19:21 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-03-22 15:19:21 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0
+2025-03-22 15:19:21 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322151921||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322151921|SAC||||24008676 ORC|NW||||||||20250322151921TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:19:21 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-22 15:19:21 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250322151921||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322151921|SAC||||24008676 ORC|NW||||||||20250322151921TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:19:21 - Updated status to 1 for ID: 250321MIC00001
+2025-03-22 15:27:03 - Response: []
+2025-03-22 15:27:03 - No pending data is available
+2025-03-22 15:27:23 - Response: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:27:23 - Save Patient Details API called for PACS 
+2025-03-22 15:27:42 - Response: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:27:42 - Save Patient Details API called for PACS 
+2025-03-22 15:27:42 - Update Status API called
+2025-03-22 15:27:42 - Response Body:  Status Updated
+2025-03-22 15:27:42 - Data sends to Mestria is started ::  
+2025-03-22 15:27:42 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0
+2025-03-22 15:27:42 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322152742||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322152742|SAC||||24008676 ORC|NW||||||||20250322152742TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:27:42 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-22 15:27:42 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250322152742||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322152742|SAC||||24008676 ORC|NW||||||||20250322152742TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:27:42 - Updated status to 1 for ID: 250321MIC00001
+2025-03-22 15:32:40 - Response: []
+2025-03-22 15:32:40 - No pending data is available
+2025-03-22 15:32:51 - Response: []
+2025-03-22 15:32:51 - No pending data is available
+2025-03-22 15:36:29 - Response: []
+2025-03-22 15:36:29 - No pending data is available
+2025-03-22 15:36:35 - Response: []
+2025-03-22 15:36:35 - No pending data is available
+2025-03-22 15:45:18 - Response: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250322MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-22","hisOrderId":"250322MIC000006","reqDno":"939151002225032210000201"}]
+2025-03-22 15:45:18 - Save Patient Details API called for PACS 
+2025-03-22 15:45:18 - Update Status API called
+2025-03-22 15:45:18 - Response Body:  Status Updated
+2025-03-22 15:45:18 - Data sends to Mestria is started ::  
+2025-03-22 15:45:18 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0
+2025-03-22 15:45:18 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322154518||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250322MIC00001SPM|1|250322MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322154518|SAC||||24008676 ORC|NW||||||||20250322154518TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:45:18 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-22 15:45:18 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250322154518||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250322MIC00001SPM|1|250322MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322154518|SAC||||24008676 ORC|NW||||||||20250322154518TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:45:18 - Updated status to 1 for ID: 250322MIC00001
+2025-03-22 15:50:17 - Response: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250322MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-22","hisOrderId":"250322MIC000006","reqDno":"939151002225032210000201"},{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:50:17 - Save Patient Details API called for PACS 
+2025-03-22 15:50:40 - Response: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250322MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-22","hisOrderId":"250322MIC000006","reqDno":"939151002225032210000201"},{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:50:40 - Save Patient Details API called for PACS 
+2025-03-22 15:53:47 - Response: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250322MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-22","hisOrderId":"250322MIC000006","reqDno":"939151002225032210000201"},{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 15:53:47 - Save Patient Details API called for PACS 
+2025-03-22 15:53:47 - Update Status API called
+2025-03-22 15:53:47 - Response Body:  Status Updated
+2025-03-22 15:53:47 - Data sends to Mestria is started ::  
+2025-03-22 15:53:47 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0
+2025-03-22 15:53:47 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322155347||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250322MIC00001SPM|1|250322MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322155347|SAC||||24008676 ORC|NW||||||||20250322155347TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:53:47 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-22 15:53:47 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250322155347||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250322MIC00001SPM|1|250322MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322155347|SAC||||24008676 ORC|NW||||||||20250322155347TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:53:47 - Updated status to 1 for ID: 250322MIC00001
+2025-03-22 15:53:48 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322155348||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322155348|SAC||||24008676 ORC|NW||||||||20250322155348TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:53:48 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-22 15:53:48 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250322155348||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322155348|SAC||||24008676 ORC|NW||||||||20250322155348TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 15:53:49 - Updated status to 1 for ID: 250321MIC00001
+2025-03-22 15:54:38 - Response: []
+2025-03-22 15:54:38 - No pending data is available
+2025-03-22 15:55:31 - Data sends to Mestria is started  for sample no ::  250322MIC00000
+2025-03-22 15:55:31 - Response from API: []
+2025-03-22 15:55:31 - Sample no or cr no. not found: []
+2025-03-22 15:55:31 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-03-22 15:58:30 - Response: []
+2025-03-22 15:58:30 - No pending data is available
+2025-03-22 15:58:32 - Response: []
+2025-03-22 15:58:32 - No pending data is available
+2025-03-22 15:58:32 - Response: []
+2025-03-22 15:58:32 - No pending data is available
+2025-03-22 15:58:32 - Response: []
+2025-03-22 15:58:32 - No pending data is available
+2025-03-22 15:58:32 - Response: []
+2025-03-22 15:58:32 - No pending data is available
+2025-03-22 15:58:33 - Response: []
+2025-03-22 15:58:33 - No pending data is available
+2025-03-22 15:58:33 - Response: []
+2025-03-22 15:58:33 - No pending data is available
+2025-03-22 16:01:17 - Data sends to Mestria is started  for sample no ::  250322MIC00000
+2025-03-22 16:01:17 - Response from API: []
+2025-03-22 16:01:17 - Sample no or cr no. not found: []
+2025-03-22 16:01:17 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-03-22 16:02:15 - Data sends to Mestria is started  for sample no ::  250322MIC00000
+2025-03-22 16:02:15 - Response from API: []
+2025-03-22 16:02:15 - Sample no or cr no. not found: []
+2025-03-22 16:02:15 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-03-22 16:05:07 - Data sends to Mestria is started  for sample no ::  250322MIC00000
+2025-03-22 16:05:07 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250322MIC00000","patSampleType":"1002","patSampleCollectionDate":"2025-03-22","hisOrderId":"250322MIC000005","reqDno":"939151002225032210000101"}]
+2025-03-22 16:05:07 - Save Patient Details API called for PACS 
+2025-03-22 16:05:07 - Update Status API called
+2025-03-22 16:05:07 - Response Body:  Status Updated
+2025-03-22 16:05:07 - Data sends to Mestria is started ::  
+2025-03-22 16:05:07 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0
+2025-03-22 16:05:07 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-03-22 16:05:07 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322160507||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250322MIC00000SPM|1|250322MIC00000||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322160507|SAC||||24008676 ORC|NW||||||||20250322160507TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 16:05:07 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-22 16:05:07 - Sent :  MSH|^~\&|LIS|LAB|myla|BMX|20250322160507||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250322MIC00000SPM|1|250322MIC00000||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322160507|SAC||||24008676 ORC|NW||||||||20250322160507TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 16:05:07 - Updated status to 1 for ID: 250322MIC00000
+2025-03-22 16:05:10 - Response: []
+2025-03-22 16:05:10 - No pending data is available

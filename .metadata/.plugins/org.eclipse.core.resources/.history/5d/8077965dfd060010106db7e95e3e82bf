@@ -1,0 +1,61 @@
+2025-03-22 14:13:37 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 14:13:37 - Response from API: [{"patFirstName":"Test Usr One    ","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"Special","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 14:13:37 - Save Patient Details API called for PACS 
+2025-03-22 14:13:37 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 14:16:00 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 14:16:00 - Response from API: [{"patFirstName":"Test Usr One    ","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"Special","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 14:16:00 - Save Patient Details API called for PACS 
+2025-03-22 14:16:00 - Update Status API called
+2025-03-22 14:16:00 - Response Body:  Status Updated
+2025-03-22 14:16:00 - Data sends to Mestria is started ::  
+2025-03-22 14:16:00 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 14:16:00 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-03-22 14:16:00 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322141600||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||Special^99BMx|||^^|^^|||P^Patient^||||||20250322141600|SAC||||24008676 ORC|NW||||||||20250322141600TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 14:16:02 - Error: Error connecting to server: Connection refused: connect
+2025-03-22 14:16:02 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1719)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-03-22 14:26:30 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 14:26:30 - Response from API: []
+2025-03-22 14:26:30 - Sample no or cr no. not found: []
+2025-03-22 14:26:30 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 14:29:48 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 14:29:49 - API call failed. Response code: 500
+2025-03-22 14:29:50 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 14:30:59 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 14:31:00 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 14:31:00 - Save Patient Details API called for PACS 
+2025-03-22 14:31:00 - Update Status API called
+2025-03-22 14:31:00 - Response Body:  Status Updated
+2025-03-22 14:31:00 - Data sends to Mestria is started ::  
+2025-03-22 14:31:00 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-03-22 14:31:00 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 14:31:00 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250322143100||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250321MIC00001SPM|1|250321MIC00001||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250322143100|SAC||||24008676 ORC|NW||||||||20250322143100TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-03-22 14:31:02 - Error: Error connecting to server: Connection refused: connect
+2025-03-22 14:31:02 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1719)
+	at Server.AIIMSLAB$6.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-03-22 14:38:36 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-22 14:38:36 - Response from API: [{"patFirstName":"Test Usr One    ","patType":"Special","patLastName":null,"patMiddleName":"-","patGender":"M","patientBirthDate":"-","patCrno":"939152100000382","patSampleNo":"250321MIC00001","patSampleType":"1002","patSampleCollectionDate":"2025-03-21","hisOrderId":"250321MIC000004","reqDno":"939151002225032110000201"}]
+2025-03-22 14:38:36 - Save Patient Details API called for PACS 
+2025-03-22 14:38:36 - Update Status API called
+2025-03-22 14:38:36 - Response Body:  Status Updated
+2025-03-22 14:38:36 - Data sends to Mestria is started ::  
+2025-03-22 14:38:36 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-22 14:38:36 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1

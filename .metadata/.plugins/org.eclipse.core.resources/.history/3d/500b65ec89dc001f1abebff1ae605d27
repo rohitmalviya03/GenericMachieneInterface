@@ -1,37 +1,0 @@
-2025-01-27 12:58:30 - Data sends to Mestria is started  for sample no ::  SN987654
-2025-01-27 12:58:30 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1 and hivnum_sample_no=SN987654
-2025-01-27 12:58:30 - Error: ERROR: column "sn987654" does not exist
-  Position: 244
-2025-01-27 12:58:30 - Stack Trace: org.postgresql.util.PSQLException: ERROR: column "sn987654" does not exist
-  Position: 244
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
-	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
-	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
-	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
-	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
-	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
-	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1442)
-	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-27 14:05:35 - Data sends to Mestria is started  for sample no ::  SN987654
-2025-01-27 14:05:35 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1 and hivnum_sample_no=?
-2025-01-27 14:05:35 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250127140535||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||John^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN987654SPM|1|SN987654||Blood^99BMx|||^^|^^|||P^Patient^||||||20250127140535|SAC||||24008676 ORC|NW||||||||20250127140535TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-01-27 14:05:37 - Error: Error connecting to server: Connection refused: connect
-2025-01-27 14:05:37 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1473)
-	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-

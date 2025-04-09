@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item key="org.eclipse.jdt.ui.lastextjar" value="C:\Users\rohitmalviya\Downloads"/>
+	<item key="org.eclipse.jdt.ui.lastextjar" value="C:\Users\rohitmalviya\Downloads\rxtx-2.1.7.jar"/>
 	<item key="org.eclipse.jdt.ui.last.selected.jre.kind2" value="2"/>
 	<item key="org.eclipse.jdt.ui.last.selected.execution.enviroment" value="JavaSE-1.8"/>
 	<item key="TypeHierarchyViewPart.hierarchyview" value="2"/>
@@ -62,10 +62,18 @@
 		<item key="FatJarPackageWizardPage.ANTSCRIPT_SAVE" value="false"/>
 		<item key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION" value="D:\GenericMachineInterface"/>
 		<item key="FatJarPackageWizardPage.LIBRARY_HANDLING" value="2"/>
-		<item key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME" value="ManglagiriCobasPureHL7 (1) - Manglagiri"/>
-		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\SYS_480RB\GenericMaster.jar"/>
+		<item key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME" value="newArkery1303 - ArkrayH8180_val2"/>
+		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\AIIMS KALYANI\ArkeryLIS.jar"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\AIIMS KALYANI\ArkeryLIS.jar"/>
+			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\Jodhpur Horiba\CDAC_LIS.jar"/>
+			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\Rajkot UA\UA.jar"/>
+			<item value="C:\Users\rohitmalviya\Desktop\LIS Manual\MIndraY\OT_GENERIC\GenericMaster.jar"/>
 			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\SYS_480RB\GenericMaster.jar"/>
+			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\Atlica\GenericMaster.jar"/>
+			<item value="C:\Users\rohitmalviya\Desktop\LIS Manual\MIndraY\OT_GENERIC\GenericMaster2.jar"/>
+			<item value="C:\Users\rohitmalviya\Desktop\LIS Manual\MIndraY\OT_GENERIC\Test.jar"/>
+			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\SEBIA MINICAP TCP IP\GenericMaster.jar"/>
 			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\SYS_480RB\Horriba.jar"/>
 			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\GP\VitrosMaster.jar"/>
 			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\OT\VitrosMaster.jar"/>
@@ -77,14 +85,6 @@
 			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\IGIMS NEW MACHINE\IGIMS.jar"/>
 			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\Sysmax.jar"/>
 			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\ERBAcheck.jar"/>
-			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\vitros20047.jar"/>
-			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\ERBAXL1000AIIMS BHU\MasterDynamic.jar"/>
-			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\SEBIAG.jar"/>
-			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\cobas\cobas20046.jar"/>
-			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\SysmaxMaster.jar"/>
-			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\MasterDynamic.jar"/>
-			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\SEBIA.jar"/>
-			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\AIIMSJAMMU\MASTER.jar"/>
 		</list>
 		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
 			<item value="D:\GenericMachineInterface.xml"/>

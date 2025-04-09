@@ -24,8 +24,12 @@
 		<list key="ImportExportPage.STORE_EXPANDED_EXPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
 			<item value="org.eclipse.jst.ejb.ui"/>
+			<item value="org.eclipse.equinox.p2.category"/>
 			<item value="org.eclipse.jdt.ui.Java"/>
 			<item value="org.eclipse.jst.j2ee.internal"/>
+			<item value="org.eclipse.debug.ui"/>
+			<item value="org.eclipse.team.ui.exportWizards"/>
+			<item value="org.eclipse.wst.web.ui"/>
 		</list>
 	</section>
 	<section name="FileSystemExportWizard">
@@ -33,6 +37,8 @@
 		<item key="WizardFileSystemResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="false"/>
 		<item key="WizardFileSystemResourceExportPage1.STORE_RESOLVE_LINKED_RESOURCES_ID" value="false"/>
 		<list key="WizardFileSystemResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\AIIMS KALYANI"/>
+			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\SEBIA MINICAP TCP IP"/>
 			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\GP"/>
 			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\IGIMS NEW MACHINE"/>
 			<item value="C:\Users\rohitmalviya\Desktop\Exported Jar Machines\AIIMSJAMMU"/>

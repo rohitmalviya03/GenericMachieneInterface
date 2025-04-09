@@ -1,0 +1,84 @@
+package mainCreation;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
+public class ReadPropertyFile {
+        
+        private static final String OS_NAME                        =        System.getProperties().getProperty("os.name");
+        private static final String pathFileName = "/read.properties";
+        private static String windowsPath = "c:/TcpFilessys/property";  //"c:/TcpFilesArkray/property";
+        private static String linuxPath = "/opt/TcpFiles/property";
+        public static HashMap propertyMap;
+        
+        /*public Map ReadPropertyFile () 
+        {
+                if(propertyMap == null)
+                        return getPropertyValues();
+                else
+                        return propertyMap;
+        }*/
+        public static Map getPropertyValues()
+        {
+                propertyMap = new HashMap();
+                String path = "";
+                String ip = "ip";
+                String port = "port";
+                String eqp = "eqp";
+                String hos = "hos";
+                String uid = "uid";
+                String fileReadPath = "fileReadPath";
+                String fileImgPath = "fileImgPath";
+                String fileSavePath = "fileSavePath";
+                //added by rahulprasad
+               // String tcode = "tcode";
+                
+                if(OS_NAME.startsWith("Win")){
+                        
+                        path = windowsPath;
+                }else{
+                        
+                        path = linuxPath;
+                }
+                path = path+pathFileName;
+        try (InputStream input = new FileInputStream(path)) {
+
+            Properties prop = new Properties();
+
+            // load a properties file
+            prop.load(input);
+
+            // get the property value and print it out
+            /*System.out.println(prop.getProperty(url));
+            System.out.println(prop.getProperty(user));
+            System.out.println(prop.getProperty(password));
+            System.out.println(prop.getProperty(ip));
+            System.out.println(prop.getProperty(port));*/
+             
+            
+          //added by rahulprasad
+            //System.out.println((prop.getProperty(tcode)));
+            
+            propertyMap.put(ip , prop.getProperty(ip));
+            propertyMap.put(port , prop.getProperty(port));
+            propertyMap.put(eqp , prop.getProperty(eqp));
+            propertyMap.put(hos , prop.getProperty(hos));
+            propertyMap.put(uid , prop.getProperty(uid));
+            propertyMap.put(fileReadPath , prop.getProperty(fileReadPath));
+            propertyMap.put(fileImgPath , prop.getProperty(fileImgPath));
+            propertyMap.put(fileSavePath , prop.getProperty(fileSavePath));
+            //added by rahulprasad
+            //propertyMap.put(tcode, prop.getProperty(tcode));
+            
+            
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+               return propertyMap;
+    }
+        }

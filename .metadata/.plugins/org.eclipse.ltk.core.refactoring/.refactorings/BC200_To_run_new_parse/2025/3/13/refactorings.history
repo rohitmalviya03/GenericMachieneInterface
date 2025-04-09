@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;BC200_To_run_new_parse/config/read.properties&apos; to &apos;readbkp.properties&apos;" description="Rename resource &apos;read.properties&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="config/read.properties" name="readbkp.properties" stamp="1742880214668" updateReferences="true"/>
+</session>

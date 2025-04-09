@@ -19,7 +19,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.apache.poi.ss.usermodel.*;
 import java.awt.*;
 import java.awt.Color;
@@ -62,9 +64,11 @@ import java.util.zip.CRC32;
  * 
  * Designed and Developed By Rohit Malviya
  * Date : 10/10/2024
- * Purpose : Generic Interface GUI in java  /// Upgrade from java jar file to java exe
+ * Purpose : Generic Interface GUI in java  /// Upgrade from java jar file to java GUI.
  * Mode : Unidirectional / Bidirectional
  * Status : Working 
+ * 
+ * 
  *   
  */
 
@@ -106,18 +110,22 @@ public class GenericServer {
 	static String server_ip = (String) res.get("server_ip");
 	static String server_port = (String) res.get("server_port");
 	static String graph_path = (String) res.get("graph_path");
+	static	JFrame frame = new JFrame("Generic Interface by CDAC Noida");
+	static String cr_no = null;
 
 	private static final char START_BLOCK = 0x0B; // <VT> (0B in HEX)
 	private static final char END_BLOCK_1 = 0x1C; // <FS> (1C in HEX)
 	private static final char END_BLOCK_2 = 0x0D; // <CR> (0D in HEX)
 
-	// static String machineId = (String) res.get("machine_id");
+	 static String machineId = (String) res.get("eqp");
 	public static void main(String[] args) {
 
+		
+		
 		FlatLightLaf.install();
 
 		// Create the frame
-		JFrame frame = new JFrame("Generic Interface by CDAC Noida");
+		//JFrame frame = new JFrame("Generic Interface by CDAC Noida");
 		ImageIcon frameIcon = new ImageIcon("resource/GMEI_Final.jpg"); // Ensure you have this file in your resources
 		// folder
 		frame.setIconImage(frameIcon.getImage());
@@ -170,8 +178,10 @@ public class GenericServer {
 
 		//String[] machines = {"SYS-480","IGIMS NEW", "CLIA180","Sysmax1000","Mindray6000","ABG","SEBIA BHU","AVEBPL","AIIMSJD","Erba680","Mindray Monitor","ICU","Monitor","Other"};
 
-		String[] machines = { "ABG" };
+		//String[] machines = { "Mindray PM","Mindray WS","Dragger Venti"};
 
+		
+		String[] machines = {"SYS-480"};
 		JComboBox<String> comboBox = new JComboBox<>(machines);
 		machinePanel.add(new JLabel("Select Machine:"));
 		machinePanel.add(comboBox);
@@ -179,9 +189,17 @@ public class GenericServer {
 		String[] protocol = { "HL7", "ASTM", "Other" };
 		JComboBox<String> comboBox2 = new JComboBox<>(protocol);
 
+		
+		
 		machinePanel.add(new JLabel("Protocol:"));
 		machinePanel.add(comboBox2);
 
+		
+		JButton crnoBtn = new JButton("Enter Cr No.");
+		
+		machinePanel.add(crnoBtn);
+		
+		
 		// machinePanel.add(baudRateNumberLabel);
 
 		// machinePanel.add(baudRateTextField);
@@ -249,6 +267,15 @@ public class GenericServer {
 
 			}
 		});
+		
+		crnoBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			fetchPatDemo();
+			
+			}
+				
+		});
 		// Style the buttons
 		button1.setBackground(new Color(70, 130, 180));
 
@@ -287,6 +314,8 @@ public class GenericServer {
 				comPortComboBox.setVisible(false);
 				frame.revalidate();
 				frame.repaint();
+				
+				
 			}
 		});
 
@@ -320,7 +349,9 @@ public class GenericServer {
 			public void actionPerformed(ActionEvent e) {
 				populatePortComboBox();
 
-				System.out.println("ASDFASFSDF");
+			//	System.out.println("ASDFASFSDF");
+				
+				
 				serverRadioButton.setSelected(false);
 				clientRadioButton.setSelected(false);
 
@@ -497,6 +528,23 @@ public class GenericServer {
 											objServer.startServer(Integer.parseInt(portNumber), selectedMachine);
 
 										}
+										
+										
+										else if (selectedMachine.equals("Mindray WS")) {
+											logMessage("Application  Type : Server", Color.BLACK);
+											//logMessage("Server IP :" + server_ip, Color.MAGENTA);
+											logMessage("Server Port :" + server_port, Color.MAGENTA);
+											logMessage("machine Selected :" + selectedMachine, Color.MAGENTA);
+											//AVEBPL.cllientConnect(server_ip, server_port); // HL 7 Server
+
+											TcpServerWATOServer.connectWorkStation(server_port,cr_no);
+										}
+										
+										
+										
+										
+										
+										
 
 									}
 
@@ -533,10 +581,16 @@ public class GenericServer {
 											objServer.startDb9Server(portName, selectedMachine, baudRate); // DB9 Server
 										}
 
-										if (selectedMachine.equals("Dragger OT")) {
+										if (selectedMachine.equals("Dragger Venti")) {
 
-											objServer.startDb9Server(portName, selectedMachine, baudRate); // DB9 Server
+											//objServer.startDb9Server(portName, selectedMachine, baudRate); // DB9 Server
+									
+											DraegerSerialComm obj = new DraegerSerialComm();
+											obj.ConnectDragger(portName, selectedMachine, baudRate);
 										}
+										
+										
+										
 
 									}
 
@@ -587,6 +641,23 @@ public class GenericServer {
 												ABGDELHI.cllientConnect(server_ip, server_port); // HL 7 Server
 
 											}
+											
+											else if (selectedMachine.equals("Mindray PM")) {
+												logMessage("Application  Type : CLIENT", Color.BLACK);
+												logMessage("Server IP :" + server_ip, Color.MAGENTA);
+												logMessage("Server Port :" + server_port, Color.MAGENTA);
+												logMessage("machine Selected :" + selectedMachine, Color.MAGENTA);
+												//AVEBPL.cllientConnect(server_ip, server_port); // HL 7 Server
+
+												try {
+												PatientMonitorClient.connectMonitor(server_ip,server_port,cr_no);
+												}
+												catch(Exception ee) {
+													ee.printStackTrace();
+												}
+												}
+											
+											
 										}
 
 									}
@@ -612,6 +683,8 @@ public class GenericServer {
 		button2.addActionListener(buttonListener); // Download log event
 		exitButton.addActionListener(buttonListener); // Exit Button event
 
+		
+		
 		// Create the button panel and add buttons to it
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 5, 5)); // create button panel and them add into the top
 		// panel which is exists in the Main Frame
@@ -682,8 +755,144 @@ public class GenericServer {
 		// Add panel to the frame
 		frame.add(panel);
 		frame.setVisible(true);
+		
+		  SwingUtilities.invokeLater(() -> {
+	            String patientID = JOptionPane.showInputDialog(frame, "Please enter Patient Cr No.:");
+	            
+	            // If user presses Cancel or enters an empty value
+	            if (patientID == null || patientID.trim().isEmpty()) {
+	                JOptionPane.showMessageDialog(frame, "No Patient Cr No entered. Exiting...");
+	                System.exit(0);  // Close the application
+	            } else {
+	            	cr_no=patientID;
+	                JOptionPane.showMessageDialog(frame, "Patient Cr No: " + cr_no);
+	                
+	               // https://aiimsjodhpur.prd.dcservices.in/
+	                	//+"HISServices/service/genericNurseEvisit/getpatientdetails?crno=989262300206008&hospcode=98926";
+	                
+	                	try {
+	        				
+	        				URL url = new URL(aiimsUrl + "/HISServices/service/genericNurseEvisit/getpatientdetails?crno="+cr_no+"&hospcode="+98926);
+		// Create a connection object
+	        				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+	        				// Set the request method to POST
+	        				connection.setRequestMethod("GET");
+
+	        				// Set request headers if needed
+	        				connection.setRequestProperty("Content-Type", "application/json");
+	        				// connection.setRequestProperty("Accept", "application/json");
+
+	        				// Enable input and output streams
+	        				connection.setDoOutput(true);
+	        				System.out.println(connection.getURL());
+	        			
+	        				// Get the response code
+	        				int responseCode = connection.getResponseCode();
+	        				System.out.println(responseCode);
+	        				
+	        				  // Check if the response code is 200 (OK)
+	        	            if (responseCode == HttpURLConnection.HTTP_OK) {
+	        	                // Read the response
+	        	                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	        	                String inputLine;
+	        	                StringBuilder response = new StringBuilder();
+
+	        	                // Read the response line by line
+	        	                while ((inputLine = in.readLine()) != null) {
+	        	                    response.append(inputLine);
+	        	                }
+	        	                // Close the BufferedReader
+	        	                in.close();
+
+	        	                // Print the response
+	        	                System.out.println("Response: " + response.toString());
+	        	                JSONObject jsonResponse = new JSONObject(response.toString());
+	        	                JSONArray patientDetails = jsonResponse.getJSONArray("patientdetails");
+
+	        	                
+	        	                
+	        	                
+	        	                String status = jsonResponse.getString("status");
+	        	                
+	        	                if(!status.equals("0")) {
+	        	                // Extract details from the JSON
+	        	                JSONObject patient = patientDetails.getJSONObject(0);
+	        	                String patientName = patient.getString("HRGSTR_FNAME") + " " + patient.getString("HRGSTR_LNAME");
+	        	                String patientAge = patient.getString("HRGSTR_AGE");
+	        	                String patientGender = patient.getString("GSTR_GENDER_CODE");
+	        	                String patientMobile = patient.getString("HRGSTR_MOBILE_NO");
+	        	                String patientAddress = patient.getString("HRGSTR_ADDRESS_LINE1") + ", " +
+	        	                                        patient.getString("HRGSTR_SUB_LOCALITY1") + ", " +
+	        	                                        patient.getString("HRGSTR_DISTRICT");
+
+	        	                // Create a message with patient details to show in the dialog
+	        	                String message = "Patient Details:\n\n" +
+	        	                                 "Name: " + patientName + "\n" +
+	        	                                 "Age: " + patientAge + "\n" +
+	        	                                 "Gender: " + (patientGender.equals("M") ? "Male" : "Female") + "\n" +
+	        	                                 "Mobile: " + patientMobile + "\n" +
+	        	                                 "Address: " + patientAddress;
+
+	        	                // Show a confirmation dialog with the details
+	        	                int responseDialog = JOptionPane.showConfirmDialog(null, 
+	        	                    message + "\n\nDo you want to proceed?", 
+	        	                    "Confirm Patient Details", 
+	        	                    JOptionPane.YES_NO_OPTION);
+
+	        	                // Handle the dialog response
+	        	                if (responseDialog == JOptionPane.YES_OPTION) {
+	        	                    // Proceed with starting the application
+	        	                    JOptionPane.showMessageDialog(null, "Proceeding with the application...");
+	        	                    // Initialize the rest of the application here...
+	        	                } else {
+	        	                    // User declined, exit the application or handle it as needed
+	        	                    JOptionPane.showMessageDialog(null, "Application terminated.");
+	        	                    //System.exit(0);
+	        	                }
+	        	                
+	        	                
+	        	                }
+	        	                
+	        	                else {
+	        	                	 JOptionPane.showMessageDialog(null, "Patient details not found for this cr no. check with another cr");
+	        	                	
+	        	                	
+	        	                }
+
+	        	            } else {
+	        	                System.out.println("GET request failed with response code: " + responseCode);
+	        	            }
+	        	            
+	        	            } 
+	        				
+	        				
+	                	
+	                	catch (Exception e) {
+							// TODO: handle exception
+						}
+	                
+	                // Continue with the application after patient ID is entered
+	            }
+	        });
 	}
 
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private static void populatePortComboBox() {
 		SerialPort[] ports = SerialPort.getCommPorts();
 		for (SerialPort port : ports) {
@@ -1191,7 +1400,10 @@ public class GenericServer {
 						.append((char) 0x0D);
 						mindACK.append((char) 0x1C).append((char) 0x0D);
 
-
+					/*	MSH|^~\&|Factory|Chemistry Analyzer|||20250218113959||ACK^R01|1570|P|2.3.1||||0||ASCII|||
+						 					 
+						 MSA|AA|1570|Message accepted|||0|
+						*/
 
 						if(msgType.equals("ORU^R01")) {
 
@@ -1199,6 +1411,8 @@ public class GenericServer {
 
 							System.out.println(mindACK);
 							saveToFile("ACK SENT:  " + mindACK.toString(), FILE_NAME);
+						
+						
 						}
 						else if(msgType.equals("QRY^Q02")) {
 
@@ -1295,7 +1509,7 @@ public class GenericServer {
 
 
 					//String it = obj.getSampleDtl(samNo);
-					String it="12321;13123;13212;";
+					String it="CREAT;SGOT;UREA;SGPT";
 					//System.out.println("API CALL FOR FETCH");
 					String[] kvPairs = it.split(";");
 
@@ -1359,8 +1573,8 @@ public class GenericServer {
 							+ "DSP|19|||||\r"
 							+ "DSP|20|||||\r"
 							+ "DSP|21||SAMPLENO|||\r"
-							+ "DSP|22||SAMPLEID|||\r"
-							+ "DSP|23||20070301183500|||\r"
+							+ "DSP|22|||||\r"
+							+ "DSP|23||TIMESTAMP|||\r"
 							+ "DSP|24||N|||\r"
 							+ "DSP|25||1|||\r"
 							+ "DSP|26||serum|||\r"
@@ -1369,11 +1583,90 @@ public class GenericServer {
 							+ "DSP|29||1^^^|||\r"
 							+ "DSP|30||2^^^|||\r"
 							+ "DSP|31||5^^^|||\r"
-							+ "DSC||"+END_BLOCK_1+END_BLOCK_2
+							+ "DSC||\r"+END_BLOCK_1+END_BLOCK_2
 							;
 
+					
+					
+					
+					
+					StringBuffer newHl7msg = new StringBuffer();
+					
+	
+					
+					
+					
+					//StringBuffer newHl7msg = new StringBuffer();
+					
+					newHl7msg.append(START_BLOCK+"MSH|^~\\&|LIS-Server|HOST|Mindray|BS-200|TIMESTAMP||DSR^Q03|MSGCONTROL|P|2.3.1||||||ASCII|||\r");
+					newHl7msg.append("MSA|AA|214|Message accepted|||0|\r");
+					newHl7msg.append("ERR|0|\r");
+					newHl7msg.append("QAK|SR|OK|\r");
+					newHl7msg.append("QRD|TIMESTAMP|R|D|1|||RD|SAMPLENO|OTH|||T|\r");
+					newHl7msg.append("QRF|BS-200|20061107000000|20061107171622|||RCT|COR|ALL||\r");
+					newHl7msg.append("DSP|1||SMOBP24000500|||\r");
+					newHl7msg.append("DSP|2||456|||\r");
+					newHl7msg.append("DSP|3||CDAC|||");
+					newHl7msg.append("DSP|4||19940201000000|||\r");
+					newHl7msg.append("DSP|5||F|||\r");
+					newHl7msg.append("SP|6||O|||\r");
+					newHl7msg.append("DSP|7|||||\r");
+					newHl7msg.append("DSP|8||xxxTownYYYRoad|||\r");
+					newHl7msg.append("DSP|9||518057|||\r");
+					newHl7msg.append("DSP|10||26582888|||\r");
+					newHl7msg.append("DSP|11|||||\r");
+					newHl7msg.append("DSP|12|||||\r");
+					newHl7msg.append("DSP|13|||||\r");
+					newHl7msg.append("DSP|14|||||\r");
+					newHl7msg.append("DSP|15||outpatient|||\r");
+					newHl7msg.append("DSP|16||87654321|||\r");
+					newHl7msg.append("DSP|17||own|||\r");
+					newHl7msg.append("DSP|18||Han|||\r");
+					newHl7msg.append("DSP|19||Jiangsu|||\r");
+					newHl7msg.append("DSP|20||China|||\r");
+					newHl7msg.append("DSP|21||SAMPLENO|||\r");
+				    newHl7msg.append("DSP|22||793|||\r");
+					newHl7msg.append("DSP|23||TIMESTAMP|||\r");
+					newHl7msg.append("DSP|24||N|||\r");
+		            newHl7msg.append("DSP|25|||||\r");
+				    newHl7msg.append("DSP|26||Serum|||\r");
+					newHl7msg.append("DSP|27|||||\r");
+					newHl7msg.append("DSP|28||SECTOR 13|||\r");
+					newHl7msg.append("DSP|29||034^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|30||016^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|31||024^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|32||033^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|33||008^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|34||010^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|35||035^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|36||005^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|37||029^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|38||015^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|39||026^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|40||027^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|41||030^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|42||011^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|43||028^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|44||002^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|45||003^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSC||"+END_BLOCK_1+END_BLOCK_2);
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					LocalDateTime now = LocalDateTime.now();
 
-					qryRepons=	qryRepons.replaceAll("TIMESTAMP", "");
+					// Define the desired format
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+
+					// Format the current date and time
+					String timestamp = now.format(formatter);
+					qryRepons=	qryRepons.replaceAll("TIMESTAMP", timestamp);
 					qryRepons=	qryRepons.replaceAll("SAMPLENO", samNo);
 					qryRepons=	qryRepons.replaceAll("SAMPLEID", "");
 					qryRepons=	qryRepons.replaceAll("PATNAME", "");
@@ -1683,7 +1976,7 @@ public class GenericServer {
 
 				// Generate base64 of GRAPH PDF -- - - - - - -
 
-				String base64val = fileReadAndConvertBase64(graph_path, sampleNo);
+			//	String base64val = fileReadAndConvertBase64(graph_path, sampleNo);
 
 				System.out.println("--" + sampleNo + " --");
 
@@ -1702,9 +1995,17 @@ public class GenericServer {
 					if (!(sampleNo.equals(null) && sampleNo.equals(""))) {
 						// String res=objAbc.insert_Sysmex800i(testCode.get(i).replaceAll("\\s",
 						// ""),testValue.get(i), sampleNo.replaceAll("\\s", ""));
-						objAbc.insertSampleDtlpdfbase64(sampleNo.replaceAll("\\s", ""),
+						
+						
+					/*	objAbc.insertSampleDtlpdfbase64(sampleNo.replaceAll("\\s", ""),
 								testCode.get(i).replaceAll("\\s", ""), testValue.get(i).replaceAll("\\s", ""),
 								base64val);
+								*/
+						
+						
+						objAbc.insert_Sysmex800i(sampleNo.replaceAll("\\s", ""),
+								testCode.get(i).replaceAll("\\s", ""),
+								testValue.get(i).replaceAll("\\s", ""));
 						// base64val=null;
 					}
 
@@ -1997,7 +2298,7 @@ public class GenericServer {
 				// URL url = new
 				// URL("http://10.226.28.174:8380/OT_INTEGRATION/service/api/saveresult/");
 
-				URL url = new URL(aiimsUrl + "/OT_INTEGRATION/service/api/saveresult/");
+				URL url = new URL(aiimsUrl + "/OT_INTEGRATION/service/api/saveresult");
 
 				// URL url = new
 				// URL("https://aiimsjodhpur.uat.dcservices.in/OT_INTEGRATION/service/api/saveresult/");
@@ -2698,5 +2999,154 @@ public class GenericServer {
 
 		return Base64.getEncoder().encodeToString(bytes);
 	}
+	
+	
+	
+	
+	
+	//open to popup to enter cr no
+	public static void fetchPatDemo() {
+	
+	 String patientID = JOptionPane.showInputDialog(frame, "Please enter Patient Cr No.:");
+     
+     // If user presses Cancel or enters an empty value
+     if (patientID == null || patientID.trim().isEmpty()) {
+         JOptionPane.showMessageDialog(frame, "No Patient Cr No entered. Exiting...");
+         System.exit(0);  // Close the application
+     } else {
+     	cr_no=patientID;
+         JOptionPane.showMessageDialog(frame, "Patient Cr No: " + cr_no);
+         
+        // https://aiimsjodhpur.prd.dcservices.in/
+         	//+"HISServices/service/genericNurseEvisit/getpatientdetails?crno=989262300206008&hospcode=98926";
+         
+         	try {
+ 				
+         		URL url = new URL(aiimsUrl + "/HISServices/service/genericNurseEvisit/getpatientdetails?crno="+cr_no+"&hospcode="+98926);
+         		// Create a connection object
+ 				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+ 				// Set the request method to POST
+ 				connection.setRequestMethod("GET");
+
+ 				// Set request headers if needed
+ 				connection.setRequestProperty("Content-Type", "application/json");
+ 				// connection.setRequestProperty("Accept", "application/json");
+
+ 				// Enable input and output streams
+ 				connection.setDoOutput(true);
+ 				System.out.println(connection.getURL());
+ 			
+ 				// Get the response code
+ 				int responseCode = connection.getResponseCode();
+ 				System.out.println(responseCode);
+ 				
+ 				  // Check if the response code is 200 (OK)
+ 	            if (responseCode == HttpURLConnection.HTTP_OK) {
+ 	                // Read the response
+ 	                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+ 	                String inputLine;
+ 	                StringBuilder response = new StringBuilder();
+
+ 	                // Read the response line by line
+ 	                while ((inputLine = in.readLine()) != null) {
+ 	                    response.append(inputLine);
+ 	                }
+ 	                // Close the BufferedReader
+ 	                in.close();
+
+ 	                // Print the response
+ 	                System.out.println("Response: " + response.toString());
+ 	                JSONObject jsonResponse = new JSONObject(response.toString());
+ 	                JSONArray patientDetails = jsonResponse.getJSONArray("patientdetails");
+
+ 	                
+ 	                
+ 	                
+ 	                String status = jsonResponse.getString("status");
+ 	                
+ 	                if(!status.equals("0")) {
+ 	                // Extract details from the JSON
+ 	                JSONObject patient = patientDetails.getJSONObject(0);
+ 	                String patientName = patient.getString("HRGSTR_FNAME") + " " + patient.getString("HRGSTR_LNAME");
+ 	                String patientAge = patient.getString("HRGSTR_AGE");
+ 	                String patientGender = patient.getString("GSTR_GENDER_CODE");
+ 	                String patientMobile = patient.getString("HRGSTR_MOBILE_NO");
+ 	                String patientAddress = patient.getString("HRGSTR_ADDRESS_LINE1") + ", " +
+ 	                                        patient.getString("HRGSTR_SUB_LOCALITY1") + ", " +
+ 	                                        patient.getString("HRGSTR_DISTRICT");
+
+ 	                // Create a message with patient details to show in the dialog
+ 	                String message = "Patient Details:\n\n" +
+ 	                                 "Name: " + patientName + "\n" +
+ 	                                 "Age: " + patientAge + "\n" +
+ 	                                 "Gender: " + (patientGender.equals("M") ? "Male" : "Female") + "\n" +
+ 	                                 "Mobile: " + patientMobile + "\n" +
+ 	                                 "Address: " + patientAddress;
+
+ 	                // Show a confirmation dialog with the details
+ 	                int responseDialog = JOptionPane.showConfirmDialog(null, 
+ 	                    message + "\n\nDo you want to proceed?", 
+ 	                    "Confirm Patient Details", 
+ 	                    JOptionPane.YES_NO_OPTION);
+
+ 	                // Handle the dialog response
+ 	                if (responseDialog == JOptionPane.YES_OPTION) {
+ 	                    // Proceed with starting the application
+ 	                    JOptionPane.showMessageDialog(null, "Proceeding with the application...");
+ 	                    // Initialize the rest of the application here...
+ 	                } else {
+ 	                    // User declined, exit the application or handle it as needed
+ 	                    JOptionPane.showMessageDialog(null, "Application terminated.");
+ 	                    //System.exit(0);
+ 	                }
+ 	                
+ 	                
+ 	                }
+ 	                
+ 	                else {
+ 	                	 JOptionPane.showMessageDialog(null, "Patient details not found for this cr no. check with another cr");
+ 	                	
+ 	                	
+ 	                }
+
+ 	            } else {
+ 	                System.out.println("GET request failed with response code: " + responseCode);
+ 	            }
+ 	            
+ 	            } 
+ 				
+ 				
+         	
+         	catch (Exception e) {
+         		
+         		e.printStackTrace();
+         		
+					// TODO: handle exception
+				}
+         
+         // Continue with the application after patient ID is entered
+     }
+	
+	}
+	//
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -113,5 +113,15 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="C:/Users/rohitmalviya/Downloads/log4j-api-2.17.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rohitmalviya/.m2/repository/ca/uhn/hapi/hapi-structures-v21/2.3/hapi-structures-v21-2.3.jar" sourcepath="C:/Users/rohitmalviya/.m2/repository/ca/uhn/hapi/hapi-structures-v21/2.3/hapi-structures-v21-2.3-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="ca.uhn.hapi"/>
+			<attribute name="maven.artifactId" value="hapi-structures-v21"/>
+			<attribute name="maven.version" value="2.3"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="/hapi-examples"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

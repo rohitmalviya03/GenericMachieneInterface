@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;ArkrayH8180_val2&apos;&#x0D;&#x0A;- Original project: &apos;ArkrayH8180_val2&apos;&#x0D;&#x0A;- Original element: &apos;ArkrayH8180_val2/src/config&apos;" description="Delete element" element1="/src&lt;config" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1741849054608" subPackages="false" version="1.0"/>
+</session>

@@ -1,0 +1,3153 @@
+package Server;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fazecast.jSerialComm.SerialPort;
+import com.formdev.flatlaf.FlatLightLaf;
+
+import Server.ABC;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.List;
+import javax.swing.*;
+import javax.swing.text.*;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.apache.poi.ss.usermodel.*;
+import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.zip.CRC32;
+
+/*
+ * 
+ * Designed and Developed By Rohit Malviya
+ * Date : 10/10/2024
+ * Purpose : Generic Interface GUI in java  /// Upgrade from java jar file to java GUI.
+ * Mode : Unidirectional / Bidirectional
+ * Status : Working 
+ * 
+ * 
+ *   
+ */
+
+//Machine Interface GUI   ......###########........... TCP/IP , Serial Communication 
+public class GenericV_04_03_01 {
+
+	//
+
+	private static JTextPane textPane;
+	protected static String portNumber;
+	protected static int baudRate;
+
+	protected static String selectedMachine;
+	protected static String selectedProtocol;
+	static ServerSocket server = null;
+	static Socket client = null;
+	static int port;
+	static ExecutorService pool = null;
+	static int clientcount = 0;
+	static JRadioButton tcpIpRadioButton = new JRadioButton("TCP/IP");
+	static JRadioButton comPortRadioButton = new JRadioButton("Serial Port");
+
+	static JRadioButton serverRadioButton = new JRadioButton("Server");
+	static JRadioButton clientRadioButton = new JRadioButton("Client");
+	protected static String portName;
+	static JComboBox<String> comPortComboBox = new JComboBox<>();
+	private static boolean waveform = false;
+
+	static final String FILE_NAME = "./machine_data_log.txt"; // File to save the data
+	private static final String JSON_FILE_NAME = "./monitor_json_data.txt";
+	// private static final String LOG_FILE_NAME =
+	// "c:/TcpFiles/property/monitor_log.txt";
+
+	private static final String PARAM_FILE_NAME = "c:/TcpFiles/property/monitor_param_data.xlsx";
+	private static final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	static Map res = ReadPropertyFile.getPropertyValues();
+	static String aiimsUrl = (String) res.get("ip");
+
+	static String server_ip = (String) res.get("server_ip");
+	static String server_port = (String) res.get("server_port");
+	static String graph_path = (String) res.get("graph_path");
+	static	JFrame frame = new JFrame("Generic Interface by CDAC Noida");
+	static String cr_no = null;
+
+	private static final char START_BLOCK = 0x0B; // <VT> (0B in HEX)
+	private static final char END_BLOCK_1 = 0x1C; // <FS> (1C in HEX)
+	private static final char END_BLOCK_2 = 0x0D; // <CR> (0D in HEX)
+
+	 static String machineId = (String) res.get("eqp");
+	public static void main(String[] args) {
+
+		
+		
+		FlatLightLaf.install();
+
+		// Create the frame
+		//JFrame frame = new JFrame("Generic Interface by CDAC Noida");
+		ImageIcon frameIcon = new ImageIcon("resource/GMEI_Final.jpg"); // Ensure you have this file in your resources
+		// folder
+		frame.setIconImage(frameIcon.getImage());
+		Image image = Toolkit.getDefaultToolkit().getImage("resource/GMEI_1.jpg");
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(1920, 1080);
+		frame.setLocationRelativeTo(null); // Center the frame
+
+		frame.setBackground(Color.blue);
+
+		// Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png");
+		// f.setIconImage(icon);
+		// f.setLayout(null);
+		// f.setSize(400,400);
+		// f.setVisible(true); y
+		//
+
+		// Create the main panel with BorderLayout
+		JPanel panel = new JPanel(new BorderLayout(10, 10));
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+		// Create the top panel with GridBagLayout
+		// JPanel topPanel = new JPanel(new GridBagLayout());
+		// topPanel.setBackground(new Color(245, 245, 245)); // Light grey background
+		// for the top panel
+
+		// Create the top panel with GridBagLayout and background image
+		Image backgroundImage = Toolkit.getDefaultToolkit().getImage("resource/GMEI_Final.jpg");
+
+		JPanel topPanel = new JPanel(new GridBagLayout()) {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+			}
+		};
+		// GridBagConstraints gbc = new GridBagConstraints();
+		// gbc.insets = new Insets(5, 5, 5, 5);
+
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(5, 5, 5, 5);
+
+		// Create and decorate the "Select Machine" panel
+		JPanel machinePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+		machinePanel.setBackground(new Color(245, 245, 245));
+		machinePanel.setBorder(BorderFactory.createTitledBorder("Machine  & Protocol Selection"));
+		//String[] machffines = {"Monitor","Mindray ICU","Advia2120","Erba680", "Horriba", "Sysmex","Other","ICU"};
+
+	//	String[] machines = {"SYS-480","IGIMS NEW", "CLIA180","Sysmax1000","Mindray6000","ABG","SEBIA BHU","AVEBPL","AIIMSJD","Erba680","Mindray Monitor","ICU","Monitor","Other"};
+
+		//String[] machines = { "Mindray PM","Mindray WS","Dragger Venti"};
+
+		
+		String[] machines = {"SYS-480"};
+		JComboBox<String> comboBox = new JComboBox<>(machines);
+		machinePanel.add(new JLabel("Select Machine:"));
+		machinePanel.add(comboBox);
+
+		String[] protocol = { "HL7", "ASTM", "Other" };
+		JComboBox<String> comboBox2 = new JComboBox<>(protocol);
+
+		
+		
+		machinePanel.add(new JLabel("Protocol:"));
+		machinePanel.add(comboBox2);
+
+		
+		JButton crnoBtn = new JButton("Enter Cr No.");
+		
+		machinePanel.add(crnoBtn);
+		
+		
+		// machinePanel.add(baudRateNumberLabel);
+
+		// machinePanel.add(baudRateTextField);
+
+		JPanel appPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		appPanel.setBackground(new Color(245, 245, 245));
+		appPanel.setBorder(BorderFactory.createTitledBorder("Application Type"));
+
+		appPanel.add(clientRadioButton);
+		appPanel.add(serverRadioButton);
+
+		JPanel portPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		portPanel.setBackground(new Color(245, 245, 245));
+		portPanel.setBorder(BorderFactory.createTitledBorder("Port Configuration"));
+		JTextField portTextField = new JTextField(10);
+
+		// portPanel.add(new JLabel("Port Number:"));
+		JLabel portNumberLabel = new JLabel("Port Number:");
+
+		// JTextField portTextField = new JTextField(10);
+		portNumberLabel.setVisible(false); // Initially hidden
+		portTextField.setVisible(false); // Initially hidden
+
+		portTextField.setVisible(false);
+
+		ButtonGroup portButtonGroup = new ButtonGroup();
+
+		portButtonGroup.add(tcpIpRadioButton);
+		portButtonGroup.add(comPortRadioButton);
+
+		// portPanel.add(tcpIpRadioButton);
+		appPanel.add(comPortRadioButton);
+
+		JLabel comPortLabel = new JLabel("COM Port :  ");
+		JLabel ipNumberLabel = new JLabel("Server IP :");
+		JTextField ipTextField = new JTextField(15);
+		JLabel baudRateNumberLabel = new JLabel("Baud Rate : ");
+		JTextField baudRateTextField = new JTextField(10);
+
+		comPortLabel.setVisible(false); // Initially hidden
+		comPortComboBox.setVisible(false); // Initially hidden
+		// portPanel.add(comPortLabel);
+		portPanel.add(comPortComboBox);
+		portPanel.add(baudRateNumberLabel);
+
+		baudRateNumberLabel.setVisible(false);
+		baudRateTextField.setVisible(false);
+		portPanel.add(baudRateTextField);
+		portPanel.add(ipNumberLabel);
+		portPanel.add(ipTextField);
+		portPanel.add(portNumberLabel);
+		portPanel.add(portTextField);
+
+		// Create the buttons
+		JButton button1 = new JButton("Connect to Machine");
+		JButton button2 = new JButton("Download Log");
+
+		JButton clearButton = new JButton();
+		clearButton = new JButton(UIManager.getIcon("OptionPane.errorIcon")); // Cross icon
+		clearButton.setToolTipText("Clear Log");
+		clearButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				logClear();
+
+			}
+		});
+		
+		crnoBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			fetchPatDemo();
+			
+			}
+				
+		});
+		// Style the buttons
+		button1.setBackground(new Color(70, 130, 180));
+
+		// button1.setPreferredSize(new Dimension(150, 50));
+		button1.setForeground(Color.WHITE);
+		button2.setBackground(new Color(70, 130, 180));
+		button2.setForeground(Color.WHITE);
+		JButton exitButton = new JButton("Exit");
+		exitButton.setBackground(new Color(220, 20, 60));
+		exitButton.setForeground(Color.WHITE);
+		// Create the text pane with a scroll pane
+		textPane = new JTextPane();
+		textPane.setEditable(false);
+		JScrollPane scrollPane = new JScrollPane(textPane);
+
+		serverRadioButton.addActionListener(new ActionListener() { // event on button click to show/hide Port Number
+			// Field
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				clientRadioButton.setSelected(false);
+				comPortRadioButton.setSelected(false);
+				// clientRadioButton.setVisible(false);
+				// comPortRadioButton.setVisible(false);
+
+				baudRateNumberLabel.setVisible(false);
+				baudRateTextField.setVisible(false);
+				portNumberLabel.setVisible(true);
+				portTextField.setVisible(true);
+				comPortLabel.setVisible(false);
+				portTextField.setText(server_port);
+
+				ipNumberLabel.setVisible(false);
+				ipTextField.setVisible(false);
+				comPortLabel.setVisible(false);
+				comPortComboBox.setVisible(false);
+				frame.revalidate();
+				frame.repaint();
+				
+				
+			}
+		});
+
+		clientRadioButton.addActionListener(new ActionListener() { // event on button click to show/hide Port Number
+			// Field
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// serverRadioButton.setVisible(false);
+				// comPortRadioButton.setVisible(false);
+				serverRadioButton.setSelected(false);
+				comPortRadioButton.setSelected(false);
+
+				baudRateNumberLabel.setVisible(false);
+				baudRateTextField.setVisible(false);
+				portNumberLabel.setVisible(true);
+				portTextField.setVisible(true);
+				ipNumberLabel.setVisible(true);
+				ipTextField.setVisible(true);
+				comPortLabel.setVisible(false);
+				comPortComboBox.setVisible(false);
+				frame.revalidate();
+				frame.repaint();
+				ipTextField.setText(server_ip);
+				portTextField.setText(server_port);
+			}
+		});
+
+		comPortRadioButton.addActionListener(new ActionListener() { // event on button click to List Port Name Combo
+			// box..
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				populatePortComboBox();
+
+			//	System.out.println("ASDFASFSDF");
+				
+				
+				serverRadioButton.setSelected(false);
+				clientRadioButton.setSelected(false);
+
+				baudRateNumberLabel.setVisible(true);
+				baudRateTextField.setVisible(true);
+
+				portNumberLabel.setVisible(false);
+				portTextField.setVisible(false);
+				ipTextField.setVisible(false);
+				comPortLabel.setVisible(true);
+				comPortComboBox.setVisible(true);
+				ipNumberLabel.setVisible(false);
+				frame.revalidate();
+				frame.repaint();
+			}
+		});
+
+		// download log file
+		//
+		// button2.addActionListener(new ActionListener() {
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		// String logContent = textPane.getText();
+		// try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt"))) {
+		// writer.write(logContent);
+		// JOptionPane.showMessageDialog(frame, "Log has been downloaded to log.txt");
+		// } catch (IOException ex) {
+		// ex.printStackTrace();
+		// JOptionPane.showMessageDialog(frame, "Error occurred while downloading the
+		// log.");
+		// }
+		// }
+		// });
+		//
+
+		//
+
+		// Action listener for buttons
+		ActionListener buttonListener = new ActionListener() { // execution on button click event Start Comunication..
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (e.getSource() == exitButton) { // to close the application
+					int res = JOptionPane.showConfirmDialog(frame, "Are you sure to close this application.");
+
+					if (res == JOptionPane.YES_OPTION) {
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						System.exit(0);
+					}
+
+				}
+
+				else if (e.getSource() == button2) { /// to download log file on button click..
+
+					String logContent = textPane.getText();
+					try (BufferedWriter writer = new BufferedWriter(new FileWriter("./Machinelog.txt"))) {
+						writer.write(logContent);
+						JOptionPane.showMessageDialog(frame, "Log has been downloaded to Machinelog.txt");
+					} catch (IOException ex) {
+						ex.printStackTrace();
+						JOptionPane.showMessageDialog(frame, "Error occurred while downloading the log.");
+					}
+
+				}
+
+				else { // to start the Communication when click on start communication
+
+					try {
+						selectedMachine = (String) comboBox.getSelectedItem();
+
+						selectedProtocol = (String) comboBox2.getSelectedItem();
+						portNumber = portTextField.getText();
+						if (comPortRadioButton.isSelected()) { // condition to check that COM POrt is selected
+							baudRate = Integer.parseInt(baudRateTextField.getText());
+							portName = (String) comPortComboBox.getSelectedItem();
+
+						}
+						if (validateInputs(selectedMachine, portNumber, portName)) {
+
+							new Thread(() -> {
+								try {
+
+									// condition to check that user has selected TCP Ip or COM PORT
+
+									if (serverRadioButton.isSelected())
+
+									{
+										portTextField.setText(server_port);
+
+										GenericV_04_03_01 serverobj = new GenericV_04_03_01(Integer.parseInt(portNumber));
+										JOptionPane.showMessageDialog(frame, "Selected Machine: " + selectedMachine
+												+ "\nPort Number: " + portNumber);
+
+										String logMessage = "Selected Machine: " + selectedMachine + ", Port Number: "
+												+ portNumber + "Protocol: " + selectedProtocol;
+										logMessage(logMessage, Color.BLUE);
+
+										saveToFile("Selected Machine: " + selectedMachine + ", Port Number: "
+												+ portNumber + "Protocol: " + selectedProtocol, FILE_NAME);
+
+										if (selectedMachine.equals("Erba680") && selectedProtocol.equals("HL7")) {
+
+											serverobj.startServer(); // HL 7 Server
+
+										} else if (selectedMachine.equals("AIIMSJD")) {
+
+											serverobj.startServer(); // HL 7 Server
+
+										}
+
+										else if (selectedMachine.equals("IGIMS NEW")) {
+
+											serverobj.startServer(); // IGIMS NEW MACHINE
+
+										}
+
+
+										else if (selectedMachine.equals("SYS-480")) {
+
+											serverobj.startServer(); // IGIMS NEW MACHINE
+
+										}
+
+
+
+										// CLIA80// gorakh[pur
+										else if (selectedMachine.equals("CLIA180")) {
+
+											serverobj.startServer(); // IGIMS NEW MACHINE
+
+										}
+
+										else if (selectedMachine.equals("SEBIA BHU")) {
+
+											serverobj.startServer(); // HL 7 Server
+
+										}
+
+										else if (selectedMachine.equals("Mindray Monitor")
+												&& selectedProtocol.equals("HL7")) {
+
+											serverobj.startServer(); // HL 7 Server
+
+										} else if (selectedMachine.equals("IGIMS NEW")
+												&& selectedProtocol.equals("HL7")) {
+
+											serverobj.startServer(); // HL 7 Server
+
+										}
+
+										else if (selectedMachine.equals("Sysmax1000")) {
+
+											serverobj.startServer(); // HL 7 Server
+
+										}
+
+										else if (selectedMachine.equals("ABG")) {
+
+											serverobj.startServer(); // HL 7 Server
+
+										}
+
+										else if (selectedMachine.equals("Sysmex")) {
+											ASTMServer objServer = new ASTMServer(Integer.parseInt(portNumber));
+
+											objServer.startServer(Integer.parseInt(portNumber), selectedMachine); // ASTM
+											// Server
+
+										}
+
+										else if (selectedMachine.equals("Other")) {
+
+											ASTMServer objServer = new ASTMServer(Integer.parseInt(portNumber));
+											objServer.startServer(Integer.parseInt(portNumber), selectedMachine);
+
+										}
+										
+										
+										else if (selectedMachine.equals("Mindray WS")) {
+											logMessage("Application  Type : Server", Color.BLACK);
+											//logMessage("Server IP :" + server_ip, Color.MAGENTA);
+											logMessage("Server Port :" + server_port, Color.MAGENTA);
+											logMessage("machine Selected :" + selectedMachine, Color.MAGENTA);
+											//AVEBPL.cllientConnect(server_ip, server_port); // HL 7 Server
+
+											TcpServerWATOServer.connectWorkStation(server_port,cr_no);
+										}
+										
+										
+										
+										
+										
+										
+
+									}
+
+									else if (comPortRadioButton.isSelected()) { // condition to check that COM POrt is
+										// selected
+										baudRate = Integer.parseInt(baudRateTextField.getText());
+										portName = (String) comPortComboBox.getSelectedItem();
+										JOptionPane.showMessageDialog(frame,
+												"Selected Machine: " + selectedMachine + "\nPort Name:: " + portName);
+
+										String logMessage = "Selected Machine: " + selectedMachine + ", Port Name: "
+												+ portName + "Protocol: " + selectedProtocol;
+										logMessage(logMessage, Color.BLUE);
+										DB9Server objServer = new DB9Server();
+
+										if (selectedMachine.equals("Advia2120")) {
+
+											objServer.startDb9Server(portName, selectedMachine, baudRate); // DB9 Server
+										}
+
+										else if (selectedMachine.equals("ABG")) {
+
+											objServer.startDb9Server(portName, selectedMachine, baudRate); // HL 7
+											// Server
+
+										}
+										if (selectedMachine.equals("ICU")) {
+
+											objServer.startDb9Server(portName, selectedMachine, baudRate); // DB9 Server
+										}
+
+										if (selectedMachine.equals("Mindray ICU")) {
+
+											objServer.startDb9Server(portName, selectedMachine, baudRate); // DB9 Server
+										}
+
+										if (selectedMachine.equals("Dragger Venti")) {
+
+											//objServer.startDb9Server(portName, selectedMachine, baudRate); // DB9 Server
+									
+											DraegerSerialComm obj = new DraegerSerialComm();
+											obj.ConnectDragger(portName, selectedMachine, baudRate);
+										}
+										
+										
+										
+
+									}
+
+									else if (clientRadioButton.isSelected()) {
+
+										String server_ip = ipTextField.getText();
+										String server_port = portTextField.getText();
+										if (server_ip.isEmpty()) {
+											JOptionPane.showMessageDialog(null, "Please Enter Server Ip.",
+													"Validation Error", JOptionPane.ERROR_MESSAGE);
+
+										}
+
+										else {
+											if (selectedMachine.equals("Monitor")) {
+
+												// System.out.println("Inside server select");
+
+												logMessage("Application  Type : CLIENT", Color.BLACK);
+												logMessage("Server IP :" + server_ip, Color.MAGENTA);
+												logMessage("Server Port :" + server_port, Color.MAGENTA);
+												ClientGUI.cllientConnect(server_ip, server_port);
+											}
+
+											else if (selectedMachine.equals("AVEBPL")) {
+												logMessage("Application  Type : CLIENT", Color.BLACK);
+												logMessage("Server IP :" + server_ip, Color.MAGENTA);
+												logMessage("Server Port :" + server_port, Color.MAGENTA);
+												logMessage("machine Selected :" + selectedMachine, Color.MAGENTA);
+												AVEBPL.cllientConnect(server_ip, server_port); // HL 7 Server
+
+											}
+
+											else if (selectedMachine.equals("Mindray6000")) {
+												logMessage("Application  Type : CLIENT", Color.BLACK);
+												logMessage("Server IP :" + server_ip, Color.MAGENTA);
+												logMessage("Server Port :" + server_port, Color.MAGENTA);
+												logMessage("machine Selected :" + selectedMachine, Color.MAGENTA);
+												MindrayHL7.cllientConnect(server_ip, server_port); // HL 7 Server
+
+											}
+
+											else if (selectedMachine.equals("ABG")) {
+												logMessage("Application  Type : CLIENT", Color.BLACK);
+												logMessage("Server IP :" + server_ip, Color.MAGENTA);
+												logMessage("Server Port :" + server_port, Color.MAGENTA);
+												logMessage("machine Selected :" + selectedMachine, Color.MAGENTA);
+												ABGDELHI.cllientConnect(server_ip, server_port); // HL 7 Server
+
+											}
+											
+											else if (selectedMachine.equals("Mindray PM")) {
+												logMessage("Application  Type : CLIENT", Color.BLACK);
+												logMessage("Server IP :" + server_ip, Color.MAGENTA);
+												logMessage("Server Port :" + server_port, Color.MAGENTA);
+												logMessage("machine Selected :" + selectedMachine, Color.MAGENTA);
+												//AVEBPL.cllientConnect(server_ip, server_port); // HL 7 Server
+
+												try {
+												PatientMonitorClient.connectMonitor(server_ip,server_port,cr_no);
+												}
+												catch(Exception ee) {
+													ee.printStackTrace();
+												}
+												}
+											
+											
+										}
+
+									}
+
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
+							}).start();
+
+						}
+
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+
+			}
+		};
+
+		button1.addActionListener(buttonListener); // Start Communication event
+		button2.addActionListener(buttonListener); // Download log event
+		exitButton.addActionListener(buttonListener); // Exit Button event
+
+		
+		
+		// Create the button panel and add buttons to it
+		JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 5, 5)); // create button panel and them add into the top
+		// panel which is exists in the Main Frame
+		buttonPanel.setBorder(BorderFactory.createTitledBorder("Actions")); // Border and header line
+
+		buttonPanel.setBackground(new Color(245, 245, 245)); // Light grey background
+		buttonPanel.setOpaque(true); // Ensure background color is displayed
+		buttonPanel.add(button1);
+		buttonPanel.add(button2);
+		buttonPanel.add(exitButton);
+		buttonPanel.add(clearButton);
+
+		// changed the button font
+
+		button1.setFont(new Font("Monospaced", Font.BOLD, 12));
+		button2.setFont(new Font("Monospaced", Font.BOLD, 12));
+		exitButton.setFont(new Font("Monospaced", Font.BOLD, 12));
+
+		JPanel hisConfig = new JPanel(new GridLayout(6, 2, 5, 5));
+		hisConfig.setBorder(BorderFactory.createTitledBorder("HIS Configuration"));
+		// JCheckBox c1 = new JCheckBox("HIS Configuration");
+		//// hisConfig.add(c1);
+		// Create labels and text fields
+		JLabel lblUrl = new JLabel("HIS URL:");
+		JTextField txtUrl = new JTextField();
+		JLabel lblEquipId = new JLabel("Equipment ID:");
+		JTextField txtEquipId = new JTextField();
+		JLabel lblHospitalCode = new JLabel("Hospital Code:");
+		JTextField txtHospitalCode = new JTextField();
+
+		// Add labels and text fields to the panel
+		hisConfig.add(lblUrl);
+		hisConfig.add(txtUrl);
+		hisConfig.add(lblEquipId);
+		hisConfig.add(txtEquipId);
+		hisConfig.add(lblHospitalCode);
+		hisConfig.add(txtHospitalCode);
+
+		// Initially hide the additional fields panel
+		hisConfig.setVisible(true);
+
+		// Add components to the top panel with proper alignment
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+
+		topPanel.add(machinePanel, gbc);
+
+		gbc.gridy = 1;
+
+		gbc.gridy = 2;
+		topPanel.add(appPanel, gbc);
+
+		gbc.gridy = 3;
+		// topPanel.add(hisConfig,gbc);
+
+		topPanel.add(portPanel, gbc);
+
+		gbc.gridy = 5;
+
+		topPanel.add(buttonPanel, gbc);
+		// Add components to the main panel
+		panel.add(topPanel, BorderLayout.NORTH);
+
+		panel.add(scrollPane, BorderLayout.CENTER);
+
+		// Add panel to the frame
+		frame.add(panel);
+		frame.setVisible(true);
+		
+		/*
+		 * SwingUtilities.invokeLater(() -> { String patientID =
+		 * JOptionPane.showInputDialog(frame, "Please enter Patient Cr No.:");
+		 * 
+		 * // If user presses Cancel or enters an empty value if (patientID == null ||
+		 * patientID.trim().isEmpty()) { JOptionPane.showMessageDialog(frame,
+		 * "No Patient Cr No entered. Exiting..."); System.exit(0); // Close the
+		 * application } else { cr_no=patientID; JOptionPane.showMessageDialog(frame,
+		 * "Patient Cr No: " + cr_no);
+		 * 
+		 * // https://aiimsjodhpur.prd.dcservices.in/ //+
+		 * "HISServices/service/genericNurseEvisit/getpatientdetails?crno=989262300206008&hospcode=98926";
+		 * 
+		 * try {
+		 * 
+		 * URL url = new URL(aiimsUrl +
+		 * "/HISServices/service/genericNurseEvisit/getpatientdetails?crno="+cr_no+
+		 * "&hospcode="+98926); // Create a connection object HttpURLConnection
+		 * connection = (HttpURLConnection) url.openConnection();
+		 * 
+		 * // Set the request method to POST connection.setRequestMethod("GET");
+		 * 
+		 * // Set request headers if needed
+		 * connection.setRequestProperty("Content-Type", "application/json"); //
+		 * connection.setRequestProperty("Accept", "application/json");
+		 * 
+		 * // Enable input and output streams connection.setDoOutput(true);
+		 * System.out.println(connection.getURL());
+		 * 
+		 * // Get the response code int responseCode = connection.getResponseCode();
+		 * System.out.println(responseCode);
+		 * 
+		 * // Check if the response code is 200 (OK) if (responseCode ==
+		 * HttpURLConnection.HTTP_OK) { // Read the response BufferedReader in = new
+		 * BufferedReader(new InputStreamReader(connection.getInputStream())); String
+		 * inputLine; StringBuilder response = new StringBuilder();
+		 * 
+		 * // Read the response line by line while ((inputLine = in.readLine()) != null)
+		 * { response.append(inputLine); } // Close the BufferedReader in.close();
+		 * 
+		 * // Print the response System.out.println("Response: " + response.toString());
+		 * JSONObject jsonResponse = new JSONObject(response.toString()); JSONArray
+		 * patientDetails = jsonResponse.getJSONArray("patientdetails");
+		 * 
+		 * 
+		 * 
+		 * 
+		 * String status = jsonResponse.getString("status");
+		 * 
+		 * if(!status.equals("0")) { // Extract details from the JSON JSONObject patient
+		 * = patientDetails.getJSONObject(0); String patientName =
+		 * patient.getString("HRGSTR_FNAME") + " " + patient.getString("HRGSTR_LNAME");
+		 * String patientAge = patient.getString("HRGSTR_AGE"); String patientGender =
+		 * patient.getString("GSTR_GENDER_CODE"); String patientMobile =
+		 * patient.getString("HRGSTR_MOBILE_NO"); String patientAddress =
+		 * patient.getString("HRGSTR_ADDRESS_LINE1") + ", " +
+		 * patient.getString("HRGSTR_SUB_LOCALITY1") + ", " +
+		 * patient.getString("HRGSTR_DISTRICT");
+		 * 
+		 * // Create a message with patient details to show in the dialog String message
+		 * = "Patient Details:\n\n" + "Name: " + patientName + "\n" + "Age: " +
+		 * patientAge + "\n" + "Gender: " + (patientGender.equals("M") ? "Male" :
+		 * "Female") + "\n" + "Mobile: " + patientMobile + "\n" + "Address: " +
+		 * patientAddress;
+		 * 
+		 * // Show a confirmation dialog with the details int responseDialog =
+		 * JOptionPane.showConfirmDialog(null, message + "\n\nDo you want to proceed?",
+		 * "Confirm Patient Details", JOptionPane.YES_NO_OPTION);
+		 * 
+		 * // Handle the dialog response if (responseDialog == JOptionPane.YES_OPTION) {
+		 * // Proceed with starting the application JOptionPane.showMessageDialog(null,
+		 * "Proceeding with the application..."); // Initialize the rest of the
+		 * application here... } else { // User declined, exit the application or handle
+		 * it as needed JOptionPane.showMessageDialog(null, "Application terminated.");
+		 * //System.exit(0); }
+		 * 
+		 * 
+		 * }
+		 * 
+		 * else { JOptionPane.showMessageDialog(null,
+		 * "Patient details not found for this cr no. check with another cr");
+		 * 
+		 * 
+		 * }
+		 * 
+		 * } else { System.out.println("GET request failed with response code: " +
+		 * responseCode); }
+		 * 
+		 * }
+		 * 
+		 * 
+		 * 
+		 * catch (Exception e) { // TODO: handle exception }
+		 * 
+		 * // Continue with the application after patient ID is entered } });
+		 */
+	}
+
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private static void populatePortComboBox() {
+		SerialPort[] ports = SerialPort.getCommPorts();
+		for (SerialPort port : ports) {
+			comPortComboBox.addItem(port.getSystemPortName());
+		}
+	}
+
+	static void logMessage(String message, Color color) {
+		StyledDocument doc = textPane.getStyledDocument();
+		Style style = textPane.addStyle("Style", null);
+		StyleConstants.setForeground(style, color);
+		// StyleConstants.setBackground(style, color);
+
+		try {
+
+			// System.out.println("Length"+doc.getLength());
+			doc.insertString(doc.getLength(), message + "\n", style);
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
+	}
+
+	static void logClear() {
+		StyledDocument doc = textPane.getStyledDocument();
+		try {
+			doc.remove(0, doc.getLength());
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	GenericV_04_03_01(int port) {
+		this.port = port;
+		pool = Executors.newFixedThreadPool(500); // max size was 5 change until connections not fully closed
+	}
+
+	public void startServer() throws IOException {
+		server = new ServerSocket(Integer.parseInt(portNumber));
+		logMessage("SERVER BOOTED ON PORT: " + this.port, Color.RED);
+		logMessage("ANY CLIENT CAN STOP THE SERVER BY SENDING -1", Color.RED);
+		saveToFile("SERVER BOOTED ON PORT: " + this.port, FILE_NAME);
+		saveToFile("ANY CLIENT CAN STOP THE SERVER BY SENDING -1", FILE_NAME);
+
+		while (true) {
+			client = server.accept();
+			clientcount++;
+			logMessage("CONNECTION " + clientcount + " ESTABLISHED WITH CLIENT " + client, Color.BLUE);
+
+			saveToFile("CONNECTION " + clientcount + " ESTABLISHED WITH CLIENT " + client, FILE_NAME);
+			ServerThread runnable = new ServerThread(client, clientcount, this);
+			pool.execute(runnable);
+		}
+	}
+
+	private static class ServerThread implements Runnable {
+
+		GenericV_04_03_01 server = null;
+		Socket client = null;
+		BufferedReader cin;
+		PrintStream cout;
+		Scanner sc = new Scanner(System.in);
+		int id;
+		char s;
+		String si;
+		private String modifiedTimeStr;
+		private String msgcontrolID;
+		private String timeZoneMachine;
+		private String MSHsegment;
+		private String pidmsg;
+		private String[] sampleNOblock;
+		private String sampleNOblock2;
+		private String sampleNO;
+		private String rackNo;
+		private String SEC2val;
+		private String RackSeq;
+		private List testValue;
+
+		ServerThread(Socket client, int count, GenericV_04_03_01 serverR) throws IOException {
+			this.client = client;
+			this.server = serverR;
+			this.id = count;
+			// logMessage("CONNECTION " + id + " ESTABLISHED WITH CLIENT " + client,
+			// Color.BLACK);
+
+			cin = new BufferedReader(new InputStreamReader(client.getInputStream())); // Obj To receive Msg from Client
+			cout = new PrintStream(client.getOutputStream()); // Obj For Sending Msg to Client
+			StringBuffer orderPacket = new StringBuffer();
+			orderPacket.append(
+					"MSH|^~\\&|LIS|LAB|myla|BMX|20240820163600||OML^O33^OML_O33|MSG-20240820-163600-0377|P|2.5.1|||NE|AL||UNICODE UTF-8")
+			.append("\n");
+			orderPacket.append("PID|||400450243||PAA^DONI^^^^^nill|PADMAJA|19620820|F|||nill^^nill^^nill^nill|||||S|")
+			.append("\n");
+			orderPacket.append(
+					"PV1||E|ACUTE-A M C U-III^AMC  6N-27(ICU)^^AIIMSMG^^^^^AMC  6N-27(ICU)^||||^RAJESH BOLLAM||||||||||||1657550")
+			.append("\n");
+			;
+			orderPacket.append("SPM|1|68182||RESP^RESP^99BMx|||^^|^^|||P^Patient^||||||20240820163525|").append("\n");
+			orderPacket.append("SAC||||24008672").append("\n");
+			orderPacket.append("ORC|NW||||||||20240820163525").append("\n");
+			orderPacket.append("TQ1|||||||||R^^").append("\n");
+			orderPacket.append("OBR|1|714647||SU^SU^99BMx||||||^^||||||^RAJESH BOLLAM").append("\n");
+			// GenericServer.logMessage("Data Sent :"+orderPacket, Color.MAGENTA);
+			// GenericServer.logMessage("Data Sent :"+orderPacket, Color.MAGENTA);
+			// cout.print(orderPacket.toString());
+
+		}
+
+		public void run() {
+			System.gc();
+			int x = 1, flag = 0, forAck = 0, status = 0;
+			int checkBit = 0;
+			int sendAck = 0;
+			boolean out = false;
+			int replyFlag = 0;
+			boolean isProcessing = false;
+
+			try {
+				char eot = ''; // End-OF-Transmission Bit character
+				char enq = '';
+				char ack = '';
+				String enn = "";
+
+				while (true) {
+					int red = -1;
+					byte[] buffer = new byte[800 * 1024]; // a read buffer of 5KiB
+					byte[] redData;
+					StringBuilder clientData = new StringBuilder();
+					String redDataText = "";
+
+					while ((red = client.getInputStream().read(buffer)) > -1) {
+						redData = new byte[red];
+						System.arraycopy(buffer, 0, redData, 0, red);
+						redDataText = new String(redData, "UTF-8");
+
+						// redDataText= redDataText.replaceAll("\\s", "");
+						// logMessage("MSG received: " + redDataText, Color.BLUE);
+						// saveToFile("MSG received: " + redDataText,FILE_NAME);
+						if (selectedMachine.equals("Erba680") && selectedProtocol.equals("HL7")) {
+							ERBA580(redDataText, cout);
+
+						} else if (selectedMachine.equals("AIIMSJD")) {
+							ATLLECIA_AIIMSJD(redDataText, cout);
+
+						}
+
+						// Mindray Monitor AIIMS JODHPUR WORKING SOLLUTION FOR PAT MONITOR..
+						else if (selectedMachine.equals("Mindray Monitor") && selectedProtocol.equals("HL7")) {
+							Mindray_Monitor55(redDataText, cout);
+
+						}
+
+						else if (selectedMachine.equals("IGIMS NEW") && selectedProtocol.equals("HL7")) {
+							IGIMS_NEW_MACHINE(redDataText, cout);
+
+						}
+						else if (selectedMachine.equals("SYS-480") && selectedProtocol.equals("HL7")) {
+							SYS_480_RB(redDataText, cout);
+
+						}
+
+
+						else if (selectedMachine.equals("CLIA180") && selectedProtocol.equals("HL7")) {
+							CLIA180(redDataText, cout);
+
+						}
+
+						else if (selectedMachine.equals("Sysmax1000")) {
+							Sysmax1000(redDataText, cout);
+
+						}
+
+						//
+
+						else if (selectedMachine.equals("ABG")) {
+
+							AIIMS_DELHI(redDataText, cout);
+
+						} else if (selectedMachine.equals("SEBIA BHU")) {
+							SEBIA_BHU(redDataText, cout);
+							System.out.println("ROHIHTTTT");
+
+						}
+
+						// SEBIA BHU
+
+						else if (selectedMachine.equals("Horriba")) {
+
+						}
+
+						else if (selectedMachine.equals("Sysmex")) {
+
+						}
+
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				// logMessage("Error: " + e.getMessage(), Color.RED);
+			}
+		}
+
+		private void CLIA180(String redDataText, PrintStream cout2) {
+			// TODO Auto-generated method stub
+
+			try {
+				String timestamp = null;
+				System.out.println("Parsing Start CLIA");
+
+				char fsChar = 0x1C; // FS
+
+				char crChar = 0x0D; // CR
+
+				String[] strData = redDataText.split(Character.toString(fsChar));
+				// saveToFile(redDataText,FILE_NAME);
+				/*
+				 * Map<String, List> mp = new HashMap(); List <String> testCode = new
+				 * ArrayList<>(); List <String> testValue = new ArrayList<>(); List<String>
+				 * sampleNo=new ArrayList<>(); String sampleName = ""; String msgtype="";
+				 */
+
+				char[] character_array = redDataText.toCharArray();
+				System.out.println("Data  RECIEVED :- " + redDataText);
+				saveToFile("Data  RECIEVED :- " + redDataText, FILE_NAME);
+
+				String[] segments1 = redDataText.split(Character.toString(crChar));
+				Map<String, List> mp = new HashMap(); // added by Rohit...
+				List<String> testCode = new ArrayList<>();
+				List<String> testValue = new ArrayList<>();
+				String sampleNo = null;
+				String msgType = null;
+				StringBuffer mindACK = new StringBuffer();
+				String msgControlId = null;
+				try {
+
+					for (String segment : segments1) {
+						segment = segment.replaceAll("\\n", "");
+						if (segment.contains("MSH|")) {
+
+							String[] msgPart = segment.split("\\|");
+							msgType = msgPart[8];
+							msgControlId = msgPart[9];
+
+							// Sen ACK Back
+
+							/*
+							 * MSH|^~\&|Analyzer||||20190226103151||ACK^RO1| 1|P|2.3.1||||1|| ASCII |||
+							 * MSA|AA|2| Message accepted |||0|
+							 */
+							LocalDateTime now = LocalDateTime.now();
+
+							// Define the desired format
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+
+							// Format the current date and time
+							timestamp = now.format(formatter);
+							mindACK.append("MSH|^~\\&|Analyzer||||" + timestamp + "||ACK^RO1|" + msgControlId
+									+ "2.3.1||||1|| ASCII |||").append((char) 0x0D);
+							mindACK.append("MSA|AA|").append(msgControlId).append(" Message accepted |||0|")
+							.append((char) 0x0D);
+							mindACK.append((char) 0x1C).append((char) 0x0D);
+							if (!msgType.equals("QRY^Q02")) {
+								cout.print(mindACK);
+								cout.flush();
+
+								saveToFile("ACK SENT:  " + mindACK.toString(), FILE_NAME);
+
+							}
+
+							if (msgType.equals("QRY^Q02")) {
+
+								// String[] segments = strPKT.split("\r");
+
+								String[] parts = segment.split("\\|");
+
+								MSHsegment = segments1[0];
+								// String[] msgpart=pidmsg.split("\\|");
+								msgcontrolID = parts[9];
+								timeZoneMachine = parts[6];
+
+								SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+
+								try {
+									// Parse the given time string into a Date object
+									Date givenTime = sdf.parse(timeZoneMachine);
+
+									// Create Calendar object and set time to the given time
+									Calendar cal = Calendar.getInstance();
+									cal.setTime(givenTime);
+
+									// Add 15 seconds
+									cal.add(Calendar.SECOND, 15);
+
+									// Format the modified time
+									modifiedTimeStr = sdf.format(cal.getTime());
+
+									System.out.println(modifiedTimeStr);
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}
+								System.out.println("MSG CONTROL ID" + msgcontrolID + "TimeZone" + timeZoneMachine);
+							}
+
+						}
+
+						// System.out.println("modified asdtime zone"+modifiedTimeStr);
+
+						if (msgType.equals("QRY^Q02")) {
+							if (segment.contains("QRD")) {
+								String[] parts2 = segment.split("\\|");
+
+								pidmsg = segments1[1];
+								// System.out.println("Patient Information :"+pidmsg);
+
+								String[] msgpart = pidmsg.split("\\|");
+
+								sampleNOblock = msgpart[3].split("\\^");
+								sampleNOblock2 = msgpart[4];
+								sampleNO = sampleNOblock[0];
+								rackNo = msgpart[4];
+								SEC2val = msgpart[2];
+								RackSeq = msgpart[5];
+								sampleNO = msgpart[8];
+								System.out.println("sample no.:" + sampleNO + "Valueat second place::" + SEC2val
+										+ "Rack NO:" + rackNo);
+								saveToFile("sample no.:" + sampleNO + "Valueat second place::" + SEC2val + "Rack NO:"
+										+ rackNo, FILE_NAME);
+								ABC obj = new ABC();
+								final StringBuffer Test_Code;
+								// String it = obj.getSampleDtl(sampleNO);
+								String it = "T3;TSH;";
+								// System.out.println("API CALL FOR FETCH");
+								String[] kvPairs = it.split(";");
+
+								String[] kv = it.split(";");
+
+								String k[] = kv.toString().split(";");
+
+								for (String data : kv) {
+
+									// if(!(data.equals("NA")|| data.equals("UU")|| data.equals("VV")||
+									// data.equals("WW") || data=="NA" || data=="VV"|| data=="UU"|| data=="WW") ) {
+									// testCode.add(data);
+									// } commented on 26 APR to check test code is present in list or not
+
+									if (!(data.equals("NA") || data.equals("UU") || data.equals("VV")
+											|| data.equals("WW") || data == "NA" || data == "VV" || data == "UU"
+											|| data == "WW")) {
+										if (!testCode.isEmpty()) {
+											if (!testCode.contains(data)) {
+												testCode.add(data);
+
+											}
+
+										} else {
+											testCode.add(data);
+										}
+									}
+
+								}
+
+								System.out.println("Test Code <<--- :: --->>>" + testCode);
+
+								String msg = START_BLOCK
+										+ "MSH|^~\\&|LIS ID|I2900|Analyzer ID||20241224180200||ORU^R01|27|P|2.3.1|AE2406510050|||0||UNICODE|||\r\n"
+										+ "MSA|AA|26\r\n"
+										+ "PID|1||sampleNO^^^LIS||Doe^John^^^Mr.||19800101|M|||123 Main St^^City^State^12345||(555)123-4567||||\r\n"
+										+ "ORC|RE|sampleNO|||||||20241224180140|||1^Requesting Physician^^^LIS|||\r\n"
+										+ "OBR|1|ORD0001|AE2406510050|12345^Blood Test|||20241224180140|||||||1^Referring Physician^^^LIS||||||||||\r\n"
+										+ END_BLOCK_1 + END_BLOCK_2;
+
+								;
+
+								// 20210109114124
+								String CLIAORDER = START_BLOCK
+										+ "MSH|^~\\&|Analyzer id|2900|LIS ID|TIME|DSR^Q03|CONTROLID|P|2.3.1||||0|UNICODE|||\r\n"
+										+ "MSA|OK|1||||0|\r\n" + "DSP|1||002|01|Jack||M||||||||||||||||||||||2^Y|\r\n"
+										+ "DSP|2|SAMPLENO||Analyzer id|N||20210109113124|N|I|4^I|N||20210109121240||||20210109114124|||||||||||||||||||||||||\r\n"
+										+ "DSP|3|3|T3^T4^TSH|||\r\n" + END_BLOCK_1 + END_BLOCK_2;
+								CLIAORDER = CLIAORDER.replaceAll("SAMPLENO", sampleNO);
+								CLIAORDER = CLIAORDER.replaceAll("TIME", timestamp);
+								CLIAORDER = CLIAORDER.replaceAll("CONTROLID", msgcontrolID);
+								msg.replaceAll("sampleNO", sampleNO);
+
+								cout.print(CLIAORDER);
+								saveToFile("Order Sent : >>  " + CLIAORDER, FILE_NAME);
+								System.out.println("Order Sent : >>  " + CLIAORDER);
+
+							}
+						}
+
+						else {
+
+							if (segment.contains("OBR")) {
+								String[] msgPart = segment.split("\\|");
+								sampleNo = msgPart[2];
+							} else if (segment.contains("OBX")) {
+
+								String[] msgPart = segment.split("\\|");
+
+								if (msgPart[1].equals("NM")) {
+									String[] dd = msgPart[3].split("\\^");
+
+									testCode.add(dd[0]);
+									testValue.add(msgPart[4]);
+								} else {
+
+									saveToFile("numeric value not present", FILE_NAME);
+
+								}
+
+							}
+
+							saveToFile("Test Code : " + testCode, FILE_NAME);
+							saveToFile("Test Value : " + testValue, FILE_NAME);
+
+							if (testCode.size() > 0) {
+								for (int i = 0; i < testCode.size(); i++) {
+
+									ABC.insert_SysmexXN350A(testCode.get(i).toString(), testValue.get(i).toString(),
+											sampleNo);
+
+								}
+							}
+
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					saveToFile(getStackTraceAsString(e), FILE_NAME);
+
+					// TODO: handle exception
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+
+				saveToFile(getStackTraceAsString(e), FILE_NAME);
+
+			}
+
+		}
+
+
+
+
+
+
+		private void SYS_480_RB(String redDataText, PrintStream cout2) {
+			// TODO Auto-generated method stub
+
+			System.out.println("Parsing Start SYS_480_RB");
+
+			char fsChar = 0x1C; // FS
+
+			char crChar = 0x0D; // CR
+
+			String[] strData = redDataText.split(Character.toString(fsChar));
+			// saveToFile(redDataText,FILE_NAME);
+			/*
+			 * Map<String, List> mp = new HashMap(); List <String> testCode = new
+			 * ArrayList<>(); List <String> testValue = new ArrayList<>(); List<String>
+			 * sampleNo=new ArrayList<>(); String sampleName = ""; String msgtype="";
+			 */
+
+			char[] character_array = redDataText.toCharArray();
+			System.out.println("Data  RECIEVED :- " + redDataText);
+			saveToFile("Data  RECIEVED :- " + redDataText, FILE_NAME);
+
+			String[] segments1 = redDataText.split(Character.toString(crChar));
+			Map<String, List> mp = new HashMap(); // added by Rohit...
+			List<String> testCode = new ArrayList<>();
+			List<String> testValue = new ArrayList<>();
+			String sampleNo = null;
+			String msgType = null;
+			StringBuffer mindACK = new StringBuffer();
+			StringBuffer qryAck = new StringBuffer();
+			String msgControlId = null;
+			try {
+
+				for (String segment : segments1) {
+
+					if (segment.contains("MSH|")) {
+
+						String[] msgPart = segment.split("\\|");
+						msgType = msgPart[8];
+						msgControlId = msgPart[9];
+
+						// Sen ACK Back
+
+						/*
+						 * MSH|^~\&|Analyzer||||20190226103151||ACK^RO1| 1|P|2.3.1||||1|| ASCII |||
+						 * MSA|AA|2| Message accepted |||0|
+						 */
+						LocalDateTime now = LocalDateTime.now();
+
+						// Define the desired format
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+
+						// Format the current date and time
+						String timestamp = now.format(formatter);
+						mindACK.append("MSH|^~\\&|||||" + timestamp + "||ACK^R01|" + msgControlId
+								+ "|P|2.3.1||||0||ASCII|||").append((char) 0x0D);
+						mindACK.append("MSA|AA|").append(msgControlId).append("|Message accepted|||0|")
+						.append((char) 0x0D);
+						mindACK.append((char) 0x1C).append((char) 0x0D);
+
+					/*	MSH|^~\&|Factory|Chemistry Analyzer|||20250218113959||ACK^R01|1570|P|2.3.1||||0||ASCII|||
+						 					 
+						 MSA|AA|1570|Message accepted|||0|
+						*/
+
+						if(msgType.equals("ORU^R01")) {
+
+							cout.print(mindACK);
+
+							System.out.println(mindACK);
+							saveToFile("ACK SENT:  " + mindACK.toString(), FILE_NAME);
+						
+						
+						}
+						else if(msgType.equals("QRY^Q02")) {
+
+
+							qryAck.append("MSH|^~\\&|||||" + timestamp + "||QCK^Q02|" + msgControlId
+									+ "|P|2.3.1||||0||ASCII|||").append((char) 0x0D);
+							qryAck.append("MSA|AA|").append(msgControlId).append("|Message accepted|||0|")
+							.append((char) 0x0D);
+							qryAck.append("ERR|0|")
+							.append((char) 0x0D);
+							qryAck.append("QAK|SR|OK|")
+							.append((char) 0x0D);
+							qryAck.append((char) 0x1C).append((char) 0x0D);
+							cout.print(qryAck);
+							System.out.println(qryAck);
+							saveToFile("ACK SENT:  " + qryAck.toString(), FILE_NAME);
+						}
+
+
+						cout.flush();
+
+
+					}
+
+
+
+
+					if(msgType.equals("ORU^R01")) {
+
+						if (segment.contains("OBR")) {
+							String[] msgPart = segment.split("\\|");
+							sampleNo = msgPart[2];
+						} else if (segment.contains("OBX")) {
+							String[] msgPart = segment.split("\\|");
+
+							if (msgPart[2].equals("NM")) {
+								testCode.add(msgPart[4]);
+								testValue.add(msgPart[5]);
+							} else {
+
+								saveToFile("numeric value not present", FILE_NAME);
+
+							}
+
+						}
+
+
+						saveToFile("Test Code : " + testCode, FILE_NAME);
+						saveToFile("Test Value : " + testValue, FILE_NAME);
+
+						for (int i = 0; i < testCode.size(); i++) {
+
+							ABC.insert_SysmexXN350A(testCode.get(i).toString(), testValue.get(i).toString(), sampleNo);
+
+						}
+
+					}
+				}
+
+				if(msgType.equals("QRY^Q02")) {
+					System.out.println("Query parse");
+
+					String samNo="";
+
+
+					//Extract Sample Number
+					for (String segment : segments1) {
+
+						segment=segment.replaceAll("\n", "");
+						String[] segments = segment.split("\\|");
+
+						if(segments[0].equals("QRD")) {
+
+							samNo=segments[8];
+
+
+						}
+
+
+
+
+					}
+
+
+
+
+
+
+
+
+
+
+
+
+					ABC obj =  new ABC();
+
+
+					String it = obj.getSampleDtl(samNo);
+					//String it="CREAT;SGOT;UREA;SGPT";
+					//System.out.println("API CALL FOR FETCH");
+					String[] kvPairs = it.split(";");
+
+					String[] kv = it.split(";");
+
+					String k[] = kv.toString().split(";");
+
+
+
+
+					for(String data:kv) {            			
+
+						if(!(data.equals("NA")|| data.equals("UU")|| data.equals("VV")|| data.equals("WW") || data=="NA" || data=="VV"|| data=="UU"|| data=="WW") ) {
+							if(!testCode.isEmpty()) {
+								if(!testCode.contains(data)){
+									testCode.add(data);
+
+								}
+
+							}
+							else {
+								testCode.add(data);
+							}
+						}
+
+					}
+
+
+
+
+
+
+					System.out.println("Test Code <<--- :: --->>>" +testCode);
+
+					saveToFile("Test Code <<--- :: --->>>" +testCode, FILE_NAME);
+
+					
+					String testSegment =null;
+					/*"DSP|29||034^^^|||\r"+
+					"DSP|30||016^^^|||\r"+
+					"DSP|31||024^^^|||\r"+
+					"DSP|32||033^^^|||\r"+
+					"DSP|33||008^^^|||\r"+
+					"DSP|34||010^^^|||\r"+
+					"DSP|35||035^^^|||\r"+
+					"DSP|36||005^^^|||\r"+
+					"DSP|37||029^^^|||\r"+
+					"DSP|38||015^^^|||\r"+
+					"DSP|39||026^^^|||\r"+
+					"DSP|40||027^^^|||\r"+
+					"DSP|41||030^^^|||\r"+
+					"DSP|42||011^^^|||\r"+
+					"DSP|43||028^^^|||\r"+
+					"DSP|44||002^^^|||\r"+
+					"DSP|45||003^^^|||\r"+*/
+		for(int i=0;i<testCode.size();i++) {
+			testSegment+="DSP|"+i+"||"+034+"^^^|||\r";
+						
+					}
+					String qryRepons=START_BLOCK+"MSH|^~\\&|LIS-Server|HOST|Mindray|BS-200|TIMESTAMP||DSR^Q03|MSGCONTROL|P|2.3.1||||||ASCII|||\r"+
+							"MSA|AA|MSGCONTROL|Message accepted|||0|\r"+
+							"ERR|0|\r"+
+							"QAK|SR|OK|\r"+
+							"QRD|TIMESTAMP|R|D|1|||RD|SAMPLENO|OTH|||T|\r"+
+							"QRF||||||RCT|COR|ALL||\r"+
+							"DSP|1|||||\r"+
+							"DSP|2|||||\r"+
+							"DSP|3|||||\r"+
+							"DSP|4|||||\r"+
+							"DSP|5|||||\r"+
+							"DSP|6|||||\r"+
+							"DSP|7|||||\r"+
+							"DSP|8|||||\r"+
+							"DSP|9|||||\r"+
+							"DSP|10|||||\r"+
+							"DSP|11|||||\r"+
+							"DSP|12|||||\r"+
+							"DSP|13|||||\r"+
+							"DSP|14|||||\r"+
+							"DSP|15|||||\r"+
+							"DSP|16|||||\r"+
+							"DSP|17|||||\r"+
+							"DSP|18|||||\r"+
+							"DSP|19|||||\r"+
+							"DSP|20|||||\r"+
+							"DSP|21||SAMPLENO|||\r"+
+							"DSP|22|||||\r"+
+							"DSP|23||TIMESTAMP|||\r"+
+							"DSP|24||N|||\r"+
+							"DSP|25|||||\r"+
+							"DSP|26||Serum|||\r"+
+							"DSP|27|||||\r"+
+							"DSP|28|||||\r"+
+							testSegment+
+							"DSC||\r"+
+							END_BLOCK_1+END_BLOCK_2
+							;
+
+				
+				
+					
+					
+					StringBuffer newHl7msg = new StringBuffer();
+					
+	
+					
+					
+					
+					//StringBuffer newHl7msg = new StringBuffer();
+					
+					newHl7msg.append(START_BLOCK+"MSH|^~\\&|LIS-Server|HOST|Mindray|BS-200|TIMESTAMP||DSR^Q03|MSGCONTROL|P|2.3.1||||||ASCII|||\r");
+					newHl7msg.append("MSA|AA|214|Message accepted|||0|\r");
+					newHl7msg.append("ERR|0|\r");
+					newHl7msg.append("QAK|SR|OK|\r");
+					newHl7msg.append("QRD|TIMESTAMP|R|D|1|||RD|SAMPLENO|OTH|||T|\r");
+					newHl7msg.append("QRF|BS-200|20061107000000|20061107171622|||RCT|COR|ALL||\r");
+					newHl7msg.append("DSP|1||SMOBP24000500|||\r");
+					newHl7msg.append("DSP|2||456|||\r");
+					newHl7msg.append("DSP|3||CDAC|||");
+					newHl7msg.append("DSP|4||19940201000000|||\r");
+					newHl7msg.append("DSP|5||F|||\r");
+					newHl7msg.append("SP|6||O|||\r");
+					newHl7msg.append("DSP|7|||||\r");
+					newHl7msg.append("DSP|8||xxxTownYYYRoad|||\r");
+					newHl7msg.append("DSP|9||518057|||\r");
+					newHl7msg.append("DSP|10||26582888|||\r");
+					newHl7msg.append("DSP|11|||||\r");
+					newHl7msg.append("DSP|12|||||\r");
+					newHl7msg.append("DSP|13|||||\r");
+					newHl7msg.append("DSP|14|||||\r");
+					newHl7msg.append("DSP|15||outpatient|||\r");
+					newHl7msg.append("DSP|16||87654321|||\r");
+					newHl7msg.append("DSP|17||own|||\r");
+					newHl7msg.append("DSP|18||Han|||\r");
+					newHl7msg.append("DSP|19||Jiangsu|||\r");
+					newHl7msg.append("DSP|20||China|||\r");
+					newHl7msg.append("DSP|21||SAMPLENO|||\r");
+				    newHl7msg.append("DSP|22||793|||\r");
+					newHl7msg.append("DSP|23||TIMESTAMP|||\r");
+					newHl7msg.append("DSP|24||N|||\r");
+		            newHl7msg.append("DSP|25|||||\r");
+				    newHl7msg.append("DSP|26||Serum|||\r");
+					newHl7msg.append("DSP|27|||||\r");
+					newHl7msg.append("DSP|28||SECTOR 13|||\r");
+					newHl7msg.append("DSP|29||034^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|30||016^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|31||024^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|32||033^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|33||008^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|34||010^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|35||035^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|36||005^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|37||029^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|38||015^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|39||026^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|40||027^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|41||030^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|42||011^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|43||028^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|44||002^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSP|45||003^GLUC^mg/dl^10-80|||\r");
+					newHl7msg.append("DSC||"+END_BLOCK_1+END_BLOCK_2);
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					LocalDateTime now = LocalDateTime.now();
+
+					// Define the desired format
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+
+					// Format the current date and time
+					String timestamp = now.format(formatter);
+					qryRepons=	qryRepons.replaceAll("TIMESTAMP", timestamp);
+					qryRepons=	qryRepons.replaceAll("SAMPLENO", samNo);
+					qryRepons=	qryRepons.replaceAll("SAMPLEID", "");
+					qryRepons=	qryRepons.replaceAll("PATNAME", "");
+					qryRepons=	qryRepons.replaceAll("PATAGE", "");
+					qryRepons=	qryRepons.replaceAll("PATGENDER", "");
+					qryRepons=	qryRepons.replaceAll("PATAGE", "");
+					qryRepons=	qryRepons.replaceAll("PATBG", "");
+					qryRepons=	qryRepons.replaceAll("MSGCONTROL", msgControlId);
+
+
+
+					cout.print(qryRepons);
+					System.out.println(qryRepons);
+				}  //if(msgType.equals("ORU^R01")) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+			} catch (Exception e) {
+				saveToFile(getStackTraceAsString(e), FILE_NAME);
+
+				// TODO: handle exception
+			}
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		private void IGIMS_NEW_MACHINE(String redDataText, PrintStream cout2) {
+			// TODO Auto-generated method stub
+
+			System.out.println("Parsing Start IGIMS");
+
+			char fsChar = 0x1C; // FS
+
+			char crChar = 0x0D; // CR
+
+			String[] strData = redDataText.split(Character.toString(fsChar));
+			// saveToFile(redDataText,FILE_NAME);
+			/*
+			 * Map<String, List> mp = new HashMap(); List <String> testCode = new
+			 * ArrayList<>(); List <String> testValue = new ArrayList<>(); List<String>
+			 * sampleNo=new ArrayList<>(); String sampleName = ""; String msgtype="";
+			 */
+
+			char[] character_array = redDataText.toCharArray();
+			System.out.println("Data  RECIEVED :- " + redDataText);
+			saveToFile("Data  RECIEVED :- " + redDataText, FILE_NAME);
+
+			String[] segments1 = redDataText.split(Character.toString(crChar));
+			Map<String, List> mp = new HashMap(); // added by Rohit...
+			List<String> testCode = new ArrayList<>();
+			List<String> testValue = new ArrayList<>();
+			String sampleNo = null;
+			String msgType = null;
+			StringBuffer mindACK = new StringBuffer();
+			String msgControlId = null;
+			try {
+
+				for (String segment : segments1) {
+
+					if (segment.contains("MSH|")) {
+
+						String[] msgPart = segment.split("\\|");
+						msgType = msgPart[8];
+						msgControlId = msgPart[9];
+
+						// Sen ACK Back
+
+						/*
+						 * MSH|^~\&|Analyzer||||20190226103151||ACK^RO1| 1|P|2.3.1||||1|| ASCII |||
+						 * MSA|AA|2| Message accepted |||0|
+						 */
+						LocalDateTime now = LocalDateTime.now();
+
+						// Define the desired format
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+
+						// Format the current date and time
+						String timestamp = now.format(formatter);
+						mindACK.append("MSH|^~\\&|Analyzer||||" + timestamp + "||ACK^RO1|" + msgControlId
+								+ "2.3.1||||1|| ASCII |||").append((char) 0x0D);
+						mindACK.append("MSA|AA|").append(msgControlId).append(" Message accepted |||0|")
+						.append((char) 0x0D);
+						mindACK.append((char) 0x1C).append((char) 0x0D);
+
+						cout.print(mindACK);
+						cout.flush();
+
+						saveToFile("ACK SENT:  " + mindACK.toString(), FILE_NAME);
+
+					} else if (segment.contains("OBR")) {
+						String[] msgPart = segment.split("\\|");
+						sampleNo = msgPart[2];
+					} else if (segment.contains("OBX")) {
+						String[] msgPart = segment.split("\\|");
+
+						if (msgPart[2].equals("NM")) {
+							testCode.add(msgPart[4]);
+							testValue.add(msgPart[5]);
+						} else {
+
+							saveToFile("numeric value not present", FILE_NAME);
+
+						}
+
+					}
+				}
+
+				saveToFile("Test Code : " + testCode, FILE_NAME);
+				saveToFile("Test Value : " + testValue, FILE_NAME);
+
+				for (int i = 0; i < testCode.size(); i++) {
+
+					ABC.insert_SysmexXN350A(testCode.get(i).toString(), testValue.get(i).toString(), sampleNo);
+
+				}
+
+			} catch (Exception e) {
+				saveToFile(getStackTraceAsString(e), FILE_NAME);
+
+				// TODO: handle exception
+			}
+
+		}
+
+		private void Sysmax1000(String redDataText, PrintStream cout2) {
+			// TODO Auto-generated method stub
+			char cr = 13;
+			char lf = 10;
+
+			Map<String, List> mp = new HashMap();
+
+			String[] items = { "WBC", "RBC", "HGB", "HCT", "MCV", "MCH", "MCHC", "PLT", "NEUT%", "LYMPH%", "MONO%",
+					"EO%", "BASO%", "NEUT#", "LYMPH#", "MONO#", "EO#", "BASO#", "IG%", "IG#", "NRBC%", "NRBC#",
+					"RDW-SD", "RDW-CV", "MICROR", "MACROR" };
+
+			List testCode = new ArrayList<String>();
+
+			List testValue = new ArrayList<String>();
+			String sampleNumber = "";
+			saveToFile("Data Received :: " + redDataText, FILE_NAME);
+
+			String[] dataPart = redDataText.split(Character.toString(cr));
+
+			for (String str : dataPart) {
+
+				str = str.replace("\n", "");
+
+				String[] msgSplit = str.split("\\|");
+
+				System.out.println("");
+				if (msgSplit[0].equals("O")) {
+
+					String[] samData = msgSplit[3].split("\\^");
+
+					sampleNumber = samData[2];
+					sampleNumber = sampleNumber.replaceAll("\\s", "");
+				} else if (msgSplit[0].equals("R")) {
+
+					String[] testCodeSegment = msgSplit[2].split("\\^");
+
+					if (testCodeSegment[4].equals("WBC") || testCodeSegment[4].equals("RBC")
+							|| testCodeSegment[4].equals("HGB") || testCodeSegment[4].equals("HCT")
+							|| testCodeSegment[4].equals("MCV") || testCodeSegment[4].equals("MCH")
+							|| testCodeSegment[4].equals("MCHC") || testCodeSegment[4].equals("PLT")
+							|| testCodeSegment[4].equals("NEUT%") || testCodeSegment[4].equals("LYMPH%")
+							|| testCodeSegment[4].equals("MONO%") || testCodeSegment[4].equals("EO%")
+							|| testCodeSegment[4].equals("BASO%") || testCodeSegment[4].equals("NEUT#")
+							|| testCodeSegment[4].equals("LYMPH#") || testCodeSegment[4].equals("MONO#")
+							|| testCodeSegment[4].equals("EO#") || testCodeSegment[4].equals("BASO#")
+							|| testCodeSegment[4].equals("IG%") || testCodeSegment[4].equals("IG#")
+							|| testCodeSegment[4].equals("NRBC%") || testCodeSegment[4].equals("NRBC#")
+							|| testCodeSegment[4].equals("RDW-SD") || testCodeSegment[4].equals("RDW-CV")
+							|| testCodeSegment[4].equals("MICROR") || testCodeSegment[4].equals("MACROR")) {
+
+						testCode.add(testCodeSegment[4]);
+						testValue.add(msgSplit[3]);
+						// Execute the code if any of the conditions are true
+					}
+
+				}
+
+			}
+
+			System.out.println(testCode);
+			System.out.println(testValue);
+
+			mp.put("TestCode", testCode);
+			mp.put("TestValue", testValue);
+
+			ABC.insert_SysmexXN350(mp, sampleNumber.toString().trim());
+
+		}
+	}
+
+	/*
+	 * V0001HbA2NORMAL LOT:05111/** EXP:2025/07 P:28 000 00000g/dl ADM2009202402Hb
+	 * A Hb A2 097.4002.
+	 * 6000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000Hb
+	 * A Hb A2 097.4002.6000000000000000000000000000000001.0001.00 00
+	 * 
+	 * 
+	 * 
+	 */
+
+	// sebia AIIMS ------------------- Sebia AIIMS BHUBNESWAR
+
+	public static void SEBIA_BHU(String redDataText, PrintStream cout) {
+
+		System.out.println("Data Received : " + redDataText);
+		String sampleNo = "";
+		Map<String, List<String>> testresultData = new HashMap<String, List<String>>();
+		List<String> testCode = new ArrayList<String>();
+		List<String> testValue = new ArrayList<String>();
+		try {
+			saveToFile("Data Received :: " + redDataText, FILE_NAME);
+
+			if (redDataText.length() > 18) {
+
+				String respacket = redDataText;
+
+				char programCode = respacket.charAt(1);
+				sampleNo = respacket.substring(6, 17);
+
+				saveToFile(sampleNo, FILE_NAME);
+				System.out.println("SAMPLE NO :" + sampleNo);
+				String idNumber = respacket.substring(6, 18);
+				System.out.println("ID NO :" + idNumber);
+
+				String patName = respacket.substring(18, 49);
+				System.out.println("Patient Name :" + patName);
+				String workingDate = respacket.substring(257, 265); // 207 //267
+				System.out.println("Working Date :" + workingDate);
+				String remData = respacket.substring(292); // 207
+				System.out.println("Test result data :" + remData);
+
+				String testCodeString = respacket.substring(267, 368);
+				String testValueString = respacket.substring(367, 468);
+				System.out.println("Test Code data :" + testCodeString);
+				System.out.println("Test Value Data : " + testValueString);
+
+				for (int i = 0; i < testCodeString.length() - 1; i = i + 10) {
+
+					if (i < testCodeString.length() - 10) {
+						testCode.add(testCodeString.substring(i, i + 10));
+					} else {
+						testCode.add(testCodeString.substring(i));
+					}
+
+				}
+
+				testCode.removeIf(item -> item == null || item.trim().isEmpty());
+				for (int i = 0; i < testValueString.length() - 1; i = i + 5) {
+
+					if (i < testValueString.length() - 5) {
+						testValue.add(testValueString.substring(i, i + 5));
+					} else {
+						testValue.add(testValueString.substring(i));
+					}
+
+					if (testValue.size() == testCode.size()) {
+						break;
+					}
+
+				}
+
+				testresultData.put("TestCode", testCode);
+				testresultData.put("TestValue", testValue);
+
+				// List<String> originalList = testCode.asList();
+
+				testValue.removeIf(item -> item == null || item.trim().isEmpty());
+
+				System.out.println(" Test Code List : " + testCode);
+				System.out.println(" Test Code Length : " + testCode.size());
+				System.out.println(" Test Value List : " + testValue);
+				System.out.println(" Test Value Length : " + testValue.size());
+
+				saveToFile("SAMPLE NO :" + sampleNo, FILE_NAME);
+				saveToFile(" Test Code List : " + testCode, FILE_NAME);
+				saveToFile("Test Value List : " + testValue, FILE_NAME);
+				ABC objAbc = new ABC();
+
+				// Generate base64 of GRAPH PDF -- - - - - - -
+
+			//	String base64val = fileReadAndConvertBase64(graph_path, sampleNo);
+
+				System.out.println("--" + sampleNo + " --");
+
+				// System.out.println(" "+base64val+" "); uncomment if you want to display base
+				// 64 data
+
+				// end PDF
+				/*
+				 * if(base64val.equals(null) &&base64val.equals("")) {
+				 * 
+				 * isInserted =false; }
+				 */
+				//// testCode.add("graph");
+				// testValue.add("");
+				for (int i = 0; i < testCode.size(); i++) {
+					if (!(sampleNo.equals(null) && sampleNo.equals(""))) {
+						// String res=objAbc.insert_Sysmex800i(testCode.get(i).replaceAll("\\s",
+						// ""),testValue.get(i), sampleNo.replaceAll("\\s", ""));
+						
+						
+					/*	objAbc.insertSampleDtlpdfbase64(sampleNo.replaceAll("\\s", ""),
+								testCode.get(i).replaceAll("\\s", ""), testValue.get(i).replaceAll("\\s", ""),
+								base64val);
+								*/
+						
+						
+						objAbc.insert_Sysmex800i(sampleNo.replaceAll("\\s", ""),
+								testCode.get(i).replaceAll("\\s", ""),
+								testValue.get(i).replaceAll("\\s", ""));
+						// base64val=null;
+					}
+
+				}
+			} else {
+
+				saveToFile("No data found", FILE_NAME);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		try {
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+
+	}
+
+	// end sebia AIIMS BHUBNESWAR
+
+	// MIndray patient Monitor working
+
+	public static void Mindray_Monitor55(String redDataText, PrintStream cout) throws JsonProcessingException {
+
+		int count = 0;
+
+		char fsChar = 0x1C; // FS
+
+		char crChar = 0x0D; // CR
+
+		String[] strData = redDataText.split(Character.toString(fsChar));
+		// saveToFile(redDataText,FILE_NAME);
+		/*
+		 * Map<String, List> mp = new HashMap(); List <String> testCode = new
+		 * ArrayList<>(); List <String> testValue = new ArrayList<>(); List<String>
+		 * sampleNo=new ArrayList<>(); String sampleName = ""; String msgtype="";
+		 */
+
+		char[] character_array = redDataText.toCharArray();
+		System.out.println("Data  RECIEVED :- " + redDataText);
+		saveToFile("Data  RECIEVED :- " + redDataText, FILE_NAME);
+		// GenericServer.logMessage("Data RECIEVED :- " + redDataText, Color.black);
+		// String[] strData=redDataText.split(Character.toString(fsChar));
+
+		// for(String strPKT:strData) {
+		// System.out.println("MESSAGE PART RECIEVED2:- " + redDataText);
+
+		String sampleName = "";
+		String msgtype = "";
+		boolean isStandBy = false;
+		String medEqpId = "";
+		// GenericServer.logMessage("Monitoring starts :", Color.MAGENTA);
+		// redDataText=redDataText.replaceAll("\\s","");
+
+		String[] segments1 = redDataText.split(Character.toString(crChar));
+		Map<String, List> mp = new HashMap(); // added by Rohit...
+		List<String> testCode = new ArrayList<>();
+		List<String> testValue = new ArrayList<>();
+		List<String> sampleNo = new ArrayList<>();
+		for (String segment : segments1) {
+
+			if (segment.contains("MSH")) {
+
+				String[] parts = segment.split("\\|");
+
+				String[] data = parts[2].split("\\^");
+
+				String value = parts[8];
+
+				String ControlId = parts[9];
+				String[] MSH = value.split("\\^");
+
+				msgtype = MSH[0];
+				System.out.println("Incoming msg Type :" + msgtype);
+				saveToFile("Incoming msg Type :" + msgtype, FILE_NAME);
+				// GenericServer.logMessage("Incoming msg Type :"+msgtype, Color.black);
+				if (msgtype.equals("ORU")) { /// sending ACK when result recieved
+					Date currentDate = new Date();
+
+					// Define the desired date format
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+
+					// Format the date
+					String formattedDate = dateFormat.format(currentDate);
+
+					// Print the formatted date
+					System.out.println("Formatted Date: " + formattedDate);
+					String controlid = parts[9];
+					String resACK1 = "MSH|^~\\&|host||cobas pure||YYYYMMDDHHMMSS||ACK^R22^ACK|CONTROLID||2.5.1||||NE||UNICODE UTF-8|\n"
+							+ "MSA|AA|CONTROLID||\n" + "";
+					StringBuilder msg = new StringBuilder();
+
+					msg.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|1|P|2.3.1||||||UNICODE||").append("\n");
+					msg.append("MSA|AA|1||||0");
+					// msg.append(" MSH|^~\\&|host||cobas
+					// pure||YYYYMMDDHHMMSS||ACK^R22^ACK|CONTROLID||2.5.1||||NE||UNICODE
+					// UTF-8|").append("\n");
+					// msg.append("MSA|AA|CONTROLID||").append("\n");
+					// msg.append("MSA|AA|CONTROLID||").append("\n");
+					msg.append((char) 0x1C).append("\n");
+
+					String resACK = msg.toString();
+					resACK = resACK.replaceAll("CONTROLID", controlid);
+					resACK = resACK.replaceAll("YYYYMMDDHHMMSS", formattedDate);
+
+					// cout.print(resACK);
+					StringBuilder mindACK = new StringBuilder();
+
+					/*
+					 * mindACK.append("MSH|^~\\&|Mindray|ADTServer|||||ACK|2|P|2.6").append((
+					 * char)0x1C).append((char)0x0D); mindACK.append("MSA|AA|6");
+					 * mindACK.append((char)0x1C).append("\n");
+					 */
+
+					mindACK.append("MSH|^~\\&|Mindray|ADTServer|||||ACK|" + ControlId + "|P|2.6").append((char) 0x0D);
+					mindACK.append("MSA|AA|").append(ControlId).append((char) 0x0D);
+					mindACK.append((char) 0x1C).append((char) 0x0D);
+
+					cout.print(mindACK);
+					cout.flush();
+					System.out.println("ACK SENT :" + mindACK);
+					// GenericServer.logMessage("ACK SENT :" + resACK, Color.BLUE);
+					saveToFile("ACK SENT :" + mindACK, FILE_NAME);
+				}
+
+			}
+
+			if (msgtype.equals("ORU")) {
+
+				if (segment.contains("OBR")) {
+
+					// String[] obtPkt=segment.split("\\|");
+					// sampleName=obtPkt[2];
+					// System.out.println("Sample No : "+sampleName);
+
+				}
+
+			}
+		}
+
+		System.out.println("11111");
+		if (msgtype.equals("ORU")) {
+
+			System.out.println("22222");
+			/// if message type is ORU only
+			List<String[]> obxSegments = new ArrayList<>();
+			String[] lines = redDataText.split(Character.toString(crChar));
+			// OBX||CE|2305^WorkState||1^Standby||||||F
+			String pid = "";
+			for (String line : lines) {
+				line = line.replace("\n", "");
+				String[] segments = line.split("\\|");
+
+				if (segments[0].contains("PID")) {
+					String str[] = segments[3].split("\\^");
+					pid = str[0];
+				} else if (segments[0].contains("OBX") && segments[2].contains("NM")) {
+					segments.toString().replace("\n", "");
+					obxSegments.add(segments);
+					// String[] val=segments[5].split("\\^");
+					// if(segments.toString().contains("WorkState")
+					// ||segments.toString().contains("2305") ) {
+					// if(val[0].contains("1")){// || val[1].contains("Standby")) {
+					//
+					// isStandBy=true;
+					// GenericServer.logMessage("Monitor in Standby Mode :", Color.MAGENTA);
+					//
+					// }
+
+					// }
+
+				}
+
+				else if (segments[0].contains("OBR")) {
+					String[] parts = segments[2].split("\\^");
+
+					// String[] data=parts[2].split("\\^");
+
+					medEqpId = parts[2];
+					if (medEqpId.equals("00A03700275CFF28")) {
+						medEqpId = "1001";
+					} 
+					else if (medEqpId.equals("000F1400302736af")) {
+						medEqpId = "1002";
+					}
+					else if (medEqpId.equals("000F14029125B3A6")) {
+						medEqpId = "1003";
+					}
+					else if (medEqpId.equals("000F14029125B3B5")) {
+						medEqpId = "1004";
+					}
+
+
+				}
+
+			}
+
+			/*
+			 * Workbook workbook; Sheet sheet; FileInputStream fis = null;
+			 * System.out.println("33333"); try { fis = new
+			 * FileInputStream(PARAM_FILE_NAME); workbook = new XSSFWorkbook(fis); sheet =
+			 * workbook.getSheetAt(0); System.out.println("4444"); } catch (IOException e) {
+			 * // File doesn't exist or can't be read; create a new workbook and sheet
+			 * workbook = new XSSFWorkbook(); sheet = workbook.createSheet("Param Data");
+			 * System.out.println("5555"); // Create Header Row Row headerRow =
+			 * sheet.createRow(0); headerRow.createCell(0).setCellValue("PID");
+			 * headerRow.createCell(1).setCellValue("Measurement ID");
+			 * headerRow.createCell(2).setCellValue("Measurement Name");
+			 * headerRow.createCell(3).setCellValue("Measurement Sub Id");
+			 * headerRow.createCell(4).setCellValue("Value");
+			 * headerRow.createCell(5).setCellValue("Unit");
+			 * headerRow.createCell(6).setCellValue("Packet Timestamp");
+			 * headerRow.createCell(7).setCellValue("Timestamp"); } finally { if (fis !=
+			 * null) { try { fis.close(); } catch (IOException e) { e.printStackTrace(); } }
+			 * }
+			 * 
+			 * // Find the last row number int rowNum = sheet.getLastRowNum() + 1;
+			 * 
+			 * // Populate the Excel sheet with OBX data for (String[] obxSegment :
+			 * obxSegments) { Row row = sheet.createRow(rowNum++);
+			 * row.createCell(0).setCellValue(pid);
+			 * 
+			 * String[] idAndName = obxSegment[3].split("\\^");
+			 * row.createCell(1).setCellValue(idAndName[0]);
+			 * row.createCell(2).setCellValue(idAndName[1]);
+			 * row.createCell(3).setCellValue(obxSegment[4]);
+			 * row.createCell(4).setCellValue(obxSegment[5]);
+			 * row.createCell(5).setCellValue(obxSegment[6]);
+			 * row.createCell(5).setCellValue(obxSegment[14]);
+			 * row.createCell(6).setCellValue(TIMESTAMP_FORMAT.format(new Date()));
+			 * System.out.println("66666"); }
+			 * 
+			 * try (FileOutputStream fileOut = new FileOutputStream(PARAM_FILE_NAME)) {
+			 * workbook.write(fileOut); System.out.println("Data written to Excel");
+			 * saveToFile("Data written to Excel",FILE_NAME); } catch (IOException e) {
+			 * e.printStackTrace(); }
+			 * 
+			 */
+			List<OBXSegment> obxSegmentList = new ArrayList<>();
+			for (String[] obxSegment : obxSegments) {
+				OBXSegment segment = new OBXSegment();
+				segment.setPatient_id(pid);
+				segment.setMachineId(medEqpId);
+				String[] idAndName = obxSegment[3].split("\\^");
+				segment.setParam_id(idAndName[0]);
+				segment.setParam_name(idAndName[1]);
+				segment.setParam_value(obxSegment[5]);
+
+				segment.setParam_unit(obxSegment[6]);
+				segment.setParam_referenceRange("");
+				segment.setPackettimestamp(obxSegment[14]);
+				segment.setTimestamp(TIMESTAMP_FORMAT.format(new Date()));
+
+				obxSegmentList.add(segment);
+			}
+
+			// Convert list to JSON
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.enable(SerializationFeature.INDENT_OUTPUT);
+			String jsonString = mapper.writeValueAsString(obxSegmentList);
+
+			System.out.println(jsonString);
+			saveToFile(jsonString, JSON_FILE_NAME);
+			// GenericServer.logMessage("Data written to Excel for PID :" + pid,
+			// Color.BLUE);
+
+			// saveToFile("Data written to Excel for PID :" + pid,FILE_NAME);
+
+			// api call
+
+			// to store data inn local db at local server
+			/*
+			 * 
+			 * OT_EQP_SERVICE objDao = new OT_EQP_SERVICE(); String response; try { response
+			 * = objDao.saveData(jsonString);
+			 * 
+			 * System.out.println(response); } catch (JSONException e) { // TODO
+			 * Auto-generated catch block e.printStackTrace(); }
+			 */
+
+			try {
+				// Define the URL of the API endpoint
+				// edb://localhost:5444/aiims_jodhpur
+				// https://aiimsjodhpur.prd.dcservices.in
+				// URL url = new
+				// URL("http://10.226.28.174:8380/OT_INTEGRATION/service/api/saveresult/");
+
+				URL url = new URL(aiimsUrl + "/OT_INTEGRATION/service/api/saveresult");
+
+				// URL url = new
+				// URL("https://aiimsjodhpur.uat.dcservices.in/OT_INTEGRATION/service/api/saveresult/");
+
+				// Create a connection object
+				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+				// Set the request method to POST
+				connection.setRequestMethod("POST");
+
+				// Set request headers if needed
+				connection.setRequestProperty("Content-Type", "application/json");
+				// connection.setRequestProperty("Accept", "application/json");
+
+				// Enable input and output streams
+				connection.setDoOutput(true);
+				System.out.println(connection.getURL());
+				// Create the JSON payload
+				String jsonInputString = "{\r\n" + "    \"patient_id\": \"1212\",\r\n"
+						+ "    \"param_id\": \"150356\",\r\n" + "    \"param_name\": \"MDC_TEMP_AWAY\",\r\n"
+						+ "    \"param_value\": \"99.0\",\r\n" + "    \"param_unit\": \"266560^MDC_DIM_FAHR^MDC\",\r\n"
+						+ "    \"param_referenceRange\": \"\",\r\n"
+						+ "    \"timestamp\": \"20240813160323.0000+0530\"\r\n" + "}";
+
+				// Write the JSON payload to the output stream
+				try (OutputStream os = connection.getOutputStream()) {
+					byte[] input1 = jsonString.getBytes("UTF-8");
+					os.write(input1, 0, input1.length);
+				}
+
+				// Get the response code
+				int responseCode = connection.getResponseCode();
+				connection.getResponseMessage();
+				saveToFile("URL : " + connection.getURL(), FILE_NAME);
+				System.out.println("Response Code: " + responseCode + connection.getResponseMessage());
+				saveToFile("Response Code: " + responseCode + connection.getResponseMessage(), FILE_NAME);
+				// Handle the response (not shown in this example)
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			// end api call
+
+			/*
+			 * try { // workbook.close(); } catch (IOException e) { e.printStackTrace(); }
+			 */
+			// }
+		}
+
+	}
+
+	// end monitor
+
+	// AIIMS Jodhpur ERBA 580...
+	public static void ERBA580(String redDataText, PrintStream cout) {
+
+		int count = 0;
+
+		char fsChar = 0x1C; // FS
+
+		char crChar = 0x0D; // CR
+
+		String[] strData = redDataText.split(Character.toString(fsChar));
+
+		Map<String, List> mp = new HashMap();
+		List<String> testCode = new ArrayList<>();
+		List<String> testValue = new ArrayList<>();
+		List<String> sampleNo = new ArrayList<>();
+		String sampleName = "";
+		String msgtype = "";
+		for (String strPKT : strData) {
+			System.out.println("MESSAGE PART RECIEVED:- " + strPKT);
+			String[] segments1 = strPKT.split(Character.toString(crChar));
+
+			// String sampleName = null;
+			// Print each segment
+
+			for (String segment : segments1) {
+
+				if (segment.contains("MSH")) {
+					String[] parts = segment.split("\\|");
+
+					String value = parts[8];
+					String[] MSH = value.split("\\^");
+
+					msgtype = MSH[0];
+					System.out.println("Incoming msg Type :" + msgtype);
+					saveToFile("Incoming msg Type :" + msgtype, FILE_NAME);
+
+					if (msgtype.equals("ORU")) { /// sending ACK when result recieved
+						Date currentDate = new Date();
+
+						// Define the desired date format
+						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssZ");
+
+						// Format the date
+						String formattedDate = dateFormat.format(currentDate);
+
+						// Print the formatted date
+						System.out.println("Formatted Date: " + formattedDate);
+						String controlid = parts[9];
+						String resACK1 = "MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE"
+								+ "MSA|AA|1" + "";
+
+						// MSH|^~\&|H560|Erba
+						// Mannheim|||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE
+						// MSA|AA|1
+						StringBuilder msg = new StringBuilder();
+
+						msg.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE")
+						.append("\r");
+						msg.append("MSA|AA|1").append("\r");
+						// msg.append("MSA|AA|CONTROLID||").append("\r");
+						msg.append((char) 0x1C).append("\r");
+
+						// check sum
+
+						StringBuilder ACKRESCS = new StringBuilder();
+
+						ACKRESCS.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE");
+						ACKRESCS.append("MSA|AA|1");
+						// msg.append("MSA|AA|CONTROLID||").append("\r");
+						ACKRESCS.append((char) 0x1C);
+
+						byte[] messageBytes = resACK1.toString().getBytes();
+
+						// Calculate CRC-16 ANSI (HL7)
+						int crcValue = calculateHL7CRC(messageBytes);
+
+						GenericV_04_03_01.logMessage("Check Sum" + crcValue, Color.black);
+
+						// check sum
+						ACKRESCS.append(crcValue);
+
+						// check sum
+						String resACK = msg.toString();
+						resACK = resACK.replaceAll("CONTROLID", controlid);
+						resACK = resACK.replaceAll("YYYYMMDDHHMMSS", formattedDate);
+						logMessage("ACK SENT :" + resACK, Color.red);
+						cout.print(resACK);
+						System.out.println("ACK SENT :" + resACK);
+						saveToFile("ACK SENT :" + resACK, FILE_NAME);
+
+					}
+
+				}
+
+				if (msgtype.equals("ORU") || segment.contains("PID")) {
+
+					if (segment.contains("PID")) { // to check sample no. in SPM section
+						// Split the line by the pipe character "|"
+						String[] parts = segment.split("\\|");
+
+						// Check if there are at least 7 elements in the array
+						// Extract and print the value after the 6th pipe
+						String value = parts[3];
+
+						String[] pid = value.split("\\^");
+						System.out.println("Patient Id: " + pid[0]);
+
+						sampleName = pid[0];
+						System.out.println("Sample NO :" + sampleName);
+						logMessage("Sample NO : " + sampleName, Color.red);
+						// sampleNo.add(sampleName);
+						// System.out.println("Patiwnt Id " + pid);
+						saveToFile("Sample NO : " + sampleName, FILE_NAME);
+					}
+
+					if (segment.contains("OBX") || segment.startsWith("OBX")) {
+						// Split the line by the pipe character "|"
+						String[] parts = segment.split("\\|");
+
+						count++;
+						if (parts[2].equals("NM")) // Ramji Added OBX|1|NM|..
+						{
+
+							// Check if there are at least 5 elements in the array
+							if (parts.length > 3) {
+								// Extract and print the value after the 4th pipe
+								String value = parts[3];
+
+								// if(value.equals("WBC")|| value.equals("NEU#") || value.equals("LYM#") ||
+								// value.equals("MON#") || value.equals("EOS#") || value.equals("BAS#") ||
+								// value.equals("IMG#") || value.equals("NEU%") || value.equals("LYM%") ||
+								// value.equals("MON%") || value.equals("EOS%") || value.equals("BAS%") ||
+								// value.equals("IMG%") || value.equals("RBC") || value.equals("HGB") ||
+								// value.equals("HCT") || value.equals("MCV") || value.equals("MCH") ||
+								// value.equals("MCHC") || value.equals("RDW-CV") || value.equals("RDW-SD") ||
+								// value.equals("PLT") || value.equals("MPV") || value.equals("PDW") ||
+								// value.equals("PCT") || value.equals("PLCC") || value.equals("NRBC#") ||
+								// value.equals("NRBC%") || value.equals("PLCR") ) {
+
+								String[] tc = value.split("\\^");
+								// System.out.println("Test Code " + tc[0]);
+								testCode.add(tc[1]);
+
+							}
+
+							if (parts.length > 5) {
+								// Extract and print the value after the 4th pipe
+								String value = parts[5];
+
+								// if(value.equals("WBC")|| value.equals("NEU#") || value.equals("LYM#") ||
+								// value.equals("MON#") || value.equals("EOS#") || value.equals("BAS#") ||
+								// value.equals("IMG#") || value.equals("NEU%") || value.equals("LYM%") ||
+								// value.equals("MON%") || value.equals("EOS%") || value.equals("BAS%") ||
+								// value.equals("IMG%") || value.equals("RBC") || value.equals("HGB") ||
+								// value.equals("HCT") || value.equals("MCV") || value.equals("MCH") ||
+								// value.equals("MCHC") || value.equals("RDW-CV") || value.equals("RDW-SD") ||
+								// value.equals("PLT") || value.equals("MPV") || value.equals("PDW") ||
+								// value.equals("PCT") || value.equals("PLCC") || value.equals("NRBC#") ||
+								// value.equals("NRBC%") || value.equals("PLCR") ) {
+
+								// String[] tv = value.split("\\^");
+
+								double number = Double.parseDouble(value);
+								double truncatedNumber = (int) (number * 10) / 10.0;
+								// System.out.println("truncatedNumber"+truncatedNumber);
+								String result = String.format("%.1f", truncatedNumber);
+
+								testValue.add(result);
+
+								// continue;
+							}
+
+						}
+
+					}
+
+				}
+
+			} // exit inner for loop
+
+		} // exit outer for loop
+
+		if (msgtype.equals("ORU")) { // when mssg type is resullt then only insert the data otherwise break
+			System.out.println(testCode);
+			System.out.println(testValue);
+			// if(msgtype.equals("OUL")) {
+			ABC abc = new ABC();
+
+			System.out.println("Sample No:" + sampleName);
+			System.out.println("Total Test Fetched from MSG" + count);
+			System.out.println("Total Test Entered" + testCode.size());
+			logMessage("Sample No:" + sampleName, Color.BLUE);
+			saveToFile("Sample No:" + sampleName, FILE_NAME);
+			mp.put("TestCode", testCode);
+			mp.put("TestValue", testValue);
+			// mp.put("SampleNO",sampleNo);
+
+			System.out.println(testCode);
+
+			System.out.println(testValue);
+			logMessage("Test Code : " + testCode, Color.BLUE);
+			logMessage("Test Value : " + testValue, Color.BLUE);
+
+			saveToFile("Test Code : " + testCode, FILE_NAME);
+			saveToFile("Test Value : " + testValue, FILE_NAME);
+			if (!sampleName.equals(null) || !sampleName.equals(""))
+				System.out.println("API CALL FOR INSERT");
+			logMessage("API CALL FOR INSERT", Color.red);
+			abc.insert_SysmexXN350COBAS(mp, sampleName);
+
+			// }
+
+		}
+
+	}
+
+	// AIIMS Jodhpur ERBA 580...
+	public static void ATLLECIA_AIIMSJD(String redDataText, PrintStream cout) {
+
+		int count = 0;
+
+		char fsChar = 0x1C; // FS
+
+		char crChar = 0x0D; // CR
+
+		String[] strData = redDataText.split(Character.toString(fsChar)); 
+
+		Map<String, List> mp = new HashMap();
+		List<String> testCode = new ArrayList<>();
+		List<String> testValue = new ArrayList<>();
+		List<String> sampleNo = new ArrayList<>();
+		String sampleName = "";
+		String msgtype = "";
+		for (String strPKT : strData) {
+			System.out.println("MESSAGE PART RECIEVED:- " + strPKT);
+			String[] segments1 = strPKT.split(Character.toString(crChar));
+
+			// String sampleName = null;
+			// Print each segment
+
+			for (String segment : segments1) {
+
+				if (segment.contains("MSH")) {
+					String[] parts = segment.split("\\|");
+
+					String value = parts[8];
+					String[] MSH = value.split("\\^");
+
+					msgtype = MSH[0];
+					System.out.println("Incoming msg Type :" + msgtype);
+					saveToFile("Incoming msg Type :" + msgtype, FILE_NAME);
+
+					if (msgtype.equals("ORU")) { /// sending ACK when result recieved
+						Date currentDate = new Date();
+
+						// Define the desired date format
+						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssZ");
+
+						// Format the date
+						String formattedDate = dateFormat.format(currentDate);
+
+						// Print the formatted date
+						System.out.println("Formatted Date: " + formattedDate);
+						String controlid = parts[9];
+						String resACK1 = "MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE"
+								+ "MSA|AA|1" + "";
+
+						// MSH|^~\&|H560|Erba
+						// Mannheim|||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE
+						// MSA|AA|1
+						StringBuilder msg = new StringBuilder();
+
+						msg.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE")
+						.append("\r");
+						msg.append("MSA|AA|1").append("\r");
+						// msg.append("MSA|AA|CONTROLID||").append("\r");
+						msg.append((char) 0x1C).append("\r");
+
+						// check sum
+
+						StringBuilder ACKRESCS = new StringBuilder();
+
+						ACKRESCS.append("MSH|^~\\&|||||YYYYMMDDHHMMSS||ACK^R01|CONTROLID|P|2.3.1||||||UNICODE");
+						ACKRESCS.append("MSA|AA|1");
+						// msg.append("MSA|AA|CONTROLID||").append("\r");
+						ACKRESCS.append((char) 0x1C);
+
+						byte[] messageBytes = resACK1.toString().getBytes();
+
+						// Calculate CRC-16 ANSI (HL7)
+						int crcValue = calculateHL7CRC(messageBytes);
+
+						GenericV_04_03_01.logMessage("Check Sum" + crcValue, Color.black);
+
+						// check sum
+						ACKRESCS.append(crcValue);
+
+						// check sum
+						String resACK = msg.toString();
+						resACK = resACK.replaceAll("CONTROLID", controlid);
+						resACK = resACK.replaceAll("YYYYMMDDHHMMSS", formattedDate);
+						logMessage("ACK SENT :" + resACK, Color.red);
+						cout.print(resACK);
+						System.out.println("ACK SENT :" + resACK);
+						saveToFile("ACK SENT :" + resACK, FILE_NAME);
+
+					}
+
+				}
+
+				if (msgtype.equals("ORU") || segment.contains("PID")) {
+
+					if (segment.contains("PID")) { // to check sample no. in SPM section
+						// Split the line by the pipe character "|"
+						String[] parts = segment.split("\\|");
+
+						// Check if there are at least 7 elements in the array
+						// Extract and print the value after the 6th pipe
+						String value = parts[3];
+
+						String[] pid = value.split("\\^");
+						System.out.println("Patient Id: " + pid[0]);
+
+						sampleName = pid[0];
+						System.out.println("Sample NO :" + sampleName);
+						logMessage("Sample NO : " + sampleName, Color.red);
+						// sampleNo.add(sampleName);
+						// System.out.println("Patiwnt Id " + pid);
+						saveToFile("Sample NO : " + sampleName, FILE_NAME);
+					}
+
+					if (segment.contains("OBX") || segment.startsWith("OBX")) {
+						// Split the line by the pipe character "|"
+						String[] parts = segment.split("\\|");
+
+						count++;
+						if (parts[2].equals("NM")) {
+
+							// Check if there are at least 5 elements in the array
+							if (parts.length > 3) {
+								// Extract and print the value after the 4th pipe
+								String value = parts[3];
+
+								// if(value.equals("WBC")|| value.equals("NEU#") || value.equals("LYM#") ||
+								// value.equals("MON#") || value.equals("EOS#") || value.equals("BAS#") ||
+								// value.equals("IMG#") || value.equals("NEU%") || value.equals("LYM%") ||
+								// value.equals("MON%") || value.equals("EOS%") || value.equals("BAS%") ||
+								// value.equals("IMG%") || value.equals("RBC") || value.equals("HGB") ||
+								// value.equals("HCT") || value.equals("MCV") || value.equals("MCH") ||
+								// value.equals("MCHC") || value.equals("RDW-CV") || value.equals("RDW-SD") ||
+								// value.equals("PLT") || value.equals("MPV") || value.equals("PDW") ||
+								// value.equals("PCT") || value.equals("PLCC") || value.equals("NRBC#") ||
+								// value.equals("NRBC%") || value.equals("PLCR") ) {
+
+								String[] tc = value.split("\\^");
+								// System.out.println("Test Code " + tc[0]);
+								testCode.add(tc[1]);
+							}
+
+							if (parts.length > 5) {
+								// Extract and print the value after the 4th pipe
+								String value = parts[5];
+
+								// if(value.equals("WBC")|| value.equals("NEU#") || value.equals("LYM#") ||
+								// value.equals("MON#") || value.equals("EOS#") || value.equals("BAS#") ||
+								// value.equals("IMG#") || value.equals("NEU%") || value.equals("LYM%") ||
+								// value.equals("MON%") || value.equals("EOS%") || value.equals("BAS%") ||
+								// value.equals("IMG%") || value.equals("RBC") || value.equals("HGB") ||
+								// value.equals("HCT") || value.equals("MCV") || value.equals("MCH") ||
+								// value.equals("MCHC") || value.equals("RDW-CV") || value.equals("RDW-SD") ||
+								// value.equals("PLT") || value.equals("MPV") || value.equals("PDW") ||
+								// value.equals("PCT") || value.equals("PLCC") || value.equals("NRBC#") ||
+								// value.equals("NRBC%") || value.equals("PLCR") ) {
+
+								// String[] tv = value.split("\\^");
+
+								double number = Double.parseDouble(value);
+								double truncatedNumber = (int) (number * 10) / 10.0;
+								// System.out.println("truncatedNumber"+truncatedNumber);
+								String result = String.format("%.1f", truncatedNumber);
+
+								testValue.add(result);
+
+								// continue;
+							}
+
+						}
+
+					}
+
+				}
+
+			} // exit inner for loop
+
+		} // exit outer for loop
+
+		if (msgtype.equals("ORU")) { // when mssg type is resullt then only insert the data otherwise break
+			System.out.println(testCode);
+			System.out.println(testValue);
+			// if(msgtype.equals("OUL")) {
+			ABC abc = new ABC();
+
+			System.out.println("Sat6mple No:" + sampleName);
+			System.out.println("Total Test Fetched from MSG" + count);
+			System.out.println("Total Test Entered" + testCode.size());
+			logMessage("Sample No:" + sampleName, Color.BLUE);
+			saveToFile("Sample No:" + sampleName, FILE_NAME);
+			mp.put("TestCode", testCode);
+			mp.put("TestValue", testValue);
+			// mp.put("SampleNO",sampleNo);
+
+			System.out.println(testCode);
+
+			System.out.println(testValue);
+			logMessage("Test Code : " + testCode, Color.BLUE);
+			logMessage("Test Value : " + testValue, Color.BLUE);
+
+			saveToFile("Test Code : " + testCode, FILE_NAME);
+			saveToFile("Test Value : " + testValue, FILE_NAME);
+			if (!sampleName.equals(null) || !sampleName.equals(""))
+				System.out.println("API CALL FOR INSERT");
+			logMessage("API CALL FOR INSERT", Color.red);
+			abc.insert_SysmexXN350COBAS(mp, sampleName);
+
+			// }
+
+		}
+
+	}
+
+	// AIIMS Dellhi ABG machine
+
+	public static void AIIMS_DELHI(String redDataText, PrintStream cout) throws JsonProcessingException {
+
+		saveToFile("ABG SOLUTION  ", FILE_NAME);
+		System.out.println("Data Recived " + redDataText);
+		saveToFile(redDataText, FILE_NAME);
+
+		char crChar = 0x0D; // CR
+		String sampleno = "";
+		List testCode = new ArrayList<>();
+		List testValue = new ArrayList<>();
+		String[] datapacket = redDataText.split(Character.toString(crChar));
+
+		System.out.println(datapacket[0]);
+
+		String[] str = datapacket[0].split("\\,");
+		sampleno = str[1];
+
+		saveToFile("Sample NO :" + sampleno, FILE_NAME);
+		try {
+			for (int i = 3; i < datapacket.length - 4; i++) {
+
+				String[] strData = datapacket[i].split("\\,");
+				strData[0] = strData[0].replace("\n", "").replace("\r", "");
+
+				testCode.add(strData[0]);
+				testValue.add(strData[1]);
+
+			}
+
+			System.out.println("testCode" + testCode);
+			System.out.println("testValue" + testValue);
+
+			System.out.println(testCode.size());
+			System.out.println(testValue.size());
+			saveToFile("testCode  :" + testCode, FILE_NAME);
+			saveToFile("testValue  :" + testValue, FILE_NAME);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+
+		dbConnection objDao = new dbConnection();
+
+		objDao.insertParaValue(testCode, testValue, sampleno);
+		System.out.println("No Exception");
+
+	}
+
+	/// end code
+
+	public static int calculateHL7CRC(byte[] bytes) {
+		// Polynomial used for CRC-16 ANSI (HL7)
+		final int polynomial = 0x11021; // x^16 + x^12 + x^5 + 1
+
+		// Initialize CRC-32 with the given polynomial
+		CRC32 crc32 = new CRC32();
+		crc32.reset();
+
+		// Update CRC-32 with the message bytes
+		crc32.update(bytes);
+
+		// Get the CRC-32 value as a long (since CRC32 returns a long)
+		long crcResult = crc32.getValue();
+
+		// Mask the CRC-32 result to fit into 16 bits (CRC-16)
+		int crc16 = (int) crcResult & 0xFFFF;
+
+		return crc16;
+	}
+
+	private static boolean validateInputs(String selectedMachine, String portNumber, String portName) {
+
+		if (selectedMachine == null || selectedMachine.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Please select a machine name.", "Validation Error",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if (serverRadioButton.isSelected())
+
+		{
+
+			System.out.println("TCP IP");
+			if (portNumber.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Please enter a port number.", "Validation Error",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+
+			try {
+				Integer.parseInt(portNumber);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Please enter a valid port number.", "Validation Error",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+
+		}
+
+		else if (comPortRadioButton.isSelected()) {
+			System.out.println("COM PORT");
+			if (portName.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Please enter a port Name.", "Validation Error",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+
+		}
+
+		return true;
+	}
+
+	static void saveToFile(String data, String jsonFileName) {
+		try (FileWriter fw = new FileWriter(jsonFileName, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				PrintWriter out = new PrintWriter(bw)) {
+			String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+			out.println(timestamp + " - " + data);
+		} catch (IOException e) {
+			System.err.println("Error writing to file: " + e.getMessage());
+		}
+	}
+
+	private static void create_Ecg_Graph(String data) {
+	}
+
+	static String getStackTraceAsString(Exception e) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		e.printStackTrace(pw);
+		return sw.toString();
+	}
+
+	public static String fileReadAndConvertBase64(String sourceFolderPath, String sam) {
+		String base64String = "";
+		try {
+			File sourceFolder = new File(sourceFolderPath);
+			// System.out.println("sourceFolder: " + sourceFolder.getPath());
+
+			// List PDF files in the source folder
+			File[] pdfFiles = sourceFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".pdf"));
+			StringBuilder str = new StringBuilder();
+
+			Arrays.sort(pdfFiles, Comparator.comparingLong(File::lastModified));
+
+			// System.out.println(111);
+			if (pdfFiles != null && pdfFiles.length > 0) {
+				// System.out.println("pdfFiles.length"+pdfFiles.length);
+
+				for (File pdfFile : pdfFiles) {
+					// Convert the PDF file to Base64
+
+					// System.out.println("pdfFiles"+pdfFile);
+
+					String fileName = pdfFile.getName();
+					fileName = fileName.replaceAll(".pdf", "");
+					int hyphenIndex = fileName.indexOf("-");
+					// if (hyphenIndex != -1) {
+
+					// String filePrefix = fileName.substring(0, hyphenIndex);
+					// str.append("Base64 representation for " + pdfFile.getName() + base64String);
+					String dd = "";
+					// try {
+					// pdfFile= compressPDF(pdfFile);
+					// System.out.println("PDF compressed successfully.");
+					// } catch (IOException e) {
+					// e.printStackTrace();
+					// }
+					if (sam.equals(fileName)) {
+
+						base64String = convertToBase64(pdfFile);
+						// base64String = convertToBase642(dd,dd);
+						System.out.println("Base 64 is genereted ::>>   " + pdfFile);
+						// System.out.println(base64String);
+						// break;
+					} else {
+						System.out.println("File Not found for Sample No ---->" + sam);
+						// break;
+						// base64String=null;
+					}
+					// str.append("Base64 representation for " + pdfFile.getName() + ": " +
+					// filePrefix);
+					// logger.info("Base64 representation for " + pdfFile.getName() + ": " +
+					// filePrefix);
+					// logger.info("Base64 representation for " + filePrefix + ":------------" +
+					// base64String);
+
+					// System.out.println("base64::: "+filePrefix+" -- "+base64String);
+					// }
+					// str.append("Base64 representation for " + pdfFile.getName() + base64String);
+					// logger.info("Base64 representation for " + pdfFile.getName()+":------------"
+					// + base64String);
+					// System.out.println("Base64 representation for " + pdfFile.getme() + ":\n" +
+					// base64String);
+				}
+			} else {
+				// System.out.println("No PDF files found in the source folder.");
+			}
+			// logger.info(""+str.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return base64String;
+	}
+
+	private static String convertToBase64(File file) throws Exception {
+		FileInputStream fileInputStream = new FileInputStream(file);
+		byte[] bytes = new byte[(int) file.length()];
+		fileInputStream.read(bytes);
+		fileInputStream.close();
+
+		return Base64.getEncoder().encodeToString(bytes);
+	}
+	
+	
+	
+	
+	
+	//open to popup to enter cr no
+	public static void fetchPatDemo() {
+	
+	 String patientID = JOptionPane.showInputDialog(frame, "Please enter Patient Cr No.:");
+     
+     // If user presses Cancel or enters an empty value
+     if (patientID == null || patientID.trim().isEmpty()) {
+         JOptionPane.showMessageDialog(frame, "No Patient Cr No entered. Exiting...");
+         System.exit(0);  // Close the application
+     } else {
+     	cr_no=patientID;
+         JOptionPane.showMessageDialog(frame, "Patient Cr No: " + cr_no);
+         
+        // https://aiimsjodhpur.prd.dcservices.in/
+         	//+"HISServices/service/genericNurseEvisit/getpatientdetails?crno=989262300206008&hospcode=98926";
+         
+         	try {
+ 				
+         		URL url = new URL(aiimsUrl + "/HISServices/service/genericNurseEvisit/getpatientdetails?crno="+cr_no+"&hospcode="+98926);
+         		// Create a connection object
+ 				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+ 				// Set the request method to POST
+ 				connection.setRequestMethod("GET");
+
+ 				// Set request headers if needed
+ 				connection.setRequestProperty("Content-Type", "application/json");
+ 				// connection.setRequestProperty("Accept", "application/json");
+
+ 				// Enable input and output streams
+ 				connection.setDoOutput(true);
+ 				System.out.println(connection.getURL());
+ 			
+ 				// Get the response code
+ 				int responseCode = connection.getResponseCode();
+ 				System.out.println(responseCode);
+ 				
+ 				  // Check if the response code is 200 (OK)
+ 	            if (responseCode == HttpURLConnection.HTTP_OK) {
+ 	                // Read the response
+ 	                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+ 	                String inputLine;
+ 	                StringBuilder response = new StringBuilder();
+
+ 	                // Read the response line by line
+ 	                while ((inputLine = in.readLine()) != null) {
+ 	                    response.append(inputLine);
+ 	                }
+ 	                // Close the BufferedReader
+ 	                in.close();
+
+ 	                // Print the response
+ 	                System.out.println("Response: " + response.toString());
+ 	                JSONObject jsonResponse = new JSONObject(response.toString());
+ 	                JSONArray patientDetails = jsonResponse.getJSONArray("patientdetails");
+
+ 	                
+ 	                
+ 	                
+ 	                String status = jsonResponse.getString("status");
+ 	                
+ 	                if(!status.equals("0")) {
+ 	                // Extract details from the JSON
+ 	                JSONObject patient = patientDetails.getJSONObject(0);
+ 	                String patientName = patient.getString("HRGSTR_FNAME") + " " + patient.getString("HRGSTR_LNAME");
+ 	                String patientAge = patient.getString("HRGSTR_AGE");
+ 	                String patientGender = patient.getString("GSTR_GENDER_CODE");
+ 	                String patientMobile = patient.getString("HRGSTR_MOBILE_NO");
+ 	                String patientAddress = patient.getString("HRGSTR_ADDRESS_LINE1") + ", " +
+ 	                                        patient.getString("HRGSTR_SUB_LOCALITY1") + ", " +
+ 	                                        patient.getString("HRGSTR_DISTRICT");
+
+ 	                // Create a message with patient details to show in the dialog
+ 	                String message = "Patient Details:\n\n" +
+ 	                                 "Name: " + patientName + "\n" +
+ 	                                 "Age: " + patientAge + "\n" +
+ 	                                 "Gender: " + (patientGender.equals("M") ? "Male" : "Female") + "\n" +
+ 	                                 "Mobile: " + patientMobile + "\n" +
+ 	                                 "Address: " + patientAddress;
+
+ 	                // Show a confirmation dialog with the details
+ 	                int responseDialog = JOptionPane.showConfirmDialog(null, 
+ 	                    message + "\n\nDo you want to proceed?", 
+ 	                    "Confirm Patient Details", 
+ 	                    JOptionPane.YES_NO_OPTION);
+
+ 	                // Handle the dialog response
+ 	                if (responseDialog == JOptionPane.YES_OPTION) {
+ 	                    // Proceed with starting the application
+ 	                    JOptionPane.showMessageDialog(null, "Proceeding with the application...");
+ 	                    // Initialize the rest of the application here...
+ 	                } else {
+ 	                    // User declined, exit the application or handle it as needed
+ 	                    JOptionPane.showMessageDialog(null, "Application terminated.");
+ 	                    //System.exit(0);
+ 	                }
+ 	                
+ 	                
+ 	                }
+ 	                
+ 	                else {
+ 	                	 JOptionPane.showMessageDialog(null, "Patient details not found for this cr no. check with another cr");
+ 	                	
+ 	                	
+ 	                }
+
+ 	            } else {
+ 	                System.out.println("GET request failed with response code: " + responseCode);
+ 	            }
+ 	            
+ 	            } 
+ 				
+ 				
+         	
+         	catch (Exception e) {
+         		
+         		e.printStackTrace();
+         		
+					// TODO: handle exception
+				}
+         
+         // Continue with the application after patient ID is entered
+     }
+	
+	}
+	//
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

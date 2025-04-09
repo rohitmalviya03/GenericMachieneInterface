@@ -1,0 +1,19 @@
+eqp = 100004
+hos = 33115
+uid = 10716
+ip = 
+server_port = 5000
+server_ip = 10.226.29.229
+formatid=40078
+machine_mode =ASTM
+Baud_Rate= 9600
+Data_Bits =8 
+Stop_Bits =1 
+Parity = 0
+machine_name =No Machine
+fileReadPath =
+Serial_Port=COM4
+
+uatrailtel.dcservices.in
+hmis.rcil.gov.in
+tsehmis.dcservices.in

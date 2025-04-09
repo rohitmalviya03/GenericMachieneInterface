@@ -1,0 +1,364 @@
+2025-04-08 10:49:26 - Data sends to Mestria is started  for sample no ::  250408MIC00000
+2025-04-08 10:49:26 - Response from API: []
+2025-04-08 10:49:26 - Sample no or cr no. not found: []
+2025-04-08 10:49:26 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-04-08 10:49:26 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250408104926||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||939152100000382||Test Usr One    ^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||250408MIC00000SPM|1|250408MIC00000||BC^Blood Culture^99BMx|||^^|^^|||P^Patient^||||||20250408104926|SAC||||24008676 ORC|NW||||||||20250408104926TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
+2025-04-08 10:49:28 - Stack Trace: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at java.net.Socket.<init>(Socket.java:452)
+	at java.net.Socket.<init>(Socket.java:229)
+	at Server.ServerConnector.sendToServer(ServerConnector.java:29)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:2338)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-04-08 10:49:28 - Error: Error connecting to server: Connection refused: connect
+2025-04-08 10:49:28 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:53)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:2338)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-04-08 17:24:12 - Failed to fetch data. Response Code: 500
+2025-04-08 17:24:12 - Something went wrong.. Internal Server Error
+2025-04-08 17:24:12 - Stack Trace: java.lang.NullPointerException
+	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1272)
+	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:446)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-04-09 11:05:05 - Data sends to pacs is started ::  
+2025-04-09 11:05:06 - Response from API: [{"hisOrderId":null,"patientId":"999122100055236","patientFname":"Harsha    ","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28","modality":"CT","testId":"10107","testName":"B/L Knee AP","phoneNumber":"9896846541","emailId":"NA","patientWeight":null,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"999121000525040710000101"},{"hisOrderId":null,"patientId":"999122100055236","patientFname":"Harsha    ","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28","modality":"MR","testId":"10572","testName":"MRI Upper Abdomen","phoneNumber":"9896846541","emailId":"NA","patientWeight":null,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"999121000525040710000102"}]
+2025-04-09 11:05:06 - Save Patient Details API called for PACS 
+2025-04-09 11:05:06 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": "999122100055236",
+        "reqDno": "999121000525040710000101",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "999122100055236",
+        "reqDno": "999121000525040710000102",
+        "status": "0"
+    }
+]
+2025-04-09 11:05:06 - Update Status API called
+2025-04-09 11:05:06 - Response Body:  Status Updated
+2025-04-09 11:05:06 - Fetching data from AIIMS Server is started ::  
+2025-04-09 11:05:06 - Some issue in Fetching data from AIIMS Server
+2025-04-09 11:08:49 - Data sends to pacs is started ::  
+2025-04-09 11:08:49 - Response from API: [{"hisOrderId":null,"patientId":"999122100055236","patientFname":"Harsha    ","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28","modality":"CT","testId":"10107","testName":"B/L Knee AP","phoneNumber":"9896846541","emailId":"NA","patientWeight":null,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"999121000525040710000101"},{"hisOrderId":null,"patientId":"999122100055236","patientFname":"Harsha    ","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28","modality":"MR","testId":"10572","testName":"MRI Upper Abdomen","phoneNumber":"9896846541","emailId":"NA","patientWeight":null,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"999121000525040710000102"}]
+2025-04-09 11:08:49 - Save Patient Details API called for PACS 
+2025-04-09 11:08:50 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": "999122100055236",
+        "reqDno": "999121000525040710000101",
+        "status": "0"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "999122100055236",
+        "reqDno": "999121000525040710000102",
+        "status": "0"
+    }
+]
+2025-04-09 11:08:50 - Update Status API called
+2025-04-09 11:08:50 - Response Body:  Status Updated
+2025-04-09 11:08:50 - Fetching data from AIIMS Server is started ::  
+2025-04-09 11:08:50 - Some issue in Fetching data from AIIMS Server
+2025-04-09 11:11:21 - Data sends to pacs is started ::  
+2025-04-09 11:11:21 - Response from API: [{"hisOrderId":null,"patientId":"999122100055236","patientFname":"Harsha    ","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28","modality":"CT","testId":"10107","testName":"B/L Knee AP","phoneNumber":"9896846541","emailId":"NA","patientWeight":null,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"999121000525040710000101"},{"hisOrderId":null,"patientId":"999122100055236","patientFname":"Harsha    ","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28","modality":"MR","testId":"10572","testName":"MRI Upper Abdomen","phoneNumber":"9896846541","emailId":"NA","patientWeight":null,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"999121000525040710000102"}]
+2025-04-09 11:11:21 - Save Patient Details API called for PACS 
+2025-04-09 11:11:21 - Response Body as JSON Array: [
+    {
+        "hisOrderId": null,
+        "patientId": "999122100055236",
+        "reqDno": "999121000525040710000101",
+        "status": "1"
+    },
+    {
+        "hisOrderId": null,
+        "patientId": "999122100055236",
+        "reqDno": "999121000525040710000102",
+        "status": "1"
+    }
+]
+2025-04-09 11:11:21 - Update Status API called
+2025-04-09 11:11:21 - Response Body:  Status Updated
+2025-04-09 11:11:21 - Fetching data from AIIMS Server is started ::  
+2025-04-09 11:11:21 - Response from AIIMS Server API: [{"hisOrderId":null,"patientId":"999122100055236","patientFname":"Harsha    ","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28 00:00:00","modality":"CT","testId":"10107","testName":"B/L Knee AP","phoneNumber":"9896846541","emailId":"NA","patientWeight":0.0,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"999121000525040710000101"},{"hisOrderId":null,"patientId":"999122100055236","patientFname":"Harsha    ","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28 00:00:00","modality":"MR","testId":"10572","testName":"MRI Upper Abdomen","phoneNumber":"9896846541","emailId":"NA","patientWeight":0.0,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"999121000525040710000102"}]
+2025-04-09 11:11:21 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250409111121||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||999122100055236||-^Harsha    ^-^^_||19760528|M|||||9896846541^NA^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|null|All India Institute of Medical Sciences Raebareli|10107^B/L Knee AP||||||||||||||||||||CT||||||||||null
+2025-04-09 11:11:23 - Stack Trace: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at java.net.Socket.<init>(Socket.java:452)
+	at java.net.Socket.<init>(Socket.java:229)
+	at Server.ServerConnector.sendToServer(ServerConnector.java:29)
+	at Server.AIIMSLAB.sendDataToPacsFromAiimsServer(AIIMSLAB.java:1696)
+	at Server.AIIMSLAB.updateStatusatHIS(AIIMSLAB.java:1553)
+	at Server.AIIMSLAB.savePatientDetailsDb(AIIMSLAB.java:1370)
+	at Server.AIIMSLAB.access$9(AIIMSLAB.java:1291)
+	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:2010)
+	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-04-09 11:11:23 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:53)
+	at Server.AIIMSLAB.sendDataToPacsFromAiimsServer(AIIMSLAB.java:1696)
+	at Server.AIIMSLAB.updateStatusatHIS(AIIMSLAB.java:1553)
+	at Server.AIIMSLAB.savePatientDetailsDb(AIIMSLAB.java:1370)
+	at Server.AIIMSLAB.access$9(AIIMSLAB.java:1291)
+	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:2010)
+	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-04-09 11:26:42 - Data sends to pacs is started ::  
+2025-04-09 11:26:42 - Response from API: [{"hisOrderId":"070425RAD3158","patientId":"999122100055236","patientFname":"Harsha    #-#-","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28","modality":"MR","testId":"10572","testName":"MRI Upper Abdomen","phoneNumber":"9896846541","emailId":"-","patientWeight":null,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"999121000525040710000102"},{"hisOrderId":"070425RAD3158","patientId":"999122100055236","patientFname":"Harsha    #-#-","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28","modality":"CT","testId":"10107","testName":"B/L Knee AP","phoneNumber":"9896846541","emailId":"-","patientWeight":null,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"999121000525040710000101"}]
+2025-04-09 11:26:42 - Save Patient Details API called for PACS 
+2025-04-09 11:26:42 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "070425RAD3158",
+        "patientId": "999122100055236",
+        "reqDno": "999121000525040710000102",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "070425RAD3158",
+        "patientId": "999122100055236",
+        "reqDno": "999121000525040710000101",
+        "status": "1"
+    }
+]
+2025-04-09 11:26:42 - Update Status API called
+2025-04-09 11:26:42 - Response Body:  Status Updated
+2025-04-09 11:26:42 - Fetching data from AIIMS Server is started ::  
+2025-04-09 11:26:42 - Response from AIIMS Server API: [{"hisOrderId":"070425RAD3158","patientId":"999122100055236","patientFname":"Harsha    #-#-","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28 00:00:00","modality":"MR","testId":"10572","testName":"MRI Upper Abdomen","phoneNumber":"9896846541","emailId":"-","patientWeight":0.0,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"999121000525040710000102"},{"hisOrderId":"070425RAD3158","patientId":"999122100055236","patientFname":"Harsha    #-#-","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28 00:00:00","modality":"CT","testId":"10107","testName":"B/L Knee AP","phoneNumber":"9896846541","emailId":"-","patientWeight":0.0,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"999121000525040710000101"}]
+2025-04-09 11:26:42 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250409112642||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||999122100055236||-^Harsha    #-#-^-^^_||19760528|M|||||9896846541^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|070425RAD3158|All India Institute of Medical Sciences Raebareli|10572^MRI Upper Abdomen||||||||||||||||||||MR||||||||||null
+2025-04-09 11:26:44 - Stack Trace: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at java.net.Socket.<init>(Socket.java:452)
+	at java.net.Socket.<init>(Socket.java:229)
+	at Server.ServerConnector.sendToServer(ServerConnector.java:29)
+	at Server.AIIMSLAB.sendDataToPacsFromAiimsServer(AIIMSLAB.java:1696)
+	at Server.AIIMSLAB.updateStatusatHIS(AIIMSLAB.java:1553)
+	at Server.AIIMSLAB.savePatientDetailsDb(AIIMSLAB.java:1370)
+	at Server.AIIMSLAB.access$9(AIIMSLAB.java:1291)
+	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:2010)
+	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-04-09 11:26:44 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:53)
+	at Server.AIIMSLAB.sendDataToPacsFromAiimsServer(AIIMSLAB.java:1696)
+	at Server.AIIMSLAB.updateStatusatHIS(AIIMSLAB.java:1553)
+	at Server.AIIMSLAB.savePatientDetailsDb(AIIMSLAB.java:1370)
+	at Server.AIIMSLAB.access$9(AIIMSLAB.java:1291)
+	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:2010)
+	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2025-04-09 11:27:28 - Data sends to pacs is started ::  
+2025-04-09 11:27:28 - Response from API: []
+2025-04-09 11:27:28 - Sample no or cr no. not found: []
+2025-04-09 11:27:44 - Data sends to pacs is started ::  
+2025-04-09 11:27:44 - Response from API: []
+2025-04-09 11:27:44 - Sample no or cr no. not found: []
+2025-04-09 11:32:04 - Data sends to pacs is started ::  
+2025-04-09 11:32:04 - Response from API: []
+2025-04-09 11:32:04 - Sample no or cr no. not found: []
+2025-04-09 11:41:25 - Fetching data from AIIMS Server is started ::  
+2025-04-09 11:41:25 - Some issue in Fetching data from AIIMS Server
+2025-04-09 11:43:16 - Fetching data from AIIMS Server is started ::  
+2025-04-09 11:43:16 - Some issue in Fetching data from AIIMS Server
+2025-04-09 11:43:56 - Fetching data from AIIMS Server is started ::  
+2025-04-09 11:43:56 - Response from AIIMS Server API: [{"hisOrderId":"070425RAD3158","patientId":"999122100055236","patientFname":"Harsha    #-#-","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28 00:00:00","modality":"MR","testId":"10572","testName":"MRI Upper Abdomen","phoneNumber":"9896846541","emailId":"-","patientWeight":0.0,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"999121000525040710000102"},{"hisOrderId":"070425RAD3158","patientId":"999122100055236","patientFname":"Harsha    #-#-","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Raebareli","patientBirthDate":"1976-05-28 00:00:00","modality":"CT","testId":"10107","testName":"B/L Knee AP","phoneNumber":"9896846541","emailId":"-","patientWeight":0.0,"patientType":null,"patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"999121000525040710000101"}]
+2025-04-09 11:43:56 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250409114356||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||999122100055236||-^Harsha    #-#-^-^^_||19760528|M|||||9896846541^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|070425RAD3158|All India Institute of Medical Sciences Raebareli|10572^MRI Upper Abdomen||||||||||||||||||||MR||||||||||null
+2025-04-09 11:43:58 - Stack Trace: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at java.net.Socket.<init>(Socket.java:452)
+	at java.net.Socket.<init>(Socket.java:229)
+	at Server.ServerConnector.sendToServer(ServerConnector.java:29)
+	at Server.AIIMSLAB.sendDataToPacsFromAiimsServer(AIIMSLAB.java:1697)
+	at Server.AIIMSLAB.access$3(AIIMSLAB.java:1593)
+	at Server.AIIMSLAB$1.actionPerformed(AIIMSLAB.java:363)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-04-09 11:43:58 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
+	at Server.ServerConnector.sendToServer(ServerConnector.java:53)
+	at Server.AIIMSLAB.sendDataToPacsFromAiimsServer(AIIMSLAB.java:1697)
+	at Server.AIIMSLAB.access$3(AIIMSLAB.java:1593)
+	at Server.AIIMSLAB$1.actionPerformed(AIIMSLAB.java:363)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2025-04-09 11:44:30 - Fetching data from AIIMS Server is started ::  
+2025-04-09 11:44:30 - Some issue in Fetching data from AIIMS Server
+2025-04-09 11:45:35 - Fetching data from AIIMS Server is started ::  
+2025-04-09 11:45:35 - Some issue in Fetching data from AIIMS Server

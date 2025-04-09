@@ -1,0 +1,45 @@
+2025-04-08 10:36:05 - Data sends to Mestria is started  for sample no ::  250408MIC00000
+2025-04-08 10:36:05 - Response from API: []
+2025-04-08 10:36:05 - Sample no or cr no. not found: []
+2025-04-08 10:36:05 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-04-08 10:38:19 - Data sends to Mestria is started  for sample no ::  250408MIC00000
+2025-04-08 10:38:19 - Response from API: []
+2025-04-08 10:38:19 - Sample no or cr no. not found: []
+2025-04-08 10:38:41 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-04-08 10:39:34 - Data sends to Mestria is started  for sample no ::  250408MIC00000
+2025-04-08 10:39:34 - Response from API: []
+2025-04-08 10:39:34 - Sample no or cr no. not found: []
+2025-04-08 10:39:34 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-04-08 10:39:36 - Data sends to Mestria is started  for sample no ::  250408MIC00000
+2025-04-08 10:39:36 - Response from API: []
+2025-04-08 10:39:36 - Sample no or cr no. not found: []
+2025-04-08 10:39:36 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-04-08 10:40:03 - Data sends to Mestria is started  for sample no ::  250408MIC00000
+2025-04-08 10:40:03 - Response from API: []
+2025-04-08 10:40:03 - Sample no or cr no. not found: []
+2025-04-08 10:40:13 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-04-08 10:41:28 - Data sends to Mestria is started  for sample no ::  250408MIC00000
+2025-04-08 10:41:28 - Response from API: []
+2025-04-08 10:41:28 - Sample no or cr no. not found: []
+2025-04-08 10:41:31 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-04-08 10:42:33 - Data sends to Mestria is started  for sample no ::  250408MIC00000
+2025-04-08 10:42:34 - Response from API: []
+2025-04-08 10:42:34 - Sample no or cr no. not found: []
+2025-04-08 10:42:34 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-04-08 10:43:29 - Data sends to Mestria is started  for sample no ::  250408MIC00000
+2025-04-08 10:43:29 - Response from API: []
+2025-04-08 10:43:29 - Sample no or cr no. not found: []
+2025-04-08 10:43:29 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 0 and hivnum_sample_no=?
+2025-04-08 10:43:29 - Error: Operation requires a scrollable ResultSet, but this ResultSet is FORWARD_ONLY.
+2025-04-08 10:43:29 - Stack Trace: org.postgresql.util.PSQLException: Operation requires a scrollable ResultSet, but this ResultSet is FORWARD_ONLY.
+	at org.postgresql.jdbc.PgResultSet.checkScrollable(PgResultSet.java:324)
+	at org.postgresql.jdbc.PgResultSet.beforeFirst(PgResultSet.java:387)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:2312)
+	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+

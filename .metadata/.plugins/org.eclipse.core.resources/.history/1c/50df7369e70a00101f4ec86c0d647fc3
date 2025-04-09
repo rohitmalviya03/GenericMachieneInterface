@@ -1,0 +1,237 @@
+2025-03-27 12:31:13 - Data sends to pacs is started ::  
+2025-03-27 12:31:13 - Response from API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:31:13 - Save Patient Details API called for PACS 
+2025-03-27 12:31:13 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "015",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122081110001101",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "003",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122080410000301",
+        "status": "1"
+    }
+]
+2025-03-27 12:31:13 - Update Status API called
+2025-03-27 12:31:13 - Response Body:  Status Updated
+2025-03-27 12:31:13 - Fetching data from AIIMS Server is started ::  
+2025-03-27 12:31:13 - Response from AIIMS Server API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:31:13 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123113||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:31:13 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:31:13 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123113||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:31:15 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123115||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:31:15 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:31:15 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123115||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:32:08 - Data sends to pacs is started ::  
+2025-03-27 12:32:15 - Response from API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:32:15 - Save Patient Details API called for PACS 
+2025-03-27 12:32:15 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "015",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122081110001101",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "003",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122080410000301",
+        "status": "1"
+    }
+]
+2025-03-27 12:32:15 - Update Status API called
+2025-03-27 12:32:15 - Response Body:  Status Updated
+2025-03-27 12:32:15 - Fetching data from AIIMS Server is started ::  
+2025-03-27 12:32:15 - Response from AIIMS Server API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:32:15 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123215||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:32:15 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:32:15 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123215||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:32:19 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123219||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:32:19 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:32:19 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123219||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:33:46 - Data sends to pacs is started ::  
+2025-03-27 12:33:50 - Response from API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:33:50 - Save Patient Details API called for PACS 
+2025-03-27 12:33:50 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "015",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122081110001101",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "003",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122080410000301",
+        "status": "1"
+    }
+]
+2025-03-27 12:33:50 - Update Status API called
+2025-03-27 12:33:50 - Response Body:  Status Updated
+2025-03-27 12:33:50 - Fetching data from AIIMS Server is started ::  
+2025-03-27 12:33:50 - Response from AIIMS Server API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:33:50 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123350||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:33:50 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:33:50 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123350||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:33:52 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123352||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:33:52 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:33:52 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123352||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:35:02 - Data sends to pacs is started ::  
+2025-03-27 12:35:02 - Response from API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:35:02 - Save Patient Details API called for PACS 
+2025-03-27 12:35:02 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "015",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122081110001101",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "003",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122080410000301",
+        "status": "1"
+    }
+]
+2025-03-27 12:35:02 - Update Status API called
+2025-03-27 12:35:02 - Response Body:  Status Updated
+2025-03-27 12:35:02 - Fetching data from AIIMS Server is started ::  
+2025-03-27 12:35:02 - Response from AIIMS Server API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:35:02 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123502||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:35:02 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:35:02 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123502||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:35:04 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123504||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:35:04 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:35:04 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123504||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:35:54 - Data sends to pacs is started ::  
+2025-03-27 12:35:54 - Response from API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:35:54 - Save Patient Details API called for PACS 
+2025-03-27 12:35:54 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "015",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122081110001101",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "003",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122080410000301",
+        "status": "1"
+    }
+]
+2025-03-27 12:35:54 - Update Status API called
+2025-03-27 12:35:54 - Response Body:  Status Updated
+2025-03-27 12:35:54 - Fetching data from AIIMS Server is started ::  
+2025-03-27 12:35:54 - Response from AIIMS Server API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:35:54 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123554||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:35:54 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:35:54 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123554||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:35:55 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123555||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:35:55 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:35:55 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123555||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:36:54 - Data sends to pacs is started ::  
+2025-03-27 12:36:54 - Response from API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:36:54 - Save Patient Details API called for PACS 
+2025-03-27 12:36:55 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "015",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122081110001101",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "003",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122080410000301",
+        "status": "1"
+    }
+]
+2025-03-27 12:36:55 - Update Status API called
+2025-03-27 12:36:55 - Response Body:  Status Updated
+2025-03-27 12:36:55 - Fetching data from AIIMS Server is started ::  
+2025-03-27 12:36:55 - Response from AIIMS Server API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122080410000301"}]
+2025-03-27 12:36:55 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123655||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:36:55 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:36:55 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123655||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:36:56 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123656||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 12:36:56 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 12:36:56 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327123656||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|003|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 14:02:44 - Data sends to pacs is started ::  
+2025-03-27 14:02:44 - Response from API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122080410000301"}]
+2025-03-27 14:02:44 - Save Patient Details API called for PACS 
+2025-03-27 14:02:44 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "015",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122081110001101",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "003",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122080410000301",
+        "status": "1"
+    }
+]
+2025-03-27 14:02:44 - Update Status API called
+2025-03-27 14:02:44 - Response Body:  Status Updated
+2025-03-27 14:02:44 - Fetching data from AIIMS Server is started ::  
+2025-03-27 14:02:44 - Response from AIIMS Server API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122080410000301"}]
+2025-03-27 14:02:44 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327020244||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 14:02:44 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 14:02:44 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327020244||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 14:03:48 - Data sends to pacs is started ::  
+2025-03-27 14:03:48 - Response from API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122080410000301"}]
+2025-03-27 14:03:48 - Save Patient Details API called for PACS 
+2025-03-27 14:03:48 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "015",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122081110001101",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "003",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122080410000301",
+        "status": "1"
+    }
+]
+2025-03-27 14:03:48 - Update Status API called
+2025-03-27 14:03:48 - Response Body:  Status Updated
+2025-03-27 14:03:48 - Fetching data from AIIMS Server is started ::  
+2025-03-27 14:03:48 - Response from AIIMS Server API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122080410000301"}]
+2025-03-27 14:03:48 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327020348||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 14:03:48 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 14:03:48 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327020348||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 14:10:24 - Data sends to pacs is started ::  
+2025-03-27 14:10:24 - Response from API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122080410000301"}]
+2025-03-27 14:10:24 - Save Patient Details API called for PACS 
+2025-03-27 14:10:24 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "015",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122081110001101",
+        "status": "1"
+    },
+    {
+        "hisOrderId": "003",
+        "patientId": "961012000007711",
+        "reqDno": "961011000122080410000301",
+        "status": "1"
+    }
+]
+2025-03-27 14:10:24 - Update Status API called
+2025-03-27 14:10:24 - Response Body:  Status Updated
+2025-03-27 14:10:24 - Fetching data from AIIMS Server is started ::  
+2025-03-27 14:10:24 - Response from AIIMS Server API: [{"hisOrderId":"015","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122081110001101"},{"hisOrderId":"003","patientId":"961012000007711","patientFname":"Sdfsdf    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-03-18 00:00:00","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":0.0,"patientType":"IPD","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":0,"reqDno":"961011000122080410000301"}]
+2025-03-27 14:10:24 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327021024||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 14:10:24 - LIS is Connected on : 10.226.28.174 : 10002
+2025-03-27 14:10:24 - Sent :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250327021024||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000007711||-^Sdfsdf    ^-^^_||19870318|F|||||7543978869^-^nullPV1|1|||||||null^null||||||||||OP||VisitNumberORC|NW|||||||||||nullOBR|1|015|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||null
+2025-03-27 14:10:46 - Data sends to pacs is started ::  
+2025-03-27 14:10:46 - Response from API: []
+2025-03-27 14:10:46 - Sample no or cr no. not found: []

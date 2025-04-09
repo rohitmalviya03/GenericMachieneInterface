@@ -1,0 +1,65 @@
+package Server;
+
+import com.fazecast.jSerialComm.*;
+
+public class DraegerSerialComm {
+    public DraegerSerialComm(String portName, String selectedMachine, int baudRate) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void ConnectDragger(SerialPort serialPort) {
+        SerialPort serialPort2 = SerialPort.getCommPort("COM3"); // Change to your port
+        serialPort.setBaudRate(9600);
+        serialPort.setNumDataBits(8);
+        serialPort.setNumStopBits(1);
+        serialPort.setParity(SerialPort.NO_PARITY);
+
+        if (serialPort.openPort()) {
+            System.out.println("Port opened successfully");
+        } else {
+            System.out.println("Failed to open port");
+            return;
+        }
+
+        try {
+            sendICCCommand(serialPort);
+            readResponse(serialPort);
+
+            sendIDCommand(serialPort);
+            readResponse(serialPort);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            serialPort.closePort();
+            System.out.println("Port closed");
+        }
+    }
+
+    private static void sendICCCommand(SerialPort serialPort) {
+        byte[] iccCommand = {(byte) 0x1B, (byte) 0x51, (byte) 0x36, (byte) 0x43, (byte) 0x0D};
+        serialPort.writeBytes(iccCommand, iccCommand.length);
+        System.out.println("ICC Command sent");
+    }
+
+    private static void sendIDCommand(SerialPort serialPort) {
+        byte[] idCommand = {(byte) 0x1B, (byte) 0x52, (byte) 0x36, (byte) 0x44, (byte) 0x0D};
+        serialPort.writeBytes(idCommand, idCommand.length);
+        System.out.println("ID Command sent");
+    }
+
+    private static void readResponse(SerialPort serialPort) throws InterruptedException {
+        Thread.sleep(100); // Allow time for response
+        byte[] buffer = new byte[256];
+        int numRead = serialPort.readBytes(buffer, buffer.length);
+
+        if (numRead > 0) {
+            System.out.print("Response received: ");
+            for (int i = 0; i < numRead; i++) {
+                System.out.printf("%02X ", buffer[i]);
+            }
+            System.out.println();
+        } else {
+            System.out.println("No response received");
+        }
+    }
+}

@@ -1,0 +1,5 @@
+2025-03-03 16:19:36,275 - ERROR - Connection error: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+2025-03-03 16:23:55,784 - ERROR - Connection error: 'str' object cannot be interpreted as an integer
+2025-03-04 09:48:40,625 - ERROR - Connection error: 'str' object cannot be interpreted as an integer
+2025-03-04 09:50:39,399 - ERROR - Connection error: 'str' object cannot be interpreted as an integer
+2025-03-04 09:52:30,750 - ERROR - Connection error: 'str' object cannot be interpreted as an integer

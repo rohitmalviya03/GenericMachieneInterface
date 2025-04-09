@@ -42,6 +42,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="D:\SerialComm_RXTX_Revolution"/>
 			<item value="C:\Users\rohitmalviya\Downloads\hl7_sdk_v3.1"/>
 			<item value="C:\Users\rohitmalviya\Desktop\AIMMS JD ICU EQP DATA\PGI-InteraOP-main"/>
 			<item value="C:\Users\rohitmalviya\Desktop\AIMMS JD ICU EQP DATA\PGI-InteraOP-main\PGI-InteraOP-main"/>

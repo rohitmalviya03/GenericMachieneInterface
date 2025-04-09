@@ -1,20 +1,0 @@
-2025-01-28 17:24:28 - Response: []
-2025-01-28 17:24:28 - Save Patient Details API called
-2025-01-28 17:24:28 - Response Body as JSON Array: []
-2025-01-28 17:24:28 - Update Status API called
-2025-01-28 17:24:28 - Response Body:  Status Updated
-2025-01-28 17:24:28 - Data sends to pacs is started ::  
-2025-01-28 17:24:28 - Query  : SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;
-2025-01-28 17:24:29 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250128052429||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961011800011051||-^Prachi    ^-^^_||19970926|F|||||9876542102^-^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|005|All India Institute of Medical Sciences Patna|12807^echonew||||||||||||||||||||-1||||||||||-
-2025-01-28 17:24:31 - Error: Error connecting to server: Connection refused: connect
-2025-01-28 17:24:31 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1313)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-

@@ -49,6 +49,10 @@ public class orderMain {
    /**
     * Example for how to send messages out
     */
+	
+	  static Map res = ReadPropertyFile.getPropertyValues();
+	  	static int result_port =  Integer.parseInt((String) res.get("server_port"));
+	  	
    public static void main(String[] args) throws Exception {
 
       /*
@@ -56,8 +60,9 @@ public class orderMain {
        * messages. The following section of code establishes a server listening
        * on port 1011 for new connections.
        */
-      int port = 10002; // The port to listen on
+      int port = result_port; // The port to listen on
      // int portB=10001;
+    
       boolean useTls = false; // Should we use TLS/SSL?
       HapiContext context = new DefaultHapiContext();
      HL7Service server = context.newServer(port, useTls);

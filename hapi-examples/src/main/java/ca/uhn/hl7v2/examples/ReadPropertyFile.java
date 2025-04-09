@@ -1,5 +1,7 @@
 package ca.uhn.hl7v2.examples;
 
+
+
 import java.io.InputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -17,10 +19,10 @@ public class ReadPropertyFile
     
     static {
         OS_NAME = System.getProperties().getProperty("os.name");
-        ReadPropertyFile.windowsPath = "c:/TcpFilessys/property";
+       // ReadPropertyFile.windowsPath = "c:/TcpFilessys/property";
         //ReadPropertyFile.linuxPath = "/opt/TcpFiles/property";
-        //ReadPropertyFile.windowsPath="c:/TcpFiles/property";  //location of Prop file in System 
-       // ReadPropertyFile.windowsPath="C:/Users/hackb/OneDrive/Desktop/";  //location of Prop file in System 
+       // ReadPropertyFile.windowsPath="c:/TcpFiles/property";  //location of Prop file in System 
+       // ReadPropertyFile.windowsPath="C:/Users/hab/OneDrive/Desktop/";  //location of Prop file in System 
           
         
     }
@@ -35,54 +37,64 @@ public class ReadPropertyFile
         final String uid = "uid";
         final String formatid = "formatid";
         final String pr="pr";
-        final String orderip="orderip";
-        final String resultip="resultip";
-        final String orderport="orderport";
-        final String machineip="machineip";
-        final String machineport="machineport";
-        final String orderpacketdata="orderpacketdata";
+        final String server_port="server_port";
+        final String httpcheck="httpcheck";  
+        
+        final String portname="portname";
+        final String server_ip="server_ip";
         
         
+        final String PACS_SERVER_IP = "PACS_SERVER_IP";
+        final String PACS_SERVER_PORT ="PACS_SERVER_PORT";
+        final String PACS_LISTNER_PORT = "PACS_LISTNER_PORT";
+        final String API_URL = "API_URL";
         
-        String path2="";
+        final String db_url="db_url";
+        
+        final String db_user="db_user";
+        final String db_pwd="db_pwd";
+        final String result_port="result_port";  
+        
+        path="config//read.properties";
         //final String local_port="local_port";
-        if (ReadPropertyFile.OS_NAME.startsWith("Win")) {
+      /*  if (ReadPropertyFile.OS_NAME.startsWith("Win")) {
             path = ReadPropertyFile.windowsPath;
-            path2=ReadPropertyFile.windowsPath;;
-            
         }
         else {
             path = ReadPropertyFile.linuxPath;
         }
         path = String.valueOf(path) + "/read.properties";
-        path2=String.valueOf(path2) + "/orderpacket.properties";;
-        
+       */
         try {
             Throwable t = null;
             try {
                 final InputStream input = new FileInputStream(path);
-                final InputStream input2 = new FileInputStream(path2);
-                
                 try {
                     final Properties prop = new Properties();
-                    final Properties prop2 = new Properties();
                     prop.load(input);
-                    prop2.load(input2);
-                    
                     ReadPropertyFile.propertyMap.put(ip, prop.getProperty(ip));
                     ReadPropertyFile.propertyMap.put(port, prop.getProperty(port));
                     ReadPropertyFile.propertyMap.put(eqp, prop.getProperty(eqp));
                     ReadPropertyFile.propertyMap.put(hos, prop.getProperty(hos));
                     ReadPropertyFile.propertyMap.put(uid, prop.getProperty(uid));
                     ReadPropertyFile.propertyMap.put(formatid, prop.getProperty(formatid));
-                    ReadPropertyFile.propertyMap.put(pr, prop.getProperty(pr));
-                    ReadPropertyFile.propertyMap.put(orderip, prop.getProperty(orderip));
-                    ReadPropertyFile.propertyMap.put(resultip, prop.getProperty(resultip));
-                    ReadPropertyFile.propertyMap.put(orderport, prop.getProperty(orderport)); 
-                    ReadPropertyFile.propertyMap.put(machineip, prop.getProperty(machineip)); 
-                    ReadPropertyFile.propertyMap.put(machineport, prop.getProperty(machineport)); 
-                
-                    ReadPropertyFile.propertyMap.put(orderpacketdata, prop2.getProperty(orderpacketdata)); 
+                   // ReadPropertyFile.propertyMap.put(pr, prop.getProperty(pr));
+                    ReadPropertyFile.propertyMap.put(server_port, prop.getProperty(server_port));
+                    ReadPropertyFile.propertyMap.put(portname, prop.getProperty(portname));
+                    
+                    ReadPropertyFile.propertyMap.put(httpcheck, prop.getProperty(httpcheck));
+                    ReadPropertyFile.propertyMap.put(server_ip, prop.getProperty(server_ip));
+                    
+                    ReadPropertyFile.propertyMap.put(db_url, prop.getProperty(db_url));
+                    ReadPropertyFile.propertyMap.put(db_user, prop.getProperty(db_user));
+                    ReadPropertyFile.propertyMap.put(db_pwd, prop.getProperty(db_pwd));
+                    ReadPropertyFile.propertyMap.put(result_port, prop.getProperty(result_port));
+                    
+                    ReadPropertyFile.propertyMap.put(PACS_SERVER_IP, prop.getProperty(PACS_SERVER_IP));
+                    ReadPropertyFile.propertyMap.put(PACS_SERVER_PORT, prop.getProperty(PACS_SERVER_PORT));
+                    ReadPropertyFile.propertyMap.put(PACS_LISTNER_PORT, prop.getProperty(PACS_LISTNER_PORT));
+                    ReadPropertyFile.propertyMap.put(API_URL, prop.getProperty(API_URL));
+                    
                     
                 }
                 finally {

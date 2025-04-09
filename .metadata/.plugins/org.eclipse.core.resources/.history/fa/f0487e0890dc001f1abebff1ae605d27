@@ -1,34 +1,0 @@
-2025-01-27 14:14:01 - Data sends to Mestria is started  for sample no ::  SN987654
-2025-01-27 14:14:01 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1 and hivnum_sample_no=?
-2025-01-27 14:14:01 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250127141401||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||John^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN987654SPM|1|SN987654||Blood^99BMx|||^^|^^|||P^Patient^||||||20250127141401|SAC||||24008676 ORC|NW||||||||20250127141401TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-01-27 14:14:03 - Error: Error connecting to server: Connection refused: connect
-2025-01-27 14:14:03 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1473)
-	at Server.AIIMSLAB$7.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-27 14:14:26 - Data sends to Mestria is started  for sample no ::  SN987654
-2025-01-27 14:14:26 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1 and hivnum_sample_no=?
-2025-01-27 14:14:26 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250127141426||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||John^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN987654SPM|1|SN987654||Blood^99BMx|||^^|^^|||P^Patient^||||||20250127141426|SAC||||24008676 ORC|NW||||||||20250127141426TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-01-27 14:14:26 - Updated status to 2 for ID: SN987654
-2025-01-27 14:14:26 - HL 7 :  MSH|^~\&|LIS|LAB|myla|BMX|20250127141426||OML^O33^OML_O33|MSG-20241007-101200-0377|P|2.5.1|||NE|AL||UNICODE UTF-8 PID|||CR123456||John^.^^^^^nill|CDAC TEST2|19681025|M|||nill^^nill^^nill^nill|||||S|PV1||E|GW-NEW CUBICAL WARD-J^8-FCGW-J-29^^ AIIMS^^^^^8-FCGW-J-29^||||^||||||||||||SN987654SPM|1|SN987654||Blood^99BMx|||^^|^^|||P^Patient^||||||20250127141426|SAC||||24008676 ORC|NW||||||||20250127141426TQ1|||||||||R^^OBR|1|714647||SU^SU^99BMx||||||^^||||||^|123456780
-2025-01-27 14:14:26 - Updated status to 2 for ID: SN987654
-2025-01-27 14:43:13 - Response: []
-2025-01-27 14:43:53 - Save Patient Details API called
-2025-01-27 14:44:32 - Response Body as JSON Array: []
-2025-01-27 14:44:46 - Update Status API called
-2025-01-27 14:44:55 - Data sends to pacs is started ::  
-2025-01-27 14:45:51 - Query  : SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;
-2025-01-27 14:50:00 - Response: []
-2025-01-27 14:50:00 - Save Patient Details API called
-2025-01-27 14:50:00 - Response Body as JSON Array: []
-2025-01-27 14:50:00 - Update Status API called
-2025-01-27 14:50:00 - Response Body:  Status Updated
-2025-01-27 14:50:00 - Data sends to pacs is started ::  
-2025-01-27 14:50:01 - Query  : SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;

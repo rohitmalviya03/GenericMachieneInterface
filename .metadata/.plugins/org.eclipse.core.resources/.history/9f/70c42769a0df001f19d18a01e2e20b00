@@ -1,449 +1,0 @@
-2025-01-29 10:50:36 - Response: []
-2025-01-29 10:50:45 - Save Patient Details API called
-2025-01-29 10:50:45 - Response Body as JSON Array: []
-2025-01-29 10:50:45 - Update Status API called
-2025-01-29 10:50:45 - Response Body:  Status Updated
-2025-01-29 10:50:45 - Data sends to pacs is started ::  
-2025-01-29 10:51:56 - Query  : SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;
-2025-01-29 10:54:13 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250129105407||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961011800011051||-^Prachi    ^-^^_||19970926|F|||||9876542102^-^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|005|All India Institute of Medical Sciences Patna|12807^echonew||||||||||||||||||||-1||||||||||-
-2025-01-29 10:54:18 - Error: Error connecting to server: Connection refused: connect
-2025-01-29 10:54:20 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1322)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 10:13:51 - Data sends to Mestria is started  for sample no ::  756757
-2025-01-31 10:13:51 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1 and hivnum_sample_no=?
-2025-01-31 10:14:16 - Data sends to Mestria is started  for sample no ::  756757
-2025-01-31 10:14:16 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1 and hivnum_sample_no=?
-2025-01-31 10:15:19 - Data sends to pacs is started ::  
-2025-01-31 10:21:08 - Data sends to Mestria is started  for sample no ::  435345
-2025-01-31 10:21:20 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1 and hivnum_sample_no=?
-2025-01-31 10:21:36 - Data sends to Mestria is started  for sample no ::  435345
-2025-01-31 10:21:48 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1 and hivnum_sample_no=?
-2025-01-31 10:23:35 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1 and hivnum_sample_no=?
-2025-01-31 10:23:43 - Data sends to Mestria is started  for sample no ::  234234
-2025-01-31 10:23:43 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, gstr_gender_code, hrgstr_age, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  microbiology_pat_sample_data WHERE hivnum_sam_status_code = 1 and hivnum_sample_no=?
-2025-01-31 10:59:28 - Data sends to pacs is started ::  
-2025-01-31 10:59:46 - Data sends to pacs is started ::  
-2025-01-31 11:00:10 - Data sends to pacs is started ::  
-2025-01-31 11:00:35 - Error: The connection attempt failed.
-2025-01-31 11:00:35 - Stack Trace: org.postgresql.util.PSQLException: The connection attempt failed.
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:364)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273)
-	at org.postgresql.Driver.makeConnection(Driver.java:446)
-	at org.postgresql.Driver.connect(Driver.java:298)
-	at java.sql.DriverManager.getConnection(DriverManager.java:664)
-	at java.sql.DriverManager.getConnection(DriverManager.java:247)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1422)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-Caused by: java.net.SocketTimeoutException: connect timed out
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
-	at java.net.Socket.connect(Socket.java:607)
-	at org.postgresql.core.PGStream.createSocket(PGStream.java:260)
-	at org.postgresql.core.PGStream.<init>(PGStream.java:121)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:140)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:268)
-	... 14 more
-
-2025-01-31 11:00:52 - Data sends to pacs is started ::  
-2025-01-31 11:02:05 - Data sends to pacs is started ::  
-2025-01-31 11:02:10 - API call failed. Response code: 500
-2025-01-31 11:02:17 - API call failed. Response code: 500
-2025-01-31 11:02:20 - Error: The connection attempt failed.
-2025-01-31 11:02:20 - Stack Trace: org.postgresql.util.PSQLException: The connection attempt failed.
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:364)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273)
-	at org.postgresql.Driver.makeConnection(Driver.java:446)
-	at org.postgresql.Driver.connect(Driver.java:298)
-	at java.sql.DriverManager.getConnection(DriverManager.java:664)
-	at java.sql.DriverManager.getConnection(DriverManager.java:247)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1424)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-Caused by: java.net.SocketTimeoutException: connect timed out
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
-	at java.net.Socket.connect(Socket.java:607)
-	at org.postgresql.core.PGStream.createSocket(PGStream.java:260)
-	at org.postgresql.core.PGStream.<init>(PGStream.java:121)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:140)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:268)
-	... 14 more
-
-2025-01-31 11:02:27 - Error: The connection attempt failed.
-2025-01-31 11:02:27 - Stack Trace: org.postgresql.util.PSQLException: The connection attempt failed.
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:364)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273)
-	at org.postgresql.Driver.makeConnection(Driver.java:446)
-	at org.postgresql.Driver.connect(Driver.java:298)
-	at java.sql.DriverManager.getConnection(DriverManager.java:664)
-	at java.sql.DriverManager.getConnection(DriverManager.java:247)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1424)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-Caused by: java.net.SocketTimeoutException: connect timed out
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
-	at java.net.Socket.connect(Socket.java:607)
-	at org.postgresql.core.PGStream.createSocket(PGStream.java:260)
-	at org.postgresql.core.PGStream.<init>(PGStream.java:121)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:140)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:268)
-	... 14 more
-
-2025-01-31 11:11:38 - Data sends to pacs is started ::  
-2025-01-31 11:22:37 - Data sends to pacs is started ::  
-2025-01-31 11:22:45 - Response from API: [{"hisOrderId":"018","patientId":"961012100001086","patientFname":"Prachi    ","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-11-11","modality":"MR","testId":"10007","testName":"Chikungunia","phoneNumber":"7543978869","emailId":"NA","patientWeight":null,"patientType":"Emergency","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122040410000401"},{"hisOrderId":"017","patientId":"961012100001086","patientFname":"Prachi    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"2022-08-03","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"NA","patientWeight":null,"patientType":"Emergency","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000123022010000801"},{"hisOrderId":"9","patientId":"961012100001086","patientFname":"Prachi    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"2022-08-03","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"NA","patientWeight":null,"patientType":"Emergency","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011001623022710000101"},{"hisOrderId":"001","patientId":"961012100001086","patientFname":"Prachi    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"2022-08-03","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"6392686295","emailId":"-","patientWeight":null,"patientType":"Emergency","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000122080910000101"},{"hisOrderId":"1","patientId":"961012100001086","patientFname":"Prachi    ","patientMname":"-","patientLname":"-","patientGender":"F","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"2022-08-03","modality":"-1","testId":"12867","testName":"Bone Marrow Aspiration Report Test","phoneNumber":"7543978869","emailId":"-","patientWeight":null,"patientType":"Emergency","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011001622112210000101"}]
-2025-01-31 11:22:45 - Save Patient Details API called
-2025-01-31 11:22:47 - Response Body as JSON Array: [
-    {
-        "hisOrderId": "018",
-        "patientId": "961012100001086",
-        "reqDno": "961011000122040410000401",
-        "status": "1"
-    },
-    {
-        "hisOrderId": "017",
-        "patientId": "961012100001086",
-        "reqDno": "961011000123022010000801",
-        "status": "1"
-    },
-    {
-        "hisOrderId": "9",
-        "patientId": "961012100001086",
-        "reqDno": "961011001623022710000101",
-        "status": "1"
-    },
-    {
-        "hisOrderId": "001",
-        "patientId": "961012100001086",
-        "reqDno": "961011000122080910000101",
-        "status": "1"
-    },
-    {
-        "hisOrderId": "1",
-        "patientId": "961012100001086",
-        "reqDno": "961011001622112210000101",
-        "status": "1"
-    }
-]
-2025-01-31 11:22:47 - Update Status API called
-2025-01-31 11:22:47 - Response Body:  Status Updated
-2025-01-31 11:22:47 - Data sends to pacs is started ::  
-2025-01-31 11:22:47 - Query  : SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;
-2025-01-31 11:22:47 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250131112247||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012100001086||-^Prachi    ^-^^_||19871111|M|||||7543978869^NA^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|018|All India Institute of Medical Sciences Patna|10007^Chikungunia||||||||||||||||||||MR||||||||||-
-2025-01-31 11:22:47 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250131112247||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012100001086||-^Prachi    ^-^^_||20220803|F|||||7543978869^NA^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|017|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||-
-2025-01-31 11:22:49 - Error: Error connecting to server: Connection refused: connect
-2025-01-31 11:22:49 - Error: Error connecting to server: Connection refused: connect
-2025-01-31 11:22:49 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1322)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 11:22:49 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1471)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 11:26:16 - Data sends to pacs is started ::  
-2025-01-31 11:26:16 - Response from API: []
-2025-01-31 11:26:16 - Save Patient Details API called
-2025-01-31 11:26:16 - Response Body as JSON Array: []
-2025-01-31 11:26:16 - Update Status API called
-2025-01-31 11:26:16 - Response Body:  Status Updated
-2025-01-31 11:26:16 - Data sends to pacs is started ::  
-2025-01-31 11:26:16 - Query  : SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;
-2025-01-31 11:26:16 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250131112616||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012100001086||-^Prachi    ^-^^_||20220803|F|||||7543978869^NA^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|017|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||-
-2025-01-31 11:26:18 - Error: Error connecting to server: Connection refused: connect
-2025-01-31 11:26:18 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1322)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 11:26:51 - Data sends to pacs is started ::  
-2025-01-31 11:27:18 - Response from API: []
-2025-01-31 11:27:22 - Save Patient Details API called
-2025-01-31 11:27:23 - Response Body as JSON Array: []
-2025-01-31 11:27:23 - Update Status API called
-2025-01-31 11:27:23 - Response Body:  Status Updated
-2025-01-31 11:27:23 - Data sends to pacs is started ::  
-2025-01-31 11:28:44 - Data sends to pacs is started ::  
-2025-01-31 11:28:44 - Response from API: []
-2025-01-31 11:28:44 - Save Patient Details API called
-2025-01-31 11:28:44 - Response Body as JSON Array: []
-2025-01-31 11:28:44 - Update Status API called
-2025-01-31 11:28:44 - Response Body:  Status Updated
-2025-01-31 11:28:44 - Data sends to pacs is started ::  
-2025-01-31 11:28:45 - Query  : SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;
-2025-01-31 11:28:45 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250131112845||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012100001086||-^Prachi    ^-^^_||20220803|F|||||7543978869^NA^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|017|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||-
-2025-01-31 11:28:47 - Error: Error connecting to server: Connection refused: connect
-2025-01-31 11:28:47 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1322)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 11:29:37 - Data sends to pacs is started ::  
-2025-01-31 11:29:37 - Response from API: []
-2025-01-31 11:29:37 - Save Patient Details API called
-2025-01-31 11:29:37 - Response Body as JSON Array: []
-2025-01-31 11:29:37 - Update Status API called
-2025-01-31 11:29:37 - Response Body:  Status Updated
-2025-01-31 11:29:37 - Data sends to pacs is started ::  
-2025-01-31 11:29:37 - Query  : SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;
-2025-01-31 11:29:37 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250131112937||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012100001086||-^Prachi    ^-^^_||20220803|F|||||7543978869^NA^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|017|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||-
-2025-01-31 11:29:39 - Error: Error connecting to server: Connection refused: connect
-2025-01-31 11:29:39 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1322)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 11:30:13 - Data sends to pacs is started ::  
-2025-01-31 11:30:34 - Response from API: []
-2025-01-31 11:30:40 - Save Patient Details API called
-2025-01-31 11:30:40 - Response Body as JSON Array: []
-2025-01-31 11:30:40 - Update Status API called
-2025-01-31 11:30:40 - Response Body:  Status Updated
-2025-01-31 11:30:40 - Data sends to pacs is started ::  
-2025-01-31 11:34:05 - Data sends to pacs is started ::  
-2025-01-31 11:34:05 - API call failed. Response code: 500
-2025-01-31 11:34:07 - Error: ERROR: column "re5343" does not exist
-  Position: 483
-2025-01-31 11:34:07 - Stack Trace: org.postgresql.util.PSQLException: ERROR: column "re5343" does not exist
-  Position: 483
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2733)
-	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2420)
-	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
-	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:517)
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:434)
-	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
-	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1425)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 11:34:36 - Data sends to pacs is started ::  
-2025-01-31 11:34:36 - Response from API: []
-2025-01-31 11:34:36 - Save Patient Details API called
-2025-01-31 11:34:36 - Response Body as JSON Array: []
-2025-01-31 11:34:36 - Update Status API called
-2025-01-31 11:34:36 - Response Body:  Status Updated
-2025-01-31 11:34:36 - Data sends to pacs is started ::  
-2025-01-31 11:34:36 - Query  : SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;
-2025-01-31 11:34:36 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250131113436||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012100001086||-^Prachi    ^-^^_||20220803|F|||||7543978869^NA^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|017|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||-
-2025-01-31 11:34:38 - Error: Error connecting to server: Connection refused: connect
-2025-01-31 11:34:38 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1322)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 11:35:24 - Data sends to pacs is started ::  
-2025-01-31 11:35:38 - Response from API: []
-2025-01-31 11:36:13 - Response from API: []
-2025-01-31 11:38:35 - Response from API: []
-2025-01-31 11:39:43 - Response from API: []
-2025-01-31 11:39:51 - Sample no or cr no. not found: []
-2025-01-31 11:40:30 - Data sends to pacs is started ::  
-2025-01-31 11:40:30 - Response from API: []
-2025-01-31 11:40:30 - Sample no or cr no. not found: []
-2025-01-31 11:40:30 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250131114030||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012100001086||-^Prachi    ^-^^_||20220803|F|||||7543978869^NA^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|017|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||-
-2025-01-31 11:40:32 - Error: Error connecting to server: Connection refused: connect
-2025-01-31 11:40:32 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1465)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 11:41:26 - Data sends to pacs is started ::  
-2025-01-31 11:41:26 - Response from API: []
-2025-01-31 11:41:26 - Sample no or cr no. not found: []
-2025-01-31 11:41:26 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250131114126||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012100001086||-^Prachi    ^-^^_||20220803|F|||||7543978869^NA^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|017|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||-
-2025-01-31 11:41:28 - Error: Error connecting to server: Connection refused: connect
-2025-01-31 11:41:28 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1465)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 11:41:40 - Data sends to pacs is started ::  
-2025-01-31 11:43:08 - Response from API: []
-2025-01-31 11:43:08 - Sample no or cr no. not found: []
-2025-01-31 11:43:08 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250131114308||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012100001086||-^Prachi    ^-^^_||20220803|F|||||7543978869^NA^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|017|All India Institute of Medical Sciences Patna|12867^Bone Marrow Aspiration Report Test||||||||||||||||||||-1||||||||||-
-2025-01-31 11:43:09 - Data sends to pacs is started ::  
-2025-01-31 11:43:10 - Error: Error connecting to server: Connection refused: connect
-2025-01-31 11:43:10 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1465)
-	at Server.AIIMSLAB$5.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 11:43:14 - Response from API: []
-2025-01-31 11:43:14 - Sample no or cr no. not found: []
-2025-01-31 11:43:24 - Data sends to pacs is started ::  
-2025-01-31 11:43:33 - Response from API: []
-2025-01-31 11:43:33 - Sample no or cr no. not found: []
-2025-01-31 11:46:37 - Data sends to pacs is started ::  
-2025-01-31 11:46:37 - Response from API: [{"hisOrderId":"002","patientId":"961012000003880","patientFname":"Rajkumar   Singh","patientMname":"-","patientLname":"-","patientGender":"M","centerId":"All India Institute of Medical Sciences Patna","patientBirthDate":"1987-02-06","modality":"MR","testId":"10007","testName":"Chikungunia","phoneNumber":"NA","emailId":"NA","patientWeight":null,"patientType":"Emergency","patientHistory":null,"referringPhysicianId":null,"referringPhysicianName":null,"radiologistId":null,"technicianId":null,"pacsOrderStatus":null,"reqDno":"961011000120102610000103"}]
-2025-01-31 11:46:37 - Save Patient Details API called
-2025-01-31 11:46:37 - Response Body as JSON Array: [{
-    "hisOrderId": "002",
-    "patientId": "961012000003880",
-    "reqDno": "961011000120102610000103",
-    "status": "1"
-}]
-2025-01-31 11:46:37 - Update Status API called
-2025-01-31 11:46:37 - Response Body:  Status Updated
-2025-01-31 11:46:37 - Data sends to pacs is started ::  
-2025-01-31 11:46:37 - Query  : SELECT his_order_id, patient_id, patient_fname, patient_mname, patient_lname, patient_gender, center_id, TO_CHAR(patient_birth_date, 'YYYY-MM-DD') AS patient_birth_date, modality, test_id, test_name, phone_number, email_id, patient_weight, patient_type, patient_history, referring_physician_id, referring_physician_name, radiologist_id, technician_id, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM pacs_patient_sample_data where pacs_order_status=1;
-2025-01-31 11:46:38 - HL 7 :  MSH|^~\&|HIS_APP|HIS_FACILITY|PACS_APP|PACS_FACILITY|20250131114638||ORM^O01|MsgCtrlId_ORM|P|2.3PID|1||961012000003880||-^Rajkumar   Singh^-^^_||19870206|M|||||NA^NA^-PV1|1|||||||-^-||||||||||OP||VisitNumberORC|NW|||||||||||-OBR|1|002|All India Institute of Medical Sciences Patna|10007^Chikungunia||||||||||||||||||||MR||||||||||-
-2025-01-31 11:46:40 - Error: Error connecting to server: Connection refused: connect
-2025-01-31 11:46:40 - Stack Trace: java.lang.Exception: Error connecting to server: Connection refused: connect
-	at Server.ServerConnector.sendToServer(ServerConnector.java:49)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1322)
-	at Server.AIIMSLAB$4.doInBackground(AIIMSLAB.java:1)
-	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at javax.swing.SwingWorker.run(SwingWorker.java:334)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:750)
-
-2025-01-31 12:23:27 - Failed to fetch data. Response Code: 500
-2025-01-31 12:23:27 - Something went wrong.. Internal Server Error
-2025-01-31 12:23:27 - Stack Trace: java.lang.NullPointerException
-	at Server.AIIMSLAB.fetchPendingOrders(AIIMSLAB.java:1067)
-	at Server.AIIMSLAB.lambda$4(AIIMSLAB.java:402)
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:262)
-	at java.awt.Component.processMouseEvent(Component.java:6539)
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
-	at java.awt.Component.processEvent(Component.java:6304)
-	at java.awt.Container.processEvent(Container.java:2239)
-	at java.awt.Component.dispatchEventImpl(Component.java:4889)
-	at java.awt.Container.dispatchEventImpl(Container.java:2297)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
-	at java.awt.Container.dispatchEventImpl(Container.java:2283)
-	at java.awt.Window.dispatchEventImpl(Window.java:2746)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
-	at java.awt.EventQueue$4.run(EventQueue.java:733)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-

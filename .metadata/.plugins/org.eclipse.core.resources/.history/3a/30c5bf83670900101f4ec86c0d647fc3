@@ -1,0 +1,222 @@
+package application.resource;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import application.resource.*;
+
+public class API {
+	
+	static String path_HIMS_LOG = "";
+	static String currentDirectory;
+	
+	static String getSampleDetail(String sampleId) {
+
+		System.out.println("Inside getSampleDtl (type2 query) ");
+
+		Map res = ReadPropertyFile.getPropertyValues();
+		final String ip = (String) res.get("ip");
+		System.out.println("ip : "+ip);
+
+		String eqp = (String) res.get("eqp");
+		String hos = (String) res.get("hos");
+		String uid = (String) res.get("uid");
+		String formatid = (String) res.get("formatid");
+		
+		String line = null;
+
+		String url = "https://" + ip + "/SupportServices/service/app/testdtl?hospcode=" + hos + "&samplecode="
+				+ sampleId + "&eqpid=" + eqp;
+
+		try {
+			SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+			TrustManager[] trust_mgr = get_trust_mgr();
+			ssl_ctx.init(null, trust_mgr, new SecureRandom());
+			HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+			URL obj = new URL(url);
+			HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+			con.setHostnameVerifier(new HostnameVerifier() {
+				public boolean verify(String host, SSLSession sess) {
+					if (host.equals(ip))
+						return true;
+					return false;
+				}
+			});
+			con.setRequestMethod("GET");
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.flush();
+			wr.close();
+			System.out.println("\nSending 'GET' request to URL : " + url);
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			StringBuffer response = new StringBuffer();
+			String inputLine;
+			while ((inputLine = in.readLine()) != null)
+				response.append(inputLine);
+			System.out.println("response " + response.toString());
+
+			String str = response.toString();
+			System.out.println("String object: " + str);
+//			str = "{\"TestData\":\"FT41DOSE;FT31DOSE;TSH3UL1DOSE;#Sameer    # 12 Yr    #M#2007OP005#\"}";
+			line = (((str.replace("{", "")).replace("\"", "")).replace("}", "")).trim();
+			System.out.print("  new line---------------- " + line);
+
+		} catch (Exception s) {
+			s.printStackTrace();
+		}
+		return line;
+	}
+	
+	public static String insertSampleDtl(String TestCode, String TestValue, String sam) {
+
+		System.out.println("Inside insertSampleDtl (type1/type5 query) ");
+
+		System.out.println(
+				"Sending TestCode " + TestCode + "  " + "  TestValue  " + TestValue + "  " + "  SampleID  " + sam);
+		Map res = ReadPropertyFile.getPropertyValues();
+
+		final String ip = (String) res.get("ip");
+		final String port = (String) res.get("port");
+		final String eqp = (String) res.get("eqp");
+		final String hos = (String) res.get("hos");
+		final String uid = (String) res.get("uid");
+
+		String url = "";
+		sam = sam.trim();
+		TestCode = TestCode.trim();
+		TestValue = TestValue.trim(); // "NULL"
+		try {
+			TestCode = URLEncoder.encode( TestCode, "UTF-8" );
+			TestValue = URLEncoder.encode( TestValue, "UTF-8" );
+		}catch(UnsupportedEncodingException e) {
+			
+		}
+//		TestCode = (((((((TestCode.toString().trim()).replace("%", "%25").replace("#", "%23"))).replace("(", "%28"))
+//				.replace(")", "%29")).replace(" ", "%20")).replace("+", "%2B")).trim();
+//		TestValue = ((((((TestValue.toString().trim())).replace("%", "%25").replace("#", "%23")).replace(" ", "%20")))
+//				.replace("+", "%2B")).trim();
+
+//		System.out.println("In HERE ip : " + ip);
+//		System.out.println("In HERE port : " + port);
+//		System.out.println("In HERE eqp : " + eqp);
+//		System.out.println("In HERE hos : " + hos);
+//		System.out.println("In HERE uid : " + uid);
+//		System.out.println("In HERE tval : " + TestValue);
+//		System.out.println("In HERE tcode : " + TestCode);
+//   
+		url = "https://" + ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
+				+ "&hos=" + hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;		
+		url = url.replaceAll("\\s", "");
+		System.out.println("In HERE url " + url);
+		StringBuffer response = new StringBuffer();
+		try {
+
+			SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+			TrustManager[] trust_mgr = get_trust_mgr();
+			ssl_ctx.init(null, // key manager
+					trust_mgr, // trust manager
+					new SecureRandom()); // random number generator
+			HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+
+			URL obj = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+			((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+				public boolean verify(String host, SSLSession sess) {
+					if (host.equals(ip))
+						return true;
+					else
+						return false;
+				}
+			});
+
+			con.setRequestMethod("GET");
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.flush();
+			wr.close();
+
+			System.out.println("\nSending 'GET' request to URL : " + url);
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			System.out.println("response--:" + response.toString());
+
+			System.out.println("responce :1+" + con.getResponseMessage());
+			
+			Path currentRelativePath = Paths.get("");
+			currentDirectory = currentRelativePath.toAbsolutePath().toString();
+			System.out.println("Current absolute path is: " + currentDirectory);
+
+			String pathLogDIR_HIMSLog = String.valueOf(currentDirectory) + "\\HIMSLog";
+			path_HIMS_LOG = String.valueOf(pathLogDIR_HIMSLog) + "\\HIMS_log.txt";
+			FileWriter fw11 = new FileWriter(path_HIMS_LOG, true);
+			BufferedWriter bw = new BufferedWriter(fw11);
+			bw.write("\n");
+			bw.write("Sample Number : " + sam);
+			bw.write("\n");
+			bw.write("Test Code : " + TestCode);
+			bw.write("\n");
+			bw.write("Test Value : " + TestValue);
+			bw.write("\n");
+			bw.write(url);
+			bw.write("\n");
+			bw.write(response.toString());
+			bw.write("\n");
+			bw.write("----------------------------------------------------------");
+			bw.flush();
+			bw.close();
+
+			in.close();
+		} catch (Exception s) {
+			s.printStackTrace();
+		}
+		return (response.toString());
+
+	}
+		
+		private static TrustManager[] get_trust_mgr() {
+			TrustManager[] certs = { new X509TrustManager() {
+				public X509Certificate[] getAcceptedIssuers() {
+					return null;
+				}
+
+				public void checkClientTrusted(X509Certificate[] certs, String t) {
+				}
+
+				public void checkServerTrusted(X509Certificate[] certs, String t) {
+				}
+			} };
+			return certs;
+		}
+
+}

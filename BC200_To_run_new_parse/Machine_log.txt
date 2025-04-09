@@ -1,6 +1,5 @@
 connection :Connection Established successful
-ip_port------- :Socket[addr=/192.168.209.23,port=52789,localport=50001]
-Date and Time :2025-02-04T11:48:15.128507300
- MESSAGE PART RECIEVED:-  :1H|\^&|||NOVA^STP pHOx Ultra^4.5.0.100^Z114210050C||||||||1|20250204114143
-BE
+ip_port------- :Socket[addr=/10.226.28.174,port=62908,localport=50004]
+Date and Time :2025-03-28T17:27:05.480
+ MESSAGE PART RECIEVED:-  :MSH|^~\&|YP8K||LIS||20250328102505||OUL^R22^OUL_R22|3782633737124113|P|2.5PID|||250328H0089^^^LIS^PI||^^^^^^|^^^^^^|20230910||||^||||||||||||||||||||YSPM|1|250328H0089||BLOOD||||InterLinkOBR|1|||PCT^PCT^HALIA|||20230910001700||||||||||||||||||F|||||||ruleResultORC|SC||||A||||20250328102459||||3267||||||||^^^^^^^^^3267TQ1|||||||20250328102118||ROBX|1|NM|PCT^PCT||0.420|%||H|||F|||20250328102140||||YH2500OBR|2|||IMG%^IMG%^HALIA|||20230910001700||||||||||||||||||F|||||||ruleResultORC|SC||||A||||20250328102459||||3267||||||||^^^^^^^^^3267
 Acknowledgment  :

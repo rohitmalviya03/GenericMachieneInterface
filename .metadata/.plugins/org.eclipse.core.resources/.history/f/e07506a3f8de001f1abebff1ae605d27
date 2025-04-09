@@ -1,1002 +1,0 @@
-2024-12-11 14:42:52 - Selected Machine: IGIMS NEW, Port Number: 50001Protocol: HL7
-2024-12-11 14:42:52 - SERVER BOOTED ON PORT: 50001
-2024-12-11 14:42:52 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-11 14:42:54 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=64130,localport=50001]
-2024-12-11 14:42:55 - Data  RECIEVED :- MSH|^~\&|Analyzer|||RT-6100|20241211132932||ORU^R01|7|P|2.3.1||||0||ASCII|||PID|1||||||0?|M|||||||||||||||||||||||OBR|1|282822|||||20241206145252|||||||20241206|||||||||||||||||2412060005|Admin||||||||||||||||OBX|1|ST||BIOT|>118.0000|uMo/dl||0.3635|||F|||20241206||||OBX|2|ST||G6PD|10.6256|U/gHb||0.3357|||F|||20241206||||OBX|3|ST||PKU|2.5673|mg/dl||0.1290|||F|||20241206||||OBX|4|ST||MSUD|3.1805|mg/dl||0.1649|||F|||20241206||||OBX|5|ST||T. GAL|5.0589|mg/dl||0.1155|||F|||20241206||||OBX|6|ST||nTSH|2.3106|uIu/ml||0.1682|||F|||20241206||||OBX|7|ST||17-OHP|3.1682|ng/ml||1.1285|||F|||20241206||||
-2024-12-11 14:42:55 - ACK SENTMSH|^~\&|Analyzer||||20241211144255||ACK^RO1|72.3.1||||1|| ASCII |||MSA|AA|7 Message accepted |||0|
-2024-12-11 14:51:26 - Selected Machine: IGIMS NEW, Port Number: 50001Protocol: HL7
-2024-12-11 14:51:26 - SERVER BOOTED ON PORT: 50001
-2024-12-11 14:51:26 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-11 14:51:29 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=64394,localport=50001]
-2024-12-11 14:51:30 - Data  RECIEVED :- MSH|^~\&|Analyzer|||RT-6100|20241211132932||ORU^R01|7|P|2.3.1||||0||ASCII|||PID|1||||||0?|M|||||||||||||||||||||||OBR|1|282822|||||20241206145252|||||||20241206|||||||||||||||||2412060005|Admin||||||||||||||||OBX|1|ST||BIOT|>118.0000|uMo/dl||0.3635|||F|||20241206||||OBX|2|ST||G6PD|10.6256|U/gHb||0.3357|||F|||20241206||||OBX|3|ST||PKU|2.5673|mg/dl||0.1290|||F|||20241206||||OBX|4|ST||MSUD|3.1805|mg/dl||0.1649|||F|||20241206||||OBX|5|ST||T. GAL|5.0589|mg/dl||0.1155|||F|||20241206||||OBX|6|ST||nTSH|2.3106|uIu/ml||0.1682|||F|||20241206||||OBX|7|ST||17-OHP|3.1682|ng/ml||1.1285|||F|||20241206||||
-2024-12-11 14:51:30 - ACK SENT:  MSH|^~\&|Analyzer||||20241211145130||ACK^RO1|72.3.1||||1|| ASCII |||MSA|AA|7 Message accepted |||0|
-2024-12-11 14:52:06 - Selected Machine: IGIMS NEW, Port Number: 50001Protocol: HL7
-2024-12-11 14:52:06 - SERVER BOOTED ON PORT: 50001
-2024-12-11 14:52:06 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-11 14:52:08 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=64413,localport=50001]
-2024-12-11 14:52:09 - Data  RECIEVED :- MSH|^~\&|Analyzer|||RT-6100|20241211132932||ORU^R01|7|P|2.3.1||||0||ASCII|||PID|1||||||0?|M|||||||||||||||||||||||OBR|1|282822|||||20241206145252|||||||20241206|||||||||||||||||2412060005|Admin||||||||||||||||OBX|1|ST||BIOT|>118.0000|uMo/dl||0.3635|||F|||20241206||||OBX|2|ST||G6PD|10.6256|U/gHb||0.3357|||F|||20241206||||OBX|3|ST||PKU|2.5673|mg/dl||0.1290|||F|||20241206||||OBX|4|ST||MSUD|3.1805|mg/dl||0.1649|||F|||20241206||||OBX|5|ST||T. GAL|5.0589|mg/dl||0.1155|||F|||20241206||||OBX|6|ST||nTSH|2.3106|uIu/ml||0.1682|||F|||20241206||||OBX|7|ST||17-OHP|3.1682|ng/ml||1.1285|||F|||20241206||||
-2024-12-11 14:52:09 - ACK SENT:  MSH|^~\&|Analyzer||||20241211145209||ACK^RO1|72.3.1||||1|| ASCII |||MSA|AA|7 Message accepted |||0|
-2024-12-11 14:55:46 - Selected Machine: IGIMS NEW, Port Number: 50001Protocol: HL7
-2024-12-11 14:55:46 - SERVER BOOTED ON PORT: 50001
-2024-12-11 14:55:46 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-11 14:55:48 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=64542,localport=50001]
-2024-12-11 14:55:48 - Data  RECIEVED :- MSH|^~\&|Analyzer|||RT-6100|20241211132932||ORU^R01|7|P|2.3.1||||0||ASCII|||PID|1||||||0?|M|||||||||||||||||||||||OBR|1|282822|||||20241206145252|||||||20241206|||||||||||||||||2412060005|Admin||||||||||||||||OBX|1|ST||BIOT|>118.0000|uMo/dl||0.3635|||F|||20241206||||OBX|2|ST||G6PD|10.6256|U/gHb||0.3357|||F|||20241206||||OBX|3|ST||PKU|2.5673|mg/dl||0.1290|||F|||20241206||||OBX|4|ST||MSUD|3.1805|mg/dl||0.1649|||F|||20241206||||OBX|5|ST||T. GAL|5.0589|mg/dl||0.1155|||F|||20241206||||OBX|6|ST||nTSH|2.3106|uIu/ml||0.1682|||F|||20241206||||OBX|7|ST||17-OHP|3.1682|ng/ml||1.1285|||F|||20241206||||
-2024-12-11 14:55:48 - ACK SENT:  MSH|^~\&|Analyzer||||20241211145548||ACK^RO1|72.3.1||||1|| ASCII |||MSA|AA|7 Message accepted |||0|
-2024-12-11 14:55:48 - Test Code : [BIOT, G6PD, PKU, MSUD, T. GAL, nTSH, 17-OHP]
-2024-12-11 14:55:48 - Test Value : [>118.0000, 10.6256, 2.5673, 3.1805, 5.0589, 2.3106, 3.1682]
-2024-12-11 14:55:48 - 
-Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=BIOT&tval=%3E118.0000&sam=282822&uid=10716
-2024-12-11 14:55:48 - response--:2412000001 	   
-2024-12-11 14:55:48 - responce :1+OK
-2024-12-11 14:55:48 - 
-Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=G6PD&tval=10.6256&sam=282822&uid=10716
-2024-12-11 14:55:48 - response--:2412000002 	   
-2024-12-11 14:55:48 - responce :1+OK
-2024-12-11 14:55:48 - 
-Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=PKU&tval=2.5673&sam=282822&uid=10716
-2024-12-11 14:55:49 - response--:2412000003 	   
-2024-12-11 14:55:49 - responce :1+OK
-2024-12-11 14:55:49 - 
-Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=MSUD&tval=3.1805&sam=282822&uid=10716
-2024-12-11 14:55:49 - response--:2412000004 	   
-2024-12-11 14:55:49 - responce :1+OK
-2024-12-11 14:55:49 - 
-Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=T.%20GAL&tval=5.0589&sam=282822&uid=10716
-2024-12-11 14:55:49 - response--:2412000005 	   
-2024-12-11 14:55:49 - responce :1+OK
-2024-12-11 14:55:49 - 
-Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=nTSH&tval=2.3106&sam=282822&uid=10716
-2024-12-11 14:55:49 - response--:2412000006 	   
-2024-12-11 14:55:49 - responce :1+OK
-2024-12-11 14:55:49 - 
-Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=17-OHP&tval=3.1682&sam=282822&uid=10716
-2024-12-11 14:55:49 - response--:2412000007 	   
-2024-12-11 14:55:49 - responce :1+OK
-2024-12-11 15:10:49 - Selected Machine: IGIMS NEW, Port Number: 50004Protocol: HL7
-2024-12-11 15:10:49 - SERVER BOOTED ON PORT: 50004
-2024-12-11 15:10:49 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-11 15:10:56 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65412,localport=50004]
-2024-12-11 15:10:57 - Data  RECIEVED :- MSH|^~\&|Analyzer|||RT-6100|20241211132932||ORU^R01|7|P|2.3.1||||0||ASCII|||PID|1||||||0?|M|||||||||||||||||||||||OBR|1|282822|||||20241206145252|||||||20241206|||||||||||||||||2412060005|Admin||||||||||||||||OBX|1|ST||BIOT|>118.0000|uMo/dl||0.3635|||F|||20241206||||OBX|2|ST||G6PD|10.6256|U/gHb||0.3357|||F|||20241206||||OBX|3|ST||PKU|2.5673|mg/dl||0.1290|||F|||20241206||||OBX|4|ST||MSUD|3.1805|mg/dl||0.1649|||F|||20241206||||OBX|5|ST||T. GAL|5.0589|mg/dl||0.1155|||F|||20241206||||OBX|6|ST||nTSH|2.3106|uIu/ml||0.1682|||F|||20241206||||OBX|7|ST||17-OHP|3.1682|ng/ml||1.1285|||F|||20241206||||
-2024-12-11 15:10:57 - ACK SENT:  MSH|^~\&|Analyzer||||20241211151057||ACK^RO1|72.3.1||||1|| ASCII |||MSA|AA|7 Message accepted |||0|
-2024-12-11 15:10:57 - Test Code : [BIOT, G6PD, PKU, MSUD, T. GAL, nTSH, 17-OHP]
-2024-12-11 15:10:57 - Test Value : [>118.0000, 10.6256, 2.5673, 3.1805, 5.0589, 2.3106, 3.1682]
-2024-12-11 15:10:57 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=BIOT&tval=%3E118.0000&sam=282822&uid=10716
-2024-12-11 15:10:57 - response--:2412000008 	   
-2024-12-11 15:10:57 - responce :1+OK
-2024-12-11 15:10:57 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=G6PD&tval=10.6256&sam=282822&uid=10716
-2024-12-11 15:10:57 - response--:2412000009 	   
-2024-12-11 15:10:57 - responce :1+OK
-2024-12-11 15:10:57 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=PKU&tval=2.5673&sam=282822&uid=10716
-2024-12-11 15:10:57 - response--:2412000010 	   
-2024-12-11 15:10:57 - responce :1+OK
-2024-12-11 15:10:57 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=MSUD&tval=3.1805&sam=282822&uid=10716
-2024-12-11 15:10:57 - response--:2412000011 	   
-2024-12-11 15:10:57 - responce :1+OK
-2024-12-11 15:10:57 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=T.%20GAL&tval=5.0589&sam=282822&uid=10716
-2024-12-11 15:10:57 - response--:2412000012 	   
-2024-12-11 15:10:57 - responce :1+OK
-2024-12-11 15:10:57 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=nTSH&tval=2.3106&sam=282822&uid=10716
-2024-12-11 15:10:57 - response--:2412000013 	   
-2024-12-11 15:10:57 - responce :1+OK
-2024-12-11 15:10:57 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=17-OHP&tval=3.1682&sam=282822&uid=10716
-2024-12-11 15:10:57 - response--:2412000014 	   
-2024-12-11 15:10:57 - responce :1+OK
-2024-12-11 15:12:51 - Selected Machine: IGIMS NEW, Port Number: 50004Protocol: HL7
-2024-12-11 15:12:51 - SERVER BOOTED ON PORT: 50004
-2024-12-11 15:12:51 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-11 15:12:52 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65484,localport=50004]
-2024-12-11 15:12:53 - Data  RECIEVED :- MSH|^~\&|Analyzer|||RT-6100|20241211132932||ORU^R01|7|P|2.3.1||||0||ASCII|||PID|1||||||0?|M|||||||||||||||||||||||OBR|1|282822|||||20241206145252|||||||20241206|||||||||||||||||2412060005|Admin||||||||||||||||OBX|1|ST||BIOT|>118.0000|uMo/dl||0.3635|||F|||20241206||||OBX|2|ST||G6PD|10.6256|U/gHb||0.3357|||F|||20241206||||OBX|3|ST||PKU|2.5673|mg/dl||0.1290|||F|||20241206||||OBX|4|ST||MSUD|3.1805|mg/dl||0.1649|||F|||20241206||||OBX|5|ST||T. GAL|5.0589|mg/dl||0.1155|||F|||20241206||||OBX|6|ST||nTSH|2.3106|uIu/ml||0.1682|||F|||20241206||||OBX|7|ST||17-OHP|3.1682|ng/ml||1.1285|||F|||20241206||||
-2024-12-11 15:12:53 - ACK SENT:  MSH|^~\&|Analyzer||||20241211151253||ACK^RO1|72.3.1||||1|| ASCII |||MSA|AA|7 Message accepted |||0|
-2024-12-11 15:12:53 - numeric value not present
-2024-12-11 15:12:53 - numeric value not present
-2024-12-11 15:12:53 - numeric value not present
-2024-12-11 15:12:53 - numeric value not present
-2024-12-11 15:12:53 - numeric value not present
-2024-12-11 15:12:53 - numeric value not present
-2024-12-11 15:12:53 - numeric value not present
-2024-12-11 15:12:53 - Test Code : []
-2024-12-11 15:12:53 - Test Value : []
-2024-12-13 16:02:40 - Selected Machine: IGIMS NEW, Port Number: 50004Protocol: HL7
-2024-12-13 16:02:40 - SERVER BOOTED ON PORT: 50004
-2024-12-13 16:02:40 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-13 16:02:52 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=63923,localport=50004]
-2024-12-13 16:02:58 - Data  RECIEVED :- 33
-2024-12-13 16:02:58 - Test Code : []
-2024-12-13 16:02:58 - Test Value : []
-2024-12-13 16:02:58 - Data  RECIEVED :- 33
-2024-12-13 16:02:58 - Test Code : []
-2024-12-13 16:02:58 - Test Value : []
-2024-12-13 16:02:58 - Data  RECIEVED :- 33
-2024-12-13 16:02:58 - Test Code : []
-2024-12-13 16:02:58 - Test Value : []
-2024-12-13 16:02:58 - Data  RECIEVED :- 33
-2024-12-13 16:02:58 - Test Code : []
-2024-12-13 16:02:58 - Test Value : []
-2024-12-13 16:02:58 - Data  RECIEVED :- 33
-2024-12-13 16:02:58 - Test Code : []
-2024-12-13 16:02:58 - Test Value : []
-2024-12-13 16:02:59 - Data  RECIEVED :- 33
-2024-12-13 16:02:59 - Test Code : []
-2024-12-13 16:02:59 - Test Value : []
-2024-12-17 14:44:30 - Selected Machine: IGIMS NEW, Port Number: 50004Protocol: HL7
-2024-12-17 14:44:30 - SERVER BOOTED ON PORT: 50004
-2024-12-17 14:44:30 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-17 14:44:41 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=50101,localport=50004]
-2024-12-17 14:45:26 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:45:26 - Test Code : []
-2024-12-17 14:45:26 - Test Value : []
-2024-12-17 14:45:29 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:45:29 - Test Code : []
-2024-12-17 14:45:29 - Test Value : []
-2024-12-17 14:46:05 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:46:05 - Test Code : []
-2024-12-17 14:46:05 - Test Value : []
-2024-12-17 14:46:06 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:46:06 - Test Code : []
-2024-12-17 14:46:06 - Test Value : []
-2024-12-17 14:46:06 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:46:06 - Test Code : []
-2024-12-17 14:46:06 - Test Value : []
-2024-12-17 14:46:06 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:46:06 - Test Code : []
-2024-12-17 14:46:06 - Test Value : []
-2024-12-17 14:46:06 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:46:06 - Test Code : []
-2024-12-17 14:46:06 - Test Value : []
-2024-12-17 14:47:31 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:47:31 - Test Code : []
-2024-12-17 14:47:31 - Test Value : []
-2024-12-17 14:47:32 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:47:32 - Test Code : []
-2024-12-17 14:47:32 - Test Value : []
-2024-12-17 14:47:32 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:47:32 - Test Code : []
-2024-12-17 14:47:32 - Test Value : []
-2024-12-17 14:47:58 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:47:58 - Test Code : []
-2024-12-17 14:47:58 - Test Value : []
-2024-12-17 14:48:00 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:48:00 - Test Code : []
-2024-12-17 14:48:00 - Test Value : []
-2024-12-17 14:48:00 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:48:00 - Test Code : []
-2024-12-17 14:48:00 - Test Value : []
-2024-12-17 14:48:01 - Data  RECIEVED :- 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2024-12-17 14:48:01 - Test Code : []
-2024-12-17 14:48:01 - Test Value : []
-2024-12-24 13:53:47 - Selected Machine: IGIMS NEW, Port Number: 50004Protocol: HL7
-2024-12-24 13:53:47 - SERVER BOOTED ON PORT: 50004
-2024-12-24 13:53:47 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-24 13:54:13 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=57599,localport=50004]
-2024-12-24 13:56:14 - Data  RECIEVED :- MSH|^~\&|Analyzer id|I2900|LIS ID||20241224151324||ORU^R01|1|P|2.3.1|AE2406510050|||0||UNICODE|||
-PID|27|||||||O|||||||||||||||||||||||0^Y|
-OBR|27|JYOTISH|3|I2900|N||20241007202957||0|||N||20241007195713|0|||||||20241224151324||||||||||||||||||||||||||
-OBX|NM|1|T3^1|1.16|ng/mL|0.20-1.80|N||F||||20241007202827|||194041|
-OBX|NM|2|T4^1|8.26|?g/dL|4.50-13.90|N||F||||20241007202856|||43736|
-OBX|NM|3|TSH^1|2.290|?IU/mL|0.250-5.000|N||F||||20241007202957|||310527|
-
-2024-12-24 13:56:14 - ACK SENT:  MSH|^~\&|Analyzer||||20241224135614||ACK^RO1|12.3.1||||1|| ASCII |||MSA|AA|1 Message accepted |||0|
-2024-12-24 13:56:14 - numeric value not present
-2024-12-24 13:56:14 - numeric value not present
-2024-12-24 13:56:14 - numeric value not present
-2024-12-24 13:56:14 - Test Code : []
-2024-12-24 13:56:14 - Test Value : []
-2024-12-30 11:48:18 - Selected Machine: Other, Port Number: 50004Protocol: HL7
-2024-12-30 12:00:14 - Selected Machine: Other, Port Number: 50004Protocol: HL7
-2024-12-30 12:01:13 - Selected Machine: Other, Port Number: 50004Protocol: HL7
-2024-12-30 12:14:08 - Selected Machine: Other, Port Number: 50004Protocol: HL7
-2024-12-30 12:14:52 - Selected Machine: Other, Port Number: 50004Protocol: HL7
-2024-12-30 15:08:15 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 15:08:15 - SERVER BOOTED ON PORT: 50004
-2024-12-30 15:08:15 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 15:08:28 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=50341,localport=50004]
-2024-12-30 15:09:32 - Data  RECIEVED :- MSH|^~\&|||||ll||ORU^R01|1|P|2.3.1||||0||ASCII|||
-PID|1|||||||O|||||||||||||||||||||||
-OBR|1|PRABHAT|1|^|N|20241121141641|20241121141359|20241121141359||||||20241121141359|Serum|||||||||||||||||||||||||||||||||
-OBX|1|NM||Creat PAP|0.973041|mg/dL|-|N|||F||0.973041|20241121143155|||0|
-OBX|2|NM||Glucose|106.352601|mg/dL|-|N|||F||106.352601|20241121143204|||0|
-OBX|3|NM||SGOT|19.805997|U/L|-|N|||F||19.805997|20241121143138|||0|
-OBX|4|NM||SGPT|15.741917|U/L|-|N|||F||15.741917|20241121143147|||0|
-OBX|5|NM||Urea|25.581694|mg/dL|-|N|||F||25.581694|20241121142955|||0|
-2024-12-30 15:09:32 - ACK SENT:  MSH|^~\&|Analyzer||||20241230150932||ACK^RO1|12.3.1||||1|| ASCII |||MSA|AA|1 Message accepted |||0|
-2024-12-30 15:09:32 - Test Code : [Creat PAP, Glucose, SGOT, SGPT, Urea]
-2024-12-30 15:09:32 - Test Value : [0.973041, 106.352601, 19.805997, 15.741917, 25.581694]
-2024-12-30 15:09:33 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:09:34 - response--:2412000015 	   
-2024-12-30 15:09:34 - responce :1+OK
-2024-12-30 15:09:34 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Glucose&tval=106.352601&sam=PRABHAT&uid=10716
-2024-12-30 15:09:34 - response--:2412000016 	   
-2024-12-30 15:09:34 - responce :1+OK
-2024-12-30 15:09:34 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGOT&tval=19.805997&sam=PRABHAT&uid=10716
-2024-12-30 15:09:34 - response--:2412000017 	   
-2024-12-30 15:09:34 - responce :1+OK
-2024-12-30 15:09:34 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGPT&tval=15.741917&sam=PRABHAT&uid=10716
-2024-12-30 15:09:34 - response--:2412000018 	   
-2024-12-30 15:09:34 - responce :1+OK
-2024-12-30 15:09:34 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Urea&tval=25.581694&sam=PRABHAT&uid=10716
-2024-12-30 15:09:34 - response--:2412000019 	   
-2024-12-30 15:09:34 - responce :1+OK
-2024-12-30 15:14:45 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 15:14:45 - SERVER BOOTED ON PORT: 50004
-2024-12-30 15:14:45 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 15:14:47 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=51018,localport=50004]
-2024-12-30 15:14:47 - Data  RECIEVED :- MSH|^~\&|||||ll||ORU^R01|1|P|2.3.1||||0||ASCII|||
-PID|1|||||||O|||||||||||||||||||||||
-OBR|1|PRABHAT|1|^|N|20241121141641|20241121141359|20241121141359||||||20241121141359|Serum|||||||||||||||||||||||||||||||||
-OBX|1|NM||Creat PAP|0.973041|mg/dL|-|N|||F||0.973041|20241121143155|||0|
-OBX|2|NM||Glucose|106.352601|mg/dL|-|N|||F||106.352601|20241121143204|||0|
-OBX|3|NM||SGOT|19.805997|U/L|-|N|||F||19.805997|20241121143138|||0|
-OBX|4|NM||SGPT|15.741917|U/L|-|N|||F||15.741917|20241121143147|||0|
-OBX|5|NM||Urea|25.581694|mg/dL|-|N|||F||25.581694|20241121142955|||0|
-2024-12-30 15:14:47 - ACK SENT:  MSH|^~\&|||||20241230151447||ACK^RO1|1P|2.3.1||||0||ASCII|||MSA|AA|1|Message accepted|||0|
-2024-12-30 15:14:47 - Test Code : [Creat PAP, Glucose, SGOT, SGPT, Urea]
-2024-12-30 15:14:47 - Test Value : [0.973041, 106.352601, 19.805997, 15.741917, 25.581694]
-2024-12-30 15:14:48 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:14:48 - response--:2412000020 	   
-2024-12-30 15:14:48 - responce :1+OK
-2024-12-30 15:14:48 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Glucose&tval=106.352601&sam=PRABHAT&uid=10716
-2024-12-30 15:14:48 - response--:2412000021 	   
-2024-12-30 15:14:48 - responce :1+OK
-2024-12-30 15:14:48 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGOT&tval=19.805997&sam=PRABHAT&uid=10716
-2024-12-30 15:14:48 - response--:2412000022 	   
-2024-12-30 15:14:48 - responce :1+OK
-2024-12-30 15:14:48 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGPT&tval=15.741917&sam=PRABHAT&uid=10716
-2024-12-30 15:14:48 - response--:2412000023 	   
-2024-12-30 15:14:48 - responce :1+OK
-2024-12-30 15:14:48 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Urea&tval=25.581694&sam=PRABHAT&uid=10716
-2024-12-30 15:14:48 - response--:2412000024 	   
-2024-12-30 15:14:48 - responce :1+OK
-2024-12-30 15:17:35 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 15:17:35 - ACK SENT:  MSH|^~\&|||||20241230151735||ACK^RO1|4P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|
-2024-12-30 15:17:35 - Test Code : []
-2024-12-30 15:17:35 - Test Value : []
-2024-12-30 15:21:18 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 15:21:18 - SERVER BOOTED ON PORT: 50004
-2024-12-30 15:21:18 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 15:21:20 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=51592,localport=50004]
-2024-12-30 15:21:20 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 15:21:20 - ACK SENT:  MSH|^~\&|||||20241230152120||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|
-2024-12-30 15:21:20 - Test Code : []
-2024-12-30 15:21:20 - Test Value : []
-2024-12-30 15:24:31 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 15:24:31 - SERVER BOOTED ON PORT: 50004
-2024-12-30 15:24:31 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 15:24:33 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=51820,localport=50004]
-2024-12-30 15:24:51 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 15:24:51 - SERVER BOOTED ON PORT: 50004
-2024-12-30 15:24:51 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 15:24:53 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=51863,localport=50004]
-2024-12-30 15:24:54 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 15:24:54 - ACK SENT:  MSH|^~\&|||||20241230152454||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|
-2024-12-30 15:25:34 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 15:25:34 - SERVER BOOTED ON PORT: 50004
-2024-12-30 15:25:34 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 15:25:35 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=51929,localport=50004]
-2024-12-30 15:25:36 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 15:25:36 - ACK SENT:  MSH|^~\&|||||20241230152536||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|
-2024-12-30 15:25:49 - Data  RECIEVED :- MSH|^~\&|||||ll||ORU^R01|1|P|2.3.1||||0||ASCII|||
-PID|1|||||||O|||||||||||||||||||||||
-OBR|1|PRABHAT|1|^|N|20241121141641|20241121141359|20241121141359||||||20241121141359|Serum|||||||||||||||||||||||||||||||||
-OBX|1|NM||Creat PAP|0.973041|mg/dL|-|N|||F||0.973041|20241121143155|||0|
-OBX|2|NM||Glucose|106.352601|mg/dL|-|N|||F||106.352601|20241121143204|||0|
-OBX|3|NM||SGOT|19.805997|U/L|-|N|||F||19.805997|20241121143138|||0|
-OBX|4|NM||SGPT|15.741917|U/L|-|N|||F||15.741917|20241121143147|||0|
-OBX|5|NM||Urea|25.581694|mg/dL|-|N|||F||25.581694|20241121142955|||0|
-2024-12-30 15:25:49 - ACK SENT:  MSH|^~\&|||||20241230152549||ACK^RO1|1|P|2.3.1||||0||ASCII|||MSA|AA|1|Message accepted|||0|
-2024-12-30 15:25:49 - Test Code : []
-2024-12-30 15:25:49 - Test Value : []
-2024-12-30 15:25:49 - Test Code : []
-2024-12-30 15:25:49 - Test Value : []
-2024-12-30 15:25:49 - Test Code : []
-2024-12-30 15:25:49 - Test Value : []
-2024-12-30 15:25:49 - Test Code : [Creat PAP]
-2024-12-30 15:25:49 - Test Value : [0.973041]
-2024-12-30 15:25:49 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:25:49 - response--:2412000025 	   
-2024-12-30 15:25:49 - responce :1+OK
-2024-12-30 15:25:49 - Test Code : [Creat PAP, Glucose]
-2024-12-30 15:25:49 - Test Value : [0.973041, 106.352601]
-2024-12-30 15:25:49 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:25:49 - response--:2412000026 	   
-2024-12-30 15:25:49 - responce :1+OK
-2024-12-30 15:25:49 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Glucose&tval=106.352601&sam=PRABHAT&uid=10716
-2024-12-30 15:25:49 - response--:2412000027 	   
-2024-12-30 15:25:49 - responce :1+OK
-2024-12-30 15:25:49 - Test Code : [Creat PAP, Glucose, SGOT]
-2024-12-30 15:25:49 - Test Value : [0.973041, 106.352601, 19.805997]
-2024-12-30 15:25:49 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:25:49 - response--:2412000028 	   
-2024-12-30 15:25:49 - responce :1+OK
-2024-12-30 15:25:49 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Glucose&tval=106.352601&sam=PRABHAT&uid=10716
-2024-12-30 15:25:49 - response--:2412000029 	   
-2024-12-30 15:25:49 - responce :1+OK
-2024-12-30 15:25:49 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGOT&tval=19.805997&sam=PRABHAT&uid=10716
-2024-12-30 15:25:49 - response--:2412000030 	   
-2024-12-30 15:25:49 - responce :1+OK
-2024-12-30 15:25:49 - Test Code : [Creat PAP, Glucose, SGOT, SGPT]
-2024-12-30 15:25:49 - Test Value : [0.973041, 106.352601, 19.805997, 15.741917]
-2024-12-30 15:25:49 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:25:50 - response--:2412000031 	   
-2024-12-30 15:25:50 - responce :1+OK
-2024-12-30 15:25:50 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Glucose&tval=106.352601&sam=PRABHAT&uid=10716
-2024-12-30 15:25:50 - response--:2412000032 	   
-2024-12-30 15:25:50 - responce :1+OK
-2024-12-30 15:25:50 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGOT&tval=19.805997&sam=PRABHAT&uid=10716
-2024-12-30 15:25:50 - response--:2412000033 	   
-2024-12-30 15:25:50 - responce :1+OK
-2024-12-30 15:25:50 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGPT&tval=15.741917&sam=PRABHAT&uid=10716
-2024-12-30 15:25:50 - response--:2412000034 	   
-2024-12-30 15:25:50 - responce :1+OK
-2024-12-30 15:25:50 - Test Code : [Creat PAP, Glucose, SGOT, SGPT, Urea]
-2024-12-30 15:25:50 - Test Value : [0.973041, 106.352601, 19.805997, 15.741917, 25.581694]
-2024-12-30 15:25:50 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:25:50 - response--:2412000035 	   
-2024-12-30 15:25:50 - responce :1+OK
-2024-12-30 15:25:50 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Glucose&tval=106.352601&sam=PRABHAT&uid=10716
-2024-12-30 15:25:50 - response--:2412000036 	   
-2024-12-30 15:25:50 - responce :1+OK
-2024-12-30 15:25:50 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGOT&tval=19.805997&sam=PRABHAT&uid=10716
-2024-12-30 15:25:50 - response--:2412000037 	   
-2024-12-30 15:25:50 - responce :1+OK
-2024-12-30 15:25:50 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGPT&tval=15.741917&sam=PRABHAT&uid=10716
-2024-12-30 15:25:50 - response--:2412000038 	   
-2024-12-30 15:25:50 - responce :1+OK
-2024-12-30 15:25:50 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Urea&tval=25.581694&sam=PRABHAT&uid=10716
-2024-12-30 15:25:50 - response--:2412000039 	   
-2024-12-30 15:25:50 - responce :1+OK
-2024-12-30 15:25:59 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 15:25:59 - ACK SENT:  MSH|^~\&|||||20241230152559||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|
-2024-12-30 15:26:37 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 15:26:37 - ACK SENT:  MSH|^~\&|||||20241230152637||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|
-2024-12-30 15:26:59 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||ORU^R01|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 15:26:59 - ACK SENT:  MSH|^~\&|||||20241230152659||ACK^RO1|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|
-2024-12-30 15:26:59 - Test Code : []
-2024-12-30 15:26:59 - Test Value : []
-2024-12-30 15:26:59 - Test Code : []
-2024-12-30 15:26:59 - Test Value : []
-2024-12-30 15:26:59 - Test Code : []
-2024-12-30 15:26:59 - Test Value : []
-2024-12-30 15:26:59 - Test Code : []
-2024-12-30 15:26:59 - Test Value : []
-2024-12-30 15:27:10 - Data  RECIEVED :- MSH|^~\&|||||ll||ORU^R01|1|P|2.3.1||||0||ASCII|||
-PID|1|||||||O|||||||||||||||||||||||
-OBR|1|PRABHAT|1|^|N|20241121141641|20241121141359|20241121141359||||||20241121141359|Serum|||||||||||||||||||||||||||||||||
-OBX|1|NM||Creat PAP|0.973041|mg/dL|-|N|||F||0.973041|20241121143155|||0|
-OBX|2|NM||Glucose|106.352601|mg/dL|-|N|||F||106.352601|20241121143204|||0|
-OBX|3|NM||SGOT|19.805997|U/L|-|N|||F||19.805997|20241121143138|||0|
-OBX|4|NM||SGPT|15.741917|U/L|-|N|||F||15.741917|20241121143147|||0|
-OBX|5|NM||Urea|25.581694|mg/dL|-|N|||F||25.581694|20241121142955|||0|
-2024-12-30 15:27:10 - ACK SENT:  MSH|^~\&|||||20241230152710||ACK^RO1|1|P|2.3.1||||0||ASCII|||MSA|AA|1|Message accepted|||0|
-2024-12-30 15:27:10 - Test Code : []
-2024-12-30 15:27:10 - Test Value : []
-2024-12-30 15:27:10 - Test Code : []
-2024-12-30 15:27:10 - Test Value : []
-2024-12-30 15:27:10 - Test Code : []
-2024-12-30 15:27:10 - Test Value : []
-2024-12-30 15:27:10 - Test Code : [Creat PAP]
-2024-12-30 15:27:10 - Test Value : [0.973041]
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000040 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Test Code : [Creat PAP, Glucose]
-2024-12-30 15:27:10 - Test Value : [0.973041, 106.352601]
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000041 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Glucose&tval=106.352601&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000042 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Test Code : [Creat PAP, Glucose, SGOT]
-2024-12-30 15:27:10 - Test Value : [0.973041, 106.352601, 19.805997]
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000043 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Glucose&tval=106.352601&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000044 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGOT&tval=19.805997&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000045 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Test Code : [Creat PAP, Glucose, SGOT, SGPT]
-2024-12-30 15:27:10 - Test Value : [0.973041, 106.352601, 19.805997, 15.741917]
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000046 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Glucose&tval=106.352601&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000047 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGOT&tval=19.805997&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000048 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGPT&tval=15.741917&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000049 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Test Code : [Creat PAP, Glucose, SGOT, SGPT, Urea]
-2024-12-30 15:27:10 - Test Value : [0.973041, 106.352601, 19.805997, 15.741917, 25.581694]
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Creat%20PAP&tval=0.973041&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000050 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Glucose&tval=106.352601&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000051 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGOT&tval=19.805997&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000052 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=SGPT&tval=15.741917&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000053 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 15:27:10 - Sending 'GET' request to URL : https://aiimsjodhpur.uat.dcservices.in/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=100029&hos=21917&tcode=Urea&tval=25.581694&sam=PRABHAT&uid=10716
-2024-12-30 15:27:10 - response--:2412000054 	   
-2024-12-30 15:27:10 - responce :1+OK
-2024-12-30 16:06:05 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 16:06:05 - SERVER BOOTED ON PORT: 50004
-2024-12-30 16:06:05 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 16:06:07 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=49938,localport=50004]
-2024-12-30 16:06:16 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 16:06:16 - ACK SENT:  MSH|^~\&|||||20241230160616||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|ERR|0|QAK|SR|OK|
-2024-12-30 16:06:59 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 16:07:00 - SERVER BOOTED ON PORT: 50004
-2024-12-30 16:07:00 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 16:07:02 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=50088,localport=50004]
-2024-12-30 16:07:10 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 16:07:10 - ACK SENT:  MSH|^~\&|||||20241230160710||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|ERR|0|QAK|SR|OK|
-2024-12-30 16:07:30 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 16:07:30 - SERVER BOOTED ON PORT: 50004
-2024-12-30 16:07:30 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 16:07:32 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=50138,localport=50004]
-2024-12-30 16:07:33 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 16:07:33 - ACK SENT:  MSH|^~\&|||||20241230160733||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|ERR|0|QAK|SR|OK|
-2024-12-30 16:08:01 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 16:08:01 - SERVER BOOTED ON PORT: 50004
-2024-12-30 16:08:01 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 16:08:02 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=50192,localport=50004]
-2024-12-30 16:08:03 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 16:08:03 - ACK SENT:  MSH|^~\&|||||20241230160803||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|ERR|0|QAK|SR|OK|
-2024-12-30 16:08:46 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 16:08:46 - ACK SENT:  MSH|^~\&|||||20241230160846||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|ERR|0|QAK|SR|OK|
-2024-12-30 16:10:12 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 16:10:12 - ACK SENT:  MSH|^~\&|||||20241230161012||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|ERR|0|QAK|SR|OK|
-2024-12-30 16:12:39 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 16:12:39 - ACK SENT:  MSH|^~\&|||||20241230161239||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|ERR|0|QAK|SR|OK|
-2024-12-30 16:21:23 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2024-12-30 16:21:23 - SERVER BOOTED ON PORT: 50004
-2024-12-30 16:21:23 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2024-12-30 16:21:24 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=50620,localport=50004]
-2024-12-30 16:21:35 - Data  RECIEVED :- MSH|^~\&|||||20120508104700||QRY^Q02|4|P|2.3.1||||||ASCII|||
-QRD|20120508104700|R|D|1|||RD|0019|OTH|||T|
-QRF||||||RCT|COR|ALL||
-
-2024-12-30 16:21:35 - ACK SENT:  MSH|^~\&|||||20241230162135||QCK^Q02|4|P|2.3.1||||0||ASCII|||MSA|AA|4|Message accepted|||0|ERR|0|QAK|SR|OK|
-2024-12-30 16:21:35 - Test Code <<--- :: --->>>[12321, 13123, 13212]
-2025-01-02 11:01:25 - Selected Machine: Mindray Monitor, Port Number: 50004Protocol: HL7
-2025-01-02 11:01:25 - SERVER BOOTED ON PORT: 50004
-2025-01-02 11:01:25 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2025-01-02 11:01:29 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=56232,localport=50004]
-2025-01-02 11:01:32 - Data  RECIEVED :- MSH|^~\&|MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|MINDRAY|||20240812133649.0000+0530||ORU^R01^ORU_R01|540|P|2.6|||AL|NE||UNICODE UTF-8|||IHE_PCD_001^IHE PCD^1.3.6.1.4.1.19376.1.6.1.1.1^ISOPID|||123^^^Hospital^PI||singh^ajay^^^^^L||19950414|MPV1||I|^^^^^^^^00-0F-14-16-C6-45^M0001OBR|1|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|182777000^monitoring of patient^SCT|||20240812133648.0000+0530OBX|1|NM|188496^MDC_TEMP_AXIL^MDC|1.2.1.188496|81.5|266560^MDC_DIM_FAHR^MDC|||||R|||20240812133648.0000+0530||||000F14029116C645^Beneview^000F14029116C645^EUI-64OBX|2|NM|150456^MDC_PULS_OXIM_SAT_O2^MDC|1.3.1.150456|99|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|3|NM|149530^MDC_PULS_OXIM_PULS_RATE^MDC|1.3.1.149530|83|264864^MDC_DIM_BEAT_PER_MIN^MDC|||||R|||20240812133648.0000+0530OBX|4|NM|247^MNDRY_PULS_OXIM_SAT_SECONDS^99MNDRY|1.3.1.247|0|264320^MDC_DIM_SEC^MDC|||||R|||20240812133648.0000+0530OBX|5|NM|151708^MDC_CONC_AWAY_CO2_ET^MDC|1.8.1.151708|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|6|NM|151716^MDC_CONC_AWAY_CO2_INSP^MDC|1.8.1.151716|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|7|NM|152108^MDC_CONC_AWAY_N2O_ET^MDC|1.9.1.152108|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|8|NM|152192^MDC_CONC_AWAY_N2O_INSP^MDC|1.9.1.152192|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|9|NM|152872^MDC_CONC_MAC^MDC|1.9.1.152872|0.00|262656^MDC_DIM_DIMLESS^MDC|||||R|||20240812133648.0000+0530OBX|10|NM|152440^MDC_CONC_AWAY_O2_ET^MDC|1.9.1.152440|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|11|NM|152196^MDC_CONC_AWAY_O2_INSP^MDC|1.9.1.152196|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|12|NM|188740^MDC_LEN_BODY_ACTUAL^MDC|1.10.1.188740|169.0|263441^MDC_DIM_CENTI_M^MDC|||||R|||20240812133648.0000+0530OBX|13|NM|188736^MDC_MASS_BODY_ACTUAL^MDC|1.10.1.188736|73.0|263875^MDC_DIM_KILO_G^MDC|||||R|||20240812133648.0000+0530
-2025-01-02 11:01:32 - Incoming msg Type :ORU
-2025-01-02 11:01:32 - ACK SENT :MSH|^~\&|Mindray|ADTServer|||||ACK|540|P|2.6MSA|AA|540
-2025-01-02 11:01:33 - URL : https://aiimsjodhpur.uat.dcservices.in/OT_INTEGRATION/service/api/saveresult/
-2025-01-02 11:01:33 - Response Code: 200OK
-2025-01-02 11:07:57 - Data  RECIEVED :- MSH|^~\&|MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|MINDRAY|||20240812133649.0000+0530||ORU^R01^ORU_R01|540|P|2.6|||AL|NE||UNICODE UTF-8|||IHE_PCD_001^IHE PCD^1.3.6.1.4.1.19376.1.6.1.1.1^ISOPID|||123^^^Hospital^PI||singh^ajay^^^^^L||19950414|MPV1||I|^^^^^^^^00-0F-14-16-C6-45^M0001OBR|1|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|182777000^monitoring of patient^SCT|||20240812133648.0000+0530OBX|1|NM|188496^MDC_TEMP_AXIL^MDC|1.2.1.188496|81.5|266560^MDC_DIM_FAHR^MDC|||||R|||20240812133648.0000+0530||||000F14029116C645^Beneview^000F14029116C645^EUI-64OBX|2|NM|150456^MDC_PULS_OXIM_SAT_O2^MDC|1.3.1.150456|99|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|3|NM|149530^MDC_PULS_OXIM_PULS_RATE^MDC|1.3.1.149530|83|264864^MDC_DIM_BEAT_PER_MIN^MDC|||||R|||20240812133648.0000+0530OBX|4|NM|247^MNDRY_PULS_OXIM_SAT_SECONDS^99MNDRY|1.3.1.247|0|264320^MDC_DIM_SEC^MDC|||||R|||20240812133648.0000+0530OBX|5|NM|151708^MDC_CONC_AWAY_CO2_ET^MDC|1.8.1.151708|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|6|NM|151716^MDC_CONC_AWAY_CO2_INSP^MDC|1.8.1.151716|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|7|NM|152108^MDC_CONC_AWAY_N2O_ET^MDC|1.9.1.152108|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|8|NM|152192^MDC_CONC_AWAY_N2O_INSP^MDC|1.9.1.152192|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|9|NM|152872^MDC_CONC_MAC^MDC|1.9.1.152872|0.00|262656^MDC_DIM_DIMLESS^MDC|||||R|||20240812133648.0000+0530OBX|10|NM|152440^MDC_CONC_AWAY_O2_ET^MDC|1.9.1.152440|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|11|NM|152196^MDC_CONC_AWAY_O2_INSP^MDC|1.9.1.152196|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|12|NM|188740^MDC_LEN_BODY_ACTUAL^MDC|1.10.1.188740|169.0|263441^MDC_DIM_CENTI_M^MDC|||||R|||20240812133648.0000+0530OBX|13|NM|188736^MDC_MASS_BODY_ACTUAL^MDC|1.10.1.188736|73.0|263875^MDC_DIM_KILO_G^MDC|||||R|||20240812133648.0000+0530
-2025-01-02 11:07:57 - Incoming msg Type :ORU
-2025-01-02 11:07:57 - ACK SENT :MSH|^~\&|Mindray|ADTServer|||||ACK|540|P|2.6MSA|AA|540
-2025-01-02 11:07:57 - URL : https://aiimsjodhpur.uat.dcservices.in/OT_INTEGRATION/service/api/saveresult/
-2025-01-02 11:07:57 - Response Code: 200OK
-2025-01-02 11:07:58 - Data  RECIEVED :- MSH|^~\&|MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|MINDRAY|||20240812133649.0000+0530||ORU^R01^ORU_R01|540|P|2.6|||AL|NE||UNICODE UTF-8|||IHE_PCD_001^IHE PCD^1.3.6.1.4.1.19376.1.6.1.1.1^ISOPID|||123^^^Hospital^PI||singh^ajay^^^^^L||19950414|MPV1||I|^^^^^^^^00-0F-14-16-C6-45^M0001OBR|1|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|182777000^monitoring of patient^SCT|||20240812133648.0000+0530OBX|1|NM|188496^MDC_TEMP_AXIL^MDC|1.2.1.188496|81.5|266560^MDC_DIM_FAHR^MDC|||||R|||20240812133648.0000+0530||||000F14029116C645^Beneview^000F14029116C645^EUI-64OBX|2|NM|150456^MDC_PULS_OXIM_SAT_O2^MDC|1.3.1.150456|99|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|3|NM|149530^MDC_PULS_OXIM_PULS_RATE^MDC|1.3.1.149530|83|264864^MDC_DIM_BEAT_PER_MIN^MDC|||||R|||20240812133648.0000+0530OBX|4|NM|247^MNDRY_PULS_OXIM_SAT_SECONDS^99MNDRY|1.3.1.247|0|264320^MDC_DIM_SEC^MDC|||||R|||20240812133648.0000+0530OBX|5|NM|151708^MDC_CONC_AWAY_CO2_ET^MDC|1.8.1.151708|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|6|NM|151716^MDC_CONC_AWAY_CO2_INSP^MDC|1.8.1.151716|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|7|NM|152108^MDC_CONC_AWAY_N2O_ET^MDC|1.9.1.152108|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|8|NM|152192^MDC_CONC_AWAY_N2O_INSP^MDC|1.9.1.152192|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|9|NM|152872^MDC_CONC_MAC^MDC|1.9.1.152872|0.00|262656^MDC_DIM_DIMLESS^MDC|||||R|||20240812133648.0000+0530OBX|10|NM|152440^MDC_CONC_AWAY_O2_ET^MDC|1.9.1.152440|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|11|NM|152196^MDC_CONC_AWAY_O2_INSP^MDC|1.9.1.152196|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|12|NM|188740^MDC_LEN_BODY_ACTUAL^MDC|1.10.1.188740|169.0|263441^MDC_DIM_CENTI_M^MDC|||||R|||20240812133648.0000+0530OBX|13|NM|188736^MDC_MASS_BODY_ACTUAL^MDC|1.10.1.188736|73.0|263875^MDC_DIM_KILO_G^MDC|||||R|||20240812133648.0000+0530
-2025-01-02 11:07:58 - Incoming msg Type :ORU
-2025-01-02 11:07:58 - ACK SENT :MSH|^~\&|Mindray|ADTServer|||||ACK|540|P|2.6MSA|AA|540
-2025-01-02 11:07:58 - URL : https://aiimsjodhpur.uat.dcservices.in/OT_INTEGRATION/service/api/saveresult/
-2025-01-02 11:07:58 - Response Code: 200OK
-2025-01-02 11:07:58 - Data  RECIEVED :- MSH|^~\&|MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|MINDRAY|||20240812133649.0000+0530||ORU^R01^ORU_R01|540|P|2.6|||AL|NE||UNICODE UTF-8|||IHE_PCD_001^IHE PCD^1.3.6.1.4.1.19376.1.6.1.1.1^ISOPID|||123^^^Hospital^PI||singh^ajay^^^^^L||19950414|MPV1||I|^^^^^^^^00-0F-14-16-C6-45^M0001OBR|1|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|182777000^monitoring of patient^SCT|||20240812133648.0000+0530OBX|1|NM|188496^MDC_TEMP_AXIL^MDC|1.2.1.188496|81.5|266560^MDC_DIM_FAHR^MDC|||||R|||20240812133648.0000+0530||||000F14029116C645^Beneview^000F14029116C645^EUI-64OBX|2|NM|150456^MDC_PULS_OXIM_SAT_O2^MDC|1.3.1.150456|99|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|3|NM|149530^MDC_PULS_OXIM_PULS_RATE^MDC|1.3.1.149530|83|264864^MDC_DIM_BEAT_PER_MIN^MDC|||||R|||20240812133648.0000+0530OBX|4|NM|247^MNDRY_PULS_OXIM_SAT_SECONDS^99MNDRY|1.3.1.247|0|264320^MDC_DIM_SEC^MDC|||||R|||20240812133648.0000+0530OBX|5|NM|151708^MDC_CONC_AWAY_CO2_ET^MDC|1.8.1.151708|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|6|NM|151716^MDC_CONC_AWAY_CO2_INSP^MDC|1.8.1.151716|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|7|NM|152108^MDC_CONC_AWAY_N2O_ET^MDC|1.9.1.152108|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|8|NM|152192^MDC_CONC_AWAY_N2O_INSP^MDC|1.9.1.152192|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|9|NM|152872^MDC_CONC_MAC^MDC|1.9.1.152872|0.00|262656^MDC_DIM_DIMLESS^MDC|||||R|||20240812133648.0000+0530OBX|10|NM|152440^MDC_CONC_AWAY_O2_ET^MDC|1.9.1.152440|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|11|NM|152196^MDC_CONC_AWAY_O2_INSP^MDC|1.9.1.152196|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|12|NM|188740^MDC_LEN_BODY_ACTUAL^MDC|1.10.1.188740|169.0|263441^MDC_DIM_CENTI_M^MDC|||||R|||20240812133648.0000+0530OBX|13|NM|188736^MDC_MASS_BODY_ACTUAL^MDC|1.10.1.188736|73.0|263875^MDC_DIM_KILO_G^MDC|||||R|||20240812133648.0000+0530
-2025-01-02 11:07:58 - Incoming msg Type :ORU
-2025-01-02 11:07:58 - ACK SENT :MSH|^~\&|Mindray|ADTServer|||||ACK|540|P|2.6MSA|AA|540
-2025-01-02 11:07:58 - URL : https://aiimsjodhpur.uat.dcservices.in/OT_INTEGRATION/service/api/saveresult/
-2025-01-02 11:07:58 - Response Code: 200OK
-2025-01-02 11:07:58 - Data  RECIEVED :- MSH|^~\&|MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|MINDRAY|||20240812133649.0000+0530||ORU^R01^ORU_R01|540|P|2.6|||AL|NE||UNICODE UTF-8|||IHE_PCD_001^IHE PCD^1.3.6.1.4.1.19376.1.6.1.1.1^ISOPID|||123^^^Hospital^PI||singh^ajay^^^^^L||19950414|MPV1||I|^^^^^^^^00-0F-14-16-C6-45^M0001OBR|1|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|182777000^monitoring of patient^SCT|||20240812133648.0000+0530OBX|1|NM|188496^MDC_TEMP_AXIL^MDC|1.2.1.188496|81.5|266560^MDC_DIM_FAHR^MDC|||||R|||20240812133648.0000+0530||||000F14029116C645^Beneview^000F14029116C645^EUI-64OBX|2|NM|150456^MDC_PULS_OXIM_SAT_O2^MDC|1.3.1.150456|99|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|3|NM|149530^MDC_PULS_OXIM_PULS_RATE^MDC|1.3.1.149530|83|264864^MDC_DIM_BEAT_PER_MIN^MDC|||||R|||20240812133648.0000+0530OBX|4|NM|247^MNDRY_PULS_OXIM_SAT_SECONDS^99MNDRY|1.3.1.247|0|264320^MDC_DIM_SEC^MDC|||||R|||20240812133648.0000+0530OBX|5|NM|151708^MDC_CONC_AWAY_CO2_ET^MDC|1.8.1.151708|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|6|NM|151716^MDC_CONC_AWAY_CO2_INSP^MDC|1.8.1.151716|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|7|NM|152108^MDC_CONC_AWAY_N2O_ET^MDC|1.9.1.152108|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|8|NM|152192^MDC_CONC_AWAY_N2O_INSP^MDC|1.9.1.152192|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|9|NM|152872^MDC_CONC_MAC^MDC|1.9.1.152872|0.00|262656^MDC_DIM_DIMLESS^MDC|||||R|||20240812133648.0000+0530OBX|10|NM|152440^MDC_CONC_AWAY_O2_ET^MDC|1.9.1.152440|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|11|NM|152196^MDC_CONC_AWAY_O2_INSP^MDC|1.9.1.152196|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|12|NM|188740^MDC_LEN_BODY_ACTUAL^MDC|1.10.1.188740|169.0|263441^MDC_DIM_CENTI_M^MDC|||||R|||20240812133648.0000+0530OBX|13|NM|188736^MDC_MASS_BODY_ACTUAL^MDC|1.10.1.188736|73.0|263875^MDC_DIM_KILO_G^MDC|||||R|||20240812133648.0000+0530
-2025-01-02 11:07:58 - Incoming msg Type :ORU
-2025-01-02 11:07:58 - ACK SENT :MSH|^~\&|Mindray|ADTServer|||||ACK|540|P|2.6MSA|AA|540
-2025-01-02 11:07:59 - URL : https://aiimsjodhpur.uat.dcservices.in/OT_INTEGRATION/service/api/saveresult/
-2025-01-02 11:07:59 - Response Code: 200OK
-2025-01-02 11:07:59 - Data  RECIEVED :- MSH|^~\&|MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|MINDRAY|||20240812133649.0000+0530||ORU^R01^ORU_R01|540|P|2.6|||AL|NE||UNICODE UTF-8|||IHE_PCD_001^IHE PCD^1.3.6.1.4.1.19376.1.6.1.1.1^ISOPID|||123^^^Hospital^PI||singh^ajay^^^^^L||19950414|MPV1||I|^^^^^^^^00-0F-14-16-C6-45^M0001OBR|1|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|182777000^monitoring of patient^SCT|||20240812133648.0000+0530OBX|1|NM|188496^MDC_TEMP_AXIL^MDC|1.2.1.188496|81.5|266560^MDC_DIM_FAHR^MDC|||||R|||20240812133648.0000+0530||||000F14029116C645^Beneview^000F14029116C645^EUI-64OBX|2|NM|150456^MDC_PULS_OXIM_SAT_O2^MDC|1.3.1.150456|99|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|3|NM|149530^MDC_PULS_OXIM_PULS_RATE^MDC|1.3.1.149530|83|264864^MDC_DIM_BEAT_PER_MIN^MDC|||||R|||20240812133648.0000+0530OBX|4|NM|247^MNDRY_PULS_OXIM_SAT_SECONDS^99MNDRY|1.3.1.247|0|264320^MDC_DIM_SEC^MDC|||||R|||20240812133648.0000+0530OBX|5|NM|151708^MDC_CONC_AWAY_CO2_ET^MDC|1.8.1.151708|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|6|NM|151716^MDC_CONC_AWAY_CO2_INSP^MDC|1.8.1.151716|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|7|NM|152108^MDC_CONC_AWAY_N2O_ET^MDC|1.9.1.152108|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|8|NM|152192^MDC_CONC_AWAY_N2O_INSP^MDC|1.9.1.152192|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|9|NM|152872^MDC_CONC_MAC^MDC|1.9.1.152872|0.00|262656^MDC_DIM_DIMLESS^MDC|||||R|||20240812133648.0000+0530OBX|10|NM|152440^MDC_CONC_AWAY_O2_ET^MDC|1.9.1.152440|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|11|NM|152196^MDC_CONC_AWAY_O2_INSP^MDC|1.9.1.152196|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|12|NM|188740^MDC_LEN_BODY_ACTUAL^MDC|1.10.1.188740|169.0|263441^MDC_DIM_CENTI_M^MDC|||||R|||20240812133648.0000+0530OBX|13|NM|188736^MDC_MASS_BODY_ACTUAL^MDC|1.10.1.188736|73.0|263875^MDC_DIM_KILO_G^MDC|||||R|||20240812133648.0000+0530
-2025-01-02 11:07:59 - Incoming msg Type :ORU
-2025-01-02 11:07:59 - ACK SENT :MSH|^~\&|Mindray|ADTServer|||||ACK|540|P|2.6MSA|AA|540
-2025-01-02 11:07:59 - URL : https://aiimsjodhpur.uat.dcservices.in/OT_INTEGRATION/service/api/saveresult/
-2025-01-02 11:07:59 - Response Code: 200OK
-2025-01-02 11:07:59 - Data  RECIEVED :- MSH|^~\&|MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|MINDRAY|||20240812133649.0000+0530||ORU^R01^ORU_R01|540|P|2.6|||AL|NE||UNICODE UTF-8|||IHE_PCD_001^IHE PCD^1.3.6.1.4.1.19376.1.6.1.1.1^ISOPID|||123^^^Hospital^PI||singh^ajay^^^^^L||19950414|MPV1||I|^^^^^^^^00-0F-14-16-C6-45^M0001OBR|1|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|182777000^monitoring of patient^SCT|||20240812133648.0000+0530OBX|1|NM|188496^MDC_TEMP_AXIL^MDC|1.2.1.188496|81.5|266560^MDC_DIM_FAHR^MDC|||||R|||20240812133648.0000+0530||||000F14029116C645^Beneview^000F14029116C645^EUI-64OBX|2|NM|150456^MDC_PULS_OXIM_SAT_O2^MDC|1.3.1.150456|99|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|3|NM|149530^MDC_PULS_OXIM_PULS_RATE^MDC|1.3.1.149530|83|264864^MDC_DIM_BEAT_PER_MIN^MDC|||||R|||20240812133648.0000+0530OBX|4|NM|247^MNDRY_PULS_OXIM_SAT_SECONDS^99MNDRY|1.3.1.247|0|264320^MDC_DIM_SEC^MDC|||||R|||20240812133648.0000+0530OBX|5|NM|151708^MDC_CONC_AWAY_CO2_ET^MDC|1.8.1.151708|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|6|NM|151716^MDC_CONC_AWAY_CO2_INSP^MDC|1.8.1.151716|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|7|NM|152108^MDC_CONC_AWAY_N2O_ET^MDC|1.9.1.152108|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|8|NM|152192^MDC_CONC_AWAY_N2O_INSP^MDC|1.9.1.152192|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|9|NM|152872^MDC_CONC_MAC^MDC|1.9.1.152872|0.00|262656^MDC_DIM_DIMLESS^MDC|||||R|||20240812133648.0000+0530OBX|10|NM|152440^MDC_CONC_AWAY_O2_ET^MDC|1.9.1.152440|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|11|NM|152196^MDC_CONC_AWAY_O2_INSP^MDC|1.9.1.152196|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|12|NM|188740^MDC_LEN_BODY_ACTUAL^MDC|1.10.1.188740|169.0|263441^MDC_DIM_CENTI_M^MDC|||||R|||20240812133648.0000+0530OBX|13|NM|188736^MDC_MASS_BODY_ACTUAL^MDC|1.10.1.188736|73.0|263875^MDC_DIM_KILO_G^MDC|||||R|||20240812133648.0000+0530
-2025-01-02 11:07:59 - Incoming msg Type :ORU
-2025-01-02 11:07:59 - ACK SENT :MSH|^~\&|Mindray|ADTServer|||||ACK|540|P|2.6MSA|AA|540
-2025-01-02 11:07:59 - URL : https://aiimsjodhpur.uat.dcservices.in/OT_INTEGRATION/service/api/saveresult/
-2025-01-02 11:07:59 - Response Code: 200OK
-2025-01-02 11:07:59 - Data  RECIEVED :- MSH|^~\&|MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|MINDRAY|||20240812133649.0000+0530||ORU^R01^ORU_R01|540|P|2.6|||AL|NE||UNICODE UTF-8|||IHE_PCD_001^IHE PCD^1.3.6.1.4.1.19376.1.6.1.1.1^ISOPID|||123^^^Hospital^PI||singh^ajay^^^^^L||19950414|MPV1||I|^^^^^^^^00-0F-14-16-C6-45^M0001OBR|1|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|540^MINDRAY_EGATEWAY^00A03700275CFF28^EUI-64|182777000^monitoring of patient^SCT|||20240812133648.0000+0530OBX|1|NM|188496^MDC_TEMP_AXIL^MDC|1.2.1.188496|81.5|266560^MDC_DIM_FAHR^MDC|||||R|||20240812133648.0000+0530||||000F14029116C645^Beneview^000F14029116C645^EUI-64OBX|2|NM|150456^MDC_PULS_OXIM_SAT_O2^MDC|1.3.1.150456|99|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|3|NM|149530^MDC_PULS_OXIM_PULS_RATE^MDC|1.3.1.149530|83|264864^MDC_DIM_BEAT_PER_MIN^MDC|||||R|||20240812133648.0000+0530OBX|4|NM|247^MNDRY_PULS_OXIM_SAT_SECONDS^99MNDRY|1.3.1.247|0|264320^MDC_DIM_SEC^MDC|||||R|||20240812133648.0000+0530OBX|5|NM|151708^MDC_CONC_AWAY_CO2_ET^MDC|1.8.1.151708|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|6|NM|151716^MDC_CONC_AWAY_CO2_INSP^MDC|1.8.1.151716|0|266016^MDC_DIM_MMHG^MDC|||||R|||20240812133648.0000+0530OBX|7|NM|152108^MDC_CONC_AWAY_N2O_ET^MDC|1.9.1.152108|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|8|NM|152192^MDC_CONC_AWAY_N2O_INSP^MDC|1.9.1.152192|0.0|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|9|NM|152872^MDC_CONC_MAC^MDC|1.9.1.152872|0.00|262656^MDC_DIM_DIMLESS^MDC|||||R|||20240812133648.0000+0530OBX|10|NM|152440^MDC_CONC_AWAY_O2_ET^MDC|1.9.1.152440|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|11|NM|152196^MDC_CONC_AWAY_O2_INSP^MDC|1.9.1.152196|21.1|262688^MDC_DIM_PERCENT^MDC|||||R|||20240812133648.0000+0530OBX|12|NM|188740^MDC_LEN_BODY_ACTUAL^MDC|1.10.1.188740|169.0|263441^MDC_DIM_CENTI_M^MDC|||||R|||20240812133648.0000+0530OBX|13|NM|188736^MDC_MASS_BODY_ACTUAL^MDC|1.10.1.188736|73.0|263875^MDC_DIM_KILO_G^MDC|||||R|||20240812133648.0000+0530
-2025-01-02 11:07:59 - Incoming msg Type :ORU
-2025-01-02 11:07:59 - ACK SENT :MSH|^~\&|Mindray|ADTServer|||||ACK|540|P|2.6MSA|AA|540
-2025-01-02 11:07:59 - URL : https://aiimsjodhpur.uat.dcservices.in/OT_INTEGRATION/service/api/saveresult/
-2025-01-02 11:07:59 - Response Code: 200OK
-2025-01-06 10:10:32 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2025-01-06 10:10:32 - SERVER BOOTED ON PORT: 50004
-2025-01-06 10:10:32 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2025-01-06 10:10:45 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65388,localport=50004]
-2025-01-06 10:10:46 - CONNECTION 2 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65396,localport=50004]
-2025-01-06 10:10:47 - CONNECTION 3 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65397,localport=50004]
-2025-01-06 10:10:47 - CONNECTION 4 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65398,localport=50004]
-2025-01-06 10:10:47 - CONNECTION 5 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65399,localport=50004]
-2025-01-06 10:10:48 - CONNECTION 6 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65400,localport=50004]
-2025-01-06 10:10:48 - CONNECTION 7 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65401,localport=50004]
-2025-01-06 10:10:48 - CONNECTION 8 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65402,localport=50004]
-2025-01-06 10:10:48 - CONNECTION 9 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65403,localport=50004]
-2025-01-06 10:10:49 - CONNECTION 10 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65404,localport=50004]
-2025-01-06 10:10:49 - CONNECTION 11 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65405,localport=50004]
-2025-01-06 10:10:49 - CONNECTION 12 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65406,localport=50004]
-2025-01-06 10:10:49 - CONNECTION 13 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65407,localport=50004]
-2025-01-06 10:10:49 - CONNECTION 14 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65408,localport=50004]
-2025-01-06 10:10:50 - CONNECTION 15 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65409,localport=50004]
-2025-01-06 10:10:50 - CONNECTION 16 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65410,localport=50004]
-2025-01-06 10:10:50 - CONNECTION 17 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65411,localport=50004]
-2025-01-06 10:10:50 - CONNECTION 18 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65412,localport=50004]
-2025-01-06 10:10:50 - CONNECTION 19 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65413,localport=50004]
-2025-01-06 10:10:51 - CONNECTION 20 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65414,localport=50004]
-2025-01-06 10:10:53 - CONNECTION 21 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65418,localport=50004]
-2025-01-06 10:10:53 - CONNECTION 22 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65419,localport=50004]
-2025-01-06 10:10:53 - CONNECTION 23 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65420,localport=50004]
-2025-01-06 10:10:53 - CONNECTION 24 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65421,localport=50004]
-2025-01-06 10:10:54 - CONNECTION 25 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65422,localport=50004]
-2025-01-06 10:10:54 - CONNECTION 26 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65423,localport=50004]
-2025-01-06 10:10:54 - CONNECTION 27 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65424,localport=50004]
-2025-01-06 10:10:54 - CONNECTION 28 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65425,localport=50004]
-2025-01-06 10:10:54 - CONNECTION 29 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65426,localport=50004]
-2025-01-06 10:10:54 - CONNECTION 30 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65427,localport=50004]
-2025-01-06 10:10:55 - CONNECTION 31 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65428,localport=50004]
-2025-01-06 10:10:55 - CONNECTION 32 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65429,localport=50004]
-2025-01-06 10:10:55 - CONNECTION 33 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65430,localport=50004]
-2025-01-06 10:10:55 - CONNECTION 34 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65431,localport=50004]
-2025-01-06 10:10:55 - CONNECTION 35 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65432,localport=50004]
-2025-01-06 10:10:55 - CONNECTION 36 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65433,localport=50004]
-2025-01-06 10:10:56 - CONNECTION 37 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65434,localport=50004]
-2025-01-06 10:10:56 - CONNECTION 38 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65435,localport=50004]
-2025-01-06 10:10:56 - CONNECTION 39 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65436,localport=50004]
-2025-01-06 10:10:57 - CONNECTION 40 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65437,localport=50004]
-2025-01-06 10:10:57 - CONNECTION 41 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65438,localport=50004]
-2025-01-06 10:10:57 - CONNECTION 42 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65439,localport=50004]
-2025-01-06 10:10:58 - CONNECTION 43 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65440,localport=50004]
-2025-01-06 10:10:59 - CONNECTION 44 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65441,localport=50004]
-2025-01-06 10:10:59 - CONNECTION 45 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65442,localport=50004]
-2025-01-06 10:10:59 - CONNECTION 46 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65443,localport=50004]
-2025-01-06 10:10:59 - CONNECTION 47 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65444,localport=50004]
-2025-01-06 10:10:59 - CONNECTION 48 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65445,localport=50004]
-2025-01-06 10:11:00 - CONNECTION 49 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65446,localport=50004]
-2025-01-06 10:11:00 - CONNECTION 50 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=65447,localport=50004]
-2025-01-06 10:47:48 - Selected Machine: SYS-480, Port Number: 50004Protocol: HL7
-2025-01-06 10:47:48 - SERVER BOOTED ON PORT: 50004
-2025-01-06 10:47:48 - ANY CLIENT CAN STOP THE SERVER BY SENDING -1
-2025-01-06 10:48:00 - CONNECTION 1 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=61499,localport=50004]
-2025-01-06 10:48:05 - CONNECTION 2 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=61500,localport=50004]
-2025-01-06 10:48:05 - CONNECTION 3 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=61501,localport=50004]
-2025-01-06 10:48:05 - CONNECTION 4 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=61502,localport=50004]
-2025-01-06 10:48:05 - CONNECTION 5 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=61503,localport=50004]
-2025-01-06 10:48:06 - CONNECTION 6 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=61504,localport=50004]
-2025-01-06 10:48:06 - CONNECTION 7 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=61505,localport=50004]
-2025-01-06 10:48:06 - CONNECTION 8 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=61506,localport=50004]
-2025-01-06 10:48:07 - CONNECTION 9 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=61507,localport=50004]
-2025-01-06 10:48:07 - CONNECTION 10 ESTABLISHED WITH CLIENT Socket[addr=/10.226.28.174,port=61508,localport=50004]
-2025-01-06 10:48:31 - Data  RECIEVED :- MSH|^~\&|||||||ORU^R01|106|P|2.3.1|
-2025-01-06 10:48:31 - ACK SENT:  MSH|^~\&|||||20250106104831||ACK^RO1|106|P|2.3.1||||0||ASCII|||MSA|AA|106|Message accepted|||0|
-2025-01-06 10:48:31 - Test Code : []
-2025-01-06 10:48:31 - Test Value : []
-2025-01-30 14:52:01 - Connected to server On : 192.168.209.23 : 50004
-2025-01-30 14:52:01 - Server Ip :192.168.209.23
-2025-01-30 14:52:01 - Port :50004
-2025-01-30 14:52:04 - TestCode details: null
-2025-01-30 14:52:23 - ABG SOLUTION  
-2025-01-30 14:52:23 -  1H|\^&|||GEM 3000^6.3.3     ^32603^GEM.P.3500^185852^2.4|||||||||20250129055025P|1O|1||||||||||||||2PtCalR|1|^^^Ca++Slope|31|mV/dec||||||||20250129055025R|2|^^^Ca++DriftA|0.01|mmol/LR|3|^^^Ca++MeasuredA|2.62|mmol/LR|4|^^^Ca++DriftB|-0.0C
-2025-01-30 14:52:23 - ACK SENT: 
-2025-01-30 16:22:56 - Connected to server On : 10.226.28.174 : 50004
-2025-01-30 16:22:56 - Server Ip :10.226.28.174
-2025-01-30 16:22:56 - Port :50004
-2025-01-30 16:23:10 - ABG SOLUTION  
-2025-01-30 16:23:10 - 1H|\^&|||GEM 3000^6.3.3     ^32603^GEM.P.3500^185852^2.4|||||||||20250129055025
-P|1
-O|1||||||||||||||2PtCal
-R|1|^^^Ca++Slope|31|mV/dec||||||||20250129055025
-R|2|^^^Ca++DriftA|0.01|mmol/L
-R|3|^^^Ca++MeasuredA|2.62|mmol/L
-R|4|^^^Ca++DriftB|-0.0C
-2025-01-30 16:23:10 - ACK SENT: 
-2025-01-30 16:23:55 - ABG SOLUTION  
-2025-01-30 16:23:55 - 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-2025-01-30 16:23:55 - ACK SENT: 
-2025-01-30 16:24:13 - ABG SOLUTION  
-2025-01-30 16:24:13 - 1H|\^&|||GEM.3000^6.3.3.....^32603^GEM.P.3500^115232^2.4|||||||||20241105134036
-P|1||500462160||^2|||U
-O|1||227||||||||||||A
-R|1|^^^BE(B)|2.6|mmol/L||||||||20241105131720
-R|2|^^^BEecf|2.9|mmol/L
-R|3|^^^Ca++|1.03|mmol/L
-R|4|^^^Ca++(7.4)|1.04|2mmol/L
-R|5|^^^Glu|180|mg/dL
-R|6|^^^HCO3-|27.2|mmol/L
-R|7|^^^HCO3std|27.0|mmol/L
-R|8|^^^Hct|31|%
-R|9|^^^K+|2.8|mmol/L
-R|10|^^^Lac|1.0|mmol/L
-R|11|^^^Na+|155|mmol/L
-R|12|^^^SO2c|99|%
-R|13|^^^TCO2|28.5|mmol/L
-R|14|^^^THbc|9.6|g/dL
-R|15|^^^pCO2[ETB]173|41|mmHg
-R|16|^^^pH|7.43
-R|17|^^^pO2|116|mmHg
-R|18|^^^Temp|37.0|Css
-L|1
-
-2025-01-30 16:24:13 - ACK SENT: 

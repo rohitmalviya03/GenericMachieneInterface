@@ -89,7 +89,7 @@ public class ABC {
 		String line1 = null;
 		String line2 = null;
 
-		 String url = "http://" + ip +
+		 String url =  ip +
 		 "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=3&eqp="
 		 + eqp + "&hos=" + hos + "&sam=" + samplecode.toString().trim() + "&uid=" + uid;
 	//	String url = "https://" + ip + "/SupportServices/service/app/testdtl?hospcode=" + hos + "&samplecode="
@@ -1228,8 +1228,8 @@ public class ABC {
 			wr.close();
 
 			System.out.println("\nSending 'GET' request to URL : " + url);
-			GenericServer.logMessage("\nSending 'GET' request to URL : " + url, Color.BLUE);
-			GenericServer.saveToFile("Sending 'GET' request to URL : " + url,GenericServer.FILE_NAME);
+			GenericV_04_03_01.logMessage("\nSending 'GET' request to URL : " + url, Color.BLUE);
+			GenericV_04_03_01.saveToFile("Sending 'GET' request to URL : " + url,GenericV_04_03_01.FILE_NAME);
 				
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String inputLine;
@@ -1239,11 +1239,11 @@ public class ABC {
 			}
 			System.out.println("response--:" + response.toString());
 			System.out.println("responce :1+" + con.getResponseMessage());
-			GenericServer.logMessage("response--:" + response.toString(), Color.BLUE);
-			GenericServer.logMessage("responce :1+" + con.getResponseMessage(), Color.BLUE);
-			GenericServer.saveToFile("response--:" + response.toString(),GenericServer.FILE_NAME);
+			GenericV_04_03_01.logMessage("response--:" + response.toString(), Color.BLUE);
+			GenericV_04_03_01.logMessage("responce :1+" + con.getResponseMessage(), Color.BLUE);
+			GenericV_04_03_01.saveToFile("response--:" + response.toString(),GenericV_04_03_01.FILE_NAME);
 			
-			GenericServer.saveToFile("responce :1+" + con.getResponseMessage(),GenericServer.FILE_NAME);
+			GenericV_04_03_01.saveToFile("responce :1+" + con.getResponseMessage(),GenericV_04_03_01.FILE_NAME);
 			
 /*			FileWriter fw11 = new FileWriter(path_HIMS_LOG, true);
 			BufferedWriter bw = new BufferedWriter(fw11);

@@ -1,0 +1,1253 @@
+package application.resource;
+
+import java.io.BufferedReader;
+import java.io.StringReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+public class MachinesIndividualMethods {
+	
+	static SimpleDateFormat time_formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+	static StringBuilder orderPacket = new StringBuilder();
+	static List frameList = new ArrayList<>();
+	static int StxCounter = 1;
+	static char stx = '';
+	
+	// frame Counts
+		public static int FrameCounter(int num) {
+			int count = 1;
+
+			int remain = 0;
+			while (true) {
+				if (num % 240 == 0) {
+					count = num / 240;
+					break;
+				}
+				remain = num / 240;
+				count = count + remain;
+				break;
+			}
+
+			System.out.println("Count " + count);
+			return count;
+		}
+       // ------------------------------------------------------------------------------------------------------------
+		
+		public static String CheckSum(String bff) {
+			int sum = 0, j = 0;
+			StringBuffer bf = new StringBuffer(); // IF STRING COMES WITHOUT STX THEN APPEND STX
+			StringBuffer string = new StringBuffer("0");
+			if (bff.charAt(0) == 2) {
+			} else {
+				bf.append(stx);
+				bf.append(bff);
+				bff = bf.toString();
+			}
+
+			char[] ch = bff.toCharArray();
+			System.out.println("Length ch : "+ch.length);
+			for (int i = 1; i < ch.length; i++) // CHECKSUM WITH STX STX-COUNTER AND ETB OR ETX
+			{
+				String hexx = Integer.toHexString(ch[i]);
+				int decimal = Integer.parseInt(hexx, 16);
+				sum = sum + decimal;
+			}
+			sum = sum % 256;
+			String str = Integer.toHexString(sum);
+			// System.out.println("checksum:---"+checksum);
+			// checksum = checksum.substring(1, checksum.length());
+			str = str.toUpperCase(); // IF ALPHABET COMES THEN IT SHOULD BE IN UPPER CASE
+			if (str.length() == 1) {
+				string.append(str);
+			}
+			System.out.println("Sum " + str + "    str" + string);
+			if (str.length() == 1)
+				return string.toString();
+			else
+				return str;
+		}
+       // ------------------------------------------------------------------------------------------------------------
+
+	public static boolean isQueryPacket(String packet) {
+//		String[] arrPacket = packet.split("\n");
+		String[] arrPacket = packet.trim().split("\\s++");
+		if (arrPacket[1].contains("Q|") && arrPacket[1].indexOf("Q|") <= 3)
+			return true;
+		else
+		    return false;
+	}
+    // ------------------------------------------------------------------------------------------------------------
+	
+	public static String buildHeader(String header) {
+//		String current_time = time_formatter.format(System.currentTimeMillis());
+		StringBuilder headerSB = new StringBuilder();
+		String analyzer = "";
+		String lis = "";
+		int countVB = 0;
+		boolean isLISAppended = false;
+		boolean isAnalyzerAppended = false;
+		String[] hArr = header.split("\\|");
+		analyzer = hArr[4];
+		lis = hArr[9];
+		System.out.println("LIS : "+lis+"\nAnalyzer : "+analyzer);
+		char[] headerCharArr = header.toCharArray();
+		for (char ch : headerCharArr) {
+			if (ch == '|')
+				countVB++;
+			if (countVB != 4 && countVB != 9) {
+				if (countVB == 13)
+					headerSB.append('1');
+				headerSB.append(ch);
+			}
+			if (countVB == 4 && !isLISAppended) {
+				headerSB.append("|"+lis);
+				isLISAppended = true;
+			}	
+			if (countVB == 9 && !isAnalyzerAppended) {
+				headerSB.append("|"+analyzer);
+				isAnalyzerAppended = true;
+			}
+			if (countVB == 13) {
+				headerSB.append(time_formatter.format(System.currentTimeMillis()));
+				break;
+			}				
+		}
+		System.out.println("Header : "+headerSB.toString());
+		return headerSB.toString();
+	}
+    // ------------------------------------------------------------------------------------------------------------
+	
+	public static String buildPatientRecord(String packet) {
+		String patientRecordPacket = "";
+		return patientRecordPacket; 
+	}
+    // ------------------------------------------------------------------------------------------------------------
+
+	public static List orderPacketBuilder(String queryPacket) {
+		char cr = 13;
+		char lf = 10;
+		char stx = '';
+		char etb = 23;
+		char eot = '';
+		char etx = 3;
+		String sampleId = "";
+		String sampleName = "";
+		String sampleGender = "";
+		String sampleAge = "";
+		String sampleDetail = "";
+		String testCode = "";
+		String header = "";
+		String terminator_L = "";
+		StringBuffer packet_buf = new StringBuffer();
+		StringBuffer header_buf = new StringBuffer();
+		StringBuffer patient_buf = new StringBuffer();
+		StringBuffer order_buf = new StringBuffer();
+		StringBuffer terminator_L_buf = new StringBuffer();
+		Queue<String> testCodeQueue = new LinkedList<>();
+		
+		Reader inputString = new StringReader(queryPacket);
+		BufferedReader reader = new BufferedReader(inputString);
+		List<String> qPacketArr = new ArrayList<String>();
+		String str;
+		try {
+			while ((str = reader.readLine()) != null) {
+				if (str != null && str.length() > 3) {
+					str = str.substring(0, str.length());
+					// str = str.substring(0, str.length() - 1);
+					qPacketArr.add(str);
+				}
+			}
+		
+//		String[] qPacketArr = queryPacket.split("\\s+");
+		
+		for (String line : qPacketArr) {
+			if (line.contains("H|")) {
+				header = line.substring(line.indexOf('H'));
+				System.out.println("Header : "+header);
+			}
+			if (line.contains("Q|")) {
+				System.out.println("QueryLine : "+line);
+				String[] fields = line.split("\\|");
+				String[] idInfo = fields[2].split("\\^");
+				sampleId = fields[2];
+				sampleId=sampleId.substring(2);
+			}
+			if (line.contains("L|") && line.indexOf('L') < 2) {
+//				terminator_L_buf.append(line);
+				break;
+			}
+		}
+		
+		String[] sampleDtl=sampleId.split("\\^");
+		sampleId=sampleDtl[0];
+		System.out.println("SampleId : "+sampleId);
+		patient_buf.append("P|1");
+		//patient_buf.append(sampleId);
+		//patient_buf.append("|||^^||||||||||||||||||||");
+		sampleDetail = API.getSampleDetail(sampleId);
+		System.out.println("sampleDetail : "+sampleDetail);
+		sampleDetail = "TestData : FT41DOSE;FT31DOSE;TSH3UL1DOSE;#Sameer    # 12 Yr    #M#2007OP005#" ;
+		String[] sampleDetailArr = sampleDetail.split("#");
+		String[] testDataArr = sampleDetailArr[0].split(":");
+		if (testDataArr[1].contains(";")) {
+			String[] testCodeArr = testDataArr[1].split(";");
+			for (String tCode : testCodeArr) {
+				System.out.println(tCode);
+				testCodeQueue.offer(tCode.trim());
+			}
+		}else
+			testCode = testDataArr[1].trim();
+		System.out.println("TestCode : "+testCode);
+		
+			StringBuffer frame = new StringBuffer();
+			
+			System.out.println("TIME :- " + time_formatter.format(System.currentTimeMillis()));
+			
+			stx = stx;
+
+			while (true) {
+				header_buf.append(buildHeader(header).trim());
+				header_buf.append(cr);
+				packet_buf.append(header_buf);
+//				packet_buf.append(cr);
+				patient_buf.append(cr);
+				packet_buf.append(patient_buf);
+
+				// ==============================
+
+				System.out.println("TestCodeQueue size------- " + testCodeQueue.size());
+
+				order_buf.append("O|1");
+				// Order.append();
+				order_buf.append("|");
+				order_buf.append(sampleId.trim());
+				order_buf.append("|");
+				
+				int k = 0;
+				for (String tc : testCodeQueue) {
+					k++;
+					order_buf.append("^^^");
+					order_buf.append(tc.replace("1DOSE", "").trim());
+
+					if (k != testCodeQueue.size()) {
+						order_buf.append("\\");
+					} else {
+			//			Order.append("^");
+					}
+				}
+				order_buf.append("|R");
+				order_buf.append("||||||||||||||||||||O\\Q");
+				order_buf.append(cr);
+				packet_buf.append(order_buf);
+				order_buf.delete(0, order_buf.length());
+
+				System.out.println("buf= " + packet_buf.toString());
+				terminator_L_buf.append("L|1|N");
+				terminator_L_buf.append(cr);
+
+				packet_buf.append(terminator_L_buf);
+
+				break;
+			}
+
+			// CODE TO DELETE LF IF EXISTS IN STRING *** STARTS ***
+			/*
+			 * for(int i=0;i<buf.length();i++) { if(buf.charAt(i)!=10)
+			 * faltu.append(buf.charAt(i)); else System.out.println("yesssss"); }
+			 * buf.delete(0, buf.length()); buf = faltu;
+			 */
+			// CODE TO DELETE LF IF EXISTS IN STRING *** ENDS ***
+
+			System.out.println("STRING LENGTH BEFORE FRAMING = " + packet_buf.length());
+			System.out.println("frame BEFORE FRAMING = " + packet_buf.toString());
+			// STRING LENGTH BEFORE FRAMING = 235
+			int frameCount = 0, first = 0, mid = 0, remain = 0;
+			frameCount = FrameCounter(packet_buf.length());
+			// System.out.println("Char At 0 "+buf.charAt(0));
+			int length = packet_buf.length();
+
+			for (int i = 1; i <= frameCount; i++) {
+				if (length < 240)
+					// if (length < 306)
+					mid = mid + length;
+				else if (length == 240)
+					mid = mid + length;
+				else if (length > 240) {
+					mid = mid + 240;
+				}
+				System.out.println("First " + first + "  " + "last " + mid + " stx  " + stx);
+				frame.append(stx);
+				System.out.println("Server.StxCounter " + StxCounter);
+				frame.append(StxCounter);
+				System.out.println("STX COUNTER:- " + StxCounter);
+				StxCounter++;
+				frame.append(packet_buf.substring(first, mid));
+
+				if (i == frameCount) {
+					frame.append(etx);
+					System.out.println("before checksum" + frame.toString());
+					frame.append(CheckSum(frame.toString())); // FRAME WITH STX STX COUNTER AND ETX
+					// frame.appen.d(CheckSum(buf.substring(first, mid))); //FRAME WITH ONLY
+					// CHARACTERS
+					frame.append(cr);
+					frame.append(lf);
+				} else
+
+				{
+					frame.append(etb);
+					System.out.println("before checksum" + frame.toString());
+					frame.append(CheckSum(frame.toString())); // FRAME WITH STX STX COUNTER AND ETB
+					// frame.append(CheckSum(buf.substring(first, mid)));
+					frame.append(cr);
+					frame.append(lf);
+				}
+				// length = length - mid;
+				length = length - 240;
+				first = mid;
+
+				frameList.add(frame.toString());
+
+				frame.delete(0, frame.length());
+
+			}
+
+			StxCounter = 1;
+			
+			System.out.println("Final String after checksum" + frameList.toString());
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return frameList;
+	}
+    // ------------------------------------------------------------------------------------------------------------
+	
+	public static List vitrosECIqOrderPacketBuilder(String sampleId) {
+		List frameList = new ArrayList();
+		StringBuffer header = new StringBuffer();
+		StringBuffer patient = new StringBuffer();
+		StringBuffer order = new StringBuffer();
+		StringBuffer terminator = new StringBuffer();
+		String sampleDetail;
+		String testCode = "";
+		Queue<String> testCodeQueue = new LinkedList<>();
+		char cr = 13;
+		char etx = 3;
+		header.append("1H|\\^&|||VITROS||||||||||");
+		header.append(cr);
+		header.append(etx);
+		header.append(CheckSum(header.toString()));
+		frameList.add(header.toString());
+		patient.append("2P|1");
+		patient.append(cr);
+		patient.append(etx);
+		patient.append(CheckSum(patient.toString()));
+		frameList.add(patient.toString());
+		order.append("3O|1|"+sampleId+"||^^^1.0+");
+//		sampleDetail = API.getSampleDetail(sampleId);
+		sampleDetail = "TestData : 003;002;035;#Test    #45 Yr     #F#OP007#" ;
+		System.out.println("SampleDetail : "+sampleDetail);
+		String[] sampleDetailArr = sampleDetail.split("#");
+		String[] testDataArr = sampleDetailArr[0].split(":");
+		if (testDataArr[1].contains(";")) {
+			String[] testCodeArr = testDataArr[1].split(";");
+			for (String tCode : testCodeArr) {
+				System.out.println(tCode);
+				testCodeQueue.offer(tCode.trim());
+			}
+		}else
+			testCode = testDataArr[1].trim();
+		System.out.println("TestCode : "+testCode);
+		int k = 0;
+		for (String tc : testCodeQueue) {
+			k++;
+			order.append(tc.trim()+"+1");
+
+			if (k != testCodeQueue.size()) {
+				order.append("\\");
+			} else {
+	//			Order.append("^");
+			}
+		}
+		order.append("|R||||||N||||4||||||||||O||||||");
+		order.append(cr);
+		order.append(etx);
+		order.append(CheckSum(order.toString()));
+		frameList.add(order.toString());
+		terminator.append("4L|1");
+		terminator.append(cr);
+		terminator.append(etx);
+		terminator.append(CheckSum(terminator.toString()));
+		frameList.add(terminator.toString());
+		System.out.println(frameList);
+		return frameList;		
+	}
+    // ------------------------------------------------------------------------------------------------------------
+//	//Beckman Coulter Access 2 Order Packet Builder
+	public static List beckmanCoulterAccess2OrderPacketBuilder(String queryPacket) {
+		List frameList = new ArrayList();
+		StringBuffer header = new StringBuffer();
+		StringBuffer patient = new StringBuffer();
+		StringBuffer order = new StringBuffer();
+		StringBuffer terminator = new StringBuffer();
+		String sampleDetail;
+		String testCode = "";
+		String sampleId = "";
+		Queue<String> testCodeQueue = new LinkedList<>();
+		char cr = 13;
+		char lf = 10;
+		char etx = 3;
+		
+		Reader inputString = new StringReader(queryPacket);
+		BufferedReader reader = new BufferedReader(inputString);
+		List<String> qPacketArr = new ArrayList<String>();
+		String str;
+		try {
+			while ((str = reader.readLine()) != null) {
+				if (str != null && str.length() > 3) {
+					str = str.substring(0, str.length());
+					// str = str.substring(0, str.length() - 1);
+					qPacketArr.add(str);
+				}
+			}
+		
+//		String[] qPacketArr = queryPacket.split("\\s+");
+		
+		for (String line : qPacketArr) {
+			if (line.contains("H|")) {
+				System.out.println("Header : "+line.substring(line.indexOf('H')));
+			}
+			if (line.contains("Q|")) {
+				System.out.println("QueryLine : "+line);
+				String[] fields = line.split("\\|");
+				String[] idInfo = fields[2].split("\\^");
+				sampleId = idInfo[1];
+			}
+			if (line.contains("L|") && line.indexOf('L') < 2) {
+//				terminator_L_buf.append(line);
+				break;
+			}
+		}
+		System.out.println("SampleId : "+sampleId);
+		header.append("1H|\\^&|||LIS|||||||P|1|");
+		header.append(time_formatter.format(System.currentTimeMillis()));
+		header.append(cr);
+		header.append(etx);
+		header.append(CheckSum(header.toString()));
+		header.append(cr);
+		header.append(lf);
+		frameList.add(header.toString());
+		patient.append("2P|1");
+		patient.append(cr);
+		patient.append(etx);
+		patient.append(CheckSum(patient.toString()));
+		patient.append(cr);
+		patient.append(lf);
+		frameList.add(patient.toString());
+		order.append("3O|1|"+sampleId+"||");
+//		sampleDetail = API.getSampleDetail(sampleId);
+		sampleDetail = "TestData : TSH3;#Test    #45 Yr     #F#OP007#" ;
+		System.out.println("SampleDetail : "+sampleDetail);
+		String[] sampleDetailArr = sampleDetail.split("#");
+		String[] testDataArr = sampleDetailArr[0].split(":");
+		if (testDataArr[1].contains(";")) {
+			String[] testCodeArr = testDataArr[1].split(";");
+			for (String tCode : testCodeArr) {
+				System.out.println(tCode);
+				testCodeQueue.offer(tCode.trim());
+			}
+		}else
+			testCode = testDataArr[1].trim();
+		System.out.println("TestCode : "+testCode);
+		int k = 0;
+		for (String tc : testCodeQueue) {
+			k++;
+			order.append("^^^"+tc.trim());
+
+			if (k != testCodeQueue.size()) {
+				order.append("\\");
+			} else {
+	//			Order.append("^");
+			}
+		}
+		order.append("|R||||||N||||Serum");
+		order.append(cr);
+		order.append(etx);
+		order.append(CheckSum(order.toString()));
+		order.append(cr);
+		order.append(lf);
+		frameList.add(order.toString());
+		terminator.append("4L|1|F");
+		terminator.append(cr);
+		terminator.append(etx);
+		terminator.append(CheckSum(terminator.toString()));
+		terminator.append(cr);
+		terminator.append(lf);
+		frameList.add(terminator.toString());
+		System.out.println(frameList);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return frameList;		
+	}
+	
+	   // ------------------------------------------------------------------------------------------------------------
+		//Beckman Coulter Access 2 Order Packet Builder
+//		public static List beckmanCoulterAccess2OrderPacketBuilder(String queryPacket) {
+//			char cr = 13;
+//			char lf = 10;
+//			char stx = '';
+//			char etb = 23;
+//			char eot = '';
+//			char etx = 3;
+//			String sampleId = "";
+//			String sampleName = "";
+//			String sampleGender = "";
+//			String sampleAge = "";
+//			String sampleDetail = "";
+//			String testCode = "";
+//			String header = "";
+//			String terminator_L = "";
+//			StringBuffer packet_buf = new StringBuffer();
+//			StringBuffer header_buf = new StringBuffer();
+//			StringBuffer patient_buf = new StringBuffer();
+//			StringBuffer order_buf = new StringBuffer();
+//			StringBuffer terminator_L_buf = new StringBuffer();
+//			Queue<String> testCodeQueue = new LinkedList<>();
+//			
+//			Reader inputString = new StringReader(queryPacket);
+//			BufferedReader reader = new BufferedReader(inputString);
+//			List<String> qPacketArr = new ArrayList<String>();
+//			String str;
+//			try {
+//				while ((str = reader.readLine()) != null) {
+//					if (str != null && str.length() > 3) {
+//						str = str.substring(0, str.length());
+//						// str = str.substring(0, str.length() - 1);
+//						qPacketArr.add(str);
+//					}
+//				}
+//			
+////			String[] qPacketArr = queryPacket.split("\\s+");
+//			
+//			for (String line : qPacketArr) {
+//				if (line.contains("H|")) {
+//					header = line.substring(line.indexOf('H'));
+//					System.out.println("Header : "+header);
+//				}
+//				if (line.contains("Q|")) {
+//					System.out.println("QueryLine : "+line);
+//					String[] fields = line.split("\\|");
+//					String[] idInfo = fields[2].split("\\^");
+//					sampleId = idInfo[1];
+//				}
+//				if (line.contains("L|") && line.indexOf('L') < 2) {
+////					terminator_L_buf.append(line);
+//					break;
+//				}
+//			}
+//			System.out.println("SampleId : "+sampleId);
+//			patient_buf.append("P|1|");
+//			sampleDetail = API.getSampleDetail(sampleId);
+//			System.out.println("sampleDetail : "+sampleDetail);
+//			sampleDetail = "TestData : FT3;TSH3;#Sameer    # 12 Yr    #M#2007OP005#" ;
+//			String[] sampleDetailArr = sampleDetail.split("#");
+//			String[] testDataArr = sampleDetailArr[0].split(":");
+//			if (testDataArr[1].contains(";")) {
+//				String[] testCodeArr = testDataArr[1].split(";");
+//				for (String tCode : testCodeArr) {
+//					System.out.println(tCode);
+//					testCodeQueue.offer(tCode.trim());
+//				}
+//			}else
+//				testCode = testDataArr[1].trim();
+//			System.out.println("TestCode : "+testCode);
+//			
+//				StringBuffer frame = new StringBuffer();
+//				
+//				System.out.println("TIME :- " + time_formatter.format(System.currentTimeMillis()));
+//				
+//				stx = stx;
+//
+//				while (true) {
+//					header_buf.append("H|\\^&|||LIS|||||||P|1|");
+//					header_buf.append(time_formatter.format(System.currentTimeMillis()));
+//					header_buf.append(cr);
+//					packet_buf.append(header_buf);
+////					packet_buf.append(cr);
+//					patient_buf.append(cr);
+//					packet_buf.append(patient_buf);
+//
+//					// ==============================
+//
+//					System.out.println("TestCodeQueue size------- " + testCodeQueue.size());
+//
+//					order_buf.append("O|1|"+sampleId+"||");
+//					
+//					int k = 0;
+//					for (String tc : testCodeQueue) {
+//						k++;
+//						order_buf.append("^^^"+tc.trim());
+//
+//						if (k != testCodeQueue.size()) {
+//							order_buf.append("\\");
+//						} else {
+//				//			Order.append("^");
+//						}
+//					}
+//					order_buf.append("|R||||||N||||Serum");
+//					order_buf.append(cr);
+//					packet_buf.append(order_buf);
+//					order_buf.delete(0, order_buf.length());
+//
+//					System.out.println("buf= " + packet_buf.toString());
+//					terminator_L_buf.append("L|1|F");
+//					terminator_L_buf.append(cr);
+//
+//					packet_buf.append(terminator_L_buf);
+//
+//					break;
+//				}
+//
+//				// CODE TO DELETE LF IF EXISTS IN STRING *** STARTS ***
+//				/*
+//				 * for(int i=0;i<buf.length();i++) { if(buf.charAt(i)!=10)
+//				 * faltu.append(buf.charAt(i)); else System.out.println("yesssss"); }
+//				 * buf.delete(0, buf.length()); buf = faltu;
+//				 */
+//				// CODE TO DELETE LF IF EXISTS IN STRING *** ENDS ***
+//
+//				System.out.println("STRING LENGTH BEFORE FRAMING = " + packet_buf.length());
+//				System.out.println("frame BEFORE FRAMING = " + packet_buf.toString());
+//				// STRING LENGTH BEFORE FRAMING = 235
+//				int frameCount = 0, first = 0, mid = 0, remain = 0;
+//				frameCount = FrameCounter(packet_buf.length());
+//				// System.out.println("Char At 0 "+buf.charAt(0));
+//				int length = packet_buf.length();
+//
+//				for (int i = 1; i <= frameCount; i++) {
+//					if (length < 240)
+//						// if (length < 306)
+//						mid = mid + length;
+//					else if (length == 240)
+//						mid = mid + length;
+//					else if (length > 240) {
+//						mid = mid + 240;
+//					}
+//					System.out.println("First " + first + "  " + "last " + mid + " stx  " + stx);
+//					frame.append(stx);
+//					System.out.println("Server.StxCounter " + StxCounter);
+//					frame.append(StxCounter);
+//					System.out.println("STX COUNTER:- " + StxCounter);
+//					StxCounter++;
+//					frame.append(packet_buf.substring(first, mid));
+//
+//					if (i == frameCount) {
+//						frame.append(etx);
+//						System.out.println("before checksum" + frame.toString());
+//						frame.append(CheckSum(frame.toString())); // FRAME WITH STX STX COUNTER AND ETX
+//						// frame.appen.d(CheckSum(buf.substring(first, mid))); //FRAME WITH ONLY
+//						// CHARACTERS
+//						frame.append(cr);
+//						frame.append(lf);
+//					} else
+//
+//					{
+//						frame.append(etb);
+//						System.out.println("before checksum" + frame.toString());
+//						frame.append(CheckSum(frame.toString())); // FRAME WITH STX STX COUNTER AND ETB
+//						// frame.append(CheckSum(buf.substring(first, mid)));
+//						frame.append(cr);
+//						frame.append(lf);
+//					}
+//					// length = length - mid;
+//					length = length - 240;
+//					first = mid;
+//
+//					frameList.add(frame.toString());
+//
+//					frame.delete(0, frame.length());
+//
+//				}
+//
+//				StxCounter = 1;
+//				
+//				System.out.println("Final String after checksum" + frameList.toString());
+//
+//			} catch (Exception e) {
+//				System.out.println(e.getMessage());
+//				e.printStackTrace();
+//			}
+//			
+//			return frameList;
+//		}
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Parser Functions
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//SiemensAdviaCentaurXPT
+	public static void siemensAdviaCentaur40078(String message) {
+		String sampleId = "";
+		String testCode = "";
+		StringBuilder tc = new StringBuilder();
+		String testValue = "";
+		Reader inputString = new StringReader(message);
+		BufferedReader reader = new BufferedReader(inputString);
+		List<String> mesLines = new ArrayList<String>();
+		String str;
+		try {
+			while ((str = reader.readLine()) != null) {
+				if (str != null && str.length() > 3) {
+					str = str.substring(0, str.length());
+					// str = str.substring(0, str.length() - 1);
+					mesLines.add(str);
+				}
+			}
+//		String[] mesLines = message.split("\n");
+		for (String st : mesLines)
+			System.out.println(st);
+		for (String line : mesLines) {
+			//sample id
+			if (line.contains("O|") && line.indexOf('O') == 0) {
+				String[] orderArr = line.split("\\|");
+				sampleId = orderArr[2].trim();
+				if (sampleId.contains("^")) {
+					String[] sampleIdArr = sampleId.split("\\^");
+					sampleId = sampleIdArr[0];
+					System.out.println("SampleId : "+sampleId);	
+				}
+			}
+			//test code & test value
+			if (line.contains("R|") && line.indexOf('R') == 0) {
+				String[] resultArr = line.split("\\|");
+				testCode = resultArr[2].trim();
+				char[] testCodeChar = testCode.toCharArray();
+				for (char c : testCodeChar) {
+					if (c != '^') {
+						tc.append(c);
+					}
+				}	
+				testCode = tc.toString();
+				tc.delete(0, tc.length());
+				testValue = resultArr[3].trim();
+				System.out.println("TestCode "+testCode);
+				System.out.println("TestValue "+testValue);
+//				System.out.println("testCode.contains(\"TSTII1DOSE\")"+testCode.contains("TSTII1DOSE"));
+				if (testCode.contains("TSTII1DOSE")) {
+					double tstVal = Double.parseDouble(testValue);
+					tstVal = tstVal / 100;
+//					tstVal = Math.round(tstVal);
+					testValue = String.format("%.2f", tstVal);
+				}
+					
+				API.insertSampleDtl(testCode, testValue, sampleId);
+			}
+		}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}		
+	}
+    // ------------------------------------------------------------------------------------------------------------
+	
+	//RapidPoint500
+	public static void rapidPoint500(String pkt) {
+		String fs = "";
+		String gs = "";
+		String testCode;
+		String testValue;
+		String[] pktArr = pkt.split(fs);
+		for(String s : pktArr) {
+//			System.out.println("Line : "+s);
+			if ((s.trim().contains("m") && s.trim().charAt(0) == 'm') || ((s.trim().contains("c") && s.trim().charAt(0) == 'c'))) {
+				String[] sAr = s.trim().split(gs);
+				testCode = sAr[0];
+				testValue = sAr[1];
+				System.out.println("TestCode : "+testCode+"\nTestValue : "+testValue);
+//				for (String p : sAr)
+//					System.out.println("P : "+p);
+			}
+		}
+	}
+    // ------------------------------------------------------------------------------------------------------------
+	public static String rapidPoint500SampleRequest(String pkt) {
+		StringBuffer packet = new StringBuffer();
+		String newSampleAvailable = "SMP_NEW_AV"; 
+		String sampleRequest = "SMP_REQ";
+		String eot = "";
+		pkt = pkt.replace(newSampleAvailable, sampleRequest);
+		packet.append(pkt);
+		packet.append(CheckSum(pkt));
+		packet.append(eot);
+		pkt = packet.toString();
+		return pkt;
+	}
+    // ------------------------------------------------------------------------------------------------------------
+
+	//OrthoVision
+	public static void orthoVision(String pkt) {
+		String testCode = "";
+		String testValue = "";
+		String sampleId = "";
+		String[] pktArr = pkt.split("\\s+");
+		
+		for(String line : pktArr) {
+			//sample id
+			if (line.contains("P|") && line.indexOf('P') == 0) {
+				String[] orderArr = line.split("\\|");
+				sampleId = orderArr[2].trim();
+				if (sampleId.contains("^")) {
+					String[] sampleIdArr = sampleId.split("\\^");
+					sampleId = sampleIdArr[0];
+					System.out.println("SampleId : "+sampleId);	
+				}
+			}
+			//test code & test value
+			if (line.contains("R|") && line.indexOf('R') == 0) {
+				String[] resultArr = line.split("\\|");
+				testCode = resultArr[2].trim();
+				testValue = resultArr[3].trim();
+				System.out.println("TestCode "+testCode);
+				System.out.println("TestCode "+testValue);
+				API.insertSampleDtl(testCode, testValue, sampleId);
+			}
+		}
+	}
+	// -----------------------------------------------------
+
+	//Vitros ECIq
+	public static void vitrosECI(String st) {
+		String sampleID="";
+		String tests="";
+		String testCode="";
+		String testValue="";
+		String etx="";
+		String stx = "";
+		String[] strArr=st.split(stx);
+		for(String s:strArr) {
+			if(s.contains("O|1|")){
+				String[] strId=s.split("\\|");
+				strId=strId[2].split("\\^");
+				sampleID=strId[0].trim();
+		    }
+			if(s.contains("R|") && s.indexOf("R|") < 4){
+				String[] strId=s.split("\\|");
+				String[] strId1=strId[2].split("\\^");
+				strId1=strId1[3].split("\\+");
+				testCode=strId1[1].trim();	
+				testValue=strId[3].replace("!","").trim();
+				if (testValue.contains("No"))
+					testValue="";
+				System.out.println(sampleID+" ---sampleID ");
+				System.out.println(testCode+" ---testCode ");
+				System.out.println(testValue+" ---testValue ");
+				if (!sampleID.trim().isEmpty())
+					API.insertSampleDtl(testCode,testValue, sampleID);
+		    }
+	    }
+	}	
+	// -----------------------------------------------------
+
+	//SensacoreST200Aqua
+	public static void sensacoreST200Aqua(String st) {
+		int tcIndex = 0;
+		String sampleID = "";
+		String testCode = "";
+		String testValue = "";
+		StringBuffer testVal = new StringBuffer();
+		String esc = "";
+		String[] strArr = st.replaceAll(esc, " ").split("\n");
+/////////////////////////////////////Solution if data received distorted////////////////////////////////////////////////////////////////
+//		for(String s : strArr) {
+//			System.out.println(s+"\n\n");
+//			if (s.contains("TIENT ID")){
+//				String[] strId=s.split(":");
+//				sampleID=strId[1].trim();
+//		    }
+//			if (s.contains("mmol")){
+//				tcIndex++;
+//				if (tcIndex == 1)
+//				testCode = "Na";	
+//				else if (tcIndex == 2)
+//					testCode = "K";
+//				else if (tcIndex == 3)
+//					testCode = "Cl";
+//				char[] tstV=s.toCharArray();
+//				for(char c : tstV) {
+//					if (Character.isDigit(c) || c == '.')
+//						testVal.append(c);
+//				}
+//				testValue = testVal.toString();
+//				testVal.delete(0, testVal.length());
+//				System.out.println(sampleID+" ---sampleID ");
+//				System.out.println(testCode+" ---testCode ");
+//				System.out.println(testValue+" ---testValue ");
+//				if (!sampleID.trim().isEmpty())
+//					API.insertSampleDtl(testCode,testValue, sampleID);
+//		    }
+//	    }
+/////////////////////////////////////Solution if data received distorted////////////////////////////////////////////////////////////////
+		for(String s : strArr) {
+//			System.out.println(s+"\n\n");
+			if (s.contains("TIENT ID")){
+				String[] strId=s.split(":");
+				sampleID=strId[1].trim();
+		    }
+			if (s.contains("mmol")){
+				String[] tst = s.replaceAll("!", " ").split("=");
+				testCode = tst[0].trim();
+				testValue = tst[1].replace("mmol/L", "").replace("HIGH", "").replace("LOW", "").trim();
+				System.out.println(sampleID+" ---sampleID ");
+				System.out.println(testCode+" ---testCode ");
+				System.out.println(testValue+" ---testValue ");
+				if (!sampleID.trim().isEmpty())
+					API.insertSampleDtl(testCode,testValue, sampleID);
+		    }
+	    }
+	}
+	
+	// -----------------------------------------------------
+	
+	//Beckman Coulter Access 2
+	public static void beckmanCoulterAccess2(String st) {
+		String sampleID="";
+		String tests="";
+		String testCode="";
+		String testValue="";
+		String etx="";
+		String stx = "";
+		String[] strArr=st.split("\\s+");
+		for(String s : strArr) {
+			if(s.contains("O|1|")){
+				String[] strId = s.split("\\|");
+				sampleID = strId[2].trim();
+		    }
+			if(s.contains("R|") && s.indexOf("R|") < 4){
+				String[] strId=s.split("\\|");
+				String[] strId1=strId[2].split("\\^");
+				testCode = strId1[3].trim();	
+				testValue=strId[3].replace("!","").trim();
+				if (testValue.contains("No"))
+					testValue="";
+				System.out.println(sampleID+" ---sampleID ");
+				System.out.println(testCode+" ---testCode ");
+				System.out.println(testValue+" ---testValue ");
+				if (!sampleID.trim().isEmpty())
+					API.insertSampleDtl(testCode,testValue, sampleID);
+		    }
+	    }
+	}	
+	
+	
+
+	public static List cobas_e411_headerParsing_s() {
+		SimpleDateFormat time_formatter2 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str2 = time_formatter2.format(System.currentTimeMillis());
+		System.out.println("current_time_str2---" + current_time_str2);
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException ex) {
+//			Thread.currentThread().interrupt();
+//		}
+		SimpleDateFormat time_formatter3 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str3 = time_formatter3.format(System.currentTimeMillis());
+		System.out.println("current_time_str2 after 1 second wait---" + current_time_str3);
+
+		String[] s_Inf = Sample_code_info.get(0).toString().trim().split("\\^");
+
+		int CountPipe = 0, j = 0;
+		char cr = 13;
+		char lf = 10;
+		int instance = 0;
+		char stx = '';
+		String mode1 = "";
+		StringBuffer buf = new StringBuffer();
+		StringBuffer cobas = new StringBuffer();
+		StringBuffer host = new StringBuffer();
+		StringBuffer mode = new StringBuffer();
+		StringBuffer lines = new StringBuffer();
+		MachinesIndividualMethods machinesMethods = new MachinesIndividualMethods();
+		SimpleDateFormat time_formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str = time_formatter.format(System.currentTimeMillis());
+
+		StringBuffer header1 = new StringBuffer(
+				"H|@^\\|GXM-88424724426|| LIS|||||CENTRAL RAILWAY HOSPITAL, SECUNDERABAD - 110000888^GeneXpert^6.4||P|1394-97|");
+		StringBuffer header = new StringBuffer("H|\\^&|");
+//		header.append(Query_Message_Id);
+		header.append("||host");
+//	header.append("99^2.00");
+//	header.append(Query_Message_sender);
+		header.append("|||||");
+//    header.append(Query_Message_receiver);
+		header.append(Query_Message_sender);
+		header.append("H7600^1|TSDWN^REPLY|P|1|");
+		// header = header.append(Query_Message_date_time);
+//		header = header.append(current_time_str);
+
+		StringBuffer line4 = new StringBuffer("L|1|N");
+		StringBuffer line6 = new StringBuffer("|||F");
+		StringBuffer line5 = new StringBuffer();
+		char etb = 23;
+		char eot = '';
+		char etx = 3;
+		counterPID_Packet = counterPID_Packet + 33;
+
+		StringBuffer p = new StringBuffer("P|");
+		p.append(p_packet_count);
+		p.append("|");
+		p.append("|");
+		// p.append("|");
+//		p.append(Sample_code.get(0).toString().replace("^", "").trim());
+		p.append("||");
+		// p.append("Smith^+Tom^J||19600315|M|||A|||icteru||||||01|||||A1|002||||||||");
+		// p.append("RR^ABIGAIL^G||19780407|F||843 TALL OAKSDR^HAILVILLE, MD
+		// 45831|||RASHAMDRA^SANJAY^V|S|||||||||||U7");
+
+//		p.append(name_pat_last + "^" + name_pat_first);
+//		 p.append(name_pat.trim()); 
+		p.append("|||U||||||^");
+		// p.append("||||||||||||||||||||");
+
+		// ***************************
+
+		StringBuffer c = new StringBuffer("C|1|L|" + name_pat_first.trim() + name_pat_last + "^^^^|G");
+		// StringBuffer c = new StringBuffer("C|1|I|Patient is complaining of shortness
+		// of breath and chest pain.|G");
+
+		// StringBuffer Order = new StringBuffer("O|1||");
+		StringBuffer Order = new StringBuffer();
+		StringBuffer Order1 = new StringBuffer("O|2");
+		List list = new ArrayList();
+		StringBuffer frame = new StringBuffer();
+		StringBuffer framevip = new StringBuffer();
+		StringBuffer response = new StringBuffer();
+		StringBuffer time = new StringBuffer();
+
+		try {
+
+			cobas = cobas;
+			host = host;
+			System.out.println("TIME:- " + time);
+
+			stx = stx;
+			mode = mode;
+
+			while (true) {
+
+				buf.append(header);
+				buf.append(cr);
+				p.append(cr);
+				buf.append(p);
+				// c.append(cr);
+
+				// ==============================
+
+				System.out.println("testCode   size------- " + testCode.size());
+
+				Order.append("O|1");
+				// Order.append();
+				Order.append("|");
+				// Order.append("2^1^" + sampleNo.toString().replace("^", "").trim() + "^B");
+				Order.append(Sample_code.get(0).toString().replace("^", "").trim());
+				// Order.append("||");
+//				Order.append("|" + Sample_code_info.get(0).toString().trim() + "|");
+				Order.append("|" + s_Inf[0] + "^" + s_Inf[1] + "^" + s_Inf[2] + "^" + s_Inf[3] + "^" + s_Inf[4] + "^"
+						+ s_Inf[5] + "|");
+				for (int k = 0; k < testCode.size(); k++)
+
+				{
+					// Order.append(k + 1);
+					Order.append("^^^");
+					Order.append(testCode.get(k));
+					// Order.append("^");
+					if (k != testCode.size() - 1) {
+						// Order.append("^2^1");
+						Order.append("\\");
+
+					}
+
+					else {
+						// Order.append("^^^");
+					}
+
+				}
+				Order.append("|R");
+				Order.append("||||||A||||1||||||||||O|||||");
+				// Order.append(line6);
+				Order.append(cr);
+
+				buf.append(Order);
+				Order.delete(0, Order.length());
+
+				System.out.println("buf= " + buf.toString());
+
+				// ==============================================================
+
+				// =================================================
+
+				// -----------------------------
+				/*
+				 * if(Server.testCode!=null) { System.out.println("TEST-CODE LIST IS NOT NULL");
+				 * for(int k=0;k<Server.testCode.size();k++)
+				 * 
+				 * { Order.append("^^^"); Order.append(Server.testCode.get(k));
+				 * Order1.append("^^^"); Order1.append(Server.testCode.get(k));
+				 * if(k!=Server.testCode.size()-1) { Order.append("^\\"); Order1.append("^\\");
+				 * } else { Order.append("^"); Order1.append("^"); } } }
+				 */
+				/*
+				 * else System.out.println("NO TEST CODE FOUND !!! TEST-CODE LIST IS NULL");
+				 */
+				// Order.append(cr);
+				// buf.append(Order);
+
+				// buf.append("");
+				// buf.append("20181227190037"+"|"+"20181227190037");
+				// buf.append("|");
+				// buf.append(line6);
+
+				// ===============SECOND ORDER PACKET ADD TO BUF
+
+				// buf.append(cr); // Ascii of CR
+				// Ascii of LF
+				// Order1.append(cr);
+				// buf.append(Order1);
+				// buf.append("");
+				// buf.append("20181227190037"+"|"+"20181227190037");
+				// buf.append("|");
+				// buf.append(line6);
+				// -----------------------------------------------
+				// ==============================================
+				// buf.append(cr);
+				// buf.append(line3);
+
+				// buf.append(cr);
+
+				c.append(cr);
+				buf.append(c);
+
+				// buf.append(line4);
+				line4.append(cr);
+
+				buf.append(line4);
+
+				break;
+			}
+
+			// CODE TO DELETE LF IF EXISTS IN STRING *** STARTS ***
+			/*
+			 * for(int i=0;i<buf.length();i++) { if(buf.charAt(i)!=10)
+			 * faltu.append(buf.charAt(i)); else System.out.println("yesssss"); }
+			 * buf.delete(0, buf.length()); buf = faltu;
+			 */
+			// CODE TO DELETE LF IF EXISTS IN STRING *** ENDS ***
+
+			System.out.println("STRING LENGTH BEFORE FRAMING = " + buf.length());
+			System.out.println("frame BEFORE FRAMING = " + buf.toString());
+			// STRING LENGTH BEFORE FRAMING = 235
+			int frameCount = 0, first = 0, mid = 0, remain = 0;
+			frameCount = FrameCounter(buf.length());
+			// System.out.println("Char At 0 "+buf.charAt(0));
+			int length = buf.length();
+
+			for (int i = 1; i <= frameCount; i++) {
+				if (length < 240)
+					// if (length < 306)
+					mid = mid + length;
+				else if (length == 240)
+					mid = mid + length;
+				else if (length > 240) {
+					mid = mid + 240;
+				}
+				System.out.println("First " + first + "  " + "last " + mid + " stx  " + stx);
+				frame.append(stx);
+				System.out.println("Server.StxCounter " + StxCounter);
+				frame.append(StxCounter);
+				System.out.println("STX COUNTER:- " + StxCounter);
+				StxCounter++;
+				frame.append(buf.substring(first, mid));
+
+				if (i == frameCount) {
+					frame.append(etx);
+					System.out.println("before checksum" + frame.toString());
+					frame.append(CheckSum(frame.toString())); // FRAME WITH STX STX COUNTER AND ETX
+					// frame.appen.d(CheckSum(buf.substring(first, mid))); //FRAME WITH ONLY
+					// CHARACTERS
+					frame.append(cr);
+					frame.append(lf);
+				} else
+
+				{
+					frame.append(etb);
+					System.out.println("before checksum" + frame.toString());
+					frame.append(CheckSum(frame.toString())); // FRAME WITH STX STX COUNTER AND ETB
+					// frame.append(CheckSum(buf.substring(first, mid)));
+					frame.append(cr);
+					frame.append(lf);
+				}
+				// length = length - mid;
+				length = length - 240;
+				first = mid;
+
+				response.append(frame);
+				frameList.add(frame.toString());
+				/*
+				 * if(i ==1) frame1.append(frame); else frame2.append(frame);
+				 */
+				frame.delete(0, frame.length());
+
+			}
+			// response.append(eot);
+			// frameList.add(eot);
+			StxCounter = 1;
+			// newS.delete(0, newS.length());
+			// System.out.println("Final String after checksum" + frameList.size());
+			for (int i = 0; i < frameList.size(); i++) {
+				count_ack_BA400_o1++;
+			}
+			System.out.println("count_ack_BA400_o1------- " + count_ack_BA400_o1);
+			System.out.println("Final String after checksum" + frameList.toString());
+			/*
+			 * UUID uuid = UUID.randomUUID(); //for random file name String Path =
+			 * "C:\\Log"; String filename = uuid.toString().replaceAll("[\\s\\-()]", "");
+			 * Path = Path+"\\"+filename+".txt"; byte[] byy =
+			 * response.toString().getBytes(); try (FileOutputStream fos = new
+			 * FileOutputStream(Path)) { // File written on path fos.write(byy);
+			 * //fos.close(); There is no more need for this line since you had created the
+			 * instance of "fos" inside the try. And this will automatically close the
+			 * OutputStream } catch(Exception e) { e.printStackTrace(); }
+			 */
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		// Server.frameList = frameList;
+
+		return frameList;
+	}
+
+	// ----------------------------------------------
+	// -----------------------------------------------------
+	public static void main(String[] args) {
+//		vitrosECIqOrderPacketBuilder("OP007");
+		String packet = "1H|\\^&|||LIS|||||||P|1|20231026164103\r" + 
+				"";
+		System.out.println(CheckSum(packet));
+	}
+}

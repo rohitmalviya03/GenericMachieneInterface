@@ -401,7 +401,7 @@ public class HL7Client1 {
                      Message hl7ParsedMessage = parser.parse(requestPacket);
                      System.out.println("::::"+instrumentHost);
                      // Create a connection to the Horiba server
-                     Connection connection = context.newClient("10.226.28.174", 10001, false);
+                     Connection connection = context.newClient(orderip, Integer.parseInt(orderport), false);
                      Initiator initiator = connection.getInitiator();
                      
                      //HapiContext context = new DefaultHapiContext();

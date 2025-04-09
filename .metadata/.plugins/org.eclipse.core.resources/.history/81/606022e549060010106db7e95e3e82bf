@@ -1,0 +1,132 @@
+2025-03-21 15:40:17 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-03-21 15:40:17 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"100","reqDno":"961011000125012810000202"},{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"104","reqDno":"961011000125012810000201"},{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"120","reqDno":"961011000125012810000203"},{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"110","reqDno":"961011000125012810000205"}]
+2025-03-21 15:40:17 - Save Patient Details API called for PACS 
+2025-03-21 15:40:17 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "100",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000202",
+        "status": "0"
+    },
+    {
+        "hisOrderId": "104",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000201",
+        "status": "0"
+    },
+    {
+        "hisOrderId": "120",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000203",
+        "status": "0"
+    },
+    {
+        "hisOrderId": "110",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000205",
+        "status": "0"
+    }
+]
+2025-03-21 15:40:17 - Update Status API called
+2025-03-21 15:40:17 - Response Body:  Status Updated
+2025-03-21 15:40:17 - Data sends to Mestria is started ::  
+2025-03-21 15:40:17 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-03-21 15:40:17 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-21 15:40:40 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-03-21 15:40:42 - Response from API: []
+2025-03-21 15:40:42 - Sample no or cr no. not found: []
+2025-03-21 15:40:42 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-21 15:40:48 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-03-21 15:40:53 - Response from API: []
+2025-03-21 15:40:53 - Sample no or cr no. not found: []
+2025-03-21 15:40:53 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-21 15:43:21 - Data sends to Mestria is started  for sample no ::  961012100000888
+2025-03-21 15:43:25 - Response from API: []
+2025-03-21 15:43:25 - Sample no or cr no. not found: []
+2025-03-21 15:43:25 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-21 15:56:55 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-03-21 15:57:39 - API call failed. Response code: 500
+2025-03-21 15:57:42 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-21 15:57:44 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-03-21 16:00:22 - API call failed. Response code: 500
+2025-03-21 16:00:25 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-21 16:00:30 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-03-21 16:01:19 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"100","reqDno":"961011000125012810000202"},{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"104","reqDno":"961011000125012810000201"},{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"120","reqDno":"961011000125012810000203"},{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"110","reqDno":"961011000125012810000205"}]
+2025-03-21 16:01:25 - Save Patient Details API called for PACS 
+2025-03-21 16:03:15 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "100",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000202",
+        "status": "0"
+    },
+    {
+        "hisOrderId": "104",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000201",
+        "status": "0"
+    },
+    {
+        "hisOrderId": "120",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000203",
+        "status": "0"
+    },
+    {
+        "hisOrderId": "110",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000205",
+        "status": "0"
+    }
+]
+2025-03-21 16:03:15 - Update Status API called
+2025-03-21 16:03:15 - Response Body:  Status Updated
+2025-03-21 16:03:15 - Data sends to Mestria is started ::  
+2025-03-21 16:03:15 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-03-21 16:03:31 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-21 16:26:01 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-03-21 16:26:16 - Response from API: []
+2025-03-21 16:26:18 - Sample no or cr no. not found: []
+2025-03-21 16:26:19 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-21 16:26:48 - Data sends to Mestria is started  for sample no ::  250128BIO0002
+2025-03-21 16:26:55 - Response from API: [{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"100","reqDno":"961011000125012810000202"},{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"104","reqDno":"961011000125012810000201"},{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"120","reqDno":"961011000125012810000203"},{"patFirstName":"Prachiiiiiii    ","patLastName":null,"patMiddleName":"-","patGender":"F","patientBirthDate":"-","patCrno":"961012100000888","patSampleNo":null,"patSampleType":"Emergency","patSampleCollectionDate":"2025-01-28","hisOrderId":"110","reqDno":"961011000125012810000205"}]
+2025-03-21 16:26:55 - Save Patient Details API called for PACS 
+2025-03-21 16:26:55 - Response Body as JSON Array: [
+    {
+        "hisOrderId": "100",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000202",
+        "status": "0"
+    },
+    {
+        "hisOrderId": "104",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000201",
+        "status": "0"
+    },
+    {
+        "hisOrderId": "120",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000203",
+        "status": "0"
+    },
+    {
+        "hisOrderId": "110",
+        "patientId": "961012100000888",
+        "reqDno": "961011000125012810000205",
+        "status": "0"
+    }
+]
+2025-03-21 16:26:55 - Update Status API called
+2025-03-21 16:26:55 - Response Body:  Status Updated
+2025-03-21 16:26:55 - Data sends to Mestria is started ::  
+2025-03-21 16:26:55 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1
+2025-03-21 16:26:55 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-21 16:36:19 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-21 16:41:14 - Response from API: []
+2025-03-21 16:41:14 - Sample no or cr no. not found: []
+2025-03-21 16:41:14 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?
+2025-03-21 17:08:17 - Data sends to Mestria is started  for sample no ::  250321MIC00001
+2025-03-21 17:08:29 - Response from API: []
+2025-03-21 17:08:29 - Sample no or cr no. not found: []
+2025-03-21 17:08:29 - Query  : SELECT hrgstr_fname,hrgstr_mname, hrgstr_lname, patient_gender, hrgnum_puk,hivnum_sample_no,hivnum_sample_type,  pat_sample_collection_date FROM  patient_org_test_details WHERE org_test_status = 1 and hivnum_sample_no=?

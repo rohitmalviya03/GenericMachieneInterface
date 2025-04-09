@@ -1,0 +1,169 @@
+package application.resource;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class ReadPropertyFile {
+	
+    private static final String OS_NAME;
+    private static String windowsPath;
+    private static String linuxPath;
+    public static HashMap propertyMap;
+    static Path path1;
+    static String currentDirectory ;
+    static String readproperty_filename ;
+    static String readproperty_filepath ;
+
+
+	static {
+		OS_NAME = System.getProperties().getProperty("os.name");
+		// ReadPropertyFile.windowsPath = "c:/TcpFiles/property";
+		// ReadPropertyFile.linuxPath = "/opt/TcpFiles/property";
+		Path currentRelativePath = Paths.get("");
+		currentDirectory = currentRelativePath.toAbsolutePath().toString();
+		System.out.println("Current absolute path is: " + currentDirectory);
+		readproperty_filename = "/read.properties";
+		readproperty_filepath = String.valueOf(currentDirectory) + readproperty_filename;
+
+		InetAddress IP = null;
+		try {
+			IP = InetAddress.getLocalHost();
+		} catch (UnknownHostException ex) {
+			Logger.getLogger(ReadPropertyFile.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		System.out.println("IP of my system is := " + IP.getHostAddress());
+
+		// ===================
+		String CData = "eqp = 100005\n" + "hos = 37913\n" + "uid = 10716\n" + "ip = uatrailtel.dcservices.in\n"
+				+ "server_port = 5000\n" + "server_ip = " + IP.getHostAddress() + "\n" + "formatid=1004\n"
+				+ "machine_mode =ASTM\n" + "Baud_Rate= 19200\n" + "Data_Bits =8 \n" + "Stop_Bits =1 \n" + "Parity = 0\n"
+				+ "machine_name =No Machine\n" + "fileReadPath =\n" + "Serial_Port=COM7";
+		try {
+			File myObj = new File(readproperty_filepath);
+			if (myObj.createNewFile()) {
+				System.out.println("File created: " + myObj.getName());
+				FileWriter fw = new FileWriter(readproperty_filepath);
+				fw.write(CData);
+				fw.close();
+			} else {
+				System.out.println("File already exists.");
+			}
+		} catch (IOException e1) {
+			System.out.println("An error occurred.");
+			e1.printStackTrace();
+		}
+
+	}
+    
+    public static Map getPropertyValues() {
+        ReadPropertyFile.propertyMap = new HashMap();
+        String path = "";
+        String readProperty_filename = "/read.properties";
+        final String ip = "ip";
+        final String port = "port";
+        final String eqp = "eqp";
+        final String hos = "hos";
+        final String uid = "uid";
+ 
+        final String server_ip = "server_ip";
+        final String server_port = "server_port";
+    
+        final String formatid = "formatid";
+        final String machine_mode = "machine_mode";
+        final String machine_name = "machine_name";
+        final String Baud_Rate = "Baud_Rate";
+        final String Data_Bits = "Data_Bits";
+        final String Stop_Bits = "Stop_Bits";
+        final String Serial_Port = "Serial_Port";
+        final String Parity = "Parity";
+        final String fileReadPath = "fileReadPath";
+        
+       
+        
+        if (ReadPropertyFile.OS_NAME.startsWith("Win")) {
+         //   path = ReadPropertyFile.windowsPath;
+              path =currentDirectory ;
+        }
+        else {
+            path = ReadPropertyFile.linuxPath;
+        }
+        path = String.valueOf(path) + readProperty_filename;
+        try {
+            Throwable t = null;
+
+            File myObj = new File(path);
+            if (myObj.createNewFile()) {
+            System.out.println("File created: " + myObj.getName());
+      } else {
+        System.out.println("File already exists.");
+      }
+            try {
+                final InputStream input = new FileInputStream(path);
+                try {
+                    final Properties prop = new Properties();
+                    prop.load(input);
+                    ReadPropertyFile.propertyMap.put(ip, prop.getProperty(ip));
+                    ReadPropertyFile.propertyMap.put(port, prop.getProperty(port));
+                    ReadPropertyFile.propertyMap.put(eqp, prop.getProperty(eqp));
+                    ReadPropertyFile.propertyMap.put(hos, prop.getProperty(hos));
+                    ReadPropertyFile.propertyMap.put(uid, prop.getProperty(uid));
+                     ReadPropertyFile.propertyMap.put(server_ip, prop.getProperty(server_ip));
+                    ReadPropertyFile.propertyMap.put(server_port, prop.getProperty(server_port));
+                    ReadPropertyFile.propertyMap.put(formatid, prop.getProperty(formatid));
+                    ReadPropertyFile.propertyMap.put(machine_mode, prop.getProperty(machine_mode));
+                    ReadPropertyFile.propertyMap.put(machine_name, prop.getProperty(machine_name));
+                    ReadPropertyFile.propertyMap.put(Serial_Port, prop.getProperty(Serial_Port));
+               
+                    ReadPropertyFile.propertyMap.put(Baud_Rate, prop.getProperty(Baud_Rate));
+                    ReadPropertyFile.propertyMap.put(Data_Bits, prop.getProperty(Data_Bits));
+                    ReadPropertyFile.propertyMap.put(Stop_Bits, prop.getProperty(Stop_Bits));
+                    //ReadPropertyFile.propertyMap.put(Serial_Port, prop.getProperty(Serial_Port));
+                    ReadPropertyFile.propertyMap.put(Parity, prop.getProperty(Parity));
+                    ReadPropertyFile.propertyMap.put(fileReadPath, prop.getProperty(fileReadPath));
+                    
+               
+                
+                    
+                    
+                
+                
+                }
+                
+                
+                finally {
+                    if (input != null) {
+                        input.close();
+                    }
+                }
+            }
+            finally {
+                if (t == null) {
+                    final Throwable exception = null;
+                    t = exception;
+                }
+                else {
+                    final Throwable exception = null;
+                    if (t != exception) {
+                        t.addSuppressed(exception);
+                    }
+                }
+            }
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return ReadPropertyFile.propertyMap;
+    }
+}
