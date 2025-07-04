@@ -31,75 +31,81 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
 public class Server {
 	static String text = "";
-	static List frameList = new ArrayList<>();
-	static List multiframeResponse = new ArrayList();		
-	static List query_Packet_List = new ArrayList(); // List of all collected Query Packets
-	static List order_Packet_List = new ArrayList();
-	static StringBuffer order_packet_buffer = new StringBuffer();
+	public static List frameList = new ArrayList<>();
+	public static List multiframeResponse = new ArrayList();		
+	public static List query_Packet_List = new ArrayList(); // List of all collected Query Packets
+	public static List order_Packet_List = new ArrayList();
+	public static StringBuffer order_packet_buffer = new StringBuffer();
 	// static int frame_list_counter = 0;
-	static int status = 0;
-	static int sam_count = 0;
+	public static int status = 0;
+	public static int sam_count = 0;
 	// static StringBuffer frame1 = new StringBuffer();
 	// static StringBuffer frame2 = new StringBuffer();;
-	static StringBuffer cobas;
-	static StringBuffer host;
-	static StringBuffer mode;
-	static StringBuffer sampleNo;
-	static StringBuffer Query_Message_Id;
-	static int counterPID_Packet;
-	static int p_packet_count = 1;
-	static StringBuffer Query_Message_sender;
-	static StringBuffer Query_Message_receiver;
-	static StringBuffer Query_Message_date_time;
-	static StringBuffer Test_Code;
-	static StringBuffer packet = new StringBuffer("741^50076^1^^S1^SC");
-	static int StxCounter = 1;
-	static StringBuffer newS = new StringBuffer();
-	static List testCode = new ArrayList();
-	static List<String> Sample_code = new ArrayList<String>();
-	static String headerVal = null;
-	static int count_ack_BA400_s = 0;
+	public static StringBuffer cobas;
+	public static StringBuffer host;
+	public static StringBuffer mode;
+	public static StringBuffer sampleNo;
+	public static StringBuffer Query_Message_Id;
+	public static int counterPID_Packet;
+	public static int p_packet_count = 1;
+	public static StringBuffer Query_Message_sender;
+	public static StringBuffer Query_Message_receiver;
+	public static StringBuffer Query_Message_date_time;
+	public static StringBuffer Test_Code;
+	public static StringBuffer packet = new StringBuffer("741^50076^1^^S1^SC");
+	public static int StxCounter = 1;
+	public static StringBuffer newS = new StringBuffer();
+	public static List testCode = new ArrayList();
+	public static List<String> Sample_code = new ArrayList<String>();
+	public static String headerVal = null;
+	public static int count_ack_BA400_s = 0;
 
-	static List testCode_mapList = new ArrayList();
-	static char stx;
-	int port;
-	static String name_pat = "";
-	static String name_pat_last = "";
-	static String name_pat_first = "";
-	static int count_ack_BA400_o1 = 0;
-	static int p = 0;
+	public static List testCode_mapList = new ArrayList();
+	public static char stx;
+	public int port;
+	public static String name_pat = "";
+	
+	public static String sampleType = "";
+	public static String name_pat_last = "";
+	public static String name_pat_first = "";
+	public static String name_pat_age = "";
+	public static String name_pat_gender = "";
+	public static String pat_Cr = "";
+	public static int count_ack_BA400_o1 = 0;
+	public static int p = 0;
 
-	static StringBuffer Query_String = new StringBuffer();
+	public static StringBuffer Query_String = new StringBuffer();
 	ServerSocket server = null;
 	Socket client = null;
 	ExecutorService pool = null;
 	int clientcount = 0;
-	static int Query_Counter = 0;
+	public static int Query_Counter = 0;
 
-	static Map res = ReadPropertyFile.getPropertyValues();
-	static String formatid = (String) res.get("formatid");
-	static String server_port = (String) res.get("serverport");
-	static Path path1;
-	static String currentDirectory;
-	static String path_HIMS_LOG = "";
-	static String path_MachineData = "";
+	public static Map res = ReadPropertyFile.getPropertyValues();
+	public static String formatid = (String) res.get("formatid");
+	public static String server_port = (String) res.get("serverport");
+	public static Path path1;
+	public static String currentDirectory;
+	public static String path_HIMS_LOG = "";
+	public static String path_MachineData = "";
 
-	static int server_port1  = Integer.parseInt((String)res.get("server_port"));//6000	;//Integer.parseInt((String) res.get("serverport"));
-	static String[] argument;
+	public static int server_port1  = Integer.parseInt((String)res.get("server_port"));//6000	;//Integer.parseInt((String) res.get("serverport"));
+	public	static String[] argument;
 
-	static List frameList1 = new ArrayList<>();
-	static List frameList2 = new ArrayList<>();
-	static List frameList3 = new ArrayList<>();
-	static List frameList3_1 = new ArrayList<>();
-	static List frameList4 = new ArrayList<>();
-	static List main_frameList = new ArrayList<>();
-	private static String sampleName;
+	public static List frameList1 = new ArrayList<>();
+	public static List frameList2 = new ArrayList<>();
+	public static List frameList3 = new ArrayList<>();
+	public static List frameList3_1 = new ArrayList<>();
+	public static List frameList4 = new ArrayList<>();
+	public static List main_frameList = new ArrayList<>();
+	public static String sampleName;
 
 	public static void main(String[] args) throws IOException {
 
@@ -877,7 +883,7 @@ public class Server {
 				//count = i + 6;
 				//i = count;
 				
-				if(formatid.equals("20048")) {
+				if(formatid.equals("20048545")) {
 					
 					count = i + 7;       //For Cobas 801 Changes [ETB ---- STX+1 Remove]
 					 	
@@ -1014,6 +1020,8 @@ public class Server {
 			String Q ="";
 			String Q1="";
 			//System.out.println("ROHITTT:: "+list);
+			
+			if(list != null) {
 			if(list.size()>1) {
 				 Q = list.get(0);
 				 Q1 = list.get(1);
@@ -1030,6 +1038,9 @@ public class Server {
 					
 			}
 			else {
+				
+				
+				
 				 Q = list.get(0);
 				
 					if (Q.length() > 2 || Q1.length() > 2) {
@@ -1041,6 +1052,9 @@ public class Server {
 							sendAck = 0;
 					}
 					
+			}}
+			else {
+				sendAck = 0;
 			}
 			
 			
@@ -1089,13 +1103,29 @@ public class Server {
 
 			//System.out.println("<####>"+list.size()+"list------------------"+list);
 			String Q = list.get(0);
-			String Q1 = list.get(1);//1
+			String Q1="";
+			String Q2="";
+			if(formatid.equals("100018") || formatid.equals("100017") || formatid.equals("50001")||formatid.equals("20047") ) { 
+				Q1 = list.get(0);
+				
+			}
+//			else if(formatid.equals("20050") ) {
+//				
+//				String str3 = list.get(1);
+//			
+//				String[] add=str3.split("\\t");
+//				Q2=add[1];
+//			}
+			
+			else { Q1 = list.get(1);}//1}
+			
 			System.out.println("<####>");
 			System.out.println("parsing start");
 			//System.out.println(" The Value LIST : " + list);
 			System.out.println(" The Value of text : " + text);
 			System.out.println(" The_Value_of Q" + Q);
-			if (Character.toUpperCase(Q.charAt(2)) == 'Q' || Q.contains("Q|1|") || Q1.contains("Q|1|") ||Character.toUpperCase(Q1.charAt(0)) == 'Q') {
+			System.out.println(" The_Value_of Q2" + Q2);
+			if (Character.toUpperCase(Q.charAt(2)) == 'Q' ||Q2.contains("Q|1|")|| Q.contains("Q|1|") || Q1.contains("Q|1|") ||Character.toUpperCase(Q1.charAt(0)) == 'Q') {
 
 				if (formatid.equals("20003"))// genexpert
 				{
@@ -1106,10 +1136,12 @@ public class Server {
 					frameList = parseSelect2500(list);
 				}
 
-				//if (formatid.equals("20045"))// mispa clinia
-				if (formatid.equals("20053"))           //change format id according to selcted machine's  format id 
+				//if 50004 (formatid.equals("20045"))// mispa clinia
+				if (formatid.equals("50004")||formatid.equals("20050")||formatid.equals("20055")||formatid.equals("20047")||formatid.equals("100018")||formatid.equals("100017")||formatid.equals("50001")  ||  formatid.equals("20050")||  formatid.equals("20053"))           //change format id according to selcted machine's  format id 
 				{
+					System.out.println("Hello rohit");
 					frameList = common_parseSelect(list,cout);
+					
 				}
 
 				if (formatid.equals("20051"))// genexpert same
@@ -1117,7 +1149,7 @@ public class Server {
 					frameList = parseSelect(list);
 				}
 				
-				if (formatid.equals("100017"))// genexpert
+				if (formatid.equals("100010"))// genexpert
 				{
 					frameList = parseSelect(list);
 				}
@@ -1153,7 +1185,7 @@ public class Server {
 
 				}
 				
-				if (formatid.equals("100018")) { // // CS2400 Sysmax
+				if (formatid.equals("50001")) { // // CS2400 Sysmax
 
 					sysmaxCS2400(list);
 
@@ -1173,6 +1205,9 @@ public class Server {
 				}
 
 				if (formatid.equals("20048")) { 
+					
+					
+					System.out.println("ROHIT M,... 2606");
 					ERBAXN100TN(list);  //erba aiims bh
 				}
 
@@ -1185,6 +1220,14 @@ public class Server {
 
 				}
 
+
+				if (formatid.equals("50002")) { // AIIMS Jodhpur  
+
+					System.out.println("inside 50002");
+					Alinity_BT(list);
+
+
+				}
 
 				if (formatid.equals("20050")) { // AIIMS RB SYSMAX  3500 urine analyzer
 					parse_AIIMSRB_UA(list);
@@ -1199,7 +1242,9 @@ public class Server {
 				
 				if (formatid.equals("20053")) {
 				parseLISMessage(list);
-			}
+			
+				
+				}
 
 				if (formatid.equals("20046")) {  //added for AIIMS BHU 
 					cobas6000_parsing(list);
@@ -1224,7 +1269,10 @@ public class Server {
 				}
 				
 
-
+				if (formatid.equals("50004")) { 
+					AlinityBhatinda.resultParse(list);
+					
+				}
 
 
 
@@ -1249,6 +1297,47 @@ public class Server {
 			return frameList;
 		else
 			return null;
+	}
+
+	private static void Alinity_BT(List<String> list) {
+		System.out.println("MIndray 6200-------------:::::Rohit M 28/04:::::");
+		String sampleNo=null;
+		List testCode = new ArrayList<String>();
+		List testValue = new ArrayList<String>();
+		Map<String ,List> mp = new HashMap<String ,List>();
+		for(String strdata:list) {
+			String[] packetData=strdata.split("\\|");
+			
+			if(packetData[0].contains("P")) {
+				
+			}
+			else if(packetData[0].contains("O")) {
+				String[] sampleNodata=packetData[2].split("\\^");
+				sampleNo=sampleNodata[0];
+			}
+			else if(packetData[0].contains("R")) {
+				
+			//	System.out.println( packetData[2]);
+				String[] dd=packetData[2].split("\\^");
+				
+				if(dd[6].equals("F")) {
+				testCode.add(dd[3]);
+				testValue.add(packetData[3]);
+				  
+				
+				
+				}
+				
+			
+			}
+			
+		}
+		for(int i=0;i<testCode.size();i++) {
+			//if(sampleNo.equals(null)) {}
+			ABC.insert_SysmexXN350A(testCode.get(i).toString().trim(), testValue.get(i).toString().trim(), sampleNo.toString().replace("^", "").trim());
+					
+		}
+	
 	}
 
 	// PArse for Select Query
@@ -1475,19 +1564,21 @@ public class Server {
 				//				{
 				//					frameList = headerParsing2500(list.get(0));
 				//				}
-				if (formatid.equals("20016"))// sysmax 2500  // added by rohit for Bi Dir.. RB sysmax 200 20016 formatid
+				if (formatid.equals("20016"))
 				{
 					frameList = sysmax2500RBparseBI(list.get(0));
 				}
 				
-				if (formatid.equals("100017"))// sysmax 2500  // added by rohit for Bi Dir.. AIIMS Jodpur
+				if (formatid.equals("100017"))
 				{
-					frameList = sysmax100BIDIR(list.get(0));
+					frameList =   sysmax100BIDIR(list.get(0));
 				}
-				if (formatid.equals("20053"))// sysmax 2500  // added by rohit for Bi Dir.. AIIMS Jodpur
+				if (formatid.equals("20053"))
 				{
 					frameList =HoribaP580(list.get(0));
 				}
+				
+				
 				// frameList = headerParsing(list.get(0));
 			}
 
@@ -3013,7 +3104,7 @@ public class Server {
 		String line_header = list.get(0);
 		//String line = list.get(2);
 		String line=null;
-		if(formatid.equals("20053")) {
+		if(formatid.equals("20053")||formatid.equals("100018")||formatid.equals("100017")||formatid.equals("50001")|| formatid.equals("50004")) {
 			line = list.get(0);
 		}
 		else {
@@ -3117,9 +3208,9 @@ public class Server {
 		//		System.out.println("ab==========vvvvvvvvv111111111111111111=========" + ab);
 		//		System.out.println("bf_header_datetime==========vvvvvvvvv111111111111111111=========" + bf_header_datetime);
 		String[] samplesplit=null;
-		String line2="";
+		String line2="#";
 		
-		if(!formatid.equals("20047")) {
+		if(!formatid.equals("20047") || !formatid.equals("20050") ) {
 		if (Character.toUpperCase(line.charAt(2)) == 'Q' || line.contains("Q|1|") ) {
 			char[] ch = line.toCharArray();
 
@@ -3160,11 +3251,29 @@ public class Server {
 			//Server.Sample_code.add(bf.toString().replaceAll("\\^", ""));
 		//line2=ABC.getSampleDtl_biolis50i(Server.Sample_code.get(0).toString().replace("^", ""));  // Get Query Information Vipul Ramji
 			
-			String str=samplesplit[1].toString().replace(" ", "");
-			line2=ABC.getSampleDtl_biolis50i(str); 
+			
+			String str="";
+			if(formatid.equals("100018")||formatid.equals("100017")||formatid.equals("50001")) {
+				str=samplesplit[2].toString().replace(" ", "");
+			}
+			else if(formatid.equals("20050")) {
+				str=samplesplit[0].toString().replace(" ", "");
+				
+			}
+			else {
+				 str=samplesplit[1].toString().replace(" ", "");
+			}
+			//
+			
+			if(formatid.equals("20050")) {
+				Server.Sample_code.add(samplesplit[0].toString().replace("\\s", ""));
+				
+			}else {
 			Server.Sample_code.add(samplesplit[1].toString().replace("\\s", ""));
+			line2=ABC.getSampleDtl_biolis50i(Server.Sample_code.get(0).toString().replace("^", "")); 
 			//line2="HDLCD;VV;VLDL;CHOL;TRIG;LDL;#Santosh Kumari    ()#63 Yr     #F#051224BIO029# ";
-		}
+			}
+			}
 		}
 		else {
 			
@@ -3179,7 +3288,7 @@ public class Server {
 		
 	
 		//	System.out.println("Sample Number:- " + Server.Sample_code);
-		//	Server.Sample_code.add(bf.toString());
+			//Server.Sample_code.add(bf.toString());
 		// ---------------------------------------------------
 
 		//String line2 = ABC.getSampleDtl_biolis50i(Sample_code.get(0).split("\\^")[1].trim());  // Get Query Information Vipul Ramji
@@ -3192,11 +3301,33 @@ public class Server {
 		//String line2="CRE;UREA#RRR";  //ERBA XLL 100 Test Code
 		//GLU1`^^^CRE1`^^^UREA1`^^^BID1`^^^SGOT1
 		//String line2="PRO;VLDL;TRIG;BIDD;LIP;CRE;HDLC;ALPU;UREA;UA;ALBD;AMY;LDH;SGOTD;CKNac;SGPTD;IBIL;GLB;FE;TIBC;UIBC;FE;BIT;#Tubaaaaaa    #13 Yr  ";//;TGL1;HDL1;CRE1;UREA1;BID1;SGOT1;TGL1;HDL1;CRE1;UREA1;BID1;SGOT1";  //ERBA TN TestCOde
-		line2="BAS#;BAS%;EOS#;EOS%;HCT;HGB;IG#;IMG%;IRF;LYM#;LYM%;MCH;MCHC;MCV;MON#;MON%;MPV;NA;NEU#;NEU%;NRBC#;NRBC%;PCT;PDW;P-LCR;PLT;RBC;RDW-CV;RDW-SD;RET#;RET%;WBC;XX;#Kushala Sunkara    ()#33 Yr     #M#250220HTY180#Whole Blood#";
-	//String line2="TSH;FT3;FT4;TSH;FT3;FT4;TSH;FT3;FT4";//;TSH3UL";
-		String[] kvPairs = line2.split("#");
+	//	line2="BAS3#;BAS%;EOS#;EOS%;HCT;HGB;IG#;IMG%;IRF;LYM#;LYM%;MCH;MCHC;MCV;MON#;MON%;MPV;NA;NEU#;NEU%;NRBC#;NRBC%;PCT;PDW;P-LCR;PLT;RBC;RDW-CV;RDW-SD;RET#;RET%;WBC;XX;#Kushala Sunkara    ()#33 Yr     #M#250429B186#URINE#1234555";
+	//line2="301;302;303;314;315;317;319;320;321;357;903;905;910;#Bikki Ramesh    ()#42 Yr     #M#250609B037#SERUM#339232500462661# ";//;TSH3UL";
+	 
 		
-		if(formatid.equals("20053")) {
+		
+	 
+	 String[] kvPairs = line2.split("#");
+	
+	 
+     // Print the last 5 data elements
+   
+	   int lastIndex = line2.lastIndexOf('#', line2.length() - 1);
+       int secondLastIndex = line2.lastIndexOf('#', lastIndex - 1);
+
+       // Extract substring between them
+        //sampleType = line2.substring(secondLastIndex + 1, lastIndex);
+
+        String[] parts = line2.split("#");
+
+        if (parts.length >= 3) {
+            String dd = parts[5];  // Second-to-last item
+           System.out.println("RMM"+parts);
+            System.out.println("Sample Type: " + dd);
+            sampleType=dd;
+        }
+
+		if(formatid.equals("20053") ||formatid.equals("100018")||formatid.equals("100017")||formatid.equals("50001")) {
 			
 	        // Split the string using #
 	       // String[] kvPairs = line2.split("#");
@@ -3204,21 +3335,43 @@ public class Server {
 			  String patientName = "";
 		        String patientAge = "";
 		        String patientGender = "";
+		        String patientCrNo= "";
+		        
+		        int length = kvPairs.length;
+		        int startIndex = Math.max(0, length - 6);
 
-		        for (String part : kvPairs) {
-		            part = part.trim();
-		            if (part.contains("()")) {
-		                patientName = part;  // Name contains ()
-		            }
-		            if (part.contains("Yr")) {
-		                patientAge = part.replaceAll("Yr", "").trim();  // Remove "Yr" and trim
-		            }
-		            if (part.equalsIgnoreCase("M") || part.equalsIgnoreCase("F") || part.equalsIgnoreCase("O")) {
-		                patientGender = part;  // Extracting Gender
-		            }
+		        for (int i = startIndex; i < length; i++) {
+		            System.out.println(kvPairs[i]);
+		            
+		            if(i==9) patientName=kvPairs[i];
+		            else if(i==10) patientAge=kvPairs[i];
+		            else   if(i==11) patientGender=kvPairs[i];
+		            else   if(i==14) patientCrNo=kvPairs[i];
+		           //else        if(i==0) patientName=kvPairs[i];
+					            	
+		            
+		            
 		        }
+		   	 
+				/*
+				 * for (String part : kvPairs) { part = part.trim(); if (part.contains("()")) {
+				 * patientName = part; // Name contains () } if (part.contains("Yr")) {
+				 * patientAge = part.replaceAll("Yr", "").trim(); // Remove "Yr" and trim } if
+				 * (part.equalsIgnoreCase("M") || part.equalsIgnoreCase("F") ||
+				 * part.equalsIgnoreCase("O")) { patientGender = part; // Extracting Gender } }
+				 */
 			
-		        name_pat=patientName+"#"+patientAge+"#"+patientGender;
+		        name_pat=patientName;
+		        name_pat_age=patientAge;
+		        name_pat_gender=patientGender;
+		        pat_Cr=patientCrNo;
+				/*
+				 * for (String kvPair : kvPairs) { //
+				 * System.out.print("kvPairs =============------ " + kvPair); if (r == 0) tc =
+				 * kvPair; if (r == 1) name_pat = kvPair; r++; if (r == 2) break;
+				 * 
+				 * }
+				 */
 		}
 		else {
 		for (String kvPair : kvPairs) {
@@ -3267,7 +3420,7 @@ public class Server {
 			String testCode1 = "";
 			String testValue1 = "";
 			//	-------------------------------------------
-			if(!formatid.equals("20053")) {
+			if(!formatid.equals("20053") && !formatid.equals("100018") && !formatid.equals("50001")) {
 			name_pat=kvPairs[1];
 			//		name_pat="Employee General Test";
 			System.out.println("name_pat11111 =============------ " + name_pat);
@@ -3295,9 +3448,28 @@ public class Server {
 				}
 				else {
 					name_pat_first=nameP[0];
-					name_pat_last=nameP[1];		
+				//	name_pat_last=nameP[1];		
 				}
+				
 			}//TC}
+			
+			
+			}
+			else {
+				if(!formatid.equals("20053")) {
+				for (String kvPair : kvPairs) {
+					// System.out.print("kvPairs =============------ " + kvPair);
+					if (r == 0)
+						tc = kvPair;
+					if (r == 1)
+						name_pat = kvPair;
+					r++;
+					if (r == 2)
+						break;
+
+				}
+			}
+				
 			}
 		}
 
@@ -3349,7 +3521,7 @@ public class Server {
 					frameList = headerParsing_Mispa_Clinia_s(list.get(0));// mispa clinia
 				}
 
-				if (formatid.equals("20050"))// mispa clinia
+				if (formatid.equals("2005000"))// mispa clinia
 				{
 					frameList = headerParsing_Mispa_Clinia_s(list.get(0));// mispa clinia
 				}
@@ -3382,15 +3554,42 @@ public class Server {
 			//	multiframeResponse.add(frameList1); //add(frameList1);
 				
 				}
+				if (formatid.equals("50003"))// mispa clinia
+				{
 				
+				frameList = 	ERBAXL1000AIIMSJammu
+						(list.get(0),cout);// mispa clinia
+					
+			//	System.out.println("NEW Frame"+frameList1);
+			//	multiframeResponse.add(frameList1); //add(frameList1);
+				
+				}
+				
+			
 				if (formatid.equals("20047"))// 
 				{
 					frameList = Vitors_Query_parse(); ///AIIMS Jodhpur Attlica
 
 				}
 				
+				if (formatid.equals("50001") || formatid.equals("100017")  )// sysmax 2500  // added by rohit for Bi Dir.. RB sysmax 200 20016 formatid
+				{
+					frameList = sysmax2400RBparseBI(list.get(0));
+				}
 
 
+				if (formatid.equals("20050"))// 
+				{
+					frameList = UATEST(list.get(0)); ///
+
+				}
+
+				if (formatid.equals("50004"))// 
+				{
+					frameList = queryParse(list.get(0)); ///
+					//frameList = AlinityBhatinda.queryParse(list.get(0)); ///
+
+				}
 				
 			//System.out.println(multiframeResponse);
 
@@ -3405,10 +3604,1093 @@ public class Server {
 			frameList = sysmex1000_headerParsing_m();// vitrose5600
 			
 		}
-	
+	 
 		// System.out.println("PAcket:-----"+packet);
 		return multiframeResponse;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+public static List<StringBuffer> queryParse(String ListData) {
+		
+		
+		System.out.println("ua Query Packet Parsing Start ");
+		SimpleDateFormat time_formatter2 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str2 = time_formatter2.format(System.currentTimeMillis());
+		System.out.println("current_time_str2---" + current_time_str2);
+		Server.StxCounter = 1;
+		String qryFlag=null;
+		
+		String[] str=ListData.split("\\|");
+		qryFlag=	str[12];
+		SimpleDateFormat time_formatter3 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str3 = time_formatter3.format(System.currentTimeMillis());
+		// System.out.println("current_time_str2 after 1 second wait---" +
+		// current_time_str3);
+
+		int CountPipe = 0, j = 0;
+		char cr = 13;
+		char lf = 10;
+		int instance = 0;
+		char stx = '';
+		String mode1 = "";
+		StringBuffer buf = new StringBuffer();
+		StringBuffer cobas = new StringBuffer();
+		StringBuffer host = new StringBuffer();
+		StringBuffer mode = new StringBuffer();
+		StringBuffer lines = new StringBuffer();
+		StringBuffer frame1 = new StringBuffer();
+		StringBuffer frame2 = new StringBuffer();
+		StringBuffer frame3 = new StringBuffer();
+		StringBuffer frame3_1 = new StringBuffer();
+		StringBuffer frame4 = new StringBuffer();
+
+		StringBuffer buf_header = new StringBuffer();
+		StringBuffer buf_patient = new StringBuffer();
+		StringBuffer buf_order = new StringBuffer();
+		StringBuffer buf_order_1 = new StringBuffer();
+		StringBuffer buf_termination = new StringBuffer();
+
+		SimpleDateFormat time_formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		time_formatter.setTimeZone(TimeZone.getTimeZone("GMT+05:30"));
+		String current_time_str = time_formatter.format(System.currentTimeMillis());
+
+		//		StringBuffer header1 = new StringBuffer(
+		//				"H|@^\\|GXM-88424724426|| LIS|||||CENTRAL RAILWAY HOSPITAL, SECUNDERABAD - 110000888^GeneXpert^6.4||P|1394-97|");
+
+		StringBuffer header = new StringBuffer();
+
+		header.append("H|\\^&||||||||||P");
+		// header = header.append(Query_Message_date_time);
+		//header = header.append(current_time_str+"+0530");
+
+		StringBuffer line4 = new StringBuffer("L|1");
+		StringBuffer line6 = new StringBuffer("|||F");
+		StringBuffer line5 = new StringBuffer();
+		char etb = 23;
+		char eot = '';
+		char etx = 3;
+		Server.counterPID_Packet = Server.counterPID_Packet + 33;
+		StringBuffer p = new StringBuffer("P|1|||********|^********************^||||||||||||||||||||******");
+	
+		 System.out.println("rohit chnage 2 2406");
+		StringBuffer c = new StringBuffer("C|1|L|Order comment.|G");
+
+		StringBuffer Order = new StringBuffer();
+		StringBuffer Order1 = new StringBuffer("O|1");
+		List list = new ArrayList();
+		StringBuffer frame = new StringBuffer();
+		StringBuffer framevip = new StringBuffer();
+		StringBuffer response = new StringBuffer();
+		StringBuffer time = new StringBuffer();
+
+		try {
+
+			System.out.println("TIME:- " + time);
+
+			while (true) {
+
+				buf_header.append(header);
+				buf_header.append(cr);
+				buf_patient.append(p);
+				buf_patient.append(cr);
+
+				System.out.println("Server.testCode.size------- " + Server.testCode.size());
+
+				Server.frameList.clear();
+				frame1.append(stx);
+				frame1.append(Server.StxCounter);
+				frame1.append(buf_header);
+				buf_header.delete(0, buf_header.length());
+				frame1.append(etx);
+				frame1.append(Server.CheckSum(frame1.toString())); // FRAME WITH STX STX COUNTER AND ETB
+				frame1.append(cr);
+				frame1.append(lf);
+				Server.frameList.add(frame1.toString());
+				frame1.delete(0, frame1.length());
+				//System.out.println("Server.frameList= " + Server.frameList.toString());
+
+				Server.StxCounter = Server.StxCounter + 1;
+
+				frame2.append(stx);
+				frame2.append(Server.StxCounter);
+				frame2.append(buf_patient);
+				buf_patient.delete(0, buf_patient.length());
+				frame2.append(etx);
+				frame2.append(Server.CheckSum(frame2.toString())); // FRAME WITH STX STX COUNTER AND ETB
+				frame2.append(cr);
+				frame2.append(lf);
+				Server.frameList.add(frame2.toString());
+				frame2.delete(0, frame2.length());
+				//System.out.println("Server.frameList= " + Server.frameList.toString());
+
+
+				
+				
+				int count =0;
+				
+				if(!testCode.isEmpty()) {
+				for(int K=0;K<=Server.testCode.size()-1;K++) {
+					
+					count++;
+					Order.append("O|"+count+"|"+Server.Sample_code.get(0)+"||^^^"+Server.testCode.get(K)+"|||||||N||||||||||||||O");
+					Order.append(cr);
+
+					buf_order.append(Order);
+					Order.delete(0, Order.length());
+					
+					int frameCount = 0, first = 0, mid = 0, remain = 0;
+					frameCount = Server.FrameCounter(buf_order.length());
+					// System.out.println("Char At 0 "+buf.charAt(0));
+					int length = buf_order.length();
+					// Server.frameList3.clear();
+					for (int i = 1; i <= frameCount; i++) {
+						if (length < 240)
+							// if (length < 306)
+							mid = mid + length;
+						else if (length == 240)
+							mid = mid + length;
+						else if (length > 240) {
+							mid = mid + 240;
+						}
+						System.out.println("First " + first + "  " + "last " + mid + " stx  " + stx);
+						frame3.append(stx);
+						// System.out.println("Server.Server.StxCounter " +Server.StxCounter);
+						if(Server.StxCounter==7) {Server.StxCounter=0;}
+						else {Server.StxCounter = Server.StxCounter + 1;
+						}
+						frame3.append(Server.StxCounter);
+						// System.out.println("STX COUNTER:- " +Server.StxCounter);
+
+						frame3.append(buf_order.substring(first, mid));
+
+						if (i == frameCount) {
+							frame3.append(etx);
+							// System.out.println("before Server.CheckSum" + frame3.toString());
+							frame3.append(Server.CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETX
+							// frame.append(Server.CheckSum(buf.substring(first, mid))); //FRAME WITH ONLY
+							// CHARACTERS
+							frame3.append(cr);
+							frame3.append(lf);
+						} else
+
+						{
+							frame3.append(etb);
+							// System.out.println("before Server.CheckSum" + frame3.toString());
+							frame3.append(Server.CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETB
+							// frame.append(Server.CheckSum(buf.substring(first, mid)));
+							frame3.append(cr);
+							frame3.append(lf);
+						}
+						// length = length - mid;
+						length = length - 240;
+						first = mid;
+
+						Server.frameList.add(frame3.toString());
+						/*
+						 * if(i ==1) frame1.append(frame); else frame2.append(frame);
+						 */
+						frame3.delete(0, frame3.length());
+
+					}
+
+					buf_order.delete(0, buf_order.length());
+				
+				}
+				}
+				else {
+					
+					Order.append("O|"+count+"|"+Server.Sample_code.get(0)+"||^^^|||||||N||||||||||||||O");
+					Order.append(cr);
+
+					buf_order.append(Order);
+					Order.delete(0, Order.length());
+					
+					int frameCount = 0, first = 0, mid = 0, remain = 0;
+					frameCount = Server.FrameCounter(buf_order.length());
+					// System.out.println("Char At 0 "+buf.charAt(0));
+					int length = buf_order.length();
+					// Server.frameList3.clear();
+					for (int i = 1; i <= frameCount; i++) {
+						if (length < 240)
+							// if (length < 306)
+							mid = mid + length;
+						else if (length == 240)
+							mid = mid + length;
+						else if (length > 240) {
+							mid = mid + 240;
+						}
+						System.out.println("First " + first + "  " + "last " + mid + " stx  " + stx);
+						frame3.append(stx);
+						// System.out.println("Server.Server.StxCounter " +Server.StxCounter);
+						if(Server.StxCounter==7) {Server.StxCounter=0;}
+						else {Server.StxCounter = Server.StxCounter + 1;
+						}
+						frame3.append(Server.StxCounter);
+						// System.out.println("STX COUNTER:- " +Server.StxCounter);
+
+						frame3.append(buf_order.substring(first, mid));
+
+						if (i == frameCount) {
+							frame3.append(etx);
+							// System.out.println("before Server.CheckSum" + frame3.toString());
+							frame3.append(Server.CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETX
+							// frame.append(Server.CheckSum(buf.substring(first, mid))); //FRAME WITH ONLY
+							// CHARACTERS
+							frame3.append(cr);
+							frame3.append(lf);
+						} else
+
+						{
+							frame3.append(etb);
+							// System.out.println("before Server.CheckSum" + frame3.toString());
+							frame3.append(Server.CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETB
+							// frame.append(Server.CheckSum(buf.substring(first, mid)));
+							frame3.append(cr);
+							frame3.append(lf);
+						}
+						// length = length - mid;
+						length = length - 240;
+						first = mid;
+
+						Server.frameList.add(frame3.toString());
+						/*
+						 * if(i ==1) frame1.append(frame); else frame2.append(frame);
+						 */
+						frame3.delete(0, frame3.length());
+
+					}
+
+					buf_order.delete(0, buf_order.length());
+				
+					
+				}
+				// System.out.println("buf_order= " + buf_order.toString());
+
+				// --------------------------------------------
+				// System.out.println("STRING LENGTH BEFORE FRAMING buf_order= " +
+				// buf_order.length());
+
+				// STRING LENGTH BEFORE FRAMING = 235
+			
+
+
+				line4.append(cr);
+
+				buf.append(line4);
+				buf_termination.append(line4);
+
+				break;
+			}
+
+			// ========================================
+			if(Server.StxCounter==7) {Server.StxCounter=0;}
+			else {
+			Server.StxCounter = Server.StxCounter + 1;
+			}
+			frame4.append(stx);
+			frame4.append(Server.StxCounter);
+			frame4.append(buf_termination);
+			buf_termination.delete(0, buf_termination.length());
+			frame4.append(etx);
+			frame4.append(Server.CheckSum(frame4.toString())); // FRAME WITH STX STX COUNTER AND ETB
+			frame4.append(cr);
+			frame4.append(lf);
+
+			Server.frameList.add(frame4.toString());
+			frame4.delete(0, frame4.length());
+
+			for (int i = 0; i < Server.frameList.size(); i++) {
+				Server.count_ack_BA400_o1++;
+			}
+			//				System.out.println("count_ack_BA400_o1------- " + count_ack_BA400_o1);
+			System.out.println("Final String after Server.CheckSum" + Server.frameList.toString());
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		// Server.Server.frameList = Server.frameList;
+
+		return Server.frameList;
+		
+		
+		//return null;
+		
+		
+	
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private static List<StringBuffer> UATEST(String string) {
+		
+		System.out.println("ua Query Packet Parsing Start ");
+		SimpleDateFormat time_formatter2 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str2 = time_formatter2.format(System.currentTimeMillis());
+		System.out.println("current_time_str2---" + current_time_str2);
+		StxCounter = 1;
+		String qryFlag=null;
+		
+		String[] str=string.split("\\|");
+		qryFlag=	str[12];
+		SimpleDateFormat time_formatter3 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str3 = time_formatter3.format(System.currentTimeMillis());
+		// System.out.println("current_time_str2 after 1 second wait---" +
+		// current_time_str3);
+
+		int CountPipe = 0, j = 0;
+		char cr = 13;
+		char lf = 10;
+		int instance = 0;
+		char stx = '';
+		String mode1 = "";
+		StringBuffer buf = new StringBuffer();
+		StringBuffer cobas = new StringBuffer();
+		StringBuffer host = new StringBuffer();
+		StringBuffer mode = new StringBuffer();
+		StringBuffer lines = new StringBuffer();
+		StringBuffer frame1 = new StringBuffer();
+		StringBuffer frame2 = new StringBuffer();
+		StringBuffer frame3 = new StringBuffer();
+		StringBuffer frame3_1 = new StringBuffer();
+		StringBuffer frame4 = new StringBuffer();
+
+		StringBuffer buf_header = new StringBuffer();
+		StringBuffer buf_patient = new StringBuffer();
+		StringBuffer buf_order = new StringBuffer();
+		StringBuffer buf_order_1 = new StringBuffer();
+		StringBuffer buf_termination = new StringBuffer();
+
+		SimpleDateFormat time_formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str = time_formatter.format(System.currentTimeMillis());
+
+		//		StringBuffer header1 = new StringBuffer(
+		//				"H|@^\\|GXM-88424724426|| LIS|||||CENTRAL RAILWAY HOSPITAL, SECUNDERABAD - 110000888^GeneXpert^6.4||P|1394-97|");
+
+		StringBuffer header = new StringBuffer();
+
+		header.append("H|\\^&|||||||||||E1394-97");
+		// header = header.append(Query_Message_date_time);
+		header = header.append(current_time_str);
+
+		StringBuffer line4 = new StringBuffer("L|1|F");
+		StringBuffer line6 = new StringBuffer("|||F");
+		StringBuffer line5 = new StringBuffer();
+		char etb = 23;
+		char eot = '';
+		char etx = 3;
+		counterPID_Packet = counterPID_Packet + 33;
+		StringBuffer p = new StringBuffer("P|");
+		p.append(p_packet_count+"||");
+		p.append(Sample_code.get(0)+"||");
+		
+		
+		String str2=name_pat_first;
+	//P|1|240527P003|||Ray^Ari|||M|||||||||||||||||
+		//p.append("cdac^test sample^^\\Sample^Ichiro||20041108|M||||||||||||||||IP");
+		// p.append("Smith^Tom^J||19600315|M|||A|||icteru||||||01|||||A1|002||||||||");
+		// p.append("RR^ABIGAIL^G||19780407|F||843 TALL OAKSDR^HAILVILLE, MD
+		// 45831|||RASHAMDRA^SANJAY^V|S|||||||||||U7");
+	
+		
+		  if (name_pat_first.equals("null")) { name_pat_first = ""; name_pat_last = "";
+		  } if (name_pat_last.equals("null")) name_pat_last = "";
+		  p.append(name_pat_first + "^" + name_pat_last); // p.append(name_pat.trim());
+		  
+		   p.append("^^^||"); p.append("|M|||||||||||||||IP");
+		 
+		StringBuffer c = new StringBuffer("C|1|I|Patient is complaining of shortness of breath and chest pain.|G");
+
+		StringBuffer Order = new StringBuffer();
+		StringBuffer Order1 = new StringBuffer("O|2");
+		List list = new ArrayList();
+		StringBuffer frame = new StringBuffer();
+		StringBuffer framevip = new StringBuffer();
+		StringBuffer response = new StringBuffer();
+		StringBuffer time = new StringBuffer();
+
+		try {
+
+			System.out.println("TIME:- " + time);
+
+			while (true) {
+
+				buf_header.append(header);
+				buf_header.append(cr);
+				buf_patient.append(p);
+				buf_patient.append(cr);
+
+				System.out.println("testCode.size------- " + testCode.size());
+
+				frameList.clear();
+				frame1.append(stx);
+				frame1.append(StxCounter);
+				frame1.append(buf_header);
+				buf_header.delete(0, buf_header.length());
+				frame1.append(etx);
+				frame1.append(CheckSum(frame1.toString())); // FRAME WITH STX STX COUNTER AND ETB
+				frame1.append(cr);
+				frame1.append(lf);
+				frameList.add(frame1.toString());
+				frame1.delete(0, frame1.length());
+				System.out.println("frameList= " + frameList.toString());
+
+				StxCounter = StxCounter + 1;
+
+				frame2.append(stx);
+				frame2.append(StxCounter);
+				frame2.append(buf_patient);
+				buf_patient.delete(0, buf_patient.length());
+				frame2.append(etx);
+				frame2.append(CheckSum(frame2.toString())); // FRAME WITH STX STX COUNTER AND ETB
+				frame2.append(cr);
+				frame2.append(lf);
+				frameList.add(frame2.toString());
+				frame2.delete(0, frame2.length());
+				System.out.println("frameList= " + frameList.toString());
+
+				// ====================================================================
+				
+//O|1|240527P003||^^^1.0000+300+1.0|R||20240527133440||||N||||5||||||||||O
+				
+				if(qryFlag.contains("C")) {
+					Order.append("O|1|"+Sample_code.get(0)+"||^^^URO\\^^^BLD\\^^^BIL\\^^^KET\\^^^GLU\\^^^PRO\\^^^PH\\^^^NIT\\^^^LEU\\^^^CRE\\^^^ ALB \\^^^ S.G.(Ref) \\^^^ COLOR \\^^^ ColorRANK \\^^^ CLOUD \\|A||"+current_time_str2+"||||N||||Urine-EarlyMorning|D00001^Doctor^Smith^^^Dr.|01-123-4567|O2015073000000001||");
+						
+					
+				}
+				else if(qryFlag.contains("F")) {
+					
+					
+					Order.append("O|1|"+Sample_code.get(0)+"||^^^RBC\\^^^WBC\\^^^WBC Clumps\\^^^EC\\^^^Squa.EC\\^^^Non SEC\\^^^CAST\\^^^Hy.CAST\\^^^Path.CAST\\^^^BACT\\^^^X'TAL\\^^^YLC\\^^^SPERM\\^^^MUCUS\\|A||"+current_time_str2+"||||N||||Urine-EarlyMorning|D00001^Doctor^Smith^^^Dr.|01-123-4567|O2015073000000001||");
+					
+				}
+				
+				
+				
+				// Order.append();
+				/*
+				 * Order.append("|"); Order.append(Sample_code.get(0)); Order.append("||");
+				 * Order.append("^^^"); Order.append("1.0000+"); for (int k = 0; k <
+				 * testCode.size(); k++)
+				 * 
+				 * { // Order.append(k + 1);
+				 * 
+				 * Order.append(testCode.get(k)); Order.append("+1.0"); if (k != testCode.size()
+				 * - 1) { // Order.append("^2^1"); Order.append("\\");
+				 * 
+				 * }
+				 * 
+				 * else { Order.append(""); }
+				 * 
+				 * } //Order.append("|");
+				 * 
+				 * if(sampleType.equals("URINE")) {
+				 * Order.append("|R||"+current_time_str+"||||N||||3||||||||||O"); } else
+				 * if(sampleType.equals("SERUM")){
+				 * Order.append("|R||"+current_time_str+"||||N||||5||||||||||O");
+				 * 
+				 * //|R||20 060516091500||||A||||| } else if(sampleType.equals("SERUM")){
+				 * Order.append("|R||"+current_time_str+"||||N||||5||||||||||O");
+				 * 
+				 * 
+				 * 
+				 * } else if(sampleType.equals("Whole Blood")){
+				 * Order.append("|R||"+current_time_str+"||||N||||4||||||||||O");
+				 * 
+				 * 
+				 * 
+				 * }
+				 * 
+				 * else if(sampleType.equals("PLASMA")){
+				 * Order.append("|R||"+current_time_str+"||||N||||6||||||||||O");
+				 * 
+				 * 
+				 * 
+				 * }
+				 * 
+				 * else if(sampleType.equals("Amniotic Fluid")){
+				 * Order.append("|R||"+current_time_str+"||||N||||7||||||||||O");
+				 * 
+				 * 
+				 * 
+				 * }
+				 */
+				
+				
+				
+				/*
+				 * Body Fluid Key: 2 CSF, 3 Urine, 4 Whole Blood, 5 Serum, 6 Plasma, 7 Amniotic
+				 * Fluid, 8 Reserved Fluid 1, 9 Reserved Fluid 2, 10 Reserved Fluid 3, UD User
+				 * Defined
+				 */
+				// Order.append(line6);
+				
+				Order.append(cr);
+
+				buf_order.append(Order);
+				Order.delete(0, Order.length());
+
+				// System.out.println("buf_order= " + buf_order.toString());
+
+				// --------------------------------------------
+				// System.out.println("STRING LENGTH BEFORE FRAMING buf_order= " +
+				// buf_order.length());
+
+				// STRING LENGTH BEFORE FRAMING = 235
+				int frameCount = 0, first = 0, mid = 0, remain = 0;
+				frameCount = FrameCounter(buf_order.length());
+				// System.out.println("Char At 0 "+buf.charAt(0));
+				int length = buf_order.length();
+				// frameList3.clear();
+				for (int i = 1; i <= frameCount; i++) {
+					if (length < 240)
+						// if (length < 306)
+						mid = mid + length;
+					else if (length == 240)
+						mid = mid + length;
+					else if (length > 240) {
+						mid = mid + 240;
+					}
+					System.out.println("First " + first + "  " + "last " + mid + " stx  " + stx);
+					frame3.append(stx);
+					StxCounter = StxCounter + 1;
+					// System.out.println("Server.StxCounter " +StxCounter);
+					frame3.append(StxCounter);
+					// System.out.println("STX COUNTER:- " +StxCounter);
+
+					frame3.append(buf_order.substring(first, mid));
+
+					if (i == frameCount) {
+						frame3.append(etx);
+						// System.out.println("before checksum" + frame3.toString());
+						frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETX
+						// frame.append(CheckSum(buf.substring(first, mid))); //FRAME WITH ONLY
+						// CHARACTERS
+						frame3.append(cr);
+						frame3.append(lf);
+					} else
+
+					{
+						frame3.append(etb);
+						// System.out.println("before checksum" + frame3.toString());
+						frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETB
+						// frame.append(CheckSum(buf.substring(first, mid)));
+						frame3.append(cr);
+						frame3.append(lf);
+					}
+					// length = length - mid;
+					length = length - 240;
+					first = mid;
+
+					frameList.add(frame3.toString());
+					/*
+					 * if(i ==1) frame1.append(frame); else frame2.append(frame);
+					 */
+					frame3.delete(0, frame3.length());
+
+				}
+
+				buf_order.delete(0, buf_order.length());
+				System.out.println("frameList= " + frameList.toString());
+
+
+
+				line4.append(cr);
+
+				buf.append(line4);
+				buf_termination.append(line4);
+
+				break;
+			}
+
+			// ========================================
+
+			StxCounter = StxCounter + 1;
+
+			frame4.append(stx);
+			frame4.append(StxCounter);
+			frame4.append(buf_termination);
+			buf_termination.delete(0, buf_termination.length());
+			frame4.append(etx);
+			frame4.append(CheckSum(frame4.toString())); // FRAME WITH STX STX COUNTER AND ETB
+			frame4.append(cr);
+			frame4.append(lf);
+
+			frameList.add(frame4.toString());
+			frame4.delete(0, frame4.length());
+
+			for (int i = 0; i < frameList.size(); i++) {
+				count_ack_BA400_o1++;
+			}
+			//				System.out.println("count_ack_BA400_o1------- " + count_ack_BA400_o1);
+			System.out.println("Final String after checksum" + frameList.toString());
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		// Server.frameList = frameList;
+
+		return frameList;
+		
+		
+	}
+
+	private static List<StringBuffer> sysmax2400RBparseBI(String line) {
+		System.out.println("Sysmax Bi DIR with ENQ----2500");
+		SimpleDateFormat time_formatter2 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str2 = time_formatter2.format(System.currentTimeMillis());
+		System.out.println("current_time---" + current_time_str2);
+
+		Server.StxCounter = 1;
+
+		SimpleDateFormat time_formatter3 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str3 = time_formatter3.format(System.currentTimeMillis());
+		//		System.out.println("current_time_str2 after 1 second wait---" + current_time_str3);
+		char[] array = line.toCharArray();
+		int CountPipe = 0, j = 0;
+		char cr = 13;
+		char lf = 10;
+		int instance = 0;
+		char stx = '';
+		String mode1 = "";
+		StringBuffer buf = new StringBuffer();
+		StringBuffer cobas = new StringBuffer();
+		StringBuffer host = new StringBuffer();
+		StringBuffer mode = new StringBuffer();
+		StringBuffer lines = new StringBuffer();
+		StringBuffer frame1 = new StringBuffer();
+		StringBuffer frame2 = new StringBuffer();
+		StringBuffer frame3 = new StringBuffer();
+		StringBuffer frame3_1 = new StringBuffer();
+		StringBuffer frame4 = new StringBuffer();
+		StringBuffer frame5 = new StringBuffer();
+
+		StringBuffer buf_header = new StringBuffer();
+		StringBuffer buf_patient = new StringBuffer();
+		StringBuffer buf_order = new StringBuffer();
+		StringBuffer buf_comment = new StringBuffer();
+		StringBuffer buf_order_1 = new StringBuffer();
+		StringBuffer buf_termination = new StringBuffer();
+
+		SimpleDateFormat time_formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str = time_formatter.format(System.currentTimeMillis());
+
+		StringBuffer header = new StringBuffer("H|\\^&|||||||||||E1394-97|");
+		//header.append("|||||||||P");	// for Alinity
+		//header.append("||"); 			// for Vitros Ramji Masked
+		//header.append("qnxa224"); 	// for Vitros Ramji Masked	
+		//header.append("|||||");  		// for Vitros Ramji Masked
+		//header.append("|||LIS2-A|");	// for Vitros Ramji Masked
+		//header = header.append(current_time_str);	// for Vitros Ramji Masked
+
+		//StringBuffer line4 = new StringBuffer("L|1|N"); // for Vitros Ramji Masked
+		StringBuffer line4 = new StringBuffer("L|1|N"); // for Alinity
+
+		//StringBuffer line6 = new StringBuffer("|||O"); // for Vitros Ramji Masked
+		StringBuffer line5 = new StringBuffer();
+		char etb = 23;
+		char eot = '';
+		char etx = 3;
+		counterPID_Packet = counterPID_Packet + 33;
+		 // for Vitros Ramji Masked
+		StringBuffer p = new StringBuffer("P|");
+		
+		String[] patDetails=name_pat.split(" ");
+		//P|1|||100|^Heisei^Jiro||20010820|M|||||^Dr.2||||||||||||^^^EAST|||||||||
+		p.append(p_packet_count);
+		//p.append("|");
+		//p.append(Server.Sample_code.get(0).toString().replace("^", ""));
+		p.append("||||");
+		p.append("^");
+		
+		if(name_pat.equals(null)) {
+		p.append(patDetails[0].trim());
+		p.append("^");
+		p.append(patDetails[1].trim());
+		
+		}
+		else{
+			p.append("");
+			p.append("^");
+			p.append("");
+				
+			
+		}
+		p.append("||");
+		p.append(name_pat_age+"|");
+		p.append(name_pat_gender);
+		//p.append("|||||");
+		//Added for Alinity
+		//StringBuffer p = new StringBuffer("P|");
+		//p.append(p_packet_count);
+		//p.append("||||^^|||||||||||||||||||||||||||||");
+
+		StringBuffer Order = new StringBuffer();
+		StringBuffer Comment = new StringBuffer();
+		StringBuffer Order1 = new StringBuffer("O|2");
+		List list = new ArrayList();
+		StringBuffer frame = new StringBuffer();
+		StringBuffer framevip = new StringBuffer();
+		StringBuffer response = new StringBuffer();
+		StringBuffer time = new StringBuffer();
+
+		try {
+
+			Server.cobas = cobas;
+			Server.host = host;
+			System.out.println("TIME:- " + time);
+
+			Server.stx = stx;
+			Server.mode = mode;
+
+			while (true) {
+
+				buf_header.append(header);
+				buf_header.append(cr);
+				buf_patient.append(p);
+				buf_patient.append(cr);
+				p.delete(0, p.length());
+
+				// ======================================================
+				frameList.clear();
+
+				//frameList.add("");
+				frame1.append(stx);
+				frame1.append(Server.StxCounter);
+				frame1.append(buf_header);
+				buf_header.delete(0, buf_header.length());
+				frame1.append(etx);
+				frame1.append(CheckSum(frame1.toString())); // FRAME WITH STX STX COUNTER AND ETB
+				frame1.append(cr);
+				frame1.append(lf);
+				frameList.add(frame1.toString());
+				frame1.delete(0, frame1.length());
+
+				Server.StxCounter = Server.StxCounter + 1;
+
+				frame2.append(stx);
+				frame2.append(Server.StxCounter);
+				frame2.append(buf_patient);
+				buf_patient.delete(0, buf_patient.length());
+				frame2.append(etx);
+				frame2.append(CheckSum(frame2.toString())); // FRAME WITH STX STX COUNTER AND ETB
+				frame2.append(cr);
+				frame2.append(lf);
+				frameList.add(frame2.toString());
+				frame2.delete(0, frame2.length());
+
+				// ===========================Start for Vitros 5600=========================================
+				/*	Order.append("O|1");
+				// Order.append();
+				Order.append("|");
+				Order.append(Server.Sample_code.get(0).toString().replace("^", ""));
+				Order.append("||^^^1.0000+");
+				for (int k = 0; k < Server.testCode.size(); k++)
+
+				{
+					Order.append(Server.testCode.get(k));
+					Order.append("+1.0");
+					if (k != Server.testCode.size() - 1) {
+						Order.append("\\");
+					}
+				}
+				Order.append("|R|");
+				Order.append("|");
+				Order.append("||||N||||5|||||||");
+				Order.append(line6);
+				Order.append(cr);
+				 */	
+				//=========================END for Vitros 5600=========================================	
+				// ===========================Start for Alinity=======O|1|002111522041500||^^^65|||||||A||||||||||||||O
+				frame3.delete(0, frame3.length());
+				int OrderCounter=0;
+				int fCount  = 3;
+				int loopSize = Server.testCode.size();
+				if(loopSize==0) //added this if condition for null Response 
+				{
+					Order.append("O|1|");
+					//OrderCounter = k + 1;
+					//Order.append(Integer.toString(OrderCounter));
+					Order.append("^");
+					Order.append("^");
+					Order.append(Server.sampleNo.toString().replace("^", "").trim());
+					// Order.append("^50087^1^^S1^SC^|");
+					Order.append("|");
+					Order.append("|");
+					//Order.append("|");
+					Order.append("^^^");
+					Order.append("^^\\");
+					Order.append("|R");
+					Order.append("|");
+					Order.append(current_time_str);
+					Order.append("|||||N|||||||||||||||||||");
+
+
+					Order.append(cr);
+
+					frame3.append(stx);
+					Server.StxCounter = Server.StxCounter + 1;
+					frame3.append(Server.StxCounter);
+					frame3.append(Order);
+					frame3.append(etx);
+					frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETX
+					frame3.append(cr);
+					frame3.append(lf);
+					frameList.add(frame3.toString());
+					frame3.delete(0, frame3.length());
+					Server.StxCounter=Server.StxCounter+1;	
+				}
+				else
+				{
+
+					Order.append("O|1|");
+					//OrderCounter = k + 1;
+					//Order.append(Integer.toString(OrderCounter));
+					//Order.append("^");
+					//Order.append("^");
+					Order.append(Server.sampleNo.toString().trim());
+					// Order.append("^50087^1^^S1^SC^|");
+					Order.append("|");
+					Order.append("|");
+
+					for (int k = 0; k < Server.testCode.size(); k++)
+					{
+
+						//Order.append("O|1|"); // Need "O|1|" "O|2|" "O|3|"
+
+
+						//Order.append("||^^^"); //RAMJI
+						//Order.append(Server.testCode.get(k));
+						//Order.append("||^^^349|||||||N||||||||||||||O"); //Hardcode
+						Order.append("^^^");
+						Order.append(Server.testCode.get(k));
+						if (k != Server.testCode.size() - 1)
+							Order.append("^^^\\");
+						else
+							Order.append("^^^");
+					}
+
+					
+					
+					//^^^040^PT-THS\^^^050^APTT-FS
+					//	Order.append(Server.testCode.get(k));
+					//	if (k != Server.testCode.size() - 1) {
+					//		Order.append("\\");
+
+					//}
+
+					Order.append("|");
+					Order.append("R");
+					Order.append("|");
+					Order.append(current_time_str);
+					Order.append("|||||N|||||||||||||||||||");
+
+					Order.append(cr);
+
+					//=========================END for Vitros 5600=========================================	
+
+					buf_order.append(Order);
+					Order.delete(0, Order.length());
+
+					buf_comment.append(Comment);
+					Comment.delete(0, Comment.length());
+
+					// --------------------------------------------
+					System.out.println("Alinity Frame Count Checking :" + Server.StxCounter);
+					int frameCount = 0, first = 0, mid = 0, remain = 0;
+					frameCount = FrameCounter(buf_order.length());
+					int length = buf_order.length();
+
+					//for (int i = 1; i <= frameCount; i++) 
+					//{
+					if (length < 240)
+						mid = mid + length;
+					else if (length == 240)
+						mid = mid + length;
+					else if (length > 240) {
+						mid = mid + 240;
+					}
+					frame3.append(stx);
+					Server.StxCounter = Server.StxCounter + 1;
+					frame3.append(fCount);
+
+					frame3.append(buf_order.substring(first, mid));
+					//---------------------------------
+					//		if (fCount != frameCount) 
+					{
+						frame3.append(etx);
+						frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETX
+						frame3.append(cr);
+						frame3.append(lf);
+					}
+					//		else
+					//		{
+					//			frame3.append(etb);
+					//			frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETB
+					//			frame3.append(cr);
+					//			frame3.append(lf);
+					//		}
+					length = length - 240;
+					first = mid;
+					//-----------------------------------------
+					frameList.add(frame3.toString());
+
+					frame3.delete(0, frame3.length());
+
+
+					fCount++;
+
+					if(fCount==8)
+					{
+						fCount=0;
+					}
+					//}
+
+					/*
+				for (int i = 1; i <= frameCount; i++) 
+				{
+					if (Server.StxCounter == 7)
+					{
+						Server.StxCounter = 0;
+						System.out.println("Alinity Frame Count Set 0 After 7 :" + Server.StxCounter);
+					}
+					if (length < 240)
+						mid = mid + length;
+					else if (length == 240)
+						mid = mid + length;
+					else if (length > 240) {
+						mid = mid + 240;
+					}
+					frame3.append(stx);
+					if(Server.StxCounter == 8)
+					{	Server.StxCounter = -1;
+						System.out.println("Alinity Initial Frame Count is 8 :" + Server.StxCounter);
+					}
+					Server.StxCounter = Server.StxCounter + 1;
+					frame3.append(Server.StxCounter);
+
+					frame3.append(buf_order.substring(first, mid));
+
+					if (i == frameCount) {
+						frame3.append(etx);
+						frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETX
+						frame3.append(cr);
+						frame3.append(lf);
+					} else
+
+					{
+						frame3.append(etb);
+						frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETB
+						frame3.append(cr);
+						frame3.append(lf);
+					}
+						length = length - 240;
+					first = mid;
+
+					frameList.add(frame3.toString());
+						frame3.delete(0, frame3.length());
+
+				}
+					 */
+					buf_order.delete(0, buf_order.length());
+					//System.out.println("frameList= " +k);
+					//				if(k==loopSize-1)
+					//				{
+					//					Server.StxCounter = fCount;
+					//				}
+					//System.out.println("frameList= " + frameList.toString());
+					//}//For Loop Ramji for Multiple Order Packet frame 3
+				}//else		
+				// -------------------------------------
+
+
+				line4.append(cr);
+
+				buf.append(line4);
+				buf_termination.append(line4);
+
+				break;
+			}
+
+			// ========================================
+			frame5.append(stx);
+			if(Server.StxCounter==8)
+			{	
+				Server.StxCounter=0;
+			}
+			else
+			{
+				Server.StxCounter = Server.StxCounter ;
+			}
+			frame5.append(Server.StxCounter);
+			Comment.append("C|1|L|Order comment.|G");
+			Comment.append(cr);
+			Comment.append(etx);
+			//Comment.append("78");
+			frame5.append(Comment);
+			frame5.append(CheckSum(frame5.toString())); // FRAME WITH STX STX COUNTER AND ETB
+			frame5.append(cr);
+			frame5.append(lf);
+
+			//frameList.add(frame5.toString());
+			frame5.delete(0, frame5.length());
+
+			Server.StxCounter = Server.StxCounter + 1;
+			if(Server.StxCounter==8)
+			{	
+				Server.StxCounter=0;
+			}
+			else
+			{
+				Server.StxCounter = Server.StxCounter ;
+			}
+
+
+			// frameList4.clear();
+			frame4.append(stx);
+			frame4.append(Server.StxCounter);
+			frame4.append(buf_termination);
+			buf_termination.delete(0, buf_termination.length());
+			frame4.append(etx);
+			frame4.append(CheckSum(frame4.toString())); // FRAME WITH STX STX COUNTER AND ETB
+			frame4.append(cr);
+			frame4.append(lf);
+
+			frameList.add(frame4.toString());
+			frame4.delete(0, frame4.length());
+
+
+			for (int i = 0; i < frameList.size(); i++) {
+				count_ack_BA400_o1++;
+			}
+			System.out.println("Final String after checksum" + frameList.toString());
+
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return frameList;
+	}
+
 	private static String Stringof(int n) {
 		// TODO Auto-generated method stub
 		return null;
@@ -3656,9 +4938,12 @@ public class Server {
 	public static List headerParsing_Mispa_Clinia_s(String line) {
 		SimpleDateFormat time_formatter2 = new SimpleDateFormat("yyyyMMddHHmmss");
 		String current_time_str2 = time_formatter2.format(System.currentTimeMillis());
-		System.out.println("current_time_str2---" + current_time_str2);
+		System.out.println("current_time_str22---" + current_time_str2);
 		Server.StxCounter = 1;
 
+		
+		
+		
 		SimpleDateFormat time_formatter3 = new SimpleDateFormat("yyyyMMddHHmmss");
 		String current_time_str3 = time_formatter3.format(System.currentTimeMillis());
 		System.out.println("current_time_str2 after 1 second wait---" + current_time_str3);
@@ -4427,7 +5712,7 @@ public class Server {
 	String[] patName=patDetilas[0].split("\\s");
 	
 	
-	p.append("|||");
+	p.append("||"+Server.pat_Cr+"|");
 	p.append("|");
 	//p.append("^");
 
@@ -4436,8 +5721,8 @@ public class Server {
 	p.append(patName[1]);
 	SimpleDateFormat time_formatter21 = new SimpleDateFormat("yyyyMMdd");
 	String current_time_str22 = time_formatter21.format(System.currentTimeMillis());
-	patDetilas[1]=patDetilas[1].replaceAll("Yr", "");
-	 int age = Integer.parseInt(patDetilas[1].replaceAll("\\s", ""));
+	String age2=name_pat_age.replaceAll("Yr", "");
+	 int age = Integer.parseInt(age2.replaceAll("\\s", ""));
 
      // Get today's date
      LocalDate today = LocalDate.now();
@@ -4455,7 +5740,7 @@ public class Server {
      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
      System.out.println("Estimated Date of Birth: " + dob.format(formatter));
      String db=dob.format(formatter);
-	p.append("||"+db+"|"+patDetilas[2]+"|||||");
+	p.append("||"+db+"|"+name_pat_gender+"|||||");
 	
 	
 	
@@ -4554,7 +5839,7 @@ public class Server {
 				//	Order.append("^");
 					Order.append(Server.Sample_code.get(0)+"||");
 					
-					Order.append("^^^^DIF|R|");
+					Order.append("^^^DIF|R|");
 					Order.append(current_time_str);
 					// Order.append("^50087^1^^S1^SC^|");
 					Order.append("|||||N||||||||||||||Q|||||");
@@ -4587,7 +5872,7 @@ public class Server {
 				//	Order.append("^");
 					Order.append(Server.Sample_code.get(0)+"||");
 					
-					Order.append("^^^^DIF|R|");
+					Order.append("^^^DIF|R|");
 					Order.append(current_time_str);
 					// Order.append("^50087^1^^S1^SC^|");
 					Order.append("|||||N||||||||||||||Q|||||");
@@ -5596,6 +6881,532 @@ public class Server {
 
 	// ----------------------------------------------------------------------------
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// PACKET Format id=50003
+	public static List ERBAXL1000AIIMSJammu(String line,PrintStream cout) {
+		System.out.println("Sysmax Bi DIR with ENQ----2500");
+		SimpleDateFormat time_formatter2 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str2 = time_formatter2.format(System.currentTimeMillis());
+		System.out.println("current_time---" + current_time_str2);
+
+		Server.StxCounter = 1;
+
+		SimpleDateFormat time_formatter3 = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str3 = time_formatter3.format(System.currentTimeMillis());
+		//		System.out.println("current_time_str2 after 1 second wait---" + current_time_str3);
+		char[] array = line.toCharArray();
+		int CountPipe = 0, j = 0;
+		char cr = 13;
+		char lf = 10;
+		int instance = 0;
+		char stx = '';
+		String mode1 = "";
+		StringBuffer buf = new StringBuffer();
+		StringBuffer cobas = new StringBuffer();
+		StringBuffer host = new StringBuffer();
+		StringBuffer mode = new StringBuffer();
+		StringBuffer lines = new StringBuffer();
+		StringBuffer frame1 = new StringBuffer();
+		StringBuffer frame2 = new StringBuffer();
+		StringBuffer frame3 = new StringBuffer();
+		StringBuffer frame3_1 = new StringBuffer();
+		StringBuffer frame4 = new StringBuffer();
+		StringBuffer frame5 = new StringBuffer();
+
+		StringBuffer buf_header = new StringBuffer();
+		StringBuffer buf_patient = new StringBuffer();
+		StringBuffer buf_order = new StringBuffer();
+		StringBuffer buf_comment = new StringBuffer();
+		StringBuffer buf_order_1 = new StringBuffer();
+		StringBuffer buf_termination = new StringBuffer();
+
+		SimpleDateFormat time_formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String current_time_str = time_formatter.format(System.currentTimeMillis());
+
+		StringBuffer header = new StringBuffer("H|`^&||||||||||P|E 1394-97|"+current_time_str);
+		//header.append("|||||||||P");	// for Alinity
+		//header.append("||"); 			// for Vitros Ramji Masked
+		//header.append("qnxa224"); 	// for Vitros Ramji Masked	
+		//header.append("|||||");  		// for Vitros Ramji Masked
+		//header.append("|||LIS2-A|");	// for Vitros Ramji Masked
+		//header = header.append(current_time_str);	// for Vitros Ramji Masked
+
+		//StringBuffer line4 = new StringBuffer("L|1|N"); // for Vitros Ramji Masked
+		StringBuffer line4 = new StringBuffer("L|1|N"); // for Alinity
+
+		//StringBuffer line6 = new StringBuffer("|||O"); // for Vitros Ramji Masked
+		StringBuffer line5 = new StringBuffer();
+		char etb = 23;
+		char eot = '';
+		char etx = 3;
+		counterPID_Packet = counterPID_Packet + 33;
+		/*	 // for Vitros Ramji Masked
+		StringBuffer p = new StringBuffer("P|");
+		p.append(p_packet_count);
+		p.append("|");
+		p.append(Server.Sample_code.get(0).toString().replace("^", ""));
+		p.append("|||");
+		p.append(name_pat_last.trim());
+		p.append("^");
+		p.append(name_pat_first.trim());
+		 */
+		//Added for Alinity
+		StringBuffer p = new StringBuffer("P|");
+		p.append(p_packet_count);
+		p.append("|");
+		p.append(Server.Sample_code.get(0).toString().replace("^", "").trim());
+		
+		//p.append("||||||U|||||||||||||||||||||||||||");
+
+		StringBuffer Order = new StringBuffer();
+		StringBuffer Comment = new StringBuffer();
+		StringBuffer Order1 = new StringBuffer("O|2");
+		List list = new ArrayList();
+		StringBuffer frame = new StringBuffer();
+		StringBuffer framevip = new StringBuffer();
+		StringBuffer response = new StringBuffer();
+		StringBuffer time = new StringBuffer();
+
+		try {
+
+			Server.cobas = cobas;
+			Server.host = host;
+			System.out.println("TIME:- " + time);
+
+			Server.stx = stx;
+			Server.mode = mode;
+
+			while (true) {
+
+				buf_header.append(header);
+				buf_header.append(cr);
+				buf_patient.append(p);
+				buf_patient.append(cr);
+				p.delete(0, p.length());
+
+				// ======================================================
+				frameList.clear();
+
+				//frameList.add("");
+				frame1.append(stx);
+				frame1.append(Server.StxCounter);
+				frame1.append(buf_header);
+				buf_header.delete(0, buf_header.length());
+				//frame1.append(etx);
+				//frame1.append(CheckSum(frame1.toString())); // FRAME WITH STX STX COUNTER AND ETB
+				//frame1.append(cr);
+				//frame1.append(lf);
+				frameList.add(frame1.toString());
+				frame1.delete(0, frame1.length());
+
+				Server.StxCounter = Server.StxCounter + 1;
+
+				//	frame2.append(stx);
+				//	frame2.append(Server.StxCounter);
+				frame2.append(buf_patient);
+				buf_patient.delete(0, buf_patient.length());
+				//	frame2.append(etx);
+				//	frame2.append(CheckSum(frame2.toString())); // FRAME WITH STX STX COUNTER AND ETB
+				//frame2.append(cr);
+				//frame2.append(lf);
+				frameList.add(frame2.toString());
+				frame2.delete(0, frame2.length());
+
+				// ===========================Start for Vitros 5600=========================================
+				/*	Order.append("O|1");
+				// Order.append();
+				Order.append("|");
+				Order.append(Server.Sample_code.get(0).toString().replace("^", ""));
+				Order.append("||^^^1.0000+");
+				for (int k = 0; k < Server.testCode.size(); k++)
+
+				{
+					Order.append(Server.testCode.get(k));
+					Order.append("+1.0");
+					if (k != Server.testCode.size() - 1) {
+						Order.append("\\");
+					}
+				}
+				Order.append("|R|");
+				Order.append("|");
+				Order.append("||||N||||5|||||||");
+				Order.append(line6);
+				Order.append(cr);
+				 */	
+				//=========================END for Vitros 5600=========================================	
+				// ===========================Start for Alinity=======O|1|002111522041500||^^^65|||||||A||||||||||||||O
+				frame3.delete(0, frame3.length());
+				int OrderCounter=0;
+				int fCount  = 3;
+				int loopSize = Server.testCode.size();
+				System.out.println("loopSize"+loopSize);
+
+				String[] multiSampl=Server.Sample_code.toString().split("\\^");
+				//O|1|270524BIO041||^^^UREA`^^^CRENZ`^^^UA`^^^Na`^^^K`^^^
+				//Cl`^^^CA`^^^MGXB`^^^PHOS`^^^BIT`^^^BIDD`^^^
+				//IBIL`^^^SGOTD`^^^SGPT1`^^^ALPU`^^^GGT`^^^PRO`^^^
+				//ALBD`^^^GLOB`^^^A/G`^^^LDH`^^^CHOL`^^^TRIG`^^^HDLC
+				//`^^^VLD`^^^LDL|R||20240527105953||||A||||SERUM||||||||||O|||||
+				if(multiSampl.length>1) //added this if condition for null Response 
+				{
+					Order.append("O|1|");
+
+					Order.append(Server.Sample_code.get(0).toString().replace("^", "").trim());
+					// Order.append("^50087^1^^S1^SC^|");
+					Order.append("|");
+					Order.append("|");
+					Order.append("^^^0^|");
+					Order.append("");
+					Order.append("R");
+					Order.append("|");
+					Order.append("|");
+					Order.append(current_time_str);
+					Order.append("||||N||||SERUM||||||||||Q"
+							+ "");
+
+
+					Order.append(cr);
+
+					//	frame3.append(stx);
+					Server.StxCounter = Server.StxCounter + 1;
+					//	frame3.append(Server.StxCounter);
+					frame3.append(Order);
+					//	frame3.append(etx);
+					//	frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETX
+					//frame3.append(cr);
+					//	frame3.append(lf);
+					frameList.add(frame3.toString());
+					frame3.delete(0, frame3.length());
+					Server.StxCounter=Server.StxCounter+1;	
+				}
+				else
+				{
+					//O|1|270524BIO041||^^^UREA`^^^CRENZ`^^^UA`^^^Na`^^^K`^^^
+					//Cl`^^^CA`^^^MGXB`^^^PHOS`^^^BIT`^^^BIDD`^^^
+					//IBIL`^^^SGOTD`^^^SGPT1`^^^ALPU`^^^GGT`^^^PRO`^^^
+					//ALBD`^^^GLOB`^^^A/G`^^^LDH`^^^CHOL`^^^TRIG`^^^HDLC
+					//`^^^VLD`^^^LDL|R||20240527105953||||A||||SERUM||||||||||O|||||
+					Order.append("O|1|");
+					Order.append(Server.Sample_code.get(0).toString().replace("^", "").trim());
+					Order.append("|");
+					Order.append("|");
+
+					for (int k = 0; k < Server.testCode.size(); k++)
+					{
+
+						Order.append("^^^");
+						Order.append(Server.testCode.get(k));
+						if (k != Server.testCode.size() - 1)
+							Order.append("`");
+						else
+							Order.append("");
+					}
+
+					//	Order.append(Server.testCode.get(k));
+					//	if (k != Server.testCode.size() - 1) {
+					//		Order.append("\\");
+
+					//}
+
+					Order.append("|");
+					Order.append("R");
+					Order.append("|");
+					Order.append("|");
+					Order.append(current_time_str);
+					Order.append("||||N||||SERUM||||||||||Q"); //used O in place of Q for TN maachines
+
+					Order.append(cr);
+
+					//=========================END for Vitros 5600=========================================	
+
+					buf_order.append(Order);
+					Order.delete(0, Order.length());
+
+					buf_comment.append(Comment);
+					Comment.delete(0, Comment.length());
+
+					// --------------------------------------------
+					System.out.println("Alinity Frame Count Checking :" + Server.StxCounter);
+					int frameCount = 0, first = 0, mid = 0, remain = 0;
+					frameCount = FrameCounter(buf_order.length());
+					int length = buf_order.length();
+
+					//for (int i = 1; i <= frameCount; i++) 
+					//{
+					if (length < 240)
+						mid = mid + length;
+					else if (length == 240)
+						mid = mid + length;
+					else if (length > 240) {
+						mid = mid + 240;
+					}
+					//	frame3.append(stx);
+					Server.StxCounter = Server.StxCounter + 1;
+					//	frame3.append(fCount);
+
+					frame3.append(buf_order.substring(first, mid));
+					//---------------------------------
+					//		if (fCount != frameCount) 
+					{
+						//		frame3.append(etx);
+						//		frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETX
+						//	frame3.append(cr);
+						//	frame3.append(lf);
+					}
+					//		else
+					//		{
+					//			frame3.append(etb);
+					//			frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETB
+					//			frame3.append(cr);
+					//			frame3.append(lf);
+					//		}
+					length = length - 240;
+					first = mid;
+					//-----------------------------------------
+					frameList.add(frame3.toString());
+
+					frame3.delete(0, frame3.length());
+
+
+					fCount++;
+
+					if(fCount==8)
+					{
+						fCount=0;
+					}
+					//}
+
+					/*
+				for (int i = 1; i <= frameCount; i++) 
+				{
+					if (Server.StxCounter == 7)
+					{
+						Server.StxCounter = 0;
+						System.out.println("Alinity Frame Count Set 0 After 7 :" + Server.StxCounter);
+					}
+					if (length < 240)
+						mid = mid + length;
+					else if (length == 240)
+						mid = mid + length;
+					else if (length > 240) {
+						mid = mid + 240;
+					}
+					frame3.append(stx);
+					if(Server.StxCounter == 8)
+					{	Server.StxCounter = -1;
+						System.out.println("Alinity Initial Frame Count is 8 :" + Server.StxCounter);
+					}
+					Server.StxCounter = Server.StxCounter + 1;
+					frame3.append(Server.StxCounter);
+
+					frame3.append(buf_order.substring(first, mid));
+
+					if (i == frameCount) {
+						frame3.append(etx);
+						frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETX
+						frame3.append(cr);
+						frame3.append(lf);
+					} else
+
+					{
+						frame3.append(etb);
+						frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETB
+						frame3.append(cr);
+						frame3.append(lf);
+					}
+						length = length - 240;
+					first = mid;
+
+					frameList.add(frame3.toString());
+						frame3.delete(0, frame3.length());
+
+				}
+					 */
+					buf_order.delete(0, buf_order.length());
+					//System.out.println("frameList= " +k);
+					//				if(k==loopSize-1)
+					//				{
+					//					Server.StxCounter = fCount;
+					//				}
+					//System.out.println("frameList= " + frameList.toString());
+					//}//For Loop Ramji for Multiple Order Packet frame 3
+				}//else		
+				// -------------------------------------
+
+				Server.Sample_code.remove(0);
+				//	line4.append(cr);
+
+				buf.append(line4);
+				buf_termination.append(line4);
+
+				break;
+			}
+
+			// ========================================
+			frame5.append(stx);
+			if(Server.StxCounter==8)
+			{	
+				Server.StxCounter=0;
+			}
+			else
+			{
+				Server.StxCounter = Server.StxCounter ;
+			}
+			//frame5.append(Server.StxCounter);
+			Comment.append("C|1|L|Order comment.|G");
+			Comment.append(cr);
+			//	Comment.append(etx);
+			//Comment.append("78");
+			frame5.append(Comment);
+			//	frame5.append(CheckSum(frame5.toString())); // FRAME WITH STX STX COUNTER AND ETB
+			//	frame5.append(cr);
+			//	frame5.append(lf);
+
+			//frameList.add(frame5.toString());
+			frame5.delete(0, frame5.length());
+
+			Server.StxCounter = Server.StxCounter + 1;
+			if(Server.StxCounter==8)
+			{	
+				Server.StxCounter=0;
+			}
+			else
+			{
+				Server.StxCounter = Server.StxCounter ;
+			}
+
+
+			// frameList4.clear();
+			//frame4.append(stx);
+			//frame4.append(Server.StxCounter);
+			frame4.append(buf_termination);
+			buf_termination.delete(0, buf_termination.length());
+			//	frame4.append(etx);
+			//	frame4.append(CheckSum(frame4.toString())); // FRAME WITH STX STX COUNTER AND ETB
+			frame4.append(cr);
+			//	frame4.append(lf);
+
+			frameList.add(frame4.toString());
+			frame4.delete(0, frame4.length());
+
+			//frameList.add("");
+			StringBuffer finalFrame= new StringBuffer();
+			//finalFrame.append("");  //added ENQ before frame....
+			for (int i = 0; i < frameList.size(); i++) {
+				finalFrame.append(frameList.get(i));
+			}
+
+
+			int frameCount = 0, first = 0, mid = 0, remain = 0;
+			frameCount = FrameCounter(finalFrame.length());
+			int length = finalFrame.length();
+			int fCount=1;
+			for (int i = 1; i <= frameCount; i++) 
+			{
+				if (length < 240)
+					mid = mid + length;
+				else if (length == 240)
+					mid = mid + length;
+				else if (length > 240) {
+					mid = mid + 240;
+				}
+				frame3.append(stx);
+				Server.StxCounter = Server.StxCounter + 1;
+				//	frame3.append(fCount);
+				//frame3.delete(0, frame3.length());
+				frame3.append(finalFrame.substring(first, mid));
+
+				//---------------------------------
+				if (fCount == frameCount) 
+				{
+					frame3.append(etx);
+					frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETX
+					frame3.append(cr);
+					frame3.append(lf);
+				}
+				else
+				{
+					frame3.append(etb);
+					frame3.append(CheckSum(frame3.toString())); // FRAME WITH STX STX COUNTER AND ETB
+					frame3.append(cr);
+					frame3.append(lf);
+				}
+				length = length - 240;
+				first = mid;
+				fCount++;
+			}
+
+			frameList.clear();
+			finalFrame.append(etx);
+			finalFrame.append(CheckSum(finalFrame.toString()));
+			//finalFrame.append(""); //eot
+			finalFrame.append(cr);
+			finalFrame.append(lf);
+
+
+
+
+			frameList.add("");
+			frameList.add(finalFrame);
+			frameList.add(eot);
+			
+			
+			
+			cout.print("");
+			cout.print(finalFrame);
+			cout.print(eot);
+		
+			for (int i = 0; i < frameList.size(); i++) {
+				count_ack_BA400_o1++;
+			}
+			System.out.println("Final String after checksum" + frameList.toString());
+			
+			
+			
+			
+			System.out.println("Server ERBA: "+"");
+			System.out.println("Server ERBA: "+finalFrame);
+			System.out.println("Server ERBA: "+eot);
+
+			Server.testCode.clear();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		
+		//multiframeResponse.add(frameList);
+		
+		return frameList;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// PACKET Format id=20045
 	public static List ERBAXL1000response(String line,PrintStream cout) {
@@ -6957,7 +8768,7 @@ public class Server {
 	}
 
 	//---------------------------------------------------------------------
-	public static void parse_AIIMSRB_UA_RB(List<String> list)
+	public static void parse_AIIMSRB_UA_RB(List<String> list)     //UA RB solution used accordingly change format id and then use this function
 	{
 
 		System.out.println("Urine ALZ RBL Machine ");
@@ -8909,12 +10720,19 @@ public class Server {
 					// Check if the parts array has at least three elements
 					if (parts.length >= 3) {
 						// The value after the second pipe '|' is at index 2
+						if(formatid.equals("50001")) {
 						sampleName = parts[3];
 						sampleName=sampleName.replaceAll(" ", "");
 						String ab[]=sampleName.split("\\^");
 						sampleName=ab[2];
 						//TestCode.append(valueAfterSecondPipe);
 						System.out.println("Value after the second pipe: " + sampleName.toString().replaceAll("\\^", ""));
+					}
+						else {
+							
+							sampleName = parts[2];
+						}
+					
 					}
 
 					System.out.println("SampleName===========:- " + sampleName);// Sample ID Read between '|' and '^'
@@ -8927,13 +10745,13 @@ public class Server {
 
 				String valueAfterSecondPipe=null;
 				String valueAfterThirdPipe=null;
-
+				String unit="";
 				if (Character.toUpperCase(line.charAt(2)) == 'R') {
 
 
 
 					String[] parts = line.split("\\|");
-
+					unit =parts[4];
 					// Check if the parts array has at least three elements
 					if (parts.length >= 3) {
 						// The value after the second pipe '|' is at index 2
@@ -8944,7 +10762,18 @@ public class Server {
 
 						//if(valueAfterSecondPipe.equals("BASO%") || valueAfterSecondPipe.equals("EO%") || valueAfterSecondPipe.equals("MONO%") || valueAfterSecondPipe.equals("LYMPH%") || valueAfterSecondPipe.equals("NEUT%") || valueAfterSecondPipe.equals("WBC")|| valueAfterSecondPipe.equals("NEU#") || valueAfterSecondPipe.equals("LYM#") || valueAfterSecondPipe.equals("MON#") || valueAfterSecondPipe.equals("EOS#") || valueAfterSecondPipe.equals("BAS#") || valueAfterSecondPipe.equals("IMG#") || valueAfterSecondPipe.equals("NEU%") || valueAfterSecondPipe.equals("LYM%") || valueAfterSecondPipe.equals("MON%") || valueAfterSecondPipe.equals("EOS%") || valueAfterSecondPipe.equals("BAS%") || valueAfterSecondPipe.equals("IMG%") || valueAfterSecondPipe.equals("RBC") || valueAfterSecondPipe.equals("HGB") || valueAfterSecondPipe.equals("HCT") || valueAfterSecondPipe.equals("MCV") || valueAfterSecondPipe.equals("MCH") || valueAfterSecondPipe.equals("MCHC") || valueAfterSecondPipe.equals("RDW-CV") || valueAfterSecondPipe.equals("RDW-SD") || valueAfterSecondPipe.equals("PLT") || valueAfterSecondPipe.equals("MPV") || valueAfterSecondPipe.equals("PDW") || valueAfterSecondPipe.equals("PCT") || valueAfterSecondPipe.equals("PLCC") || valueAfterSecondPipe.equals("NRBC#") || valueAfterSecondPipe.equals("NRBC%") || valueAfterSecondPipe.equals("PLCR") ) {
 						//if(valueAfterSecondPipe.equals("PCV") || valueAfterSecondPipe.equals("IG%") || valueAfterSecondPipe.equals("IG#") || valueAfterSecondPipe.equals("BASO#") || valueAfterSecondPipe.equals("BASO#") || valueAfterSecondPipe.equals("EO#") || valueAfterSecondPipe.equals("LYMPH#")  || valueAfterSecondPipe.equals("MONO#")  || valueAfterSecondPipe.equals("NEUT#")  || valueAfterSecondPipe.equals("BASO%")  ||  valueAfterSecondPipe.equals("EO%") || valueAfterSecondPipe.equals("NEUT%") || valueAfterSecondPipe.equals("MONO%") || valueAfterSecondPipe.equals("LYMPH%") || valueAfterSecondPipe.equals("WBC")|| valueAfterSecondPipe.equals("NEU#") || valueAfterSecondPipe.equals("LYM#") || valueAfterSecondPipe.equals("MON#") || valueAfterSecondPipe.equals("EOS#") || valueAfterSecondPipe.equals("BAS#") || valueAfterSecondPipe.equals("IMG#") || valueAfterSecondPipe.equals("NEU%") || valueAfterSecondPipe.equals("LYM%") || valueAfterSecondPipe.equals("MON%") || valueAfterSecondPipe.equals("EOS%") || valueAfterSecondPipe.equals("BAS%") || valueAfterSecondPipe.equals("IMG%") || valueAfterSecondPipe.equals("RBC") || valueAfterSecondPipe.equals("HGB") || valueAfterSecondPipe.equals("HCT") || valueAfterSecondPipe.equals("MCV") || valueAfterSecondPipe.equals("MCH") || valueAfterSecondPipe.equals("MCHC") || valueAfterSecondPipe.equals("RDW-CV") || valueAfterSecondPipe.equals("RDW-SD") || valueAfterSecondPipe.equals("PLT") || valueAfterSecondPipe.equals("MPV") || valueAfterSecondPipe.equals("PDW") || valueAfterSecondPipe.equals("PCT") || valueAfterSecondPipe.equals("PLCC") || valueAfterSecondPipe.equals("NRBC#") || valueAfterSecondPipe.equals("NRBC%") || valueAfterSecondPipe.equals("PLCR") ) {	
+						if(!formatid.equals("50001")) {
+						if(unit.equalsIgnoreCase("sec")) {
+						TestCode.append(valueAfterSecondPipe+"sec");
+						}
+						if(unit.equalsIgnoreCase("INR")) {
+							TestCode.append(valueAfterSecondPipe+"INR");
+						}
+					}
+						else {
 							TestCode.append(valueAfterSecondPipe);
+							
+						}
 						//}
 						System.out.println("Value after the second pipe: " + valueAfterSecondPipe.replaceAll("\\^", ""));
 					}
@@ -8982,9 +10811,12 @@ public class Server {
 				if (!TestCode.toString().trim().equals("") && !(list.size()==2)) {
 
 					testCode.add(TestCode.toString().trim());
-					testvalue.add(TestValue.toString().trim());
+					
+					double val = Double.parseDouble(TestValue.toString().trim());
+					String formatted = String.format("%.2f", val);
+					testvalue.add(formatted);
 					//aBCbkpinsert_SysmexXN350();
-					aBCbkp.insert_SysmexXN350A(TestCode.toString().trim(), TestValue.toString().trim(),
+					aBCbkp.insert_SysmexXN350A(TestCode.toString().trim(), formatted,
 							sampleName.toString().trim());
 				}
 			}
@@ -9192,7 +11024,7 @@ public class Server {
 						valueAfterSecondPipe=abc[4];
 
 						//if(valueAfterSecondPipe.equals("BASO%") || valueAfterSecondPipe.equals("EO%") || valueAfterSecondPipe.equals("MONO%") || valueAfterSecondPipe.equals("LYMPH%") || valueAfterSecondPipe.equals("NEUT%") || valueAfterSecondPipe.equals("WBC")|| valueAfterSecondPipe.equals("NEU#") || valueAfterSecondPipe.equals("LYM#") || valueAfterSecondPipe.equals("MON#") || valueAfterSecondPipe.equals("EOS#") || valueAfterSecondPipe.equals("BAS#") || valueAfterSecondPipe.equals("IMG#") || valueAfterSecondPipe.equals("NEU%") || valueAfterSecondPipe.equals("LYM%") || valueAfterSecondPipe.equals("MON%") || valueAfterSecondPipe.equals("EOS%") || valueAfterSecondPipe.equals("BAS%") || valueAfterSecondPipe.equals("IMG%") || valueAfterSecondPipe.equals("RBC") || valueAfterSecondPipe.equals("HGB") || valueAfterSecondPipe.equals("HCT") || valueAfterSecondPipe.equals("MCV") || valueAfterSecondPipe.equals("MCH") || valueAfterSecondPipe.equals("MCHC") || valueAfterSecondPipe.equals("RDW-CV") || valueAfterSecondPipe.equals("RDW-SD") || valueAfterSecondPipe.equals("PLT") || valueAfterSecondPipe.equals("MPV") || valueAfterSecondPipe.equals("PDW") || valueAfterSecondPipe.equals("PCT") || valueAfterSecondPipe.equals("PLCC") || valueAfterSecondPipe.equals("NRBC#") || valueAfterSecondPipe.equals("NRBC%") || valueAfterSecondPipe.equals("PLCR") ) {
-						if(valueAfterSecondPipe.equals("PCV") || valueAfterSecondPipe.equals("IG%") || valueAfterSecondPipe.equals("IG#") || valueAfterSecondPipe.equals("BASO#") || valueAfterSecondPipe.equals("BASO#") || valueAfterSecondPipe.equals("EO#") || valueAfterSecondPipe.equals("LYMPH#")  || valueAfterSecondPipe.equals("MONO#")  || valueAfterSecondPipe.equals("NEUT#")  || valueAfterSecondPipe.equals("BASO%")  ||  valueAfterSecondPipe.equals("EO%") || valueAfterSecondPipe.equals("NEUT%") || valueAfterSecondPipe.equals("MONO%") || valueAfterSecondPipe.equals("LYMPH%") || valueAfterSecondPipe.equals("WBC")|| valueAfterSecondPipe.equals("NEU#") || valueAfterSecondPipe.equals("LYM#") || valueAfterSecondPipe.equals("MON#") || valueAfterSecondPipe.equals("EOS#") || valueAfterSecondPipe.equals("BAS#") || valueAfterSecondPipe.equals("IMG#") || valueAfterSecondPipe.equals("NEU%") || valueAfterSecondPipe.equals("LYM%") || valueAfterSecondPipe.equals("MON%") || valueAfterSecondPipe.equals("EOS%") || valueAfterSecondPipe.equals("BAS%") || valueAfterSecondPipe.equals("IMG%") || valueAfterSecondPipe.equals("RBC") || valueAfterSecondPipe.equals("HGB") || valueAfterSecondPipe.equals("HCT") || valueAfterSecondPipe.equals("MCV") || valueAfterSecondPipe.equals("MCH") || valueAfterSecondPipe.equals("MCHC") || valueAfterSecondPipe.equals("RDW-CV") || valueAfterSecondPipe.equals("RDW-SD") || valueAfterSecondPipe.equals("PLT") || valueAfterSecondPipe.equals("MPV") || valueAfterSecondPipe.equals("PDW") || valueAfterSecondPipe.equals("PCT") || valueAfterSecondPipe.equals("PLCC") || valueAfterSecondPipe.equals("NRBC#") || valueAfterSecondPipe.equals("NRBC%") || valueAfterSecondPipe.equals("PLCR") ) {	
+						if(valueAfterSecondPipe.equals("PCV") || valueAfterSecondPipe.equals("IG%") || valueAfterSecondPipe.equals("IG#") || valueAfterSecondPipe.equals("BASO#") || valueAfterSecondPipe.equals("BASO#") || valueAfterSecondPipe.equals("EO#") || valueAfterSecondPipe.equals("LYMPH#")  || valueAfterSecondPipe.equals("MONO#")  || valueAfterSecondPipe.equals("NEUT#")  || valueAfterSecondPipe.equals("BASO%")  ||  valueAfterSecondPipe.equals("EO%") || valueAfterSecondPipe.equals("NEUT%") || valueAfterSecondPipe.equals("MONO%") || valueAfterSecondPipe.equals("LYMPH%") || valueAfterSecondPipe.equals("WBC")|| valueAfterSecondPipe.equals("NEU#") || valueAfterSecondPipe.equals("LYM#") || valueAfterSecondPipe.equals("MON#") || valueAfterSecondPipe.equals("EOS#") || valueAfterSecondPipe.equals("BAS#") || valueAfterSecondPipe.equals("IMG#") || valueAfterSecondPipe.equals("NEU%") || valueAfterSecondPipe.equals("LYM%") || valueAfterSecondPipe.equals("MON%") || valueAfterSecondPipe.equals("EOS%") || valueAfterSecondPipe.equals("BAS%") || valueAfterSecondPipe.equals("IMG%") || valueAfterSecondPipe.equals("RBC") || valueAfterSecondPipe.equals("HGB") || valueAfterSecondPipe.equals("HCT") || valueAfterSecondPipe.equals("MCV") || valueAfterSecondPipe.equals("MCH") || valueAfterSecondPipe.equals("MCHC") || valueAfterSecondPipe.equals("RDW-CV") || valueAfterSecondPipe.equals("RDW-SD") || valueAfterSecondPipe.equals("PLT") || valueAfterSecondPipe.equals("MPV") || valueAfterSecondPipe.equals("PDW") || valueAfterSecondPipe.equals("PCT") || valueAfterSecondPipe.equals("PLCC") || valueAfterSecondPipe.equals("NRBC#") || valueAfterSecondPipe.equals("NRBC%") || valueAfterSecondPipe.equals("PLCR") || valueAfterSecondPipe.equals("P-LCR") || valueAfterSecondPipe.equals("MXD%")|| valueAfterSecondPipe.equals("MXD#") ) {	
 							TestCode.append(valueAfterSecondPipe);
 						}
 						System.out.println("Value after the second pipe: " + valueAfterSecondPipe.replaceAll("\\^", ""));
@@ -9215,7 +11047,7 @@ public class Server {
 						//if(valueAfterSecondPipe.equals("BASO%")  ||  valueAfterSecondPipe.equals("EO%") || valueAfterSecondPipe.equals("NEUT%") || valueAfterSecondPipe.equals("MONO%") || valueAfterSecondPipe.equals("LYMPH%") || valueAfterSecondPipe.equals("WBC")|| valueAfterSecondPipe.equals("NEU#") || valueAfterSecondPipe.equals("LYM#") || valueAfterSecondPipe.equals("MON#") || valueAfterSecondPipe.equals("EOS#") || valueAfterSecondPipe.equals("BAS#") || valueAfterSecondPipe.equals("IMG#") || valueAfterSecondPipe.equals("NEU%") || valueAfterSecondPipe.equals("LYM%") || valueAfterSecondPipe.equals("MON%") || valueAfterSecondPipe.equals("EOS%") || valueAfterSecondPipe.equals("BAS%") || valueAfterSecondPipe.equals("IMG%") || valueAfterSecondPipe.equals("RBC") || valueAfterSecondPipe.equals("HGB") || valueAfterSecondPipe.equals("HCT") || valueAfterSecondPipe.equals("MCV") || valueAfterSecondPipe.equals("MCH") || valueAfterSecondPipe.equals("MCHC") || valueAfterSecondPipe.equals("RDW-CV") || valueAfterSecondPipe.equals("RDW-SD") || valueAfterSecondPipe.equals("PLT") || valueAfterSecondPipe.equals("MPV") || valueAfterSecondPipe.equals("PDW") || valueAfterSecondPipe.equals("PCT") || valueAfterSecondPipe.equals("PLCC") || valueAfterSecondPipe.equals("NRBC#") || valueAfterSecondPipe.equals("NRBC%") || valueAfterSecondPipe.equals("PLCR") ) {
 
 
-						if( valueAfterSecondPipe.equals("PCV") ||valueAfterSecondPipe.equals("IG%") || valueAfterSecondPipe.equals("IG#") || valueAfterSecondPipe.equals("BASO#") || valueAfterSecondPipe.equals("BASO#") || valueAfterSecondPipe.equals("EO#") || valueAfterSecondPipe.equals("LYMPH#")  || valueAfterSecondPipe.equals("MONO#")  || valueAfterSecondPipe.equals("NEUT#")  || valueAfterSecondPipe.equals("BASO%")  ||  valueAfterSecondPipe.equals("EO%") || valueAfterSecondPipe.equals("NEUT%") || valueAfterSecondPipe.equals("MONO%") || valueAfterSecondPipe.equals("LYMPH%") || valueAfterSecondPipe.equals("WBC")|| valueAfterSecondPipe.equals("NEU#") || valueAfterSecondPipe.equals("LYM#") || valueAfterSecondPipe.equals("MON#") || valueAfterSecondPipe.equals("EOS#") || valueAfterSecondPipe.equals("BAS#") || valueAfterSecondPipe.equals("IMG#") || valueAfterSecondPipe.equals("NEU%") || valueAfterSecondPipe.equals("LYM%") || valueAfterSecondPipe.equals("MON%") || valueAfterSecondPipe.equals("EOS%") || valueAfterSecondPipe.equals("BAS%") || valueAfterSecondPipe.equals("IMG%") || valueAfterSecondPipe.equals("RBC") || valueAfterSecondPipe.equals("HGB") || valueAfterSecondPipe.equals("HCT") || valueAfterSecondPipe.equals("MCV") || valueAfterSecondPipe.equals("MCH") || valueAfterSecondPipe.equals("MCHC") || valueAfterSecondPipe.equals("RDW-CV") || valueAfterSecondPipe.equals("RDW-SD") || valueAfterSecondPipe.equals("PLT") || valueAfterSecondPipe.equals("MPV") || valueAfterSecondPipe.equals("PDW") || valueAfterSecondPipe.equals("PCT") || valueAfterSecondPipe.equals("PLCC") || valueAfterSecondPipe.equals("NRBC#") || valueAfterSecondPipe.equals("NRBC%") || valueAfterSecondPipe.equals("PLCR") ) {	
+						if( valueAfterSecondPipe.equals("PCV") ||valueAfterSecondPipe.equals("IG%") || valueAfterSecondPipe.equals("IG#") || valueAfterSecondPipe.equals("BASO#") || valueAfterSecondPipe.equals("BASO#") || valueAfterSecondPipe.equals("EO#") || valueAfterSecondPipe.equals("LYMPH#")  || valueAfterSecondPipe.equals("MONO#")  || valueAfterSecondPipe.equals("NEUT#")  || valueAfterSecondPipe.equals("BASO%")  ||  valueAfterSecondPipe.equals("EO%") || valueAfterSecondPipe.equals("NEUT%") || valueAfterSecondPipe.equals("MONO%") || valueAfterSecondPipe.equals("LYMPH%") || valueAfterSecondPipe.equals("WBC")|| valueAfterSecondPipe.equals("NEU#") || valueAfterSecondPipe.equals("LYM#") || valueAfterSecondPipe.equals("MON#") || valueAfterSecondPipe.equals("EOS#") || valueAfterSecondPipe.equals("BAS#") || valueAfterSecondPipe.equals("IMG#") || valueAfterSecondPipe.equals("NEU%") || valueAfterSecondPipe.equals("LYM%") || valueAfterSecondPipe.equals("MON%") || valueAfterSecondPipe.equals("EOS%") || valueAfterSecondPipe.equals("BAS%") || valueAfterSecondPipe.equals("IMG%") || valueAfterSecondPipe.equals("RBC") || valueAfterSecondPipe.equals("HGB") || valueAfterSecondPipe.equals("HCT") || valueAfterSecondPipe.equals("MCV") || valueAfterSecondPipe.equals("MCH") || valueAfterSecondPipe.equals("MCHC") || valueAfterSecondPipe.equals("RDW-CV") || valueAfterSecondPipe.equals("RDW-SD") || valueAfterSecondPipe.equals("PLT") || valueAfterSecondPipe.equals("MPV") || valueAfterSecondPipe.equals("PDW") || valueAfterSecondPipe.equals("PCT") || valueAfterSecondPipe.equals("PLCC") || valueAfterSecondPipe.equals("NRBC#") || valueAfterSecondPipe.equals("NRBC%") || valueAfterSecondPipe.equals("PLCR") || valueAfterSecondPipe.equals("P-LCR") || valueAfterSecondPipe.equals("MXD%")|| valueAfterSecondPipe.equals("MXD#")) {	
 							TestValue.append(valueAfterThirdPipe);
 							//aBCbkp.insert_GenExpert(TestCode.toString().trim(),TestValue.toString().trim(),sampleName.toString().trim());
 							
@@ -9400,8 +11232,52 @@ public class Server {
 
 				}
 				//Order.append("|");
-				Order.append("|R||"+current_time_str+"||||N||||5||||||||||O");  //|R||20 060516091500||||A|||||
+				
+				if(sampleType.equals("URINE")||sampleType.equals("Urine") ||sampleType.toUpperCase().contains("URINE"))
+				{
+			    Order.append("|R||"+current_time_str+"||||N||||3||||||||||O");
+				}
+				else if(sampleType.equals("SERUM")||sampleType.equals("Serum")||sampleType.toUpperCase().contains("SERUM")){
+				Order.append("|R||"+current_time_str+"||||N||||5||||||||||O");  
+				
+				//|R||20 060516091500||||A|||||
+				}
+				else if(sampleType.equals("SERUM")||sampleType.toUpperCase().contains("SERUM")){
+					Order.append("|R||"+current_time_str+"||||N||||5||||||||||O");  
+					
+					
+					
+				}
+				else if(sampleType.equals("Whole Blood")||sampleType.toUpperCase().contains("Whole Blood")){
+					Order.append("|R||"+current_time_str+"||||N||||4||||||||||O");  
+					
+					
+					
+				}
+				
+				else if(sampleType.equals("PLASMA")||sampleType.toUpperCase().contains("PLASMA")){
+					Order.append("|R||"+current_time_str+"||||N||||6||||||||||O");  
+					
+					
+					
+				}
+				
+				else if(sampleType.equals("Amniotic Fluid")||sampleType.toUpperCase().contains("Amniotic Fluid")){
+					Order.append("|R||"+current_time_str+"||||N||||7||||||||||O");  
+					
+					
+					
+				}
+				
+				
+				
+				/*
+				 * Body Fluid Key: 2 CSF, 3 Urine, 4 Whole Blood, 5 Serum, 6 Plasma, 7 Amniotic
+				 * Fluid, 8 Reserved Fluid 1, 9 Reserved Fluid 2, 10 Reserved Fluid 3, UD User
+				 * Defined
+				 */
 				// Order.append(line6);
+				
 				Order.append(cr);
 
 				buf_order.append(Order);
@@ -10150,8 +12026,10 @@ public class Server {
 				testCode.add( packetData[2].substring(10,13));
 				testValue.add(packetData[3]);
 				  
-				ABC.insert_SysmexXN350A(packetData[2].substring(10,13).toString().trim(), packetData[3].toString().replace("|", "").trim(), sampleNo.toString().replace("^", "").trim());
 				
+				if(!packetData[3].contains("No Result")) {
+				ABC.insert_SysmexXN350A(packetData[2].substring(10,13).toString().trim(), packetData[3].toString().replace("|", "").trim(), sampleNo.toString().replace("^", "").trim());
+				}
 				
 			}
 			

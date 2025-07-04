@@ -86,7 +86,7 @@ public class ABC {
 		String line1 = null;
 		String line2 = null;
 
-		 String url = "http://" + ip +
+		 String url =  ip +
 		 "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=3&eqp="
 		 + eqp + "&hos=" + hos + "&sam=" + samplecode.toString().trim() + "&uid=" + uid;
 	//	String url = "https://" + ip + "/SupportServices/service/app/testdtl?hospcode=" + hos + "&samplecode="
@@ -604,8 +604,8 @@ public class ABC {
 		
 
 		
-		//String httpcheck = (String) res.get("httpcheck");
-		String httpcheck="1";
+		String httpcheck = (String) res.get("httpcheck");
+		//String httpcheck="1";
 		String pr="";
 		if(httpcheck.equals("1")) {
 			pr="https";
@@ -623,7 +623,7 @@ public class ABC {
 //		testList.remove(0);
 
 		 String url =  ip +
-		 "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=3&eqp="
+		 "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=2&eqp="
 		 + eqp + "&hos=" + hos + "&sam=" + samplecode + "&uid=" + uid;
 
 	//	String url = "https://" + ip + "/SupportServices/service/app/testdtl?hospcode=" + hos + "&samplecode="
@@ -664,6 +664,9 @@ public class ABC {
 			});
 			
 			}
+			
+			
+			
 			con.setRequestMethod("GET");
 			con.setDoOutput(true);
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());

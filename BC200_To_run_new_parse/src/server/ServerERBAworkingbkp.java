@@ -860,7 +860,11 @@ public class ServerERBAworkingbkp {
 				break;
 			}
 			if (ch[i] == 23) {
-				count = i + 6;
+				if(formatid.equals("20048"))
+					{System.out.println("STX Removed");
+					count = i + 8;}
+				else {
+				count = i + 6;}
 				i = count;
 			} else {
 				count = 0;
@@ -1046,7 +1050,7 @@ public class ServerERBAworkingbkp {
 				}
 
 				//if (formatid.equals("20045"))// mispa clinia
-				if (formatid.equals("20050"))           //change format id according to selcted machine's  format id 
+				if (formatid.equals("20048"))           //change format id according to selcted machine's  format id 
 				{
 					frameList = common_parseSelect(list);
 				}
@@ -3009,17 +3013,19 @@ public class ServerERBAworkingbkp {
 		//	Server.Sample_code.add(bf.toString());
 		// ---------------------------------------------------
 
-		//String line2 = ABC.getSampleDtl_biolis50i(Server.Sample_code.get(0).toString().replace("^", ""));  // Get Query Information Vipul Ramji
+		String line2 = ABC.getSampleDtl_biolis50i(ServerERBAworkingbkp.Sample_code.get(0).toString().replace("^", ""));  // Get Query Information Vipul Ramji
 		//System.out.println("Response after Test Code  Selection---- " + line2); //null#null#null#null#230206BIO0335#
+		
 		int r = 0;
 		String tc = "";
-		//lline2="1005;1268;1094;1065;1023;1021;1020;1406;1400;2002;1103;1101;1102;1069;1005;1268;1094;1065;1023;1021;1020;1406;1400;2002;1103;1101;1102;654;797;248;#Asitabh    #39 Yr     #F#230413BIO0554#"; // ALinity Check Ramji
+		//line2="AGR;ALBD;ALPU;BIDD;BIT;CA;CHOL;Cl;CRENZ;GGT;GLB;HDLC;IBIL;K;LDL;Na;PHOS;PRO;SGOTD;SGPTD;TRIG;UA;UREA;VLDL;#Kishore Kumar Shrivastava    ()#68 Yr     #M#130525BIO124#SERUM# "; // ALinity Check Ramji
 		//String line2="UREA-BUN-UV;ALBUNIM;NA;K+;CL-;BUN;PROTEIN TOTAL;NA;K+;CL-;BUN;PROTEIN TOTAL#RRR";	
 		//String line2="C-URO;C-BLD;C-BIL;C-KET;C-GLU;C-PRO;C-PH;C-NIT;C-LEU;C-CRE;C-ALB;C-P/C;C-A/C;C-S.G.(Ref);C-COLOR;C-CLOUD";
 		//String line2="BIT;SGOTD;CRE;BIDD;UREA;UA#RRR";  //ERBA XLL 100 Test Code
 		//GLU1`^^^CRE1`^^^UREA1`^^^BID1`^^^SGOT1
-		String line2="GLU1;CRE1;UREA1;null4;null5";//;TGL1;HDL1;CRE1;UREA1;BID1;SGOT1;TGL1;HDL1;CRE1;UREA1;BID1;SGOT1";  //ERBA TN TestCOde
+		//String line2="CA;PHOS;YY;Na;K;UREA;CRENZ;Cl;UA;#Chanchla()#50 Yr     #F#060525BIO140# ";//;TGL1;HDL1;CRE1;UREA1;BID1;SGOT1;TGL1;HDL1;CRE1;UREA1;BID1;SGOT1";  //ERBA TN TestCOde
 		String[] kvPairs = line2.split("#");
+		
 		for (String kvPair : kvPairs) {
 			// System.out.print("kvPairs =============------ " + kvPair);
 			if (r == 0)
@@ -4752,6 +4758,8 @@ public class ServerERBAworkingbkp {
 					length = length - 240;
 					first = mid;
 					//-----------------------------------------
+					
+					frame3.append(cr);
 					frameList.add(frame3.toString());
 
 					frame3.delete(0, frame3.length());
@@ -4877,7 +4885,7 @@ public class ServerERBAworkingbkp {
 
 			frameList.add(frame4.toString());
 			frame4.delete(0, frame4.length());
-
+System.out.println();
 			//frameList.add("");
 			StringBuffer finalFrame= new StringBuffer();
 			//finalFrame.append("");  //added ENQ before frame....
