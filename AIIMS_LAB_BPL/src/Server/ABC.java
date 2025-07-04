@@ -1,10 +1,13 @@
 package Server;
 
+
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Path;
@@ -22,7 +25,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-
+import Server.GenericServer;
+import Server.ReadPropertyFile;
 public class ABC {
 	public static String datetime = "";
 
@@ -85,7 +89,7 @@ public class ABC {
 		String line1 = null;
 		String line2 = null;
 
-		 String url = "http://" + ip +
+		 String url =  ip +
 		 "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=3&eqp="
 		 + eqp + "&hos=" + hos + "&sam=" + samplecode.toString().trim() + "&uid=" + uid;
 	//	String url = "https://" + ip + "/SupportServices/service/app/testdtl?hospcode=" + hos + "&samplecode="
@@ -223,7 +227,7 @@ public class ABC {
 				DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 				wr.flush();
 				wr.close();
-				System.out.println("\n url Check "+wr);	
+				//System.out.println("\n url Check "+wr);	
 				//System.out.println("\nSending 'GET' request to URL : " + url);
 
 				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -245,7 +249,7 @@ public class ABC {
 				// String str = reader.toString();
 				// System.out.print(" serv--------- "+str);
 				// System.out.print(" serv line1---------------- "+line1);
-				 line2="230926BR005;230926BR005;230926BR004;230926BR006;";
+				// line2="10032;10120;10172";
 					
 				//line2 = ((((str.replace("{", "")).replace(":", "=")).replace("\"", "")).replace("}", ""));
 				//System.out.println("  new   line2---------------- " + line2);
@@ -260,7 +264,7 @@ public class ABC {
 
 				if (Test_Code == null)
 					Test_Code = "";
-				return_value = str;
+				return_value = Test_Code;
 				// return_value = String.valueOf(Test_Code) + "#" + pat_name + "#" + pat_age +
 				// "#" + pat_gender;
 
@@ -798,8 +802,19 @@ public class ABC {
 		String url = "";
 
 		TestCode = (((TestCode.toString().replace("%", "%23")).replace("#", "%25")).replace(" ", "%20")).trim();
-		TestValue = (((TestValue.toString().replace("%", "%23")).replace("#", "%25")).replace(" ", "%20")).trim();
-
+		//TestValue = (((TestValue.toString().replace("%", "%23")).replace("#", "%25")).replace(" ", "%20")).trim();
+		TestValue = (((((((TestValue.toString().trim())).replace("%", "%25").replace("#", "%23")).replace(" ", "%20")).replace("<", "%3C")).replace(">", "%3E")))
+				.trim();
+		String httpcheck = (String) res.get("httpcheck");
+	      String pr="";
+			if(httpcheck.equals("1")) {
+				pr="https";
+				
+			}
+			else {
+				
+				pr="http";
+			}
 		/*
 		 * TestCode=TestCode.toString().replace("%","");
 		 * TestValue=TestValue.toString().replace("%","");
@@ -823,35 +838,58 @@ public class ABC {
 		 */
 		sam = (sam.toString().replace(" ", "%20")).trim();
 
-		url = "https://" + ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
+		url = ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
 				+ "&hos=" + hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
 
 		StringBuffer response = new StringBuffer();
 		try {
-			SSLContext ssl_ctx = SSLContext.getInstance("TLS");
-			TrustManager[] trust_mgr = get_trust_mgr();
-			ssl_ctx.init(null, trust_mgr, new SecureRandom());
-			HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+//			SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+//			TrustManager[] trust_mgr = get_trust_mgr();
+//			ssl_ctx.init(null, trust_mgr, new SecureRandom());
+//			HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+//			URL obj = new URL(url);
+//			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//			((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+//				public boolean verify(String host, SSLSession sess) {
+//					if (host.equals(ip))
+//						return true;
+//					return false;
+//				}
+//			});
 			URL obj = new URL(url);
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-			((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
-				public boolean verify(String host, SSLSession sess) {
-					if (host.equals(ip))
-						return true;
-					return false;
+			if(httpcheck.equals("1")) {
+				SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+				TrustManager[] trust_mgr = get_trust_mgr();
+				ssl_ctx.init(null, trust_mgr, new SecureRandom());
+				HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+//				URL obj = new URL(url);
+				//HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+				((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+					public boolean verify(String host, SSLSession sess) {
+						if (host.equals(ip))
+							return true;
+						return false;
+					}
+				});
+				
 				}
-			});
 			con.setRequestMethod("GET");
 			con.setDoOutput(true);
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 			wr.flush();
 			wr.close();
 			System.out.println("\nSending 'GET' request to URL : " + url);
+			
+			  AIIMSLAB.saveToFile("\nSending 'GET' request to URL : " + url, AIIMSLAB.FILE_NAME);
+
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String inputLine;
 			while ((inputLine = in.readLine()) != null)
 				response.append(inputLine);
 			System.out.println("response " + response.toString());
+			 AIIMSLAB.saveToFile("response " + response.toString(), AIIMSLAB.FILE_NAME);
+
 			in.close();
 		} catch (Exception s) {
 			s.printStackTrace();
@@ -955,7 +993,7 @@ public class ABC {
 		// "+(String)TestValue.get(i) +" "+sam);
 		// save((String)TestCode.get(i) , (String)TestList.get(i) , sampleName , conn);
 
-		url = "https://" + ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
+		url =  ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
 				+ "&hos=" + hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
 
 		StringBuffer response = new StringBuffer();
@@ -980,7 +1018,7 @@ public class ABC {
 			wr.close();
 			System.out.println("\nSending 'GET' request to URL : " + url);
 			// ---------------------------------------
-
+		GenericServer.saveToFile("\nSending 'GET' request to URL : " + url,GenericServer.FILE_NAME);
 			FileWriter fw = new FileWriter(path, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write("sam : " + sam);
@@ -1001,6 +1039,7 @@ public class ABC {
 			while ((inputLine = in.readLine()) != null)
 				response.append(inputLine);
 			System.out.println("response " + response.toString());
+			GenericServer.saveToFile("response " + response.toString(),GenericServer.FILE_NAME);
 			in.close();
 		} catch (Exception s) {
 			s.printStackTrace();
@@ -1108,9 +1147,13 @@ public class ABC {
 		 * TestValue=TestValue.toString().replace(" ","%20");
 		 */
 		sam = ((sam.toString().trim()).replace(" ", "%20")).trim();
-		System.out.println("TestCode:" + TestCode);
-		System.out.println("TestValue:" + TestValue);
-		System.out.println("sam:" + sam);
+		System.out.println("TestCode : " + TestCode);
+		System.out.println("TestValue : " + TestValue);
+		System.out.println("sam : " + sam);
+		
+		//GenericServer.logMessage("TestCode:" + TestCode, Color.BLUE);
+		//GenericServer.logMessage("TestValue:" + TestValue, Color.BLUE);
+		//GenericServer.logMessage("sam:" + sam, Color.BLUE);
 /*		url = "https://" + ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
 				+ "&hos=" + hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
 		System.out.println("url Cobas 801 https:" + url);
@@ -1163,7 +1206,7 @@ public class ABC {
 */		//--------------http- AIIMS Bhubneshwat--------
 //		url = ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp + "&hos="
 //				+ hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
-		url = "https://" + ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
+		url =ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
 				+ "&hos=" + hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
 		System.out.println("url Cobas 801 :" + url);
 		StringBuffer response = new StringBuffer();
@@ -1192,7 +1235,9 @@ public class ABC {
 			wr.close();
 
 			System.out.println("\nSending 'GET' request to URL : " + url);
-
+			GenericV_04_03_01.logMessage("\nSending 'GET' request to URL : " + url, Color.BLUE);
+			GenericV_04_03_01.saveToFile("Sending 'GET' request to URL : " + url,GenericV_04_03_01.FILE_NAME);
+				
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String inputLine;
 
@@ -1201,7 +1246,12 @@ public class ABC {
 			}
 			System.out.println("response--:" + response.toString());
 			System.out.println("responce :1+" + con.getResponseMessage());
-
+			GenericV_04_03_01.logMessage("response--:" + response.toString(), Color.BLUE);
+			GenericV_04_03_01.logMessage("responce :1+" + con.getResponseMessage(), Color.BLUE);
+			GenericV_04_03_01.saveToFile("response--:" + response.toString(),GenericV_04_03_01.FILE_NAME);
+			
+			GenericV_04_03_01.saveToFile("responce :1+" + con.getResponseMessage(),GenericV_04_03_01.FILE_NAME);
+			
 /*			FileWriter fw11 = new FileWriter(path_HIMS_LOG, true);
 			BufferedWriter bw = new BufferedWriter(fw11);
 			bw.write("\n");
@@ -1227,10 +1277,21 @@ public class ABC {
 		return response.toString();
 	}
 
-//Horriba Machine Result Entry....
-	// ----------------------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static String insert_SysmexXN350(Map mp, String sam) {
 		System.out.println("Inside insertSampleDtl (type1/type5 query) ");
+		GenericServer.saveToFile("Inside insertSampleDtl (type1/type5 query) ",GenericServer.FILE_NAME);
 		Map res = ReadPropertyFile.getPropertyValues();
 		final String ip = (String) res.get("ip");
 		String port = (String) res.get("port");
@@ -1239,9 +1300,25 @@ public class ABC {
 		String uid = (String) res.get("uid");
 		String url = "";
 
+		
+		String httpcheck = (String) res.get("httpcheck");
+	      String pr="";
+			if(httpcheck.equals("1")) {
+				pr="https";
+				
+			}
+			else {
+				
+				pr="http";
+			}
+		
+		
 		List TestCode = (List)mp.get("TestCode");
 		List TestValue = (List)mp.get("TestValue");
-
+		
+		
+		
+		
 		StringBuffer testcode1 =new StringBuffer();;
 		StringBuffer testvalue1=new StringBuffer();;
 		
@@ -1263,7 +1340,7 @@ public class ABC {
 	
 			}
 else {
-			if(str.toString().trim().length() >=3 && str.toString().trim().length() <=6  )
+			if(str.toString().trim().length() >=2 && str.toString().trim().length() <=6  )
 			{
 				
 				
@@ -1297,6 +1374,274 @@ else {
 		
 			
 				}
+}
+		}
+		
+		String stra=testcode1.toString().replaceAll(" ", "");
+		String strb=testvalue1.toString().replaceAll(" ", "");
+		
+		 
+	//	System.out.println("stra"+stra);
+//		System.out.println("strb"+strb);
+		
+//		String TestCode1 = (((((((TestCode.toString().trim()).replace("%", "_$").replace("#", "*$"))).replace("(", "%28"))
+//				.replace(")", "%29")).replace(" ", "%20")).replace("+", "%2B")).trim();
+//		String TestValue1 = (((((((TestValue.toString().trim())).replace("%", "_$").replace("#", "*$")).replace(" ", "__")).replace("<", "%3C")).replace(">", "%3E")))
+//				.trim();
+
+		/*
+		 * TestCode=TestCode.toString().replace("%","");
+		 * TestValue=TestValue.toString().replace("%","");
+		 */
+
+		// System.out.println("hiiiiii"+(String)TestCode.get(i)+"
+		// "+(String)TestValue.get(i) +" "+sam);
+		// save((String)TestCode.get(i) , (String)TestList.get(i) , sampleName , conn);
+
+//		if (TestValue.equals("POSITIVE")) {
+//			TestValue = "2";
+//		}
+//
+//		if (TestValue.equals("NEGATIVE")) {
+//			TestValue = "1";
+//		}
+
+		/*
+		 * TestCode=TestCode.toString().replace(" ","%20");
+		 * TestValue=TestValue.toString().replace(" ","%20");
+		 */
+		sam = ((sam.toString().trim()).replace(" ", "%20")).trim();
+		//System.out.println("TestCode:" + TestCode.toString());
+		//System.out.println("TestValue:" + TestValue.toString());
+		//System.out.println("sam:" + sam);
+/*		url = "https://" + ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
+				+ "&hos=" + hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
+		System.out.println("url Cobas 801 https:" + url);
+		StringBuffer response = new StringBuffer();
+		try {
+			SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+			TrustManager[] trust_mgr = get_trust_mgr();
+			ssl_ctx.init(null, trust_mgr, new SecureRandom());
+			HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+			URL obj = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+				public boolean verify(String host, SSLSession sess) {
+					if (host.equals(ip))
+						return true;
+					return false;
+				}
+			});
+			con.setRequestMethod("GET");
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.flush();
+			wr.close();
+			System.out.println("\nSending 'GET' request to URL : " + url);
+			// ---------------------------------------
+
+			FileWriter fw = new FileWriter(path, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("sam : " + sam);
+			bw.write("\n");
+			bw.write("TestCode : " + TestCode);
+			bw.write("\n");
+			bw.write("TestValue : " + TestValue);
+			bw.write("\n");
+			bw.write(url);
+			bw.write("\n");
+
+			bw.close();
+
+			// -------------------------------------------------
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String inputLine;
+			while ((inputLine = in.readLine()) != null)
+				response.append(inputLine);
+			System.out.println("response " + response.toString());
+			in.close();
+		} catch (Exception s) {
+			s.printStackTrace();
+		}
+*/		//--------------http- AIIMS Bhubneshwat--------
+//		url = ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp + "&hos="
+//				+ hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
+		url =   ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=5&eqp=" + eqp
+				+ "&hos=" + hos + "&tcode=" + stra + "&tval=" + strb + "&sam=" + sam + "&uid=" + uid;
+		  String modifiedString = url.replace("tval=$", "tval=");
+		  String  modifiedString1 = modifiedString.replace("%", "_");
+		   String modifiedString2 = modifiedString1.replace("#", "*");
+		   modifiedString2 = modifiedString2.replace("\\>", "%3E");
+		   modifiedString2 = modifiedString2.replaceAll("\\<", "%3C");
+		   modifiedString2 = modifiedString2.replaceAll(" ", "%20");
+		   modifiedString2 = modifiedString2.replaceAll("\\+", "%2B");
+		   modifiedString2 = modifiedString2.replaceAll("\\-", "%2D");
+		     
+	        System.out.println(modifiedString2);
+	     	//GenericServer.logMessage(modifiedString2, Color.BLUE);
+	//	System.out.println("url Cobas 801 :" + modifiedString2);
+		StringBuffer response = new StringBuffer();
+
+		
+		try {
+			/*
+			 * SSLContext ssl_ctx = SSLContext.getInstance("TLS"); TrustManager[] trust_mgr
+			 * = get_trust_mgr(); ssl_ctx.init(null, // key manager trust_mgr, // trust
+			 * manager new SecureRandom()); // random number generator
+			 * HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+			 */
+			
+			URL obj = new URL(modifiedString2);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			
+			if(httpcheck.equals("1")) {
+				SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+				TrustManager[] trust_mgr = get_trust_mgr();
+				ssl_ctx.init(null, trust_mgr, new SecureRandom());
+				HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+//				URL obj = new URL(url);
+				//HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+				((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+					public boolean verify(String host, SSLSession sess) {
+						if (host.equals(ip))
+							return true;
+						return false;
+					}
+				});
+				
+				}
+			
+			/*
+			 * ((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+			 * public boolean verify(String host, SSLSession sess) { if (host.equals(ip))
+			 * return true; else return false; } });
+			 */
+
+			con.setRequestMethod("GET");
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.flush();
+			wr.close();
+
+			System.out.println("\nSending 'GET' request to URL : " + modifiedString2);
+			//GenericServer.logMessage("\nSending 'GET' request to URL : " + modifiedString2 , Color.RED);
+			GenericServer.saveToFile("\nSending 'GET' request to URL : " + modifiedString2,GenericServer.FILE_NAME);
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			System.out.println("response--:" + response.toString());
+			System.out.println("responce :1+" + con.getResponseMessage());
+			GenericServer.saveToFile("response--:" + response.toString(),GenericServer.FILE_NAME);
+			
+			//GenericServer.logMessage("response--:" + response.toString(), Color.RED);
+			//GenericServer.logMessage("responce :1+" + con.getResponseMessage() , Color.RED);
+
+/*			FileWriter fw11 = new FileWriter(path_HIMS_LOG, true);
+			BufferedWriter bw = new BufferedWriter(fw11);
+			bw.write("\n");
+			bw.write("Sample Number : " + sam);
+			bw.write("\n");
+			bw.write("Test Code : " + TestCode);
+			bw.write("\n");
+			bw.write("Test Value : " + TestValue);
+			bw.write("\n");
+			bw.write(url);
+			bw.write("\n");
+			bw.write(response.toString());
+			bw.write("\n");
+			bw.write("----------------------------------------------------------");
+			bw.flush();
+			bw.close();
+*/			in.close();
+	
+		} catch (Exception s) {
+			s.printStackTrace();	   
+		//--Http End----------------------------	
+		}
+		return response.toString();
+	}
+	
+	
+	
+//Horriba Machine Result Entry....
+	// ----------------------------------------------------------------------------------------
+	public static String insert_SysmexXN350COBAS(Map mp, String sam) {
+		System.out.println("Inside insertSampleDtl (type1/type5 query) ");
+		Map res = ReadPropertyFile.getPropertyValues();
+		final String ip = (String) res.get("ip");
+		String port = (String) res.get("port");
+		String eqp = (String) res.get("eqp");
+		String hos = (String) res.get("hos");
+		String uid = (String) res.get("uid");
+		String url = "";
+
+		
+		
+		
+		
+		
+		List TestCode = (List)mp.get("TestCode");
+		List TestValue = (List)mp.get("TestValue");
+		
+		System.out.println("ROHITTT"+TestCode);
+		StringBuffer testcode1 =new StringBuffer();;
+		StringBuffer testvalue1=new StringBuffer();;
+		
+		//System.out.println("total testcode"+TestCode.size());
+		//System.out.println("total testvalue"+TestValue.size());
+		for(int i=0;i<TestCode.size();i++) {
+			
+			
+			String str= (String) TestCode.get(i);
+			String str1 =(String) TestValue.get(i);
+			//System.out.println("str : " +str);
+			//System.out.println("st1r : " +str1);
+			//str.replaceAll("", "--");
+			//str1.replaceAll("", "--");
+			if(str1.equals("")||str1.equals(" ")) str1="--";
+			if(i==TestCode.size()-1) {
+				testcode1.append(str.replace("#", "*"));
+				testvalue1.append(str1);
+	
+			}
+else {
+			//if(str.toString().trim().length() >=3 && str.toString().trim().length() <=6  )
+			//{
+				
+				
+			if(str.toString().trim().contains("#")) {
+			//TestCode.toString().replaceAll("#", "*");str.ap
+				
+			testcode1.append(str.replace("#", "*$"));
+			if(testvalue1.equals("") ||testvalue1.equals(" ")) {
+				testvalue1.append("--");
+				
+				testvalue1.append("$");
+					
+			}
+			else {
+			testvalue1.append(str1);
+			testvalue1.append("$");
+			}
+		}
+		else if(str.toString().trim().contains("%"))
+		{
+			//TestCode.toString().replaceAll("%", "_$");
+			testcode1.append(str.replace("%", "_$"));
+			testvalue1.append(str1);
+			testvalue1.append("$");
+		}
+		else {
+			testcode1.append(str+"$");
+			testvalue1.append(str1+"$");
+			
+		}
+		
+			
+				//}
 }
 		}
 		
@@ -1387,16 +1732,15 @@ else {
 */		//--------------http- AIIMS Bhubneshwat--------
 //		url = ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp + "&hos="
 //				+ hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
-		url =  ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=5&eqp=" + 100002
+		url = ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=5&eqp=" + eqp
 				+ "&hos=" + hos + "&tcode=" + stra + "&tval=" + strb + "&sam=" + sam + "&uid=" + uid;
 		  String modifiedString = url.replace("tval=$", "tval=");
 		  String  modifiedString1 = modifiedString.replace("%", "_");
 		   String modifiedString2 = modifiedString1.replace("#", "*");
 		     
 	       // System.out.println(modifiedString);
-			AIIMSLAB.saveToFile("url Cobas 801 :" + modifiedString2, AIIMSLAB.FILE_NAME);
-		     
-		System.out.println("url Cobas 801 :" + modifiedString2);
+		
+	//	System.out.println("url Cobas 801 :" + modifiedString2);
 		StringBuffer response = new StringBuffer();
 
 		
@@ -1407,11 +1751,11 @@ else {
 			 * manager new SecureRandom()); // random number generator
 			 * HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
 			 */
-			SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+		/*	SSLContext ssl_ctx = SSLContext.getInstance("TLS");
 			TrustManager[] trust_mgr = get_trust_mgr();
 			ssl_ctx.init(null, trust_mgr, new SecureRandom());
 			HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
-			URL obj = new URL(url);
+			URL obj = new URL(modifiedString2);
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 			((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
 				public boolean verify(String host, SSLSession sess) {
@@ -1420,8 +1764,9 @@ else {
 					return false;
 				}
 			});
-			//URL obj = new URL(modifiedString2);
-			//HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			*/
+			URL obj = new URL(modifiedString2);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 			/*
 			 * ((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
 			 * public boolean verify(String host, SSLSession sess) { if (host.equals(ip))
@@ -1435,18 +1780,34 @@ else {
 			wr.close();
 
 			System.out.println("\nSending 'GET' request to URL : " + modifiedString2);
-			AIIMSLAB.saveToFile("\nSending 'GET' request to URL : " + modifiedString2, AIIMSLAB.FILE_NAME);
-	           
+			///GenericServer.logMessage("\nSending 'GET' request to URL : " + modifiedString2, Color.BLUE);
+			//   GenericServer.logMessage("\nSending 'GET' request to URL : " + modifiedString2, Color.BLUE);
+			
+	        GenericServer.saveToFile("\nSending 'GET' request to URL : " + modifiedString2, GenericServer.FILE_NAME);
+	        GenericServer.logMessage("\nSending 'GET' request to URL : " + modifiedString2, Color.red);
+			
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String inputLine;
 
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
 			}
+			
+		//GenericServer.logMessage("Sending Data to URl " + modifiedString2, Color.RED);
+		//	GenericServer.logMessage("Response : " + response.toString(), Color.RED);
+		//	GenericServer.logMessage("response : 1: " + con.getResponseMessage(), Color.RED);
+			
+			
 			System.out.println("response--:" + response.toString());
 			System.out.println("responce :1+" + con.getResponseMessage());
-			AIIMSLAB.saveToFile("response--:" + response.toString(), AIIMSLAB.FILE_NAME);
-		     
+			
+			GenericServer.saveToFile("Sending Data to URl " + modifiedString2,GenericServer.FILE_NAME);
+			GenericServer.saveToFile("Response : " + response.toString(),GenericServer.FILE_NAME);
+			GenericServer.saveToFile("response : 1: " + con.getResponseMessage(),GenericServer.FILE_NAME);
+			
+			 GenericServer.logMessage("Response : " + response.toString(), Color.red);
+				
+			
 /*			FileWriter fw11 = new FileWriter(path_HIMS_LOG, true);
 			BufferedWriter bw = new BufferedWriter(fw11);
 			bw.write("\n");
@@ -1650,5 +2011,375 @@ else {
 		System.out.println(res);
 		return res;
 	}
+	
+	
+	
+	public static String insertSampleDtlpdfbase64(String sampleno, String testcode,String testval,String base64data) {
+		System.out.println("Inside insertSampleDtl (type1/type5 query) ");
+		Map res = ReadPropertyFile.getPropertyValues();
+		String ip = (String) res.get("ip");
+		String port = (String) res.get("port");
+		String eqp = (String) res.get("eqp");
+		String hos = (String) res.get("hos");
+		String uid = (String) res.get("uid");
+		String url = "";
+		//List TestCode = (List) mp.get("TestCode");
+		//List TestValue = (List) mp.get("TestValue");
+
+		//for (int i = 0; i < TestCode.size(); i++) {
+			// System.out.println("hiiiiii"+(String)TestCode.get(i)+"
+			// "+(String)TestValue.get(i) +" "+sam);
+			// save((String)TestCode.get(i) , (String)TestList.get(i) , sampleName , conn);
+			
+			url = ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=6&eqp=" + eqp + "&hos="
+					+ hos + "&tcode=" + testcode+ "&tval=" + testval + "&sam=" + sampleno 
+					+ "&uid=" + uid;
+	//	}
+			//+"&pdfbase64="+base64data
+			
+		StringBuffer response = new StringBuffer();
+		try {
+			
+		//for http 	
+		/*
+		 * URL obj = new URL(url); HttpURLConnection con = (HttpURLConnection)
+		 * obj.openConnection();
+		 */	
+			//System.out.println(url);
+//		end http
+			SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+			TrustManager[] trust_mgr = get_trust_mgr();
+			ssl_ctx.init(null, trust_mgr, new SecureRandom());
+			HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+			
+			URL obj = new URL(url);
+		//	HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			//System.out.println("URL :: "+url);
+			HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+			((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+				public boolean verify(String host, SSLSession sess) {
+					if (host.equals(ip))
+						return true;
+					return false;
+				}
+			});
+////			
+			
+			
+		//	con.setRequestMethod("GET");
+			
+			con.setRequestMethod("POST");
+			con.setRequestProperty("Content-Type", "application/json");
+			con.setRequestProperty("Accept", "application/json");
+			
+			con.setDoOutput(true);
+			
+			String jsonInputString = "{\"pdfbase64\":\"" + base64data + "\"}";
+			//String jsonInputString = "{\"machine_data\":\"" + base64data + "\"}";
+
+			try(OutputStream os = con.getOutputStream()) {
+			    byte[] input = jsonInputString.getBytes("utf-8");
+			    os.write(input, 0, input.length);			
+			}
+			
+			
+//			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+//			wr.flush();
+//			wr.close();
+			
+		
+			System.out.println("\nSending 'GET' request to URL : " + url);
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			
+			  int responseCode = con.getResponseCode();
+		        System.out.println("Response Code: " + responseCode);
+			String inputLine;
+			while ((inputLine = in.readLine()) != null)
+				response.append(inputLine);
+			System.out.println("response " + response.toString());
+			in.close();
+		} catch (Exception s) {
+			s.printStackTrace();
+		}
+		return response.toString();
+	}
+	
+	
+	public static String insert_SysmexXN350Bubneswar(Map mp, String sam) {
+		System.out.println("Inside insertSampleDtl (type1/type5 query) ");
+		//GenericServer.saveToFile("Inside insertSampleDtl (type1/type5 query) ",GenericServer.FILE_NAME);
+		Map res = ReadPropertyFile.getPropertyValues();
+		final String ip = (String) res.get("ip");
+		String port = (String) res.get("port");
+		String eqp = (String) res.get("eqp");
+		String hos = (String) res.get("hos");
+		String uid = (String) res.get("uid");
+		String url = "";
+
+		
+		String httpcheck = (String) res.get("httpcheck");
+	      String pr="";
+			if(httpcheck.equals("1")) {
+				pr="https";
+				
+			}
+			else {
+				
+				pr="http";
+			}
+		
+		
+		List TestCode = (List)mp.get("TestCode");
+		List TestValue = (List)mp.get("TestValue");
+		
+		
+		
+		
+		StringBuffer testcode1 =new StringBuffer();;
+		StringBuffer testvalue1=new StringBuffer();;
+		
+		//System.out.println("total testcode"+TestCode.size());
+		//System.out.println("total testvalue"+TestValue.size());
+		for(int i=0;i<TestCode.size();i++) {
+			
+			
+			String str= (String) TestCode.get(i);
+			String str1 =(String) TestValue.get(i);
+			//System.out.println("str : " +str);
+			//System.out.println("st1r : " +str1);
+			//str.replaceAll("", "--");
+			//str1.replaceAll("", "--");
+			if(str1.equals("")||str1.equals(" ")) str1="--";
+			if(i==TestCode.size()-1) {
+				testcode1.append(str.replace("#", "*"));
+				testvalue1.append(str1);
+	
+			}
+else {
+			if(str.toString().trim().length() >=2 && str.toString().trim().length() <=6  )
+			{
+				
+				
+			if(str.toString().trim().contains("#")) {
+			//TestCode.toString().replaceAll("#", "*");str.ap
+				
+			testcode1.append(str.replace("#", "*$"));
+			if(testvalue1.equals("") ||testvalue1.equals(" ")) {
+				testvalue1.append("--");
+				
+				testvalue1.append("$");
+					
+			}
+			else {
+			testvalue1.append(str1);
+			testvalue1.append("$");
+			}
+		}
+		else if(str.toString().trim().contains("%"))
+		{
+			//TestCode.toString().replaceAll("%", "_$");
+			testcode1.append(str.replace("%", "_$"));
+			testvalue1.append(str1);
+			testvalue1.append("$");
+		}
+		else {
+			testcode1.append(str+"$");
+			testvalue1.append(str1+"$");
+			
+		}
+		
+			
+				}
+}
+		}
+		
+		String stra=testcode1.toString().replaceAll(" ", "");
+		String strb=testvalue1.toString().replaceAll(" ", "");
+		
+		 
+	//	System.out.println("stra"+stra);
+//		System.out.println("strb"+strb);
+		
+//		String TestCode1 = (((((((TestCode.toString().trim()).replace("%", "_$").replace("#", "*$"))).replace("(", "%28"))
+//				.replace(")", "%29")).replace(" ", "%20")).replace("+", "%2B")).trim();
+//		String TestValue1 = (((((((TestValue.toString().trim())).replace("%", "_$").replace("#", "*$")).replace(" ", "__")).replace("<", "%3C")).replace(">", "%3E")))
+//				.trim();
+
+		/*
+		 * TestCode=TestCode.toString().replace("%","");
+		 * TestValue=TestValue.toString().replace("%","");
+		 */
+
+		// System.out.println("hiiiiii"+(String)TestCode.get(i)+"
+		// "+(String)TestValue.get(i) +" "+sam);
+		// save((String)TestCode.get(i) , (String)TestList.get(i) , sampleName , conn);
+
+//		if (TestValue.equals("POSITIVE")) {
+//			TestValue = "2";
+//		}
+//
+//		if (TestValue.equals("NEGATIVE")) {
+//			TestValue = "1";
+//		}
+
+		/*
+		 * TestCode=TestCode.toString().replace(" ","%20");
+		 * TestValue=TestValue.toString().replace(" ","%20");
+		 */
+		sam = ((sam.toString().trim()).replace(" ", "%20")).trim();
+		//System.out.println("TestCode:" + TestCode.toString());
+		//System.out.println("TestValue:" + TestValue.toString());
+		//System.out.println("sam:" + sam);
+/*		url = "https://" + ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp
+				+ "&hos=" + hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
+		System.out.println("url Cobas 801 https:" + url);
+		StringBuffer response = new StringBuffer();
+		try {
+			SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+			TrustManager[] trust_mgr = get_trust_mgr();
+			ssl_ctx.init(null, trust_mgr, new SecureRandom());
+			HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+			URL obj = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+				public boolean verify(String host, SSLSession sess) {
+					if (host.equals(ip))
+						return true;
+					return false;
+				}
+			});
+			con.setRequestMethod("GET");
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.flush();
+			wr.close();
+			System.out.println("\nSending 'GET' request to URL : " + url);
+			// ---------------------------------------
+
+			FileWriter fw = new FileWriter(path, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("sam : " + sam);
+			bw.write("\n");
+			bw.write("TestCode : " + TestCode);
+			bw.write("\n");
+			bw.write("TestValue : " + TestValue);
+			bw.write("\n");
+			bw.write(url);
+			bw.write("\n");
+
+			bw.close();
+
+			// -------------------------------------------------
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String inputLine;
+			while ((inputLine = in.readLine()) != null)
+				response.append(inputLine);
+			System.out.println("response " + response.toString());
+			in.close();
+		} catch (Exception s) {
+			s.printStackTrace();
+		}
+*/		//--------------http- AIIMS Bhubneshwat--------
+//		url = ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=1&eqp=" + eqp + "&hos="
+//				+ hos + "&tcode=" + TestCode + "&tval=" + TestValue + "&sam=" + sam + "&uid=" + uid;
+		url =  ip + "/HISInvestigationG5/new_investigation/masters/MachineInterface.jsp?type=5&eqp=" + eqp
+				+ "&hos=" + hos + "&tcode=" + stra + "&tval=" + strb + "&sam=" + sam + "&uid=" + uid;
+		  String modifiedString = url.replace("tval=$", "tval=");
+		  String  modifiedString1 = modifiedString.replace("%", "_");
+		   String modifiedString2 = modifiedString1.replace("#", "*");
+		   modifiedString2 = modifiedString2.replace("\\>", "%3E");
+		   modifiedString2 = modifiedString2.replaceAll("\\<", "%3C");
+		   modifiedString2 = modifiedString2.replaceAll(" ", "%20");
+		   modifiedString2 = modifiedString2.replaceAll("\\+", "%2B");
+		   modifiedString2 = modifiedString2.replaceAll("\\-", "%2D");
+		     
+	        System.out.println(modifiedString2);
+	     	//GenericServer.logMessage(modifiedString2, Color.BLUE);
+	//	System.out.println("url Cobas 801 :" + modifiedString2);
+		StringBuffer response = new StringBuffer();
+
+		
+		try {
+			/*
+			 * SSLContext ssl_ctx = SSLContext.getInstance("TLS"); TrustManager[] trust_mgr
+			 * = get_trust_mgr(); ssl_ctx.init(null, // key manager trust_mgr, // trust
+			 * manager new SecureRandom()); // random number generator
+			 * HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+			 */
+			
+			URL obj = new URL(modifiedString2);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			
+			if(httpcheck.equals("1")) {
+				SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+				TrustManager[] trust_mgr = get_trust_mgr();
+				ssl_ctx.init(null, trust_mgr, new SecureRandom());
+				HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
+//				URL obj = new URL(url);
+				//HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+				((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+					public boolean verify(String host, SSLSession sess) {
+						if (host.equals(ip))
+							return true;
+						return false;
+					}
+				});
+				
+				}
+			
+			/*
+			 * ((HttpsURLConnection) con).setHostnameVerifier(new HostnameVerifier() {
+			 * public boolean verify(String host, SSLSession sess) { if (host.equals(ip))
+			 * return true; else return false; } });
+			 */
+
+			con.setRequestMethod("GET");
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.flush();
+			wr.close();
+
+			System.out.println("\nSending 'GET' request to URL : " + modifiedString2);
+			//GenericServer.logMessage("\nSending 'GET' request to URL : " + modifiedString2 , Color.RED);
+		//	GenericServer.saveToFile("\nSending 'GET' request to URL : " + modifiedString2,GenericServer.FILE_NAME);
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			System.out.println("response--:" + response.toString());
+			System.out.println("responce :1+" + con.getResponseMessage());
+		//	GenericServer.saveToFile("response--:" + response.toString(),GenericServer.FILE_NAME);
+			
+			//GenericServer.logMessage("response--:" + response.toString(), Color.RED);
+			//GenericServer.logMessage("responce :1+" + con.getResponseMessage() , Color.RED);
+
+/*			FileWriter fw11 = new FileWriter(path_HIMS_LOG, true);
+			BufferedWriter bw = new BufferedWriter(fw11);
+			bw.write("\n");
+			bw.write("Sample Number : " + sam);
+			bw.write("\n");
+			bw.write("Test Code : " + TestCode);
+			bw.write("\n");
+			bw.write("Test Value : " + TestValue);
+			bw.write("\n");
+			bw.write(url);
+			bw.write("\n");
+			bw.write(response.toString());
+			bw.write("\n");
+			bw.write("----------------------------------------------------------");
+			bw.flush();
+			bw.close();
+*/			in.close();
+	
+		} catch (Exception s) {
+			s.printStackTrace();	   
+		//--Http End----------------------------	
+		}
+		return response.toString();
+	}
+	
+	
 
 }

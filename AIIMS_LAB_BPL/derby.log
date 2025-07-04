@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Jun 10 15:23:45 IST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0197-5942-96dc-00000cc25f40 
+on database directory D:\GenericMachineInterface\AIIMS_LAB_BPL\vitrosDb with class loader sun.misc.Launcher$AppClassLoader@4e0e2f2a 
+Loaded from file:/C:/Users/rohitmalviya/Downloads/derby-10.14.2.0.jar
+java.vendor=Temurin
+java.runtime.version=1.8.0_412-b08
+user.dir=D:\GenericMachineInterface\AIIMS_LAB_BPL
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

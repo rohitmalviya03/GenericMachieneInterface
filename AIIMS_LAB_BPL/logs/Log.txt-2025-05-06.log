@@ -1,0 +1,323 @@
+2025-05-06 10:18:05 - Received : MSH|^~\&|myla|BMX|HL72LIS|LIS|20250506054259+0530||OUL^R22^OUL_R22|8362b5fc-3e78-41fa-a3ac-9b212390f177|P|2.5.1|||NE|AL||UNICODE UTF-8
+PID|1||""|||||U
+PV1|1|U|||||||||||||||||""
+SPM|1|1|250505MIC00001||||||||P^Patient^HL70369||||||20250505124944
+SAC|1||1|250505MIC00001
+OBR|1|""||AST-P628^AST-P628^99BMx
+ORC|SC||||CM
+OBX|1|CE|ID^Bacteria identified in isolate^99BMx|1|MAU^Staphylococcus aureus^99BMx|||""|||""|||||""||""|""||||||||||SCI
+OBX|2|CE|OXSF^Cefoxitin Screen^99BMx^18888-8^cefOXitin [Susceptibility]^LN|1|""|||Neg^Negative^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|3|SN|P^Benzylpenicillin^99BMx^6932-8^Penicillin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|>=^0.5|mg/mL^microgram per milliliter^UCUM||R^Resistant^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|4|SN|OX1^Oxacillin^99BMx^383-0^Oxacillin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^0.5|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|5|SN|GM^Gentamicin^99BMx^267-5^Gentamicin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^0.5|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|6|SN|CIP^Ciprofloxacin^99BMx^185-9^Ciprofloxacin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|>=^8.0|mg/mL^microgram per milliliter^UCUM||R^Resistant^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|7|SN|LEV^Levofloxacin^99BMx^20396-8^levoFLOXacin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^4.0|mg/mL^microgram per milliliter^UCUM||R^Resistant^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|8|CE|ICR^Inducible Clindamycin Resistance^99BMx^61188-9^Clindamycin.induced [Susceptibility]^LN|1|""|||Neg^Negative^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|9|SN|E^Erythromycin^99BMx^233-7^Erythromycin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^0.25|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|10|SN|CM^Clindamycin^99BMx^193-3^Clindamycin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^0.25|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|11|SN|LNZ^Linezolid^99BMx^29254-0^Linezolid [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^2.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|12|SN|DAP^Daptomycin^99BMx^35788-9^DAPTOmycin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^1.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|13|SN|TEC^Teicoplanin^99BMx^484-6^Teicoplanin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^0.5|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|14|SN|VA^Vancomycin^99BMx^524-9^Vancomycin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^1.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|15|SN|TE^Tetracycline^99BMx^496-0^Tetracycline [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^1.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|16|SN|TGC^Tigecycline^99BMx^42355-8^Tigecycline [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^0.12|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|17|SN|FT^Nitrofurantoin^99BMx^363-2^Nitrofurantoin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^32.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|18|SN|RA^Rifampicin^99BMx^428-3^rifAMPin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^0.03|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|19|SN|SXT^Trimethoprim/Sulfamethoxazole^99BMx^516-5^Trimethoprim+Sulfamethoxazole [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^10.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|20|CE|DO^Doxycycline^99BMx^225-3^Doxycycline [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|ad^MIC value not calculated but deduced from other result^99BMx|||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|21|TX|ap^Phenotype^99BMx|1|WILD:RIFAMYCINS~PARTIALLY RESISTANT:QUINOLONES~WILD:FURANES~RESISTANT KAN (APH(3')-III):AMINOGLYCOSIDES~RESISTANT KAN TOB (ANT(4')(4'')):AMINOGLYCOSIDES~WILD:AMINOGLYCOSIDES~WILD:MACROLIDES/LINCOSAMIDES/STREPTOGRAMINS~RESISTANT TO STREPTOGRAMINS (SGA-SGB):MACROLIDES/LINCOSAMIDES/STREPTOGRAMINS~WILD:GLYCOPEPTIDES~WILD:TETRACYCLINES~WILD:OXAZOLIDINONE~ACQUIRED PENICILLINASE:BETA-LACTAMS~WILD:TRIMETHOPRIM/SULFONAMIDES~TRIMETHOPRIM RESISTANT:TRIMETHOPRIM/SULFONAMIDES||||||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+INV|AST-P628^^99BMx|NA^Not Applicable^HL70383|VITEK2-AST-CARD^^99BMx|5383028103827017||||||||20260312||||5383028103
+
+2025-05-06 10:18:05 - Sent ACK response: MSH|^~\&|HL72LIS||LIS|BMX|myla|20250506101805+0530||ACK^R22|8362b5fc-3e78-41fa-a3ac-9b212390f177|P|2.5.1MSA|AA|8362b5fc-3e78-41fa-a3ac-9b212390f177
+2025-05-06 10:18:05 - MSG TYPE: OUL^R22^OUL_R22
+2025-05-06 10:18:05 - SAMPLE NO :250505MIC00001
+2025-05-06 10:18:05 - SAMPLLE Type
+2025-05-06 10:18:05 - Organism type :Staphylococcus aureus
+2025-05-06 10:18:05 - MIC Value :>=^0.5
+2025-05-06 10:18:05 - antiBiotic :P
+2025-05-06 10:18:05 - antiBiotic :Benzylpenicillin
+2025-05-06 10:18:05 - MIC Value :=^0.5
+2025-05-06 10:18:05 - antiBiotic :OX1
+2025-05-06 10:18:05 - antiBiotic :Oxacillin
+2025-05-06 10:18:05 - MIC Value :<=^0.5
+2025-05-06 10:18:05 - antiBiotic :GM
+2025-05-06 10:18:05 - antiBiotic :Gentamicin
+2025-05-06 10:18:05 - MIC Value :>=^8.0
+2025-05-06 10:18:05 - antiBiotic :CIP
+2025-05-06 10:18:05 - antiBiotic :Ciprofloxacin
+2025-05-06 10:18:05 - MIC Value :=^4.0
+2025-05-06 10:18:05 - antiBiotic :LEV
+2025-05-06 10:18:05 - antiBiotic :Levofloxacin
+2025-05-06 10:18:05 - MIC Value :<=^0.25
+2025-05-06 10:18:05 - antiBiotic :E
+2025-05-06 10:18:05 - antiBiotic :Erythromycin
+2025-05-06 10:18:05 - MIC Value :=^0.25
+2025-05-06 10:18:05 - antiBiotic :CM
+2025-05-06 10:18:05 - antiBiotic :Clindamycin
+2025-05-06 10:18:05 - MIC Value :=^2.0
+2025-05-06 10:18:05 - antiBiotic :LNZ
+2025-05-06 10:18:05 - antiBiotic :Linezolid
+2025-05-06 10:18:05 - MIC Value :=^1.0
+2025-05-06 10:18:05 - antiBiotic :DAP
+2025-05-06 10:18:05 - antiBiotic :Daptomycin
+2025-05-06 10:18:05 - MIC Value :<=^0.5
+2025-05-06 10:18:05 - antiBiotic :TEC
+2025-05-06 10:18:05 - antiBiotic :Teicoplanin
+2025-05-06 10:18:05 - MIC Value :=^1.0
+2025-05-06 10:18:05 - antiBiotic :VA
+2025-05-06 10:18:05 - antiBiotic :Vancomycin
+2025-05-06 10:18:05 - MIC Value :<=^1.0
+2025-05-06 10:18:05 - antiBiotic :TE
+2025-05-06 10:18:05 - antiBiotic :Tetracycline
+2025-05-06 10:18:05 - MIC Value :<=^0.12
+2025-05-06 10:18:05 - antiBiotic :TGC
+2025-05-06 10:18:05 - antiBiotic :Tigecycline
+2025-05-06 10:18:05 - MIC Value :=^32.0
+2025-05-06 10:18:05 - antiBiotic :FT
+2025-05-06 10:18:05 - antiBiotic :Nitrofurantoin
+2025-05-06 10:18:05 - MIC Value :<=^0.03
+2025-05-06 10:18:05 - antiBiotic :RA
+2025-05-06 10:18:05 - antiBiotic :Rifampicin
+2025-05-06 10:18:05 - MIC Value :<=^10.0
+2025-05-06 10:18:05 - antiBiotic :SXT
+2025-05-06 10:18:05 - antiBiotic :Trimethoprim/Sulfamethoxazole
+2025-05-06 10:21:15 - Received : MSH|^~\&|myla|BMX|HL72LIS|LIS|20250506054259+0530||OUL^R22^OUL_R22|8362b5fc-3e78-41fa-a3ac-9b212390f177|P|2.5.1|||NE|AL||UNICODE UTF-8
+PID|1||""|||||U
+PV1|1|U|||||||||||||||||""
+SPM|1|1|250505MIC00001||||||||P^Patient^HL70369||||||20250505124944
+SAC|1||1|250505MIC00001
+OBR|1|""||AST-P628^AST-P628^99BMx
+ORC|SC||||CM
+OBX|1|CE|ID^Bacteria identified in isolate^99BMx|1|MAU^Staphylococcus aureus^99BMx|||""|||""|||||""||""|""||||||||||SCI
+OBX|2|CE|OXSF^Cefoxitin Screen^99BMx^18888-8^cefOXitin [Susceptibility]^LN|1|""|||Neg^Negative^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|3|SN|P^Benzylpenicillin^99BMx^6932-8^Penicillin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|>=^0.5|mg/mL^microgram per milliliter^UCUM||R^Resistant^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|4|SN|OX1^Oxacillin^99BMx^383-0^Oxacillin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^0.5|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|5|SN|GM^Gentamicin^99BMx^267-5^Gentamicin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^0.5|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|6|SN|CIP^Ciprofloxacin^99BMx^185-9^Ciprofloxacin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|>=^8.0|mg/mL^microgram per milliliter^UCUM||R^Resistant^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|7|SN|LEV^Levofloxacin^99BMx^20396-8^levoFLOXacin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^4.0|mg/mL^microgram per milliliter^UCUM||R^Resistant^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|8|CE|ICR^Inducible Clindamycin Resistance^99BMx^61188-9^Clindamycin.induced [Susceptibility]^LN|1|""|||Neg^Negative^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|9|SN|E^Erythromycin^99BMx^233-7^Erythromycin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^0.25|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|10|SN|CM^Clindamycin^99BMx^193-3^Clindamycin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^0.25|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|11|SN|LNZ^Linezolid^99BMx^29254-0^Linezolid [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^2.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|12|SN|DAP^Daptomycin^99BMx^35788-9^DAPTOmycin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^1.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|13|SN|TEC^Teicoplanin^99BMx^484-6^Teicoplanin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^0.5|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|14|SN|VA^Vancomycin^99BMx^524-9^Vancomycin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^1.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|15|SN|TE^Tetracycline^99BMx^496-0^Tetracycline [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^1.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|16|SN|TGC^Tigecycline^99BMx^42355-8^Tigecycline [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^0.12|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|17|SN|FT^Nitrofurantoin^99BMx^363-2^Nitrofurantoin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|=^32.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|18|SN|RA^Rifampicin^99BMx^428-3^rifAMPin [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^0.03|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|19|SN|SXT^Trimethoprim/Sulfamethoxazole^99BMx^516-5^Trimethoprim+Sulfamethoxazole [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|<=^10.0|mg/mL^microgram per milliliter^UCUM||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|20|CE|DO^Doxycycline^99BMx^225-3^Doxycycline [Susceptibility] by Minimum inhibitory concentration (MIC)^LN|1|ad^MIC value not calculated but deduced from other result^99BMx|||S^Susceptible^HL70078|||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+OBX|21|TX|ap^Phenotype^99BMx|1|WILD:RIFAMYCINS~PARTIALLY RESISTANT:QUINOLONES~WILD:FURANES~RESISTANT KAN (APH(3')-III):AMINOGLYCOSIDES~RESISTANT KAN TOB (ANT(4')(4'')):AMINOGLYCOSIDES~WILD:AMINOGLYCOSIDES~WILD:MACROLIDES/LINCOSAMIDES/STREPTOGRAMINS~RESISTANT TO STREPTOGRAMINS (SGA-SGB):MACROLIDES/LINCOSAMIDES/STREPTOGRAMINS~WILD:GLYCOPEPTIDES~WILD:TETRACYCLINES~WILD:OXAZOLIDINONE~ACQUIRED PENICILLINASE:BETA-LACTAMS~WILD:TRIMETHOPRIM/SULFONAMIDES~TRIMETHOPRIM RESISTANT:TRIMETHOPRIM/SULFONAMIDES||||||F|||||""||Vitek2^biomerieux~000016FE032E^biomerieux~AIIMS BHOPAL^biomerieux~|20250506054719||||||||||RSLT
+INV|AST-P628^^99BMx|NA^Not Applicable^HL70383|VITEK2-AST-CARD^^99BMx|5383028103827017||||||||20260312||||5383028103
+
+2025-05-06 10:21:15 - Sent ACK response: MSH|^~\&|HL72LIS||LIS|BMX|myla|20250506102115+0530||ACK^R22|8362b5fc-3e78-41fa-a3ac-9b212390f177|P|2.5.1MSA|AA|8362b5fc-3e78-41fa-a3ac-9b212390f177
+2025-05-06 10:21:15 - MSG TYPE: OUL^R22^OUL_R22
+2025-05-06 10:21:15 - SAMPLE NO :250505MIC00001
+2025-05-06 10:21:15 - SAMPLLE Type
+2025-05-06 10:21:15 - Organism type :Staphylococcus aureus
+2025-05-06 10:21:15 - MIC Value :>=^0.5
+2025-05-06 10:21:15 - antiBiotic :P
+2025-05-06 10:21:15 - antiBiotic :Benzylpenicillin
+2025-05-06 10:21:15 - MIC Value :=^0.5
+2025-05-06 10:21:15 - antiBiotic :OX1
+2025-05-06 10:21:15 - antiBiotic :Oxacillin
+2025-05-06 10:21:15 - MIC Value :<=^0.5
+2025-05-06 10:21:15 - antiBiotic :GM
+2025-05-06 10:21:15 - antiBiotic :Gentamicin
+2025-05-06 10:21:15 - MIC Value :>=^8.0
+2025-05-06 10:21:15 - antiBiotic :CIP
+2025-05-06 10:21:15 - antiBiotic :Ciprofloxacin
+2025-05-06 10:21:15 - MIC Value :=^4.0
+2025-05-06 10:21:15 - antiBiotic :LEV
+2025-05-06 10:21:15 - antiBiotic :Levofloxacin
+2025-05-06 10:21:15 - MIC Value :<=^0.25
+2025-05-06 10:21:15 - antiBiotic :E
+2025-05-06 10:21:15 - antiBiotic :Erythromycin
+2025-05-06 10:21:15 - MIC Value :=^0.25
+2025-05-06 10:21:15 - antiBiotic :CM
+2025-05-06 10:21:15 - antiBiotic :Clindamycin
+2025-05-06 10:21:15 - MIC Value :=^2.0
+2025-05-06 10:21:15 - antiBiotic :LNZ
+2025-05-06 10:21:15 - antiBiotic :Linezolid
+2025-05-06 10:21:15 - MIC Value :=^1.0
+2025-05-06 10:21:15 - antiBiotic :DAP
+2025-05-06 10:21:15 - antiBiotic :Daptomycin
+2025-05-06 10:21:15 - MIC Value :<=^0.5
+2025-05-06 10:21:15 - antiBiotic :TEC
+2025-05-06 10:21:15 - antiBiotic :Teicoplanin
+2025-05-06 10:21:15 - MIC Value :=^1.0
+2025-05-06 10:21:15 - antiBiotic :VA
+2025-05-06 10:21:15 - antiBiotic :Vancomycin
+2025-05-06 10:21:15 - MIC Value :<=^1.0
+2025-05-06 10:21:15 - antiBiotic :TE
+2025-05-06 10:21:15 - antiBiotic :Tetracycline
+2025-05-06 10:21:15 - MIC Value :<=^0.12
+2025-05-06 10:21:15 - antiBiotic :TGC
+2025-05-06 10:21:15 - antiBiotic :Tigecycline
+2025-05-06 10:21:15 - MIC Value :=^32.0
+2025-05-06 10:21:15 - antiBiotic :FT
+2025-05-06 10:21:15 - antiBiotic :Nitrofurantoin
+2025-05-06 10:21:15 - MIC Value :<=^0.03
+2025-05-06 10:21:15 - antiBiotic :RA
+2025-05-06 10:21:15 - antiBiotic :Rifampicin
+2025-05-06 10:21:15 - MIC Value :<=^10.0
+2025-05-06 10:21:15 - antiBiotic :SXT
+2025-05-06 10:21:15 - antiBiotic :Trimethoprim/Sulfamethoxazole
+2025-05-06 10:21:15 - Sample Object: {"testCode":"10193","machineCode":"-","resultTimeStamp":"20250506054259+0530","modifyDate":"-","syncFlag":"-","entryDate":"-","patName":"Test Usr One    ","sampleNo":"250505MIC00001","sampleType":"","patCrNo":"2147483647","genderCode":"M","labCode":"10022","sampleCode":"1002","hivtnumReqDno":"939151002225050510000101","age":"62 Yr             ","deptCode":"102"}
+2025-05-06 10:21:15 - [{
+    "age": "62 Yr             ",
+    "deptCode": "102",
+    "entryDate": "-",
+    "genderCode": "M",
+    "hivtnumReqDno": "939151002225050510000101",
+    "labCode": "10022",
+    "machineCode": "-",
+    "modifyDate": "-",
+    "patCrNo": "2147483647",
+    "patName": "Test Usr One    ",
+    "resultTimeStamp": "20250506054259+0530",
+    "results": [
+        {
+            "antiBioticCode": "P",
+            "antiBioticName": "Benzylpenicillin",
+            "micValue": ">=^0.5",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "R"
+        },
+        {
+            "antiBioticCode": "OX1",
+            "antiBioticName": "Oxacillin",
+            "micValue": "=^0.5",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "GM",
+            "antiBioticName": "Gentamicin",
+            "micValue": "<=^0.5",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "CIP",
+            "antiBioticName": "Ciprofloxacin",
+            "micValue": ">=^8.0",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "R"
+        },
+        {
+            "antiBioticCode": "LEV",
+            "antiBioticName": "Levofloxacin",
+            "micValue": "=^4.0",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "R"
+        },
+        {
+            "antiBioticCode": "E",
+            "antiBioticName": "Erythromycin",
+            "micValue": "<=^0.25",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "CM",
+            "antiBioticName": "Clindamycin",
+            "micValue": "=^0.25",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "LNZ",
+            "antiBioticName": "Linezolid",
+            "micValue": "=^2.0",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "DAP",
+            "antiBioticName": "Daptomycin",
+            "micValue": "=^1.0",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "TEC",
+            "antiBioticName": "Teicoplanin",
+            "micValue": "<=^0.5",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "VA",
+            "antiBioticName": "Vancomycin",
+            "micValue": "=^1.0",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "TE",
+            "antiBioticName": "Tetracycline",
+            "micValue": "<=^1.0",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "TGC",
+            "antiBioticName": "Tigecycline",
+            "micValue": "<=^0.12",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "FT",
+            "antiBioticName": "Nitrofurantoin",
+            "micValue": "=^32.0",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "RA",
+            "antiBioticName": "Rifampicin",
+            "micValue": "<=^0.03",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        },
+        {
+            "antiBioticCode": "SXT",
+            "antiBioticName": "Trimethoprim/Sulfamethoxazole",
+            "micValue": "<=^10.0",
+            "organismCode": "MAU",
+            "organismName": "Staphylococcus aureus",
+            "result": "S"
+        }
+    ],
+    "sampleCode": "1002",
+    "sampleNo": "250505MIC00001",
+    "sampleType": "",
+    "syncFlag": "-",
+    "testCode": "10193"
+}]
+2025-05-06 10:21:15 - Response Code: 200
+2025-05-06 14:38:13 - Stack Trace: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at Server.AIIMSLAB.lambda$8(AIIMSLAB.java:797)
+	at java.lang.Thread.run(Thread.java:750)
+

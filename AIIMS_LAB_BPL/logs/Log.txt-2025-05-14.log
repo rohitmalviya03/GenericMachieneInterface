@@ -1,0 +1,9 @@
+2025-05-14 09:41:26 - Stack Trace: java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at Server.AIIMSLAB.lambda$8(AIIMSLAB.java:797)
+	at java.lang.Thread.run(Thread.java:750)
+

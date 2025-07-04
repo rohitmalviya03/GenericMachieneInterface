@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.Map;
 
 
@@ -37,7 +38,7 @@ public class ServerConnector {
         	  AIIMSLAB.saveToFile("LIS is Connected on : "+ server_ip +" : "+server_port , AIIMSLAB.FILE_NAME);
           	 
             out.write(hl7Message.getBytes());
-            out.flush();
+           // out.flush();
             AIIMSLAB.saveToFile("Sent :  "+ hl7Message , AIIMSLAB.FILE_NAME);
             res=1;
           //  new Thread(new ResponseReceiver(socket)).start();
@@ -56,6 +57,63 @@ public class ServerConnector {
         
         return res;
     }
+    
+    
+    public static int sendToVitrosServer(String hl7Message) throws Exception {
+        String serverAddress = server_ip;//"10.226.28.174";  // Replace with actual server IP
+        int port = Integer.parseInt(server_port);//8002;  // Replace with actual server port
+        
+       // AIIMSLAB.updateConnectionStatusLabel("LIS is trying to connect on : "+ server_ip +" : "+server_port );
+        int res=0;
+        try (
+        	    Socket socket = new Socket(serverAddress, port);
+        	    OutputStream out = socket.getOutputStream();
+        	    InputStream in = socket.getInputStream()
+        	) {
+        	    socket.setSoTimeout(5000); // Optional: wait up to 10 seconds for ACK
+
+        	    System.out.println("LIS is Connected on : " + server_ip + " : " + server_port);
+        	    AIIMSLAB.saveToFile("LIS is Connected on : " + server_ip + " : " + server_port, AIIMSLAB.FILE_NAME);
+
+        	    // Send the HL7 message (with MLLP framing already present)
+        	    out.write(hl7Message.getBytes("UTF-8"));
+        	    out.flush();
+        	    AIIMSLAB.saveToFile("Sent : " + hl7Message, AIIMSLAB.FILE_NAME);
+
+        	    // Await and read ACK
+        	    byte[] buffer = new byte[1024];
+        	    int read = in.read(buffer); // This will block until ACK is received or timeout
+
+        	    if (read > 0) {
+        	        String ackResponse = new String(buffer, 0, read, "UTF-8");
+        	        System.out.println("ACK Received: " + ackResponse);
+        	        AIIMSLAB.saveToFile("ACK Received: " + ackResponse, AIIMSLAB.FILE_NAME);
+        	    } else {
+        	        System.out.println("No ACK received (read = 0)");
+        	        AIIMSLAB.saveToFile("No ACK received", AIIMSLAB.FILE_NAME);
+        	    }
+
+        	    res = 1;
+
+        	} catch (SocketTimeoutException ste) {
+        	    res = 1;
+        	    String msg = "Timeout waiting for ACK from server.";
+        	    System.out.println(msg);
+        	    AIIMSLAB.updateConnectionStatusLabel(msg);
+        	    AIIMSLAB.saveToFile(msg, AIIMSLAB.FILE_NAME);
+
+        	} catch (Exception e) {
+        	    res = 0;
+        	    String errorMsg = "Error connecting to server: " + e.getMessage();
+        	    AIIMSLAB.updateConnectionStatusLabel(errorMsg);
+        	    System.out.println(errorMsg);
+        	    AIIMSLAB.saveToFile("Stack Trace: " + AIIMSLAB.getStackTraceAsString(e), AIIMSLAB.FILE_NAME);
+        	    throw new Exception(errorMsg);
+        	}
+        
+        return res;
+    }
+    
     
     public static String receiveFromServer() {
     	 int port =Integer.parseInt(server_port);  // The port to listen on

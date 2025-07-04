@@ -165,7 +165,7 @@ public class insertOrganismData {
             // Get the response code
             int responseCode = connection.getResponseCode();
             System.out.println("Response Code: " + responseCode);
-
+            AIIMSLAB.saveToFile("Response Code: " + responseCode,"");
             // Handle the response if needed (e.g., read input stream)
 
         } catch (Exception e) {
